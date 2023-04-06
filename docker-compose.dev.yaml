@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  traefik:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "traefik"
+
+  api:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "api"
+    command:
+      - "run"
+      - "start:dev"
+    volumes:
+      - "$PWD/services/api/:/app"
+
+  auth:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "auth"
+
+  db:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "db"
+
+  pgadmin:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "pgadmin"
+
+  supertokens:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "supertokens"
+
+  web-ui:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "web-ui"
+    command:
+      - "run"
+      - "start:dev"
+    entrypoint:
+      - "npm"
+    volumes:
+      - "$PWD/services/web-ui/:/app"

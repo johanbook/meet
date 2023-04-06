@@ -1,0 +1,1 @@
+export { SwipableProfileDetails } from "./SwipableProfileDetails";

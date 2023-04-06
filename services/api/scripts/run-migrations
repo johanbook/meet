@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+sh ./scripts/create-database-if-not-exists
+
+DATA_SOURCE=src/infrastructure/database/dataSource.ts
+MIGRATION_DIRECTORY=./src/infrastructure/database/migrations
+
+# Check that `MIGRATION_DIRECTORY` exists
+if [ ! -d "$MIGRATION_DIRECTORY" ]; then
+	echo "ERROR: Directory '$MIGRATION_DIRECTORY' must exist"
+	echo "Make sure the script is run from the project root directory"
+	exit 1
+fi
+
+npx typeorm-ts-node-commonjs migration:run --dataSource $DATA_SOURCE

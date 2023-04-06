@@ -1,0 +1,89 @@
+version: "3.9"
+
+services:
+  traefik:
+    image: "traefik:v2.4"
+    container_name: "traefik"
+    command:
+      - "--accesslog=true"
+      - "--api.insecure=true"
+
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+
+      - "--entrypoints.web.address=:80"
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.edge-router.entrypoints=web"
+      - "traefik.http.routers.edge-router.rule=Host(`traefik.localhost`)"
+      - "traefik.http.services.edge-router.loadbalancer.server.port=8080"
+    ports:
+      - 80:80
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+  api:
+    build:
+      context: "./services/api"
+    container_name: "api"
+    environment:
+      - DB_DATABASE=api
+      - DB_HOST=db
+      - DB_PASSWORD=postgres
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - PORT=80
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=PathPrefix(`/api`)"
+      - "traefik.http.routers.api.entrypoints=web"
+      - "traefik.http.routers.api.middlewares=auth"
+
+  auth:
+    build:
+      context: "./services/auth"
+    container_name: "auth"
+    environment:
+      SUPERTOKENS_URL: "http://supertokens:3567"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.auth.rule=PathPrefix(`/auth`)"
+      - "traefik.http.routers.auth.entrypoints=web"
+      - "traefik.http.middlewares.auth.forwardauth.address=http://auth/sessioninfo"
+      - "traefik.http.middlewares.auth.forwardauth.authResponseHeaders=X-User-Id"
+
+  db:
+    image: "postgis/postgis:15-3.3-alpine"
+    container_name: "db"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - "$PWD/config/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql"
+
+  pgadmin:
+    image: "dpage/pgadmin4"
+    container_name: "pgadmin"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=pgadmin@noop.com
+      - PGADMIN_DEFAULT_PASSWORD=pgadmin
+    ports:
+      - "5050:80"
+
+  supertokens:
+    image: registry.supertokens.io/supertokens/supertokens-postgresql
+    container_name: "supertokens"
+    environment:
+      POSTGRESQL_CONNECTION_URI: "postgresql://postgres:postgres@db:5432/"
+
+  web-ui:
+    build:
+      context: "./services/web-ui"
+    container_name: "web-ui"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.web-ui.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.web-ui.entrypoints=web"
+      - "traefik.http.routers.web-ui.middlewares=auth"

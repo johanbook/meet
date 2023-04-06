@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+DATA_SOURCE=src/infrastructure/database/dataSource.ts
+MIGRATION_DIRECTORY=./src/infrastructure/database/migrations
+MIGRATION_NAME=$1
+
+# Check that `MIGRATION_NAME` is defined
+if [ -z "$MIGRATION_NAME" ]; then
+	echo "ERROR: Migration name must be specified"
+	exit 1
+fi
+
+# Check that `MIGRATION_DIRECTORY` exists
+if [ ! -d "$MIGRATION_DIRECTORY" ]; then
+	echo "ERROR: Directory '$MIGRATION_DIRECTORY' must exist"
+	echo "Make sure the script is run from the project root directory"
+	exit 1
+fi
+
+npx typeorm-ts-node-commonjs migration:generate --dataSource $DATA_SOURCE $MIGRATION_DIRECTORY/$MIGRATION_NAME
