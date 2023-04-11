@@ -26,6 +26,11 @@ services:
       file: "./docker-compose.shared.yaml"
       service: "db"
 
+  minio:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "minio"
+
   pgadmin:
     extends:
       file: "./docker-compose.shared.yaml"

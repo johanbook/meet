@@ -1,7 +1,10 @@
 import { ApiHideProperty } from "@nestjs/swagger";
+import { IsDefined } from "class-validator";
+import { Readable as ReadableStream } from "stream";
 
 export class AddPhotoCommand {
-  public readonly photo!: string;
+  @IsDefined()
+  public photo!: Buffer | ReadableStream;
 
   @ApiHideProperty()
   public userId!: string;

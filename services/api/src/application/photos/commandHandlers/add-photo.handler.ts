@@ -6,10 +6,12 @@ import { AddPhotoCommand } from "../contracts/add-photo.command";
 import { ProfilePhoto } from "src/infrastructure/database/entities/profile-photo.entity";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { BadRequestException } from "@nestjs/common";
+import { ObjectStorageService } from "src/infrastructure/objectStorage/objectStorage.service";
 
 @CommandHandler(AddPhotoCommand)
 export class AddPhotoHandler implements ICommandHandler<AddPhotoCommand, void> {
   constructor(
+    private objectStorageService: ObjectStorageService,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
     @InjectRepository(ProfilePhoto)
@@ -26,8 +28,13 @@ export class AddPhotoHandler implements ICommandHandler<AddPhotoCommand, void> {
       throw new BadRequestException("Profile not found");
     }
 
+    const objectMetadata = await this.objectStorageService.put(
+      "profile-photos",
+      command.photo,
+    );
+
     const profilePhoto = new ProfilePhoto();
-    profilePhoto.imageUrl = command.photo;
+    profilePhoto.imageUrl = objectMetadata.url;
     profilePhoto.profile = profile;
 
     await this.profilePhotos.save(profilePhoto);

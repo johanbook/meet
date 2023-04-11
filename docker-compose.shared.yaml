@@ -34,6 +34,9 @@ services:
       - DB_PORT=5432
       - DB_USERNAME=postgres
       - PORT=80
+      - S3_ACCESS_KEY=minio
+      - S3_ENDPOINT=minio
+      - S3_SECRET_KEY=minio-secret-key
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=PathPrefix(`/api`)"
@@ -87,3 +90,26 @@ services:
       - "traefik.http.routers.web-ui.rule=PathPrefix(`/`)"
       - "traefik.http.routers.web-ui.entrypoints=web"
       - "traefik.http.routers.web-ui.middlewares=auth"
+
+  minio:
+    image: "minio/minio"
+    container_name: "minio"
+    command:
+      - "server"
+      - "/data"
+      - "--console-address"
+      - ":9001"
+    environment:
+      MINIO_ACCESS_KEY: "minio"
+      MINIO_SECRET_KEY: "minio-secret-key"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.minio.entrypoints=web"
+      - "traefik.http.routers.minio.rule=Host(`console.s3.localhost`)"
+      - "traefik.http.routers.minio.service=minio"
+      - "traefik.http.services.minio.loadbalancer.server.port=9001"
+
+      - "traefik.http.routers.s3.entrypoints=web"
+      - "traefik.http.routers.s3.rule=Host(`s3.localhost`)"
+      - "traefik.http.routers.s3.service=s3"
+      - "traefik.http.services.s3.loadbalancer.server.port=9000"

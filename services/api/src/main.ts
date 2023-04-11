@@ -8,6 +8,7 @@ import { AppModule } from "./app.module";
 import { LoggingInterceptor } from "./client/interceptors/logging.interceptor";
 import { AuthenticationGuard } from "./client/guards/authentication.guard";
 import { ValidationPipe } from "@nestjs/common";
+import fastifyMultipart from "@fastify/multipart";
 
 const APP_NAME = "Meet";
 const APP_VERSION = process.env.npm_package_version;
@@ -41,6 +42,8 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useGlobalGuards(new AuthenticationGuard());
   app.useGlobalInterceptors(new LoggingInterceptor());
+
+  app.register(fastifyMultipart);
 
   await app.listen(PORT, "0.0.0.0");
 }
