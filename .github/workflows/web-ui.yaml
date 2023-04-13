@@ -1,0 +1,28 @@
+name:  web-ui
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./services/web-ui
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          cache-dependency-path: '**/package-lock.json'
+
+      - name: Install node dependencies
+        run: npm ci --legacy-peer-deps -D --ignore-scripts
+
+      - name: Run linting
+        run: npm run lint
