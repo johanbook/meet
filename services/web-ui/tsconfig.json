@@ -8,8 +8,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strict": true,
-    "target": "ES7"
+    "target": "ES2022"
   },
   "include": ["src"],
-  "exclude": ["src/**/*.test.*"]
 }

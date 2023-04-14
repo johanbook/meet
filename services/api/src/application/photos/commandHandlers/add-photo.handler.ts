@@ -6,7 +6,7 @@ import { AddPhotoCommand } from "../contracts/add-photo.command";
 import { ProfilePhoto } from "src/infrastructure/database/entities/profile-photo.entity";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { BadRequestException } from "@nestjs/common";
-import { ObjectStorageService } from "src/infrastructure/objectStorage/objectStorage.service";
+import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
 
 @CommandHandler(AddPhotoCommand)
 export class AddPhotoHandler implements ICommandHandler<AddPhotoCommand, void> {

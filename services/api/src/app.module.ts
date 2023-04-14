@@ -3,8 +3,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { MinioModule } from "nestjs-minio-client";
 
 import { ClientModule } from "./client/client.module";
-import { dataSourceOptions } from "./infrastructure/database/dataSourceOptions";
-import { minioOptions } from "./infrastructure/objectStorage/minioOptions";
+import { dataSourceOptions } from "./infrastructure/database/data-source.config";
+import { minioOptions } from "./infrastructure/objectStorage/minio.config";
 
 @Module({
   imports: [

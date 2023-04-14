@@ -1,11 +1,11 @@
-import { BadRequestException, Controller, Post } from "@nestjs/common";
+import { Controller, Post } from "@nestjs/common";
 import { CommandBus } from "@nestjs/cqrs";
 import { ApiBody, ApiConsumes, ApiTags } from "@nestjs/swagger";
 
-import { UserId } from "../decorators/userId.decorator";
+import { UserId } from "../decorators/user-id.decorator";
 import { AddPhotoCommand } from "src/application/photos/contracts/add-photo.command";
-import { UploadedFile } from "../decorators/UploadedFile";
 import { MultipartFile } from "@fastify/multipart";
+import { UploadedImage } from "../decorators/uploaded-image.decorator";
 
 @Controller("photos")
 @ApiTags("photos")
@@ -26,13 +26,9 @@ export class PhotosController {
     },
   })
   async addPhoto(
-    @UploadedFile() file: MultipartFile,
+    @UploadedImage() file: MultipartFile,
     @UserId() userId: string,
   ): Promise<null> {
-    if (!file.mimetype.startsWith("image")) {
-      throw new BadRequestException("Invalid file format");
-    }
-
     const command = new AddPhotoCommand();
     command.photo = file.file;
     command.userId = userId;

@@ -1,5 +1,5 @@
 import { NestFactory } from "@nestjs/core";
-import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
+import { SwaggerModule } from "@nestjs/swagger";
 import {
   FastifyAdapter,
   NestFastifyApplication,
@@ -9,18 +9,12 @@ import { LoggingInterceptor } from "./client/interceptors/logging.interceptor";
 import { AuthenticationGuard } from "./client/guards/authentication.guard";
 import { ValidationPipe } from "@nestjs/common";
 import fastifyMultipart from "@fastify/multipart";
+import { createOpenApiDocument } from "./client/openapi";
 
-const APP_NAME = "Meet";
-const APP_VERSION = process.env.npm_package_version;
 const PATH_PREFIX = process.env.PATH_PREFIX || "/api";
 const PORT = Number.parseInt(process.env.PORT || "3000");
 
 async function bootstrap() {
-  if (!APP_VERSION) {
-    console.error("Unable to read app version");
-    process.exit(1);
-  }
-
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter({ logger: true }),
@@ -28,15 +22,7 @@ async function bootstrap() {
 
   app.setGlobalPrefix(PATH_PREFIX);
 
-  const config = new DocumentBuilder()
-    .setTitle(`${APP_NAME} API`)
-    .setDescription(
-      `The ${APP_NAME} API can be used to interact with ${APP_NAME}`,
-    )
-    .setVersion(APP_VERSION)
-    .build();
-
-  const document = SwaggerModule.createDocument(app, config);
+  const document = createOpenApiDocument(app);
   SwaggerModule.setup(`${PATH_PREFIX}/docs`, app, document);
 
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
@@ -48,4 +34,4 @@ async function bootstrap() {
   await app.listen(PORT, "0.0.0.0");
 }
 
-bootstrap();
+await bootstrap();

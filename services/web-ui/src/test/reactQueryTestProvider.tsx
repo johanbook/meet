@@ -7,7 +7,7 @@ export interface ReactQueryTestProviderProps {
   children: React.ReactElement;
 }
 
-export default function ReactQueryTestProvider({
+export function ReactQueryTestProvider({
   children,
 }: ReactQueryTestProviderProps): React.ReactElement {
   return (

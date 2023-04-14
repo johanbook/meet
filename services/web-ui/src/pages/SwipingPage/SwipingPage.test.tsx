@@ -1,11 +1,11 @@
-import LandingPage from ".";
+import SwipingPage from ".";
 import { TestRouter, render, screen } from "../../test";
 
-describe("<LandingPage />", () => {
+describe("<SwipingPage />", () => {
   it("renders a welcome message", () => {
     render(
       <TestRouter>
-        <LandingPage />
+        <SwipingPage />
       </TestRouter>
     );
 

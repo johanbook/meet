@@ -7,7 +7,7 @@ function getConfig(key: string): string {
   const value = process.env[key];
 
   if (!value) {
-    throw Error(`Required environment variable '${key}' is undefined`);
+    throw new Error(`Required environment variable '${key}' is undefined`);
   }
 
   return value;

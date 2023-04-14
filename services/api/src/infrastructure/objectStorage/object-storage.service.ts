@@ -1,9 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { MinioService } from "nestjs-minio-client";
-import { Readable as ReadableStream } from "stream";
-import { BUCKET_NAMES } from "./bucketConfig";
-import { createPublicBucketPolicy } from "./policies";
+import { Readable as ReadableStream } from "node:stream";
 import { v4 as uuidv4 } from "uuid";
+
+import { BUCKET_NAMES } from "./buckets.config";
+import { createPublicBucketPolicy } from "./policies";
 
 type ValueOf<T> = T[keyof T];
 

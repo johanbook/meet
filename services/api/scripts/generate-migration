@@ -3,7 +3,7 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-DATA_SOURCE=src/infrastructure/database/dataSource.ts
+DATA_SOURCE=src/infrastructure/database/data-source.ts
 MIGRATION_DIRECTORY=./src/infrastructure/database/migrations
 MIGRATION_NAME=$1
 

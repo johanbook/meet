@@ -14,15 +14,37 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install node
+      - name: Install NodeJS
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: "npm"
           cache-dependency-path: '**/package-lock.json'
 
-      - name: Install node dependencies
+      - name: Install NodeJS dependencies
         run: npm ci --legacy-peer-deps -D --ignore-scripts
 
       - name: Run linting
         run: npm run lint:ci
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./services/api
+    needs: ["lint"]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          cache-dependency-path: '**/package-lock.json'
+
+      - name: Install NodeJS dependencies
+        run: npm ci --legacy-peer-deps -D --ignore-scripts
+
+      - name: Run tests
+        run: npm run test:ci

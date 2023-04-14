@@ -1,15 +1,20 @@
-import LandingPage from ".";
-import { TestRouter, render, screen } from "../../test";
+import { ReactQueryTestProvider, TestRouter, render, screen } from "test";
 
-describe("<LandingPage />", () => {
-  it("renders a welcome message", () => {
+import ChatPage from ".";
+
+describe("<ChatPage />", () => {
+  it("renders a welcome message", async () => {
     render(
       <TestRouter>
-        <LandingPage />
+        <ReactQueryTestProvider>
+          <ChatPage />
+        </ReactQueryTestProvider>
       </TestRouter>
     );
 
-    const welcomeMessage = screen.getByText(/Welcome/);
+    const welcomeMessage = await screen.findByText(
+      /You do not have any matches/
+    );
     expect(welcomeMessage).toBeInTheDocument();
   });
 });

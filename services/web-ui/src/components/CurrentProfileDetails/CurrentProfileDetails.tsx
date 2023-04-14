@@ -22,7 +22,7 @@ export function CurrentProfileDetails({
 
   return (
     <>
-      <Box align="center" sx={{ paddingTop: 1 }}>
+      <Box sx={{ align: "center", paddingTop: 1 }}>
         <Avatar sx={{ height: 80, width: 80 }}>
           <AccountCircle />
         </Avatar>
@@ -42,7 +42,7 @@ export function CurrentProfileDetails({
           value={description}
         />
 
-        <Box align="right">
+        <Box sx={{ align: "right" }}>
           <Button onClick={handleSubmit} type="submit" variant="outlined">
             Save
           </Button>

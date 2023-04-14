@@ -1,4 +1,6 @@
 {
+  "importOrder": ["^(?!src|./)", "^src", "^[./]"],
+  "importOrderSeparation": true,
   "singleQuote": false,
   "trailingComma": "all"
 }

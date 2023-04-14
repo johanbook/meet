@@ -1,5 +1,6 @@
 import { createDatabase } from "typeorm-extension";
-import { dataSourceOptions } from "../dataSourceOptions";
+
+import { dataSourceOptions } from "../data-source.config";
 
 async function createDatabaseIfNotExits(): Promise<void> {
   await createDatabase({
@@ -9,4 +10,4 @@ async function createDatabaseIfNotExits(): Promise<void> {
   });
 }
 
-createDatabaseIfNotExits();
+await createDatabaseIfNotExits();
