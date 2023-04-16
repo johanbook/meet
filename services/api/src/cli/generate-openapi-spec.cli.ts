@@ -13,6 +13,7 @@ import { DataSourceMock } from "src/test/data-source.mock";
 
 
 const FILE_PATH = "./openapi.json";
+const PATH_PREFIX = process.env.PATH_PREFIX || "/api";
 
 class Noop {}
 
@@ -29,6 +30,7 @@ async function generateOpenApiDocument() {
     .compile();
 
   const app = appModule.createNestApplication();
+  app.setGlobalPrefix(PATH_PREFIX);
 
   console.log("Generating OpenAPI document");
   const document = createOpenApiDocument(app);

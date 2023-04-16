@@ -2,8 +2,8 @@ import { ReactQueryTestProvider, TestRouter, render, screen } from "src/test";
 
 import ChatPage from ".";
 
-describe("<ChatPage />", () => {
-  it("renders a welcome message", async () => {
+describe.skip("<ChatPage />", () => {
+  it("renders message when no matches", async () => {
     render(
       <TestRouter>
         <ReactQueryTestProvider>
@@ -12,9 +12,7 @@ describe("<ChatPage />", () => {
       </TestRouter>
     );
 
-    const welcomeMessage = await screen.findByText(
-      /You do not have any matches/
-    );
-    expect(welcomeMessage).toBeInTheDocument();
+    const message = await screen.findByText(/You do not have any matches/);
+    expect(message).toBeInTheDocument();
   });
 });

@@ -5,7 +5,7 @@ on:
     branches: ["main"]
 
 jobs:
-  lint:
+  generate-swagger:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -13,6 +13,50 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+
+      - name: Install NodeJS dependencies
+        run: npm ci --legacy-peer-deps -D --ignore-scripts
+
+      - name: Download OpenAPI specification
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          name: openapi-schema
+          path: ./services/web-ui/
+          workflow: api.yaml
+
+      - name: Generate Swagger stubs
+        run: ./scripts/generate-swagger
+
+
+      - name: Upload Swagger stubs
+        uses: actions/upload-artifact@master
+        with:
+          name: openapi-server
+          path: ./services/web-ui/src/api
+          if-no-files-found: error
+
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./services/web-ui
+    needs: ["generate-swagger"]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download Swagger stubs
+        uses: actions/download-artifact@v3
+        with:
+          name: openapi-server
+          path: ./services/web-ui/src/api
 
       - name: Install NodeJS
         uses: actions/setup-node@v3
@@ -35,6 +79,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: Download Swagger stubs
+        uses: actions/download-artifact@v3
+        with:
+          name: openapi-server
+          path: ./services/web-ui/src/api
 
       - name: Install NodeJS
         uses: actions/setup-node@v3
@@ -65,11 +115,17 @@ jobs:
       run:
         working-directory: ./services/web-ui
     env:
-      TAG: ghcr.io/johanbook/meet/web-uapii:latest
+      TAG: ghcr.io/johanbook/meet/web-ui:latest
     needs: ["test"]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: Download Swagger stubs
+        uses: actions/download-artifact@v3
+        with:
+          name: openapi-server
+          path: ./services/web-ui/src/api
 
       - name: Login to ghcr.io
         uses: docker/login-action@v1
