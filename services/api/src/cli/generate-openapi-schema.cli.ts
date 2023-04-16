@@ -1,15 +1,15 @@
 // Should be imported first
-import "./create-dummy-envs.cli";
-
-import * as fs from "node:fs";
 import { Test } from "@nestjs/testing";
+import { getDataSourceToken } from "@nestjs/typeorm";
+import * as fs from "node:fs";
 
 import { AppModule } from "src/app.module";
 import { createOpenApiDocument } from "src/client/openapi";
-import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
-import { getDataSourceToken } from "@nestjs/typeorm";
 import { dataSourceOptions } from "src/infrastructure/database/data-source.config";
+import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
 import { DataSourceMock } from "src/test/data-source.mock";
+
+import "./create-dummy-envs.cli";
 
 const FILE_PATH = "./openapi.json";
 

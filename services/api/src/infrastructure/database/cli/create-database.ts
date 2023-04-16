@@ -10,4 +10,4 @@ async function createDatabaseIfNotExits(): Promise<void> {
   });
 }
 
-await createDatabaseIfNotExits();
+createDatabaseIfNotExits();

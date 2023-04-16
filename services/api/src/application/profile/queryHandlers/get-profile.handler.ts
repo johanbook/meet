@@ -2,8 +2,9 @@ import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { GetProfileQuery } from "../contracts/get-profile.query";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
+
+import { GetProfileQuery } from "../contracts/get-profile.query";
 
 @QueryHandler(GetProfileQuery)
 export class GetProfileHandler implements IQueryHandler<GetProfileQuery, any> {

@@ -1,10 +1,11 @@
+import { NotFoundException } from "@nestjs/common";
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Not, Repository } from "typeorm";
 
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
+
 import { GetProfilesNearbyQuery } from "../contracts/get-profiles-nearby.query";
-import { NotFoundException } from "@nestjs/common";
 
 const DISTANCE = 100;
 

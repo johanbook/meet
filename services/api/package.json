@@ -13,7 +13,7 @@
     "start:debug": "nest start --debug --watch",
     "prestart:prod": "sh scripts/run-migrations",
     "start:prod": "node dist/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "lint": "tsc && eslint \"{src,apps,libs,test}/**/*.ts\"",
     "lint:ci": "npm run lint",
     "test": "jest",
     "test:ci": "jest",

@@ -4,6 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
+
 import { CreateProfileCommand } from "../contracts/create-profile.command";
 
 @CommandHandler(CreateProfileCommand)

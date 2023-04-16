@@ -1,14 +1,15 @@
+import fastifyMultipart from "@fastify/multipart";
+import { ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
-import { SwaggerModule } from "@nestjs/swagger";
 import {
   FastifyAdapter,
   NestFastifyApplication,
 } from "@nestjs/platform-fastify";
+import { SwaggerModule } from "@nestjs/swagger";
+
 import { AppModule } from "./app.module";
-import { LoggingInterceptor } from "./client/interceptors/logging.interceptor";
 import { AuthenticationGuard } from "./client/guards/authentication.guard";
-import { ValidationPipe } from "@nestjs/common";
-import fastifyMultipart from "@fastify/multipart";
+import { LoggingInterceptor } from "./client/interceptors/logging.interceptor";
 import { createOpenApiDocument } from "./client/openapi";
 
 const PATH_PREFIX = process.env.PATH_PREFIX || "/api";
@@ -34,4 +35,4 @@ async function bootstrap() {
   await app.listen(PORT, "0.0.0.0");
 }
 
-await bootstrap();
+bootstrap();

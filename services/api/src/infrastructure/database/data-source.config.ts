@@ -1,5 +1,5 @@
-import { DataSourceOptions } from "typeorm";
 import * as dotenv from "dotenv";
+import { DataSourceOptions } from "typeorm";
 
 /* eslint-disable unicorn/prefer-module */
 

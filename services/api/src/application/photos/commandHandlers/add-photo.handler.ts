@@ -1,12 +1,13 @@
+import { BadRequestException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { AddPhotoCommand } from "../contracts/add-photo.command";
 import { ProfilePhoto } from "src/infrastructure/database/entities/profile-photo.entity";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
-import { BadRequestException } from "@nestjs/common";
 import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
+
+import { AddPhotoCommand } from "../contracts/add-photo.command";
 
 @CommandHandler(AddPhotoCommand)
 export class AddPhotoHandler implements ICommandHandler<AddPhotoCommand, void> {

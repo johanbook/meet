@@ -2,12 +2,13 @@ import { Body, Controller, Get, Post } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
-import { UpdateProfileCommand } from "src/application/profile/contracts/update-profile.command";
+import { CreateProfileCommand } from "src/application/profile/contracts/create-profile.command";
 import { GetProfileQuery } from "src/application/profile/contracts/get-profile.query";
 import { GetProfilesNearbyQuery } from "src/application/profile/contracts/get-profiles-nearby.query";
-import { CreateProfileCommand } from "src/application/profile/contracts/create-profile.command";
-import { UserId } from "../decorators/user-id.decorator";
 import { ProfileDetails } from "src/application/profile/contracts/profile.dto";
+import { UpdateProfileCommand } from "src/application/profile/contracts/update-profile.command";
+
+import { UserId } from "../decorators/user-id.decorator";
 
 @Controller("profile")
 @ApiTags("profile")

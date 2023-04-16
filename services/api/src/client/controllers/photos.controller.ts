@@ -1,11 +1,12 @@
+import { MultipartFile } from "@fastify/multipart";
 import { Controller, Post } from "@nestjs/common";
 import { CommandBus } from "@nestjs/cqrs";
 import { ApiBody, ApiConsumes, ApiTags } from "@nestjs/swagger";
 
-import { UserId } from "../decorators/user-id.decorator";
 import { AddPhotoCommand } from "src/application/photos/contracts/add-photo.command";
-import { MultipartFile } from "@fastify/multipart";
+
 import { UploadedImage } from "../decorators/uploaded-image.decorator";
+import { UserId } from "../decorators/user-id.decorator";
 
 @Controller("photos")
 @ApiTags("photos")
