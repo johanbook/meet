@@ -15,3 +15,7 @@ export class DataSourceMock {
     type: "postgres",
   };
 }
+
+export function createDataSourceMock(): any {
+  return new DataSourceMock();
+}

@@ -1,6 +1,3 @@
-import { CurrentProfileDetails } from "components/CurrentProfileDetails";
-import { ProfileCreator } from "components/ProfileCreator";
-import ErrorMessage from "components/ui/ErrorMessage";
 import React from "react";
 import { useQuery } from "react-query";
 
@@ -8,14 +5,18 @@ import {
   CreateProfileCommand,
   ProfileApi,
   UpdateProfileCommand,
-} from "../../api";
+} from "src/api";
+import { CurrentProfileDetails } from "src/components/CurrentProfileDetails";
+import { ProfileCreator } from "src/components/ProfileCreator";
+import ErrorMessage from "src/components/ui/ErrorMessage";
+
 import { ProfilePageHeader } from "./ProfilePageHeader";
 import { ProfilePageSkeleton } from "./ProfilePageSkeleton";
 
 const profileApi = new ProfileApi();
 
 async function handleCreateProfile(createProfileCommand: CreateProfileCommand) {
-  await profileApi.profileControllerCreateCurrentProfile({
+  await profileApi.createCurrentProfile({
     createProfileCommand,
   });
 }
@@ -23,14 +24,14 @@ async function handleCreateProfile(createProfileCommand: CreateProfileCommand) {
 async function handleUpdateProfile(
   updateProfileCommand: UpdateProfileCommand
 ): Promise<void> {
-  await profileApi.profileControllerUpdateCurrentProfile({
+  await profileApi.updateCurrentProfile({
     updateProfileCommand,
   });
 }
 
 export default function ProfilePageContainer(): React.ReactElement {
   const { error, data, isLoading } = useQuery("currentProfile", () =>
-    profileApi.profileControllerGetCurrentProfile()
+    profileApi.getCurrentProfile()
   );
 
   if (error) {

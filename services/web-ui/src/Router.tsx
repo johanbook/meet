@@ -1,10 +1,10 @@
-import ChatPage from "pages/ChatPage";
 import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import Nav from "./components/ui/Nav";
-import ProfilePage from "./pages/ProfilePage";
-import SwipingPage from "./pages/SwipingPage";
+import Nav from "src/components/ui/Nav";
+import ChatPage from "src/pages/ChatPage";
+import ProfilePage from "src/pages/ProfilePage";
+import SwipingPage from "src/pages/SwipingPage";
 
 const router = createBrowserRouter([
   {

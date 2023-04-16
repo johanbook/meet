@@ -1,8 +1,9 @@
-import { CreateProfileCommand } from "api";
-import { useCurrentLocation } from "hooks/useCurrentLocation";
 import React from "react";
 
 import { Button, TextField, Typography } from "@mui/material";
+
+import { CreateProfileCommand } from "src/api";
+import { useCurrentLocation } from "src/hooks/useCurrentLocation";
 
 export interface ProfileCreatorProps {
   onCreateProfile: (profileDetails: CreateProfileCommand) => void;

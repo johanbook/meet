@@ -3,4 +3,5 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-NODE_PATH=. npx ts-node ./src/cli/generate-openapi-spec.cli.ts
+npm run build
+NODE_PATH=. npx node ./dist/cli/generate-openapi-spec.cli.js

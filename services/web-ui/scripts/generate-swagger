@@ -4,10 +4,17 @@
 set -e
 
 OPENAPI_PATH=openapi.json
+TARGET=src/api/
+USER=$(id --user):$(id --group)
 
 echo "Generating stubs"
-docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli generate \
+
+# We set user such that current user later is allowed to edit files
+docker run --user $USER --rm -v ${PWD}:/local openapitools/openapi-generator-cli generate \
 	--skip-validate-spec \
 	-i /local/$OPENAPI_PATH \
 	-g typescript-fetch \
-	-o /local/src/api/
+	-o /local/$TARGET
+
+# Workaround to https://github.com/OpenAPITools/openapi-generator/issues/8961
+find $TARGET -type f -name "*.ts" -exec sed -i '1s;^;// @ts-nocheck\n;' {} \;

@@ -1,4 +1,4 @@
-import { ReactQueryTestProvider, TestRouter, render, screen } from "test";
+import { ReactQueryTestProvider, TestRouter, render, screen } from "src/test";
 
 import ChatPage from ".";
 

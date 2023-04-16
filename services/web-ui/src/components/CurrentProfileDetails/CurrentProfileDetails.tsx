@@ -1,8 +1,9 @@
-import { ProfileDetails } from "api";
 import React from "react";
 
 import { AccountCircle } from "@mui/icons-material";
 import { Avatar, Box, Button, TextField, Typography } from "@mui/material";
+
+import { ProfileDetails } from "src/api";
 
 export interface CurrentProfileDetailsProps {
   profile: ProfileDetails;
