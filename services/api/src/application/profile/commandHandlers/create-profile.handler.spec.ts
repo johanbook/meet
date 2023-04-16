@@ -17,17 +17,22 @@ describe(CreateProfileHandler.name, () => {
   });
 
   describe("can create new profile", () => {
-    it("should return profile id", async () => {
-      const command = map(CreateProfileCommand, {
+    it("should save new profile", async () => {
+      const newProfile = {
         description: "my-description",
         name: "my-name",
         recentLocation: { lat: 1, lon: 2 },
         userId: "my-user-id",
-      });
+      };
+
+      const command = map(CreateProfileCommand, newProfile);
 
       await commandHandler.execute(command);
 
-      expect(mockRepository.save).toHaveBeenCalled();
+      expect(mockRepository.save).toHaveBeenCalledWith({
+        ...newProfile,
+        recentLocation: "1, 2",
+      });
     });
   });
 });

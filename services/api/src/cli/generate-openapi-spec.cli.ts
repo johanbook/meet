@@ -1,4 +1,6 @@
 // Should be imported first
+import "./create-dummy-envs.cli";
+
 import { Test } from "@nestjs/testing";
 import { getDataSourceToken } from "@nestjs/typeorm";
 import * as fs from "node:fs";
@@ -9,13 +11,14 @@ import { dataSourceOptions } from "src/infrastructure/database/data-source.confi
 import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
 import { DataSourceMock } from "src/test/data-source.mock";
 
-import "./create-dummy-envs.cli";
 
 const FILE_PATH = "./openapi.json";
 
 class Noop {}
 
 async function generateOpenApiDocument() {
+  console.log("Setting up dummy application");
+
   const appModule = await Test.createTestingModule({
     imports: [AppModule],
   })
@@ -27,6 +30,7 @@ async function generateOpenApiDocument() {
 
   const app = appModule.createNestApplication();
 
+  console.log("Generating OpenAPI document");
   const document = createOpenApiDocument(app);
 
   await app.close();
@@ -38,7 +42,7 @@ export async function generateOpenApiJsonFile(path: string): Promise<void> {
   const document = await generateOpenApiDocument();
   const json = JSON.stringify(document);
 
-  console.log(`Writing OpenAPI schema to '${path}'`);
+  console.log(`Writing OpenAPI specification to '${path}'`);
   fs.writeFileSync(path, json);
 }
 

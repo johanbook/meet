@@ -1,1 +1,2 @@
+src/cli/generate-openapi-spec.cli.ts
 src/infrastructure/database/migrations

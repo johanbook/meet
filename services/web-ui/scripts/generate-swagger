@@ -4,18 +4,10 @@
 set -e
 
 OPENAPI_PATH=openapi.json
-OPENAPI_URL=localhost/api/docs-json
 
-echo "Fetching OpenAPI specification from '$OPENAPI_URL'"
-curl $OPENAPI_URL -o $OPENAPI_PATH
-
-echo ""
 echo "Generating stubs"
-# We should use v3 as we use OASv3 in the backend
 docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli generate \
 	--skip-validate-spec \
 	-i /local/$OPENAPI_PATH \
 	-g typescript-fetch \
 	-o /local/src/api/
-
-rm $OPENAPI_PATH
