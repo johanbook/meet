@@ -1,33 +1,31 @@
 import React from "react";
-import { Outlet, Link as RouterLink } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import MuiLink from "@mui/material/Link";
 import Toolbar from "@mui/material/Toolbar";
 
-import { config } from "../../../config";
+import { AppBar } from "../AppBar";
 import { BottomNavigation } from "../BottomNavigation";
 import Drawer from "../Drawer";
 
 export interface NavProps {
+  children?: React.ReactNode;
   nav?: React.ReactNode;
+  showBottomNav?: boolean;
 }
 
-export default function Nav({ nav }: NavProps): React.ReactElement {
+export default function Nav({
+  children,
+  nav,
+  showBottomNav = true,
+}: NavProps): React.ReactElement {
+  if (!children) {
+    children = <Outlet />;
+  }
+
   return (
     <Box sx={{ display: "flex" }}>
-      <AppBar
-        color="transparent"
-        position="fixed"
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      >
-        <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
-          <MuiLink component={RouterLink} to="/" underline="hover" variant="h6">
-            {config.APP.NAME}
-          </MuiLink>
-        </Toolbar>
-      </AppBar>
+      <AppBar />
 
       {nav && <Drawer> {nav}</Drawer>}
 
@@ -36,8 +34,8 @@ export default function Nav({ nav }: NavProps): React.ReactElement {
         sx={{ flexGrow: 1, padding: 3, paddingRight: 3, paddingTop: 1 }}
       >
         <Toolbar />
-        <Outlet />
-        <BottomNavigation />
+        {children}
+        {showBottomNav && <BottomNavigation />}
       </Box>
     </Box>
   );

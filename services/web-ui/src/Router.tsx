@@ -6,13 +6,17 @@ import ChatPage from "src/pages/ChatPage";
 import ProfilePage from "src/pages/ProfilePage";
 import SwipingPage from "src/pages/SwipingPage";
 
+import ErrorMessage from "./components/ui/ErrorMessage";
+import { ProfileGuard } from "./pages/ProfileGuard";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Nav />,
+    errorElement: <ErrorMessage message="Page not found" />,
     children: [
       {
-        path: "/",
+        index: true,
         element: <SwipingPage />,
       },
       {
@@ -28,5 +32,9 @@ const router = createBrowserRouter([
 ]);
 
 export default function App(): React.ReactElement {
-  return <RouterProvider router={router} />;
+  return (
+    <ProfileGuard>
+      <RouterProvider router={router} />
+    </ProfileGuard>
+  );
 }

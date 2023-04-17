@@ -1,8 +1,9 @@
 import React from "react";
 
-import { Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 
 import { CreateProfileCommand } from "src/api";
+import { config } from "src/config";
 import { useCurrentLocation } from "src/hooks/useCurrentLocation";
 
 export interface ProfileCreatorProps {
@@ -25,9 +26,13 @@ export function ProfileCreator({
 
   return (
     <>
-      <Typography>
-        Welcome to APP. Let's start by creating a profile.
-      </Typography>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Typography color="primary" gutterBottom variant="h5">
+          Welcome to {config.APP.NAME}
+        </Typography>
+      </Box>
+
+      <Typography>Let's start by creating a profile.</Typography>
       <form>
         <TextField
           fullWidth
@@ -49,9 +54,11 @@ export function ProfileCreator({
           value={description}
         />
 
-        <Button onClick={handleSubmit} type="submit" variant="contained">
-          Create
-        </Button>
+        <Box sx={{ display: "flex", justifyContent: "right" }}>
+          <Button onClick={handleSubmit} type="submit" variant="contained">
+            Create
+          </Button>
+        </Box>
       </form>
     </>
   );

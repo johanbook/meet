@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
+import { CheckIfProfileExistsQuery } from "src/application/profile/contracts/check-if-profile-exists.query";
 import { CreateProfileCommand } from "src/application/profile/contracts/create-profile.command";
 import { GetProfileQuery } from "src/application/profile/contracts/get-profile.query";
 import { GetProfilesNearbyQuery } from "src/application/profile/contracts/get-profiles-nearby.query";
@@ -18,6 +19,12 @@ export class ProfileController {
   @Get()
   async getCurrentProfile(@UserId() userId: string): Promise<ProfileDetails> {
     const query = new GetProfileQuery(userId);
+    return await this.queryBus.execute(query);
+  }
+
+  @Get("/exists")
+  async checkIfFileExists(@UserId() userId: string): Promise<boolean> {
+    const query = new CheckIfProfileExistsQuery(userId);
     return await this.queryBus.execute(query);
   }
 

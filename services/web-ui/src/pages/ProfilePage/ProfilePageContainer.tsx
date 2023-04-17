@@ -21,18 +21,19 @@ async function handleCreateProfile(createProfileCommand: CreateProfileCommand) {
   });
 }
 
-async function handleUpdateProfile(
-  updateProfileCommand: UpdateProfileCommand
-): Promise<void> {
-  await profileApi.updateCurrentProfile({
-    updateProfileCommand,
-  });
-}
-
 export default function ProfilePageContainer(): React.ReactElement {
-  const { error, data, isLoading } = useQuery("currentProfile", () =>
+  const { error, data, isLoading, refetch } = useQuery("currentProfile", () =>
     profileApi.getCurrentProfile()
   );
+
+  async function handleUpdateProfile(
+    updateProfileCommand: UpdateProfileCommand
+  ): Promise<void> {
+    await profileApi.updateCurrentProfile({
+      updateProfileCommand,
+    });
+    await refetch();
+  }
 
   if (error) {
     const message = (error as Error).message;
