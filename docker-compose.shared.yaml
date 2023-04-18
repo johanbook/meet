@@ -51,10 +51,12 @@ services:
       SUPERTOKENS_URL: "http://supertokens:3567"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.auth.rule=PathPrefix(`/auth`)"
+      - "traefik.http.routers.auth.rule=PathPrefix(`/login`)||PathPrefix(`/logout`)"
       - "traefik.http.routers.auth.entrypoints=web"
-      - "traefik.http.middlewares.auth.forwardauth.address=http://auth/sessioninfo"
+      - "traefik.http.middlewares.auth.forwardauth.address=http://auth/authenticate"
       - "traefik.http.middlewares.auth.forwardauth.authResponseHeaders=X-User-Id"
+      - "traefik.http.middlewares.auth-redirect.forwardauth.address=http://auth/authenticate-with-redirect"
+      - "traefik.http.middlewares.auth-redirect.forwardauth.authResponseHeaders=X-User-Id"
 
   db:
     image: "postgis/postgis:15-3.3-alpine"

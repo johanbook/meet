@@ -13,10 +13,25 @@ SuperTokens.init({
     appName: "Login",
     apiDomain: "http://localhost",
     websiteDomain: "http://localhost",
-    apiBasePath: "/auth",
-    websiteBasePath: "/auth",
+    apiBasePath: "/login",
+    websiteBasePath: "/login",
   },
-  recipeList: [EmailPassword.init(), Session.init()],
+  recipeList: [
+    EmailPassword.init({
+      getRedirectionURL: async (context) => {
+        if (context.action !== "SUCCESS") {
+          return;
+        }
+
+        if (context.redirectToPath !== undefined) {
+          return context.redirectToPath;
+        }
+
+        return "/";
+      },
+    }),
+    Session.init(),
+  ],
 });
 
 export default function App(): React.ReactElement {

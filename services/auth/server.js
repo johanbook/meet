@@ -19,7 +19,7 @@ const app = express();
 setupProxy(app);
 
 /** Needed to serve files correctly */
-app.use(rewritePath("/auth"));
+app.use(rewritePath("/login"));
 app.use(express.static(getPath("build")));
 app.get("/*", (_, res) => res.sendFile(getPath("build/index.html")));
 
