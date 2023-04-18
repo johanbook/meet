@@ -3,4 +3,4 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-npx ts-node ./src/infrastructure/database/cli/create-database.ts
+npx ts-node ./dist/infrastructure/database/cli/create-database.js

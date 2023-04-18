@@ -20,6 +20,7 @@ WORKDIR /app
 ENV PORT=80
 
 COPY package.json package-lock.json ./
+COPY scripts/ ./scripts
 COPY --from=builder /app/dist ./dist
 RUN npm ci
 
