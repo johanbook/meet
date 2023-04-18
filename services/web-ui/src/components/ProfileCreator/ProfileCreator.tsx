@@ -6,6 +6,8 @@ import { CreateProfileCommand } from "src/api";
 import { config } from "src/config";
 import { useCurrentLocation } from "src/hooks/useCurrentLocation";
 
+import { Center } from "../ui/Center";
+
 export interface ProfileCreatorProps {
   onCreateProfile: (profileDetails: CreateProfileCommand) => void;
 }
@@ -26,11 +28,11 @@ export function ProfileCreator({
 
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Center>
         <Typography color="primary" gutterBottom variant="h5">
           Welcome to {config.APP.NAME}
         </Typography>
-      </Box>
+      </Center>
 
       <Typography>Let's start by creating a profile.</Typography>
       <form>

@@ -1,5 +1,6 @@
+import { render, screen } from "src/test";
+
 import ErrorMessage from ".";
-import { render, screen } from "../../../test";
 
 describe("<ErrorMessage />", () => {
   it("displays error message", () => {
