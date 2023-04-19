@@ -35,7 +35,7 @@ export class AddPhotoHandler implements ICommandHandler<AddPhotoCommand, void> {
     );
 
     const profilePhoto = new ProfilePhoto();
-    profilePhoto.imageUrl = objectMetadata.url;
+    profilePhoto.objectId = objectMetadata.id;
     profilePhoto.profile = profile;
 
     await this.profilePhotos.save(profilePhoto);

@@ -7,8 +7,8 @@ export class ProfilePhoto {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ length: 1024 })
-  imageUrl!: string;
+  @Column({ type: "uuid" })
+  objectId!: string;
 
   @ManyToOne(() => Profile, (profile) => profile.photos)
   profile!: Profile;

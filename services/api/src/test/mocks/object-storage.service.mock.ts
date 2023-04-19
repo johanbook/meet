@@ -3,7 +3,10 @@ import { ObjectStorageService } from "src/infrastructure/objectStorage/object-st
 /* eslint-disable unicorn/consistent-function-scoping */
 
 class ObjectStorageServiceMock {
-  put = jest.fn(() => ({ url: "my-url" }));
+  put = jest.fn(() => ({
+    id: "my-object-id",
+    url: "my-url",
+  }));
 }
 
 export function createObjectStorageServiceMock(): ObjectStorageService {

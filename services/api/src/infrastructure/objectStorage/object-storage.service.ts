@@ -7,6 +7,7 @@ import { BUCKET_NAMES } from "./buckets.config";
 import { createPublicBucketPolicy } from "./policies";
 
 type ValueOf<T> = T[keyof T];
+type BucketName = ValueOf<typeof BUCKET_NAMES>;
 
 interface PutResult {
   id: string;
@@ -46,7 +47,7 @@ export class ObjectStorageService {
   }
 
   async put(
-    bucketName: ValueOf<typeof BUCKET_NAMES>,
+    bucketName: BucketName,
     stream: ReadableStream | Buffer | string,
   ): Promise<PutResult> {
     const client = this.minioService.client;
@@ -55,5 +56,10 @@ export class ObjectStorageService {
     await client.putObject(bucketName, id, stream);
 
     return { id, url: id };
+  }
+
+  getUrl(bucketName: BucketName, objectId: string): string {
+    // TODO: Remove hardcoded path
+    return `http://s3.localhost/${bucketName}/${objectId}`;
   }
 }

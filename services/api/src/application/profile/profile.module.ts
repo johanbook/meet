@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
+import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
 
 import { CreateProfileHandler } from "./commandHandlers/create-profile.handler";
 import { UpdateProfileHandler } from "./commandHandlers/update-profile.handler";
@@ -17,6 +18,7 @@ import { GetProfilesNearbyHandler } from "./queryHandlers/get-profiles-nearby.ha
     CreateProfileHandler,
     GetProfileHandler,
     GetProfilesNearbyHandler,
+    ObjectStorageService,
     UpdateProfileHandler,
   ],
 })

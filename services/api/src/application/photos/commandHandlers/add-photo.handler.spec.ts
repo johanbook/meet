@@ -42,7 +42,7 @@ describe(AddPhotoHandler.name, () => {
       await commandHandler.execute(command);
 
       expect(profilePhotos.save).toHaveBeenCalledWith({
-        imageUrl: "my-url",
+        objectId: "my-object-id",
         profile: "my-profile-id",
       });
     });

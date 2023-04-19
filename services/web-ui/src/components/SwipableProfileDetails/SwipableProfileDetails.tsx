@@ -16,12 +16,15 @@ export interface SwipableProfileDetailsProps {
 export function SwipableProfileDetails({
   profile,
 }: SwipableProfileDetailsProps): React.ReactElement {
+  let url = DUMMY_IMAGE_URL;
+
+  if (profile.photos.length > 0) {
+    url = profile.photos[0].imageUrl;
+  }
+
   return (
     <Card variant="outlined">
-      <CardMedia
-        image={DUMMY_IMAGE_URL}
-        sx={{ height: "74vh", position: "relative" }}
-      >
+      <CardMedia image={url} sx={{ height: "74vh", position: "relative" }}>
         <Typography
           color="white"
           gutterBottom
