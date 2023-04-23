@@ -16,7 +16,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.edge-router.entrypoints=web"
-      - "traefik.http.routers.edge-router.rule=Host(`traefik.localhost`)"
+      - "traefik.http.routers.edge-router.rule=Host(`traefik.console.localhost`)"
       - "traefik.http.services.edge-router.loadbalancer.server.port=8080"
     ports:
       - 80:80
@@ -43,6 +43,17 @@ services:
       - "traefik.http.routers.api.entrypoints=web"
       - "traefik.http.routers.api.middlewares=auth"
 
+  console:
+    image: ghcr.io/benphelps/homepage:latest
+    container_name: console
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.console.rule=Host(`console.localhost`)"
+      - "traefik.http.routers.console.entrypoints=web"
+    volumes:
+      - "$PWD/config/console/:/app/config"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
   auth:
     build:
       context: "./services/auth"
@@ -51,7 +62,7 @@ services:
       SUPERTOKENS_URL: "http://supertokens:3567"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.auth.rule=PathPrefix(`/login`)||PathPrefix(`/logout`)"
+      - "traefik.http.routers.auth.rule=Host(`localhost`)&&(PathPrefix(`/login`)||PathPrefix(`/logout`))"
       - "traefik.http.routers.auth.entrypoints=web"
       - "traefik.http.middlewares.auth.forwardauth.address=http://auth/authenticate"
       - "traefik.http.middlewares.auth.forwardauth.authResponseHeaders=X-User-Id"
@@ -74,8 +85,10 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=pgadmin@noop.com
       - PGADMIN_DEFAULT_PASSWORD=pgadmin
-    ports:
-      - "5050:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pgadmin.rule=Host(`pgadmin.console.localhost`)"
+      - "traefik.http.routers.pgadmin.entrypoints=web"
 
   supertokens:
     image: registry.supertokens.io/supertokens/supertokens-postgresql
@@ -107,7 +120,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.minio.entrypoints=web"
-      - "traefik.http.routers.minio.rule=Host(`console.s3.localhost`)"
+      - "traefik.http.routers.minio.rule=Host(`s3.console.localhost`)"
       - "traefik.http.routers.minio.service=minio"
       - "traefik.http.services.minio.loadbalancer.server.port=9001"
 
