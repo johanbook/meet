@@ -3,6 +3,11 @@ name: web-ui
 on:
   push:
     branches: ["main"]
+  pull_request:
+    branches:
+      - "main"
+    paths:
+      - "services/web-ui/**"
 
 jobs:
   generate-swagger:
@@ -33,7 +38,6 @@ jobs:
 
       - name: Generate Swagger stubs
         run: ./scripts/generate-swagger
-
 
       - name: Upload Swagger stubs
         uses: actions/upload-artifact@master
@@ -101,6 +105,7 @@ jobs:
 
   build-and-push-docker-image:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     defaults:
       run:
         working-directory: ./services/web-ui

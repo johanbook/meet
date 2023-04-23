@@ -1,5 +1,6 @@
 import * as dotenv from "dotenv";
 import { DataSourceOptions } from "typeorm";
+import { SeederOptions } from "typeorm-extension";
 
 /* eslint-disable unicorn/prefer-module */
 
@@ -15,7 +16,7 @@ function getConfig(key: string): string {
   return value;
 }
 
-export const dataSourceOptions: DataSourceOptions = {
+export const dataSourceOptions: DataSourceOptions & SeederOptions = {
   type: (process.env.DB_TYPE as any) || "postgres",
   host: getConfig("DB_HOST"),
   port: Number.parseInt(process.env.DB_PORT || "5432"),
@@ -27,4 +28,6 @@ export const dataSourceOptions: DataSourceOptions = {
   entities: [__dirname + "/entities/*.{ts,js}"],
   subscribers: [],
   migrations: [__dirname + "/migrations/*.{ts,js}"],
+  factories: [__dirname + "/factories/*.{ts,js}"],
+  seeds: [__dirname + "/seeds/*.{ts,js}"],
 };
