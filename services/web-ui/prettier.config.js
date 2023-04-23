@@ -1,5 +1,5 @@
 module.exports = {
-  importOrder: ["^react/(.*)$", "^@mui/(.*)$", "^src", "^\\."],
+  importOrder: ["^react", "^(?!src|\\.)", "^src", "^\\."],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
 };

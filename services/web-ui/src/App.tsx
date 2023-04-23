@@ -2,6 +2,7 @@ import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import CssBaseline from "@mui/material/CssBaseline";
+import { SnackbarProvider } from "notistack";
 
 import Router from "./Router";
 import Theme from "./theme/Theme";
@@ -14,6 +15,7 @@ export default function App(): React.ReactElement {
       <CssBaseline />
       <Theme>
         <Router />
+        <SnackbarProvider dense />
       </Theme>
     </QueryClientProvider>
   );

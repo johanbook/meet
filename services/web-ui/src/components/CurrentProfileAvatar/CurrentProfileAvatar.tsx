@@ -5,6 +5,7 @@ import { AccountCircle } from "@mui/icons-material";
 import { Avatar, Button } from "@mui/material";
 
 import { PhotosApi } from "src/api";
+import { useSnackbar } from "src/hooks/useSnackbar";
 
 const HEIGHT = 120;
 
@@ -20,6 +21,7 @@ export function CurrentProfileAvatar({
   src,
 }: CurrentProfileAvatarProps): React.ReactElement {
   const mutation = useMutation((file: File) => photosApi.addPhoto({ file }));
+  const { success } = useSnackbar();
 
   async function handleUpload(
     event: React.ChangeEvent<HTMLInputElement>
@@ -35,6 +37,8 @@ export function CurrentProfileAvatar({
     await mutation.mutateAsync(file);
 
     onUploadedNewProfilePhoto();
+
+    success("Photo uploaded successfully");
   }
 
   if (src) {
