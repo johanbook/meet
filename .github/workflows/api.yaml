@@ -3,6 +3,11 @@ name: api
 on:
   push:
     branches: ["main"]
+  pull_request:
+    branches:
+      - "main"
+    paths:
+      - "services/api/**"
 
 jobs:
   lint:
@@ -82,6 +87,7 @@ jobs:
 
   build-and-push-docker-image:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     defaults:
       run:
         working-directory: ./services/api
