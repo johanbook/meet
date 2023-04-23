@@ -23,6 +23,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@fastify/multipart": "^7.6.0",
     "@fastify/static": "^6.10.0",
     "@nestjs/common": "^9.0.0",
@@ -41,6 +42,7 @@
     "rxjs": "^7.2.0",
     "typeorm": "^0.3.13",
     "typeorm-extension": "^2.7.0",
+    "typeorm-seeding": "^1.6.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

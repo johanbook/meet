@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+DATA_SOURCE=./dist/infrastructure/database/data-source.js
+
+npx ts-node ./node_modules/typeorm-seeding/dist/cli.js seed --root $DATA_SOURCE
