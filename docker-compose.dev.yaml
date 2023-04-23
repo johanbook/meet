@@ -16,6 +16,11 @@ services:
     volumes:
       - "$PWD/services/api/:/app"
 
+  console:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "console"
+
   auth:
     extends:
       file: "./docker-compose.shared.yaml"

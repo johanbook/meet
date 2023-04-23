@@ -1,0 +1,9 @@
+- Tools:
+    - pgAdmin:
+        href: http://pgadmin.console.localhost/
+
+    - Minio admin Panel:
+        href: http://s3.console.localhost/
+
+    - Traefik:
+        href: http://traefik.console.localhost/
