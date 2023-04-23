@@ -1,20 +1,29 @@
 import React from "react";
 
-import { AccountCircle } from "@mui/icons-material";
-import { Avatar, Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 
 import { ProfileDetails } from "src/api";
 
+import { CurrentProfileAvatar } from "../CurrentProfileAvatar";
+
 export interface CurrentProfileDetailsProps {
-  profile: ProfileDetails;
   onUpdateProfile: (profileDetails: Partial<ProfileDetails>) => void;
+  profile: ProfileDetails;
+  refetchData: () => void;
 }
 
 export function CurrentProfileDetails({
-  profile,
   onUpdateProfile,
+  profile,
+  refetchData,
 }: CurrentProfileDetailsProps): React.ReactElement {
   const [description, setDescription] = React.useState(profile.description);
+
+  let imageUrl: string | undefined;
+
+  if (profile.photos.length > 0) {
+    imageUrl = profile.photos[0].imageUrl;
+  }
 
   function handleSubmit(event: React.SyntheticEvent): void {
     event.preventDefault();
@@ -23,12 +32,23 @@ export function CurrentProfileDetails({
 
   return (
     <>
-      <Box sx={{ align: "center", paddingTop: 1 }}>
-        <Avatar sx={{ height: 80, width: 80 }}>
-          <AccountCircle />
-        </Avatar>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          paddingTop: 1,
+          justifyContent: "center",
+        }}
+      >
+        <CurrentProfileAvatar
+          onUploadedNewProfilePhoto={refetchData}
+          src={imageUrl}
+        />
 
-        <Typography variant="h6">{profile.name}</Typography>
+        <Typography sx={{ paddingTop: 1 }} variant="h5">
+          {profile.name}
+        </Typography>
       </Box>
 
       <form>
@@ -43,7 +63,7 @@ export function CurrentProfileDetails({
           value={description}
         />
 
-        <Box sx={{ align: "right" }}>
+        <Box sx={{ display: "flex", justifyContent: "right" }}>
           <Button onClick={handleSubmit} type="submit" variant="outlined">
             Save
           </Button>

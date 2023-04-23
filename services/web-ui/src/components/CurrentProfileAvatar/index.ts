@@ -1,0 +1,1 @@
+export { CurrentProfileAvatar } from "./CurrentProfileAvatar";

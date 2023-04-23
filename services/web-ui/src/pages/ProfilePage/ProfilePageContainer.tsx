@@ -71,6 +71,7 @@ export default function ProfilePageContainer(): React.ReactElement {
       <CurrentProfileDetails
         onUpdateProfile={handleUpdateProfile}
         profile={data}
+        refetchData={refetch}
       />
     </>
   );
