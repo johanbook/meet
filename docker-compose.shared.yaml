@@ -16,7 +16,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.edge-router.entrypoints=web"
-      - "traefik.http.routers.edge-router.rule=Host(`traefik.console.localhost`)"
+      - "traefik.http.routers.edge-router.rule=Host(`traefik.console.$DOMAIN`)"
       - "traefik.http.services.edge-router.loadbalancer.server.port=8080"
     ports:
       - 80:80
@@ -30,16 +30,16 @@ services:
     environment:
       - DB_DATABASE=api
       - DB_HOST=db
-      - DB_PASSWORD=postgres
+      - DB_PASSWORD=$POSTGRES_PASSWORD
       - DB_PORT=5432
-      - DB_USERNAME=postgres
+      - DB_USERNAME=$POSTGRES_USERNAME
       - PORT=80
-      - S3_ACCESS_KEY=minio
+      - S3_ACCESS_KEY=$MINIO_ACCESS_KEY
       - S3_ENDPOINT=minio
-      - S3_SECRET_KEY=minio-secret-key
+      - S3_SECRET_KEY=$MINIO_SECRET_KEY
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.api.rule=PathPrefix(`/api`)"
+      - "traefik.http.routers.api.rule=Host(`$DOMAIN`)&&PathPrefix(`/api`)"
       - "traefik.http.routers.api.entrypoints=web"
       - "traefik.http.routers.api.middlewares=auth"
 
@@ -48,7 +48,7 @@ services:
     container_name: console
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.console.rule=Host(`console.localhost`)"
+      - "traefik.http.routers.console.rule=Host(`console.$DOMAIN`)"
       - "traefik.http.routers.console.entrypoints=web"
     volumes:
       - "$PWD/config/console/:/app/config"
@@ -62,7 +62,7 @@ services:
       SUPERTOKENS_URL: "http://supertokens:3567"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.auth.rule=Host(`localhost`)&&(PathPrefix(`/login`)||PathPrefix(`/logout`))"
+      - "traefik.http.routers.auth.rule=Host(`$DOMAIN`)&&(PathPrefix(`/login`)||PathPrefix(`/logout`))"
       - "traefik.http.routers.auth.entrypoints=web"
       - "traefik.http.middlewares.auth.forwardauth.address=http://auth/authenticate"
       - "traefik.http.middlewares.auth.forwardauth.authResponseHeaders=X-User-Id"
@@ -73,7 +73,8 @@ services:
     image: "postgis/postgis:15-3.3-alpine"
     container_name: "db"
     environment:
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - POSTGRES_USERNAME=$POSTGRES_USERNAME
     ports:
       - "5432:5432"
     volumes:
@@ -83,11 +84,11 @@ services:
     image: "dpage/pgadmin4"
     container_name: "pgadmin"
     environment:
-      - PGADMIN_DEFAULT_EMAIL=pgadmin@noop.com
-      - PGADMIN_DEFAULT_PASSWORD=pgadmin
+      - PGADMIN_DEFAULT_EMAIL=$PGADMIN_EMAIL
+      - PGADMIN_DEFAULT_PASSWORD=$POSTGRES_PASSWORD
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.pgadmin.rule=Host(`pgadmin.console.localhost`)"
+      - "traefik.http.routers.pgadmin.rule=Host(`pgadmin.console.$DOMAIN`)"
       - "traefik.http.routers.pgadmin.entrypoints=web"
 
   supertokens:
@@ -102,7 +103,7 @@ services:
     container_name: "web-ui"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.web-ui.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.web-ui.rule=Host(`$DOMAIN`)"
       - "traefik.http.routers.web-ui.entrypoints=web"
       - "traefik.http.routers.web-ui.middlewares=auth"
 
@@ -115,16 +116,16 @@ services:
       - "--console-address"
       - ":9001"
     environment:
-      MINIO_ACCESS_KEY: "minio"
-      MINIO_SECRET_KEY: "minio-secret-key"
+      MINIO_ACCESS_KEY: $MINIO_ACCESS_KEY
+      MINIO_SECRET_KEY: $MINIO_SECRET_KEY
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.minio.entrypoints=web"
-      - "traefik.http.routers.minio.rule=Host(`s3.console.localhost`)"
+      - "traefik.http.routers.minio.rule=Host(`minio.console.$DOMAIN`)"
       - "traefik.http.routers.minio.service=minio"
       - "traefik.http.services.minio.loadbalancer.server.port=9001"
 
       - "traefik.http.routers.s3.entrypoints=web"
-      - "traefik.http.routers.s3.rule=Host(`s3.localhost`)"
+      - "traefik.http.routers.s3.rule=Host(`s3.$DOMAIN`)"
       - "traefik.http.routers.s3.service=s3"
       - "traefik.http.services.s3.loadbalancer.server.port=9000"
