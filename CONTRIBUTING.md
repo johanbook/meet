@@ -10,8 +10,9 @@ To use a development build, run
 docker-compose -f docker-compose.dev.yaml up --build
 ```
 
-The Traefik dashboard is available at
-[traefik.localhost](http://traefik.localhost).
+The application will be available on [localhost](http://localhost) and the
+console (admin portal) can be accessed at
+[console.localhost](http://console.localhost).
 
 ## Migrations
 
