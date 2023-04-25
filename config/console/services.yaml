@@ -1,19 +1,23 @@
 - Tools:
     - pgAdmin:
         description: Postgres UI
-        href: http://pgadmin.console.localhost/
+        href: http://pgadmin.console.{{HOMEPAGE_VAR_DOMAIN}}/
         icon: pgadmin
 
     - Minio:
         description: S3 compatible storage
-        href: http://minio.console.localhost/
+        href: http://minio.console.{{HOMEPAGE_VAR_DOMAIN}}/
         icon: minio
 
     - Swagger UI:
         description: UI for OpenAPI specification
-        href: http://localhost/api/docs
+        href: http://{{HOMEPAGE_VAR_DOMAIN}}/api/docs
 
     - Traefik:
         description: Edge router
-        href: http://traefik.console.localhost/
+        href: http://traefik.console.{{HOMEPAGE_VAR_DOMAIN}}/
         icon: traefik
+
+    - User management:
+        description: User management
+        href: http://{{HOMEPAGE_VAR_DOMAIN}}/login/dashboard

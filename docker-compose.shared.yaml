@@ -44,6 +44,8 @@ services:
   console:
     image: ghcr.io/benphelps/homepage:latest
     container_name: console
+    environment:
+      HOMEPAGE_VAR_DOMAIN: "$DOMAIN"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.console.rule=Host(`console.$DOMAIN`)"
