@@ -24,8 +24,6 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
   api:
-    build:
-      context: "./services/api"
     container_name: "api"
     environment:
       - DB_DATABASE=api
@@ -55,8 +53,6 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
   auth:
-    build:
-      context: "./services/auth"
     container_name: "auth"
     environment:
       SUPERTOKENS_URL: "http://supertokens:3567"
@@ -98,8 +94,6 @@ services:
       POSTGRESQL_CONNECTION_URI: "postgresql://postgres:postgres@db:5432/"
 
   web-ui:
-    build:
-      context: "./services/web-ui"
     container_name: "web-ui"
     labels:
       - "traefik.enable=true"
