@@ -33,11 +33,13 @@ services:
     extends:
       file: "./docker-compose.shared.yaml"
       service: "api"
+    image: ghcr.io/johanbook/meet/api:latest
 
   auth:
     extends:
       file: "./docker-compose.shared.yaml"
       service: "auth"
+    image: ghcr.io/johanbook/meet/auth:latest
 
   console:
     extends:
@@ -75,3 +77,4 @@ services:
     extends:
       file: "./docker-compose.shared.yaml"
       service: "web-ui"
+    image: ghcr.io/johanbook/meet/web-ui:latest
