@@ -40,6 +40,10 @@ services:
       file: "./docker-compose.shared.yaml"
       service: "auth"
     image: ghcr.io/johanbook/meet/auth:latest
+    environment:
+      API_URL: "https://$DOMAIN"
+      UI_URL: "https://$DOMAIN"
+      SUPERTOKENS_URL: "http://supertokens:3567"
 
   console:
     extends:
