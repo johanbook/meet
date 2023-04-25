@@ -1,52 +1,22 @@
 import React from "react";
-import * as reactRouterDom from "react-router-dom";
-import { BrowserRouter, Routes } from "react-router-dom";
 
-import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
-import Session from "supertokens-auth-react/recipe/session";
-import SuperTokens, {
-  getSuperTokensRoutesForReactRouterDom,
-} from "supertokens-auth-react";
+import SuperTokens from "supertokens-auth-react";
 
-async function initializeSuperTokens(callback: () => void): Promise<void> {
-  const resp = await fetch("/login/config");
-  const config = await resp.json();
-
-  SuperTokens.init({
-    appInfo: {
-      appName: "Login",
-      apiDomain: config["API_DOMAIN"],
-      websiteDomain: config["UI_DOMAIN"],
-      apiBasePath: "/login",
-      websiteBasePath: "/login",
-    },
-    recipeList: [
-      EmailPassword.init({
-        getRedirectionURL: async (context) => {
-          if (context.action !== "SUCCESS") {
-            return;
-          }
-
-          if (context.redirectToPath !== undefined) {
-            return context.redirectToPath;
-          }
-
-          return "/";
-        },
-      }),
-      Session.init(),
-    ],
-  });
-
-  callback();
-}
+import { LoadingPage } from "./LoadingPage";
+import { initializeSuperTokens } from "./supertokens";
 
 export function Router(): React.ReactElement {
-  return (
-    <BrowserRouter>
-      <Routes>{getSuperTokensRoutesForReactRouterDom(reactRouterDom)}</Routes>
-    </BrowserRouter>
-  );
+  if (!SuperTokens.canHandleRoute()) {
+    return <p>An unexpected error has occurred</p>;
+  }
+
+  const component = SuperTokens.getRoutingComponent();
+
+  if (!component) {
+    return <p>An unexpected error has occurred</p>;
+  }
+
+  return component;
 }
 
 export default function App(): React.ReactElement {
@@ -57,7 +27,7 @@ export default function App(): React.ReactElement {
   }, []);
 
   if (!isInitialized) {
-    return <p>Loading...</p>;
+    return <LoadingPage />;
   }
 
   return <Router />;
