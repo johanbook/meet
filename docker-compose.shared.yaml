@@ -91,7 +91,7 @@ services:
     image: registry.supertokens.io/supertokens/supertokens-postgresql
     container_name: "supertokens"
     environment:
-      POSTGRESQL_CONNECTION_URI: "postgresql://postgres:postgres@db:5432/"
+      POSTGRESQL_CONNECTION_URI: "postgresql://$POSTGRES_USERNAME:$POSTGRES_PASSWORD@db:5432/"
 
   web-ui:
     container_name: "web-ui"
