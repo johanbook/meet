@@ -1,0 +1,77 @@
+version: "3.9"
+
+services:
+  traefik:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "traefik"
+    command:
+      - "--accesslog=true"
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+
+      - "--entrypoints.webinsecure.address=:80"
+      - "--entrypoints.webinsecure.http.redirections.entrypoint.to=web"
+      - "--entrypoints.webinsecure.http.redirections.entrypoint.scheme=https"
+      - "--entrypoints.web.address=:443"
+      - "--entrypoints.web.http.tls.certresolver=letsencrypt"
+
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=webinsecure"
+      - "--certificatesresolvers.letsencrypt.acme.email=$EMAIL"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "$PWD/letsencrypt:/letsencrypt"
+
+  api:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "api"
+
+  auth:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "auth"
+
+  console:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "console"
+
+  db:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "db"
+
+  minio:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "minio"
+
+  pgadmin:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "pgadmin"
+
+  supertokens:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "supertokens"
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    command: --interval 120
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  web-ui:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "web-ui"

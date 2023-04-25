@@ -1,9 +1,19 @@
 - Tools:
     - pgAdmin:
+        description: Postgres UI
         href: http://pgadmin.console.localhost/
+        icon: pgadmin
 
-    - Minio admin Panel:
-        href: http://s3.console.localhost/
+    - Minio:
+        description: S3 compatible storage
+        href: http://minio.console.localhost/
+        icon: minio
+
+    - Swagger UI:
+        description: UI for OpenAPI specification
+        href: http://localhost/api/docs
 
     - Traefik:
+        description: Edge router
         href: http://traefik.console.localhost/
+        icon: traefik

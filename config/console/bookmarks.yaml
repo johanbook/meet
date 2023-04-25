@@ -1,11 +1,3 @@
 ---
 # For configuration options and examples, please see:
 # https://gethomepage.dev/en/configs/bookmarks
-
-- Tools:
-    - pgAdmin:
-        - abbr: PG
-          href: http://pgadmin.console.localhost/
-    - Minio admin Panel:
-        - abbr: S3
-          href: http://s3.console.localhost/
