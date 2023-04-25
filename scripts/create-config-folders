@@ -1,0 +1,10 @@
+#!/bin/bash
+
+mkdir -p $DATA_STORAGE_PATH/grafana \ 
+$DATA_STORAGE_PATH/letsencrypt \
+	$DATA_STORAGE_PATH/postgres \
+	$DATA_STORAGE_PATH/prometheus
+
+chown 472:472 $DATA_STORAGE_PATH/grafana
+chown 65534:65534 $DATA_STORAGE_PATH/prometheus
+chown --recursive 472:472 config/grafana

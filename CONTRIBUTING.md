@@ -14,6 +14,24 @@ The application will be available on [localhost](http://localhost) and the
 console (admin portal) can be accessed at
 [console.localhost](http://console.localhost).
 
+### Production
+
+Install Loki plugin
+
+```sh
+docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
+```
+
+To use a production build, run
+
+```sh
+docker-compose -f docker-compose.prod.yaml up
+```
+
+The application will be available on [localhost](http://localhost) and the
+console (admin portal) can be accessed at
+[console.localhost](http://console.localhost).
+
 ## Migrations
 
 We use the
