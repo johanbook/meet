@@ -1,15 +1,13 @@
 import React from "react";
 import { useQuery } from "react-query";
 
-import { ProfileApi } from "src/api";
+import { profileApi } from "src/apis";
 import { NoProfilesFound } from "src/components/NoProfilesFound";
 import { SwipableProfileDetails } from "src/components/SwipableProfileDetails";
 import ErrorMessage from "src/components/ui/ErrorMessage";
 
 import { SwipingPageHeader } from "./SwipingPageHeader";
 import { SwipingPageSkeleton } from "./SwipingPageSkeleton";
-
-const profileApi = new ProfileApi();
 
 export function SwipingPageContainer(): React.ReactElement {
   const { error, data, isLoading } = useQuery("nearbyProfiles", () =>

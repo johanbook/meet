@@ -3,14 +3,13 @@ import { useQuery } from "react-query";
 
 import { Box, Toolbar } from "@mui/material";
 
-import { CreateProfileCommand, ProfileApi } from "src/api";
+import { CreateProfileCommand } from "src/api";
+import { profileApi } from "src/apis";
 import { ProfileCreator } from "src/components/ProfileCreator";
 import { AppBar } from "src/components/ui/AppBar";
 import ErrorMessage from "src/components/ui/ErrorMessage";
 
 import { ProfileGuardSkeleton } from "./ProfileGuardSkeleton";
-
-const profileApi = new ProfileApi();
 
 export interface ProfileGuardContainerProps {
   children: React.ReactNode;
