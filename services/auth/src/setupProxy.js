@@ -14,8 +14,8 @@ const {
   verifySession,
 } = require("supertokens-node/recipe/session/framework/express");
 
-const apiDomain = process.env.API_URL || `http://localhost`;
-const websiteDomain = process.env.UI_URL || `http://localhost`;
+const API_DOMAIN = process.env.API_URL || `http://localhost`;
+const UI_DOMAIN = process.env.UI_URL || `http://localhost`;
 const httpUserIdHeader = process.env.USER_ID_HTTP_HEADER || "X-User-Id";
 const SUPERTOKENS_URL = process.env.SUPERTOKENS_URL || "http://localhost";
 const PATH_PREFIX = "/login";
@@ -24,8 +24,8 @@ supertokens.init({
   framework: "express",
   appInfo: {
     appName: "auth",
-    apiDomain,
-    websiteDomain,
+    apiDomain: API_DOMAIN,
+    websiteDomain: UI_DOMAIN,
     apiBasePath: PATH_PREFIX,
     websiteBasePath: PATH_PREFIX,
   },
@@ -38,7 +38,7 @@ supertokens.init({
 module.exports = function (app) {
   app.use(
     cors({
-      origin: websiteDomain, // TODO: Change to your app's website domain
+      origin: UI_DOMAIN, // TODO: Change to your app's website domain
       allowedHeaders: ["content-type", ...supertokens.getAllCORSHeaders()],
       methods: ["GET", "PUT", "POST", "DELETE"],
       credentials: true,
@@ -81,8 +81,12 @@ module.exports = function (app) {
         accessTokenPayload: session.getAccessTokenPayload(),
       });
     } catch (err) {
-      res.redirect(`${websiteDomain}{PATH_PREFIX}`);
+      res.redirect(`${UI_DOMAIN}${PATH_PREFIX}`);
     }
+  });
+
+  app.get("/login/config", async (req, res) => {
+    res.send({ API_DOMAIN, UI_DOMAIN });
   });
 
   app.get("/logout", verifySession(), async (req, res) => {

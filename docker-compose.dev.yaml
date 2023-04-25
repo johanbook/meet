@@ -29,6 +29,10 @@ services:
       service: "auth"
     build:
       context: "./services/auth"
+    environment:
+      API_URL: "http://$DOMAIN"
+      UI_URL: "http://$DOMAIN"
+      SUPERTOKENS_URL: "http://supertokens:3567"
 
   db:
     extends:

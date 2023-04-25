@@ -26,15 +26,15 @@ services:
   api:
     container_name: "api"
     environment:
-      - DB_DATABASE=api
-      - DB_HOST=db
-      - DB_PASSWORD=$POSTGRES_PASSWORD
-      - DB_PORT=5432
-      - DB_USERNAME=$POSTGRES_USERNAME
-      - PORT=80
-      - S3_ACCESS_KEY=$MINIO_ACCESS_KEY
-      - S3_ENDPOINT=minio
-      - S3_SECRET_KEY=$MINIO_SECRET_KEY
+      DB_DATABASE: "api"
+      DB_HOST: "db"
+      DB_PASSWORD: "$POSTGRES_PASSWORD"
+      DB_PORT: 5432
+      DB_USERNAME: "$POSTGRES_USERNAME"
+      PORT: 80
+      S3_ACCESS_KEY: "$MINIO_ACCESS_KEY"
+      S3_ENDPOINT: "minio"
+      S3_SECRET_KEY: "$MINIO_SECRET_KEY"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=Host(`$DOMAIN`)&&PathPrefix(`/api`)"
@@ -54,8 +54,6 @@ services:
 
   auth:
     container_name: "auth"
-    environment:
-      SUPERTOKENS_URL: "http://supertokens:3567"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.auth.rule=Host(`$DOMAIN`)&&(PathPrefix(`/login`)||PathPrefix(`/logout`))"
@@ -69,8 +67,8 @@ services:
     image: "postgis/postgis:15-3.3-alpine"
     container_name: "db"
     environment:
-      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
-      - POSTGRES_USERNAME=$POSTGRES_USERNAME
+      POSTGRES_PASSWORD: "$POSTGRES_PASSWORD"
+      POSTGRES_USERNAME: "$POSTGRES_USERNAME"
     ports:
       - "5432:5432"
     volumes:
@@ -80,8 +78,8 @@ services:
     image: "dpage/pgadmin4"
     container_name: "pgadmin"
     environment:
-      - PGADMIN_DEFAULT_EMAIL=$PGADMIN_EMAIL
-      - PGADMIN_DEFAULT_PASSWORD=$POSTGRES_PASSWORD
+      PGADMIN_DEFAULT_EMAIL: "$PGADMIN_EMAIL"
+      PGADMIN_DEFAULT_PASSWORD: "$POSTGRES_PASSWORD"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.pgadmin.rule=Host(`pgadmin.console.$DOMAIN`)"
@@ -99,7 +97,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.web-ui.rule=Host(`$DOMAIN`)"
       - "traefik.http.routers.web-ui.entrypoints=web"
-      - "traefik.http.routers.web-ui.middlewares=auth"
+      - "traefik.http.routers.web-ui.middlewares=auth-redirect"
 
   minio:
     image: "minio/minio"
