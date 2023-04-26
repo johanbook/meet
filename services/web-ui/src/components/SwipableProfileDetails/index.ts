@@ -1,1 +1,0 @@
-export { SwipableProfileDetails } from "./SwipableProfileDetails";

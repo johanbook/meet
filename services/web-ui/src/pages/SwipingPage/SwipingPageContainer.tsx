@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
 import React from "react";
 import { useQuery } from "react-query";
 
 import { profileApi } from "src/apis";
 import { NoProfilesFound } from "src/components/NoProfilesFound";
-import { SwipableProfileDetails } from "src/components/SwipableProfileDetails";
+import { SwipeableProfiles } from "src/components/SwipeableProfiles";
 import ErrorMessage from "src/components/ui/ErrorMessage";
 
 import { SwipingPageHeader } from "./SwipingPageHeader";
@@ -41,10 +42,10 @@ export function SwipingPageContainer(): React.ReactElement {
     <>
       <SwipingPageHeader />
 
-      <SwipableProfileDetails
-        onAccept={() => data.shift()}
-        onDecline={() => data.shift()}
-        profile={data[0]}
+      <SwipeableProfiles
+        onAccept={console.log}
+        onDecline={console.log}
+        profiles={data}
       />
     </>
   );
