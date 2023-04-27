@@ -16,15 +16,25 @@ export function SwipeableProfiles({
   onDecline,
   profiles,
 }: SwipeableProfilesProps): React.ReactElement {
+  const [currentProfileIsExpanded, setCurrentProfileIsExpanded] =
+    React.useState(false);
+
   return (
-    <SwipeableList
-      data={profiles}
-      getItemId={(profile) => profile.id}
-      onSwipeLeft={(profile) => onDecline(profile.id)}
-      onSwipeRight={(profile) => onAccept(profile.id)}
-      onRequestData={async () => []}
-    >
-      {(props) => <SwipeableProfileDetails {...props} />}
-    </SwipeableList>
+    <div onClick={() => setCurrentProfileIsExpanded(!currentProfileIsExpanded)}>
+      <SwipeableList
+        data={profiles}
+        getItemId={(profile) => profile.id}
+        onSwipeLeft={(profile) => onDecline(profile.id)}
+        onSwipeRight={(profile) => onAccept(profile.id)}
+        onRequestData={async () => []}
+      >
+        {(props) => (
+          <SwipeableProfileDetails
+            expanded={currentProfileIsExpanded}
+            {...props}
+          />
+        )}
+      </SwipeableList>
+    </div>
   );
 }

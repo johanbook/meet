@@ -1,6 +1,12 @@
 import React from "react";
 
-import { Card, CardMedia, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Collapse,
+  Typography,
+} from "@mui/material";
 
 import { ProfileDetails } from "src/api";
 
@@ -9,10 +15,12 @@ const DUMMY_IMAGE_URL =
 
 export interface SwipeableProfileDetailsProps {
   data: ProfileDetails;
+  expanded: boolean;
 }
 
 export function SwipeableProfileDetails({
   data,
+  expanded,
 }: SwipeableProfileDetailsProps): React.ReactElement {
   let url = DUMMY_IMAGE_URL;
 
@@ -32,6 +40,16 @@ export function SwipeableProfileDetails({
           {data.name}
         </Typography>
       </CardMedia>
+
+      <Collapse in={expanded}>
+        <CardContent>
+          <Typography>{data.description}</Typography>
+
+          {data.photos.map((image) => (
+            <img alt="Profile" src={image.imageUrl} />
+          ))}
+        </CardContent>
+      </Collapse>
     </Card>
   );
 }
