@@ -4,12 +4,10 @@ import { useMutation } from "react-query";
 import { AccountCircle } from "@mui/icons-material";
 import { Avatar, Button } from "@mui/material";
 
-import { PhotosApi } from "src/api";
+import { photosApi } from "src/apis";
 import { useSnackbar } from "src/hooks/useSnackbar";
 
 const HEIGHT = 120;
-
-const photosApi = new PhotosApi();
 
 export interface CurrentProfileAvatarProps {
   onUploadedNewProfilePhoto: () => void;

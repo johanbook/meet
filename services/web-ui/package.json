@@ -54,8 +54,6 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.4.4",
-    "@commitlint/config-conventional": "17.4.4",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/lodash": "^4.14.191",
     "@types/react-plotly.js": "^2.6.0",

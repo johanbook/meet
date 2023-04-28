@@ -1,1 +1,1 @@
-export { ProfilePhotosEditor } from "./ProfilePhotosEditor";
+export { ProfilePhotosEditorContainer as ProfilePhotosEditor } from "./ProfilePhotosEditorContainer";
