@@ -7,7 +7,7 @@ import { ProfileDetails, UpdateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
 import { useSnackbar } from "src/hooks/useSnackbar";
 
-import { CurrentProfileAvatar } from "../CurrentProfileAvatar";
+import { ProfilePhotosEditor } from "../ProfilePhotosEditor";
 
 export interface CurrentProfileDetailsProps {
   profile: ProfileDetails;
@@ -35,29 +35,22 @@ export function CurrentProfileDetails({
     snackbar.success("Updated profile");
   }
 
-  const [profilePhoto] = profile.photos;
   const canSubmit = description !== profile.description && !mutation.isLoading;
 
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          paddingTop: 1,
-          justifyContent: "center",
-        }}
-      >
-        <CurrentProfileAvatar
-          onUploadedNewProfilePhoto={refetchData}
-          src={profilePhoto?.imageUrl}
-        />
+      <Typography sx={{ paddingTop: 2 }} variant="h5">
+        Photos and media
+      </Typography>
 
-        <Typography sx={{ paddingTop: 1 }} variant="h5">
-          {profile.name}
-        </Typography>
-      </Box>
+      <ProfilePhotosEditor
+        onUploadedNewProfilePhoto={refetchData}
+        photos={profile.photos}
+      />
+
+      <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
+        About me
+      </Typography>
 
       <form>
         <TextField
