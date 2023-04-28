@@ -6,6 +6,9 @@ import { animated } from "@react-spring/web";
 import { useQueue } from "src/hooks/useQueue";
 import { useSwipe } from "src/hooks/useSwipe";
 
+/* eslint-disable-next-line @typescript-eslint/no-empty-function */
+const NOOP = () => {};
+
 export interface SwipeableListItemProps<T> {
   data: T;
 }
@@ -28,7 +31,11 @@ export function SwipeableList<T>({
   const { append, queue, shift } = useQueue<T>(data);
 
   const current = queue[0];
-  const swipingProps = useSwipe();
+  const swipingProps = useSwipe({
+    onSwipe: NOOP,
+    onSwipeLeft: NOOP,
+    onSwipeRight: NOOP,
+  });
 
   React.useEffect(() => {
     if (queue.length < 2) {
@@ -53,7 +60,10 @@ export function SwipeableList<T>({
 
   return (
     <>
-      <animated.div {...swipingProps}>
+      <animated.div
+        {...swipingProps}
+        style={{ ...swipingProps.style, touchAction: "pan-y" }}
+      >
         {children({ data: current })}
       </animated.div>
 

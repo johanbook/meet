@@ -1,8 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
+import { Box, Container, Toolbar } from "@mui/material";
 
 import { AppBar } from "../AppBar";
 import { BottomNavigation } from "../BottomNavigation";
@@ -23,7 +22,11 @@ export default function Nav({
         sx={{ flexGrow: 1, padding: 3, paddingRight: 3, paddingTop: 1 }}
       >
         <Toolbar />
-        <Outlet />
+
+        <Container disableGutters maxWidth="md">
+          <Outlet />
+        </Container>
+
         {showBottomNav && <BottomNavigation />}
       </Box>
     </Box>

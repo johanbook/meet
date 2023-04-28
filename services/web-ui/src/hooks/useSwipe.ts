@@ -1,7 +1,11 @@
 import React from "react";
 
 import { useSpring } from "@react-spring/web";
-import { FullGestureState, useDrag } from "@use-gesture/react";
+import { DragConfig, FullGestureState, useDrag } from "@use-gesture/react";
+
+const DRAG_CONFIG: DragConfig = {
+  delay: 1000,
+};
 
 const SWIPING_VELOCITY_THRESHOLD = 2;
 
@@ -17,7 +21,7 @@ export interface UseSwipeProps {
   onSwipeRight: () => void;
 }
 
-export function useSwipe() {
+export function useSwipe({ onSwipe }: UseSwipeProps) {
   const [triggerIsActive, setTriggerIsActive] = React.useState(false);
 
   const [{ x }, api] = useSpring(() => ({
@@ -26,16 +30,16 @@ export function useSwipe() {
 
   const bind = useDrag((dragState) => {
     const down = dragState.down;
-    const [dx] = dragState.direction;
     const [mx] = dragState.movement;
 
     const triggerSwipe = determineTriggerSwipe(dragState);
 
     api.start(() => {
-      let x = down ? mx : 0;
+      const x = down ? mx : 0;
 
       if (triggerSwipe) {
-        x = dx * window.innerWidth;
+        // TODO: Use this for swiping a card to a side
+        // x = dx * window.innerWidth;
       }
 
       return { x };
@@ -44,10 +48,12 @@ export function useSwipe() {
     if (triggerSwipe && !triggerIsActive) {
       setTimeout(() => {
         setTriggerIsActive(false);
-        api.start({ x: 0, immediate: true });
+        // TODO: Use this for reseting a card
+        // api.start({ x: 0, immediate: true });
+        onSwipe();
       }, 300);
     }
-  });
+  }, DRAG_CONFIG);
 
   const bindProps = bind();
   return { ...bindProps, style: { x } };
