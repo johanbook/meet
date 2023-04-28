@@ -30,9 +30,9 @@ with the [PostGIS](https://postgis.net) extensions for handling geospatial data.
 [Minio](https://min.io/) is an on-prem S3-compatible object storage which is
 used for e.g. storing user profile photos.
 
-However, for a production environment, a cloud-based object storage is still
-recommended due to being considerably cheaper than using fault-tolerant block
-storage (which would be required for self-hosting an object storage).
+For a production environment, a cloud-based object storage is recommended due to
+being cheaper than using fault-tolerant block storage (which would be required
+for self-hosting an object storage).
 
 ## Frontend
 

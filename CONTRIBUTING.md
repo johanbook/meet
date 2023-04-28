@@ -1,6 +1,21 @@
 # Contributing
 
+This document outlines the contributing guidelines for the project.
+
 ## Running the project
+
+In order to run the project, start by cloning the repository onto your local
+machine
+
+```sh
+git clone git@github.com:johanbook/meet.git
+```
+
+Create a `.env` file like so and replace the required fields:
+
+```sh
+cp .env.example .env
+```
 
 ### Development
 
@@ -14,19 +29,33 @@ The application will be available on [localhost](http://localhost) and the
 console (admin portal) can be accessed at
 [console.localhost](http://console.localhost).
 
-## Migrations
+### Production
+
+To use a production build, run
+
+```sh
+docker-compose -f docker-compose.prod.yaml up
+```
+
+## Database
+
+### Migrations
 
 We use the
 [TypeORM migration system](https://github.com/typeorm/typeorm/blob/master/docs/migrations.md)
 for running and generating migrations.
 
-### Generating new migrations
+#### Generating new migrations
 
 Navigate to `./services/api` and run
 
 ```sh
-generate-migration MyMigrationName
+./scripts/generate-migration MyMigrationName
 ```
+
+### Seeding the database with test data
+
+To seed the database with test data, run `services/api/scripts/seed-database`.
 
 ## Git methodology
 
