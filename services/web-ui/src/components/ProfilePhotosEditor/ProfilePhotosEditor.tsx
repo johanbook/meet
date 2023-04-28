@@ -32,8 +32,11 @@ export function ProfilePhotosEditor({
   onUploadedNewProfilePhoto,
   photos,
 }: ProfilePhotosEditorProps): React.ReactElement {
-  const mutation = useMutation((file: File) => photosApi.addPhoto({ file }));
-  const { success } = useSnackbar();
+  const snackbar = useSnackbar();
+
+  const mutation = useMutation((file: File) => photosApi.addPhoto({ file }), {
+    onError: () => snackbar.error("Image upload failed"),
+  });
 
   async function handleUpload(
     event: React.ChangeEvent<HTMLInputElement>
@@ -42,6 +45,7 @@ export function ProfilePhotosEditor({
 
     const files = event.target.files;
     if (!files || files.length === 0) {
+      snackbar.error("File not found. Please contact app support.");
       return;
     }
 
@@ -50,7 +54,7 @@ export function ProfilePhotosEditor({
 
     onUploadedNewProfilePhoto();
 
-    success("Photo uploaded successfully");
+    snackbar.success("Photo uploaded successfully");
   }
 
   return (
