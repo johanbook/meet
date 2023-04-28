@@ -3,6 +3,7 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { UserIdService } from "src/client/context/user-id.service";
 import { ProfilePhoto } from "src/infrastructure/database/entities/profile-photo.entity";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
@@ -17,12 +18,15 @@ export class AddPhotoHandler implements ICommandHandler<AddPhotoCommand, void> {
     private readonly profiles: Repository<Profile>,
     @InjectRepository(ProfilePhoto)
     private readonly profilePhotos: Repository<ProfilePhoto>,
+    private readonly userIdService: UserIdService,
   ) {}
 
   async execute(command: AddPhotoCommand) {
+    const userId = this.userIdService.getUserId();
+
     const profile = await this.profiles.findOne({
       select: { id: true },
-      where: { userId: command.userId },
+      where: { userId },
     });
 
     if (!profile) {

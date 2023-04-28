@@ -32,7 +32,7 @@ describe.skip("ProfileController", () => {
 
   describe("getCurrentProfile", () => {
     it("should return profile id", async () => {
-      const currentProfile = await appController.getCurrentProfile("1");
+      const currentProfile = await appController.getCurrentProfile();
       expect(currentProfile.id).toBe("1");
     });
   });

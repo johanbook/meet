@@ -8,7 +8,6 @@ import {
 import { SwaggerModule } from "@nestjs/swagger";
 
 import { AppModule } from "./app.module";
-import { AuthenticationGuard } from "./client/guards/authentication.guard";
 import { LoggingInterceptor } from "./client/interceptors/logging.interceptor";
 import { createOpenApiDocument } from "./client/openapi";
 
@@ -27,7 +26,6 @@ async function bootstrap() {
   SwaggerModule.setup(`${PATH_PREFIX}/docs`, app, document);
 
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
-  app.useGlobalGuards(new AuthenticationGuard());
   app.useGlobalInterceptors(new LoggingInterceptor());
 
   app.register(fastifyMultipart);

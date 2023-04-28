@@ -1,4 +1,3 @@
-import { ApiHideProperty } from "@nestjs/swagger";
 import { IsAlpha, Length, IsString, ValidateNested } from "class-validator";
 
 import { Location } from "./location.dto";
@@ -14,7 +13,4 @@ export class CreateProfileCommand {
 
   @ValidateNested()
   public readonly recentLocation!: Location;
-
-  @ApiHideProperty()
-  public userId!: string;
 }

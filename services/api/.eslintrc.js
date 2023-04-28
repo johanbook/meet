@@ -28,7 +28,7 @@ module.exports = {
     "unicorn/prevent-abbreviations": [
       "error",
       {
-        ignore: ["e2e", /env/i, /fn/i, /props/i],
+        ignore: ["e2e", /env/i, /fn/i, /props/i, /req/i, /res/i],
       },
     ],
   },
