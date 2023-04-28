@@ -1,5 +1,4 @@
 import React from "react";
-import { useMutation } from "react-query";
 
 import { Add } from "@mui/icons-material";
 import {
@@ -10,53 +9,21 @@ import {
   ImageListItemBar,
 } from "@mui/material";
 
-import { PhotoDetails, PhotosApi } from "src/api";
-import { useSnackbar } from "src/hooks/useSnackbar";
+import { PhotoDetails } from "src/api";
 
-const photosApi = new PhotosApi();
-
-function getPhotoLabel(index: number): string {
-  if (index === 0) {
-    return "Main";
-  }
-
-  return String(index + 1);
-}
-
-export interface ProfilePhotosEditorProps {
-  onUploadedNewProfilePhoto: () => void;
+export interface ProfilePhotosEditorComponentProps {
+  disabled: boolean;
+  getPhotoLabel: (index: number) => string;
+  handleUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
   photos: PhotoDetails[];
 }
 
-export function ProfilePhotosEditor({
-  onUploadedNewProfilePhoto,
+export function ProfilePhotosEditorComponent({
+  disabled,
+  getPhotoLabel,
+  handleUpload,
   photos,
-}: ProfilePhotosEditorProps): React.ReactElement {
-  const snackbar = useSnackbar();
-
-  const mutation = useMutation((file: File) => photosApi.addPhoto({ file }), {
-    onError: () => snackbar.error("Image upload failed"),
-  });
-
-  async function handleUpload(
-    event: React.ChangeEvent<HTMLInputElement>
-  ): Promise<void> {
-    event.preventDefault();
-
-    const files = event.target.files;
-    if (!files || files.length === 0) {
-      snackbar.error("File not found. Please contact app support.");
-      return;
-    }
-
-    const file = files[0];
-    await mutation.mutateAsync(file);
-
-    onUploadedNewProfilePhoto();
-
-    snackbar.success("Photo uploaded successfully");
-  }
-
+}: ProfilePhotosEditorComponentProps): React.ReactElement {
   return (
     <>
       <ImageList cols={3} gap={10} sx={{ height: "50vh" }}>
@@ -88,7 +55,7 @@ export function ProfilePhotosEditor({
         >
           <Button
             component="label"
-            disabled={mutation.isLoading}
+            disabled={disabled}
             sx={{ height: "100%", width: "100%" }}
           >
             <Add />
