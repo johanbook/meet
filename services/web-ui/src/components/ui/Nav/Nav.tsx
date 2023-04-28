@@ -26,9 +26,9 @@ export default function Nav({
         <Container disableGutters maxWidth="md">
           <Outlet />
         </Container>
-
-        {showBottomNav && <BottomNavigation />}
       </Box>
+
+      {showBottomNav && <BottomNavigation />}
     </Box>
   );
 }
