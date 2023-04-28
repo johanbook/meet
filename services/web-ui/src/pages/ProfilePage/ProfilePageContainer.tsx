@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
 
-import { CreateProfileCommand, UpdateProfileCommand } from "src/api";
+import { CreateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
 import { CurrentProfileDetails } from "src/components/CurrentProfileDetails";
 import { ProfileCreator } from "src/components/ProfileCreator";
@@ -20,15 +20,6 @@ export default function ProfilePageContainer(): React.ReactElement {
   const { error, data, isLoading, refetch } = useQuery("currentProfile", () =>
     profileApi.getCurrentProfile()
   );
-
-  async function handleUpdateProfile(
-    updateProfileCommand: UpdateProfileCommand
-  ): Promise<void> {
-    await profileApi.updateCurrentProfile({
-      updateProfileCommand,
-    });
-    await refetch();
-  }
 
   if (error) {
     const message = (error as Error).message;
@@ -63,11 +54,7 @@ export default function ProfilePageContainer(): React.ReactElement {
     <>
       <ProfilePageHeader />
 
-      <CurrentProfileDetails
-        onUpdateProfile={handleUpdateProfile}
-        profile={data}
-        refetchData={refetch}
-      />
+      <CurrentProfileDetails profile={data} refetchData={refetch} />
     </>
   );
 }
