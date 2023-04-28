@@ -43,7 +43,7 @@ export function CurrentProfileAvatar({
 
   if (src) {
     return (
-      <Button component="label">
+      <Button component="label" disabled={mutation.isLoading}>
         <Avatar sx={{ height: HEIGHT, width: HEIGHT }} src={src} />
         <input hidden accept="image/*" type="file" onChange={handleUpload} />
       </Button>
@@ -51,7 +51,7 @@ export function CurrentProfileAvatar({
   }
 
   return (
-    <Button component="label">
+    <Button component="label" disabled={mutation.isLoading}>
       <Avatar sx={{ height: HEIGHT, width: HEIGHT }}>
         <AccountCircle sx={{ height: HEIGHT, width: HEIGHT }} />
       </Avatar>
