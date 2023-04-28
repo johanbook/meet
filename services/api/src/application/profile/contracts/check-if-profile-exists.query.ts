@@ -1,3 +1,1 @@
-export class CheckIfProfileExistsQuery {
-  constructor(public readonly userId: string) {}
-}
+export class CheckIfProfileExistsQuery {}

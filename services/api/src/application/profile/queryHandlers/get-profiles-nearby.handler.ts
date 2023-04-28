@@ -3,6 +3,7 @@ import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Not, Repository } from "typeorm";
 
+import { UserIdService } from "src/client/context/user-id.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
 
@@ -18,11 +19,14 @@ export class GetProfilesNearbyHandler
     private readonly objectStorageService: ObjectStorageService,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
+    private readonly userIdService: UserIdService,
   ) {}
 
-  async execute(query: GetProfilesNearbyQuery) {
+  async execute() {
+    const userId = this.userIdService.getUserId();
+
     const userProfile = await this.profiles.findOne({
-      where: { userId: query.userId },
+      where: { userId },
     });
 
     if (!userProfile) {
@@ -49,7 +53,7 @@ export class GetProfilesNearbyHandler
           y: recentLocation.y,
         },
       )
-      .andWhere({ userId: Not(query.userId) })
+      .andWhere({ userId: Not(userId) })
       .getMany();
 
     return foundProfiles.map((profile) => ({

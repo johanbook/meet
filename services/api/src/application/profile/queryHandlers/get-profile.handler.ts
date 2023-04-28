@@ -3,6 +3,7 @@ import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { UserIdService } from "src/client/context/user-id.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
 
@@ -14,9 +15,12 @@ export class GetProfileHandler implements IQueryHandler<GetProfileQuery, any> {
     private readonly objectStorageService: ObjectStorageService,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
+    private readonly userIdService: UserIdService,
   ) {}
 
-  async execute(query: GetProfileQuery) {
+  async execute() {
+    const userId = this.userIdService.getUserId();
+
     const profile = await this.profiles.findOne({
       select: {
         id: true,
@@ -26,7 +30,7 @@ export class GetProfileHandler implements IQueryHandler<GetProfileQuery, any> {
       relations: {
         photos: true,
       },
-      where: { userId: query.userId },
+      where: { userId },
     });
 
     if (!profile) {

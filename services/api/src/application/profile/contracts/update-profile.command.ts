@@ -1,4 +1,3 @@
-import { ApiHideProperty } from "@nestjs/swagger";
 import { IsAlpha, IsOptional, IsString, Length } from "class-validator";
 
 export class UpdateProfileCommand {
@@ -11,7 +10,4 @@ export class UpdateProfileCommand {
   @IsAlpha()
   @Length(0, 128)
   public readonly name?: string;
-
-  @ApiHideProperty()
-  public userId!: string;
 }

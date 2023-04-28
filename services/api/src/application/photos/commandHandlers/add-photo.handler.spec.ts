@@ -1,10 +1,12 @@
 import { Repository } from "typeorm";
 
+import { UserIdService } from "src/client/context/user-id.service";
 import { ProfilePhoto } from "src/infrastructure/database/entities/profile-photo.entity";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
 import { createObjectStorageServiceMock } from "src/test/mocks/object-storage.service.mock";
 import { createMockRepository } from "src/test/mocks/repository.mock";
+import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
 import { map } from "src/utils/mapper";
 
 import { AddPhotoCommand } from "../contracts/add-photo.command";
@@ -15,15 +17,19 @@ describe(AddPhotoHandler.name, () => {
   let objectStorageService: ObjectStorageService;
   let profilePhotos: Repository<ProfilePhoto>;
   let profiles: Repository<Profile>;
+  let userIdService: UserIdService;
 
   beforeEach(() => {
     objectStorageService = createObjectStorageServiceMock();
     profilePhotos = createMockRepository<ProfilePhoto>();
     profiles = createMockRepository<Profile>();
+    userIdService = createUserIdServiceMock();
+
     commandHandler = new AddPhotoHandler(
       objectStorageService,
       profiles,
       profilePhotos,
+      userIdService,
     );
   });
 

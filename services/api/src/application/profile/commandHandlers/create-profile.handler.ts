@@ -3,6 +3,7 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { UserIdService } from "src/client/context/user-id.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 
 import { CreateProfileCommand } from "../contracts/create-profile.command";
@@ -14,11 +15,14 @@ export class CreateProfileHandler
   constructor(
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
+    private readonly userIdService: UserIdService,
   ) {}
 
   async execute(command: CreateProfileCommand) {
+    const userId = this.userIdService.getUserId();
+
     const profileExists = await this.profiles.exist({
-      where: { userId: command.userId },
+      where: { userId },
     });
 
     if (profileExists) {
@@ -32,7 +36,7 @@ export class CreateProfileHandler
     profile.name = command.name;
     profile.recentLocation =
       `${command.recentLocation.lat}, ${command.recentLocation.lon}` as any;
-    profile.userId = command.userId;
+    profile.userId = userId;
 
     await this.profiles.save(profile);
   }
