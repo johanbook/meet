@@ -1,1 +1,1 @@
-export { ProfileGuardContainer as ProfileGuard } from "./ProfileGuardContainer";
+export { ProfileGuardContainer as ProfileGuard } from "./ProfileGuard.container";
