@@ -7,6 +7,6 @@ class MockRepository {
   save = jest.fn();
 }
 
-export function createMockRepository<T extends ObjectLiteral>() {
-  return new MockRepository() as any as Repository<T>;
+export function createMockRepository<T extends ObjectLiteral>(): Repository<T> {
+  return new MockRepository() as any;
 }

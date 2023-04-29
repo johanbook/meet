@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 
 import { ProfilePhoto } from "./profile-photo.entity";
+import { Swipe } from "./swipe.entity";
 
 @Entity()
 export class Profile {
@@ -16,6 +17,12 @@ export class Profile {
 
   @Column({ length: 1024 })
   description!: string;
+
+  @OneToMany(() => Swipe, (swipe) => swipe.profile)
+  likes!: Swipe[];
+
+  @OneToMany(() => Swipe, (swipe) => swipe.shownProfile)
+  likedBy!: Swipe[];
 
   @Column({ length: 128 })
   name!: string;
