@@ -19,13 +19,15 @@ export default function Nav({
 
       <Box
         component="main"
-        sx={{ flexGrow: 1, padding: 3, paddingRight: 3, paddingTop: 1 }}
+        sx={{ flexGrow: 1, paddingLeft: 3, paddingRight: 3, paddingTop: 1 }}
       >
         <Toolbar />
 
         <Container disableGutters maxWidth="md">
           <Outlet />
         </Container>
+
+        <Toolbar />
       </Box>
 
       {showBottomNav && <BottomNavigation />}
