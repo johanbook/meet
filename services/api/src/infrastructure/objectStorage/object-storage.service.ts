@@ -4,6 +4,7 @@ import { Readable as ReadableStream } from "node:stream";
 import { v4 as uuidv4 } from "uuid";
 
 import { BUCKET_NAMES } from "./buckets.config";
+import { minioOptions } from "./minio.config";
 import { createPublicBucketPolicy } from "./policies";
 
 type ValueOf<T> = T[keyof T];
@@ -59,7 +60,6 @@ export class ObjectStorageService {
   }
 
   getUrl(bucketName: BucketName, objectId: string): string {
-    // TODO: Remove hardcoded path
-    return `http://s3.localhost/${bucketName}/${objectId}`;
+    return `${minioOptions.publicEndpoint}/${bucketName}/${objectId}`;
   }
 }

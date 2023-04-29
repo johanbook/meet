@@ -34,6 +34,7 @@ services:
       PORT: 80
       S3_ACCESS_KEY: "$MINIO_ACCESS_KEY"
       S3_ENDPOINT: "minio"
+      S3_PUBLIC_ENDPOINT: "$PROTOCOL://s3.$DOMAIN"
       S3_SECRET_KEY: "$MINIO_SECRET_KEY"
     labels:
       - "traefik.enable=true"
