@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import {
   Avatar,
@@ -8,7 +9,7 @@ import {
   ListItemText,
 } from "@mui/material";
 
-import {  MatchDetails } from "src/api";
+import { MatchDetails } from "src/api";
 
 export interface MatchListItemProps {
   data: MatchDetails;
@@ -19,7 +20,7 @@ export function MatchListItem({
 }: MatchListItemProps): React.ReactElement {
   return (
     <ListItem divider>
-      <ListItemButton>
+      <ListItemButton component={Link} to={`/chat/${data.profileId}`}>
         <ListItemAvatar>
           <Avatar />
         </ListItemAvatar>
