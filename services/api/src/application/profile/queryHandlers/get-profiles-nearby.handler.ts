@@ -8,12 +8,13 @@ import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
 
 import { GetProfilesNearbyQuery } from "../contracts/get-profiles-nearby.query";
+import { ProfileDetails } from "../contracts/profile.dto";
 
 const DISTANCE = 100;
 
 @QueryHandler(GetProfilesNearbyQuery)
 export class GetProfilesNearbyHandler
-  implements IQueryHandler<GetProfilesNearbyQuery, any>
+  implements IQueryHandler<GetProfilesNearbyQuery, ProfileDetails[]>
 {
   constructor(
     private readonly objectStorageService: ObjectStorageService,

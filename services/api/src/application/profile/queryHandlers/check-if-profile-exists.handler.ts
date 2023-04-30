@@ -9,7 +9,7 @@ import { CheckIfProfileExistsQuery } from "../contracts/check-if-profile-exists.
 
 @QueryHandler(CheckIfProfileExistsQuery)
 export class CheckIfProfileExistsHandler
-  implements IQueryHandler<CheckIfProfileExistsQuery, any>
+  implements IQueryHandler<CheckIfProfileExistsQuery, boolean>
 {
   constructor(
     @InjectRepository(Profile)

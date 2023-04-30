@@ -6,7 +6,7 @@ import { Repository } from "typeorm";
 import { UserIdService } from "src/client/context/user-id.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { Match } from "src/infrastructure/database/views/matches.view";
-import { map } from "src/utils/mapper";
+import { mapArray } from "src/utils/mapper";
 
 import { GetMatchesQuery } from "../contracts/get-matches.query";
 import { MatchDetails } from "../contracts/match.dto";
@@ -41,11 +41,9 @@ export class GetMatchesHandler
       where: { profileId: profile.id },
     });
 
-    return foundMatches.map((match) =>
-      map(MatchDetails, {
-        name: match.name,
-        profileId: match.shownProfileId,
-      }),
-    );
+    return mapArray(MatchDetails, foundMatches, (match) => ({
+      name: match.name,
+      profileId: match.shownProfileId,
+    }));
   }
 }
