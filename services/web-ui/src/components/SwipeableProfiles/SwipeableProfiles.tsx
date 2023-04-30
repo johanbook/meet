@@ -1,27 +1,37 @@
 import React from "react";
+import { useMutation } from "react-query";
 
-import { ProfileDetails } from "src/api";
+import { ProfileDetails, SwipeCommand } from "src/api";
+import { swipesApi } from "src/apis";
 
 import { SwipeableProfileDetails } from "../SwipeableProfileDetails";
 import { SwipeableList } from "../ui/SwipeableList/SwipeableList";
 
 export interface SwipeableProfilesProps {
-  onAccept: (id: number) => void;
-  onDecline: (id: number) => void;
   profiles: ProfileDetails[];
 }
 
 export function SwipeableProfiles({
-  onAccept,
-  onDecline,
   profiles,
 }: SwipeableProfilesProps): React.ReactElement {
+  const mutation = useMutation((swipeCommand: SwipeCommand) =>
+    swipesApi.swipe({ swipeCommand })
+  );
+
+  async function handleSwipeLeft(shownProfileId: number): Promise<void> {
+    await mutation.mutateAsync({ shownProfileId, liked: true });
+  }
+
+  async function handleSwipeRight(shownProfileId: number): Promise<void> {
+    await mutation.mutateAsync({ shownProfileId, liked: true });
+  }
+
   return (
     <SwipeableList
       data={profiles}
       getItemId={(profile) => profile.id}
-      onSwipeLeft={(profile) => onDecline(profile.id)}
-      onSwipeRight={(profile) => onAccept(profile.id)}
+      onSwipeLeft={(profile) => handleSwipeLeft(profile.id)}
+      onSwipeRight={(profile) => handleSwipeRight(profile.id)}
       onRequestData={async () => []}
     >
       {(props) => <SwipeableProfileDetails {...props} />}

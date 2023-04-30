@@ -5,7 +5,7 @@ import { useQuery } from "react-query";
 import { profileApi } from "src/apis";
 import { NoProfilesFound } from "src/components/NoProfilesFound";
 import { SwipeableProfiles } from "src/components/SwipeableProfiles";
-import ErrorMessage from "src/components/ui/ErrorMessage";
+import { ErrorMessage } from "src/components/ui/ErrorMessage";
 
 import { SwipingPageHeader } from "./SwipingPageHeader";
 import { SwipingPageSkeleton } from "./SwipingPageSkeleton";
@@ -42,11 +42,7 @@ export function SwipingPageContainer(): React.ReactElement {
     <>
       <SwipingPageHeader />
 
-      <SwipeableProfiles
-        onAccept={console.log}
-        onDecline={console.log}
-        profiles={data}
-      />
+      <SwipeableProfiles profiles={data} />
     </>
   );
 }
