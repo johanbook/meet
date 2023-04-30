@@ -19,7 +19,7 @@ export function SwipeableProfiles({
   );
 
   async function handleSwipeLeft(shownProfileId: number): Promise<void> {
-    await mutation.mutateAsync({ shownProfileId, liked: true });
+    await mutation.mutateAsync({ shownProfileId, liked: false });
   }
 
   async function handleSwipeRight(shownProfileId: number): Promise<void> {

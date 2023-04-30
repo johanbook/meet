@@ -5,8 +5,5 @@ export class SwipeCommand {
   public liked!: boolean;
 
   @IsPositive()
-  public profileId!: number;
-
-  @IsPositive()
   public shownProfileId!: number;
 }
