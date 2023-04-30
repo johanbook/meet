@@ -1,4 +1,4 @@
-export class Match {
+export class MatchDetails {
   name!: string;
   profileId!: string;
 }

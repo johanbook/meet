@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 
+import { ChatMessage } from "./chat-message.entity";
 import { ProfilePhoto } from "./profile-photo.entity";
 import { Swipe } from "./swipe.entity";
 
@@ -32,6 +33,12 @@ export class Profile {
 
   @Column({ type: "point" })
   recentLocation!: Point;
+
+  @OneToMany(() => ChatMessage, (chatMessage) => chatMessage.receiver)
+  receivedMessages!: ChatMessage;
+
+  @OneToMany(() => ChatMessage, (chatMessage) => chatMessage.sender)
+  sentMessage!: ChatMessage;
 
   @Index({ unique: true })
   @Column({ length: 128 })
