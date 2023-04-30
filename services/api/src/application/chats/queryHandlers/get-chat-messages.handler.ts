@@ -6,12 +6,14 @@ import { Repository } from "typeorm";
 import { UserIdService } from "src/client/context/user-id.service";
 import { ChatMessage } from "src/infrastructure/database/entities/chat-message.entity";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
+import { Mapper } from "src/utils/mapper";
 
+import { ChatMessageDetails } from "../contracts/chat.dto";
 import { GetChatMessagesQuery } from "../contracts/get-chat-messages.query";
 
 @QueryHandler(GetChatMessagesQuery)
 export class GetChatMessagesHandler
-  implements IQueryHandler<GetChatMessagesQuery, any>
+  implements IQueryHandler<GetChatMessagesQuery, ChatMessageDetails[]>
 {
   constructor(
     @InjectRepository(ChatMessage)
@@ -38,11 +40,18 @@ export class GetChatMessagesHandler
     const currentProfileId = profile.id;
     const targetProfileId = query.profileId;
 
-    return await this.chatMessages.find({
+    const foundChatMessages = await this.chatMessages.find({
       where: [
         { receiverId: currentProfileId, senderId: targetProfileId },
         { receiverId: targetProfileId, senderId: currentProfileId },
       ],
     });
+
+    return Mapper.mapArray(ChatMessageDetails, foundChatMessages, (item) => ({
+      id: item.id,
+      message: item.message,
+      read: false,
+      sentByCurrentUser: false,
+    }));
   }
 }

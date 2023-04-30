@@ -1,6 +1,4 @@
-export class PhotoDetails {
-  imageUrl!: string;
-}
+import { PhotoDetails } from "./photo.dto";
 
 export class ProfileDetails {
   id!: number;
