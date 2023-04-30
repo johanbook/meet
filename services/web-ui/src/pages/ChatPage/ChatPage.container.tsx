@@ -1,19 +1,33 @@
 import React from "react";
 import { useQuery } from "react-query";
+import { useParams } from "react-router";
 
 import { List, Typography } from "@mui/material";
 
-import { matchesApi } from "src/apis";
-import { MatchListItem } from "src/components/MatchListitem";
+import { chatsApi } from "src/apis";
+import { ChatMessage } from "src/components/ChatMessage";
+import { ChatTextField } from "src/components/ChatTextBox";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 
 import { ChatPageHeader } from "./ChatPage.header";
 import { ChatPageSkeleton } from "./ChatPage.skeleton";
 
 export function ChatPageContainer(): React.ReactElement {
-  const { error, data, isLoading } = useQuery("allChats", () =>
-    matchesApi.getMatches()
+  const { id } = useParams();
+
+  const { error, data, isLoading, refetch } = useQuery(`chat-${id}`, () =>
+    chatsApi.getChats()
   );
+
+  if (!id) {
+    return (
+      <>
+        <ChatPageHeader /> <ErrorMessage message="Unable to find profile" />{" "}
+      </>
+    );
+  }
+
+  const receiverProfileId = Number.parseInt(id);
 
   if (error) {
     const message = (error as Error).message;
@@ -40,9 +54,17 @@ export function ChatPageContainer(): React.ReactElement {
         <ChatPageHeader />
 
         <Typography gutterBottom variant="h6">
-          You do not have any matches yet
+          No messages in chat
         </Typography>
-        <Typography>Keep on swiping to get your first match</Typography>
+
+        <Typography color="textSecondary">
+          Send a message and say 'hi'!
+        </Typography>
+
+        <ChatTextField
+          onSentMessage={refetch}
+          receiverProfileId={receiverProfileId}
+        />
       </>
     );
   }
@@ -52,10 +74,15 @@ export function ChatPageContainer(): React.ReactElement {
       <ChatPageHeader />
 
       <List>
-        {data.map((match) => (
-          <MatchListItem key={match.profileId} data={match} />
+        {data.map((message) => (
+          <ChatMessage key={message.id} message={message} />
         ))}
       </List>
+
+      <ChatTextField
+        onSentMessage={refetch}
+        receiverProfileId={receiverProfileId}
+      />
     </>
   );
 }

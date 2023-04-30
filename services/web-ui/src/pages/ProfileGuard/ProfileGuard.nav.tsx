@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Toolbar } from "@mui/material";
+import { Box, Container, Toolbar } from "@mui/material";
 
 import { AppBar } from "src/components/ui/AppBar";
 
@@ -16,7 +16,7 @@ export function ProfileGuardNav({
       <AppBar />
       <Box component="main" sx={{ flexGrow: 1, padding: 3, paddingTop: 1 }}>
         <Toolbar />
-        {children}
+        <Container maxWidth="md">{children}</Container>
       </Box>
     </Box>
   );

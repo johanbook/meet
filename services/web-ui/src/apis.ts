@@ -1,4 +1,5 @@
 import {
+  ChatsApi,
   Configuration,
   MatchesApi,
   PhotosApi,
@@ -8,6 +9,7 @@ import {
 
 const config = new Configuration({ basePath: window.location.origin });
 
+export const chatsApi = new ChatsApi(config);
 export const matchesApi = new MatchesApi(config);
 export const profileApi = new ProfileApi(config);
 export const photosApi = new PhotosApi(config);
