@@ -6,11 +6,15 @@ import { Repository } from "typeorm";
 import { UserIdService } from "src/client/context/user-id.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { Match } from "src/infrastructure/database/views/matches.view";
+import { map } from "src/utils/mapper";
 
 import { GetMatchesQuery } from "../contracts/get-matches.query";
+import { MatchDetails } from "../contracts/match.dto";
 
 @QueryHandler(GetMatchesQuery)
-export class GetMatchesHandler implements IQueryHandler<GetMatchesQuery, any> {
+export class GetMatchesHandler
+  implements IQueryHandler<GetMatchesQuery, MatchDetails[]>
+{
   constructor(
     @InjectRepository(Match)
     private readonly matches: Repository<Match>,
@@ -33,6 +37,15 @@ export class GetMatchesHandler implements IQueryHandler<GetMatchesQuery, any> {
       throw new NotFoundException();
     }
 
-    return await this.matches.find({ where: { profileId: profile.id } });
+    const foundMatches = await this.matches.find({
+      where: { profileId: profile.id },
+    });
+
+    return foundMatches.map((match) =>
+      map(MatchDetails, {
+        name: match.name,
+        profileId: match.shownProfileId,
+      }),
+    );
   }
 }
