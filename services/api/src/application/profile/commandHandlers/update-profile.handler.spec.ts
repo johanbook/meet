@@ -11,14 +11,14 @@ import { UpdateProfileHandler } from "./update-profile.handler";
 
 describe(UpdateProfileHandler.name, () => {
   let commandHandler: UpdateProfileHandler;
-  let mockRepository: Repository<Profile>;
+  let profiles: Repository<Profile>;
   let userIdService: UserIdService;
 
   beforeEach(() => {
-    mockRepository = createMockRepository<Profile>();
+    profiles = createMockRepository<Profile>();
     userIdService = createUserIdServiceMock();
 
-    commandHandler = new UpdateProfileHandler(mockRepository, userIdService);
+    commandHandler = new UpdateProfileHandler(profiles, userIdService);
   });
 
   describe("can update profile", () => {
@@ -46,7 +46,7 @@ describe(UpdateProfileHandler.name, () => {
         userId: "my-user-id",
       };
 
-      const findOneFn = mockRepository.findOne as unknown as jest.Mock;
+      const findOneFn = profiles.findOne as unknown as jest.Mock;
       findOneFn.mockImplementation(() => profile);
 
       const command = map(UpdateProfileCommand, {
@@ -56,7 +56,7 @@ describe(UpdateProfileHandler.name, () => {
 
       await commandHandler.execute(command);
 
-      expect(mockRepository.save).toHaveBeenCalledWith({
+      expect(profiles.save).toHaveBeenCalledWith({
         ...profile,
         description: "my-new-description",
       });
