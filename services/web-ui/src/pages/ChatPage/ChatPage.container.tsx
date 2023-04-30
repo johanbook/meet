@@ -1,9 +1,10 @@
 import React from "react";
 import { useQuery } from "react-query";
 
-import { Typography } from "@mui/material";
+import { List, Typography } from "@mui/material";
 
 import { matchesApi } from "src/apis";
+import { MatchListItem } from "src/components/MatchListitem";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 
 import { ChatPageHeader } from "./ChatPage.header";
@@ -49,6 +50,12 @@ export function ChatPageContainer(): React.ReactElement {
   return (
     <>
       <ChatPageHeader />
+
+      <List>
+        {data.map((match) => (
+          <MatchListItem key={match.profileId} data={match} />
+        ))}
+      </List>
     </>
   );
 }

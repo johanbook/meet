@@ -3,8 +3,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Nav from "src/components/ui/Nav";
 import { ChatPage } from "src/pages/ChatPage";
-import ProfilePage from "src/pages/ProfilePage";
-import SwipingPage from "src/pages/SwipingPage";
+import { ProfilePage } from "src/pages/ProfilePage";
+import { SwipingPage } from "src/pages/SwipingPage";
 
 import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 import { ProfileGuard } from "./pages/ProfileGuard";

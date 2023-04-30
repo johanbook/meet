@@ -7,8 +7,8 @@ import { NoProfilesFound } from "src/components/NoProfilesFound";
 import { SwipeableProfiles } from "src/components/SwipeableProfiles";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 
-import { SwipingPageHeader } from "./SwipingPageHeader";
-import { SwipingPageSkeleton } from "./SwipingPageSkeleton";
+import { SwipingPageHeader } from "./SwipingPage.header";
+import { SwipingPageSkeleton } from "./SwipingPage.skeleton";
 
 export function SwipingPageContainer(): React.ReactElement {
   const { error, data, isLoading } = useQuery("nearbyProfiles", () =>

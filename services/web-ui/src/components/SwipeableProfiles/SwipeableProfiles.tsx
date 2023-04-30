@@ -19,7 +19,10 @@ export function SwipeableProfiles({
 
   const mutation = useMutation(
     (swipeCommand: SwipeCommand) => swipesApi.swipe({ swipeCommand }),
-    { onError: () => snackbar.error("Unable to register swipe. Try refreshing the page") }
+    {
+      onError: () =>
+        snackbar.error("Unable to register swipe. Try refreshing the page"),
+    }
   );
 
   async function handleSwipeLeft(shownProfileId: number): Promise<void> {
