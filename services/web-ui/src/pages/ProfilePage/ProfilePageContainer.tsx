@@ -5,7 +5,7 @@ import { CreateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
 import { CurrentProfileDetails } from "src/components/CurrentProfileDetails";
 import { ProfileCreator } from "src/components/ProfileCreator";
-import ErrorMessage from "src/components/ui/ErrorMessage";
+import { ErrorMessage } from "src/components/ui/ErrorMessage";
 
 import { ProfilePageHeader } from "./ProfilePageHeader";
 import { ProfilePageSkeleton } from "./ProfilePageSkeleton";

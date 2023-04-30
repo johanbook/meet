@@ -68,8 +68,8 @@ export function SwipeableList<T>({
       </animated.div>
 
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Button onClick={handleSwipeLeft}>Left</Button>
-        <Button onClick={handleSwipeRight}>Right</Button>
+        <Button onClick={handleSwipeLeft}>Skip</Button>
+        <Button onClick={handleSwipeRight}>Like</Button>
       </Box>
     </>
   );
