@@ -10,9 +10,9 @@ import { minioOptions } from "./infrastructure/objectStorage/minio.config";
 @Module({
   imports: [
     ContextModule,
+    ClientModule,
     MinioModule.register({ ...minioOptions, isGlobal: true }),
     TypeOrmModule.forRoot({ ...dataSourceOptions, autoLoadEntities: true }),
-    ClientModule,
   ],
   providers: [],
 })

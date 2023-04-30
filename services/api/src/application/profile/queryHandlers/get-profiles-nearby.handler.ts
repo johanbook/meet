@@ -5,7 +5,7 @@ import { Not, Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
-import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
+import { MapperService } from "src/utils/mapper/mapper.service";
 
 import { GetProfilesNearbyQuery } from "../contracts/get-profiles-nearby.query";
 import { ProfileDetails } from "../contracts/profile.dto";
@@ -17,7 +17,7 @@ export class GetProfilesNearbyHandler
   implements IQueryHandler<GetProfilesNearbyQuery, ProfileDetails[]>
 {
   constructor(
-    private readonly objectStorageService: ObjectStorageService,
+    private readonly mapperService: MapperService,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
     private readonly userIdService: UserIdService,
@@ -57,15 +57,6 @@ export class GetProfilesNearbyHandler
       .andWhere({ userId: Not(userId) })
       .getMany();
 
-    return foundProfiles.map((profile) => ({
-      ...profile,
-      photos: profile.photos.map((photo) => ({
-        ...photo,
-        imageUrl: this.objectStorageService.getUrl(
-          "profile-photos",
-          photo.objectId,
-        ),
-      })),
-    }));
+    return this.mapperService.mapArray(foundProfiles, ProfileDetails);
   }
 }

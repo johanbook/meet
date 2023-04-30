@@ -6,7 +6,7 @@ import { Repository } from "typeorm";
 import { UserIdService } from "src/client/context/user-id.service";
 import { ChatMessage } from "src/infrastructure/database/entities/chat-message.entity";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
-import { Mapper } from "src/utils/mapper";
+import { MapperService } from "src/utils/mapper/mapper.service";
 
 import { ChatMessageDetails } from "../contracts/chat.dto";
 import { GetChatMessagesQuery } from "../contracts/get-chat-messages.query";
@@ -18,6 +18,7 @@ export class GetChatMessagesHandler
   constructor(
     @InjectRepository(ChatMessage)
     private readonly chatMessages: Repository<ChatMessage>,
+    private readonly mapperService: MapperService,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
     private readonly userIdService: UserIdService,
@@ -47,11 +48,6 @@ export class GetChatMessagesHandler
       ],
     });
 
-    return Mapper.mapArray(ChatMessageDetails, foundChatMessages, (item) => ({
-      id: item.id,
-      message: item.message,
-      read: false,
-      sentByCurrentUser: false,
-    }));
+    return this.mapperService.mapArray(foundChatMessages, ChatMessageDetails);
   }
 }

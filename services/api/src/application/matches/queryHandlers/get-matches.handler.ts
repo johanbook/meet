@@ -6,7 +6,7 @@ import { Repository } from "typeorm";
 import { UserIdService } from "src/client/context/user-id.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { Match } from "src/infrastructure/database/views/matches.view";
-import { Mapper } from "src/utils/mapper";
+import { MapperService } from "src/utils/mapper/mapper.service";
 
 import { GetMatchesQuery } from "../contracts/get-matches.query";
 import { MatchDetails } from "../contracts/match.dto";
@@ -18,6 +18,7 @@ export class GetMatchesHandler
   constructor(
     @InjectRepository(Match)
     private readonly matches: Repository<Match>,
+    private readonly mapperService: MapperService,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
     private readonly userIdService: UserIdService,
@@ -41,9 +42,6 @@ export class GetMatchesHandler
       where: { profileId: profile.id },
     });
 
-    return Mapper.mapArray(MatchDetails, foundMatches, (match) => ({
-      name: match.name,
-      profileId: match.shownProfileId,
-    }));
+    return this.mapperService.mapArray(foundMatches, MatchDetails);
   }
 }

@@ -6,6 +6,7 @@ import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
 
 import { AddPhotoHandler } from "./commandHandlers/add-photo.handler";
+import { PhotoDetailsMapper } from "./mappers/photo.mapper";
 
 @Module({
   imports: [
@@ -13,6 +14,6 @@ import { AddPhotoHandler } from "./commandHandlers/add-photo.handler";
     TypeOrmModule.forFeature([ProfilePhoto]),
   ],
   controllers: [],
-  providers: [AddPhotoHandler, ObjectStorageService],
+  providers: [AddPhotoHandler, ObjectStorageService, PhotoDetailsMapper],
 })
 export class PhotosModule {}

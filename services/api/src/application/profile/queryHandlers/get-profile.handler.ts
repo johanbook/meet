@@ -5,7 +5,7 @@ import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
-import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
+import { MapperService } from "src/utils/mapper/mapper.service";
 
 import { GetProfileQuery } from "../contracts/get-profile.query";
 import { ProfileDetails } from "../contracts/profile.dto";
@@ -15,7 +15,7 @@ export class GetProfileHandler
   implements IQueryHandler<GetProfileQuery, ProfileDetails>
 {
   constructor(
-    private readonly objectStorageService: ObjectStorageService,
+    private readonly mapperService: MapperService,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
     private readonly userIdService: UserIdService,
@@ -40,15 +40,14 @@ export class GetProfileHandler
       throw new NotFoundException();
     }
 
-    return {
-      ...profile,
-      photos: profile.photos.map((photo) => ({
-        ...photo,
-        imageUrl: this.objectStorageService.getUrl(
-          "profile-photos",
-          photo.objectId,
-        ),
-      })),
-    };
+    // const photos = Mapper.mapArray(PhotoDetails, profile.photos, (photo) => ({
+    //   id: photo.id,
+    //   imageUrl: this.objectStorageService.getUrl(
+    //     "profile-photos",
+    //     photo.objectId,
+    //   ),
+    // }));
+
+    return this.mapperService.map(profile, ProfileDetails);
   }
 }

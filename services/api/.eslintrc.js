@@ -23,13 +23,14 @@ module.exports = {
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-explicit-any": "off",
+    "unicorn/no-array-callback-reference": "off",
     "unicorn/no-array-method-this-argument": "off",
     "unicorn/no-process-exit": "off",
     "unicorn/prefer-top-level-await": "off",
     "unicorn/prevent-abbreviations": [
       "error",
       {
-        ignore: ["e2e", /env/i, /fn/i, /props/i, /req/i, /res/i],
+        ignore: ["e2e", /env/i, /fn/i, /props/i, /ref/i, /req/i, /res/i],
       },
     ],
   },

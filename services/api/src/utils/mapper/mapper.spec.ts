@@ -1,4 +1,4 @@
-import { map } from "./mapper";
+import { map } from ".";
 
 class TestMyClass {
   myProperty!: string;
