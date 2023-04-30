@@ -24,9 +24,10 @@ export function ProfilePhotosEditorComponent({
   handleUpload,
   photos,
 }: ProfilePhotosEditorComponentProps): React.ReactElement {
+  const numCols = Math.min(3, photos.length + 1);
   return (
     <>
-      <ImageList cols={3} gap={10} sx={{ height: "50vh" }}>
+      <ImageList cols={numCols} gap={10} sx={{ height: "50vh" }}>
         {photos.map((photo, index) => (
           <ImageListItem
             component={Card}

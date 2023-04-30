@@ -8,10 +8,10 @@ import {
   ListItemText,
 } from "@mui/material";
 
-import { Match } from "src/api";
+import {  MatchDetails } from "src/api";
 
 export interface MatchListItemProps {
-  data: Match;
+  data: MatchDetails;
 }
 
 export function MatchListItem({
