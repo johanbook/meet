@@ -1,1 +1,1 @@
-export { SwipingPageContainer as default } from "./SwipingPageContainer";
+export { SwipingPageContainer as SwipingPage } from "./SwipingPage.container";

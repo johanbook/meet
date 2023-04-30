@@ -1,15 +1,19 @@
 import React from "react";
 import { useQuery } from "react-query";
 
-import { Typography } from "@mui/material";
+import { List, Typography } from "@mui/material";
 
+import { matchesApi } from "src/apis";
+import { MatchListItem } from "src/components/MatchListitem";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 
-import { ChatPageHeader } from "./ChatPageHeader";
-import { ChatPageSkeleton } from "./ChatPageSkeleton";
+import { ChatPageHeader } from "./ChatPage.header";
+import { ChatPageSkeleton } from "./ChatPage.skeleton";
 
-export default function ChatPageContainer(): React.ReactElement {
-  const { error, data, isLoading } = useQuery("allChats", () => false);
+export function ChatPageContainer(): React.ReactElement {
+  const { error, data, isLoading } = useQuery("allChats", () =>
+    matchesApi.getMatches()
+  );
 
   if (error) {
     const message = (error as Error).message;
@@ -30,7 +34,7 @@ export default function ChatPageContainer(): React.ReactElement {
     );
   }
 
-  if (!data) {
+  if (!data || data.length === 0) {
     return (
       <>
         <ChatPageHeader />
@@ -46,6 +50,12 @@ export default function ChatPageContainer(): React.ReactElement {
   return (
     <>
       <ChatPageHeader />
+
+      <List>
+        {data.map((match) => (
+          <MatchListItem key={match.profileId} data={match} />
+        ))}
+      </List>
     </>
   );
 }

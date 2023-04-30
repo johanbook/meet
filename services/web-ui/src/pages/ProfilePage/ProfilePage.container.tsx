@@ -7,8 +7,8 @@ import { CurrentProfileDetails } from "src/components/CurrentProfileDetails";
 import { ProfileCreator } from "src/components/ProfileCreator";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 
-import { ProfilePageHeader } from "./ProfilePageHeader";
-import { ProfilePageSkeleton } from "./ProfilePageSkeleton";
+import { ProfilePageHeader } from "./ProfilePage.header";
+import { ProfilePageSkeleton } from "./ProfilePage.skeleton";
 
 async function handleCreateProfile(createProfileCommand: CreateProfileCommand) {
   await profileApi.createCurrentProfile({
@@ -16,7 +16,7 @@ async function handleCreateProfile(createProfileCommand: CreateProfileCommand) {
   });
 }
 
-export default function ProfilePageContainer(): React.ReactElement {
+export function ProfilePageContainer(): React.ReactElement {
   const { error, data, isLoading, refetch } = useQuery("currentProfile", () =>
     profileApi.getCurrentProfile()
   );

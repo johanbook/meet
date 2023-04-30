@@ -1,6 +1,6 @@
 import { ReactQueryTestProvider, TestRouter, render, screen } from "src/test";
 
-import ProfilePage from ".";
+import { ProfilePage } from ".";
 
 describe.skip("<ProfilePage />", () => {
   it("renders a message", async () => {
