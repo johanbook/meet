@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 
 import { Typography } from "@mui/material";
 
-import ErrorMessage from "src/components/ui/ErrorMessage";
+import { ErrorMessage } from "src/components/ui/ErrorMessage";
 
 import { ChatPageHeader } from "./ChatPageHeader";
 import { ChatPageSkeleton } from "./ChatPageSkeleton";

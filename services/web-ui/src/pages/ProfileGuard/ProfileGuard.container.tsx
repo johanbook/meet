@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { CreateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
 import { ProfileCreator } from "src/components/ProfileCreator";
-import ErrorMessage from "src/components/ui/ErrorMessage";
+import { ErrorMessage } from "src/components/ui/ErrorMessage";
 
 import { ProfileGuardNav } from "./ProfileGuard.nav";
 import { ProfileGuardSkeleton } from "./ProfileGuard.skeleton";

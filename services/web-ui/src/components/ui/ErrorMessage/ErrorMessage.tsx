@@ -7,7 +7,7 @@ export interface ErrorMessageProps {
   message: string;
 }
 
-export default function ErrorMessage({
+export function ErrorMessage({
   debug,
   message,
 }: ErrorMessageProps): React.ReactElement {

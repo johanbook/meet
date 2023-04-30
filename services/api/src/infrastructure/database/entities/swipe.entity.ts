@@ -4,11 +4,13 @@ import {
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
+  Unique,
 } from "typeorm";
 
 import { Profile } from "./profile.entity";
 
 @Entity()
+@Unique(["profile", "shownProfile"])
 export class Swipe {
   @PrimaryGeneratedColumn()
   id!: number;
