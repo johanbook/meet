@@ -8,9 +8,12 @@ import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
 
 import { GetProfileQuery } from "../contracts/get-profile.query";
+import { ProfileDetails } from "../contracts/profile.dto";
 
 @QueryHandler(GetProfileQuery)
-export class GetProfileHandler implements IQueryHandler<GetProfileQuery, any> {
+export class GetProfileHandler
+  implements IQueryHandler<GetProfileQuery, ProfileDetails>
+{
   constructor(
     private readonly objectStorageService: ObjectStorageService,
     @InjectRepository(Profile)
