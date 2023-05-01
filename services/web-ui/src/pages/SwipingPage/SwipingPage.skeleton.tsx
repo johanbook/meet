@@ -5,7 +5,7 @@ import { Skeleton } from "@mui/material";
 export function SwipingPageSkeleton(): React.ReactElement {
   return (
     <>
-      <Skeleton />
+      <Skeleton height="85vh" />
     </>
   );
 }
