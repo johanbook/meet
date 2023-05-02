@@ -3,7 +3,7 @@ version: "3.9"
 x-logging: &logging
   driver: loki
   options:
-    loki-url: "$LOKI_URL"
+    loki-url: "http://loki:3100"
     loki-external-labels: "container_name={{.Name}}"
     loki-pipeline-stages: |
       - multiline:
@@ -107,13 +107,12 @@ services:
     image: grafana/grafana:latest
     labels:
       - "traefik.enable=true"
-      - "traefik.docker.network=edge"
       - "traefik.http.routers.grafana.rule=Host(`grafana.$DOMAIN`)"
       - "traefik.http.routers.grafana.entrypoints=web"
     volumes:
       - "$PWD/config/grafana/datasources:/etc/grafana/provisioning/datasources/:ro"
       - "$PWD/config/grafana/dashboards:/etc/grafana/provisioning/dashboards/:ro"
-      - "$DATA_STORAGE_PATH/grafana:/var/lib/grafana:rw"
+      - ".data/grafana:/var/lib/grafana:rw"
 
   node-exporter:
     logging: *logging
@@ -143,4 +142,4 @@ services:
       - source: prometheus
         target: /etc/prometheus/prometheus.yml
     volumes:
-      - "$DATA_STORAGE_PATH/prometheus:/prometheus:rw"
+      - ".data/prometheus:/prometheus:rw"
