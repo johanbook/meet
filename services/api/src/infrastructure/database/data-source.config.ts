@@ -25,7 +25,7 @@ export const dataSourceOptions: DataSourceOptions & SeederOptions = {
   database: getConfig("DB_DATABASE"),
   synchronize: false,
   logging: "all",
-  entities: [__dirname + "/entities/*.{ts,js}"],
+  entities: [__dirname + "/entities/*.{ts,js}", __dirname + "/views/*.{ts,js}"],
   subscribers: [],
   migrations: [__dirname + "/migrations/*.{ts,js}"],
   factories: [__dirname + "/factories/*.{ts,js}"],

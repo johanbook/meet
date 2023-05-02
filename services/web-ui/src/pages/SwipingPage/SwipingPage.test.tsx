@@ -1,6 +1,6 @@
 import { ReactQueryTestProvider, TestRouter, render, screen } from "src/test";
 
-import SwipingPage from ".";
+import { SwipingPage } from ".";
 
 describe.skip("<SwipingPage />", () => {
   it("renders message when no nearby profiles found", async () => {

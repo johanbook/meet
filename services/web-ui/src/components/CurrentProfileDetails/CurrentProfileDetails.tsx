@@ -1,59 +1,61 @@
 import React from "react";
+import { useMutation } from "react-query";
 
 import { Box, Button, TextField, Typography } from "@mui/material";
 
-import { ProfileDetails } from "src/api";
+import { ProfileDetails, UpdateProfileCommand } from "src/api";
+import { profileApi } from "src/apis";
+import { useSnackbar } from "src/hooks/useSnackbar";
 
-import { CurrentProfileAvatar } from "../CurrentProfileAvatar";
+import { ProfilePhotosEditor } from "../ProfilePhotosEditor";
 
 export interface CurrentProfileDetailsProps {
-  onUpdateProfile: (profileDetails: Partial<ProfileDetails>) => void;
   profile: ProfileDetails;
   refetchData: () => void;
 }
 
 export function CurrentProfileDetails({
-  onUpdateProfile,
   profile,
   refetchData,
 }: CurrentProfileDetailsProps): React.ReactElement {
+  const mutation = useMutation((updateProfileCommand: UpdateProfileCommand) =>
+    profileApi.updateCurrentProfile({ updateProfileCommand })
+  );
+
   const [description, setDescription] = React.useState(profile.description);
+  const snackbar = useSnackbar();
 
-  let imageUrl: string | undefined;
-
-  if (profile.photos.length > 0) {
-    imageUrl = profile.photos[0].imageUrl;
-  }
-
-  function handleSubmit(event: React.SyntheticEvent): void {
+  async function handleSubmit(event: React.SyntheticEvent): Promise<void> {
     event.preventDefault();
-    onUpdateProfile({ description });
+
+    await mutation.mutateAsync({ description });
+
+    refetchData();
+
+    snackbar.success("Updated profile");
   }
+
+  const canSubmit = description !== profile.description && !mutation.isLoading;
 
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          paddingTop: 1,
-          justifyContent: "center",
-        }}
-      >
-        <CurrentProfileAvatar
-          onUploadedNewProfilePhoto={refetchData}
-          src={imageUrl}
-        />
+      <Typography sx={{ paddingTop: 2 }} variant="h5">
+        Photos and media
+      </Typography>
 
-        <Typography sx={{ paddingTop: 1 }} variant="h5">
-          {profile.name}
-        </Typography>
-      </Box>
+      <ProfilePhotosEditor
+        onUploadedNewProfilePhoto={refetchData}
+        photos={profile.photos}
+      />
+
+      <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
+        About me
+      </Typography>
 
       <form>
         <TextField
           fullWidth
+          disabled={mutation.isLoading}
           label="Description"
           margin="normal"
           multiline
@@ -64,7 +66,12 @@ export function CurrentProfileDetails({
         />
 
         <Box sx={{ display: "flex", justifyContent: "right" }}>
-          <Button onClick={handleSubmit} type="submit" variant="outlined">
+          <Button
+            disabled={!canSubmit}
+            onClick={handleSubmit}
+            type="submit"
+            variant="outlined"
+          >
             Save
           </Button>
         </Box>

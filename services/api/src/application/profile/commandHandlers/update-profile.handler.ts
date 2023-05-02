@@ -3,6 +3,7 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { UserIdService } from "src/client/context/user-id.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 
 import { UpdateProfileCommand } from "../contracts/update-profile.command";
@@ -14,11 +15,14 @@ export class UpdateProfileHandler
   constructor(
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
+    private readonly userIdService: UserIdService,
   ) {}
 
   async execute(command: UpdateProfileCommand) {
+    const userId = this.userIdService.getUserId();
+
     const profile = await this.profiles.findOne({
-      where: { userId: command.userId },
+      where: { userId },
     });
 
     if (!profile) {

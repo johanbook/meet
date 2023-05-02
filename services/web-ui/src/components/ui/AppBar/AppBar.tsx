@@ -7,7 +7,7 @@ import { config } from "src/config";
 export function AppBar(): React.ReactElement {
   return (
     <MuiAppBar
-      color="transparent"
+      color="inherit"
       position="fixed"
       sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
     >

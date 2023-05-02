@@ -2,18 +2,19 @@ import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Nav from "src/components/ui/Nav";
-import ChatPage from "src/pages/ChatPage";
-import ProfilePage from "src/pages/ProfilePage";
-import SwipingPage from "src/pages/SwipingPage";
+import { ChatPage } from "src/pages/ChatPage";
+import { ProfilePage } from "src/pages/ProfilePage";
+import { SwipingPage } from "src/pages/SwipingPage";
 
-import ErrorMessage from "./components/ui/ErrorMessage";
+import { MatchesPage } from "./pages/MatchesPage";
+import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 import { ProfileGuard } from "./pages/ProfileGuard";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Nav />,
-    errorElement: <ErrorMessage message="Page not found" />,
+    errorElement: <NotFoundPage />,
     children: [
       {
         index: true,
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/chat",
+        element: <MatchesPage />,
+      },
+      {
+        path: "/chat/:id",
         element: <ChatPage />,
       },
       {

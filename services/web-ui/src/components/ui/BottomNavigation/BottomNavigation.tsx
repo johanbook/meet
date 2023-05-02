@@ -14,6 +14,7 @@ export function BottomNavigation(): React.ReactElement {
 
   return (
     <Paper
+      component="footer"
       elevation={3}
       sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
     >

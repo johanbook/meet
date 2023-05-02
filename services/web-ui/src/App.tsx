@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import CssBaseline from "@mui/material/CssBaseline";
 import { SnackbarProvider } from "notistack";
 
+import "./App.css";
 import Router from "./Router";
 import Theme from "./theme/Theme";
 

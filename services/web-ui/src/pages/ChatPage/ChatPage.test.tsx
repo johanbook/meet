@@ -1,6 +1,6 @@
 import { ReactQueryTestProvider, TestRouter, render, screen } from "src/test";
 
-import ChatPage from ".";
+import { ChatPage } from ".";
 
 describe.skip("<ChatPage />", () => {
   it("renders message when no matches", async () => {

@@ -4,12 +4,10 @@ import { useMutation } from "react-query";
 import { AccountCircle } from "@mui/icons-material";
 import { Avatar, Button } from "@mui/material";
 
-import { PhotosApi } from "src/api";
+import { photosApi } from "src/apis";
 import { useSnackbar } from "src/hooks/useSnackbar";
 
 const HEIGHT = 120;
-
-const photosApi = new PhotosApi();
 
 export interface CurrentProfileAvatarProps {
   onUploadedNewProfilePhoto: () => void;
@@ -43,7 +41,7 @@ export function CurrentProfileAvatar({
 
   if (src) {
     return (
-      <Button component="label">
+      <Button component="label" disabled={mutation.isLoading}>
         <Avatar sx={{ height: HEIGHT, width: HEIGHT }} src={src} />
         <input hidden accept="image/*" type="file" onChange={handleUpload} />
       </Button>
@@ -51,7 +49,7 @@ export function CurrentProfileAvatar({
   }
 
   return (
-    <Button component="label">
+    <Button component="label" disabled={mutation.isLoading}>
       <Avatar sx={{ height: HEIGHT, width: HEIGHT }}>
         <AccountCircle sx={{ height: HEIGHT, width: HEIGHT }} />
       </Avatar>
