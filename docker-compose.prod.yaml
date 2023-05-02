@@ -1,7 +1,17 @@
 version: "3.9"
 
+x-logging: &logging
+  driver: loki
+  options:
+    loki-url: "http://loki:3100"
+    loki-external-labels: "container_name={{.Name}}"
+    loki-pipeline-stages: |
+      - multiline:
+          firstline: '^[a-zA-Z0-9\[\{\(]'
+
 services:
   traefik:
+    logging: *logging
     extends:
       file: "./docker-compose.shared.yaml"
       service: "traefik"
@@ -30,12 +40,14 @@ services:
       - "$PWD/letsencrypt:/letsencrypt"
 
   api:
+    logging: *logging
     extends:
       file: "./docker-compose.shared.yaml"
       service: "api"
     image: ghcr.io/johanbook/meet/api:latest
 
   auth:
+    logging: *logging
     extends:
       file: "./docker-compose.shared.yaml"
       service: "auth"
@@ -46,31 +58,37 @@ services:
       SUPERTOKENS_URL: "http://supertokens:3567"
 
   console:
+    logging: *logging
     extends:
       file: "./docker-compose.shared.yaml"
       service: "console"
 
   db:
+    logging: *logging
     extends:
       file: "./docker-compose.shared.yaml"
       service: "db"
 
   minio:
+    logging: *logging
     extends:
       file: "./docker-compose.shared.yaml"
       service: "minio"
 
   pgadmin:
+    logging: *logging
     extends:
       file: "./docker-compose.shared.yaml"
       service: "pgadmin"
 
   supertokens:
+    logging: *logging
     extends:
       file: "./docker-compose.shared.yaml"
       service: "supertokens"
 
   watchtower:
+    logging: *logging
     image: containrrr/watchtower
     container_name: watchtower
     command: --interval 120
@@ -78,7 +96,50 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
   web-ui:
+    logging: *logging
     extends:
       file: "./docker-compose.shared.yaml"
       service: "web-ui"
     image: ghcr.io/johanbook/meet/web-ui:latest
+
+  grafana:
+    logging: *logging
+    image: grafana/grafana:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.$DOMAIN`)"
+      - "traefik.http.routers.grafana.entrypoints=web"
+    volumes:
+      - "$PWD/config/grafana/datasources:/etc/grafana/provisioning/datasources/:ro"
+      - "$PWD/config/grafana/dashboards:/etc/grafana/provisioning/dashboards/:ro"
+      - ".data/grafana:/var/lib/grafana:rw"
+
+  node-exporter:
+    logging: *logging
+    image: prom/node-exporter:latest
+    command:
+      - "--path.procfs=/host/proc"
+      - "--path.rootfs=/rootfs"
+      - "--path.sysfs=/host/sys"
+      - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
+      - "--collector.systemd"
+      - "--collector.processes"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+
+  prometheus:
+    logging: *logging
+    image: prom/prometheus:latest
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/etc/prometheus/console_libraries"
+      - "--web.console.templates=/etc/prometheus/consoles"
+      - "--web.enable-lifecycle"
+    configs:
+      - source: prometheus
+        target: /etc/prometheus/prometheus.yml
+    volumes:
+      - ".data/prometheus:/prometheus:rw"

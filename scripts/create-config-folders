@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+
+mkdir -p .data/grafana \
+	.data/letsencrypt \
+	.data/postgres \
+	.data/prometheus
+
+chown 472:472 .data/grafana
+chown 65534:65534 .data/prometheus
+chown --recursive 472:472 config/grafana
