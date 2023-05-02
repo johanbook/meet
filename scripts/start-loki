@@ -2,6 +2,7 @@
 
 docker container inspect loki >/dev/null 2>&1
 if [ $? -eq 0 ]; then
+	echo "Loki is already exists"
 	exit 0
 fi
 
@@ -9,6 +10,7 @@ echo "Starting Loki instance"
 docker run \
 	--detach \
 	--name loki \
+	--network edge \
 	--publish 3100:3100 \
 	--restart unless-stopped \
 	--volume ${PWD}/config/loki/loki.yaml:/etc/config/loki.yaml \
