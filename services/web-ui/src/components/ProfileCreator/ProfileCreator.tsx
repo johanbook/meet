@@ -19,6 +19,8 @@ export function ProfileCreator({
   const [description, setDescription] = React.useState("");
   const [name, setName] = React.useState("");
 
+  const canCreateProfile = name && description;
+
   function handleSubmit(event: React.SyntheticEvent): void {
     event.preventDefault();
     const lat = coordinates?.latitude || 0;
@@ -57,7 +59,12 @@ export function ProfileCreator({
         />
 
         <Box sx={{ display: "flex", justifyContent: "right" }}>
-          <Button onClick={handleSubmit} type="submit" variant="contained">
+          <Button
+            disabled={!canCreateProfile}
+            onClick={handleSubmit}
+            type="submit"
+            variant="contained"
+          >
             Create
           </Button>
         </Box>

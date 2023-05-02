@@ -5,8 +5,12 @@ import { Typography } from "@mui/material";
 export function NoProfilesFound(): React.ReactElement {
   return (
     <>
+      <Typography gutterBottom variant="h5">
+        No profiles found
+      </Typography>
+
       <Typography>
-        No profiles found. Try again later or try expanding your search range.
+        Try again later or expand your search range
       </Typography>
     </>
   );
