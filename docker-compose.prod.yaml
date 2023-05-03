@@ -9,6 +9,14 @@ x-logging: &logging
       - multiline:
           firstline: '^[a-zA-Z0-9\[\{\(]'
 
+configs:
+  prometheus:
+    file: ${PWD}/config/prometheus/prometheus.yml
+
+networks:
+  edge:
+    external: true
+
 services:
   traefik:
     logging: *logging
@@ -32,12 +40,14 @@ services:
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=webinsecure"
       - "--certificatesresolvers.letsencrypt.acme.email=$EMAIL"
       - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+    networks:
+      - edge
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "$PWD/letsencrypt:/letsencrypt"
+      - "$PWD/.data/letsencrypt:/letsencrypt"
 
   api:
     logging: *logging
@@ -45,6 +55,8 @@ services:
       file: "./docker-compose.shared.yaml"
       service: "api"
     image: ghcr.io/johanbook/meet/api:latest
+    networks:
+      - edge
 
   auth:
     logging: *logging
@@ -56,42 +68,56 @@ services:
       API_URL: "https://$DOMAIN"
       UI_URL: "https://$DOMAIN"
       SUPERTOKENS_URL: "http://supertokens:3567"
+    networks:
+      - edge
 
   console:
     logging: *logging
     extends:
       file: "./docker-compose.shared.yaml"
       service: "console"
+    networks:
+      - edge
 
   db:
     logging: *logging
     extends:
       file: "./docker-compose.shared.yaml"
       service: "db"
+    networks:
+      - edge
 
   minio:
     logging: *logging
     extends:
       file: "./docker-compose.shared.yaml"
       service: "minio"
+    networks:
+      - edge
 
   pgadmin:
     logging: *logging
     extends:
       file: "./docker-compose.shared.yaml"
       service: "pgadmin"
+    networks:
+      - edge
 
   supertokens:
     logging: *logging
     extends:
       file: "./docker-compose.shared.yaml"
       service: "supertokens"
+    networks:
+      - edge
 
   watchtower:
     logging: *logging
     image: containrrr/watchtower
     container_name: watchtower
     command: --interval 120
+    networks:
+      - edge
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
@@ -101,14 +127,21 @@ services:
       file: "./docker-compose.shared.yaml"
       service: "web-ui"
     image: ghcr.io/johanbook/meet/web-ui:latest
+    networks:
+      - edge
 
   grafana:
     logging: *logging
     image: grafana/grafana:latest
+    container_name: grafana
+    external_links:
+      - "loki"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.grafana.rule=Host(`grafana.$DOMAIN`)"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.console.$DOMAIN`)"
       - "traefik.http.routers.grafana.entrypoints=web"
+    networks:
+      - edge
     volumes:
       - "$PWD/config/grafana/datasources:/etc/grafana/provisioning/datasources/:ro"
       - "$PWD/config/grafana/dashboards:/etc/grafana/provisioning/dashboards/:ro"
@@ -117,6 +150,7 @@ services:
   node-exporter:
     logging: *logging
     image: prom/node-exporter:latest
+    container_name: node-exporter
     command:
       - "--path.procfs=/host/proc"
       - "--path.rootfs=/rootfs"
@@ -124,6 +158,8 @@ services:
       - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
       - "--collector.systemd"
       - "--collector.processes"
+    networks:
+      - edge
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
@@ -132,6 +168,7 @@ services:
   prometheus:
     logging: *logging
     image: prom/prometheus:latest
+    container_name: prometheus
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
       - "--storage.tsdb.path=/prometheus"
@@ -141,5 +178,7 @@ services:
     configs:
       - source: prometheus
         target: /etc/prometheus/prometheus.yml
+    networks:
+      - edge
     volumes:
       - ".data/prometheus:/prometheus:rw"
