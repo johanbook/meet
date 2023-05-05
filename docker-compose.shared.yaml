@@ -76,17 +76,20 @@ services:
       - "5432:5432"
     volumes:
       - "$PWD/config/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql"
+      - ".data/postgres:/var/lib/postgresql/data:rw"
 
   pgadmin:
     image: "dpage/pgadmin4"
     container_name: "pgadmin"
     environment:
       PGADMIN_DEFAULT_EMAIL: "$PGADMIN_EMAIL"
-      PGADMIN_DEFAULT_PASSWORD: "$POSTGRES_PASSWORD"
+      PGADMIN_DEFAULT_PASSWORD: "$PGADMIN_PASSWORD"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.pgadmin.rule=Host(`pgadmin.console.$DOMAIN`)"
       - "traefik.http.routers.pgadmin.entrypoints=web"
+    volumes:
+      - ".data/pgadmin:/var/lib/pgadmin:rw"
 
   supertokens:
     image: registry.supertokens.io/supertokens/supertokens-postgresql

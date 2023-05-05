@@ -3,6 +3,7 @@
 
 mkdir -p .data/grafana \
 	.data/letsencrypt \
+	.data/pgadmin
 	.data/postgres \
 	.data/prometheus
 
