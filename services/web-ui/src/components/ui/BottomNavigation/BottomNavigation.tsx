@@ -10,7 +10,9 @@ import {
 
 export function BottomNavigation(): React.ReactElement {
   const location = useLocation();
-  const pathname = location.pathname;
+
+  // Strips away ie chat id, meaning `/chat/12` -> `/chat`
+  const pathname = "/" + location.pathname.split("/")[1];
 
   return (
     <Paper
