@@ -1,7 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
 
-import { CreateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
 import { ProfileCreator } from "src/components/ProfileCreator";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
@@ -20,15 +19,6 @@ export function ProfileGuardContainer({
     "currentProfileExists",
     () => profileApi.checkIfFileExists()
   );
-
-  async function handleCreateProfile(
-    createProfileCommand: CreateProfileCommand
-  ) {
-    await profileApi.createCurrentProfile({
-      createProfileCommand,
-    });
-    await refetch();
-  }
 
   if (error) {
     const errorMessage = (error as Error).message;
@@ -51,7 +41,7 @@ export function ProfileGuardContainer({
   if (!data) {
     return (
       <ProfileGuardNav>
-        <ProfileCreator onCreateProfile={handleCreateProfile} />
+        <ProfileCreator onCreateProfile={refetch} />
       </ProfileGuardNav>
     );
   }

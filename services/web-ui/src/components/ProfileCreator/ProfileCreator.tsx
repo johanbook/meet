@@ -1,31 +1,50 @@
 import React from "react";
+import { useMutation } from "react-query";
 
 import { Box, Button, TextField, Typography } from "@mui/material";
 
 import { CreateProfileCommand } from "src/api";
+import { profileApi } from "src/apis";
 import { config } from "src/config";
 import { useCurrentLocation } from "src/hooks/useCurrentLocation";
+import { useSnackbar } from "src/hooks/useSnackbar";
 
 import { Center } from "../ui/Center";
 
 export interface ProfileCreatorProps {
-  onCreateProfile: (profileDetails: CreateProfileCommand) => void;
+  onCreateProfile: () => void;
 }
 
 export function ProfileCreator({
   onCreateProfile,
 }: ProfileCreatorProps): React.ReactElement {
   const { coordinates } = useCurrentLocation();
+  const snackbar = useSnackbar();
+
+  const mutation = useMutation(
+    (createProfileCommand: CreateProfileCommand) =>
+      profileApi.createCurrentProfile({ createProfileCommand }),
+    { onError: () => snackbar.error("Unable to create profile") }
+  );
+
   const [description, setDescription] = React.useState("");
   const [name, setName] = React.useState("");
 
-  const canCreateProfile = name && description;
+  const canCreateProfile = name && description && !mutation.isLoading;
 
-  function handleSubmit(event: React.SyntheticEvent): void {
+  async function handleSubmit(event: React.SyntheticEvent): Promise<void> {
     event.preventDefault();
+
     const lat = coordinates?.latitude || 0;
     const lon = coordinates?.longitude || 0;
-    onCreateProfile({ description, name, recentLocation: { lat, lon } });
+
+    await mutation.mutateAsync({
+      description,
+      name,
+      recentLocation: { lat, lon },
+    });
+
+    onCreateProfile();
   }
 
   return (
@@ -39,6 +58,7 @@ export function ProfileCreator({
       <Typography>Let's start by creating a profile.</Typography>
       <form>
         <TextField
+          disabled={mutation.isLoading}
           fullWidth
           label="Name"
           margin="normal"
@@ -48,6 +68,7 @@ export function ProfileCreator({
         />
 
         <TextField
+          disabled={mutation.isLoading}
           fullWidth
           label="Description"
           margin="normal"
