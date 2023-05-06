@@ -13,6 +13,9 @@ export function ChatMessage({ message }: ChatMessageProps): React.ReactElement {
     <ListItem>
       <ListItemText
         primary={message.message}
+        primaryTypographyProps={{
+          align: message.sentByCurrentUser ? "right" : "left",
+        }}
         sx={{
           background: "rgb(250,250,250)",
           border: "1px solid rgb(200,200,200)",
