@@ -51,7 +51,7 @@ export class GetChatMessagesHandler
       id: item.id,
       message: item.message,
       read: false,
-      sentByCurrentUser: false,
+      sentByCurrentUser: item.senderId == profile.id,
     }));
   }
 }
