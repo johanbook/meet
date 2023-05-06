@@ -35,7 +35,6 @@ export class GetProfilesNearbyHandler
     }
 
     const recentLocation = userProfile.recentLocation as any;
-    console.log({ recentLocation });
 
     const foundProfiles = await this.profiles
       .createQueryBuilder("profile")
@@ -55,6 +54,15 @@ export class GetProfilesNearbyHandler
         },
       )
       .andWhere({ userId: Not(userId) })
+      .andWhere(
+        `
+        profile.id NOT IN (
+          SELECT "shownProfileId" FROM swipe
+          WHERE "profileId" = :currentProfileId
+        )
+        `,
+        { currentProfileId: userProfile.id },
+      )
       .getMany();
 
     return foundProfiles.map((profile) => ({
