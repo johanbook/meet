@@ -30,7 +30,14 @@ export function SwipeableProfiles({
   }
 
   async function handleSwipeRight(shownProfileId: number): Promise<void> {
-    await mutation.mutateAsync({ shownProfileId, liked: true });
+    const swipeDetails = await mutation.mutateAsync({
+      shownProfileId,
+      liked: true,
+    });
+
+    if (swipeDetails.match) {
+      snackbar.success("It's a match!");
+    }
   }
 
   return (
