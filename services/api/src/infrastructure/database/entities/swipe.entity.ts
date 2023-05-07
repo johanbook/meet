@@ -21,8 +21,14 @@ export class Swipe {
   @Column("bool")
   liked!: boolean;
 
+  @Column()
+  profileId!: number;
+
   @ManyToOne(() => Profile)
   profile!: Profile;
+
+  @Column()
+  shownProfileId!: number;
 
   @ManyToOne(() => Profile)
   shownProfile!: Profile;

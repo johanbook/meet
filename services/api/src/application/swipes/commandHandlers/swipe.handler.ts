@@ -6,11 +6,15 @@ import { Repository } from "typeorm";
 import { UserIdService } from "src/client/context/user-id.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { Swipe } from "src/infrastructure/database/entities/swipe.entity";
+import { map } from "src/utils/mapper";
 
+import { SwipeDetails } from "../contracts/swipe-details.dto";
 import { SwipeCommand } from "../contracts/swipe.command";
 
 @CommandHandler(SwipeCommand)
-export class SwipeHandler implements ICommandHandler<SwipeCommand, void> {
+export class SwipeHandler
+  implements ICommandHandler<SwipeCommand, SwipeDetails>
+{
   constructor(
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
@@ -42,5 +46,27 @@ export class SwipeHandler implements ICommandHandler<SwipeCommand, void> {
     swipe.shownProfile = shownProfile;
 
     await this.swipes.save(swipe);
+
+    return this.fetchSwipeDetails(command, profile);
+  }
+
+  private async fetchSwipeDetails(
+    command: SwipeCommand,
+    currentProfile: Profile,
+  ): Promise<SwipeDetails> {
+    if (!command.liked) {
+      return map(SwipeDetails, { match: false });
+    }
+
+    const correspondingSwipe = await this.swipes.findOne({
+      where: {
+        profileId: command.shownProfileId,
+        shownProfileId: currentProfile.id,
+      },
+    });
+
+    const match = Boolean(correspondingSwipe && correspondingSwipe.liked);
+
+    return map(SwipeDetails, { match });
   }
 }
