@@ -6,6 +6,7 @@ import { Repository } from "typeorm";
 import { UserIdService } from "src/client/context/user-id.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { Match } from "src/infrastructure/database/views/matches.view";
+import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
 import { mapArray } from "src/utils/mapper";
 
 import { GetMatchesQuery } from "../contracts/get-matches.query";
@@ -18,6 +19,7 @@ export class GetMatchesHandler
   constructor(
     @InjectRepository(Match)
     private readonly matches: Repository<Match>,
+    private readonly objectStorageService: ObjectStorageService,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
     private readonly userIdService: UserIdService,
@@ -42,6 +44,10 @@ export class GetMatchesHandler
     });
 
     return mapArray(MatchDetails, foundMatches, (match) => ({
+      imageUrl:
+        match.photoObjectId &&
+        this.objectStorageService.getUrl("profile-photos", match.photoObjectId),
+      lastMessage: match.lastMessage,
       name: match.name,
       profileId: match.shownProfileId,
     }));
