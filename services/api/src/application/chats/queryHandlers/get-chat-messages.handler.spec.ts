@@ -5,6 +5,7 @@ import { ChatMessage } from "src/infrastructure/database/entities/chat-message.e
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
+import { map } from "src/utils/mapper";
 
 import { GetChatMessagesQuery } from "../contracts/get-chat-messages.query";
 import { GetChatMessagesHandler } from "./get-chat-messages.handler";
@@ -48,7 +49,9 @@ describe(GetChatMessagesHandler.name, () => {
 
   describe("execute", () => {
     it("should return chat messages", async () => {
-      const query = new GetChatMessagesQuery(receivingProfile.id);
+      const query = map(GetChatMessagesQuery, {
+        profileId: receivingProfile.id,
+      });
 
       const result = await queryHandler.execute(query);
 
