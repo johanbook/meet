@@ -115,7 +115,9 @@ services:
     logging: *logging
     image: containrrr/watchtower
     container_name: watchtower
-    command: --interval 120
+    command:
+      - "--cleanup"
+      - "--interval 3600"
     networks:
       - edge
     volumes:
