@@ -1,8 +1,10 @@
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
+import { NotificationsGateway } from "src/client/gateways/notifications.gateway";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { Swipe } from "src/infrastructure/database/entities/swipe.entity";
+import { createNotificationsGatewayMock } from "src/test/mocks/notifications.gateway.mock";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
 
@@ -11,6 +13,7 @@ import { SwipeHandler } from "./swipe.handler";
 
 describe(SwipeHandler.name, () => {
   let commandHandler: SwipeHandler;
+  let noficationsGateway: NotificationsGateway;
   let profiles: Repository<Profile>;
   let swipes: Repository<Swipe>;
   let userIdService: UserIdService;
@@ -19,11 +22,17 @@ describe(SwipeHandler.name, () => {
   let shownProfile: Profile;
 
   beforeEach(() => {
+    noficationsGateway = createNotificationsGatewayMock();
     profiles = createMockRepository<Profile>();
     swipes = createMockRepository<Swipe>();
     userIdService = createUserIdServiceMock();
 
-    commandHandler = new SwipeHandler(profiles, swipes, userIdService);
+    commandHandler = new SwipeHandler(
+      noficationsGateway,
+      profiles,
+      swipes,
+      userIdService,
+    );
 
     profile = new Profile();
     profile.id = 1;

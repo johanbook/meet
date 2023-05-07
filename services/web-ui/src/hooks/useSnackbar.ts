@@ -15,6 +15,8 @@ function showSnackbar(message: string, variant: VariantType): void {
 export function useSnackbar() {
   return {
     error: (message: string) => showSnackbar(message, "error"),
+    info: (message: string) => showSnackbar(message, "info"),
     success: (message: string) => showSnackbar(message, "success"),
+    warn: (message: string) => showSnackbar(message, "warning"),
   };
 }

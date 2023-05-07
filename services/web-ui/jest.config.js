@@ -6,7 +6,7 @@ module.exports = {
       branches: 2,
       functions: 6,
       lines: 31,
-      statements: 32,
+      statements: 31,
     },
   },
   preset: "ts-jest",

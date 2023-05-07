@@ -4,6 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
+import { NotificationsGateway } from "src/client/gateways/notifications.gateway";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { Swipe } from "src/infrastructure/database/entities/swipe.entity";
 import { map } from "src/utils/mapper";
@@ -16,6 +17,7 @@ export class SwipeHandler
   implements ICommandHandler<SwipeCommand, SwipeDetails>
 {
   constructor(
+    private readonly notificationsGateway: NotificationsGateway,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
     @InjectRepository(Swipe)
@@ -66,6 +68,25 @@ export class SwipeHandler
     });
 
     const match = Boolean(correspondingSwipe && correspondingSwipe.liked);
+
+    if (!match) {
+      return map(SwipeDetails, { match: false });
+    }
+
+    const targetProfile = await this.profiles.findOne({
+      select: ["userId"],
+      where: { id: command.shownProfileId },
+    });
+
+    if (!targetProfile) {
+      throw new NotFoundException("An error occured when registering swipe");
+    }
+
+    this.notificationsGateway.notifyUsersIfAvailable(
+      [currentProfile.userId, targetProfile?.userId],
+      "new_match",
+      "You got a new match",
+    );
 
     return map(SwipeDetails, { match });
   }

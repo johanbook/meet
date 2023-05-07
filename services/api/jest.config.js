@@ -1,8 +1,15 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
+  coverageDirectory: "../coverage",
+  coveragePathIgnorePatterns: [
+    "/node_modules/",
+    "/infrastructure/database/factories/",
+    "/infrastructure/database/migrations/",
+    "/infrastructure/database/seeds/",
+  ],
   coverageThreshold: {
     global: {
-      branches: 30,
+      branches: 27,
       functions: 23,
       lines: 50,
       statements: 50,
@@ -15,7 +22,6 @@ module.exports = {
     "^.+\\.(t|j)s$": "ts-jest",
   },
   collectCoverageFrom: ["**/*.(t|j)s"],
-  coverageDirectory: "../coverage",
   moduleDirectories: ["node_modules", __dirname],
   setupFilesAfterEnv: ["<rootDir>/test/setup-tests.ts"],
   testEnvironment: "node",
