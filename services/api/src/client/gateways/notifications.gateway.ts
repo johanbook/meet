@@ -1,4 +1,3 @@
-import { Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import {
   OnGatewayConnection,
@@ -10,6 +9,7 @@ import { Socket } from "socket.io";
 import { In, Repository } from "typeorm";
 
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
+import { Logger } from "src/infrastructure/logger.service";
 
 @WebSocketGateway({ path: "/api/notifications" })
 export class NotificationsGateway
