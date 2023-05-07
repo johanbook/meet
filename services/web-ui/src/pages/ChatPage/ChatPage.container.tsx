@@ -6,7 +6,7 @@ import { List, Typography } from "@mui/material";
 
 import { chatsApi } from "src/apis";
 import { ChatMessage } from "src/components/ChatMessage";
-import { ChatTextField } from "src/components/ChatTextBox";
+import { ChatTextField } from "src/components/ChatTextField";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 
 import { ChatPageHeader } from "./ChatPage.header";
