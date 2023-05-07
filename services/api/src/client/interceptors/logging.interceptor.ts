@@ -7,10 +7,14 @@ import {
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 
+import { Logger } from "src/infrastructure/logger.service";
+
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
+  private readonly logger = new Logger(LoggingInterceptor.name);
+
   private logRequestDuration(durationInMs: number): void {
-    console.log(`Request took ${durationInMs}ms`);
+    this.logger.debug(`Request took ${durationInMs}ms`);
   }
 
   intercept(_: ExecutionContext, next: CallHandler): Observable<any> {
