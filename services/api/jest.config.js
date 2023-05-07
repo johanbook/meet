@@ -1,5 +1,13 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
+  coverageThreshold: {
+    global: {
+      branches: 30,
+      functions: 23,
+      lines: 50,
+      statements: 50,
+    },
+  },
   moduleFileExtensions: ["js", "ts"],
   rootDir: "src",
   testRegex: ".*\\.spec\\.ts$",

@@ -1,6 +1,14 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
   collectCoverageFrom: ["src/**/*.{ts,tsx}"],
+  coverageThreshold: {
+    global: {
+      branches: 2,
+      functions: 6,
+      lines: 31,
+      statements: 32,
+    },
+  },
   preset: "ts-jest",
   moduleDirectories: ["node_modules", __dirname],
   setupFilesAfterEnv: ["./src/setupTests.ts"],
