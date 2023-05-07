@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
-import { ChatMessage } from "src/infrastructure/database/entities/chat-message.entity";
+import { ChatMessageDomainService } from "src/domain/chatMessages/services/chat-message-domain.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
@@ -11,7 +11,7 @@ import { PostChatMessageCommand } from "../contracts/post-chat-message.command";
 import { PostChatMessageHandler } from "./post-chat-message.handler";
 
 describe(PostChatMessageHandler.name, () => {
-  let chatMessages: Repository<ChatMessage>;
+  let chatMessageDomainService: ChatMessageDomainService;
   let profiles: Repository<Profile>;
   let userIdService: UserIdService;
 
@@ -20,7 +20,7 @@ describe(PostChatMessageHandler.name, () => {
   let commandHandler: PostChatMessageHandler;
 
   beforeEach(() => {
-    chatMessages = createMockRepository<ChatMessage>();
+    chatMessageDomainService = { saveChatMessage: jest.fn() } as any;
 
     mockProfile = new Profile();
     mockProfile.id = 1;
@@ -29,7 +29,7 @@ describe(PostChatMessageHandler.name, () => {
     userIdService = createUserIdServiceMock();
 
     commandHandler = new PostChatMessageHandler(
-      chatMessages,
+      chatMessageDomainService,
       profiles,
       userIdService,
     );
@@ -46,7 +46,7 @@ describe(PostChatMessageHandler.name, () => {
 
       await commandHandler.execute(command);
 
-      expect(chatMessages.save).toHaveBeenCalledWith({
+      expect(chatMessageDomainService.saveChatMessage).toHaveBeenCalledWith({
         message: command.message,
         receiverId: command.profileId,
         senderId: mockProfile.id,
