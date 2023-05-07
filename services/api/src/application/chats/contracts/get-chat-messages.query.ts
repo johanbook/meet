@@ -1,3 +1,6 @@
+import { IsPositive } from "class-validator";
+
 export class GetChatMessagesQuery {
-  constructor(public readonly profileId: number) {}
+  @IsPositive()
+  public readonly profileId!: number;
 }
