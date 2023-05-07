@@ -4,6 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
+import { ProfileService } from "src/domain/profiles/services/profile.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 
 import { CreateProfileCommand } from "../contracts/create-profile.command";
@@ -13,6 +14,7 @@ export class CreateProfileHandler
   implements ICommandHandler<CreateProfileCommand, void>
 {
   constructor(
+    private readonly profileService: ProfileService,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
     private readonly userIdService: UserIdService,
@@ -38,6 +40,6 @@ export class CreateProfileHandler
       `${command.recentLocation.lat}, ${command.recentLocation.lon}` as any;
     profile.userId = userId;
 
-    await this.profiles.save(profile);
+    await this.profileService.createProfile(profile);
   }
 }
