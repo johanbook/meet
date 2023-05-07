@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
+import { ProfileDomainModule } from "src/domain/profiles/profile-domain.module";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
 
@@ -11,7 +12,7 @@ import { GetProfileHandler } from "./queryHandlers/get-profile.handler";
 import { GetProfilesNearbyHandler } from "./queryHandlers/get-profiles-nearby.handler";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Profile])],
+  imports: [ProfileDomainModule, TypeOrmModule.forFeature([Profile])],
   controllers: [],
   providers: [
     CheckIfProfileExistsHandler,
