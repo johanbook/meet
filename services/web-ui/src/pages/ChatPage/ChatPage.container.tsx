@@ -16,7 +16,7 @@ export function ChatPageContainer(): React.ReactElement {
   const { id } = useParams();
 
   const { error, data, isLoading, refetch } = useQuery(`chat-${id}`, () =>
-    chatsApi.getChats()
+    chatsApi.getChats({ profileId: id || "" })
   );
 
   if (!id) {
