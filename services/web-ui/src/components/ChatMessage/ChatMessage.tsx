@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ListItem, ListItemText } from "@mui/material";
+import { ListItem, ListItemText, useTheme } from "@mui/material";
 
 import { ChatMessageDetails } from "src/api";
 
@@ -9,6 +9,8 @@ export interface ChatMessageProps {
 }
 
 export function ChatMessage({ message }: ChatMessageProps): React.ReactElement {
+  const theme = useTheme();
+
   return (
     <ListItem>
       <ListItemText
@@ -17,9 +19,11 @@ export function ChatMessage({ message }: ChatMessageProps): React.ReactElement {
           align: message.sentByCurrentUser ? "right" : "left",
         }}
         sx={{
-          background: "rgb(250,250,250)",
-          border: "1px solid rgb(200,200,200)",
-          borderRadius: 4,
+          background: message.sentByCurrentUser
+            ? theme.palette.background.paper
+            : theme.palette.grey[50],
+          border: `1px solid ${theme.palette.divider} `,
+          borderRadius: 3,
           padding: 1,
         }}
       />

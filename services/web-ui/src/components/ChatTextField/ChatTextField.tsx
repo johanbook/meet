@@ -1,7 +1,8 @@
 import React from "react";
 import { useMutation } from "react-query";
 
-import { Button, TextField } from "@mui/material";
+import { Send } from "@mui/icons-material";
+import { IconButton, InputAdornment, TextField } from "@mui/material";
 
 import { PostChatMessageCommand } from "src/api";
 import { chatsApi } from "src/apis";
@@ -41,11 +42,19 @@ export function ChatTextField({
       <TextField
         disabled={mutation.isLoading}
         fullWidth
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <IconButton color="primary" onClick={handleSubmit} type="submit">
+                <Send />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+        placeholder="A chat message..."
         onChange={(event) => setValue(event.target.value)}
         value={value}
       />
-
-      <Button onClick={handleSubmit} type="submit"></Button>
     </form>
   );
 }
