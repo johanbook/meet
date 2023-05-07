@@ -13,8 +13,6 @@ export function useSocket(host: string) {
 
     setSocket(socket);
 
-    socket.emit("ping", "hi");
-
     socket.on("notification", (message: string) => {
       snackbar.info(message);
     });
