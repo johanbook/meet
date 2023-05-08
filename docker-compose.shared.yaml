@@ -127,3 +127,5 @@ services:
       - "traefik.http.routers.s3.rule=Host(`s3.$DOMAIN`)"
       - "traefik.http.routers.s3.service=s3"
       - "traefik.http.services.s3.loadbalancer.server.port=9000"
+    volumes:
+      - ".data/mino:/data:rw"
