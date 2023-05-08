@@ -117,7 +117,8 @@ services:
     container_name: watchtower
     command:
       - "--cleanup"
-      - "--interval 3600"
+      - "--interval"
+      - "3600"
     networks:
       - edge
     volumes:
