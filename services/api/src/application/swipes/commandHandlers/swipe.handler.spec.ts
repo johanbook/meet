@@ -1,47 +1,34 @@
-import { Repository } from "typeorm";
-
-import { UserIdService } from "src/client/context/user-id.service";
-import { NotificationsGateway } from "src/client/gateways/notifications.gateway";
+import { CurrentProfileService } from "src/domain/profiles/services/current-profile.service";
+import { SwipeDomainService } from "src/domain/swipes/services/swipes-domain.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
-import { Swipe } from "src/infrastructure/database/entities/swipe.entity";
-import { createNotificationsGatewayMock } from "src/test/mocks/notifications.gateway.mock";
-import { createMockRepository } from "src/test/mocks/repository.mock";
-import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
 
 import { SwipeCommand } from "../contracts/swipe.command";
 import { SwipeHandler } from "./swipe.handler";
 
 describe(SwipeHandler.name, () => {
   let commandHandler: SwipeHandler;
-  let noficationsGateway: NotificationsGateway;
-  let profiles: Repository<Profile>;
-  let swipes: Repository<Swipe>;
-  let userIdService: UserIdService;
+  let currentProfileService: CurrentProfileService;
+  let swipeDomainService: SwipeDomainService;
 
   let profile: Profile;
   let shownProfile: Profile;
 
   beforeEach(() => {
-    noficationsGateway = createNotificationsGatewayMock();
-    profiles = createMockRepository<Profile>();
-    swipes = createMockRepository<Swipe>();
-    userIdService = createUserIdServiceMock();
-
-    commandHandler = new SwipeHandler(
-      noficationsGateway,
-      profiles,
-      swipes,
-      userIdService,
-    );
-
     profile = new Profile();
     profile.id = 1;
 
-    const findOneFn = profiles.findOne as unknown as jest.Mock;
-    findOneFn.mockImplementation(() => profile);
-
     shownProfile = new Profile();
     shownProfile.id = 2;
+
+    currentProfileService = {
+      fetchCurrentProfile: jest.fn(() => profile),
+    } as any;
+    swipeDomainService = { saveSwipe: jest.fn() } as any;
+
+    commandHandler = new SwipeHandler(
+      currentProfileService,
+      swipeDomainService,
+    );
   });
 
   it("should save swipe to the database", async () => {
@@ -51,7 +38,7 @@ describe(SwipeHandler.name, () => {
 
     await commandHandler.execute(command);
 
-    expect(swipes.save).toHaveBeenCalledWith({
+    expect(swipeDomainService.saveSwipe).toHaveBeenCalledWith({
       liked: command.liked,
       profile: profile,
       shownProfile: shownProfile,

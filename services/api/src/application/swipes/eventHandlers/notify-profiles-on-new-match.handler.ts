@@ -2,19 +2,17 @@ import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
 
 import { NotificationsGateway } from "src/client/gateways/notifications.gateway";
 import { NotificationEventsConstants } from "src/constants/notification-events.constants";
-import { ChatMessageSentEvent } from "src/domain/chatMessages/events/chat-message-sent.event";
+import { MatchMadeEvent } from "src/domain/swipes/events/match-made.event";
 
-@EventsHandler(ChatMessageSentEvent)
-export class NotifyReceiverOnPostedChatMessageHandler
-  implements IEventHandler<ChatMessageSentEvent>
-{
+@EventsHandler(MatchMadeEvent)
+export class NotifyProfilesOnNewMatch implements IEventHandler<MatchMadeEvent> {
   constructor(private readonly notificationsGateway: NotificationsGateway) {}
 
-  handle(event: ChatMessageSentEvent) {
+  handle(event: MatchMadeEvent) {
     this.notificationsGateway.notifyProfilesIfAvailable(
-      [event.receiverId],
-      NotificationEventsConstants.NEW_CHAT_MESSAGE,
-      "Reveived new message",
+      [event.swipedProfileId, event.swipingProfileId],
+      NotificationEventsConstants.NEW_MATCH,
+      "You got a new match",
     );
   }
 }
