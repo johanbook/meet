@@ -1,18 +1,22 @@
 import { Grow } from "@mui/material";
 import { VariantType, enqueueSnackbar } from "notistack";
 
-function showSnackbar(message: string, variant: VariantType): void {
-  enqueueSnackbar(message, {
-    anchorOrigin: {
-      horizontal: "center",
-      vertical: "bottom",
-    },
-    TransitionComponent: Grow,
-    variant,
-  });
-}
+import { useIsMobile } from "./useIsMobile";
 
 export function useSnackbar() {
+  const isMobile = useIsMobile();
+
+  function showSnackbar(message: string, variant: VariantType): void {
+    enqueueSnackbar(message, {
+      anchorOrigin: {
+        horizontal: "center",
+        vertical: isMobile ? "top" : "bottom",
+      },
+      TransitionComponent: Grow,
+      variant,
+    });
+  }
+
   return {
     error: (message: string) => showSnackbar(message, "error"),
     info: (message: string) => showSnackbar(message, "info"),

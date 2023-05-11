@@ -6,20 +6,20 @@ import { SnackbarProvider } from "notistack";
 
 import "./App.css";
 import Router from "./Router";
-import { useSocket } from "./hooks/useSocket";
+import { NotificationProvider } from "./notification.provider";
 import Theme from "./theme/Theme";
 
 const queryClient = new QueryClient();
 
 export default function App(): React.ReactElement {
-  useSocket(window.location.hostname);
-
   return (
     <QueryClientProvider client={queryClient}>
       <CssBaseline />
       <Theme>
-        <Router />
-        <SnackbarProvider dense />
+        <NotificationProvider>
+          <Router />
+          <SnackbarProvider dense />
+        </NotificationProvider>
       </Theme>
     </QueryClientProvider>
   );

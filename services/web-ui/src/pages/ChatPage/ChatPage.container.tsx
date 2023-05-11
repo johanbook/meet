@@ -8,6 +8,8 @@ import { chatsApi } from "src/apis";
 import { ChatMessage } from "src/components/ChatMessage";
 import { ChatTextField } from "src/components/ChatTextField";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
+import { NotificationEventsConstants } from "src/constants/notification-events.constants";
+import { useHandleNotification } from "src/hooks/useHandleNotification";
 
 import { ChatPageHeader } from "./ChatPage.header";
 import { ChatPageSkeleton } from "./ChatPage.skeleton";
@@ -18,6 +20,12 @@ export function ChatPageContainer(): React.ReactElement {
   const { error, data, isLoading, refetch } = useQuery(`chat-${id}`, () =>
     chatsApi.getChats({ profileId: id || "" })
   );
+
+  useHandleNotification({
+    onCondition: (event) => event.data.receiverId === id,
+    onNotification: () => refetch(),
+    type: NotificationEventsConstants.NEW_CHAT_MESSAGE,
+  });
 
   if (!id) {
     return (
