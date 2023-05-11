@@ -3,7 +3,7 @@ version: "3.9"
 x-logging: &logging
   driver: loki
   options:
-    loki-url: "http://loki:3100"
+    loki-url: "$LOKI_URL"
     loki-external-labels: "container_name={{.Name}}"
     loki-pipeline-stages: |
       - multiline:
