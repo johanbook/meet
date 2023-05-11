@@ -1,5 +1,6 @@
 .env
 .data
 build
+coverage
 dist
 node_modules
