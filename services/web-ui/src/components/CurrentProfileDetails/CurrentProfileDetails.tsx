@@ -44,7 +44,7 @@ export function CurrentProfileDetails({
       </Typography>
 
       <ProfilePhotosEditor
-        onUploadedNewProfilePhoto={refetchData}
+        onRefresh={refetchData}
         photos={profile.photos}
       />
 
