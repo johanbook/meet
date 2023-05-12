@@ -9,6 +9,7 @@ class MockRepository<T extends ObjectLiteral> {
   find = jest.fn(() => this.data);
   findAll = jest.fn(() => this.data);
   findOne = jest.fn(() => this.data[0]);
+  remove = jest.fn();
   save = jest.fn();
 }
 

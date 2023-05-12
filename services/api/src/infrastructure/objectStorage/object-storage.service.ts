@@ -47,6 +47,12 @@ export class ObjectStorageService {
     await client.setBucketPolicy(bucketName, JSON.stringify(policy));
   }
 
+  async delete(bucketName: BucketName, id: string): Promise<void> {
+    const client = this.minioService.client;
+
+    await client.removeObject(bucketName, id);
+  }
+
   async put(
     bucketName: BucketName,
     stream: ReadableStream | Buffer | string,

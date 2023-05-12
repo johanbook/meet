@@ -3,6 +3,7 @@ import { ObjectStorageService } from "src/infrastructure/objectStorage/object-st
 /* eslint-disable unicorn/consistent-function-scoping */
 
 class ObjectStorageServiceMock {
+  delete = jest.fn();
   put = jest.fn(() => ({
     id: "my-object-id",
     url: "my-url",

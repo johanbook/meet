@@ -1,9 +1,10 @@
 import { MultipartFile } from "@fastify/multipart";
-import { Controller, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Post } from "@nestjs/common";
 import { CommandBus } from "@nestjs/cqrs";
 import { ApiBody, ApiConsumes, ApiTags } from "@nestjs/swagger";
 
 import { AddPhotoCommand } from "src/application/photos/contracts/add-photo.command";
+import { RemovePhotoCommand } from "src/application/photos/contracts/remove-photo.command";
 
 import { UploadedImage } from "../decorators/uploaded-image.decorator";
 
@@ -28,6 +29,11 @@ export class PhotosController {
   async addPhoto(@UploadedImage() file: MultipartFile): Promise<null> {
     const command = new AddPhotoCommand();
     command.photo = file.file;
+    return await this.commandBus.execute(command);
+  }
+
+  @Delete()
+  async removePhoto(@Body() command: RemovePhotoCommand): Promise<null> {
     return await this.commandBus.execute(command);
   }
 }

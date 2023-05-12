@@ -5,7 +5,7 @@ import { PhotoDetails } from "src/api";
 import { photosApi } from "src/apis";
 import { useSnackbar } from "src/hooks/useSnackbar";
 
-import { ProfilePhotosEditorComponent } from "./ProfilePhotosEditorComponent";
+import { ProfilePhotosEditorComponent } from "./ProfilePhotosEditor.component";
 
 function getPhotoLabel(index: number): string {
   if (index === 0) {
@@ -16,12 +16,12 @@ function getPhotoLabel(index: number): string {
 }
 
 export interface ProfilePhotosEditorContainerProps {
-  onUploadedNewProfilePhoto: () => void;
+  onRefresh: () => void;
   photos: PhotoDetails[];
 }
 
 export function ProfilePhotosEditorContainer({
-  onUploadedNewProfilePhoto,
+  onRefresh,
   photos,
 }: ProfilePhotosEditorContainerProps): React.ReactElement {
   const snackbar = useSnackbar();
@@ -44,7 +44,7 @@ export function ProfilePhotosEditorContainer({
     const file = files[0];
     await mutation.mutateAsync(file);
 
-    onUploadedNewProfilePhoto();
+    onRefresh();
 
     snackbar.success("Photo uploaded successfully");
   }
@@ -54,6 +54,7 @@ export function ProfilePhotosEditorContainer({
       disabled={mutation.isLoading}
       getPhotoLabel={getPhotoLabel}
       handleUpload={handleUpload}
+      onRefresh={onRefresh}
       photos={photos}
     />
   );

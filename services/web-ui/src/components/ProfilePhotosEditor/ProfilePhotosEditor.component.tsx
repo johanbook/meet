@@ -1,20 +1,17 @@
 import React from "react";
 
 import { Add } from "@mui/icons-material";
-import {
-  Button,
-  Card,
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
-} from "@mui/material";
+import { Button, Card, ImageList } from "@mui/material";
 
 import { PhotoDetails } from "src/api";
+
+import { ProfilePhotoComponent } from "./ProfilePhoto.component";
 
 export interface ProfilePhotosEditorComponentProps {
   disabled: boolean;
   getPhotoLabel: (index: number) => string;
   handleUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onRefresh: () => void;
   photos: PhotoDetails[];
 }
 
@@ -22,6 +19,7 @@ export function ProfilePhotosEditorComponent({
   disabled,
   getPhotoLabel,
   handleUpload,
+  onRefresh,
   photos,
 }: ProfilePhotosEditorComponentProps): React.ReactElement {
   const numCols = Math.min(3, photos.length + 1);
@@ -29,21 +27,12 @@ export function ProfilePhotosEditorComponent({
     <>
       <ImageList cols={numCols} gap={10} sx={{ height: "50vh" }}>
         {photos.map((photo, index) => (
-          <ImageListItem
-            component={Card}
-            key={photo.imageUrl}
-            variant="outlined"
-          >
-            <img alt="Profile" src={photo.imageUrl} />
-            <ImageListItemBar
-              title={getPhotoLabel(index)}
-              sx={{
-                background:
-                  "linear-gradient(to top, rgba(0,0,0,0.7) 0%, " +
-                  "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
-              }}
-            />
-          </ImageListItem>
+          <ProfilePhotoComponent
+            key={photo.id}
+            onRefresh={onRefresh}
+            photo={photo}
+            title={getPhotoLabel(index)}
+          />
         ))}
 
         <Card

@@ -10,6 +10,9 @@ export class ProfilePhoto {
   @Column({ type: "uuid" })
   objectId!: string;
 
+  @Column()
+  profileId!: number;
+
   @ManyToOne(() => Profile, (profile) => profile.photos)
   profile!: Profile;
 }
