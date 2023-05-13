@@ -14,16 +14,29 @@ export default function Nav({
   showBottomNav = true,
 }: NavProps): React.ReactElement {
   return (
-    <Box>
+    <Box sx={{ height: "100vh", minHeight: "100%" }}>
       <AppBar />
 
       <Box
         component="main"
-        sx={{ flexGrow: 1, paddingLeft: 3, paddingRight: 3, paddingTop: 1 }}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          paddingLeft: 3,
+          paddingRight: 3,
+          paddingTop: 1,
+          height: "100%",
+        }}
       >
         <Toolbar />
 
-        <Container disableGutters maxWidth="md">
+        <Container
+          disableGutters
+          maxWidth="md"
+          sx={{
+            flexGrow: 1,
+          }}
+        >
           <Outlet />
         </Container>
 

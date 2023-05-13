@@ -53,6 +53,7 @@ export function ChatTextField({
         }}
         placeholder="A chat message..."
         onChange={(event) => setValue(event.target.value)}
+        sx={{ paddingBottom: 2 }}
         value={value}
       />
     </form>
