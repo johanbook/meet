@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router";
 
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { chatsApi } from "src/apis";
 import { ChatMessageList } from "src/components/ChatMessageList";
@@ -58,35 +58,51 @@ export function ChatPageContainer(): React.ReactElement {
 
   if (!data || data.length === 0) {
     return (
-      <>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+        }}
+      >
         <ChatPageHeader />
 
-        <Typography gutterBottom variant="h6">
-          No messages in chat
-        </Typography>
+        <Box sx={{ flexGrow: 1 }}>
+          <Typography gutterBottom variant="h6">
+            No messages in chat
+          </Typography>
 
-        <Typography color="textSecondary">
-          Send a message and say 'hi'!
-        </Typography>
+          <Typography color="textSecondary">
+            Send a message and say 'hi'!
+          </Typography>
+        </Box>
 
         <ChatTextField
           onSentMessage={refetch}
           receiverProfileId={receiverProfileId}
         />
-      </>
+      </Box>
     );
   }
 
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+      }}
+    >
       <ChatPageHeader />
 
-      <ChatMessageList messages={data} />
+      <Box sx={{ flexGrow: 1 }}>
+        <ChatMessageList messages={data} />
+      </Box>
 
       <ChatTextField
         onSentMessage={refetch}
         receiverProfileId={receiverProfileId}
       />
-    </>
+    </Box>
   );
 }
