@@ -14,6 +14,7 @@ export interface NewMatchNotification extends BaseNotification {
 export interface NewChatMessageNotification extends BaseNotification {
   data: {
     receiverId: string;
+    senderId: string;
   };
   type: NotificationEventsConstants.NEW_CHAT_MESSAGE;
 }

@@ -65,9 +65,7 @@ export class NotificationEventHandler {
   private handle(notification: INotification): void {
     const handlers = Object.values(this.handlers[notification.type]);
 
-    if (handlers.length === 0) {
-      this.defaultHandler(notification);
-    }
+    let eventWasHandled = false;
 
     for (const handler of handlers) {
       if (
@@ -78,6 +76,12 @@ export class NotificationEventHandler {
       }
 
       handler.execute(notification);
+
+      eventWasHandled = true;
+    }
+
+    if (!eventWasHandled) {
+      this.defaultHandler(notification);
     }
   }
 }
