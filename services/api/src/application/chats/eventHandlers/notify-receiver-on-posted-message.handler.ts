@@ -11,10 +11,10 @@ export class NotifyReceiverOnPostedChatMessageHandler
   constructor(private readonly notificationsGateway: NotificationsGateway) {}
 
   handle(event: ChatMessageSentEvent) {
-    this.notificationsGateway.notifyProfilesIfAvailable(
-      [event.receiverId],
-      NotificationEventsConstants.NEW_CHAT_MESSAGE,
-      "Reveived new message",
-    );
+    this.notificationsGateway.notifyProfilesIfAvailable([event.receiverId], {
+      data: { receiverId: event.receiverId, senderId: event.senderId },
+      message: "Reveived new message",
+      type: NotificationEventsConstants.NEW_CHAT_MESSAGE,
+    });
   }
 }

@@ -2,12 +2,14 @@ import React from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router";
 
-import { List, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 import { chatsApi } from "src/apis";
-import { ChatMessage } from "src/components/ChatMessage";
+import { ChatMessageList } from "src/components/ChatMessageList";
 import { ChatTextField } from "src/components/ChatTextField";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
+import { NotificationEventsConstants } from "src/constants/notification-events.constants";
+import { useHandleNotification } from "src/hooks/useHandleNotification";
 
 import { ChatPageHeader } from "./ChatPage.header";
 import { ChatPageSkeleton } from "./ChatPage.skeleton";
@@ -18,6 +20,12 @@ export function ChatPageContainer(): React.ReactElement {
   const { error, data, isLoading, refetch } = useQuery(`chat-${id}`, () =>
     chatsApi.getChats({ profileId: id || "" })
   );
+
+  useHandleNotification({
+    onCondition: (event) => String(event.data.senderId) === id,
+    onNotification: () => refetch(),
+    type: NotificationEventsConstants.NEW_CHAT_MESSAGE,
+  });
 
   if (!id) {
     return (
@@ -73,11 +81,7 @@ export function ChatPageContainer(): React.ReactElement {
     <>
       <ChatPageHeader />
 
-      <List>
-        {data.map((message) => (
-          <ChatMessage key={message.id} message={message} />
-        ))}
-      </List>
+      <ChatMessageList messages={data} />
 
       <ChatTextField
         onSentMessage={refetch}
