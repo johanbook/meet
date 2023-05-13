@@ -1,6 +1,6 @@
+import SuperTokens from "supertokens-auth-react";
 import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
 import Session from "supertokens-auth-react/recipe/session";
-import SuperTokens from "supertokens-auth-react";
 
 import { fetchConfig } from "./config";
 
@@ -30,6 +30,15 @@ export async function initializeSuperTokens(
 
           return "/";
         },
+        style: `
+              [data-supertokens~=container] {
+                  --palette-primary: 200, 100, 150;
+                  --palette-primaryBorder: 200, 100, 150;
+              }
+              [data-supertokens~=superTokensBranding] {
+                display: none;
+              }
+            `,
         useShadowDom: false,
       }),
       Session.init(),
