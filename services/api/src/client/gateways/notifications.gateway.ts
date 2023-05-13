@@ -8,8 +8,17 @@ import {
 import { Socket } from "socket.io";
 import { In, Repository } from "typeorm";
 
+import { NotificationEventsConstants } from "src/constants/notification-events.constants";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { Logger } from "src/infrastructure/logger.service";
+
+type NotificationData = Record<string, number | string>;
+
+type INotification = {
+  data?: NotificationData;
+  message: string;
+  type: NotificationEventsConstants;
+};
 
 @WebSocketGateway({ path: "/api/notifications" })
 export class NotificationsGateway
@@ -35,8 +44,7 @@ export class NotificationsGateway
 
   async notifyProfilesIfAvailable(
     profileIds: number[],
-    type: string,
-    message: string,
+    notification: INotification,
   ) {
     const profiles = await this.profiles.find({
       select: ["userId"],
@@ -45,23 +53,18 @@ export class NotificationsGateway
 
     const ids = profiles.map((profile) => profile.userId);
 
-    this.notifyUsersIfAvailable(ids, type, message);
+    this.notifyUsersIfAvailable(ids, notification);
   }
 
-  notifyUsersIfAvailable(
-    userIds: string[],
-    type: string,
-    message: string,
-  ): void {
+  notifyUsersIfAvailable(userIds: string[], notification: INotification): void {
     for (const userId of userIds) {
-      this.notifyUserIfAvailable(userId, type, message);
+      this.notifyUserIfAvailable(userId, notification);
     }
   }
 
   private notifyUserIfAvailable(
     userId: string,
-    type: string,
-    message: string,
+    { data = {}, message, type }: INotification,
   ): void {
     const socket = this.connections[userId];
 
@@ -72,7 +75,7 @@ export class NotificationsGateway
       return;
     }
 
-    socket.emit("notification", { message, type });
+    socket.emit("notification", { data, message, type });
   }
 
   private parseUserIdFromSocket(socket: Socket): string {
