@@ -1,4 +1,4 @@
-import App from "./App";
+import { App } from "./App";
 import { render } from "./test";
 
 describe("<App />", () => {

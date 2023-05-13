@@ -1,3 +1,7 @@
+/* eslint-disable unicorn/prefer-module */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-unused-vars  */
+
 const cors = require("cors");
 const morgan = require("morgan");
 // const helmet = require("helmet");
@@ -35,7 +39,7 @@ supertokens.init({
   },
 });
 
-module.exports = function (app) {
+module.exports = function setupProxy(app) {
   app.use(
     cors({
       origin: UI_DOMAIN, // TODO: Change to your app's website domain
@@ -64,7 +68,7 @@ module.exports = function (app) {
         userId: session.getUserId(),
         accessTokenPayload: session.getAccessTokenPayload(),
       });
-    } catch (err) {
+    } catch {
       res.send(401);
     }
   });
@@ -80,7 +84,7 @@ module.exports = function (app) {
         userId: session.getUserId(),
         accessTokenPayload: session.getAccessTokenPayload(),
       });
-    } catch (err) {
+    } catch {
       res.redirect(`${UI_DOMAIN}${PATH_PREFIX}`);
     }
   });
