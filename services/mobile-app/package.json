@@ -1,0 +1,15 @@
+{
+  "name": "mobile-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "bubblewrap build",
+    "init": "bubblewrap init --manifest https://app.meetly.site/login/manifest.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@bubblewrap/cli": "^1.20.0"
+  }
+}
