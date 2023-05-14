@@ -1,12 +1,25 @@
-const handler = require("serve-handler");
-const http = require("http");
+const Fastify = require("fastify");
+const path = require("path");
 
 const PORT = Number.parseInt(process.env.PORT || "8080");
 
-const server = http.createServer((request, response) => {
-  return handler(request, response, { public: build });
+const fastify = Fastify({ logger: true });
+
+fastify.register(require("@fastify/static"), {
+  root: path.join(__dirname, "build"),
+  wildcard: false,
 });
 
-server.listen(PORT, () => {
-  console.log("Running at http://localhost:3000");
+fastify.get("*", function (req, reply) {
+  reply.sendFile("index.html");
 });
+
+fastify.listen(
+  {
+    host: "0.0.0.0",
+    port: PORT,
+  },
+  (err, address) => {
+    if (err) throw err;
+  }
+);
