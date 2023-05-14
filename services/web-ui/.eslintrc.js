@@ -9,6 +9,7 @@ module.exports = {
     "plugin:unicorn/recommended",
     "react-app",
     "react-app/jest",
+    "plugin:storybook/recommended",
   ],
   plugins: ["@typescript-eslint", "sonarjs", "unicorn"],
   rules: {
