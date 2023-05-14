@@ -6,12 +6,17 @@ services:
     container_name: "traefik"
     command:
       - "--accesslog=true"
+      - "--accesslog.fields.headers.names.x-correlation-id=keep"
       - "--api.insecure=true"
 
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
 
       - "--entrypoints.web.address=:80"
+
+      # Adds correlation id
+      - "--tracing.jaeger.samplingparam=0"
+      - "--tracing.jaeger.tracecontextheadername=x-correlation-id"
 
     labels:
       - "traefik.enable=true"
