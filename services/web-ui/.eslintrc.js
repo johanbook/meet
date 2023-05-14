@@ -11,6 +11,14 @@ module.exports = {
     "react-app/jest",
     "plugin:storybook/recommended",
   ],
+  overrides: [
+    {
+      files: ["*.stories.*"],
+      rules: {
+        "@typescript-eslint/no-explicit-any": "off",
+      },
+    },
+  ],
   plugins: ["@typescript-eslint", "sonarjs", "unicorn"],
   rules: {
     "no-console": "error",
