@@ -20,8 +20,9 @@ WORKDIR /app
 ENV PORT=80
 
 COPY --from=builder /app/build ./build
-RUN npm i serve
+COPY server.js .
+RUN npm i fastify @fastify/static
 
-ENTRYPOINT [ "npx" ]
-CMD [  "serve", "build", "-l", "80" ]
+ENTRYPOINT [ "node" ]
+CMD [  "server.js" ]
 EXPOSE 80
