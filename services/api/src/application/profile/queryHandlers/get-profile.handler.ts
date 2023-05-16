@@ -6,8 +6,10 @@ import { Repository } from "typeorm";
 import { UserIdService } from "src/client/context/user-id.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
+import { map, mapArray } from "src/utils/mapper";
 
 import { GetProfileQuery } from "../contracts/get-profile.query";
+import { PhotoDetails } from "../contracts/photo.dto";
 import { ProfileDetails } from "../contracts/profile.dto";
 
 @QueryHandler(GetProfileQuery)
@@ -40,15 +42,18 @@ export class GetProfileHandler
       throw new NotFoundException();
     }
 
-    return {
-      ...profile,
-      photos: profile.photos.map((photo) => ({
-        ...photo,
-        imageUrl: this.objectStorageService.getUrl(
+    return map(ProfileDetails, {
+      id: profile.id,
+      description: profile.description,
+      name: profile.name,
+      photos: mapArray(PhotoDetails, profile.photos, (photo) => {
+        const imageUrl = this.objectStorageService.getUrl(
           "profile-photos",
           photo.objectId,
-        ),
-      })),
-    };
+        );
+
+        return { id: photo.id, imageUrl };
+      }),
+    });
   }
 }
