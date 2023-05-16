@@ -1,6 +1,11 @@
 import { LoggerService } from "@nestjs/common";
 import * as pino from "pino";
 
+export function getLogLevel(): string {
+  const level = process.env.LOG_LEVEL || "info";
+  return level.toLowerCase();
+}
+
 export function createPinoLoggerOptions(name: string): pino.pino.LoggerOptions {
   let transport: pino.pino.LoggerOptions["transport"] | undefined;
 
@@ -13,7 +18,11 @@ export function createPinoLoggerOptions(name: string): pino.pino.LoggerOptions {
     };
   }
 
-  return { name, transport };
+  return {
+    level: getLogLevel(),
+    name,
+    transport,
+  };
 }
 
 export class Logger implements LoggerService {
