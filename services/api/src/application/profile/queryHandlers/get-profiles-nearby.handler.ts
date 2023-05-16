@@ -6,8 +6,10 @@ import { Not, Repository } from "typeorm";
 import { UserIdService } from "src/client/context/user-id.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
+import { mapArray } from "src/utils/mapper";
 
 import { GetProfilesNearbyQuery } from "../contracts/get-profiles-nearby.query";
+import { PhotoDetails } from "../contracts/photo.dto";
 import { ProfileDetails } from "../contracts/profile.dto";
 
 const DISTANCE = 100;
@@ -65,15 +67,18 @@ export class GetProfilesNearbyHandler
       )
       .getMany();
 
-    return foundProfiles.map((profile) => ({
-      ...profile,
-      photos: profile.photos.map((photo) => ({
-        ...photo,
-        imageUrl: this.objectStorageService.getUrl(
+    return mapArray(ProfileDetails, foundProfiles, (profile) => ({
+      id: profile.id,
+      description: profile.description,
+      name: profile.name,
+      photos: mapArray(PhotoDetails, profile.photos, (photo) => {
+        const imageUrl = this.objectStorageService.getUrl(
           "profile-photos",
           photo.objectId,
-        ),
-      })),
+        );
+
+        return { id: photo.id, imageUrl };
+      }),
     }));
   }
 }
