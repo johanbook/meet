@@ -26,8 +26,11 @@ jobs:
           cache: "npm"
           cache-dependency-path: "**/package-lock.json"
 
-      - name: Install NodeJS dependencies
+      - name: Install server NodeJS dependencies
         run: npm ci --legacy-peer-deps -D --ignore-scripts
+
+      - name: Install client NodeJS dependencies
+        run: cd client && npm ci --legacy-peer-deps -D --ignore-scripts
 
       - name: Run linting
         run: npm run lint:ci
@@ -48,8 +51,11 @@ jobs:
           cache: "npm"
           cache-dependency-path: "**/package-lock.json"
 
-      - name: Install NodeJS dependencies
+      - name: Install server NodeJS dependencies
         run: npm ci --legacy-peer-deps -D --ignore-scripts
+
+      - name: Install client NodeJS dependencies
+        run: cd client && npm ci --legacy-peer-deps -D --ignore-scripts
 
       - name: Run tests
         run: npm run test:ci

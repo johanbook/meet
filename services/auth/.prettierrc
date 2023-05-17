@@ -1,0 +1,7 @@
+{
+  "importOrder": ["^(?!src|\\.)", "^src", "^\\."],
+  "importOrderParserPlugins": ["typescript", "decorators-legacy"],
+  "importOrderSeparation": true,
+  "singleQuote": false,
+  "trailingComma": "all"
+}

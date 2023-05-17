@@ -1,6 +1,5 @@
 const express = require("express");
 const path = require("path");
-const setupProxy = require("./src/setupProxy");
 
 const PORT = process.env.REACT_APP_PORT || 80;
 
@@ -16,7 +15,6 @@ function rewritePath(prefix) {
 }
 
 const app = express();
-setupProxy(app);
 
 /** Needed to serve files correctly */
 app.use(rewritePath("/login"));

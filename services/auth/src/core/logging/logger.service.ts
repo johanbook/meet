@@ -1,8 +1,6 @@
 import { LoggerService } from "@nestjs/common";
 import * as pino from "pino";
 
-import { REQUEST_CONTEXT_ALS } from "src/client/context/als.module";
-
 export function getLogLevel(): string {
   const level = process.env.LOG_LEVEL || "info";
   return level.toLowerCase();
@@ -30,15 +28,6 @@ export function createPinoLoggerOptions(name: string): pino.pino.LoggerOptions {
       level: (label) => ({ level: label }),
     },
     level,
-    mixin: () => {
-      const store = REQUEST_CONTEXT_ALS.getStore();
-
-      if (!store) {
-        return {};
-      }
-
-      return { correlationId: store.correlationId, userId: store.userId };
-    },
     name,
     transport,
   };

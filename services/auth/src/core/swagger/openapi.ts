@@ -1,9 +1,9 @@
 import { INestApplication } from "@nestjs/common";
-import { SwaggerModule, DocumentBuilder, OpenAPIObject } from "@nestjs/swagger";
+import { DocumentBuilder, OpenAPIObject, SwaggerModule } from "@nestjs/swagger";
 
-import { Logger } from "src/infrastructure/logger.service";
+import { Logger } from "../logging/logger.service";
 
-const APP_NAME = "Meet";
+const APP_NAME = "Auth";
 const APP_VERSION = process.env.npm_package_version;
 
 export function createOpenApiDocument(app: INestApplication): OpenAPIObject {
