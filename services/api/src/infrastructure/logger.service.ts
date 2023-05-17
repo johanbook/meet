@@ -18,8 +18,14 @@ export function createPinoLoggerOptions(name: string): pino.pino.LoggerOptions {
     };
   }
 
+  const level = getLogLevel();
+
   return {
-    level: getLogLevel(),
+    formatters: {
+      // Log level as string as most log viewers can parse not natively
+      level: (label) => ({ level: label }),
+    },
+    level,
     name,
     transport,
   };
