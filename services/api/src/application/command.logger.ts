@@ -9,9 +9,11 @@ export class CommandLogger {
 
   constructor(private readonly commandBus: CommandBus) {
     this.commandBus.subscribe((command: ICommand) => {
+      const commandName = command.constructor.name;
       this.logger.debug({
-        command,
-        msg: `Executed ${command.constructor.name}`,
+        args: command,
+        command: commandName,
+        msg: `Executed ${commandName}`,
       });
     });
   }
