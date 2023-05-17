@@ -14,6 +14,8 @@ export function createPinoLoggerOptions(name: string): pino.pino.LoggerOptions {
       target: "pino-pretty",
       options: {
         colorize: true,
+        // Create less verbose output
+        hideObject: true,
       },
     };
   }
