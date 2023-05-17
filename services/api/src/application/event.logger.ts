@@ -9,9 +9,11 @@ export class EventLogger {
 
   constructor(private readonly eventBus: EventBus) {
     this.eventBus.subscribe((event: IEvent) => {
+      const eventName = event.constructor.name;
       this.logger.debug({
-        event,
-        msg: `Dispatched ${event.constructor.name}`,
+        args: event,
+        event: eventName,
+        msg: `Dispatched ${eventName}`,
       });
     });
   }
