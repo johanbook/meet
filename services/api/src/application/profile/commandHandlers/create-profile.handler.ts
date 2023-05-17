@@ -6,6 +6,7 @@ import { Repository } from "typeorm";
 import { UserIdService } from "src/client/context/user-id.service";
 import { ProfileService } from "src/domain/profiles/services/profile.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
+import { Logger } from "src/infrastructure/logger.service";
 
 import { CreateProfileCommand } from "../contracts/create-profile.command";
 
@@ -13,6 +14,8 @@ import { CreateProfileCommand } from "../contracts/create-profile.command";
 export class CreateProfileHandler
   implements ICommandHandler<CreateProfileCommand, void>
 {
+  private logger = new Logger(CreateProfileHandler.name);
+
   constructor(
     private readonly profileService: ProfileService,
     @InjectRepository(Profile)
@@ -28,6 +31,10 @@ export class CreateProfileHandler
     });
 
     if (profileExists) {
+      this.logger.warn(
+        "Attempt at creating profile when profile already exists.",
+      );
+
       throw new BadRequestException(
         "Cannot create profile as it already exists",
       );

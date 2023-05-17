@@ -1,11 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { AsyncLocalStorage } from "node:async_hooks";
 
-import { UserIdStore } from "./user-id.module";
+import { RequestContext } from "./request-context.interface";
 
 @Injectable()
 export class UserIdService {
-  constructor(private readonly als: AsyncLocalStorage<UserIdStore>) {}
+  constructor(private readonly als: AsyncLocalStorage<RequestContext>) {}
 
   getUserId() {
     const store = this.als.getStore();

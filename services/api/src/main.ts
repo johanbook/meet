@@ -22,9 +22,9 @@ async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter({
-      logger: createPinoLoggerOptions("fastify"),
+      logger: createPinoLoggerOptions("Fastify"),
     }),
-    { logger: new Logger("nestjs") },
+    { logger: new Logger("NestJS") },
   );
 
   app.setGlobalPrefix(PATH_PREFIX);
