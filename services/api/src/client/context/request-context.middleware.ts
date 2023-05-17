@@ -10,18 +10,15 @@ import { AsyncLocalStorage } from "node:async_hooks";
 import { Logger } from "src/infrastructure/logger.service";
 
 import { AlsModule } from "./als.module";
-
-export interface UserIdStore {
-  userId: string;
-}
+import { RequestContext } from "./request-context.interface";
 
 @Module({
   imports: [AlsModule],
 })
-export class UserIdModule implements NestModule {
-  private logger = new Logger(UserIdModule.name);
+export class RequestContextMiddleware implements NestModule {
+  private logger = new Logger(RequestContextMiddleware.name);
 
-  constructor(private readonly als: AsyncLocalStorage<UserIdStore>) {}
+  constructor(private readonly als: AsyncLocalStorage<RequestContext>) {}
 
   configure(consumer: MiddlewareConsumer) {
     consumer
@@ -31,7 +28,18 @@ export class UserIdModule implements NestModule {
           _: FastifyReply["raw"],
           next: () => void,
         ) => {
+          const correlationId = req.headers["x-correlation-id"];
           const userId = req.headers["x-user-id"];
+
+          if (typeof correlationId != "string") {
+            this.logger.error(
+              "Failed parsing correlation ID. This indicates an error in the reverse proxy.",
+            );
+
+            throw new UnauthorizedException(
+              "Unable to parse correlation ID from request",
+            );
+          }
 
           if (typeof userId != "string") {
             this.logger.error(
@@ -39,11 +47,12 @@ export class UserIdModule implements NestModule {
             );
 
             throw new UnauthorizedException(
-              "Unable to parse user id from request",
+              "Unable to parse user ID from request",
             );
           }
 
-          const store: UserIdStore = {
+          const store: RequestContext = {
+            correlationId,
             userId,
           };
 

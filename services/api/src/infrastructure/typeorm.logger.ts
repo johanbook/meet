@@ -3,7 +3,7 @@ import { Logger as TypeOrmBaseLogger } from "typeorm";
 import { Logger } from "./logger.service";
 
 export class TypeOrmLogger implements TypeOrmBaseLogger {
-  private logger = new Logger("typeorm");
+  private logger = new Logger(TypeOrmLogger.name);
 
   log(level: "log" | "info" | "warn", message: any): void {
     switch (level) {

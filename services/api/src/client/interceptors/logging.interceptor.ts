@@ -14,7 +14,10 @@ export class LoggingInterceptor implements NestInterceptor {
   private readonly logger = new Logger(LoggingInterceptor.name);
 
   private logRequestDuration(durationInMs: number): void {
-    this.logger.debug(`Request took ${durationInMs}ms`);
+    this.logger.debug({
+      duration: durationInMs,
+      msg: `Request took ${durationInMs}ms`,
+    });
   }
 
   intercept(_: ExecutionContext, next: CallHandler): Observable<any> {
