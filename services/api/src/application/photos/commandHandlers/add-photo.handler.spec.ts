@@ -1,35 +1,30 @@
 import { Repository } from "typeorm";
 
-import { UserIdService } from "src/client/context/user-id.service";
+import { CurrentProfileService } from "src/domain/profiles/services/current-profile.service";
 import { ProfilePhoto } from "src/infrastructure/database/entities/profile-photo.entity";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
 import { createObjectStorageServiceMock } from "src/test/mocks/object-storage.service.mock";
 import { createMockRepository } from "src/test/mocks/repository.mock";
-import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
 import { map } from "src/utils/mapper";
 
 import { AddPhotoCommand } from "../contracts/add-photo.command";
 import { AddPhotoHandler } from "./add-photo.handler";
 
 describe(AddPhotoHandler.name, () => {
+  let currentProfileService: CurrentProfileService;
   let commandHandler: AddPhotoHandler;
   let objectStorageService: ObjectStorageService;
   let profilePhotos: Repository<ProfilePhoto>;
-  let profiles: Repository<Profile>;
-  let userIdService: UserIdService;
 
   beforeEach(() => {
+    currentProfileService = { fetchCurrentProfile: jest.fn() } as any;
     objectStorageService = createObjectStorageServiceMock();
     profilePhotos = createMockRepository<ProfilePhoto>();
-    profiles = createMockRepository<Profile>();
-    userIdService = createUserIdServiceMock();
 
     commandHandler = new AddPhotoHandler(
+      currentProfileService,
       objectStorageService,
-      profiles,
       profilePhotos,
-      userIdService,
     );
   });
 
@@ -40,7 +35,8 @@ describe(AddPhotoHandler.name, () => {
         userId: "my-user-id",
       };
 
-      const findOneFn = profiles.findOne as unknown as jest.Mock;
+      const findOneFn =
+        currentProfileService.fetchCurrentProfile as unknown as jest.Mock;
       findOneFn.mockImplementation(() => "my-profile-id");
 
       const command = map(AddPhotoCommand, newProfile);
