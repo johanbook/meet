@@ -9,16 +9,6 @@ module.exports = {
     "plugin:unicorn/recommended",
     "react-app",
     "react-app/jest",
-    "plugin:storybook/recommended",
-  ],
-  overrides: [
-    {
-      files: ["*.stories.*"],
-      rules: {
-        "@typescript-eslint/no-explicit-any": "off",
-        "import/no-anonymous-default-export": "off",
-      },
-    },
   ],
   plugins: ["@typescript-eslint", "sonarjs", "unicorn"],
   rules: {
