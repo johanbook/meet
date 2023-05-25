@@ -1,11 +1,9 @@
-import { BadRequestException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { UserIdService } from "src/client/context/user-id.service";
+import { CurrentProfileService } from "src/domain/profiles/services/current-profile.service";
 import { ProfilePhoto } from "src/infrastructure/database/entities/profile-photo.entity";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
 
 import { AddPhotoCommand } from "../contracts/add-photo.command";
@@ -13,25 +11,14 @@ import { AddPhotoCommand } from "../contracts/add-photo.command";
 @CommandHandler(AddPhotoCommand)
 export class AddPhotoHandler implements ICommandHandler<AddPhotoCommand, void> {
   constructor(
-    private objectStorageService: ObjectStorageService,
-    @InjectRepository(Profile)
-    private readonly profiles: Repository<Profile>,
+    private readonly currentProfileService: CurrentProfileService,
+    private readonly objectStorageService: ObjectStorageService,
     @InjectRepository(ProfilePhoto)
     private readonly profilePhotos: Repository<ProfilePhoto>,
-    private readonly userIdService: UserIdService,
   ) {}
 
   async execute(command: AddPhotoCommand) {
-    const userId = this.userIdService.getUserId();
-
-    const profile = await this.profiles.findOne({
-      select: { id: true },
-      where: { userId },
-    });
-
-    if (!profile) {
-      throw new BadRequestException("Profile not found");
-    }
+    const profile = await this.currentProfileService.fetchCurrentProfile();
 
     const objectMetadata = await this.objectStorageService.put(
       "profile-photos",
