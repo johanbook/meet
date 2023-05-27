@@ -1,4 +1,5 @@
 import { Module } from "@nestjs/common";
+import { ScheduleModule } from "@nestjs/schedule";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { MinioModule } from "nestjs-minio-client";
 
@@ -9,6 +10,7 @@ import { minioOptions } from "./infrastructure/objectStorage/minio.config";
 
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     RequestContextModule,
     MinioModule.register({ ...minioOptions, isGlobal: true }),
     TypeOrmModule.forRoot({ ...dataSourceOptions, autoLoadEntities: true }),
