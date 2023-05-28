@@ -60,6 +60,11 @@ jobs:
       - name: Run tests
         run: npm run test:ci
 
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          flags: homepage
+
   build-and-publish:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
