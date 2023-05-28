@@ -53,12 +53,20 @@ export class Logger implements LoggerService {
     this.logger.fatal(message);
   }
 
+  info(message: any): void {
+    this.logger.info(message);
+  }
+
   log(message: any): void {
     this.logger.info(message);
   }
 
   verbose(message: any): void {
     this.logger.debug(message);
+  }
+
+  trace(message: any): void {
+    this.logger.trace(message);
   }
 
   warn(message: any): void {
