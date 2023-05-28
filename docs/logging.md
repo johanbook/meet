@@ -10,7 +10,40 @@ library. Documentation for the different used libraries are found here
 - [NestJS](https://docs.nestjs.com/techniques/logger)
 - [TypeORM docs](https://github.com/typeorm/typeorm/blob/master/docs/logging.md)
 
-## Logging aggregation
+## Infrastructure
+
+### Logging aggregation
 
 Log aggregation is handled by Loki which is handled by Grafana cloud. Logs are
 shipped there using the Loki docker plugin.
+
+## Log level guidelines
+
+This project use the following log levels:
+
+- **Trace**: The lowest log level, reserved for extremely detailed information
+  aiding in debugging or tracing program flow. Use trace messages sparingly to
+  avoid generating a large volume of logs. Examples include tracking function
+  entry and exit points or logging variable values during critical operations.
+- **Debug**: Debug-level logs provide specific information helpful for debugging
+  and diagnosing issues during development. Log events, conditions, or variable
+  values to assist in identifying and resolving problems. Debug logs are
+  typically disabled in production environments.
+- **Info**: Info-level logs offer general information about the application's
+  progress and important milestones. Use them to track overall execution flow
+  and significant events. Capture important state changes, initialization
+  messages, or the start and completion of significant operations.
+- **Warn**: Warn-level logs indicate potentially harmful situations or
+  conditions that may not lead to errors or failures but require attention.
+  Identify issues that can impact application performance or behavior. For
+  instance, report deprecated API usage or configuration settings deviating from
+  recommended values.
+- **Error**: Error-level logs represent actual errors or exceptions encountered
+  during software execution. Log problems preventing the application from
+  functioning as intended or resulting in incorrect results. Provide sufficient
+  information to understand the cause and context of errors, facilitating
+  diagnosis and resolution.
+- **Fatal**: Fatal-level logs denote critical errors leading to an unrecoverable
+  state or application termination. Use them for severe failures impacting
+  system stability or data integrity. Log fatal events just before the
+  application exits or shuts down abruptly.
