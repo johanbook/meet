@@ -5,6 +5,7 @@ import { MinioModule } from "nestjs-minio-client";
 
 import { ClientModule } from "./client/client.module";
 import { RequestContextModule } from "./client/context/request-context.module";
+import { WingmanModule } from "./features/wingman/wingman.module";
 import { dataSourceOptions } from "./infrastructure/database/data-source.config";
 import { minioOptions } from "./infrastructure/objectStorage/minio.config";
 
@@ -15,6 +16,7 @@ import { minioOptions } from "./infrastructure/objectStorage/minio.config";
     MinioModule.register({ ...minioOptions, isGlobal: true }),
     TypeOrmModule.forRoot({ ...dataSourceOptions, autoLoadEntities: true }),
     ClientModule,
+    WingmanModule,
   ],
   providers: [],
 })
