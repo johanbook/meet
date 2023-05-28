@@ -11,7 +11,7 @@ export default {
 
 type Story = StoryObj<typeof ChatMessageList>;
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
     messages: createChatMessagesMock(10),
   },
