@@ -9,13 +9,14 @@ module.exports = {
       statements: 31,
     },
   },
+  coveragePathIgnorePatterns: ["node_modules", "src/api", "stories.tsx"],
   moduleDirectories: ["node_modules", __dirname],
   moduleNameMapper: {
     // Force module uuid to resolve with the CJS entry point, because Jest does not support package.json.exports. See https://github.com/uuidjs/uuid/issues/451
-    "uuid": require.resolve('uuid'),
+    uuid: require.resolve("uuid"),
   },
   preset: "ts-jest",
   setupFilesAfterEnv: ["./src/setupTests.ts"],
   testEnvironment: "jsdom",
-  testPathIgnorePatterns: ["node_modules", "src/api"],
+  testPathIgnorePatterns: ["node_modules"],
 };
