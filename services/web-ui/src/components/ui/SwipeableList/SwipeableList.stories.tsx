@@ -5,13 +5,13 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { SwipeableList } from ".";
 
 export default {
-  title: "UI/SwipeableList",
+  title: "Core/SwipeableList",
   component: SwipeableList,
 } as Meta;
 
 type Story = StoryObj<typeof SwipeableList>;
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
     children: ({ data }: any) => (
       <Container maxWidth="md">
