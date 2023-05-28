@@ -1,4 +1,4 @@
-import { JournalEntry } from "src/core/journal/infrastructure/entitities/journal-entry.entity";
+import { JournalEntry } from "src/core/journal/infrastructure/entities/journal-entry.entity";
 import { map, mapArray } from "src/utils/mapper";
 
 import { JournalDetails } from "../contracts/dtos/journal-details.dto";

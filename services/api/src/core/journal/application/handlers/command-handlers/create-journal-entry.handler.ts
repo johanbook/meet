@@ -4,7 +4,7 @@ import { Repository } from "typeorm";
 
 import { CurrentProfileService } from "src/domain/profiles/services/current-profile.service";
 
-import { JournalEntry } from "../../../infrastructure/entitities/journal-entry.entity";
+import { JournalEntry } from "../../../infrastructure/entities/journal-entry.entity";
 import { CreateJournalEntryCommand } from "../../contracts/commands/create-journal-entry.command";
 
 @CommandHandler(CreateJournalEntryCommand)

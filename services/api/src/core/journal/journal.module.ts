@@ -4,7 +4,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { CreateJournalEntryHandler } from "./application/handlers/command-handlers/create-journal-entry.handler";
 import { JournalController } from "./client/controllers/journal.controller";
-import { JournalEntry } from "./infrastructure/entitities/journal-entry.entity";
+import { JournalEntry } from "./infrastructure/entities/journal-entry.entity";
 import { JournalLogger } from "./journal.listener";
 
 @Module({

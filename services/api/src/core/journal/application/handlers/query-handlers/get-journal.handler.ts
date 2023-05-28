@@ -2,7 +2,7 @@ import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { JournalEntry } from "src/core/journal/infrastructure/entitities/journal-entry.entity";
+import { JournalEntry } from "src/core/journal/infrastructure/entities/journal-entry.entity";
 import { CurrentProfileService } from "src/domain/profiles/services/current-profile.service";
 
 import { JournalDetails } from "../../contracts/dtos/journal-details.dto";
