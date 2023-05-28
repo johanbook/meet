@@ -68,6 +68,10 @@ export class Logger implements LoggerService {
     this.logger.info(message);
   }
 
+  trace(message: any): void {
+    this.logger.trace(message);
+  }
+
   verbose(message: any): void {
     this.logger.debug(message);
   }

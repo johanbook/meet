@@ -1,4 +1,5 @@
 import * as dotenv from "dotenv";
+import { join } from "node:path";
 import { DataSourceOptions } from "typeorm";
 import { SeederOptions } from "typeorm-extension";
 
@@ -31,9 +32,12 @@ export const dataSourceOptions: DataSourceOptions & SeederOptions = {
   synchronize: false,
   logging,
   logger: new TypeOrmLogger(),
-  entities: [__dirname + "/entities/*.{ts,js}", __dirname + "/views/*.{ts,js}"],
+  entities: [
+    join(__dirname, "/entities/*.{ts,js}"),
+    join(__dirname, "/views/*.{ts,js}"),
+  ],
   subscribers: [],
-  migrations: [__dirname + "/migrations/*.{ts,js}"],
-  factories: [__dirname + "/factories/*.{ts,js}"],
-  seeds: [__dirname + "/seeds/*.{ts,js}"],
+  migrations: [join(__dirname, "/migrations/*.{ts,js}")],
+  factories: [join(__dirname, "/factories/*.{ts,js}")],
+  seeds: [join(__dirname, "/seeds/*.{ts,js}")],
 };

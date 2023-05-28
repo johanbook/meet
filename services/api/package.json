@@ -19,8 +19,7 @@
     "test:ci": "jest --coverage",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
     "@fastify/multipart": "^7.6.0",
@@ -31,6 +30,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/platform-fastify": "^9.4.0",
     "@nestjs/platform-socket.io": "^9.4.0",
+    "@nestjs/schedule": "^2.2.2",
     "@nestjs/swagger": "^6.3.0",
     "@nestjs/typeorm": "^9.0.1",
     "@nestjs/websockets": "^9.4.0",
