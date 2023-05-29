@@ -24,6 +24,7 @@ export class GetJournalHandler
 
     const foundJournalEntries = await this.journalEntries.find({
       where: { userId: userId },
+      order: { created: "desc" },
     });
 
     return mapToJournalDetails({ entries: foundJournalEntries });
