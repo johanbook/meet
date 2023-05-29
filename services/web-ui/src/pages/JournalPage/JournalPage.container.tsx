@@ -1,11 +1,11 @@
 import React from "react";
 import { useQuery } from "react-query";
 
-import { List, ListItem, ListItemText } from "@mui/material";
-import { capitalize, lowerCase } from "lodash";
+import { List, ListItem, ListItemText, Typography } from "@mui/material";
 
 import { journalApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
+import { format } from "src/utils/string";
 
 import { JournalPageHeader } from "./JournalPage.header";
 import { JournalPageSkeleton } from "./JournalPage.skeleton";
@@ -38,7 +38,7 @@ export function JournalPageContainer(): React.ReactElement {
     return (
       <>
         <JournalPageHeader />
-        No data
+        <Typography>No entries found in journal</Typography>
       </>
     );
   }
@@ -51,7 +51,7 @@ export function JournalPageContainer(): React.ReactElement {
         {data.entries.map((element) => (
           <ListItem>
             <ListItemText
-              primary={capitalize(lowerCase(element.commandName))}
+              primary={format(element.commandName)}
               secondary={element.created.toLocaleString()}
             />
           </ListItem>
