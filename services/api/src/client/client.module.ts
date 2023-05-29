@@ -11,7 +11,6 @@ import { PhotosController } from "./controllers/photos.controller";
 import { ProfileController } from "./controllers/profile.controller";
 import { SwipesController } from "./controllers/swipes.controller";
 import { NotificationsGateway } from "./gateways/notifications.gateway";
-import { HealthCheckJobs } from "./jobs/healthcheck.jobs";
 
 @Module({
   imports: [CqrsModule, ApplicationModule, TypeOrmModule.forFeature([Profile])],
@@ -22,6 +21,6 @@ import { HealthCheckJobs } from "./jobs/healthcheck.jobs";
     ProfileController,
     SwipesController,
   ],
-  providers: [HealthCheckJobs, NotificationsGateway],
+  providers: [NotificationsGateway],
 })
 export class ClientModule {}
