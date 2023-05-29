@@ -14,7 +14,7 @@ export function mapToJournalDetails({
   const mappedEntries = mapArray(JournalEntryDetails, entries, (entry) => ({
     commandName: entry.commandName,
     created: entry.created,
-    payload: entry.profile,
+    payload: entry.payload,
   }));
 
   return map(JournalDetails, { entries: mappedEntries });

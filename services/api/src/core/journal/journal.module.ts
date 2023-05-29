@@ -5,6 +5,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ProfileDomainModule } from "src/domain/profiles/profile-domain.module";
 
 import { CreateJournalEntryHandler } from "./application/handlers/command-handlers/create-journal-entry.handler";
+import { GetJournalHandler } from "./application/handlers/query-handlers/get-journal.handler";
 import { JournalController } from "./client/controllers/journal.controller";
 import { JournalEntry } from "./infrastructure/entities/journal-entry.entity";
 import { JournalLogger } from "./journal.listener";
@@ -16,6 +17,6 @@ import { JournalLogger } from "./journal.listener";
     TypeOrmModule.forFeature([JournalEntry]),
   ],
   controllers: [JournalController],
-  providers: [CreateJournalEntryHandler, JournalLogger],
+  providers: [CreateJournalEntryHandler, GetJournalHandler, JournalLogger],
 })
 export class JournalModule {}

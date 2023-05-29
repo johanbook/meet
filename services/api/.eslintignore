@@ -1,1 +1,1 @@
-src/infrastructure/database/migrations
+src/**/migrations
