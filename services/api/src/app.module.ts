@@ -6,12 +6,14 @@ import { MinioModule } from "nestjs-minio-client";
 import { ClientModule } from "./client/client.module";
 import { RequestContextModule } from "./client/context/request-context.module";
 import { HealthChecksModule } from "./core/health-checks/health-checks.module";
+import { JournalModule } from "./core/journal/journal.module";
 import { WingmanModule } from "./features/wingman/wingman.module";
 import { dataSourceOptions } from "./infrastructure/database/data-source.config";
 import { minioOptions } from "./infrastructure/objectStorage/minio.config";
 
 @Module({
   imports: [
+    JournalModule,
     HealthChecksModule,
     ScheduleModule.forRoot(),
     RequestContextModule,

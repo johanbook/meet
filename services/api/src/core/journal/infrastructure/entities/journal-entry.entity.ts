@@ -3,10 +3,7 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  ManyToOne,
 } from "typeorm";
-
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
 
 @Entity()
 export class JournalEntry {
@@ -22,9 +19,6 @@ export class JournalEntry {
   @Column("json")
   payload!: unknown;
 
-  @Column()
-  profileId!: number;
-
-  @ManyToOne(() => Profile)
-  profile!: Profile;
+  @Column("uuid")
+  userId!: string;
 }
