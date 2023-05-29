@@ -4,11 +4,14 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
+import { Permission } from "src/core/authorization/permissions.enum";
+import { RequirePermissions } from "src/core/authorization/required-permissions.decorator";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 
 import { UpdateProfileCommand } from "../contracts/update-profile.command";
 
 @CommandHandler(UpdateProfileCommand)
+@RequirePermissions([Permission.Update])
 export class UpdateProfileHandler
   implements ICommandHandler<UpdateProfileCommand, void>
 {
