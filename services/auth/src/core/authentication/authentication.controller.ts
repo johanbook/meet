@@ -46,4 +46,22 @@ export class AuthenticationController {
     response.header(HTTP_HEADER_USER_ID, session.getUserId());
     response.status(200).send();
   }
+
+  @Get("/logout")
+  async logout(
+    @Res({ passthrough: false }) response: FastifyReply,
+    @Session({
+      sessionRequired: false,
+    })
+    session: ISession,
+  ): Promise<void> {
+    if (!session) {
+      response.status(404).send();
+      return;
+    }
+
+    await session.revokeSession();
+
+    response.status(200).send();
+  }
 }
