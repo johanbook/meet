@@ -113,7 +113,6 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.web-ui.rule=Host(`$DOMAIN`)"
       - "traefik.http.routers.web-ui.entrypoints=web"
-      - "traefik.http.routers.web-ui.middlewares=auth-redirect"
 
   minio:
     image: "minio/minio"
