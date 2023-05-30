@@ -17,10 +17,15 @@ export class AuthenticationController {
   authenticate(
     @Res({ passthrough: false }) response: FastifyReply,
     @Session({
-      sessionRequired: true,
+      sessionRequired: false,
     })
     session: ISession,
   ): void {
+    if (!session) {
+      response.status(401).send();
+      return;
+    }
+
     response.header(HTTP_HEADER_USER_ID, session.getUserId());
     response.status(200).send();
   }
