@@ -6,7 +6,7 @@ import { ChatPage } from "src/pages/ChatPage";
 
 import { JournalPage } from "./pages/JournalPage";
 import { MatchesPage } from "./pages/MatchesPage";
-import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 import { ProfileGuard } from "./pages/ProfileGuard";
 import { ProfilePage } from "./pages/ProfilePage";
 import { SwipingPage } from "./pages/SwipingPage";
