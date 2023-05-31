@@ -5,15 +5,15 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { SnackbarProvider } from "notistack";
 
 import "./App.css";
-import Router from "./Router";
+import { Router } from "./Router";
 import { NotificationProvider } from "./notification.provider";
 import Theme from "./theme/Theme";
 
-const queryClient = new QueryClient();
+const QUERY_CLIENT = new QueryClient();
 
-export default function App(): React.ReactElement {
+export function App(): React.ReactElement {
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={QUERY_CLIENT}>
       <CssBaseline />
       <Theme>
         <NotificationProvider>
