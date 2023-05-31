@@ -16,30 +16,40 @@ export class HealthCheckService {
   constructor(private readonly dataSource: DataSource) {}
 
   async healthcheck(): Promise<HealthCheckDetails> {
+    const errors: unknown[] = [];
     let status: HealthCheckStatus = "ok";
 
-    const databaseOK = await this.checkDatabase();
+    const healthChecksToRun: Promise<HealthCheckDetails>[] = [
+      this.checkDatabase(),
+    ];
 
-    if (!databaseOK) {
+    const results = await Promise.all(healthChecksToRun);
+
+    for (const result of results) {
+      if (result.status === "ok") {
+        continue;
+      }
+
       status = "error";
+      errors.push(...result.errors);
     }
 
-    return map(HealthCheckDetails, { status });
+    return map(HealthCheckDetails, { errors, status });
   }
 
-  async rungDiagnostics(): Promise<HealthCheckDetails> {
+  async runDiagnostics(): Promise<HealthCheckDetails> {
     return await this.healthcheck();
   }
 
-  private async checkDatabase(): Promise<boolean> {
+  private async checkDatabase(): Promise<HealthCheckDetails> {
     try {
       const queryRunner = this.dataSource.createQueryRunner();
 
       await queryRunner.query("SELECT 1;");
-      return true;
-    } catch {
-      this.logger.error("Unable to reach database");
-      return false;
+      return map(HealthCheckDetails, { errors: [], status: "ok" });
+    } catch (error) {
+      this.logger.error({ msg: "Unable to reach database", error });
+      return map(HealthCheckDetails, { errors: [error], status: "error" });
     }
   }
 }
