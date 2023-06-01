@@ -2,7 +2,7 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { CurrentProfileService } from "src/domain/profiles/services/current-profile.service";
+import { UserIdService } from "src/client/context/user-id.service";
 
 import { JournalEntry } from "../../../infrastructure/entities/journal-entry.entity";
 import { CreateJournalEntryCommand } from "../../contracts/commands/create-journal-entry.command";
@@ -12,20 +12,19 @@ export class CreateJournalEntryHandler
   implements ICommandHandler<CreateJournalEntryCommand, void>
 {
   constructor(
-    private readonly currentProfileService: CurrentProfileService,
     @InjectRepository(JournalEntry)
     private readonly journalEntry: Repository<JournalEntry>,
+    private readonly userIdService: UserIdService,
   ) {}
 
   async execute(command: CreateJournalEntryCommand) {
-    const currentProfile =
-      await this.currentProfileService.fetchCurrentProfile();
+    const userId = this.userIdService.getUserId();
 
     const newJournalEntry = new JournalEntry();
 
     newJournalEntry.commandName = command.commandName;
     newJournalEntry.payload = command.payload;
-    newJournalEntry.profile = currentProfile;
+    newJournalEntry.userId = userId;
 
     await this.journalEntry.save(newJournalEntry);
   }

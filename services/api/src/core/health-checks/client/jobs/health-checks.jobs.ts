@@ -13,12 +13,15 @@ export class HealthChecksJobs {
 
   @Cron(CronExpression.EVERY_30_MINUTES)
   async rungDiagnostics(): Promise<void> {
-    const result = await this.healthCheckService.rungDiagnostics();
+    const result = await this.healthCheckService.runDiagnostics();
 
     if (result.status === "ok") {
       this.logger.debug("Diagnostics completed. Everything OK.");
     } else {
-      this.logger.warn("Errors encountered when running diagnosticskkj");
+      this.logger.error({
+        msg: "Errors encountered when running diagnostics",
+        errors: result.errors,
+      });
     }
   }
 }

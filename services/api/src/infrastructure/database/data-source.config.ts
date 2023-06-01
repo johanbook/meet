@@ -35,9 +35,16 @@ export const dataSourceOptions: DataSourceOptions & SeederOptions = {
   entities: [
     join(__dirname, "/entities/*.{ts,js}"),
     join(__dirname, "/views/*.{ts,js}"),
+    join(__dirname, "../../core/**/entities/*.{ts,js}"),
+    join(__dirname, "../../features/**/entities/*.{ts,js}"),
   ],
   subscribers: [],
-  migrations: [join(__dirname, "/migrations/*.{ts,js}")],
+  migrations: [
+    // Note that glob should be on both `ts` and `js` to work in both dev and production
+    join(__dirname, "/migrations/*.{ts,js}"),
+    join(__dirname, "../../core/**/migrations/*.{ts,js}"),
+    join(__dirname, "../../features/**/migrations/*.{ts,js}"),
+  ],
   factories: [join(__dirname, "/factories/*.{ts,js}")],
   seeds: [join(__dirname, "/seeds/*.{ts,js}")],
 };
