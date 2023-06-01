@@ -1,33 +1,38 @@
 import { Logger } from "src/infrastructure/logger.service";
 
-import { PERMISSIONS_CONTEXT_ALS } from "./client/context/permission-als.module";
-import { Permission } from "./permissions.enum";
+import { AUTHORIZATION_ALS } from "./client/context/authorization-als.module";
+import { IPermission } from "./permission.interface";
 
-const logger = new Logger("authorize");
+export class Authorizer {
+  private static logger = new Logger("authorize");
 
-export function authorize(requiredPermissionss: Permission[]): boolean {
-  const store = PERMISSIONS_CONTEXT_ALS.getStore();
+  public static authorize(requiredPermissionss: IPermission[]): boolean {
+    const store = AUTHORIZATION_ALS.getStore();
 
-  if (!store) {
-    throw new Error("Unable to authorize due to missing store");
+    if (!store) {
+      this.logger.error(
+        "Authorization failed due to unable to fetch ALS store",
+      );
+      throw new Error("Unable fetch user permissions");
+    }
+
+    const currentPermissions = store.permissions;
+
+    const isAuthorized = requiredPermissionss.every((requiredPermissions) =>
+      currentPermissions.includes(requiredPermissions),
+    );
+
+    if (isAuthorized) {
+      this.logger.trace("Authorization granted");
+      return true;
+    }
+
+    this.logger.warn({
+      msg: "Authorizion not granted",
+      currentPermissions,
+      requiredPermissionss,
+    });
+
+    return false;
   }
-
-  const currentPermissions = store.permissions;
-
-  const isAuthorized = requiredPermissionss.every((requiredPermissions) =>
-    currentPermissions.includes(requiredPermissions),
-  );
-
-  if (isAuthorized) {
-    logger.trace("Authorization granted");
-    return true;
-  }
-
-  logger.warn({
-    msg: "Failed authorizion",
-    currentPermissions,
-    requiredPermissionss,
-  });
-
-  return false;
 }

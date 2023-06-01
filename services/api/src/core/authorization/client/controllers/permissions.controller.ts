@@ -1,7 +1,7 @@
 import { Controller, Get } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 
-import { PermissionsService } from "../context/permissions.service";
+import { PermissionsService } from "../../application/permissions.service";
 
 @Controller("permissions")
 @ApiTags("permissions")
@@ -10,6 +10,6 @@ export class PermissionsController {
 
   @Get()
   async getPermissions(): Promise<string[]> {
-    return this.permissionsService.getPermissions();
+    return await this.permissionsService.fetchPermissions();
   }
 }
