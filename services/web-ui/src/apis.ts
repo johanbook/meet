@@ -8,7 +8,10 @@ import {
   SwipesApi,
 } from "src/api";
 
-const config = new Configuration({ basePath: window.location.origin });
+const config = new Configuration({
+  basePath: window.location.origin,
+  middleware: [],
+});
 
 export const chatsApi = new ChatsApi(config);
 export const journalApi = new JournalApi(config);

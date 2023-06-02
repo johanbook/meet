@@ -2,20 +2,43 @@ import React from "react";
 
 import Typography from "@mui/material/Typography";
 
+import { errorToMessage } from "src/utils/error.utils";
+
 export interface ErrorMessageProps {
-  debug?: string;
+  error?: unknown;
   message: string;
 }
 
 export function ErrorMessage({
-  debug,
+  error,
   message,
 }: ErrorMessageProps): React.ReactElement {
+  const [errorMessage, setErrorMessage] = React.useState<string>("");
+
+  React.useEffect(() => {
+    async function parseError() {
+      const parsedErrorMessage = await errorToMessage(error);
+
+      if (parsedErrorMessage) {
+        setErrorMessage(parsedErrorMessage);
+      }
+    }
+
+    parseError();
+    /* eslint-disable-next-line react-hooks/exhaustive-deps*/
+  }, []);
+
   return (
     <>
-      <Typography color="error">{message}</Typography>
+      <Typography color="error" variant="h6">
+        {message}
+      </Typography>
 
-      {debug && <Typography color="textSecondary">{debug} </Typography>}
+      {errorMessage && (
+        <Typography color="textSecondary">
+          <b>Reason:</b> {errorMessage}{" "}
+        </Typography>
+      )}
     </>
   );
 }

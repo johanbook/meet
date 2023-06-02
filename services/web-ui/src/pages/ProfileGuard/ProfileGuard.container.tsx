@@ -21,11 +21,10 @@ export function ProfileGuardContainer({
   );
 
   if (error) {
-    const errorMessage = (error as Error).message;
     const message = `Unable to verify if profile exists. Try refreshing page.`;
     return (
       <ProfileGuardNav>
-        <ErrorMessage debug={errorMessage} message={message} />
+        <ErrorMessage error={error} message={message} />
       </ProfileGuardNav>
     );
   }

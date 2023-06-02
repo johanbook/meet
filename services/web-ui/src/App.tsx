@@ -10,7 +10,13 @@ import { NotificationProvider } from "./notification.provider";
 import { AuthenticationGuard } from "./pages/AuthenticationGuard";
 import Theme from "./theme/Theme";
 
-const QUERY_CLIENT = new QueryClient();
+const QUERY_CLIENT = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+    },
+  },
+});
 
 export function App(): React.ReactElement {
   return (
