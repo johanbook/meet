@@ -3,8 +3,8 @@ import { useQuery } from "react-query";
 
 import { ResponseError } from "src/api";
 import { profileApi } from "src/apis";
-import { ErrorMessage } from "src/components/ui/ErrorMessage";
 
+import { ErrorPage } from "../ErrorPage";
 import { AuthenticationGuardNav } from "./AuthenticationGuard.nav";
 import { AuthenticationGuardSkeleton } from "./AuthenticationGuard.skeleton";
 
@@ -21,12 +21,8 @@ export function AuthenticationGuardContainer({
     { retry: false }
   );
 
-  if (error instanceof ResponseError) {
-    const status = error.response.status;
-
-    if (status === 401) {
-      window.location.href = "/login";
-    }
+  if (error instanceof ResponseError && error.response.status === 401) {
+    window.location.href = "/login";
 
     return (
       <AuthenticationGuardNav>
@@ -36,11 +32,10 @@ export function AuthenticationGuardContainer({
   }
 
   if (error) {
-    const errorMessage = (error as Error).message;
-    const message = `Please login. Try refreshing page.`;
+    const message = `Unable to verify if logged in. Try refreshing the page.`;
     return (
       <AuthenticationGuardNav>
-        <ErrorMessage debug={errorMessage} message={message} />
+        <ErrorPage error={error} message={message} />
       </AuthenticationGuardNav>
     );
   }
