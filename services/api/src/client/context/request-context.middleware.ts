@@ -1,4 +1,5 @@
 import {
+  Inject,
   MiddlewareConsumer,
   Module,
   NestModule,
@@ -9,7 +10,7 @@ import { AsyncLocalStorage } from "node:async_hooks";
 
 import { Logger } from "src/infrastructure/logger.service";
 
-import { AlsModule } from "./als.module";
+import { AlsModule, REQUEST_CONTEXT_KEY } from "./als.module";
 import { RequestContext } from "./request-context.interface";
 
 @Module({
@@ -18,7 +19,10 @@ import { RequestContext } from "./request-context.interface";
 export class RequestContextMiddleware implements NestModule {
   private logger = new Logger(RequestContextMiddleware.name);
 
-  constructor(private readonly als: AsyncLocalStorage<RequestContext>) {}
+  constructor(
+    @Inject(REQUEST_CONTEXT_KEY)
+    private readonly als: AsyncLocalStorage<RequestContext>,
+  ) {}
 
   configure(consumer: MiddlewareConsumer) {
     consumer
