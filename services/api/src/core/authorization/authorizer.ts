@@ -1,5 +1,6 @@
 import { Logger } from "src/infrastructure/logger.service";
 
+import { ApplicationError } from "../error-handling";
 import { AUTHORIZATION_ALS } from "./client/context/authorization-als.module";
 import { IPermission } from "./permission.interface";
 
@@ -13,7 +14,7 @@ export class Authorizer {
       this.logger.error(
         "Authorization failed due to unable to fetch ALS store",
       );
-      throw new Error("Unable fetch user permissions");
+      throw new ApplicationError("Unable fetch user permissions");
     }
 
     const currentPermissions = store.permissions;

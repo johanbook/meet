@@ -1,4 +1,4 @@
-class EnvNotFoundError extends Error {}
+import { ConfigurationError } from "src/core/error-handling";
 
 function readEnv(key: string): string | undefined {
   return process.env[key];
@@ -11,7 +11,7 @@ export function getRequiredBooleanConfig(
   const value = readEnv(key) || defaultValue;
 
   if (typeof value !== "boolean") {
-    throw new EnvNotFoundError(
+    throw new ConfigurationError(
       `Required environment variable '${key}' is undefined`,
     );
   }
@@ -33,7 +33,7 @@ export function getRequiredIntConfig(
   value = value || defaultValue;
 
   if (typeof value !== "number") {
-    throw new EnvNotFoundError(
+    throw new ConfigurationError(
       `Required environment variable '${key}' is undefined`,
     );
   }
@@ -48,7 +48,7 @@ export function getRequiredStringConfig(
   const value = readEnv(key) ?? defaultValue;
 
   if (typeof value !== "string") {
-    throw new EnvNotFoundError(
+    throw new ConfigurationError(
       `Required environment variable '${key}' is undefined`,
     );
   }
