@@ -5,6 +5,7 @@ import {
   HttpStatus,
 } from "@nestjs/common";
 import { HttpAdapterHost } from "@nestjs/core";
+import { v4 as uuidv4 } from "uuid";
 
 import { BaseError } from "src/core/error-handling";
 import { Logger } from "src/infrastructure/logger.service";
@@ -16,14 +17,24 @@ export class InternalExceptionFilter implements ExceptionFilter {
   constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
 
   catch(exception: Error, host: ArgumentsHost) {
-    this.logger.error({ msg: exception.message, stacktrace: exception.stack });
+    const errorId = uuidv4();
+
+    this.logger.error({
+      errorId,
+      msg: exception.message,
+      stacktrace: exception.stack,
+    });
 
     const { httpAdapter } = this.httpAdapterHost;
     const context = host.switchToHttp();
 
     httpAdapter.reply(
       context.getResponse(),
-      exception.message,
+      {
+        message:
+          "We encountered an internal issue. If the issue is persistent, please contact us.",
+        errorId,
+      },
       HttpStatus.INTERNAL_SERVER_ERROR,
     );
   }

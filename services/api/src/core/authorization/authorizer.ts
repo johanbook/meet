@@ -11,10 +11,9 @@ export class Authorizer {
     const store = AUTHORIZATION_ALS.getStore();
 
     if (!store) {
-      this.logger.error(
+      throw new ApplicationError(
         "Authorization failed due to unable to fetch ALS store",
       );
-      throw new ApplicationError("Unable fetch user permissions");
     }
 
     const currentPermissions = store.permissions;
