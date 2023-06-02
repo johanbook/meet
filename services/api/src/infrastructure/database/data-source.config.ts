@@ -3,6 +3,8 @@ import { join } from "node:path";
 import { DataSourceOptions } from "typeorm";
 import { SeederOptions } from "typeorm-extension";
 
+import { ConfigurationError } from "src/core/error-handling";
+
 import { TypeOrmLogger } from "../typeorm.logger";
 
 /* eslint-disable unicorn/prefer-module */
@@ -16,7 +18,9 @@ function getConfig(key: string): string {
   const value = process.env[key];
 
   if (!value) {
-    throw new Error(`Required environment variable '${key}' is undefined`);
+    throw new ConfigurationError(
+      `Required environment variable '${key}' is undefined`,
+    );
   }
 
   return value;
