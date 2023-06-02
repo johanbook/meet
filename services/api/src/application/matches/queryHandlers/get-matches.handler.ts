@@ -1,10 +1,8 @@
-import { NotFoundException } from "@nestjs/common";
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { UserIdService } from "src/client/context/user-id.service";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
+import { CurrentProfileService } from "src/domain/profiles/services/current-profile.service";
 import { Match } from "src/infrastructure/database/views/matches.view";
 import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
 import { mapArray } from "src/utils/mapper";
@@ -17,30 +15,18 @@ export class GetMatchesHandler
   implements IQueryHandler<GetMatchesQuery, MatchDetails[]>
 {
   constructor(
+    private readonly currentProfileService: CurrentProfileService,
     @InjectRepository(Match)
     private readonly matches: Repository<Match>,
     private readonly objectStorageService: ObjectStorageService,
-    @InjectRepository(Profile)
-    private readonly profiles: Repository<Profile>,
-    private readonly userIdService: UserIdService,
   ) {}
 
   async execute() {
-    const userId = this.userIdService.getUserId();
-
-    const profile = await this.profiles.findOne({
-      select: {
-        id: true,
-      },
-      where: { userId },
-    });
-
-    if (!profile) {
-      throw new NotFoundException();
-    }
+    const currentProfile =
+      await this.currentProfileService.fetchCurrentProfile();
 
     const foundMatches = await this.matches.find({
-      where: { profileId: profile.id },
+      where: { profileId: currentProfile.id },
     });
 
     return mapArray(MatchDetails, foundMatches, (match) => ({
