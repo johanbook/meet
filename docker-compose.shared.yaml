@@ -82,6 +82,8 @@ services:
     environment:
       POSTGRES_PASSWORD: "$POSTGRES_PASSWORD"
       POSTGRES_USERNAME: "$POSTGRES_USERNAME"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     ports:
       - "5432:5432"
     volumes:
