@@ -17,7 +17,18 @@ export class InternalExceptionFilter implements ExceptionFilter {
   constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
 
   catch(exception: Error, host: ArgumentsHost) {
+    const { httpAdapter } = this.httpAdapterHost;
+    const context = host.switchToHttp();
+
     if (exception instanceof HttpException) {
+      httpAdapter.reply(
+        context.getResponse(),
+        {
+          message: exception.message,
+        },
+        exception.getStatus(),
+      );
+
       return;
     }
 
@@ -28,9 +39,6 @@ export class InternalExceptionFilter implements ExceptionFilter {
       msg: exception.message,
       stacktrace: exception.stack,
     });
-
-    const { httpAdapter } = this.httpAdapterHost;
-    const context = host.switchToHttp();
 
     httpAdapter.reply(
       context.getResponse(),
