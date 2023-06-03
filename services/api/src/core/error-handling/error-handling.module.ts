@@ -11,4 +11,4 @@ import { InternalExceptionFilter } from "./client/exception-filters/internal-exe
     },
   ],
 })
-export class LoggingModule {}
+export class ErrorHandlingModule {}
