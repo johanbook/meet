@@ -20,6 +20,7 @@ export class PermissionsService {
     const currentUserPermissions = await this.permissions.find({
       where: { userId },
     });
+
     return currentUserPermissions.map((permission) => permission.name);
   }
 }

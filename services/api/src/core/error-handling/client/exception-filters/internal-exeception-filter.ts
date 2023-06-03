@@ -3,20 +3,24 @@ import {
   Catch,
   ArgumentsHost,
   HttpStatus,
+  HttpException,
 } from "@nestjs/common";
 import { HttpAdapterHost } from "@nestjs/core";
 import { v4 as uuidv4 } from "uuid";
 
-import { BaseError } from "src/core/error-handling";
 import { Logger } from "src/infrastructure/logger.service";
 
-@Catch(BaseError)
+@Catch()
 export class InternalExceptionFilter implements ExceptionFilter {
   private logger = new Logger(InternalExceptionFilter.name);
 
   constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
 
   catch(exception: Error, host: ArgumentsHost) {
+    if (exception instanceof HttpException) {
+      return;
+    }
+
     const errorId = uuidv4();
 
     this.logger.error({
