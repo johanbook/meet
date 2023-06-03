@@ -3,7 +3,10 @@ import ReactDOM from "react-dom/client";
 
 import { App } from "./App";
 import { config } from "./config";
+import { registerExceptionLogger } from "./logger";
 import reportWebVitals from "./utils/reportWebVitals";
+
+registerExceptionLogger();
 
 const root = ReactDOM.createRoot(
   document.querySelector("#root") as HTMLElement

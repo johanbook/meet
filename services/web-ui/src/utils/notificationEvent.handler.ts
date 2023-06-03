@@ -2,6 +2,7 @@ import { Socket, io } from "socket.io-client";
 import { v4 as uuid } from "uuid";
 
 import { NotificationEventsConstants } from "src/constants/notification-events.constants";
+import { Logger } from "src/logger";
 import { INotification } from "src/types/notification.interface";
 
 interface Handler {
@@ -19,6 +20,8 @@ interface RegisterHandlerProps<
 }
 
 export class NotificationEventHandler {
+  private logger = new Logger(NotificationEventHandler.name);
+
   private defaultHandler: (notification: INotification) => void;
   private readonly handlers: Record<
     NotificationEventsConstants,
@@ -64,6 +67,8 @@ export class NotificationEventHandler {
 
   private handle(notification: INotification): void {
     const handlers = Object.values(this.handlers[notification.type]);
+
+    this.logger.trace("Received notification", { notification });
 
     let eventWasHandled = false;
 

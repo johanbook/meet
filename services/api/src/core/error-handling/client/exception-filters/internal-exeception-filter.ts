@@ -37,7 +37,7 @@ export class InternalExceptionFilter implements ExceptionFilter {
     this.logger.error({
       errorId,
       msg: exception.message,
-      stacktrace: exception.stack,
+      stackTrace: exception.stack,
     });
 
     httpAdapter.reply(
