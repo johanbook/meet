@@ -1,4 +1,4 @@
-import { Controller, Get, Res } from "@nestjs/common";
+import { Controller, Get, HttpStatus, Res } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { FastifyReply } from "fastify";
 
@@ -27,14 +27,15 @@ export class AuthenticationController {
     if (!session) {
       this.logger.trace("Denied authentication");
 
-      response.status(401).send();
+      response.status(HttpStatus.UNAUTHORIZED).send();
+
       return;
     }
 
     this.logger.trace("Authentication approved");
 
     response.header(HTTP_HEADER_USER_ID, session.getUserId());
-    response.status(200).send();
+    response.status(HttpStatus.OK).send();
   }
 
   @Get("/authenticate-with-redirect")
@@ -48,14 +49,17 @@ export class AuthenticationController {
     if (!session) {
       this.logger.trace("Denied authentication. Redirecting");
 
-      response.status(301).redirect(`${UI_DOMAIN}${PATH_PREFIX}`);
+      response
+        .status(HttpStatus.TEMPORARY_REDIRECT)
+        .redirect(`${UI_DOMAIN}${PATH_PREFIX}`);
+
       return;
     }
 
     this.logger.trace("Authentication approved");
 
     response.header(HTTP_HEADER_USER_ID, session.getUserId());
-    response.status(200).send();
+    response.status(HttpStatus.OK).send();
   }
 
   @Get("/logout")
@@ -69,7 +73,8 @@ export class AuthenticationController {
     if (!session) {
       this.logger.trace("Failed logout due to missing session");
 
-      response.status(404).send();
+      response.status(HttpStatus.NOT_FOUND).send();
+
       return;
     }
 
@@ -77,6 +82,6 @@ export class AuthenticationController {
 
     this.logger.trace("Logout successful");
 
-    response.status(200).send();
+    response.status(HttpStatus.OK).send();
   }
 }
