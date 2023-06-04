@@ -34,6 +34,7 @@ export const dataSourceOptions: DataSourceOptions & SeederOptions = {
   password: getConfig("DB_PASSWORD"),
   database: getConfig("DB_DATABASE"),
   synchronize: false,
+  connectTimeoutMS: 30 * 1000,
   logging,
   logger: new TypeOrmLogger(),
   entities: [
