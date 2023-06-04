@@ -42,14 +42,23 @@ export class HealthCheckService {
   }
 
   private async checkDatabase(): Promise<HealthCheckDetails> {
-    try {
-      const queryRunner = this.dataSource.createQueryRunner();
+    const errors: unknown[] = [];
+    let status: HealthCheckStatus = "ok";
 
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+
+    try {
       await queryRunner.query("SELECT 1;");
-      return map(HealthCheckDetails, { errors: [], status: "ok" });
     } catch (error) {
+      errors.push(error);
+      status = "error";
+
       this.logger.error({ msg: "Unable to reach database", error });
-      return map(HealthCheckDetails, { errors: [error], status: "error" });
+    } finally {
+      await queryRunner.release();
     }
+
+    return map(HealthCheckDetails, { errors, status });
   }
 }

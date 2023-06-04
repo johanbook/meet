@@ -5,7 +5,11 @@ describe(HealthCheckService.name, () => {
 
   beforeEach(() => {
     healthCheckService = new HealthCheckService({
-      createQueryRunner: jest.fn(),
+      createQueryRunner: () => ({
+        connect: jest.fn(),
+        query: jest.fn(),
+        release: jest.fn(),
+      }),
     } as any);
   });
 
