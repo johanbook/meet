@@ -19,6 +19,8 @@ WORKDIR /app
 
 ENV PORT=80
 
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 CMD node /usr/src/app/healthcheck
+
 COPY package.json package-lock.json ./
 COPY scripts/ ./scripts
 COPY --from=builder /app/dist ./dist
