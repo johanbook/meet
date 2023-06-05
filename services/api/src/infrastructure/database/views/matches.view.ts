@@ -19,9 +19,13 @@ import { ViewEntity, ViewColumn } from "typeorm";
      ) AS avatar ON s1."shownProfileId" = avatar."profileId"
      LEFT JOIN (
        SELECT "senderId", "receiverId", message, created
-       FROM chat_message
-       ORDER BY id DESC
-       LIMIT 1
+       FROM chat_message cm
+       WHERE cm.created = (
+         SELECT MAX(created)
+         FROM chat_message
+         WHERE (cm."senderId" = "senderId" AND cm."receiverId" = "receiverId")
+            OR (cm."senderId" = "receiverId" AND cm."receiverId" = "senderId")
+         )
      ) AS last_message ON 
       (s1."profileId" = last_message."senderId" AND s1."shownProfileId" = last_message."receiverId") OR
       (s1."profileId" = last_message."receiverId" AND s1."shownProfileId" = last_message."senderId")
