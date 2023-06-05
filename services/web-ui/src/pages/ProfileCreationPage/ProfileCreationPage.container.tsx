@@ -21,7 +21,11 @@ export function ProfileCreationPageContainer({
   const mutation = useMutation(
     (createProfileCommand: CreateProfileCommand) =>
       profileApi.createCurrentProfile({ createProfileCommand }),
-    { onError: () => snackbar.error("Unable to create profile") }
+    {
+      onError: () => snackbar.error("Unable to create profile"),
+      onSuccess: () =>
+        snackbar.success("Your profile was successfully created!"),
+    }
   );
 
   const [form, setForm] = React.useState<CreateProfileCommand>({

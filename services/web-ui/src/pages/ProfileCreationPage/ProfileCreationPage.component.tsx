@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Step, StepLabel, Stepper } from "@mui/material";
+import { Fade, Step, StepLabel, Stepper } from "@mui/material";
 
 import { CreateProfileCommand } from "src/api";
 import { Center } from "src/components/ui/Center";
@@ -36,21 +36,25 @@ export function ProfileCreationPageComponent({
         </Stepper>
       </Center>
 
-      {step === 0 && (
-        <NameForm
-          onChange={(name) => setForm({ ...form, name })}
-          onNext={() => setStep(1)}
-          value={form.name}
-        />
-      )}
+      <Fade in={step === 1} mountOnEnter timeout={2000}>
+        <div>
+          <DescriptionForm
+            onChange={(description) => setForm({ ...form, description })}
+            onNext={() => onCreateProfile()}
+            value={form.description}
+          />
+        </div>
+      </Fade>
 
-      {step === 1 && (
-        <DescriptionForm
-          onChange={(description) => setForm({ ...form, description })}
-          onNext={() => onCreateProfile()}
-          value={form.description}
-        />
-      )}
+      <Fade in={step === 0} timeout={2000} unmountOnExit>
+        <div>
+          <NameForm
+            onChange={(name) => setForm({ ...form, name })}
+            onNext={() => setStep(1)}
+            value={form.name}
+          />
+        </div>
+      </Fade>
     </ProfileCreationPageNav>
   );
 }
