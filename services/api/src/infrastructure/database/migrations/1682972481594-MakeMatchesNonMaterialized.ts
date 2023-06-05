@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-import { MigrationError } from "src/core/error-handling";
+import { MigrationError } from "../../../core/error-handling";
 
 export class MakeMatchesNonMatcherialized1682972481594 implements MigrationInterface {
     name = 'MakeMatchesNonMatcherialized1682972481594'
