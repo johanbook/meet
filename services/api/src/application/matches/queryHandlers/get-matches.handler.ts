@@ -27,7 +27,7 @@ export class GetMatchesHandler
 
     const foundMatches = await this.matches.find({
       where: { profileId: currentProfile.id },
-      order: { lastMessageSent: "asc" },
+      order: { lastMessageSent: "desc" },
     });
 
     return mapArray(MatchDetails, foundMatches, (match) => ({
@@ -35,6 +35,7 @@ export class GetMatchesHandler
         match.photoObjectId &&
         this.objectStorageService.getUrl("profile-photos", match.photoObjectId),
       lastMessage: match.lastMessage,
+      lastMessageSent: match.lastMessageSent,
       name: match.name,
       profileId: match.shownProfileId,
     }));
