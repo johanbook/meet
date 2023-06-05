@@ -23,9 +23,7 @@ export class InternalExceptionFilter implements ExceptionFilter {
     if (exception instanceof HttpException) {
       httpAdapter.reply(
         context.getResponse(),
-        {
-          message: exception.message,
-        },
+        exception.getResponse(),
         exception.getStatus(),
       );
 

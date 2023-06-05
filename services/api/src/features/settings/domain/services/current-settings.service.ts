@@ -16,6 +16,12 @@ export class CurrentSettingsService {
     private readonly userIdService: UserIdService,
   ) {}
 
+  async checkIfExists(): Promise<boolean> {
+    const userId = this.userIdService.getUserId();
+
+    return this.settings.exist({ where: { userId } });
+  }
+
   async fetchCurrentSettings(): Promise<Settings> {
     const userId = this.userIdService.getUserId();
 
