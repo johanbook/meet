@@ -7,6 +7,7 @@ import { ViewEntity, ViewColumn } from "typeorm";
       s1."shownProfileId",
       profile.name,
     last_message.message as "lastMessage",
+    last_message.created as "lastMessageSent",
     avatar."objectId" as "photoObjectId"
      FROM swipe s1
        JOIN swipe s2 ON s1."profileId" = s2."shownProfileId" AND s1."shownProfileId" = s2."profileId"
@@ -17,7 +18,7 @@ import { ViewEntity, ViewColumn } from "typeorm";
        LIMIT 1
      ) AS avatar ON s1."shownProfileId" = avatar."profileId"
      LEFT JOIN (
-       SELECT "senderId", "receiverId", message
+       SELECT "senderId", "receiverId", message, created
        FROM chat_message
        ORDER BY id DESC
        LIMIT 1
@@ -30,6 +31,9 @@ import { ViewEntity, ViewColumn } from "typeorm";
 export class Match {
   @ViewColumn()
   lastMessage?: string;
+
+  @ViewColumn()
+  lastMessageSent?: Date;
 
   @ViewColumn()
   name!: string;
