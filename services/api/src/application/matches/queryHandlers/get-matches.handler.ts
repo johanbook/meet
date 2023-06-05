@@ -27,6 +27,7 @@ export class GetMatchesHandler
 
     const foundMatches = await this.matches.find({
       where: { profileId: currentProfile.id },
+      order: { lastMessageSent: "asc" },
     });
 
     return mapArray(MatchDetails, foundMatches, (match) => ({
