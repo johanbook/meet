@@ -2,9 +2,9 @@ import React from "react";
 import { useQuery } from "react-query";
 
 import { profileApi } from "src/apis";
-import { ProfileCreator } from "src/components/ProfileCreator";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 
+import { ProfileCreationPage } from "../ProfileCreationPage";
 import { ProfileGuardNav } from "./ProfileGuard.nav";
 import { ProfileGuardSkeleton } from "./ProfileGuard.skeleton";
 
@@ -38,11 +38,7 @@ export function ProfileGuardContainer({
   }
 
   if (!data) {
-    return (
-      <ProfileGuardNav>
-        <ProfileCreator onCreateProfile={refetch} />
-      </ProfileGuardNav>
-    );
+    return <ProfileCreationPage onProfileCreated={refetch} />;
   }
 
   return <>{children}</>;
