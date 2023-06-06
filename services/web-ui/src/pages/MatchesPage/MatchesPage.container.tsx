@@ -1,15 +1,13 @@
 import React from "react";
 import { useQuery } from "react-query";
 
-import { List, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 import { matchesApi } from "src/apis";
-import { MatchListItem } from "src/components/MatchListitem";
-import { ErrorMessage } from "src/components/ui/ErrorMessage";
 
-import { MatchesPageHeader } from "./MatchesPage.header";
-import { MatchesPageSkeleton } from "./MatchesPage.skeleton";
-import { MatchesPageNewMatches } from "./components/MatchesPageNewMatches";
+import { MatchesPageDataView } from "./views/MatchesPageData.view";
+import { MatchesPageErrorView } from "./views/MatchesPageError.view";
+import { MatchesPageLoadingView } from "./views/MatchesPageLoading.view";
 
 export function MatchesPageContainer(): React.ReactElement {
   const { error, data, isLoading } = useQuery("allChats", () =>
@@ -17,20 +15,13 @@ export function MatchesPageContainer(): React.ReactElement {
   );
 
   if (error) {
-    const message = (error as Error).message;
-    return (
-      <>
-        <MatchesPageHeader />
-        <ErrorMessage message={message} />
-      </>
-    );
+    return <MatchesPageErrorView error={error as Error} />;
   }
 
   if (isLoading) {
     return (
       <>
-        <MatchesPageHeader />
-        <MatchesPageSkeleton />
+        <MatchesPageLoadingView />
       </>
     );
   }
@@ -38,8 +29,6 @@ export function MatchesPageContainer(): React.ReactElement {
   if (!data || (data.notTalkedTo.length === 0 && data.talkedTo.length === 0)) {
     return (
       <>
-        <MatchesPageHeader />
-
         <Typography gutterBottom variant="h6">
           You do not have any matches yet
         </Typography>
@@ -50,15 +39,7 @@ export function MatchesPageContainer(): React.ReactElement {
 
   return (
     <>
-      <MatchesPageHeader />
-
-      <MatchesPageNewMatches matches={data.notTalkedTo} />
-
-      <List>
-        {data.talkedTo.map((match) => (
-          <MatchListItem key={match.profileId} data={match} />
-        ))}
-      </List>
+      <MatchesPageDataView data={data} />
     </>
   );
 }

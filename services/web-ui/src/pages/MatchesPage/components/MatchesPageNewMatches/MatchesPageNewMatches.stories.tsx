@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { MatchesPageNewMatches } from ".";
 
 export default {
-  title: "MatchesPage/MatchesPageNewMatches",
+  title: "Pages/Matches/MatchesPageNewMatches",
   component: MatchesPageNewMatches,
 } as Meta;
 
