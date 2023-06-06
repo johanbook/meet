@@ -5,14 +5,15 @@ import { Repository } from "typeorm";
 import { CurrentProfileService } from "src/domain/profiles/services/current-profile.service";
 import { Match } from "src/infrastructure/database/views/matches.view";
 import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
-import { mapArray } from "src/utils/mapper";
+import { map } from "src/utils/mapper";
 
 import { GetMatchesQuery } from "../contracts/get-matches.query";
-import { MatchDetails } from "../contracts/match.dto";
+import { AllMatchesDetails } from "../contracts/match.dto";
+import { mapToMatchDetails } from "../mappers/match.mapper";
 
 @QueryHandler(GetMatchesQuery)
 export class GetMatchesHandler
-  implements IQueryHandler<GetMatchesQuery, MatchDetails[]>
+  implements IQueryHandler<GetMatchesQuery, AllMatchesDetails>
 {
   constructor(
     private readonly currentProfileService: CurrentProfileService,
@@ -30,14 +31,18 @@ export class GetMatchesHandler
       order: { lastMessageSent: "desc" },
     });
 
-    return mapArray(MatchDetails, foundMatches, (match) => ({
-      imageUrl:
-        match.photoObjectId &&
-        this.objectStorageService.getUrl("profile-photos", match.photoObjectId),
-      lastMessage: match.lastMessage,
-      lastMessageSent: match.lastMessageSent,
-      name: match.name,
-      profileId: match.shownProfileId,
-    }));
+    const talkedTo = foundMatches.filter((match) =>
+      Boolean(match.lastMessageSent),
+    );
+    const notTalkedTo = foundMatches.filter((match) => !match.lastMessageSent);
+
+    return map(AllMatchesDetails, {
+      notTalkedTo: mapToMatchDetails(notTalkedTo, this.getPhotoUrl),
+      talkedTo: mapToMatchDetails(talkedTo, this.getPhotoUrl),
+    });
+  }
+
+  private getPhotoUrl(photoId: string) {
+    return this.objectStorageService.getUrl("profile-photos", photoId);
   }
 }

@@ -5,3 +5,8 @@ export class MatchDetails {
   name!: string;
   profileId!: number;
 }
+
+export class AllMatchesDetails {
+  notTalkedTo!: MatchDetails[];
+  talkedTo!: MatchDetails[];
+}

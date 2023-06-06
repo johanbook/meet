@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
 
-import { List, Typography } from "@mui/material";
+import { Avatar, List, Typography } from "@mui/material";
 
 import { matchesApi } from "src/apis";
 import { MatchListItem } from "src/components/MatchListitem";
@@ -34,7 +34,7 @@ export function MatchesPageContainer(): React.ReactElement {
     );
   }
 
-  if (!data || data.length === 0) {
+  if (!data || (data.notTalkedTo.length === 0 && data.talkedTo.length === 0)) {
     return (
       <>
         <MatchesPageHeader />
@@ -51,8 +51,12 @@ export function MatchesPageContainer(): React.ReactElement {
     <>
       <MatchesPageHeader />
 
+      {data.notTalkedTo.map((match) => (
+        <Avatar key={match.profileId} src={match.imageUrl} />
+      ))}
+
       <List>
-        {data.map((match) => (
+        {data.talkedTo.map((match) => (
           <MatchListItem key={match.profileId} data={match} />
         ))}
       </List>
