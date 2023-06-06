@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
 
-import { Avatar, List, Typography } from "@mui/material";
+import { List, Typography } from "@mui/material";
 
 import { matchesApi } from "src/apis";
 import { MatchListItem } from "src/components/MatchListitem";
@@ -9,6 +9,7 @@ import { ErrorMessage } from "src/components/ui/ErrorMessage";
 
 import { MatchesPageHeader } from "./MatchesPage.header";
 import { MatchesPageSkeleton } from "./MatchesPage.skeleton";
+import { MatchesPageNewMatches } from "./components/MatchesPageNewMatches";
 
 export function MatchesPageContainer(): React.ReactElement {
   const { error, data, isLoading } = useQuery("allChats", () =>
@@ -51,9 +52,7 @@ export function MatchesPageContainer(): React.ReactElement {
     <>
       <MatchesPageHeader />
 
-      {data.notTalkedTo.map((match) => (
-        <Avatar key={match.profileId} src={match.imageUrl} />
-      ))}
+      <MatchesPageNewMatches matches={data.notTalkedTo} />
 
       <List>
         {data.talkedTo.map((match) => (
