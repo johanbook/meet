@@ -1,15 +1,13 @@
-import {
-  IsAlpha,
-  Length,
-  IsString,
-  ValidateNested,
-  IsDate,
-} from "class-validator";
+import { Type } from "class-transformer";
+import { IsAlpha, Length, IsString, ValidateNested } from "class-validator";
+
+import { DateIsBefore } from "src/core/validation/custom-validators/date-is-before.validator";
 
 import { Location } from "./location.dto";
 
 export class CreateProfileCommand {
-  @IsDate()
+  @Type(() => Date)
+  @DateIsBefore({ years: 18 })
   public readonly dateOfBirth!: Date;
 
   @IsString()

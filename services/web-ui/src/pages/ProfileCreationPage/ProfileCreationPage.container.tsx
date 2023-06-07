@@ -29,6 +29,7 @@ export function ProfileCreationPageContainer({
   );
 
   const [form, setForm] = React.useState<CreateProfileCommand>({
+    dateOfBirth: new Date(),
     name: "",
     description: "",
     recentLocation: { lat: 0, lon: 0 },

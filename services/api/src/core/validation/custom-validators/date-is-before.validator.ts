@@ -1,7 +1,4 @@
-import {
-  registerDecorator,
-  ValidationOptions,
-} from "class-validator";
+import { registerDecorator, ValidationOptions } from "class-validator";
 
 interface DateIsBeforeProps {
   years?: number;
@@ -11,6 +8,14 @@ export function DateIsBefore(
   property: DateIsBeforeProps,
   validationOptions?: ValidationOptions,
 ) {
+  const { years } = property;
+  const targetDate = new Date();
+
+  if (years) {
+    const targetYear = targetDate.getFullYear() - years;
+    targetDate.setFullYear(targetYear);
+  }
+
   return function (object: object, propertyName: string) {
     registerDecorator({
       name: "dateIsBefore",
@@ -19,21 +24,15 @@ export function DateIsBefore(
       constraints: [property],
       options: validationOptions,
       validator: {
-        validate(value: unknown) {
-          const targetDate = new Date();
-
-          const { years } = property;
-
-          if (!(value instanceof Date)) {
+        defaultMessage: () => {
+          return `Must be a valid date at least before ${targetDate}`;
+        },
+        validate(date: unknown) {
+          if (!(date instanceof Date)) {
             return false;
           }
 
-          if (years) {
-            const targetYear = targetDate.getFullYear() - years;
-            targetDate.setFullYear(targetYear);
-          }
-
-          return value <= targetDate;
+          return date <= targetDate;
         },
       },
     });
