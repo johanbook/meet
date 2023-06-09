@@ -5,6 +5,7 @@ import { MinioModule } from "nestjs-minio-client";
 
 import { ClientModule } from "./client/client.module";
 import { RequestContextModule } from "./client/context/request-context.module";
+import { ClassificationsModule } from "./core/classifications/classifications.module";
 import { ErrorHandlingModule } from "./core/error-handling/error-handling.module";
 import { HealthChecksModule } from "./core/health-checks/health-checks.module";
 import { JournalModule } from "./core/journal/journal.module";
@@ -15,6 +16,7 @@ import { minioOptions } from "./infrastructure/objectStorage/minio.config";
 
 @Module({
   imports: [
+    ClassificationsModule,
     ErrorHandlingModule,
     JournalModule,
     HealthChecksModule,
