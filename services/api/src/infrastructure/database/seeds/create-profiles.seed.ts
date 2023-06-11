@@ -12,6 +12,6 @@ export default class CreateProfiles implements Seeder {
     factoryManger: SeederFactoryManager,
   ): Promise<void> {
     const factory = factoryManger.get(Profile);
-    await factory.saveMany(50);
+    await factory.saveMany(10);
   }
 }
