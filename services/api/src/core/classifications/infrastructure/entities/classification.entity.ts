@@ -3,9 +3,11 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
+  Unique,
 } from "typeorm";
 
 @Entity()
+@Unique(["uuid", "locale"])
 export class Classification {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -18,6 +20,15 @@ export class Classification {
 
   @Column("varchar", { length: 512 })
   label!: string;
+
+  @Column("varchar", { length: 16 })
+  locale!: string;
+
+  @Column("boolean", { default: false })
+  manual!: boolean;
+
+  @Column("boolean", { default: false })
+  obsolete!: boolean;
 
   @Column("uuid")
   uuid!: string;
