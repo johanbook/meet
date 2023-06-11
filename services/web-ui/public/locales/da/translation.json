@@ -1,0 +1,16 @@
+{
+  "general": {
+    "save": "Gem"
+  },
+  "profile-editor": {
+    "description": {
+      "title": "Om mig",
+      "label": "Beskrivelse",
+      "placeholder": "Beskriv dig selv i nogle ord"
+    },
+    "media": "Fotos og Media",
+    "update": {
+      "success": "Profil opdateret"
+    }
+
+}
