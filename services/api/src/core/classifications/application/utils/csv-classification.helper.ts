@@ -1,8 +1,12 @@
+import { readdirSync } from "node:fs";
 import * as path from "node:path";
-import { QueryRunner } from "typeorm";
+import { DataSource } from "typeorm";
 
 import { MigrationError } from "src/core/error-handling";
+import { Logger } from "src/infrastructure/logger.service";
 import { readAndParseCsv } from "src/utils/csv-parser.helper";
+
+const logger = new Logger("CsvClassifications");
 
 interface GetCategoryAndLocaleFromPathResult {
   category: string;
@@ -38,30 +42,56 @@ interface ParsedClassification {
 }
 
 export async function loadClassificationsFromCsv(
-  queryRunner: QueryRunner,
+  dataSource: DataSource,
   filePath: string,
 ): Promise<void> {
   const { category, locale } = getCategoryAndLocaleFromPath(filePath);
 
+  logger.info(`Seeding classification '${category}' for locale '${locale}'`);
+
   const parsedClassifications = readAndParseCsv<ParsedClassification>(filePath);
 
-  for (const classification of parsedClassifications) {
-    await queryRunner.query(
-      `
-    INSERT INTO classifications (uuid, category, label, locale, manual, obsolete)
+  const queryRunner = dataSource.createQueryRunner();
+  await queryRunner.connect();
+
+  try {
+    for (const classification of parsedClassifications) {
+      // NB: The constraint is introduced in migration `AddLocalizationToClassifications1686484223894`
+      await queryRunner.query(
+        `
+    INSERT INTO classification (uuid, category, label, locale, manual, obsolete)
     VALUES ($1,$2,$3,$4,$5,$6) 
     ON CONFLICT ON CONSTRAINT "UQ_4bac7977fbb00765ef58fe0f63f"
     DO 
        UPDATE SET label = $3, manual = $5, obsolete = $6;
   `,
-      [
-        classification.uuid,
-        category,
-        classification.label,
-        locale,
-        classification.manual,
-        classification.obsolete,
-      ],
+        [
+          classification.uuid,
+          category,
+          classification.label,
+          locale,
+          classification.manual,
+          classification.obsolete,
+        ],
+      );
+    }
+  } catch (error) {
+    logger.error({ msg: "Unable to run migration", error, filePath });
+  } finally {
+    await queryRunner.release();
+  }
+}
+
+export async function loadAllClassificationsInFolder(
+  dataSource: DataSource,
+  folderPath: string,
+): Promise<void> {
+  const fileNames = readdirSync(folderPath);
+
+  for (const fileName of fileNames) {
+    await loadClassificationsFromCsv(
+      dataSource,
+      path.join(folderPath, fileName),
     );
   }
 }
