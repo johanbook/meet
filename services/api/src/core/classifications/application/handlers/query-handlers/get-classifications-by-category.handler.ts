@@ -15,9 +15,12 @@ export class GetClassificationsByCategoryHandler
 
   async execute(query: GetClassificationsByCategoryQuery) {
     const matchingClassifications =
-      await this.classificationService.fetchClassificationsByCategory(
-        query.category,
-      );
+      await this.classificationService.fetchClassificationsByCategory({
+        category: query.category,
+        includeManual: query.includeManual,
+        includeObsolete: query.includeObsolete,
+        locale: query.locale || "en-US",
+      });
 
     return mapToClassificationDetails(matchingClassifications);
   }
