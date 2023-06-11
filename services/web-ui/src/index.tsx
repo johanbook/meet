@@ -3,9 +3,11 @@ import ReactDOM from "react-dom/client";
 
 import { App } from "./App";
 import { config } from "./config";
+import { registerI18n } from "./i18n";
 import { registerExceptionLogger } from "./logger";
 import reportWebVitals from "./utils/reportWebVitals";
 
+registerI18n();
 registerExceptionLogger();
 
 const root = ReactDOM.createRoot(
