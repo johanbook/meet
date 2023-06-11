@@ -12,7 +12,6 @@ export function registerI18n() {
     .init({
       fallbackLng: "en",
       debug: true,
-
       interpolation: {
         // Not needed for react as it escapes by default
         escapeValue: false,
