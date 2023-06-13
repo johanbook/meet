@@ -1,6 +1,6 @@
 import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
 
-import { ChatMessageSentEvent } from "src/domain/chatMessages/events/chat-message-sent.event";
+import { ChatMessageSentEvent } from "src/features/chat/domain/events/chat-message-sent.event";
 import { Logger } from "src/infrastructure/logger.service";
 
 @EventsHandler(ChatMessageSentEvent)

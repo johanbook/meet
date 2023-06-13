@@ -4,18 +4,18 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
-import { ChatMessageDomainService } from "src/domain/chatMessages/services/chat-message-domain.service";
-import { ChatMessage } from "src/infrastructure/database/entities/chat-message.entity";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 
-import { PostChatMessageCommand } from "../contracts/post-chat-message.command";
+import { ChatMessageService } from "../../../domain/services/chat-message.service";
+import { ChatMessage } from "../../../infrastructure/entities/chat-message.entity";
+import { PostChatMessageCommand } from "../../contracts/commands/post-chat-message.command";
 
 @CommandHandler(PostChatMessageCommand)
 export class PostChatMessageHandler
   implements ICommandHandler<PostChatMessageCommand, void>
 {
   constructor(
-    private readonly chatMessageDomainService: ChatMessageDomainService,
+    private readonly chatMessageService: ChatMessageService,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
     private readonly userIdService: UserIdService,
@@ -37,6 +37,6 @@ export class PostChatMessageHandler
     chatMessage.receiverId = command.profileId;
     chatMessage.senderId = currentProfile.id;
 
-    await this.chatMessageDomainService.saveChatMessage(chatMessage);
+    await this.chatMessageService.saveChatMessage(chatMessage);
   }
 }

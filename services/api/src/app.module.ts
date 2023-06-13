@@ -9,6 +9,7 @@ import { ClassificationsModule } from "./core/classifications/classifications.mo
 import { ErrorHandlingModule } from "./core/error-handling/error-handling.module";
 import { HealthChecksModule } from "./core/health-checks/health-checks.module";
 import { JournalModule } from "./core/journal/journal.module";
+import { ChatModule } from "./features/chat/chat.module";
 import { SettingsModule } from "./features/settings/settings.module";
 import { WingmanModule } from "./features/wingman/wingman.module";
 import { dataSourceOptions } from "./infrastructure/database/data-source.config";
@@ -16,6 +17,7 @@ import { minioOptions } from "./infrastructure/objectStorage/minio.config";
 
 @Module({
   imports: [
+    ChatModule,
     ClassificationsModule,
     ErrorHandlingModule,
     JournalModule,

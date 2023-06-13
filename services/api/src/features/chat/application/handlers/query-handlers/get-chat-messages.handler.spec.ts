@@ -1,13 +1,13 @@
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
-import { ChatMessage } from "src/infrastructure/database/entities/chat-message.entity";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
 import { map } from "src/utils/mapper";
 
-import { GetChatMessagesQuery } from "../contracts/get-chat-messages.query";
+import { ChatMessage } from "../../../infrastructure/entities/chat-message.entity";
+import { GetChatMessagesQuery } from "../../contracts/queries/get-chat-messages.query";
 import { GetChatMessagesHandler } from "./get-chat-messages.handler";
 
 describe(GetChatMessagesHandler.name, () => {

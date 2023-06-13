@@ -9,10 +9,11 @@ import {
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
-import { ChatMessageDetails } from "src/application/chats/contracts/chat.dto";
-import { GetChatMessagesQuery } from "src/application/chats/contracts/get-chat-messages.query";
-import { PostChatMessageCommand } from "src/application/chats/contracts/post-chat-message.command";
 import { map } from "src/utils/mapper";
+
+import { PostChatMessageCommand } from "../../application/contracts/commands/post-chat-message.command";
+import { ChatMessageDetails } from "../../application/contracts/dtos/chat.dto";
+import { GetChatMessagesQuery } from "../../application/contracts/queries/get-chat-messages.query";
 
 @Controller("chats")
 @ApiTags("chats")

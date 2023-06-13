@@ -1,17 +1,17 @@
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
-import { ChatMessageDomainService } from "src/domain/chatMessages/services/chat-message-domain.service";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
 import { map } from "src/utils/mapper";
 
-import { PostChatMessageCommand } from "../contracts/post-chat-message.command";
+import { ChatMessageService } from "../../../domain/services/chat-message.service";
+import { PostChatMessageCommand } from "../../contracts/commands/post-chat-message.command";
 import { PostChatMessageHandler } from "./post-chat-message.handler";
 
 describe(PostChatMessageHandler.name, () => {
-  let chatMessageDomainService: ChatMessageDomainService;
+  let chatMessageService: ChatMessageService;
   let profiles: Repository<Profile>;
   let userIdService: UserIdService;
 
@@ -20,7 +20,7 @@ describe(PostChatMessageHandler.name, () => {
   let commandHandler: PostChatMessageHandler;
 
   beforeEach(() => {
-    chatMessageDomainService = { saveChatMessage: jest.fn() } as any;
+    chatMessageService = { saveChatMessage: jest.fn() } as any;
 
     mockProfile = new Profile();
     mockProfile.id = 1;
@@ -29,7 +29,7 @@ describe(PostChatMessageHandler.name, () => {
     userIdService = createUserIdServiceMock();
 
     commandHandler = new PostChatMessageHandler(
-      chatMessageDomainService,
+      chatMessageService,
       profiles,
       userIdService,
     );
@@ -46,7 +46,7 @@ describe(PostChatMessageHandler.name, () => {
 
       await commandHandler.execute(command);
 
-      expect(chatMessageDomainService.saveChatMessage).toHaveBeenCalledWith({
+      expect(chatMessageService.saveChatMessage).toHaveBeenCalledWith({
         message: command.message,
         receiverId: command.profileId,
         senderId: mockProfile.id,
