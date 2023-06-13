@@ -2,7 +2,8 @@ import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
 
 import { NotificationsGateway } from "src/client/gateways/notifications.gateway";
 import { NotificationEventsConstants } from "src/constants/notification-events.constants";
-import { ChatMessageSentEvent } from "src/domain/chatMessages/events/chat-message-sent.event";
+
+import { ChatMessageSentEvent } from "../../../domain/events/chat-message-sent.event";
 
 @EventsHandler(ChatMessageSentEvent)
 export class NotifyReceiverOnPostedChatMessageHandler

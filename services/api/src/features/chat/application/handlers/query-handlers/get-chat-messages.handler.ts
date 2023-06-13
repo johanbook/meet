@@ -4,12 +4,12 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
-import { ChatMessage } from "src/infrastructure/database/entities/chat-message.entity";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { mapArray } from "src/utils/mapper";
 
-import { ChatMessageDetails } from "../contracts/chat.dto";
-import { GetChatMessagesQuery } from "../contracts/get-chat-messages.query";
+import { ChatMessage } from "../../..//infrastructure/entities/chat-message.entity";
+import { ChatMessageDetails } from "../../contracts/dtos/chat.dto";
+import { GetChatMessagesQuery } from "../../contracts/queries/get-chat-messages.query";
 
 @QueryHandler(GetChatMessagesQuery)
 export class GetChatMessagesHandler

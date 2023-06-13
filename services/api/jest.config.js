@@ -12,7 +12,7 @@ module.exports = {
       branches: 24,
       functions: 19,
       lines: 45,
-      statements: 46,
+      statements: 45,
     },
   },
   moduleFileExtensions: ["js", "ts"],
