@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
-import { NotificationsGateway } from "src/client/gateways/notifications.gateway";
+import { NotificationModule } from "src/core/notifications/notification.module";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 
 import { PostChatMessageHandler } from "./application/handlers/command-handlers/post-chat-message.handler";
@@ -12,12 +12,15 @@ import { ChatMessageService } from "./domain/services/chat-message.service";
 import { ChatMessage } from "./infrastructure/entities/chat-message.entity";
 
 @Module({
-  imports: [CqrsModule, TypeOrmModule.forFeature([ChatMessage, Profile])],
+  imports: [
+    CqrsModule,
+    NotificationModule,
+    TypeOrmModule.forFeature([ChatMessage, Profile]),
+  ],
   controllers: [],
   providers: [
     ChatMessageService,
     GetChatMessagesHandler,
-    NotificationsGateway,
     NotifyReceiverOnPostedChatMessageHandler,
     PostChatMessageHandler,
   ],

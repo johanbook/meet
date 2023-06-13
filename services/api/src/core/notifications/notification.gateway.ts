@@ -1,4 +1,3 @@
-import { InjectRepository } from "@nestjs/typeorm";
 import {
   OnGatewayConnection,
   OnGatewayDisconnect,
@@ -6,31 +5,17 @@ import {
   WsException,
 } from "@nestjs/websockets";
 import { Socket } from "socket.io";
-import { In, Repository } from "typeorm";
 
-import { NotificationEventsConstants } from "src/constants/notification-events.constants";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { Logger } from "src/infrastructure/logger.service";
 
-type NotificationData = Record<string, number | string>;
-
-type INotification = {
-  data?: NotificationData;
-  message: string;
-  type: NotificationEventsConstants;
-};
+import { INotification } from "./types";
 
 @WebSocketGateway({ path: "/api/notifications" })
-export class NotificationsGateway
+export class NotificationGateway
   implements OnGatewayConnection, OnGatewayDisconnect
 {
   private connections: Record<string, Socket> = {};
-  private readonly logger = new Logger(NotificationsGateway.name);
-
-  constructor(
-    @InjectRepository(Profile)
-    private readonly profiles: Repository<Profile>,
-  ) {}
+  private readonly logger = new Logger(NotificationGateway.name);
 
   handleConnection(socket: Socket): void {
     const userId = this.parseUserIdFromSocket(socket);
@@ -40,20 +25,6 @@ export class NotificationsGateway
   handleDisconnect(socket: Socket): void {
     const userId = this.parseUserIdFromSocket(socket);
     delete this.connections[userId];
-  }
-
-  async notifyProfilesIfAvailable(
-    profileIds: number[],
-    notification: INotification,
-  ) {
-    const profiles = await this.profiles.find({
-      select: ["userId"],
-      where: { id: In(profileIds) },
-    });
-
-    const ids = profiles.map((profile) => profile.userId);
-
-    this.notifyUsersIfAvailable(ids, notification);
   }
 
   notifyUsersIfAvailable(userIds: string[], notification: INotification): void {
