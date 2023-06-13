@@ -9,7 +9,6 @@ import { MatchesController } from "./controllers/matches.controller";
 import { PhotosController } from "./controllers/photos.controller";
 import { ProfileController } from "./controllers/profile.controller";
 import { SwipesController } from "./controllers/swipes.controller";
-import { NotificationsGateway } from "./gateways/notifications.gateway";
 
 @Module({
   imports: [CqrsModule, ApplicationModule, TypeOrmModule.forFeature([Profile])],
@@ -19,6 +18,6 @@ import { NotificationsGateway } from "./gateways/notifications.gateway";
     ProfileController,
     SwipesController,
   ],
-  providers: [NotificationsGateway],
+  providers: [],
 })
 export class ClientModule {}
