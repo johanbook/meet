@@ -1,4 +1,4 @@
-import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
+import { ObjectStorageService } from "../../object-storage.service";
 
 /* eslint-disable unicorn/consistent-function-scoping */
 
