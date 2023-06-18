@@ -26,6 +26,7 @@ module.exports = {
     "@typescript-eslint/no-empty-function": "off",
     "unicorn/no-array-method-this-argument": "off",
     "unicorn/no-process-exit": "off",
+    "unicorn/no-null": "off",
     "unicorn/prefer-top-level-await": "off",
     "unicorn/prevent-abbreviations": [
       "error",
