@@ -41,6 +41,7 @@ export class CreateProfileHandler
     }
 
     const profile = new Profile();
+    profile.dateOfBirth = command.dateOfBirth;
     profile.description = command.description;
     profile.name = command.name;
     profile.recentLocation =

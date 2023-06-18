@@ -17,6 +17,9 @@ export class Profile {
   @PrimaryGeneratedColumn()
   id!: number;
 
+  @Column("date")
+  dateOfBirth!: Date;
+
   @Column({ length: 1024 })
   description!: string;
 
