@@ -49,6 +49,14 @@ export const dataSourceOptions: DataSourceOptions & SeederOptions = {
     join(__dirname, "../../core/**/migrations/*.{ts,js}"),
     join(__dirname, "../../features/**/migrations/*.{ts,js}"),
   ],
-  factories: [join(__dirname, "/factories/*.{ts,js}")],
-  seeds: [join(__dirname, "/seeds/*.{ts,js}")],
+  factories: [
+    join(__dirname, "/factories/*.{ts,js}"),
+    join(__dirname, "/../../core/**/factories/*.{ts,js}"),
+    join(__dirname, "/../../features/**/factories/*.{ts,js}"),
+  ],
+  seeds: [
+    join(__dirname, "/seeds/*.{ts,js}"),
+    join(__dirname, "/../../core/**/seeds/*.{ts,js}"),
+    join(__dirname, "/../../features/**/seeds/*.{ts,js}"),
+  ],
 };

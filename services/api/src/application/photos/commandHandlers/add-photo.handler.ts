@@ -2,9 +2,9 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { ObjectStorageService } from "src/core/object-storage";
 import { CurrentProfileService } from "src/domain/profiles/services/current-profile.service";
 import { ProfilePhoto } from "src/infrastructure/database/entities/profile-photo.entity";
-import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
 
 import { AddPhotoCommand } from "../contracts/add-photo.command";
 

@@ -4,8 +4,8 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
+import { ObjectStorageService } from "src/core/object-storage";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
-import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
 import { map, mapArray } from "src/utils/mapper";
 
 import { GetProfileQuery } from "../contracts/get-profile.query";

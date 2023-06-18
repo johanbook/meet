@@ -1,0 +1,16 @@
+{
+  "general": {
+    "save": "Spara"
+  },
+  "profile-editor": {
+    "description": {
+      "title": "Om mig",
+      "label": "Beskrivning",
+      "placeholder": "Beskriv dig själv i några få ord"
+    },
+    "media": "Foton och Media",
+    "update": {
+      "success": "Profil uppdaterad"
+    }
+  }
+}
