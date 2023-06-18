@@ -30,6 +30,9 @@ export class Classification {
   @Column("boolean", { default: false })
   obsolete!: boolean;
 
+  @Column("uuid", { nullable: true })
+  parentUuid?: string;
+
   @Column("uuid")
   uuid!: string;
 }

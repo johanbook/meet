@@ -1,4 +1,10 @@
-import { IsBoolean, IsLocale, IsOptional, Length } from "class-validator";
+import {
+  IsBoolean,
+  IsLocale,
+  IsOptional,
+  IsUUID,
+  Length,
+} from "class-validator";
 
 export class GetClassificationsByCategoryQuery {
   @Length(1, 255)
@@ -15,4 +21,8 @@ export class GetClassificationsByCategoryQuery {
   @IsOptional()
   @IsLocale()
   locale?: string;
+
+  @IsOptional()
+  @IsUUID()
+  parentUuid?: string;
 }

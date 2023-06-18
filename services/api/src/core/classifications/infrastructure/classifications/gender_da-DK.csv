@@ -1,4 +1,4 @@
-uuid,label,manual,obsolete
-b66e1c9f-1381-472c-af75-2c2bc2166124,"Mand",false,false
-1c7a1cef-f7ea-4022-85dc-81bcca0b79d7,"Kvinde",false,false
-79e18bbf-8c29-4d2e-97e3-0ddb3188fa03,"Foretrækker ikke at sige",false,false
+uuid,label,manual,obsolete,parentUuid
+b66e1c9f-1381-472c-af75-2c2bc2166124,"Mand",false,false,
+1c7a1cef-f7ea-4022-85dc-81bcca0b79d7,"Kvinde",false,false,
+79e18bbf-8c29-4d2e-97e3-0ddb3188fa03,"Foretrækker ikke at sige",false,false,

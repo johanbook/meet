@@ -9,6 +9,7 @@ interface FetchClassificationsByCategoryProps {
   includeManual?: boolean;
   includeObsolete?: boolean;
   locale: string;
+  parentUuid?: string;
 }
 
 @Injectable()
@@ -23,6 +24,7 @@ export class ClassificationService {
     includeManual = false,
     includeObsolete = false,
     locale,
+    parentUuid,
   }: FetchClassificationsByCategoryProps): Promise<Classification[]> {
     const whereOptions: FindOneOptions<Classification>["where"] = {
       category,
@@ -35,6 +37,10 @@ export class ClassificationService {
 
     if (!includeObsolete) {
       whereOptions.obsolete = false;
+    }
+
+    if (parentUuid) {
+      whereOptions.parentUuid = parentUuid;
     }
 
     return this.classifications.find({

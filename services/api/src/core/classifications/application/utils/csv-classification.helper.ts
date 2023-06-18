@@ -39,6 +39,7 @@ interface ParsedClassification {
   label: string;
   manual: boolean;
   obsolete: boolean;
+  parentUuid?: string;
 }
 
 export async function loadClassificationsFromCsv(
@@ -59,11 +60,11 @@ export async function loadClassificationsFromCsv(
       // NB: The constraint is introduced in migration `AddLocalizationToClassifications1686484223894`
       await queryRunner.query(
         `
-    INSERT INTO classification (uuid, category, label, locale, manual, obsolete)
-    VALUES ($1,$2,$3,$4,$5,$6) 
+    INSERT INTO classification (uuid, category, label, locale, manual, obsolete, "parentUuid")
+    VALUES ($1,$2,$3,$4,$5,$6,$7) 
     ON CONFLICT ON CONSTRAINT "UQ_4bac7977fbb00765ef58fe0f63f"
     DO 
-       UPDATE SET label = $3, manual = $5, obsolete = $6;
+       UPDATE SET label = $3, manual = $5, obsolete = $6, "parentUuid" = $7;
   `,
         [
           classification.uuid,
@@ -72,6 +73,7 @@ export async function loadClassificationsFromCsv(
           locale,
           classification.manual,
           classification.obsolete,
+          classification.parentUuid || null,
         ],
       );
     }

@@ -20,6 +20,7 @@ export class GetClassificationsByCategoryHandler
         includeManual: query.includeManual,
         includeObsolete: query.includeObsolete,
         locale: query.locale || "en-US",
+        parentUuid: query.parentUuid,
       });
 
     return mapToClassificationDetails(matchingClassifications);

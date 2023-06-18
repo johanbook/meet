@@ -9,6 +9,7 @@ export function mapToClassificationDetails(
   return mapArray(ClassificationDetails, classifications, (classification) => ({
     id: classification.id,
     label: classification.label,
+    parentUuid: classification.parentUuid,
     uuid: classification.uuid,
   }));
 }
