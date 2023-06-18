@@ -1,10 +1,15 @@
 import { ReactElement } from "react";
 
-import { TextField, TextFieldProps } from "@mui/material";
+import { SxProps } from "@mui/material";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker as MuiDatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import dayjs, { Dayjs } from "dayjs";
 
-export interface DatePickerProps
-  extends Omit<TextFieldProps, "onChange" | "value"> {
+export interface DatePickerProps {
+  fullWidth?: boolean;
   onChange: (date: Date) => void;
+  sx?: SxProps;
   value: Date;
 }
 
@@ -13,23 +18,18 @@ export function DatePicker({
   value,
   ...props
 }: DatePickerProps): ReactElement {
-  // Input value is always formatted yyyy-mm-dd.
-  // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
-  const stringValue = `${value.getFullYear()}-${value.getMonth()}-${value.getDate()}`;
-
-  /* eslint-disable-next-line no-console */
-  console.log({ val: stringValue });
-
   return (
-    <TextField
-      onChange={(event) => {
-        onChange(new Date(event.target.value));
-        /* eslint-disable-next-line no-console */
-        console.log({ val: new Date(event.target.value) });
-      }}
-      type="date"
-      value={stringValue}
-      {...props}
-    />
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <MuiDatePicker
+        label="Controlled picker"
+        onChange={(newValue: Dayjs | null) => {
+          if (newValue) {
+            onChange(newValue.toDate());
+          }
+        }}
+        value={dayjs(value)}
+        {...props}
+      />
+    </LocalizationProvider>
   );
 }
