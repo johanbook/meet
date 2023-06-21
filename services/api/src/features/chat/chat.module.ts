@@ -8,6 +8,7 @@ import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { PostChatMessageHandler } from "./application/handlers/command-handlers/post-chat-message.handler";
 import { NotifyReceiverOnPostedChatMessageHandler } from "./application/handlers/event-handlers/notify-receiver-on-posted-message.handler";
 import { GetChatMessagesHandler } from "./application/handlers/query-handlers/get-chat-messages.handler";
+import { ChatsController } from "./client/controllers/chats.controller";
 import { ChatMessageService } from "./domain/services/chat-message.service";
 import { ChatMessage } from "./infrastructure/entities/chat-message.entity";
 
@@ -17,7 +18,7 @@ import { ChatMessage } from "./infrastructure/entities/chat-message.entity";
     NotificationModule,
     TypeOrmModule.forFeature([ChatMessage, Profile]),
   ],
-  controllers: [],
+  controllers: [ChatsController],
   providers: [
     ChatMessageService,
     GetChatMessagesHandler,
