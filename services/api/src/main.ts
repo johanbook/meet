@@ -32,7 +32,7 @@ async function bootstrap() {
   const document = createOpenApiDocument(app);
   SwaggerModule.setup(`${PATH_PREFIX}/docs`, app, document);
 
-  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
   app.useGlobalInterceptors(new LoggingInterceptor());
 
   app.register(fastifyMultipart);

@@ -31,6 +31,7 @@ describe(CreateProfileHandler.name, () => {
   describe("execute", () => {
     it("should save new profile", async () => {
       const newProfile = {
+        dateOfBirth: new Date("2000-01-01"),
         description: "my-description",
         name: "my-name",
         recentLocation: { lat: 1, lon: 2 },

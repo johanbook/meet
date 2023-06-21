@@ -39,6 +39,7 @@ export function ProfileCreator({
     const lon = coordinates?.longitude || 0;
 
     await mutation.mutateAsync({
+      dateOfBirth: new Date(),
       description,
       name,
       recentLocation: { lat, lon },
