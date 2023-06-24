@@ -4,14 +4,16 @@ import Typography from "@mui/material/Typography";
 
 import { errorToMessage } from "src/utils/error.utils";
 
+const DEFAULT_ERROR_MESSAGE = "An unexpected error occured";
+
 export interface ErrorMessageProps {
   error?: unknown;
-  message: string;
+  message?: string;
 }
 
 export function ErrorMessage({
   error,
-  message,
+  message = DEFAULT_ERROR_MESSAGE,
 }: ErrorMessageProps): React.ReactElement {
   const [errorMessage, setErrorMessage] = React.useState<string>("");
 
@@ -36,9 +38,14 @@ export function ErrorMessage({
 
       {errorMessage && (
         <Typography color="textSecondary">
-          <b>Reason:</b> {errorMessage}{" "}
+          <b>Reason:</b> {errorMessage}
         </Typography>
       )}
+
+      <Typography color="textSecondary">
+        You can try refreshing the page. If the error persists, please contact
+        our support.
+      </Typography>
     </>
   );
 }
