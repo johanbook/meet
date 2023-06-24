@@ -18,6 +18,7 @@ export class CreateProfileCommand {
   @Length(0, 128)
   public readonly name!: string;
 
+  @Type(() => Location)
   @ValidateNested()
   public readonly recentLocation!: Location;
 }
