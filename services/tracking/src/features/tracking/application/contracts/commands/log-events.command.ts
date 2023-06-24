@@ -1,8 +1,10 @@
 import { Type } from "class-transformer";
 import {
+  Allow,
   ArrayNotEmpty,
   IsArray,
   IsIn,
+  IsOptional,
   Length,
   ValidateNested,
 } from "class-validator";
@@ -14,8 +16,10 @@ class LoggingEvent {
   public readonly level!: LogLevel;
 
   @Length(0, 1024)
-  public readonly message!: string;
+  public readonly msg!: string;
 
+  @IsOptional()
+  @Allow()
   public readonly props?: object;
 }
 
