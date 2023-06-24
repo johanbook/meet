@@ -11,6 +11,7 @@ import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { NotificationEventsConstants } from "src/constants/notification-events.constants";
 import { useHandleNotification } from "src/hooks/useHandleNotification";
 
+import { ErrorPage } from "../ErrorPage";
 import { ChatPageHeader } from "./ChatPage.header";
 import { ChatPageSkeleton } from "./ChatPage.skeleton";
 
@@ -30,7 +31,8 @@ export function ChatPageContainer(): React.ReactElement {
   if (!id) {
     return (
       <>
-        <ChatPageHeader /> <ErrorMessage message="Unable to find profile" />{" "}
+        <ChatPageHeader />
+        <ErrorMessage message="Unable to find profile" />
       </>
     );
   }
@@ -38,11 +40,10 @@ export function ChatPageContainer(): React.ReactElement {
   const receiverProfileId = Number.parseInt(id);
 
   if (error) {
-    const message = (error as Error).message;
     return (
       <>
         <ChatPageHeader />
-        <ErrorMessage message={message} />
+        <ErrorPage error={error} />
       </>
     );
   }

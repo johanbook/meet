@@ -9,5 +9,5 @@ export interface MatchesPageErrorViewProps {
 export function MatchesPageErrorView({
   error,
 }: MatchesPageErrorViewProps): React.ReactElement {
-  return <ErrorPage error={error} message="Unable to load matches" />;
+  return <ErrorPage error={error} />;
 }
