@@ -57,6 +57,18 @@ services:
       file: "./docker-compose.shared.yaml"
       service: "supertokens"
 
+  tracking:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "tracking"
+    build:
+      context: "./services/tracking"
+    command:
+      - "run"
+      - "start:dev"
+    volumes:
+      - "$PWD/services/tracking/:/app"
+
   web-ui:
     extends:
       file: "./docker-compose.shared.yaml"
