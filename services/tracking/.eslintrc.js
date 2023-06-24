@@ -27,5 +27,11 @@ module.exports = {
     "unicorn/prefer-module": "off",
     /* Unnecessary */
     "unicorn/prefer-top-level-await": "off",
+    "unicorn/prevent-abbreviations": [
+      "error",
+      {
+        ignore: ["e2e", /env/i, /fn/i, /props/i, /req/i, /res/i],
+      },
+    ],
   },
 };
