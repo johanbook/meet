@@ -11,8 +11,8 @@ export class LogEventsHandler
   private logger = new Logger(LogEventsHandler.name);
 
   async execute(command: LogEventsCommand) {
-    for (const event of command.events) {
-      this.logger.log(event);
+    for (const { message, ...other } of command.events) {
+      this.logger.log({ msg: message, ...other });
     }
   }
 }
