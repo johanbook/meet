@@ -1,6 +1,17 @@
 import { LoggerService } from "@nestjs/common";
 import * as pino from "pino";
 
+export const LOG_LEVELS = [
+  "debug",
+  "error",
+  "fatal",
+  "info",
+  "trace",
+  "warn",
+] as const;
+
+export type LogLevel = typeof LOG_LEVELS[number];
+
 export function getLogLevel(): string {
   const level = process.env.LOG_LEVEL || "info";
   return level.toLowerCase();

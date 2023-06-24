@@ -11,6 +11,8 @@ export class TrackEventHandler
   private logger = new Logger(TrackEventHandler.name);
 
   async execute(command: TrackEventCommand) {
-    this.logger.debug(command);
+    for (const event of command.events) {
+      this.logger.info(event);
+    }
   }
 }
