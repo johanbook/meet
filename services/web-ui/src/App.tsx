@@ -6,8 +6,8 @@ import { SnackbarProvider } from "notistack";
 
 import "./App.css";
 import { Router } from "./Router";
+import { NotificationProvider } from "./core/notifications";
 import { Logger } from "./logger";
-import { NotificationProvider } from "./notification.provider";
 import { AuthenticationGuard } from "./pages/AuthenticationGuard";
 import Theme from "./theme/Theme";
 

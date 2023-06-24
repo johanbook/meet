@@ -1,8 +1,8 @@
 import React from "react";
 
-import { NotificationEventsConstants } from "src/constants/notification-events.constants";
-import { NotificationContext } from "src/notification.provider";
-import { INotification } from "src/types/notification.interface";
+import { NotificationEventsConstants } from "../constants/notification-events.constants";
+import { NotificationContext } from "../notification.provider";
+import { INotification } from "../types/notification.interface";
 
 interface UseHandleNotificationProps<
   T extends NotificationEventsConstants,

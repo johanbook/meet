@@ -1,9 +1,10 @@
 import { Socket, io } from "socket.io-client";
 import { v4 as uuid } from "uuid";
 
-import { NotificationEventsConstants } from "src/constants/notification-events.constants";
 import { Logger } from "src/logger";
-import { INotification } from "src/types/notification.interface";
+
+import { NotificationEventsConstants } from "./constants/notification-events.constants";
+import { INotification } from "./types/notification.interface";
 
 interface Handler {
   execute: (notification: unknown) => void;
