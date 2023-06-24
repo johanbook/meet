@@ -76,7 +76,7 @@ export class Logger {
   }
 
   private async httpLog({ msg, props, level }: LogProps): Promise<void> {
-    const body = { events: [{ level, message: msg, props }] };
+    const body = { events: [{ level, msg, props }] };
 
     await fetch("/tracking/log", {
       body: JSON.stringify(body),

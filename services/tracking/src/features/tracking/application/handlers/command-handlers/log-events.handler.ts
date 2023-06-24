@@ -20,9 +20,9 @@ export class LogEventsHandler
   ) {}
 
   async execute(command: LogEventsCommand) {
-    for (const { message, ...other } of command.events) {
+    for (const event of command.events) {
       const requestData = this.getRequestData();
-      this.logger.log({ msg: message, ...other, ...requestData });
+      this.logger.log({ ...event, ...requestData });
     }
   }
 
