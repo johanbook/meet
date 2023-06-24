@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Nav from "src/components/ui/Nav";
 import { ChatPage } from "src/pages/ChatPage";
 
+import { NavigationTrackingProvider } from "./core/tracking/NavigationTrackingProvider";
 import { JournalPage } from "./pages/JournalPage";
 import { MatchesPage } from "./pages/MatchesPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
@@ -14,7 +15,11 @@ import { SwipingPage } from "./pages/SwipingPage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Nav />,
+    element: (
+      <NavigationTrackingProvider>
+        <Nav />
+      </NavigationTrackingProvider>
+    ),
     errorElement: <NotFoundPage />,
     children: [
       {
