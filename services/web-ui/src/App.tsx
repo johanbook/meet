@@ -7,9 +7,9 @@ import { SnackbarProvider } from "notistack";
 import "./App.css";
 import { Router } from "./Router";
 import { NotificationProvider } from "./core/notifications";
+import { ThemeProvider } from "./core/theme";
 import { Logger } from "./logger";
 import { AuthenticationGuard } from "./pages/AuthenticationGuard";
-import Theme from "./theme/Theme";
 
 const logger = new Logger(QueryClient.name);
 
@@ -45,14 +45,14 @@ export function App(): React.ReactElement {
   return (
     <QueryClientProvider client={QUERY_CLIENT}>
       <CssBaseline />
-      <Theme>
+      <ThemeProvider>
         <AuthenticationGuard>
           <NotificationProvider>
             <Router />
             <SnackbarProvider dense />
           </NotificationProvider>
         </AuthenticationGuard>
-      </Theme>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
