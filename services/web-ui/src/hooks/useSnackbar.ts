@@ -1,12 +1,31 @@
 import { Grow } from "@mui/material";
 import { VariantType, enqueueSnackbar } from "notistack";
 
+import { Logger } from "src/logger";
+
 import { useIsMobile } from "./useIsMobile";
+
+const logger = new Logger("Snackbar");
 
 export function useSnackbar() {
   const isMobile = useIsMobile();
 
   function showSnackbar(message: string, variant: VariantType): void {
+    switch (variant) {
+      case "error": {
+        logger.error(message);
+        break;
+      }
+      case "warning": {
+        logger.warn(message);
+        break;
+      }
+      default: {
+        logger.debug(message);
+        break;
+      }
+    }
+
     enqueueSnackbar(message, {
       anchorOrigin: {
         horizontal: "center",
