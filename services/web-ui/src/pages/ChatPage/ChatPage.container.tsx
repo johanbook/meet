@@ -8,8 +8,8 @@ import { chatsApi } from "src/apis";
 import { ChatMessageList } from "src/components/ChatMessageList";
 import { ChatTextField } from "src/components/ChatTextField";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
-import { NotificationEventsConstants } from "src/constants/notification-events.constants";
-import { useHandleNotification } from "src/hooks/useHandleNotification";
+import { NotificationEventsConstants } from "src/core/notifications";
+import { useHandleNotification } from "src/core/notifications";
 
 import { ErrorPage } from "../ErrorPage";
 import { ChatPageHeader } from "./ChatPage.header";
