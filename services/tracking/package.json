@@ -14,10 +14,8 @@
     "start:prod": "NODE_ENV=production node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "lint:ci": "npm run lint",
-    "postlint": "cd client && npm run lint",
     "test": "jest",
     "test:ci": "jest --coverage",
-    "posttest:ci": "cd client && npm run test:ci",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"

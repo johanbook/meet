@@ -1,16 +1,17 @@
 import { Type } from "class-transformer";
 import {
   ArrayNotEmpty,
-  IsAlpha,
   IsArray,
+  IsIn,
   Length,
   ValidateNested,
 } from "class-validator";
 
-class TrackingEvent {
-  @IsAlpha()
-  @Length(0, 128)
-  public readonly eventName!: string;
+import { LOG_LEVELS, LogLevel } from "src/core/logging/logger.service";
+
+class LoggingEvent {
+  @IsIn(LOG_LEVELS)
+  public readonly level!: LogLevel;
 
   @Length(0, 1024)
   public readonly message!: string;
@@ -18,10 +19,10 @@ class TrackingEvent {
   public readonly props?: object;
 }
 
-export class TrackEventsCommand {
+export class LogEventsCommand {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => TrackingEvent)
-  events: TrackingEvent[];
+  @Type(() => LoggingEvent)
+  events: LoggingEvent[];
 }
