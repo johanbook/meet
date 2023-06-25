@@ -16,7 +16,7 @@ module.exports = {
     uuid: require.resolve("uuid"),
   },
   preset: "ts-jest",
-  setupFilesAfterEnv: ["./src/setupTests.ts"],
+  setupFilesAfterEnv: ["./src/test/setupTests.ts"],
   testEnvironment: "jsdom",
   testPathIgnorePatterns: ["node_modules"],
 };
