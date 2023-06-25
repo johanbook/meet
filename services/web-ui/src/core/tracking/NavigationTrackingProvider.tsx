@@ -15,7 +15,7 @@ export function NavigationTrackingProvider({
   const location = useLocation();
 
   useEffect(() => {
-    logger.info("Navigated to new page", {
+    logger.debug(`Navigated to ${location.pathname}`, {
       pathname: location.pathname,
       search: location.search,
     });
