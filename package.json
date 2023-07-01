@@ -22,5 +22,10 @@
     "@commitlint/config-conventional": "^17.6.1",
     "husky": "^8.0.3",
     "standard-version": "^9.5.0"
+  },
+  "standard-version": {
+    "scripts": {
+      "postchangelog": "prettier ./CHANGELOG.md"
+    }
   }
 }
