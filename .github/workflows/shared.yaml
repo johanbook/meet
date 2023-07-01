@@ -1,0 +1,92 @@
+name: shared
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches:
+      - "main"
+    paths:
+      - "services/shared/**"
+
+permissions: write-all
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./services/shared
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+
+      - name: Install NodeJS dependencies
+        run: npm ci --legacy-peer-deps -D --ignore-scripts
+
+      - name: Run linting
+        run: npm run lint:ci
+
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./services/shared
+    needs: ["lint"]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+
+      - name: Install NodeJS dependencies
+        run: npm ci --legacy-peer-deps -D --ignore-scripts
+
+      - name: Run tests
+        run: npm run test:ci
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          flags: shared
+
+  build-and-publish:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    env:
+      GITHUB_NPM_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    defaults:
+      run:
+        working-directory: ./services/shared
+    needs: ["test"]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+
+      - name: Install NodeJS dependencies
+        run: npm ci --legacy-peer-deps -D --ignore-scripts
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish to Github NPM registry
+        run: npm publish
