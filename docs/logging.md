@@ -1,5 +1,19 @@
 # Logging
 
+The software system is built with logging and observability in mind. This
+applies to all services. Frontend logs are captured by running a dedicated
+service for logging and tracking.
+
+Each log event will capture the following information if available:
+
+- Log level
+- Request correlation id
+- Request id
+- User id
+
+Exceptions are logged with a unique exception id to help tracking down and
+pinning errors.
+
 ## Logging SDK
 
 The application (mainly the api service) should output logs in JSON format to
