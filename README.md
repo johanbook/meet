@@ -12,3 +12,13 @@ machine learning to find your perfect match.
 ## Contributing
 
 See the [contribution guide](./CONTRIBUTING.md).
+
+## Further reading
+
+See the following for more documentation on the software system:
+
+- [Classifications](./docs/classifications.md)
+- [Configuring DNS](./docs/configuring-dns.md)
+- [Logging](./docs/logging.md)
+- [Seeding](./docs/seeding.md)
+- [Technologies](./docs/technologies.md)
