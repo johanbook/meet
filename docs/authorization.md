@@ -2,10 +2,9 @@
 
 **The authorization is currently under construction**
 
-The software system comes with an authorization framework, using a role based
-approach (RBAC). The system uses an authorization-first approach, meaning
-permissions has to be specified (or disabled) for every action taken in the
-system.
+The software system comes with a RBAC-based authorization framework. The system
+uses an authorization-first approach, meaning permissions has to be specified
+(or disabled) for every action taken in the system.
 
 ## Guide
 
