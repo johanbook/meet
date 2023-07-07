@@ -17,6 +17,7 @@ See the [contribution guide](./CONTRIBUTING.md).
 
 See the following for more documentation on the software system:
 
+- [Authorization](./docs/authorization.md)
 - [Classifications](./docs/classifications.md)
 - [Configuring DNS](./docs/configuring-dns.md)
 - [Logging](./docs/logging.md)
