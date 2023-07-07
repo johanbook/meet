@@ -20,6 +20,7 @@ See the following for more documentation on the software system:
 - [Authorization](./docs/authorization.md)
 - [Classifications](./docs/classifications.md)
 - [Configuring DNS](./docs/configuring-dns.md)
+- [Journaling](./docs/journaling.md.md)
 - [Logging](./docs/logging.md)
 - [Seeding](./docs/seeding.md)
 - [Technologies](./docs/technologies.md)
