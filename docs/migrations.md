@@ -31,4 +31,5 @@ export class AddMonkeys1682844159027 implements MigrationInterface {
 }
 ```
 
-Move this migration file to the `infrastructure/migrations` folder in the relevant feature module.
+Move this migration file to the `infrastructure/migrations` folder in the
+relevant feature module.
