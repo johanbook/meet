@@ -9,6 +9,9 @@ _For you who want to meet someone_
 **meet** is an app for meeting other people based on your location, leveraging
 machine learning to find your perfect match.
 
+To run the project locally, see
+the [contribution guide](./CONTRIBUTING.md).
+
 ## Features
 
 The software includes builtin opinionated frameworks for the following:
@@ -21,7 +24,7 @@ The software includes builtin opinionated frameworks for the following:
 - [Seeding](./docs/seeding.md)
 - [Testing](./docs/testing.md)
 
-## Other documentation
+## Other system documentation
 
 Here is some additionally useful documentation for the system,:
 
