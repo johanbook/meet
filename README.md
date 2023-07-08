@@ -15,6 +15,7 @@ The software includes builtin opinionated frameworks for the following:
 
 - [Authorization](./docs/authorization.md)
 - [Classifications](./docs/classifications.md)
+- [Database migrations](./docs/migrations.md)
 - [Journaling](./docs/journaling.md)
 - [Logging](./docs/logging.md)
 - [Seeding](./docs/seeding.md)
