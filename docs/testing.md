@@ -7,8 +7,9 @@ backend and frontend. For frontend, DOM testing is utilized.
 
 ### Backend
 
-In the backend, the recommendation is to test all command handlers. A test might
-look something like this:
+In the backend, the recommendation is to test all command handlers and
+non-trivial query handlers. This should also cover testing of domain services. A
+test might look something like this:
 
 ```ts
 import { Repository } from "typeorm";
@@ -22,19 +23,19 @@ import { CreateMonkeyHandler } from "./create-monkey.handler";
 describe(CreateMonkeyHandler.name, () => {
   let monkeyService: MonkeyService;
   let commandHandler: CreateMonkeyHandler;
-  let monkey: Repository<Monkey>;
+  let monkies: Repository<Monkey>;
 
   beforeEach(() => {
-    monkey = createMockRepository<Monkey>();
-    monkeyService = new MonkeyService(monkey, userIdService);
-    commandHandler = new CreateMonkeyHandler(monkeyService, monkey);
+    monkies = createMockRepository<Monkey>();
+    monkeyService = new MonkeyService(monkies);
+    commandHandler = new CreateMonkeyHandler(monkeyService);
   });
 
   describe("can create monkey", () => {
     it("should save changes", async () => {
       await commandHandler.execute();
 
-      expect(monkey.save).toHaveBeenCalled();
+      expect(monkies.save).toHaveBeenCalled();
     });
   });
 });
@@ -62,4 +63,5 @@ describe("<Button />", () => {
 ### Coverage
 
 Coverage is calculated for test runs and each service has a required minimum
-coverage threshold.
+coverage threshold. These thresholds should not be set in stone, but adjusted
+after need. They should serve as a guard for not forgetting to write tests.
