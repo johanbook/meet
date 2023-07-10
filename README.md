@@ -26,7 +26,7 @@ The software includes builtin opinionated frameworks for the following:
 
 ## Other system documentation
 
-Here is some additionally useful documentation for the system,:
+Here is some additionally useful documentation for the system:
 
 - [Configuring DNS](./docs/configuring-dns.md)
 - [Technologies](./docs/technologies.md)
