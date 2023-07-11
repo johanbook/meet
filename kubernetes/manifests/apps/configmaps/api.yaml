@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api
+data:
+  DB_DATABASE: "api"
+  DB_HOST: "db"
+  DB_PORT: "5432"
+  LOG_LEVEL: "info"
+  PORT: "80"
+  S3_ENDPOINT: "minio"

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api
+          image: ghcr.io/johanbook/meet/api:latest
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: api
+            - secretRef:
+                name: api
