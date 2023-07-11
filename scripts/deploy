@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+# Source and export environment variables
+set -a
+source .env
+set +a
+
+# Ordering is important
+manifest_directories=("configmaps" "secrets" "services" "deployments" "ingress-routes")
+
+for directory in "${manifest_directories[@]}"; do
+	for manifest in $(find kubernetes/manifests/*/$directory -type f -name '*.yaml'); do
+		cat $manifest | envsubst | kubectl apply -f -
+	done
+done
