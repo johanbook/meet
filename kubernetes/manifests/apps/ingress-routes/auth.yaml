@@ -1,0 +1,13 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: auth
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`$DOMAIN`)&&(PathPrefix(`/login`)||PathPrefix(`/logout`))"
+      kind: Rule
+      services:
+        - name: auth
+          port: 80

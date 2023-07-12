@@ -21,8 +21,17 @@ spec:
           ports:
             - containerPort: 5432
           volumeMounts:
+            - name: init-config
+              mountPath: /docker-entrypoint-initdb.d/init.sql
+              readOnly: true
             - name: db-volume
               mountPath: /var/lib/postgresql/data
       volumes:
         - name: db-volume
-          emptyDir: {}
+          hostPath:
+            path: "$PWD/.data/postgres"
+            type: Directory
+        - name: init-config
+          hostPath:
+            path: "$PWD/config/postgres/init.sql"
+            type: File

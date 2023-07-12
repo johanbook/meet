@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supertokens
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: supertokens
+  template:
+    metadata:
+      labels:
+        app: supertokens
+    spec:
+      containers:
+        - name: supertokens
+          image: registry.supertokens.io/supertokens/supertokens-postgresql:5.0
+          ports:
+            - containerPort: 3567
+          envFrom:
+            - configMapRef:
+                name: supertokens
+            - secretRef:
+                name: supertokens
