@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Exit immediately if a command exits with a non-zero status
-set -e
-
-helm repo add traefik https://traefik.github.io/charts
-helm install traefik traefik/traefik
