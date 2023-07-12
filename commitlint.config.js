@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-const ALLOWED_SCOPES = [...fs.readdirSync("./services"), "repo"];
+const ALLOWED_SCOPES = [...fs.readdirSync("./services"), "k8", "repo"];
 
 const LEVEL = {
   ERROR: 2,
