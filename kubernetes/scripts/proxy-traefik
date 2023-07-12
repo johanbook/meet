@@ -1,3 +1,5 @@
 #!/bin/bash
 
+# NB: The root user also needs a kube config. Copy the local config if not setup
+
 kubectl port-forward --address 0.0.0.0 service/traefik 80:80 443:443 -n default

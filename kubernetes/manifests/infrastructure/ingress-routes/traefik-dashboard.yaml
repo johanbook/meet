@@ -7,7 +7,7 @@ spec:
     - web
   routes:
     - match:
-        Host(`traefik.console.localhost`) && (PathPrefix(`/dashboard`) ||
+        Host(`traefik.console.$DOMAIN`) && (PathPrefix(`/dashboard`) ||
         PathPrefix(`/api`))
       kind: Rule
       services:
