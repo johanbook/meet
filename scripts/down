@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+# Ordering is important
+manifest_directories=("configmaps" "secrets" "services" "deployments" "ingress-routes")
+
+for manifest_type in "${manifest_directories[@]}"; do
+	kubectl delete $manifest_type --all
+done

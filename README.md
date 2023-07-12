@@ -29,6 +29,7 @@ The software includes builtin opinionated frameworks for the following:
 Here is some additionally useful documentation for the system:
 
 - [Configuring DNS](./docs/configuring-dns.md)
+- [Configuring Kubernetes](./docs/configuring-kubernetes.md)
 - [Technologies](./docs/technologies.md)
 
 ## Contributing
