@@ -24,14 +24,14 @@ spec:
             - name: init-config
               mountPath: /docker-entrypoint-initdb.d/init.sql
               readOnly: true
-            - name: db-volume
+            - name: persisted-data
               mountPath: /var/lib/postgresql/data
       volumes:
-        - name: db-volume
+        - name: persisted-data
           hostPath:
-            path: "$PWD/.data/postgres"
+            path: /app/.data/postgres
             type: Directory
         - name: init-config
           hostPath:
-            path: "$PWD/config/postgres/init.sql"
+            path: /app/config/postgres/init.sql
             type: File

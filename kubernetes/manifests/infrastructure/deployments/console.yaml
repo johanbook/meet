@@ -18,9 +18,10 @@ spec:
           ports:
             - containerPort: 3000
           volumeMounts:
-            - name: config-volume
+            - name: config
               mountPath: /app/config
       volumes:
-        - name: config-volume
+        - name: config
           hostPath:
-            path: "$PWD/config/console/"
+            path: /app/config/console
+            type: Directory
