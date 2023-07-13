@@ -1,4 +1,21 @@
-- Tools:
+- API Specifications:
+    - API Swagger UI:
+        description: UI for OpenAPI specification
+        href: http://{{HOMEPAGE_VAR_DOMAIN}}/api/docs
+
+- Monitoring:
+    - Grafana:
+        description: Monitoring ui
+        href: http://grafana.console.{{HOMEPAGE_VAR_DOMAIN}}/
+        icon: grafana
+
+- Routing:
+    - Traefik dashboard:
+        description: Edge router
+        href: http://traefik.console.{{HOMEPAGE_VAR_DOMAIN}}/
+        icon: traefik
+
+- Storage:
     - pgAdmin:
         description: Postgres UI
         href: http://pgadmin.console.{{HOMEPAGE_VAR_DOMAIN}}/
@@ -9,15 +26,7 @@
         href: http://minio.console.{{HOMEPAGE_VAR_DOMAIN}}/
         icon: minio
 
-    - Swagger UI:
-        description: UI for OpenAPI specification
-        href: http://{{HOMEPAGE_VAR_DOMAIN}}/api/docs
-
-    - Traefik:
-        description: Edge router
-        href: http://traefik.console.{{HOMEPAGE_VAR_DOMAIN}}/
-        icon: traefik
-
+- User management:
     - User management:
-        description: User management
+        description: Admin interface
         href: http://{{HOMEPAGE_VAR_DOMAIN}}/login/dashboard

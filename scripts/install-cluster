@@ -3,5 +3,11 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+# Repositories
 helm repo add traefik https://traefik.github.io/charts
+helm repo add grafana https://grafana.github.io/helm-charts
+
+helm repo update
+
 helm install traefik traefik/traefik -f ./kubernetes/helm/values/traefik.yaml
+helm install loki-stack grafana/loki -f ./kubernetes/helm/values/loki.yaml
