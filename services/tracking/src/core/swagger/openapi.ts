@@ -3,7 +3,7 @@ import { DocumentBuilder, OpenAPIObject, SwaggerModule } from "@nestjs/swagger";
 
 import { Logger } from "../logging/logger.service";
 
-const APP_NAME = "Auth";
+const APP_NAME = "Tracking";
 const APP_VERSION = process.env.npm_package_version;
 
 export function createOpenApiDocument(app: INestApplication): OpenAPIObject {
