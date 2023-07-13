@@ -24,7 +24,6 @@
   "dependencies": {
     "@fastify/multipart": "^7.6.0",
     "@fastify/static": "^6.10.0",
-    "@johanbook/meet-shared": "^0.0.1",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/cqrs": "^9.0.3",
