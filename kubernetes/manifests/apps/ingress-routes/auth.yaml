@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`$DOMAIN`)&&(PathPrefix(`/login`)||PathPrefix(`/logout`))"
+    - match: Host(`$DOMAIN`)&&(PathPrefix(`/login`)||PathPrefix(`/logout`))
       kind: Rule
       services:
         - name: auth

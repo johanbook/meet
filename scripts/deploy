@@ -9,7 +9,7 @@ source .env
 set +a
 
 # Ordering is important
-manifest_directories=("configmaps" "secrets" "services" "deployments" "ingress-routes")
+manifest_directories=("configmaps" "secrets" "services" "deployments" "middlewares" "ingress-routes")
 
 for directory in "${manifest_directories[@]}"; do
 	for manifest in $(find kubernetes/manifests/*/$directory -type f -name '*.yaml'); do

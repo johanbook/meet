@@ -6,8 +6,10 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`$DOMAIN`)&&PathPrefix(`/api`)"
+    - match: Host(`$DOMAIN`)&&PathPrefix(`/api`)
       kind: Rule
+      middlewares:
+        - name: required-auth
       services:
         - name: api
-          port: 3000
+          port: 80

@@ -1,0 +1,9 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: required-auth
+spec:
+  forwardAuth:
+    address: http://auth/authenticate
+    authResponseHeaders:
+      - "x-user-id"
