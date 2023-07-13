@@ -17,6 +17,9 @@ spec:
           image: ghcr.io/benphelps/homepage:latest
           ports:
             - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: console
           volumeMounts:
             - name: config
               mountPath: /app/config

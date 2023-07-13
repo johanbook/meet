@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgadmin
+  template:
+    metadata:
+      labels:
+        app: pgadmin
+    spec:
+      containers:
+        - name: pgadmin
+          image: "dpage/pgadmin4"
+          envFrom:
+            - secretRef:
+                name: pgadmin
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: persisted-data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: persisted-data
+          hostPath:
+            path: /app/.data/pgadmin
+            type: Directory
