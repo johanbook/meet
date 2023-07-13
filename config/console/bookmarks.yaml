@@ -1,4 +1,7 @@
 - OpenAPI specifications:
-    - API Swagger UI:
-        - abbr: API
-          href: http://{{HOMEPAGE_VAR_DOMAIN}}/api/docs
+    - API:
+        - href: http://{{HOMEPAGE_VAR_DOMAIN}}/api/docs
+    - Auth:
+        - href: http://{{HOMEPAGE_VAR_DOMAIN}}/login/docs
+    - Tracking:
+        - href: http://{{HOMEPAGE_VAR_DOMAIN}}/tracking/docs
