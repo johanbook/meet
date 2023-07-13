@@ -1,11 +1,6 @@
-- API Specifications:
-    - API Swagger UI:
-        description: UI for OpenAPI specification
-        href: http://{{HOMEPAGE_VAR_DOMAIN}}/api/docs
-
 - Monitoring:
     - Grafana:
-        description: Monitoring ui
+        description: Logging
         href: http://grafana.console.{{HOMEPAGE_VAR_DOMAIN}}/
         icon: grafana
 
