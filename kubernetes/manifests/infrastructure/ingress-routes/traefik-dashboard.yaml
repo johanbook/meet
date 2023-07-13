@@ -6,10 +6,10 @@ spec:
   entryPoints:
     - web
   routes:
-    - match:
-        Host(`traefik.console.$DOMAIN`) && (PathPrefix(`/dashboard`) ||
-        PathPrefix(`/api`))
+    - match: Host(`traefik.console.$DOMAIN`)
       kind: Rule
+      middlewares:
+        - name: console-auth
       services:
         - name: api@internal
           kind: TraefikService
