@@ -6,6 +6,11 @@ spec:
   selector:
     app: minio
   ports:
-    - protocol: TCP
+    - name: minio
+      protocol: TCP
       port: 9000
       targetPort: 9000
+    - name: mino-admin
+      protocol: TCP
+      port: 9001
+      targetPort: 9001

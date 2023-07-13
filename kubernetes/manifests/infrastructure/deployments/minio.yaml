@@ -18,6 +18,8 @@ spec:
           args:
             - server
             - /data
+            - --console-address
+            - :9001
           envFrom:
             - secretRef:
                 name: minio
