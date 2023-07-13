@@ -4,4 +4,7 @@ metadata:
   name: console-auth
 spec:
   basicAuth:
+    headerField: x-console-auth
+    realm: console
+    removeHeader: true
     secret: console-auth
