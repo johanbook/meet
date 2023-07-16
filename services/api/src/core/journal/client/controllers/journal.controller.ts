@@ -1,4 +1,4 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, Query } from "@nestjs/common";
 import { QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
@@ -11,7 +11,7 @@ export class JournalController {
   constructor(private queryBus: QueryBus) {}
 
   @Get()
-  async getJournal(): Promise<JournalDetails> {
-    return await this.queryBus.execute(new GetJournalQuery());
+  async getJournal(@Query() query: GetJournalQuery): Promise<JournalDetails> {
+    return await this.queryBus.execute(query);
   }
 }
