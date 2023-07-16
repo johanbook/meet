@@ -9,8 +9,7 @@ _For you who want to meet someone_
 **meet** is an app for meeting other people based on your location, leveraging
 machine learning to find your perfect match.
 
-To run the project locally, see
-the [contribution guide](./CONTRIBUTING.md).
+To run the project locally, see the [contribution guide](./CONTRIBUTING.md).
 
 ## Features
 
@@ -19,6 +18,7 @@ The software includes builtin opinionated frameworks for the following:
 - [Authorization](./docs/authorization.md)
 - [Classifications](./docs/classifications.md)
 - [Database migrations](./docs/migrations.md)
+- [Filtering, sorting and pagination when querying data](./docs/querying.md)
 - [Journaling](./docs/journaling.md)
 - [Logging](./docs/logging.md)
 - [Seeding](./docs/seeding.md)
