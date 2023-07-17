@@ -4,8 +4,11 @@ import { Box, Button, Typography } from "@mui/material";
 
 import { Center } from "src/components/ui/Center";
 import { CONFIG } from "src/config";
+import { useTranslation } from "src/core/i18n";
 
 export function LandingPageComponent(): React.ReactElement {
+  const { t } = useTranslation();
+
   return (
     <Box
       sx={{
@@ -17,12 +20,12 @@ export function LandingPageComponent(): React.ReactElement {
     >
       <Box>
         <Typography color="primary" gutterBottom variant="h3">
-          Meet someone
+          {t("landingpage.hero.text")}
         </Typography>
 
         <Center>
           <Button component="a" href={CONFIG.URLS.APP} variant="contained">
-            Sign up
+            {t("landingpage.hero.signup")}
           </Button>
         </Center>
       </Box>
