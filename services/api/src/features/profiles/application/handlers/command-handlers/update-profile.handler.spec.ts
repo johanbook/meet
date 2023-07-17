@@ -1,12 +1,12 @@
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
 import { map } from "src/utils/mapper";
 
-import { UpdateProfileCommand } from "../contracts/update-profile.command";
+import { Profile } from "../../../infrastructure/entities/profile.entity";
+import { UpdateProfileCommand } from "../../contracts/commands/update-profile.command";
 import { UpdateProfileHandler } from "./update-profile.handler";
 
 describe(UpdateProfileHandler.name, () => {

@@ -4,8 +4,8 @@ import { getRepositoryToken } from "@nestjs/typeorm";
 
 import { ApplicationModule } from "src/application/application.module";
 import { ProfilePhoto } from "src/features/photos/infrastructure/entities/profile-photo.entity";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
 
+import { Profile } from "../../infrastructure/entities/profile.entity";
 import { ProfileController } from "./profile.controller";
 
 describe.skip("ProfileController", () => {

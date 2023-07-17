@@ -3,7 +3,8 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
+
+import { Profile } from "../../infrastructure/entities/profile.entity";
 
 const CURRENT_PROFILE_CACHE_PERIOD_MS = 1000;
 

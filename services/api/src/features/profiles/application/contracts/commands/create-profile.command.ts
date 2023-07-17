@@ -3,7 +3,7 @@ import { IsAlpha, Length, IsString, ValidateNested } from "class-validator";
 
 import { DateIsBefore } from "src/core/validation/custom-validators/date-is-before.validator";
 
-import { Location } from "./location.dto";
+import { Location } from "../dtos/location.dto";
 
 export class CreateProfileCommand {
   @Type(() => Date)

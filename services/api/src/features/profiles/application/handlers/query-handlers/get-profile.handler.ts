@@ -5,12 +5,12 @@ import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
 import { ObjectStorageService } from "src/core/object-storage";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { map, mapArray } from "src/utils/mapper";
 
-import { GetProfileQuery } from "../contracts/get-profile.query";
-import { PhotoDetails } from "../contracts/photo.dto";
-import { ProfileDetails } from "../contracts/profile.dto";
+import { Profile } from "../../../infrastructure/entities/profile.entity";
+import { PhotoDetails } from "../../contracts/dtos/photo.dto";
+import { ProfileDetails } from "../../contracts/dtos/profile.dto";
+import { GetProfileQuery } from "../../contracts/queries/get-profile.query";
 
 @QueryHandler(GetProfileQuery)
 export class GetProfileHandler

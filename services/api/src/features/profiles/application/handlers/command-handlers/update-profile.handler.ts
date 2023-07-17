@@ -4,9 +4,9 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
 
-import { UpdateProfileCommand } from "../contracts/update-profile.command";
+import { Profile } from "../../../infrastructure/entities/profile.entity";
+import { UpdateProfileCommand } from "../../contracts/commands/update-profile.command";
 
 @CommandHandler(UpdateProfileCommand)
 export class UpdateProfileHandler

@@ -3,7 +3,7 @@ import { CqrsModule } from "@nestjs/cqrs";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { QueryModule } from "src/core/query/query.module";
-import { ProfileDomainModule } from "src/domain/profiles/profile-domain.module";
+import { ProfileModule } from "src/features/profiles/profile.module";
 
 import { CreateJournalEntryHandler } from "./application/handlers/command-handlers/create-journal-entry.handler";
 import { GetJournalHandler } from "./application/handlers/query-handlers/get-journal.handler";
@@ -14,7 +14,7 @@ import { JournalLogger } from "./journal.listener";
 @Module({
   imports: [
     CqrsModule,
-    ProfileDomainModule,
+    ProfileModule,
     TypeOrmModule.forFeature([JournalEntry]),
     QueryModule,
   ],

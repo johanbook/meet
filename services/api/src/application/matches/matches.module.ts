@@ -2,8 +2,8 @@ import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { ObjectStorageModule } from "src/core/object-storage/object-storage.module";
-import { ProfileDomainModule } from "src/domain/profiles/profile-domain.module";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
+import { Profile } from "src/features/profiles";
+import { ProfileModule } from "src/features/profiles/profile.module";
 import { Match } from "src/infrastructure/database/views/matches.view";
 
 import { GetMatchesHandler } from "./queryHandlers/get-matches.handler";
@@ -11,7 +11,7 @@ import { GetMatchesHandler } from "./queryHandlers/get-matches.handler";
 @Module({
   imports: [
     ObjectStorageModule,
-    ProfileDomainModule,
+    ProfileModule,
     TypeOrmModule.forFeature([Match, Profile]),
   ],
   controllers: [],

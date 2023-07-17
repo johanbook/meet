@@ -2,8 +2,7 @@ import { Repository } from "typeorm";
 
 import { ObjectStorageService } from "src/core/object-storage";
 import { createObjectStorageServiceMock } from "src/core/object-storage/test/mocks/object-storage.service.mock";
-import { CurrentProfileService } from "src/domain/profiles/services/current-profile.service";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
+import { CurrentProfileService, Profile } from "src/features/profiles";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 import { map } from "src/utils/mapper";
 

@@ -2,12 +2,12 @@ import { Body, Controller, Get, Post } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
-import { CheckIfProfileExistsQuery } from "src/application/profile/contracts/check-if-profile-exists.query";
-import { CreateProfileCommand } from "src/application/profile/contracts/create-profile.command";
-import { GetProfileQuery } from "src/application/profile/contracts/get-profile.query";
-import { GetProfilesNearbyQuery } from "src/application/profile/contracts/get-profiles-nearby.query";
-import { ProfileDetails } from "src/application/profile/contracts/profile.dto";
-import { UpdateProfileCommand } from "src/application/profile/contracts/update-profile.command";
+import { CreateProfileCommand } from "../../application/contracts/commands/create-profile.command";
+import { UpdateProfileCommand } from "../../application/contracts/commands/update-profile.command";
+import { ProfileDetails } from "../../application/contracts/dtos/profile.dto";
+import { CheckIfProfileExistsQuery } from "../../application/contracts/queries/check-if-profile-exists.query";
+import { GetProfileQuery } from "../../application/contracts/queries/get-profile.query";
+import { GetProfilesNearbyQuery } from "../../application/contracts/queries/get-profiles-nearby.query";
 
 @Controller("profile")
 @ApiTags("profile")

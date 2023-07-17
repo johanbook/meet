@@ -4,11 +4,11 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
-import { ProfileService } from "src/domain/profiles/services/profile.service";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { Logger } from "src/infrastructure/logger.service";
 
-import { CreateProfileCommand } from "../contracts/create-profile.command";
+import { ProfileService } from "../../../domain/services/profile.service";
+import { Profile } from "../../../infrastructure/entities/profile.entity";
+import { CreateProfileCommand } from "../../contracts/commands/create-profile.command";
 
 @CommandHandler(CreateProfileCommand)
 export class CreateProfileHandler
