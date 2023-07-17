@@ -1,7 +1,7 @@
 import { INestApplication } from "@nestjs/common";
 import { SwaggerModule, DocumentBuilder, OpenAPIObject } from "@nestjs/swagger";
 
-import { Logger } from "src/infrastructure/logger.service";
+import { Logger } from "src/core/logging";
 
 const APP_NAME = "Meet";
 const APP_VERSION = process.env.npm_package_version;

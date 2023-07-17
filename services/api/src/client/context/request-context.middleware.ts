@@ -8,7 +8,7 @@ import {
 import { FastifyRequest, FastifyReply } from "fastify";
 import { AsyncLocalStorage } from "node:async_hooks";
 
-import { Logger } from "src/infrastructure/logger.service";
+import { Logger } from "src/core/logging";
 
 import { AlsModule, REQUEST_CONTEXT_KEY } from "./als.module";
 import { RequestContext } from "./request-context.interface";

@@ -6,7 +6,7 @@ import {
 } from "@nestjs/websockets";
 import { Socket } from "socket.io";
 
-import { Logger } from "src/infrastructure/logger.service";
+import { Logger } from "src/core/logging";
 
 import { INotification } from "./types";
 

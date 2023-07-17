@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { CommandBus, ICommand } from "@nestjs/cqrs";
 
-import { Logger } from "src/infrastructure/logger.service";
+import { Logger } from "./domain/services/logger.service";
 
 @Injectable()
 export class CommandLogger {

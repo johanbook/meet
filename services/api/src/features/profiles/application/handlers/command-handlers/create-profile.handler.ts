@@ -4,7 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
-import { Logger } from "src/infrastructure/logger.service";
+import { Logger } from "src/core/logging";
 
 import { ProfileService } from "../../../domain/services/profile.service";
 import { Profile } from "../../../infrastructure/entities/profile.entity";

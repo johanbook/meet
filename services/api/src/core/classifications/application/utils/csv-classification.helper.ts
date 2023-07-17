@@ -3,7 +3,7 @@ import * as path from "node:path";
 import { DataSource } from "typeorm";
 
 import { MigrationError } from "src/core/error-handling";
-import { Logger } from "src/infrastructure/logger.service";
+import { Logger } from "src/core/logging";
 import { readAndParseCsv } from "src/utils/csv-parser.helper";
 
 const logger = new Logger("CsvClassifications");

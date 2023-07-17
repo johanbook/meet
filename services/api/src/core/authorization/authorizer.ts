@@ -1,4 +1,4 @@
-import { Logger } from "src/infrastructure/logger.service";
+import { Logger } from "src/core/logging";
 
 import { ApplicationError } from "../error-handling";
 import { AUTHORIZATION_ALS } from "./client/context/authorization-als.module";

@@ -8,7 +8,7 @@ import {
 import { HttpAdapterHost } from "@nestjs/core";
 import { v4 as uuidv4 } from "uuid";
 
-import { Logger } from "src/infrastructure/logger.service";
+import { Logger } from "src/core/logging";
 
 @Catch()
 export class InternalExceptionFilter implements ExceptionFilter {

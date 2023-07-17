@@ -9,6 +9,7 @@ import { ClassificationsModule } from "./core/classifications/classifications.mo
 import { ErrorHandlingModule } from "./core/error-handling/error-handling.module";
 import { HealthChecksModule } from "./core/health-checks/health-checks.module";
 import { JournalModule } from "./core/journal/journal.module";
+import { LoggingModule } from "./core/logging/logging.module";
 import { NotificationModule } from "./core/notifications/notification.module";
 import { minioOptions } from "./core/object-storage/minio.config";
 import { ChatModule } from "./features/chat/chat.module";
@@ -23,8 +24,9 @@ import { dataSourceOptions } from "./infrastructure/database/data-source.config"
     ChatModule,
     ClassificationsModule,
     ErrorHandlingModule,
-    JournalModule,
     HealthChecksModule,
+    JournalModule,
+    LoggingModule,
     NotificationModule,
     ScheduleModule.forRoot(),
     RequestContextModule,
