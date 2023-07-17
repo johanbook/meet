@@ -3,10 +3,10 @@ import { Body, Controller, Delete, Post } from "@nestjs/common";
 import { CommandBus } from "@nestjs/cqrs";
 import { ApiBody, ApiConsumes, ApiTags } from "@nestjs/swagger";
 
-import { AddPhotoCommand } from "src/application/photos/contracts/add-photo.command";
-import { RemovePhotoCommand } from "src/application/photos/contracts/remove-photo.command";
+import { UploadedImage } from "src/client/decorators/uploaded-image.decorator";
 
-import { UploadedImage } from "../decorators/uploaded-image.decorator";
+import { RemovePhotoCommand } from "../..//application/contracts/commands/remove-photo.command";
+import { AddPhotoCommand } from "../../application/contracts/commands/add-photo.command";
 
 @Controller("photos")
 @ApiTags("photos")

@@ -5,9 +5,9 @@ import { Repository } from "typeorm";
 
 import { ObjectStorageService } from "src/core/object-storage";
 import { CurrentProfileService } from "src/domain/profiles/services/current-profile.service";
-import { ProfilePhoto } from "src/infrastructure/database/entities/profile-photo.entity";
 
-import { RemovePhotoCommand } from "../contracts/remove-photo.command";
+import { ProfilePhoto } from "../../../infrastructure/entities/profile-photo.entity";
+import { RemovePhotoCommand } from "../../contracts/commands/remove-photo.command";
 
 @CommandHandler(RemovePhotoCommand)
 export class RemovePhotoHandler

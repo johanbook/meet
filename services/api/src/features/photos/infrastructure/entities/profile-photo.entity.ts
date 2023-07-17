@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
-import { Profile } from "./profile.entity";
+import { Profile } from "src/infrastructure/database/entities//profile.entity";
 
 @Entity()
 export class ProfilePhoto {

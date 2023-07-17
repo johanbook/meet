@@ -12,6 +12,7 @@ import { JournalModule } from "./core/journal/journal.module";
 import { NotificationModule } from "./core/notifications/notification.module";
 import { minioOptions } from "./core/object-storage/minio.config";
 import { ChatModule } from "./features/chat/chat.module";
+import { PhotosModule } from "./features/photos/photos.module";
 import { SettingsModule } from "./features/settings/settings.module";
 import { WingmanModule } from "./features/wingman/wingman.module";
 import { dataSourceOptions } from "./infrastructure/database/data-source.config";
@@ -27,6 +28,7 @@ import { dataSourceOptions } from "./infrastructure/database/data-source.config"
     ScheduleModule.forRoot(),
     RequestContextModule,
     MinioModule.register({ ...minioOptions, isGlobal: true }),
+    PhotosModule,
     TypeOrmModule.forRoot({ ...dataSourceOptions, autoLoadEntities: true }),
     ClientModule,
     SettingsModule,
