@@ -1,5 +1,6 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { Provider as ReduxProvider } from "react-redux";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { SnackbarProvider } from "notistack";
@@ -7,6 +8,7 @@ import { SnackbarProvider } from "notistack";
 import "./App.css";
 import { Router } from "./Router";
 import { NotificationProvider } from "./core/notifications";
+import { store } from "./core/redux/store";
 import { ThemeProvider } from "./core/theme";
 import { Logger } from "./logger";
 import { AuthenticationGuard } from "./pages/AuthenticationGuard";
@@ -43,16 +45,18 @@ const QUERY_CLIENT = new QueryClient({
 
 export function App(): React.ReactElement {
   return (
-    <QueryClientProvider client={QUERY_CLIENT}>
-      <CssBaseline />
-      <ThemeProvider>
-        <AuthenticationGuard>
-          <NotificationProvider>
-            <Router />
-            <SnackbarProvider dense />
-          </NotificationProvider>
-        </AuthenticationGuard>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <ReduxProvider store={store}>
+      <QueryClientProvider client={QUERY_CLIENT}>
+        <CssBaseline />
+        <ThemeProvider>
+          <AuthenticationGuard>
+            <NotificationProvider>
+              <Router />
+              <SnackbarProvider dense />
+            </NotificationProvider>
+          </AuthenticationGuard>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </ReduxProvider>
   );
 }
