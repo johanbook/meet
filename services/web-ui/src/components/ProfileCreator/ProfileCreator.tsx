@@ -6,8 +6,8 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { CreateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
 import { config } from "src/config";
+import { useSnackbar } from "src/core/snackbar";
 import { useCurrentLocation } from "src/hooks/useCurrentLocation";
-import { useSnackbar } from "src/hooks/useSnackbar";
 
 import { Center } from "../ui/Center";
 

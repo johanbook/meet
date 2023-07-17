@@ -3,8 +3,8 @@ import { useMutation } from "react-query";
 
 import { CreateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
+import { useSnackbar } from "src/core/snackbar";
 import { useCurrentLocation } from "src/hooks/useCurrentLocation";
-import { useSnackbar } from "src/hooks/useSnackbar";
 
 import { ProfileCreationPageComponent } from "./ProfileCreationPage.component";
 

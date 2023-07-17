@@ -6,7 +6,7 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 
 import { ProfileDetails, UpdateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
-import { useSnackbar } from "src/hooks/useSnackbar";
+import { useSnackbar } from "src/core/snackbar";
 
 import { ProfilePhotosEditor } from "../ProfilePhotosEditor";
 

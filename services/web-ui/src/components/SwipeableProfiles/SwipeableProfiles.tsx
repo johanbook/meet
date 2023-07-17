@@ -3,7 +3,7 @@ import { useMutation } from "react-query";
 
 import { ProfileDetails, SwipeCommand } from "src/api";
 import { swipesApi } from "src/apis";
-import { useSnackbar } from "src/hooks/useSnackbar";
+import { useSnackbar } from "src/core/snackbar";
 
 import { SwipeableProfileDetails } from "../SwipeableProfileDetails";
 import { SwipeableList } from "../ui/SwipeableList/SwipeableList";
