@@ -61,3 +61,52 @@ This project use the following log levels:
   state or application termination. Use them for severe failures impacting
   system stability or data integrity. Log fatal events just before the
   application exits or shuts down abruptly.
+
+## Guide
+
+### Backend
+
+The logger can be utilized as shown in the example below. Notice that there
+should always be a `msg` field with a message describing the loggedevent.
+
+```ts
+import { Injectable } from "@nestjs/common";
+
+import { Logger } from "src/core/logging";
+
+@Injectable()
+export class MonkeyService {
+  private logger = new Logger(CommandLogger.name);
+
+  pingMonkey(name: string) {
+    this.logger.debug({
+      msg: "Monkey was pinged",
+      name,
+    });
+  }
+}
+```
+
+### Frontend
+
+Logging is handled similarly in the frontend as in the backend. Events that are
+logged in the frontend are shipped to the system tracking service and can be
+queried in the same manner as other logs.
+
+```tsx
+import React from "react";
+
+import { Logger } from "src/core/logging";
+
+const logger = new Logger(CommandLogger.name);
+
+export function MonkeyComponent(): React.ReactElement {
+  function handleClick(): void {
+    logger.debug({
+      msg: "I was clicked",
+    });
+  }
+
+  return <span onClick={handleClick}>Click me!</span>;
+}
+```
