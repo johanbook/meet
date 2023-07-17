@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
+import { registerI18n } from "src/core/i18n";
+import { registerExceptionLogger } from "src/core/logging/logger";
+
 import { App } from "./App";
 import { config } from "./config";
-import { registerExceptionLogger } from "./core/logging/logger";
-import { registerI18n } from "./i18n";
 import reportWebVitals from "./utils/reportWebVitals";
 
 registerI18n();
