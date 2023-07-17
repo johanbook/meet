@@ -2,9 +2,9 @@ import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { NotificationModule } from "src/core/notifications/notification.module";
-import { ProfileDomainModule } from "src/domain/profiles/profile-domain.module";
 import { SwipesDomainModule } from "src/domain/swipes/swipes-domain.module";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
+import { Profile } from "src/features/profiles";
+import { ProfileModule } from "src/features/profiles/profile.module";
 import { Swipe } from "src/infrastructure/database/entities/swipe.entity";
 
 import { SwipeHandler } from "./commandHandlers/swipe.handler";
@@ -13,7 +13,7 @@ import { NotifyProfilesOnNewMatch } from "./eventHandlers/notify-profiles-on-new
 @Module({
   imports: [
     NotificationModule,
-    ProfileDomainModule,
+    ProfileModule,
     SwipesDomainModule,
     TypeOrmModule.forFeature([Profile, Swipe]),
   ],

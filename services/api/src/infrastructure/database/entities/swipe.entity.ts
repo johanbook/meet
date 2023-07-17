@@ -7,7 +7,7 @@ import {
   Unique,
 } from "typeorm";
 
-import { Profile } from "./profile.entity";
+import { Profile } from "src/features/profiles/infrastructure/entities/profile.entity";
 
 @Entity()
 @Unique(["profile", "shownProfile"])

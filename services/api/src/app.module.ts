@@ -13,6 +13,7 @@ import { NotificationModule } from "./core/notifications/notification.module";
 import { minioOptions } from "./core/object-storage/minio.config";
 import { ChatModule } from "./features/chat/chat.module";
 import { PhotosModule } from "./features/photos/photos.module";
+import { ProfileModule } from "./features/profiles/profile.module";
 import { SettingsModule } from "./features/settings/settings.module";
 import { WingmanModule } from "./features/wingman/wingman.module";
 import { dataSourceOptions } from "./infrastructure/database/data-source.config";
@@ -29,6 +30,7 @@ import { dataSourceOptions } from "./infrastructure/database/data-source.config"
     RequestContextModule,
     MinioModule.register({ ...minioOptions, isGlobal: true }),
     PhotosModule,
+    ProfileModule,
     TypeOrmModule.forRoot({ ...dataSourceOptions, autoLoadEntities: true }),
     ClientModule,
     SettingsModule,

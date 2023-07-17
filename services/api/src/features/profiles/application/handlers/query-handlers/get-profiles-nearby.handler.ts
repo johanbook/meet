@@ -5,12 +5,12 @@ import { Not, Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
 import { ObjectStorageService } from "src/core/object-storage";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { mapArray } from "src/utils/mapper";
 
-import { GetProfilesNearbyQuery } from "../contracts/get-profiles-nearby.query";
-import { PhotoDetails } from "../contracts/photo.dto";
-import { ProfileDetails } from "../contracts/profile.dto";
+import { Profile } from "../../../infrastructure/entities/profile.entity";
+import { PhotoDetails } from "../../contracts/dtos/photo.dto";
+import { ProfileDetails } from "../../contracts/dtos/profile.dto";
+import { GetProfilesNearbyQuery } from "../../contracts/queries/get-profiles-nearby.query";
 
 const DISTANCE = 100;
 

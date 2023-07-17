@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
+import { Profile } from "src/features/profiles";
 
 import { NotificationGateway } from "./notification.gateway";
 import { NotificationService } from "./notification.service";

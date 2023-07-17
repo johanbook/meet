@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { In, Repository } from "typeorm";
 
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
+import { Profile } from "src/features/profiles";
 
 import { NotificationGateway } from "./notification.gateway";
 import { INotification } from "./types";

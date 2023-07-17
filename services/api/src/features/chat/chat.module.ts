@@ -3,7 +3,7 @@ import { CqrsModule } from "@nestjs/cqrs";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { NotificationModule } from "src/core/notifications/notification.module";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
+import { Profile } from "src/features/profiles";
 
 import { PostChatMessageHandler } from "./application/handlers/command-handlers/post-chat-message.handler";
 import { NotifyReceiverOnPostedChatMessageHandler } from "./application/handlers/event-handlers/notify-receiver-on-posted-message.handler";

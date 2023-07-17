@@ -3,9 +3,9 @@ import { EventBus } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { map } from "src/utils/mapper";
 
+import { Profile } from "../../infrastructure/entities/profile.entity";
 import { ProfileCreatedEvent } from "../events/profile-created.event";
 
 @Injectable()

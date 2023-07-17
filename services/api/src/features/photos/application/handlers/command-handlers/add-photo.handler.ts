@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { ObjectStorageService } from "src/core/object-storage";
-import { CurrentProfileService } from "src/domain/profiles/services/current-profile.service";
+import { CurrentProfileService } from "src/features/profiles";
 
 import { ProfilePhoto } from "../../../infrastructure/entities/profile-photo.entity";
 import { AddPhotoCommand } from "../../contracts/commands/add-photo.command";

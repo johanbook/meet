@@ -4,7 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
+import { Profile } from "src/features/profiles";
 
 import { ChatMessageService } from "../../../domain/services/chat-message.service";
 import { ChatMessage } from "../../../infrastructure/entities/chat-message.entity";

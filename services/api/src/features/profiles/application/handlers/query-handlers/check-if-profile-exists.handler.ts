@@ -3,9 +3,9 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
 
-import { CheckIfProfileExistsQuery } from "../contracts/check-if-profile-exists.query";
+import { Profile } from "../../../infrastructure/entities/profile.entity";
+import { CheckIfProfileExistsQuery } from "../../contracts/queries/check-if-profile-exists.query";
 
 @QueryHandler(CheckIfProfileExistsQuery)
 export class CheckIfProfileExistsHandler
