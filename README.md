@@ -19,6 +19,7 @@ The software includes builtin opinionated frameworks for the following:
 - [Classifications](./docs/classifications.md)
 - [Database migrations](./docs/migrations.md)
 - [Filtering, sorting and pagination when querying data](./docs/querying.md)
+- [Internationalization and localization](./docs/i18n.md)
 - [Journaling](./docs/journaling.md)
 - [Logging](./docs/logging.md)
 - [Seeding](./docs/seeding.md)
