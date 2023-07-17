@@ -1,7 +1,7 @@
 import { Socket, io } from "socket.io-client";
 import { v4 as uuid } from "uuid";
 
-import { Logger } from "src/logger";
+import { Logger } from "src/core/logging";
 
 import { NotificationEventsConstants } from "./constants/notification-events.constants";
 import { INotification } from "./types/notification.interface";

@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 
 import { App } from "./App";
 import { config } from "./config";
+import { registerExceptionLogger } from "./core/logging/logger";
 import { registerI18n } from "./i18n";
-import { registerExceptionLogger } from "./logger";
 import reportWebVitals from "./utils/reportWebVitals";
 
 registerI18n();
