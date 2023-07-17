@@ -26,10 +26,14 @@ export class GetJournalHandler
 
     const foundJournalEntries = await this.queryService.find(
       this.journalEntries,
-      query,
       {
-        where: { userId: userId },
-        order: { created: "desc" },
+        default: {
+          order: { created: "desc" },
+        },
+        query,
+        required: {
+          where: { userId: userId },
+        },
       },
     );
 
