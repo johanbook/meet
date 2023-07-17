@@ -2,8 +2,8 @@
 
 **Filtering and sorting are currently under construction**
 
-The system comes with builtin tools for pagination, filtering and sorting by
-default.
+The system comes with builtin tools for pagination, filtering and sorting for
+efficiently displaying tabular data.
 
 ## Guide
 
@@ -40,7 +40,7 @@ export class GetMonkeyHandler
   ) {}
 
   async execute(query: GetMonkiesQuery) {
-    const foundMonkies = await this.queryService.find(this.monkies, query);
+    const foundMonkies = await this.queryService.find(this.monkies, { query });
 
     return mapToMonkeyDetails({ entries: foundMonkies });
   }
