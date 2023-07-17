@@ -1,6 +1,6 @@
 import { Logger as TypeOrmBaseLogger } from "typeorm";
 
-import { Logger } from "./logger.service";
+import { Logger } from "src/core/logging";
 
 export class TypeOrmLogger implements TypeOrmBaseLogger {
   private logger = new Logger(TypeOrmLogger.name);

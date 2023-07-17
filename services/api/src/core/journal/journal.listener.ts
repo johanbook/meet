@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { CommandBus, ICommand } from "@nestjs/cqrs";
 
-import { Logger } from "src/infrastructure/logger.service";
+import { Logger } from "src/core/logging";
 import { map } from "src/utils/mapper";
 
 import { CreateJournalEntryCommand } from "./application/contracts/commands/create-journal-entry.command";
