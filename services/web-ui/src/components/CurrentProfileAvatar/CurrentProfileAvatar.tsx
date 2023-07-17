@@ -5,7 +5,7 @@ import { AccountCircle } from "@mui/icons-material";
 import { Avatar, Button } from "@mui/material";
 
 import { photosApi } from "src/apis";
-import { useSnackbar } from "src/hooks/useSnackbar";
+import { useSnackbar } from "src/core/snackbar";
 
 const HEIGHT = 120;
 

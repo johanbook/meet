@@ -11,7 +11,7 @@ import {
 
 import { PhotoDetails, RemovePhotoCommand } from "src/api";
 import { photosApi } from "src/apis";
-import { useSnackbar } from "src/hooks/useSnackbar";
+import { useSnackbar } from "src/core/snackbar";
 
 export interface ProfilePhotoComponentProps {
   onRefresh: () => void;
