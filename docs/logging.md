@@ -96,11 +96,11 @@ queried in the same manner as other logs.
 ```tsx
 import React from "react";
 
-import { Logger } from "src/core/logging";
-
-const logger = new Logger(CommandLogger.name);
+import { useLogger } from "src/core/logging";
 
 export function MonkeyComponent(): React.ReactElement {
+  const logger = useLogger(MonkeyComponent.name);
+
   function handleClick(): void {
     logger.debug({
       msg: "I was clicked",
