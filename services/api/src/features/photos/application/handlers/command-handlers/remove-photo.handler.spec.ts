@@ -3,12 +3,12 @@ import { Repository } from "typeorm";
 import { ObjectStorageService } from "src/core/object-storage";
 import { createObjectStorageServiceMock } from "src/core/object-storage/test/mocks/object-storage.service.mock";
 import { CurrentProfileService } from "src/domain/profiles/services/current-profile.service";
-import { ProfilePhoto } from "src/infrastructure/database/entities/profile-photo.entity";
 import { Profile } from "src/infrastructure/database/entities/profile.entity";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 import { map } from "src/utils/mapper";
 
-import { RemovePhotoCommand } from "../contracts/remove-photo.command";
+import { ProfilePhoto } from "../../../infrastructure/entities/profile-photo.entity";
+import { RemovePhotoCommand } from "../../contracts/commands/remove-photo.command";
 import { RemovePhotoHandler } from "./remove-photo.handler";
 
 describe(RemovePhotoHandler.name, () => {
