@@ -9,8 +9,11 @@ import {
 } from "@mui/material";
 
 import { CONFIG } from "src/config";
+import { useTranslation } from "src/core/i18n";
 
 export function AppBar(): React.ReactElement {
+  const { t } = useTranslation();
+
   return (
     <MuiAppBar
       color="inherit"
@@ -25,7 +28,7 @@ export function AppBar(): React.ReactElement {
         </Box>
 
         <Button component="a" href={CONFIG.URLS.APP} variant="contained">
-          Log in
+          {t("nav.login")}
         </Button>
       </Toolbar>
     </MuiAppBar>

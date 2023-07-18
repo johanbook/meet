@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useSnackbar } from "../../hooks/useSnackbar";
+import { useSnackbar } from "src/core/snackbar";
 import { NotificationEventHandler } from "./notificationEvent.handler";
 
 export const NotificationContext = React.createContext<

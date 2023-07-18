@@ -3,7 +3,7 @@ import { useMutation } from "react-query";
 
 import { PostChatMessageCommand } from "src/api";
 import { chatsApi } from "src/apis";
-import { useSnackbar } from "src/hooks/useSnackbar";
+import { useSnackbar } from "src/core/snackbar";
 
 import { ChatTextFieldComponent } from "./ChatTextField.component";
 

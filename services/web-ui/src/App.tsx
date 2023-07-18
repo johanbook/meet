@@ -5,12 +5,13 @@ import { Provider as ReduxProvider } from "react-redux";
 import CssBaseline from "@mui/material/CssBaseline";
 import { SnackbarProvider } from "notistack";
 
+import { Logger } from "src/core/logging";
+import { NotificationProvider } from "src/core/notifications";
+import { store } from "src/core/redux";
+import { ThemeProvider } from "src/core/theme";
+
 import "./App.css";
 import { Router } from "./Router";
-import { NotificationProvider } from "./core/notifications";
-import { store } from "./core/redux/store";
-import { ThemeProvider } from "./core/theme";
-import { Logger } from "./logger";
 import { AuthenticationGuard } from "./pages/AuthenticationGuard";
 
 const logger = new Logger(QueryClient.name);

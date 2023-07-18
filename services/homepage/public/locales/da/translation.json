@@ -1,0 +1,14 @@
+{
+  "landingpage": {
+    "hero": {
+      "signup": "Registrer",
+      "text": "Mød nogen"
+    }
+  },
+  "nav": {
+    "login": "Log på"
+  },
+  "page-not-found": {
+    "text": "Den side, du ledte efter, blev ikke fundet"
+  }
+}

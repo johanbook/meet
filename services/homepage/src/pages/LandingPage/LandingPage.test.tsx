@@ -12,7 +12,7 @@ describe("<LandingPage />", () => {
       </ReactQueryTestProvider>
     );
 
-    const message = await screen.findByText(/Meet/);
+    const message = await screen.findByText(/landingpage.hero.text/);
     expect(message).toBeInTheDocument();
   });
 });
