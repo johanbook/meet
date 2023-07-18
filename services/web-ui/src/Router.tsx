@@ -10,6 +10,7 @@ import { MatchesPage } from "./pages/MatchesPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { ProfileGuard } from "./pages/ProfileGuard";
 import { ProfilePage } from "./pages/ProfilePage";
+import { SettingsPage } from "./pages/SettingsPage";
 import { SwipingPage } from "./pages/SwipingPage";
 
 const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <ProfilePage />,
+      },
+      {
+        path: "/settings",
+        element: <SettingsPage />,
       },
     ],
   },
