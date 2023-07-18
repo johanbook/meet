@@ -26,6 +26,7 @@ describe(CreateSettingsHandler.name, () => {
     commandHandler = new CreateSettingsHandler(
       currentSettingsService,
       settings,
+      userIdService,
     );
   });
 
@@ -44,6 +45,7 @@ describe(CreateSettingsHandler.name, () => {
 
       expect(settings.save).toHaveBeenCalledWith({
         darkmode: false,
+        userId: "my-user-id",
       });
     });
   });
