@@ -12,7 +12,8 @@
     "start:dev": "react-scripts start",
     "start:storybook": "storybook dev -p 6006",
     "test": "jest src  --ci --coverage",
-    "test:ci": "npm run test"
+    "test:ci": "npm run test",
+    "codegen": "npx @rtk-query/codegen-openapi openapi-code-generator.config.ts"
   },
   "browserslist": {
     "production": [
@@ -37,6 +38,7 @@
     "@mui/x-date-pickers": "^6.6.0",
     "@react-spring/web": "^9.7.2",
     "@reduxjs/toolkit": "^1.9.5",
+    "@rtk-query/codegen-openapi": "^1.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
