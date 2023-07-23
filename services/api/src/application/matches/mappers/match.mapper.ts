@@ -1,5 +1,5 @@
+import { mapArray } from "src/core/mapper";
 import { Match } from "src/infrastructure/database/views/matches.view";
-import { mapArray } from "src/utils/mapper";
 
 import { MatchDetails } from "../contracts/match.dto";
 

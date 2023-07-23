@@ -1,9 +1,9 @@
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
+import { map } from "src/core/mapper";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
-import { map } from "src/utils/mapper";
 
 import { ProfileService } from "../../../domain/services/profile.service";
 import { Profile } from "../../../infrastructure/entities/profile.entity";

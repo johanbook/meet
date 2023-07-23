@@ -1,4 +1,4 @@
-import { mapArray } from "src/utils/mapper";
+import { mapArray } from "src/core/mapper";
 
 import { Classification } from "../../infrastructure/entities/classification.entity";
 import { ClassificationDetails } from "../contracts/dtos/classification.dto";

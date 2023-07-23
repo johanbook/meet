@@ -1,10 +1,10 @@
 import { Repository } from "typeorm";
 
+import { map } from "src/core/mapper";
 import { ObjectStorageService } from "src/core/object-storage";
 import { createObjectStorageServiceMock } from "src/core/object-storage/test/mocks/object-storage.service.mock";
 import { CurrentProfileService } from "src/features/profiles";
 import { createMockRepository } from "src/test/mocks/repository.mock";
-import { map } from "src/utils/mapper";
 
 import { ProfilePhoto } from "../../../infrastructure/entities/profile-photo.entity";
 import { AddPhotoCommand } from "../../contracts/commands/add-photo.command";
