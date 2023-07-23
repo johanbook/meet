@@ -3,7 +3,7 @@ import { EventBus } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { map } from "src/utils/mapper";
+import { map } from "src/core/mapper";
 
 import { ChatMessage } from "../../infrastructure/entities/chat-message.entity";
 import { ChatMessageSentEvent } from "../events/chat-message-sent.event";

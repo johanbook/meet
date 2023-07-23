@@ -2,10 +2,10 @@ import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { map } from "src/core/mapper";
 import { ObjectStorageService } from "src/core/object-storage";
 import { CurrentProfileService } from "src/features/profiles";
 import { Match } from "src/infrastructure/database/views/matches.view";
-import { map } from "src/utils/mapper";
 
 import { GetMatchesQuery } from "../contracts/get-matches.query";
 import { AllMatchesDetails } from "../contracts/match.dto";

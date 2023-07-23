@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { DataSource } from "typeorm";
 
 import { Logger } from "src/core/logging";
-import { map } from "src/utils/mapper";
+import { map } from "src/core/mapper";
 
 import {
   HealthCheckDetails,

@@ -1,7 +1,7 @@
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 
+import { map } from "src/core/mapper";
 import { CurrentSettingsService } from "src/features/settings/domain/services/current-settings.service";
-import { map } from "src/utils/mapper";
 
 import { SettingsDetails } from "../../contracts/dtos/settings-details.dto";
 import { GetSettingsQuery } from "../../contracts/queries/get-settings.query";

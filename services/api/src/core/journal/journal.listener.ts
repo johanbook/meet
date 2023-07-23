@@ -3,7 +3,7 @@ import { Reflector } from "@nestjs/core";
 import { CommandBus, ICommand } from "@nestjs/cqrs";
 
 import { Logger } from "src/core/logging";
-import { map } from "src/utils/mapper";
+import { map } from "src/core/mapper";
 
 import { CreateJournalEntryCommand } from "./application/contracts/commands/create-journal-entry.command";
 import { IGNORE_JOURNAL_KEY } from "./no-journal.decorator";

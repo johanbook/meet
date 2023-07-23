@@ -1,11 +1,11 @@
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
+import { map } from "src/core/mapper";
 import { CurrentSettingsService } from "src/features/settings/domain/services/current-settings.service";
 import { Settings } from "src/features/settings/infrastructure/entities/settings.entity";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
-import { map } from "src/utils/mapper";
 
 import { UpdateSettingsCommand } from "../../contracts/commands/update-settings.comamnd";
 import { UpdateSettingsHandler } from "./update-settings.handler";

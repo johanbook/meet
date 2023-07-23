@@ -9,7 +9,7 @@ import {
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
-import { map } from "src/utils/mapper";
+import { map } from "src/core/mapper";
 
 import { PostChatMessageCommand } from "../../application/contracts/commands/post-chat-message.command";
 import { ChatMessageDetails } from "../../application/contracts/dtos/chat.dto";

@@ -3,8 +3,8 @@ import { EventBus } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { map } from "src/core/mapper";
 import { Swipe } from "src/infrastructure/database/entities/swipe.entity";
-import { map } from "src/utils/mapper";
 
 import { MatchMadeEvent } from "../events/match-made.event";
 
