@@ -24,6 +24,7 @@ The software includes builtin opinionated frameworks for the following:
 - [Logging](./docs/logging.md)
 - [Seeding](./docs/seeding.md)
 - [Testing](./docs/testing.md)
+- [Validation](./docs/validation.md)
 
 ## Other system documentation
 
