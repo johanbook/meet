@@ -1,9 +1,9 @@
 import { MultipartFile } from "@fastify/multipart";
 import { Body, Controller, Delete, Post } from "@nestjs/common";
 import { CommandBus } from "@nestjs/cqrs";
-import { ApiBody, ApiConsumes, ApiTags } from "@nestjs/swagger";
+import { ApiTags } from "@nestjs/swagger";
 
-import { UploadedImage } from "src/client/decorators/uploaded-image.decorator";
+import { Multipart, UploadedImage } from "src/core/multipart";
 
 import { RemovePhotoCommand } from "../..//application/contracts/commands/remove-photo.command";
 import { AddPhotoCommand } from "../../application/contracts/commands/add-photo.command";
@@ -14,8 +14,7 @@ export class PhotosController {
   constructor(private commandBus: CommandBus) {}
 
   @Post("add")
-  @ApiConsumes("multipart/form-data")
-  @ApiBody({
+  @Multipart({
     schema: {
       type: "object",
       properties: {

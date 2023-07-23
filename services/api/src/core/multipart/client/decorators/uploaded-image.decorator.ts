@@ -10,7 +10,7 @@ export const UploadedImage = createParamDecorator(
     const file = await request.file();
 
     if (!file.mimetype.startsWith("image")) {
-      throw new BadRequestException("Invalid file format");
+      throw new BadRequestException("Invalid image format");
     }
 
     return file;
