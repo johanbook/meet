@@ -2,15 +2,28 @@
 
 **The authorization is currently under construction**
 
-The software system comes with a RBAC-based authorization framework. The system
+The software system comes with a RBAC-based authorization framework. 
+
+The system
 uses an authorization-first approach, meaning permissions has to be specified
 (or disabled) for every action taken in the system.
+
+## Types of resources
+
+There are three types of resources in the system:
+
+- **Individual resources** which are owned by a single account. Examples are account settings.
+- **Organizational resources** which are owned by one organization.
+- **System resources** that are owned by the system, for example
+  [classifications](./classifications.md).
+
+Authorization works differently for the different kinds of resources.
 
 ## Guide
 
 When the authorization module is enabled, all command and query handlers have to
 specify which permissions are required when being executed. If a handler does
-not require any authorization checks, this has to be specified manually.
+not require any authorization checks, this has to be specified explicitly.
 
 ### Available roles
 
@@ -18,8 +31,8 @@ Roles are defined in `./services/api/src/core/authorization/roles.ts`
 
 ```ts
 export enum Roles {
-  admin,
-  viewer,
+ member,
+  owner,
 }
 ```
 
@@ -52,7 +65,7 @@ export class ProfilePermissions extends PermissionsDefinition {
 }
 ```
 
-## Requiring permissions
+### Requiring permissions
 
 An authorization check is added to command and query using the
 `RequirePermissions` keyword like so:
@@ -64,7 +77,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { RequirePermissions, Permission } from "src/core/authorization";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
+import { Profile } from "src/features/profiles";
 
 import { UpdateProfileCommand } from "../contracts/update-profile.command";
 
