@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
@@ -15,20 +15,23 @@ export class ProfileController {
   constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
 
   @Get()
-  async getCurrentProfile(): Promise<ProfileDetails> {
-    const query = new GetProfileQuery();
+  async getCurrentProfile(
+    @Query() query: GetProfileQuery,
+  ): Promise<ProfileDetails> {
     return await this.queryBus.execute(query);
   }
 
   @Get("/exists")
-  async checkIfFileExists(): Promise<boolean> {
-    const query = new CheckIfProfileExistsQuery();
+  async checkIfProfileExists(
+    @Query() query: CheckIfProfileExistsQuery,
+  ): Promise<boolean> {
     return await this.queryBus.execute(query);
   }
 
   @Get("/nearby")
-  async getProfilesNearby(): Promise<ProfileDetails[]> {
-    const query = new GetProfilesNearbyQuery();
+  async getProfilesNearby(
+    @Query() query: GetProfilesNearbyQuery,
+  ): Promise<ProfileDetails[]> {
     return await this.queryBus.execute(query);
   }
 

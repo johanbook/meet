@@ -1,1 +1,1 @@
-export { map, mapArray } from "./mapper";
+export { map, mapAndValidate, mapAndValidateArray, mapArray } from "./mapper";
