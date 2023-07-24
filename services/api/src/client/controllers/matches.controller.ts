@@ -1,4 +1,4 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, Query } from "@nestjs/common";
 import { QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
@@ -11,8 +11,9 @@ export class MatchesController {
   constructor(private queryBus: QueryBus) {}
 
   @Get()
-  async getMatches(): Promise<AllMatchesDetails> {
-    const query = new GetMatchesQuery();
+  async getMatches(
+    @Query() query: GetMatchesQuery,
+  ): Promise<AllMatchesDetails> {
     return await this.queryBus.execute(query);
   }
 }

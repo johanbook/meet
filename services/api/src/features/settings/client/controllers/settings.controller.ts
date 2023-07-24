@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
@@ -12,8 +12,9 @@ export class SettingsController {
   constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
 
   @Get()
-  async getCurrentSettings(): Promise<SettingsDetails> {
-    const query = new GetSettingsQuery();
+  async getCurrentSettings(
+    @Query() query: GetSettingsQuery,
+  ): Promise<SettingsDetails> {
     return await this.queryBus.execute(query);
   }
 
