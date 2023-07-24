@@ -13,6 +13,7 @@ import { LoggingModule } from "./core/logging/logging.module";
 import { NotificationModule } from "./core/notifications/notification.module";
 import { minioOptions } from "./core/object-storage/minio.config";
 import { ChatModule } from "./features/chat/chat.module";
+import { OrganizationModule } from "./features/organizations/organization.module";
 import { PhotosModule } from "./features/photos/photos.module";
 import { ProfileModule } from "./features/profiles/profile.module";
 import { SettingsModule } from "./features/settings/settings.module";
@@ -31,6 +32,7 @@ import { dataSourceOptions } from "./infrastructure/database/data-source.config"
     ScheduleModule.forRoot(),
     RequestContextModule,
     MinioModule.register({ ...minioOptions, isGlobal: true }),
+    OrganizationModule,
     PhotosModule,
     ProfileModule,
     TypeOrmModule.forRoot({ ...dataSourceOptions, autoLoadEntities: true }),

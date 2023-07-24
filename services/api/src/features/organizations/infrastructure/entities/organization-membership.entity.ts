@@ -11,7 +11,7 @@ import { Profile } from "src/features/profiles/infrastructure/entities/profile.e
 import { Organization } from "./organization.entity";
 
 @Entity()
-export class OrganizationMember {
+export class OrganizationMembership {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -27,6 +27,6 @@ export class OrganizationMember {
   @Column()
   profileId!: number;
 
-  @ManyToOne(() => Profile, (profile) => profile.organizations)
+  @ManyToOne(() => Profile, (profile) => profile.organizationMemberships)
   profile!: Profile;
 }

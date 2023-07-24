@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 
-import { OrganizationMember } from "./organization-member.entity";
+import { OrganizationMembership } from "./organization-membership.entity";
 
 @Entity()
 export class Organization {
@@ -17,11 +17,17 @@ export class Organization {
   created!: Date;
 
   @Column({ type: "varchar", length: 512 })
-  description!: string;
+  description?: string;
 
-  @OneToMany(() => OrganizationMember, (member) => member.organization)
-  members!: OrganizationMember[];
+  @OneToMany(
+    () => OrganizationMembership,
+    (membership) => membership.organization,
+  )
+  members!: OrganizationMembership[];
 
   @Column({ type: "varchar", length: 128 })
   name!: string;
+
+  @Column()
+  personal!: boolean;
 }
