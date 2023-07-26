@@ -4,6 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
+import { ProfileService } from "src/features/profiles/domain/services/profile.service";
 
 import { Profile } from "../../../infrastructure/entities/profile.entity";
 import { UpdateProfileCommand } from "../../contracts/commands/update-profile.command";
@@ -15,6 +16,7 @@ export class UpdateProfileHandler
   constructor(
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
+    private readonly profileService: ProfileService,
     private readonly userIdService: UserIdService,
   ) {}
 
@@ -39,6 +41,6 @@ export class UpdateProfileHandler
       profile.description = command.description;
     }
 
-    await this.profiles.save(profile);
+    await this.profileService.updateProfile(profile);
   }
 }
