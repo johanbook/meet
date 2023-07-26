@@ -23,7 +23,7 @@ export class Organization {
     () => OrganizationMembership,
     (membership) => membership.organization,
   )
-  members!: OrganizationMembership[];
+  memberships!: OrganizationMembership[];
 
   @Column({ type: "varchar", length: 128 })
   name!: string;
