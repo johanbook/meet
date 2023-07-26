@@ -19,7 +19,7 @@ export function ChatPageContainer(): React.ReactElement {
   const { id } = useParams();
 
   const { error, data, isLoading, refetch } = useQuery(`chat-${id}`, () =>
-    chatsApi.getChats({ profileId: id || "" })
+    chatsApi.getChats({ profileId: Number.parseInt(id || "") })
   );
 
   useHandleNotification({

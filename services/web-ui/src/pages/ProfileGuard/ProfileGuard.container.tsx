@@ -17,7 +17,7 @@ export function ProfileGuardContainer({
 }: ProfileGuardContainerProps): React.ReactElement {
   const { error, data, isLoading, refetch } = useQuery(
     "currentProfileExists",
-    () => profileApi.checkIfFileExists()
+    () => profileApi.checkIfProfileExists()
   );
 
   if (error) {
