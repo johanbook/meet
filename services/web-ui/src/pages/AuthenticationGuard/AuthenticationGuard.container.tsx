@@ -17,7 +17,7 @@ export function AuthenticationGuardContainer({
 }: AuthenticationGuardContainerProps): React.ReactElement {
   const { error, isLoading } = useQuery(
     "authentication",
-    () => profileApi.checkIfFileExists(),
+    () => profileApi.checkIfProfileExists(),
     { retry: false }
   );
 
