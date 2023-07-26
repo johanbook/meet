@@ -2,6 +2,7 @@ import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
 import { map } from "src/core/mapper";
+import { ProfileService } from "src/features/profiles/domain/services/profile.service";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
 
@@ -12,13 +13,23 @@ import { UpdateProfileHandler } from "./update-profile.handler";
 describe(UpdateProfileHandler.name, () => {
   let commandHandler: UpdateProfileHandler;
   let profiles: Repository<Profile>;
+  let profileService: ProfileService;
   let userIdService: UserIdService;
 
   beforeEach(() => {
     profiles = createMockRepository<Profile>();
     userIdService = createUserIdServiceMock();
 
-    commandHandler = new UpdateProfileHandler(profiles, userIdService);
+    profileService = new ProfileService(
+      // TODO: Use proper EventBus mock
+      { publish: jest.fn() } as any,
+      profiles,
+    );
+    commandHandler = new UpdateProfileHandler(
+      profiles,
+      profileService,
+      userIdService,
+    );
   });
 
   describe("can update profile", () => {
