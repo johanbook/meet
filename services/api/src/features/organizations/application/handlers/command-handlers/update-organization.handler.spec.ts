@@ -3,7 +3,12 @@ import { Repository } from "typeorm";
 
 import { map } from "src/core/mapper";
 import { CurrentOrganizationService } from "src/features/organizations/domain/services/current-organization.service";
-import { createEventBusMock, createMockRepository } from "src/test/mocks";
+import { Profile } from "src/features/profiles";
+import {
+  createEventBusMock,
+  createMockRepository,
+  createUserIdServiceMock,
+} from "src/test/mocks";
 
 import { OrganizationService } from "../../../domain/services/organization.service";
 import { Organization } from "../../../infrastructure/entities/organization.entity";
@@ -21,7 +26,10 @@ describe(UpdateOrganizationHandler.name, () => {
     eventBus = createEventBusMock();
     organizations = createMockRepository<Organization>();
 
-    currentOrganizationService = new CurrentOrganizationService(organizations);
+    currentOrganizationService = new CurrentOrganizationService(
+      createMockRepository<Profile>([{} as any]),
+      createUserIdServiceMock(),
+    );
     organizationService = new OrganizationService(eventBus, organizations);
     commandHandler = new UpdateOrganizationHandler(
       currentOrganizationService,

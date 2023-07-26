@@ -24,7 +24,11 @@ describe(CreateOrganizationHandler.name, () => {
 
   describe("can create organizations", () => {
     it("should save changes to organizations", async () => {
-      const command = map(CreateOrganizationCommand, { name: "my-name" });
+      const command = map(CreateOrganizationCommand, {
+        name: "my-name",
+        personal: true,
+      });
+
       await commandHandler.execute(command);
 
       expect(organizations.save).toHaveBeenCalledWith({
