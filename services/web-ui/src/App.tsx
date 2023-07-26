@@ -30,7 +30,7 @@ const QUERY_CLIENT = new QueryClient({
     queries: {
       onError: (err) => {
         const error = err as Error;
-        logger.error("Failed to execute mutation", {
+        logger.error("Failed to execute query", {
           error: {
             message: error.message,
             stackTrace: error.stack,
