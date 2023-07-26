@@ -16,12 +16,13 @@ export class Organization {
   @CreateDateColumn()
   created!: Date;
 
-  @Column({ type: "varchar", length: 512 })
-  description?: string;
+  @Column({ type: "varchar", length: 512, default: "" })
+  description!: string;
 
   @OneToMany(
     () => OrganizationMembership,
     (membership) => membership.organization,
+    { cascade: true },
   )
   memberships!: OrganizationMembership[];
 
