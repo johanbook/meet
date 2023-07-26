@@ -1,7 +1,7 @@
 ################################
 # Build client
 ################################
-FROM node:16.5.0-alpine as client
+FROM node:20.5.0-alpine as client
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ RUN npm run build
 ################################
 # Build server
 ################################
-FROM node:16.5.0-alpine as builder
+FROM node:20.5.0-alpine as builder
 
 WORKDIR /app
 
@@ -24,7 +24,7 @@ RUN npm run build
 ################################
 # Create Docker image
 ################################
-FROM node:16.5.0-alpine
+FROM node:20.5.0-alpine
 
 WORKDIR /app
 
