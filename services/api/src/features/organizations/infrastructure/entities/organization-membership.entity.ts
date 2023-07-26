@@ -21,7 +21,7 @@ export class OrganizationMembership {
   @Column()
   organizationId!: number;
 
-  @ManyToOne(() => Organization, (organization) => organization.members)
+  @ManyToOne(() => Organization, (organization) => organization.memberships)
   organization!: Organization;
 
   @Column()
