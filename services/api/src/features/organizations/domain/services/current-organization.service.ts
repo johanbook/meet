@@ -40,7 +40,9 @@ export class CurrentOrganizationService {
     const profile = await this.profiles.findOne({
       cache: CURRENT_ORGANIZATION_CACHE_PERIOD_MS,
       relations: {
-        organizationMemberships: true,
+        organizationMemberships: {
+          organization: true,
+        },
       },
       where: { userId },
     });
