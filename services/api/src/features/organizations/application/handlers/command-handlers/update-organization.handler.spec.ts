@@ -27,7 +27,11 @@ describe(UpdateOrganizationHandler.name, () => {
     organizations = createMockRepository<Organization>();
 
     currentOrganizationService = new CurrentOrganizationService(
-      createMockRepository<Profile>([{} as any]),
+      createMockRepository<Profile>([
+        {
+          organizationMemberships: [{ organization: { personal: true } }],
+        } as any,
+      ]),
       createUserIdServiceMock(),
     );
     organizationService = new OrganizationService(eventBus, organizations);
@@ -44,6 +48,7 @@ describe(UpdateOrganizationHandler.name, () => {
 
       expect(organizations.save).toHaveBeenCalledWith({
         name: "my-name",
+        personal: true,
       });
     });
   });
