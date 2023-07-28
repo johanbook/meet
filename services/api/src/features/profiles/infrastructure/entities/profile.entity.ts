@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 
 import { ChatMessage } from "src/features/chat/infrastructure/entities/chat-message.entity";
+import { OrganizationMembership } from "src/features/organizations/infrastructure/entities/organization-membership.entity";
 import { ProfilePhoto } from "src/features/photos/infrastructure/entities/profile-photo.entity";
 import { Swipe } from "src/infrastructure/database/entities/swipe.entity";
 
@@ -30,6 +31,9 @@ export class Profile {
 
   @Column({ length: 128 })
   name!: string;
+
+  @OneToMany(() => OrganizationMembership, (member) => member.profile)
+  organizationMemberships!: OrganizationMembership[];
 
   @OneToMany(() => ProfilePhoto, (photo) => photo.profile)
   photos!: ProfilePhoto[];
