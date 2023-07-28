@@ -13,7 +13,7 @@ export class CreateJournalEntryHandler
 {
   constructor(
     @InjectRepository(JournalEntry)
-    private readonly journalEntry: Repository<JournalEntry>,
+    private readonly journalEntries: Repository<JournalEntry>,
     private readonly userIdService: UserIdService,
   ) {}
 
@@ -26,6 +26,6 @@ export class CreateJournalEntryHandler
     newJournalEntry.payload = command.payload;
     newJournalEntry.userId = userId;
 
-    await this.journalEntry.save(newJournalEntry);
+    await this.journalEntries.save(newJournalEntry);
   }
 }
