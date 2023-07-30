@@ -3,7 +3,7 @@ import { useMutation } from "react-query";
 
 import { PhotoDetails } from "src/api";
 import { photosApi } from "src/apis";
-import { useSnackbar } from "src/hooks/useSnackbar";
+import { useSnackbar } from "src/core/snackbar";
 
 import { ProfilePhotosEditorComponent } from "./ProfilePhotosEditor.component";
 

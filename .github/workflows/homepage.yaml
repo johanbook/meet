@@ -1,0 +1,99 @@
+name: homepage
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches:
+      - "main"
+    paths:
+      - "services/homepage/**"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./services/homepage
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+
+      - name: Install NodeJS dependencies
+        run: npm ci --legacy-peer-deps -D --ignore-scripts
+
+      - name: Run linting
+        run: npm run lint:ci
+
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./services/homepage
+    needs: ["lint"]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+
+      - name: Install NodeJS dependencies
+        run: npm ci --legacy-peer-deps -D --ignore-scripts
+
+      - name: Run tests
+        run: npm run test:ci
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          flags: homepage
+
+  build-and-publish:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    defaults:
+      run:
+        working-directory: ./services/homepage
+    needs: ["test"]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+
+      - name: Install NodeJS dependencies
+        run: npm ci --legacy-peer-deps -D --ignore-scripts
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: './services/homepage/build'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1

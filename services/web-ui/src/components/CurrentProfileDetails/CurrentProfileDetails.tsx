@@ -1,11 +1,12 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation } from "react-query";
 
 import { Box, Button, TextField, Typography } from "@mui/material";
 
 import { ProfileDetails, UpdateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
-import { useSnackbar } from "src/hooks/useSnackbar";
+import { useSnackbar } from "src/core/snackbar";
 
 import { ProfilePhotosEditor } from "../ProfilePhotosEditor";
 
@@ -18,6 +19,7 @@ export function CurrentProfileDetails({
   profile,
   refetchData,
 }: CurrentProfileDetailsProps): React.ReactElement {
+  const { t } = useTranslation();
   const mutation = useMutation((updateProfileCommand: UpdateProfileCommand) =>
     profileApi.updateCurrentProfile({ updateProfileCommand })
   );
@@ -32,7 +34,7 @@ export function CurrentProfileDetails({
 
     refetchData();
 
-    snackbar.success("Updated profile");
+    snackbar.success(t("profile-editor.update.success"));
   }
 
   const canSubmit = description !== profile.description && !mutation.isLoading;
@@ -40,27 +42,24 @@ export function CurrentProfileDetails({
   return (
     <>
       <Typography sx={{ paddingTop: 2 }} variant="h5">
-        Photos and media
+        {t("profile-editor.media")}
       </Typography>
 
-      <ProfilePhotosEditor
-        onRefresh={refetchData}
-        photos={profile.photos}
-      />
+      <ProfilePhotosEditor onRefresh={refetchData} photos={profile.photos} />
 
       <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
-        About me
+        {t("profile-editor.description.title")}
       </Typography>
 
       <form>
         <TextField
           fullWidth
           disabled={mutation.isLoading}
-          label="Description"
+          label={t("profile-editor.description.label")}
           margin="normal"
           multiline
           onChange={(event) => setDescription(event.target.value)}
-          placeholder="Describe yourself in a few words"
+          placeholder={t("profile-edtir.description.placeholder") ?? undefined}
           rows={4}
           value={description}
         />
@@ -72,7 +71,7 @@ export function CurrentProfileDetails({
             type="submit"
             variant="outlined"
           >
-            Save
+            {t("general.save")}
           </Button>
         </Box>
       </form>

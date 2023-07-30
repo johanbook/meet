@@ -1,0 +1,7 @@
+globalArguments: []
+tracing:
+  jaeger:
+    # NB: This is needed to enable setting correlation ID on received requests
+    # Value cannot be 0, but must be "0" to be included
+    samplingParam: "0"
+    traceContextHeaderName: x-correlation-id

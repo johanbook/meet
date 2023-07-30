@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth
+data:
+  API_URL: "$PROTOCOL://$DOMAIN"
+  UI_URL: "$PROTOCOL://$DOMAIN"
+  SUPERTOKENS_URL: "http://supertokens:3567"

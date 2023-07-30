@@ -13,6 +13,10 @@ export interface ChatMessageListProps {
 export function ChatMessageList({
   messages,
 }: ChatMessageListProps): React.ReactElement {
+  // The Flex layout used to keep focus at bottom of container 
+  // shows messages in reverse order
+  const shownMessages = [...messages].reverse();
+
   return (
     <List
       sx={{
@@ -22,7 +26,7 @@ export function ChatMessageList({
         flexDirection: "column-reverse",
       }}
     >
-      {messages.map((message) => (
+      {shownMessages.map((message) => (
         <ChatMessage key={message.id} message={message} />
       ))}
     </List>

@@ -1,1 +1,1 @@
-export { ChatTextField } from "./ChatTextField";
+export { ChatTextFieldContainer as ChatTextField } from "./ChatTextField.container";

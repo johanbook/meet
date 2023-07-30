@@ -2,15 +2,16 @@ import React from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router";
 
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { chatsApi } from "src/apis";
 import { ChatMessageList } from "src/components/ChatMessageList";
 import { ChatTextField } from "src/components/ChatTextField";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
-import { NotificationEventsConstants } from "src/constants/notification-events.constants";
-import { useHandleNotification } from "src/hooks/useHandleNotification";
+import { NotificationEventsConstants } from "src/core/notifications";
+import { useHandleNotification } from "src/core/notifications";
 
+import { ErrorPage } from "../ErrorPage";
 import { ChatPageHeader } from "./ChatPage.header";
 import { ChatPageSkeleton } from "./ChatPage.skeleton";
 
@@ -18,7 +19,7 @@ export function ChatPageContainer(): React.ReactElement {
   const { id } = useParams();
 
   const { error, data, isLoading, refetch } = useQuery(`chat-${id}`, () =>
-    chatsApi.getChats({ profileId: id || "" })
+    chatsApi.getChats({ profileId: Number.parseInt(id || "") })
   );
 
   useHandleNotification({
@@ -30,7 +31,8 @@ export function ChatPageContainer(): React.ReactElement {
   if (!id) {
     return (
       <>
-        <ChatPageHeader /> <ErrorMessage message="Unable to find profile" />{" "}
+        <ChatPageHeader />
+        <ErrorMessage message="Unable to find profile" />
       </>
     );
   }
@@ -38,11 +40,10 @@ export function ChatPageContainer(): React.ReactElement {
   const receiverProfileId = Number.parseInt(id);
 
   if (error) {
-    const message = (error as Error).message;
     return (
       <>
         <ChatPageHeader />
-        <ErrorMessage message={message} />
+        <ErrorPage error={error} />
       </>
     );
   }
@@ -58,35 +59,51 @@ export function ChatPageContainer(): React.ReactElement {
 
   if (!data || data.length === 0) {
     return (
-      <>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+        }}
+      >
         <ChatPageHeader />
 
-        <Typography gutterBottom variant="h6">
-          No messages in chat
-        </Typography>
+        <Box sx={{ flexGrow: 1 }}>
+          <Typography gutterBottom variant="h6">
+            No messages in chat
+          </Typography>
 
-        <Typography color="textSecondary">
-          Send a message and say 'hi'!
-        </Typography>
+          <Typography color="textSecondary">
+            Send a message and say 'hi'!
+          </Typography>
+        </Box>
 
         <ChatTextField
           onSentMessage={refetch}
           receiverProfileId={receiverProfileId}
         />
-      </>
+      </Box>
     );
   }
 
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+      }}
+    >
       <ChatPageHeader />
 
-      <ChatMessageList messages={data} />
+      <Box sx={{ flexGrow: 1 }}>
+        <ChatMessageList messages={data} />
+      </Box>
 
       <ChatTextField
         onSentMessage={refetch}
         receiverProfileId={receiverProfileId}
       />
-    </>
+    </Box>
   );
 }

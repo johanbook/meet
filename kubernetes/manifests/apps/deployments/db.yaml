@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+        - name: db
+          image: postgis/postgis:15-3.3-alpine
+          envFrom:
+            - secretRef:
+                name: db
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: init-config
+              mountPath: /docker-entrypoint-initdb.d/init.sql
+              readOnly: true
+            - name: persisted-data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: persisted-data
+          hostPath:
+            path: /app/.data/postgres
+            type: Directory
+        - name: init-config
+          hostPath:
+            path: /app/config/postgres/init.sql
+            type: File

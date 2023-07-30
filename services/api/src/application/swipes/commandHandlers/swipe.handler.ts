@@ -1,8 +1,7 @@
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
-import { CurrentProfileService } from "src/domain/profiles/services/current-profile.service";
 import { SwipeDomainService } from "src/domain/swipes/services/swipes-domain.service";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
+import { CurrentProfileService, Profile } from "src/features/profiles";
 import { Swipe } from "src/infrastructure/database/entities/swipe.entity";
 
 import { SwipeCommand } from "../contracts/swipe.command";

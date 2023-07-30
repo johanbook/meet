@@ -17,7 +17,10 @@ services:
       service: "traefik"
     command:
       - "--accesslog=true"
-      #- "--log.level=DEBUG"
+      - "--accesslog.fields.headers.names.x-correlation-id=keep"
+      - "--accesslog.format=json"
+      - "--log.format=json"
+
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
@@ -32,6 +35,10 @@ services:
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=webinsecure"
       - "--certificatesresolvers.letsencrypt.acme.email=$EMAIL"
       - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+
+      # Adds correlation id
+      - "--tracing.jaeger.samplingparam=0"
+      - "--tracing.jaeger.tracecontextheadername=x-correlation-id"
     ports:
       - "80:80"
       - "443:443"
@@ -52,10 +59,6 @@ services:
       file: "./docker-compose.shared.yaml"
       service: "auth"
     image: ghcr.io/johanbook/meet/auth:latest
-    environment:
-      API_URL: "https://$DOMAIN"
-      UI_URL: "https://$DOMAIN"
-      SUPERTOKENS_URL: "http://supertokens:3567"
 
   console:
     logging: *logging
@@ -86,6 +89,13 @@ services:
     extends:
       file: "./docker-compose.shared.yaml"
       service: "supertokens"
+
+  tracking:
+    logging: *logging
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "tracking"
+    image: ghcr.io/johanbook/meet/tracking:latest
 
   watchtower:
     logging: *logging

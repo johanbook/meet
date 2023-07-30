@@ -6,9 +6,9 @@ import { getDataSourceToken } from "@nestjs/typeorm";
 import * as fs from "node:fs";
 
 import { AppModule } from "src/app.module";
-import { createOpenApiDocument } from "src/client/openapi";
+import { createOpenApiDocument } from "src/core/openapi";
 import { dataSourceOptions } from "src/infrastructure/database/data-source.config";
-import { ObjectStorageService } from "src/infrastructure/objectStorage/object-storage.service";
+import { ObjectStorageService } from "src/core/object-storage";
 import { DataSourceMock } from "src/test/data-source.mock";
 
 

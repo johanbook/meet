@@ -1,6 +1,5 @@
-import { CurrentProfileService } from "src/domain/profiles/services/current-profile.service";
 import { SwipeDomainService } from "src/domain/swipes/services/swipes-domain.service";
-import { Profile } from "src/infrastructure/database/entities/profile.entity";
+import { CurrentProfileService, Profile } from "src/features/profiles";
 
 import { SwipeCommand } from "../contracts/swipe.command";
 import { SwipeHandler } from "./swipe.handler";

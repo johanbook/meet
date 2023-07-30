@@ -25,28 +25,11 @@ export interface SwipeableListProps<T> {
 export function SwipeableList<T>({
   children,
   data,
+  onRequestData,
   onSwipeLeft,
   onSwipeRight,
 }: SwipeableListProps<T>): React.ReactElement {
   const { append, queue, shift } = useQueue<T>(data);
-
-  const current = queue[0];
-  const swipingProps = useSwipe({
-    onSwipe: NOOP,
-    onSwipeLeft: NOOP,
-    onSwipeRight: NOOP,
-  });
-
-  React.useEffect(() => {
-    if (queue.length < 2) {
-      append([]);
-    }
-    /* eslint-disable-next-line react-hooks/exhaustive-deps */
-  }, [queue.length]);
-
-  if (queue.length === 0) {
-    return <p>No items to swipe on </p>;
-  }
 
   async function handleSwipeLeft(): Promise<void> {
     onSwipeLeft(current);
@@ -56,6 +39,32 @@ export function SwipeableList<T>({
   async function handleSwipeRight(): Promise<void> {
     onSwipeRight(current);
     shift();
+  }
+
+  async function handleFetchData(): Promise<void> {
+    const newData = await onRequestData();
+    append(newData);
+  }
+
+  const current = queue[0];
+  const swipingProps = useSwipe({
+    onSwipe: NOOP,
+    onSwipeLeft: handleSwipeLeft,
+    onSwipeRight: handleSwipeRight,
+  });
+
+  React.useEffect(() => {
+    if (queue.length > 1) {
+      return;
+    }
+
+    handleFetchData();
+
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [queue.length]);
+
+  if (queue.length === 0) {
+    return <p>No items to swipe on </p>;
   }
 
   return (

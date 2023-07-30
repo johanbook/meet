@@ -4,23 +4,56 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import CssBaseline from "@mui/material/CssBaseline";
 import { SnackbarProvider } from "notistack";
 
+import { Logger } from "src/core/logging";
+import { NotificationProvider } from "src/core/notifications";
+import { ThemeProvider } from "src/core/theme";
+
 import "./App.css";
-import Router from "./Router";
-import { NotificationProvider } from "./notification.provider";
-import Theme from "./theme/Theme";
+import { Router } from "./Router";
+import { AuthenticationGuard } from "./pages/AuthenticationGuard";
 
-const queryClient = new QueryClient();
+const logger = new Logger(QueryClient.name);
 
-export default function App(): React.ReactElement {
+const QUERY_CLIENT = new QueryClient({
+  defaultOptions: {
+    mutations: {
+      onError: (err) => {
+        const error = err as Error;
+        logger.error("Failed to execute mutation", {
+          error: {
+            message: error.message,
+            stackTrace: error.stack,
+          },
+        });
+      },
+    },
+    queries: {
+      onError: (err) => {
+        const error = err as Error;
+        logger.error("Failed to execute query", {
+          error: {
+            message: error.message,
+            stackTrace: error.stack,
+          },
+        });
+      },
+      retry: 1,
+    },
+  },
+});
+
+export function App(): React.ReactElement {
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={QUERY_CLIENT}>
       <CssBaseline />
-      <Theme>
-        <NotificationProvider>
-          <Router />
-          <SnackbarProvider dense />
-        </NotificationProvider>
-      </Theme>
+      <ThemeProvider>
+        <AuthenticationGuard>
+          <NotificationProvider>
+            <Router />
+            <SnackbarProvider dense />
+          </NotificationProvider>
+        </AuthenticationGuard>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

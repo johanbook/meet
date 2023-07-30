@@ -85,3 +85,9 @@ a new release, run the following commands:
 npm run release
 git push --follow-tags origin main
 ```
+
+## Style guide
+
+### Naming conventions
+
+All files and folders in backend services should be named in kebab-case.

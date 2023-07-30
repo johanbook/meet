@@ -1,0 +1,16 @@
+{
+  "general": {
+    "save": "Save"
+  },
+  "profile-editor": {
+    "description": {
+      "title": "About me",
+      "label": "Description",
+      "placeholder": "Describe yourself in a few words"
+    },
+    "media": "Photos and Media",
+    "update": {
+      "success": "Updated profile"
+    }
+  }
+}

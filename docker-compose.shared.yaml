@@ -6,12 +6,17 @@ services:
     container_name: "traefik"
     command:
       - "--accesslog=true"
+      - "--accesslog.fields.headers.names.x-correlation-id=keep"
       - "--api.insecure=true"
 
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
 
       - "--entrypoints.web.address=:80"
+
+      # Adds correlation id
+      - "--tracing.jaeger.samplingparam=0"
+      - "--tracing.jaeger.tracecontextheadername=x-correlation-id"
 
     labels:
       - "traefik.enable=true"
@@ -31,6 +36,7 @@ services:
       DB_PASSWORD: "$POSTGRES_PASSWORD"
       DB_PORT: 5432
       DB_USERNAME: "$POSTGRES_USERNAME"
+      LOG_LEVEL: "$LOG_LEVEL"
       PORT: 80
       S3_ACCESS_KEY: "$MINIO_ACCESS_KEY"
       S3_ENDPOINT: "minio"
@@ -62,9 +68,13 @@ services:
       - "traefik.http.routers.auth.rule=Host(`$DOMAIN`)&&(PathPrefix(`/login`)||PathPrefix(`/logout`))"
       - "traefik.http.routers.auth.entrypoints=web"
       - "traefik.http.middlewares.auth.forwardauth.address=http://auth/authenticate"
-      - "traefik.http.middlewares.auth.forwardauth.authResponseHeaders=X-User-Id"
+      - "traefik.http.middlewares.auth.forwardauth.authResponseHeaders=x-user-id"
       - "traefik.http.middlewares.auth-redirect.forwardauth.address=http://auth/authenticate-with-redirect"
-      - "traefik.http.middlewares.auth-redirect.forwardauth.authResponseHeaders=X-User-Id"
+      - "traefik.http.middlewares.auth-redirect.forwardauth.authResponseHeaders=x-user-id"
+    environment:
+      API_URL: "$PROTOCOL://$DOMAIN"
+      UI_URL: "$PROTOCOL://$DOMAIN"
+      SUPERTOKENS_URL: "http://supertokens:3567"
 
   db:
     image: "postgis/postgis:15-3.3-alpine"
@@ -72,6 +82,8 @@ services:
     environment:
       POSTGRES_PASSWORD: "$POSTGRES_PASSWORD"
       POSTGRES_USERNAME: "$POSTGRES_USERNAME"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     ports:
       - "5432:5432"
     volumes:
@@ -92,7 +104,7 @@ services:
       - ".data/pgadmin:/var/lib/pgadmin:rw"
 
   supertokens:
-    image: registry.supertokens.io/supertokens/supertokens-postgresql
+    image: "registry.supertokens.io/supertokens/supertokens-postgresql:5.0"
     container_name: "supertokens"
     environment:
       POSTGRESQL_CONNECTION_URI: "postgresql://$POSTGRES_USERNAME:$POSTGRES_PASSWORD@db:5432/"
@@ -103,7 +115,6 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.web-ui.rule=Host(`$DOMAIN`)"
       - "traefik.http.routers.web-ui.entrypoints=web"
-      - "traefik.http.routers.web-ui.middlewares=auth-redirect"
 
   minio:
     image: "minio/minio"
@@ -129,3 +140,10 @@ services:
       - "traefik.http.services.s3.loadbalancer.server.port=9000"
     volumes:
       - ".data/mino:/data:rw"
+
+  tracking:
+    container_name: "tracking"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.tracking.rule=Host(`$DOMAIN`)&&(PathPrefix(`/tracking`))"
+      - "traefik.http.routers.tracking.entrypoints=web"

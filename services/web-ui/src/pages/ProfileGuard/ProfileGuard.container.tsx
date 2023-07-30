@@ -2,9 +2,9 @@ import React from "react";
 import { useQuery } from "react-query";
 
 import { profileApi } from "src/apis";
-import { ProfileCreator } from "src/components/ProfileCreator";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 
+import { ProfileCreationPage } from "../ProfileCreationPage";
 import { ProfileGuardNav } from "./ProfileGuard.nav";
 import { ProfileGuardSkeleton } from "./ProfileGuard.skeleton";
 
@@ -17,15 +17,14 @@ export function ProfileGuardContainer({
 }: ProfileGuardContainerProps): React.ReactElement {
   const { error, data, isLoading, refetch } = useQuery(
     "currentProfileExists",
-    () => profileApi.checkIfFileExists()
+    () => profileApi.checkIfProfileExists()
   );
 
   if (error) {
-    const errorMessage = (error as Error).message;
     const message = `Unable to verify if profile exists. Try refreshing page.`;
     return (
       <ProfileGuardNav>
-        <ErrorMessage debug={errorMessage} message={message} />
+        <ErrorMessage error={error} message={message} />
       </ProfileGuardNav>
     );
   }
@@ -39,11 +38,7 @@ export function ProfileGuardContainer({
   }
 
   if (!data) {
-    return (
-      <ProfileGuardNav>
-        <ProfileCreator onCreateProfile={refetch} />
-      </ProfileGuardNav>
-    );
+    return <ProfileCreationPage onProfileCreated={refetch} />;
   }
 
   return <>{children}</>;

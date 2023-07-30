@@ -3,17 +3,24 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Nav from "src/components/ui/Nav";
 import { ChatPage } from "src/pages/ChatPage";
-import { ProfilePage } from "src/pages/ProfilePage";
-import { SwipingPage } from "src/pages/SwipingPage";
 
+import { NavigationTrackingProvider } from "./core/tracking/NavigationTrackingProvider";
+import { JournalPage } from "./pages/JournalPage";
 import { MatchesPage } from "./pages/MatchesPage";
-import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 import { ProfileGuard } from "./pages/ProfileGuard";
+import { ProfilePage } from "./pages/ProfilePage";
+import { SettingsPage } from "./pages/SettingsPage";
+import { SwipingPage } from "./pages/SwipingPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Nav />,
+    element: (
+      <NavigationTrackingProvider>
+        <Nav />
+      </NavigationTrackingProvider>
+    ),
     errorElement: <NotFoundPage />,
     children: [
       {
@@ -29,14 +36,22 @@ const router = createBrowserRouter([
         element: <ChatPage />,
       },
       {
+        path: "/journal",
+        element: <JournalPage />,
+      },
+      {
         path: "/profile",
         element: <ProfilePage />,
+      },
+      {
+        path: "/settings",
+        element: <SettingsPage />,
       },
     ],
   },
 ]);
 
-export default function App(): React.ReactElement {
+export function Router(): React.ReactElement {
   return (
     <ProfileGuard>
       <RouterProvider router={router} />

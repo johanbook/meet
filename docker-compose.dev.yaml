@@ -29,10 +29,13 @@ services:
       service: "auth"
     build:
       context: "./services/auth"
-    environment:
-      API_URL: "http://$DOMAIN"
-      UI_URL: "http://$DOMAIN"
-      SUPERTOKENS_URL: "http://supertokens:3567"
+    command:
+      - "run"
+      - "start:dev"
+    entrypoint:
+      - "npm"
+    volumes:
+      - "$PWD/services/auth/:/app"
 
   db:
     extends:
@@ -53,6 +56,18 @@ services:
     extends:
       file: "./docker-compose.shared.yaml"
       service: "supertokens"
+
+  tracking:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "tracking"
+    build:
+      context: "./services/tracking"
+    command:
+      - "run"
+      - "start:dev"
+    volumes:
+      - "$PWD/services/tracking/:/app"
 
   web-ui:
     extends:

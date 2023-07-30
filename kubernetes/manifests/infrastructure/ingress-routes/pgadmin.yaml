@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: pgadmin
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`pgadmin.console.$DOMAIN`)
+      kind: Rule
+      middlewares:
+        - name: console-auth
+      services:
+        - name: pgadmin
+          port: 80
