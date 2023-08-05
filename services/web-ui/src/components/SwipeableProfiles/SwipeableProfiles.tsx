@@ -2,7 +2,7 @@ import React from "react";
 import { useMutation } from "react-query";
 
 import { ProfileDetails, SwipeCommand } from "src/api";
-import { swipesApi } from "src/apis";
+import { matchesApi } from "src/apis";
 import { useSnackbar } from "src/core/snackbar";
 
 import { SwipeableProfileDetails } from "../SwipeableProfileDetails";
@@ -18,7 +18,7 @@ export function SwipeableProfiles({
   const snackbar = useSnackbar();
 
   const mutation = useMutation(
-    (swipeCommand: SwipeCommand) => swipesApi.swipe({ swipeCommand }),
+    (swipeCommand: SwipeCommand) => matchesApi.swipe({ swipeCommand }),
     {
       onError: () =>
         snackbar.error("Unable to register swipe. Try refreshing the page"),
