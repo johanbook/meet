@@ -1,4 +1,4 @@
-import { NotificationEventsConstants } from "src/constants/notification-events.constants";
+import { NotificationEventsConstants } from "./constants/notification-events.constants";
 
 export type NotificationData = Record<string, number | string>;
 
