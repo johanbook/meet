@@ -1,13 +1,13 @@
-import { SwipeDomainService } from "src/domain/swipes/services/swipes-domain.service";
 import { CurrentProfileService, Profile } from "src/features/profiles";
 
-import { SwipeCommand } from "../contracts/swipe.command";
+import { SwipeService } from "../../../domain/services/swipe.service";
+import { SwipeCommand } from "../../contracts/commands/swipe.command";
 import { SwipeHandler } from "./swipe.handler";
 
 describe(SwipeHandler.name, () => {
   let commandHandler: SwipeHandler;
   let currentProfileService: CurrentProfileService;
-  let swipeDomainService: SwipeDomainService;
+  let swipeService: SwipeService;
 
   let profile: Profile;
   let shownProfile: Profile;
@@ -22,12 +22,9 @@ describe(SwipeHandler.name, () => {
     currentProfileService = {
       fetchCurrentProfile: jest.fn(() => profile),
     } as any;
-    swipeDomainService = { saveSwipe: jest.fn() } as any;
+    swipeService = { saveSwipe: jest.fn() } as any;
 
-    commandHandler = new SwipeHandler(
-      currentProfileService,
-      swipeDomainService,
-    );
+    commandHandler = new SwipeHandler(currentProfileService, swipeService);
   });
 
   it("should save swipe to the database", async () => {
@@ -37,7 +34,7 @@ describe(SwipeHandler.name, () => {
 
     await commandHandler.execute(command);
 
-    expect(swipeDomainService.saveSwipe).toHaveBeenCalledWith({
+    expect(swipeService.saveSwipe).toHaveBeenCalledWith({
       liked: command.liked,
       profile: profile,
       shownProfile: shownProfile,
