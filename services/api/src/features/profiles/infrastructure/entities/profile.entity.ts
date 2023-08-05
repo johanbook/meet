@@ -8,9 +8,9 @@ import {
 } from "typeorm";
 
 import { ChatMessage } from "src/features/chat/infrastructure/entities/chat-message.entity";
+import { Swipe } from "src/features/matches/infrastructure/entities/swipe.entity";
 import { OrganizationMembership } from "src/features/organizations/infrastructure/entities/organization-membership.entity";
 import { ProfilePhoto } from "src/features/photos/infrastructure/entities/profile-photo.entity";
-import { Swipe } from "src/infrastructure/database/entities/swipe.entity";
 
 @Entity()
 export class Profile {

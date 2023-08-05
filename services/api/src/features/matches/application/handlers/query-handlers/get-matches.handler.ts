@@ -5,11 +5,11 @@ import { Repository } from "typeorm";
 import { map } from "src/core/mapper";
 import { ObjectStorageService } from "src/core/object-storage";
 import { CurrentProfileService } from "src/features/profiles";
-import { Match } from "src/infrastructure/database/views/matches.view";
 
-import { GetMatchesQuery } from "../contracts/get-matches.query";
-import { AllMatchesDetails } from "../contracts/match.dto";
-import { mapToMatchDetails } from "../mappers/match.mapper";
+import { Match } from "../../../infrastructure/views/matches.view";
+import { AllMatchesDetails } from "../../contracts/dtos/match.dto";
+import { GetMatchesQuery } from "../../contracts/queries/get-matches.query";
+import { mapToMatchDetails } from "../../mappers/match.mapper";
 
 @QueryHandler(GetMatchesQuery)
 export class GetMatchesHandler
