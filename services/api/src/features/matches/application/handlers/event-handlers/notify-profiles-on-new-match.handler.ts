@@ -1,7 +1,9 @@
 import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
 
-import { NotificationEventsConstants } from "src/constants/notification-events.constants";
-import { NotificationService } from "src/core/notifications";
+import {
+  NotificationEventsConstants,
+  NotificationService,
+} from "src/core/notifications";
 
 import { MatchMadeEvent } from "../../../domain/events/match-made.event";
 
