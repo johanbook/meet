@@ -4,12 +4,12 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { map } from "src/core/mapper";
-import { Swipe } from "src/infrastructure/database/entities/swipe.entity";
 
+import { Swipe } from "../../infrastructure/entities/swipe.entity";
 import { MatchMadeEvent } from "../events/match-made.event";
 
 @Injectable()
-export class SwipeDomainService {
+export class SwipeService {
   constructor(
     private readonly eventBus: EventBus,
     @InjectRepository(Swipe)

@@ -2,7 +2,6 @@ import { CqrsModule } from "@nestjs/cqrs";
 import { Test, TestingModule } from "@nestjs/testing";
 import { getRepositoryToken } from "@nestjs/typeorm";
 
-import { ApplicationModule } from "src/application/application.module";
 import { ProfilePhoto } from "src/features/photos/infrastructure/entities/profile-photo.entity";
 
 import { GetProfileQuery } from "../../application/contracts/queries/get-profile.query";
@@ -14,7 +13,7 @@ describe.skip("ProfileController", () => {
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      imports: [ApplicationModule, CqrsModule],
+      imports: [CqrsModule],
       controllers: [ProfileController],
       providers: [
         {

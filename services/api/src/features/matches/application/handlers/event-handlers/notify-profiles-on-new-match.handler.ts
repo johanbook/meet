@@ -1,8 +1,11 @@
 import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
 
-import { NotificationEventsConstants } from "src/constants/notification-events.constants";
-import { NotificationService } from "src/core/notifications";
-import { MatchMadeEvent } from "src/domain/swipes/events/match-made.event";
+import {
+  NotificationEventsConstants,
+  NotificationService,
+} from "src/core/notifications";
+
+import { MatchMadeEvent } from "../../../domain/events/match-made.event";
 
 @EventsHandler(MatchMadeEvent)
 export class NotifyProfilesOnNewMatch implements IEventHandler<MatchMadeEvent> {

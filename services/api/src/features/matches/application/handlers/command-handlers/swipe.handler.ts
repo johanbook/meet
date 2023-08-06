@@ -1,16 +1,16 @@
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
-import { SwipeDomainService } from "src/domain/swipes/services/swipes-domain.service";
 import { CurrentProfileService, Profile } from "src/features/profiles";
-import { Swipe } from "src/infrastructure/database/entities/swipe.entity";
 
-import { SwipeCommand } from "../contracts/swipe.command";
+import { SwipeService } from "../../../domain/services/swipe.service";
+import { Swipe } from "../../../infrastructure/entities/swipe.entity";
+import { SwipeCommand } from "../../contracts/commands/swipe.command";
 
 @CommandHandler(SwipeCommand)
 export class SwipeHandler implements ICommandHandler<SwipeCommand, void> {
   constructor(
     private readonly currentProfileService: CurrentProfileService,
-    private readonly swipeDomainService: SwipeDomainService,
+    private readonly swipeService: SwipeService,
   ) {}
 
   async execute(command: SwipeCommand) {
@@ -25,6 +25,6 @@ export class SwipeHandler implements ICommandHandler<SwipeCommand, void> {
     swipe.profile = currentProfile;
     swipe.shownProfile = shownProfile;
 
-    await this.swipeDomainService.saveSwipe(swipe);
+    await this.swipeService.saveSwipe(swipe);
   }
 }

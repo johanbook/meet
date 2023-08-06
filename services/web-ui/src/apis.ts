@@ -6,7 +6,6 @@ import {
   PhotosApi,
   ProfileApi,
   SettingsApi,
-  SwipesApi,
 } from "src/api";
 
 const config = new Configuration({
@@ -20,4 +19,3 @@ export const matchesApi = new MatchesApi(config);
 export const profileApi = new ProfileApi(config);
 export const photosApi = new PhotosApi(config);
 export const settingsApi = new SettingsApi(config);
-export const swipesApi = new SwipesApi(config);
