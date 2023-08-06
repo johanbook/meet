@@ -1,0 +1,14 @@
+{
+  "landingpage": {
+    "hero": {
+      "signup": "报名",
+      "text": "认识人"
+    }
+  },
+  "nav": {
+    "login": "登录"
+  },
+  "page-not-found": {
+    "text": "找不到您要查找的页面"
+  }
+}
