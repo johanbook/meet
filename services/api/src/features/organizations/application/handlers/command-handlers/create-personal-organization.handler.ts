@@ -3,25 +3,27 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { OrganizationService } from "src/features/organizations/domain/services/organization.service";
 import { CurrentProfileService } from "src/features/profiles";
 
-import { CreateOrganizationCommand } from "../../contracts/commands/create-organization.command";
+import { CreatePersonalOrganizationCommand } from "../../contracts/commands/create-personal-organization.command";
 
-@CommandHandler(CreateOrganizationCommand)
-export class CreateOrganizationHandler
-  implements ICommandHandler<CreateOrganizationCommand, void>
+@CommandHandler(CreatePersonalOrganizationCommand)
+export class CreatePersonalOrganizationHandler
+  implements ICommandHandler<CreatePersonalOrganizationCommand, void>
 {
   constructor(
     private readonly currentProfileService: CurrentProfileService,
     private readonly organizationService: OrganizationService,
   ) {}
 
-  async execute(command: CreateOrganizationCommand) {
+  async execute() {
     const currentProfile =
       await this.currentProfileService.fetchCurrentProfile();
 
+    // TODO: Check if there already exsits a personal organization
+
     await this.organizationService.createOrganization({
-      name: command.name,
+      name: currentProfile.name,
       owner: currentProfile,
-      personal: false,
+      personal: true,
     });
   }
 }
