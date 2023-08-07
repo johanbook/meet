@@ -11,6 +11,8 @@ describe(UpdateBlogPostHandler.name, () => {
   let blogPosts: Repository<BlogPost>;
   let commandHandler: UpdateBlogPostHandler;
 
+  const newContent = "my-new-content";
+
   beforeEach(() => {
     blogPosts = createMockRepository<BlogPost>();
 
@@ -18,9 +20,9 @@ describe(UpdateBlogPostHandler.name, () => {
   });
 
   describe("can update blog post", () => {
-    it("should throw if settings not found", async () => {
+    it("should throw if blog post not found", async () => {
       const command = map(UpdateBlogPostCommand, {
-        content: "my-new-content",
+        content: newContent,
         id: "my-id",
       });
 
@@ -30,20 +32,21 @@ describe(UpdateBlogPostHandler.name, () => {
       );
     });
 
-    it("should save changes to profile", async () => {
-      const findOneFn = blogPosts.findOne as unknown as jest.Mock;
-      findOneFn.mockImplementation(() => ({ content: "" }));
+    it("should save changes to blog post", async () => {
+      const initalPost = new BlogPost();
+      const { id } = await blogPosts.save(initalPost);
 
       const command = map(UpdateBlogPostCommand, {
-        content: "my-new-content",
-        id: "my-id",
+        content: newContent,
+        id,
       });
 
       await commandHandler.execute(command);
 
-      expect(blogPosts.save).toHaveBeenCalledWith({
-        content: "my-new-content",
-      });
+      const storedBlogPosts = await blogPosts.find();
+
+      expect(storedBlogPosts.length).toBe(1);
+      expect(storedBlogPosts[0]).toHaveProperty("content", newContent);
     });
   });
 });
