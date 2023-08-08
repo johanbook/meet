@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { AsyncLocalStorage } from "node:async_hooks";
 
-import { ApplicationError } from "src/core/error-handling";
+import { MissingUserIdError } from "src/core/authentication";
 
 import { REQUEST_CONTEXT_KEY } from "./als.module";
 import { RequestContext } from "./request-context.interface";
@@ -17,7 +17,7 @@ export class UserIdService {
     const store = this.als.getStore();
 
     if (!store) {
-      throw new ApplicationError(
+      throw new MissingUserIdError(
         "Unable to obtain user ID due to missing store",
       );
     }
