@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/client/context/user-id.service";
+import { MissingUserIdError } from "src/core/authentication";
 
 import { JournalEntry } from "../../../infrastructure/entities/journal-entry.entity";
 import { CreateJournalEntryCommand } from "../../contracts/commands/create-journal-entry.command";
@@ -18,7 +19,19 @@ export class CreateJournalEntryHandler
   ) {}
 
   async execute(command: CreateJournalEntryCommand) {
-    const userId = this.userIdService.getUserId();
+    let userId: string;
+
+    // User ID will not be available for system-issued commands (e.g. event handlers)
+    // This skips logging any commands where user id cannot be found
+    try {
+      userId = this.userIdService.getUserId();
+    } catch (error) {
+      if (error instanceof MissingUserIdError) {
+        return;
+      }
+
+      throw error;
+    }
 
     const newJournalEntry = new JournalEntry();
 
