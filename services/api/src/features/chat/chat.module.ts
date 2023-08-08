@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
+import { AuthenticationModule } from "src/core/authentication/authentication.module";
 import { NotificationModule } from "src/core/notifications/notification.module";
 import { Profile } from "src/features/profiles";
 
@@ -14,6 +15,7 @@ import { ChatMessage } from "./infrastructure/entities/chat-message.entity";
 
 @Module({
   imports: [
+    AuthenticationModule,
     CqrsModule,
     NotificationModule,
     TypeOrmModule.forFeature([ChatMessage, Profile]),

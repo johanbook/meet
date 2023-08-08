@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
+import { AuthenticationModule } from "src/core/authentication/authentication.module";
 import { Profile } from "src/features/profiles";
 import { ProfileModule } from "src/features/profiles/profile.module";
 
@@ -23,6 +24,7 @@ import { Organization } from "./infrastructure/entities/organization.entity";
   controllers: [OrganizationsController],
   exports: [CurrentOrganizationService],
   imports: [
+    AuthenticationModule,
     CqrsModule,
     ProfileModule,
     TypeOrmModule.forFeature([Organization, OrganizationMembership, Profile]),

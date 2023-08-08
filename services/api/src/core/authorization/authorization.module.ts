@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
-import { RequestContextModule } from "src/client/context/request-context.module";
+import { RequestContextModule } from "src/core/request-context/request-context.module";
 
 import { PermissionsService } from "./application/permissions.service";
 import { AuthorizationAlsModule } from "./client/context/authorization-als.module";

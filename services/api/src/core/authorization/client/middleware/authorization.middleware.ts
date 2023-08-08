@@ -3,9 +3,9 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { FastifyRequest, FastifyReply } from "fastify";
 import { AsyncLocalStorage } from "node:async_hooks";
 
-import { AlsModule } from "src/client/context/als.module";
-import { RequestContextModule } from "src/client/context/request-context.module";
 import { Logger } from "src/core/logging";
+import { AlsModule } from "src/core/request-context/als.module";
+import { RequestContextModule } from "src/core/request-context/request-context.module";
 
 import { PermissionsService } from "../../application/permissions.service";
 import { Permission } from "../../infrastructure/entitities/permission.entity";

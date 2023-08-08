@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
+import { AuthenticationModule } from "src/core/authentication/authentication.module";
 import { ObjectStorageModule } from "src/core/object-storage/object-storage.module";
 
 import { CreateProfileHandler } from "./application/handlers/command-handlers/create-profile.handler";
@@ -18,6 +19,7 @@ import { Profile } from "./infrastructure/entities/profile.entity";
   controllers: [ProfileController],
   exports: [CurrentProfileService],
   imports: [
+    AuthenticationModule,
     CqrsModule,
     ObjectStorageModule,
     TypeOrmModule.forFeature([Profile]),

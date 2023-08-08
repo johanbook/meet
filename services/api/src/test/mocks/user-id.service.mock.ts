@@ -1,4 +1,4 @@
-import { UserIdService } from "src/client/context/user-id.service";
+import { UserIdService } from "src/core/authentication";
 
 import { DEFAULT_MOCK_USERID } from "./constants";
 

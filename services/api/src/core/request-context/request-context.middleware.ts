@@ -11,7 +11,7 @@ import { AsyncLocalStorage } from "node:async_hooks";
 import { Logger } from "src/core/logging";
 
 import { AlsModule, REQUEST_CONTEXT_KEY } from "./als.module";
-import { RequestContext } from "./request-context.interface";
+import { IRequestContext } from "./request-context.interface";
 
 @Module({
   imports: [AlsModule],
@@ -21,7 +21,7 @@ export class RequestContextMiddleware implements NestModule {
 
   constructor(
     @Inject(REQUEST_CONTEXT_KEY)
-    private readonly als: AsyncLocalStorage<RequestContext>,
+    private readonly als: AsyncLocalStorage<IRequestContext>,
   ) {}
 
   configure(consumer: MiddlewareConsumer) {
@@ -55,7 +55,7 @@ export class RequestContextMiddleware implements NestModule {
             );
           }
 
-          const store: RequestContext = {
+          const store: IRequestContext = {
             correlationId,
             userId,
           };

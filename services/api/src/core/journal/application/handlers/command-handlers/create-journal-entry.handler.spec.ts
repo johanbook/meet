@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
 
-import { UserIdService } from "src/client/context/user-id.service";
+import { UserIdService } from "src/core/authentication";
 import { map } from "src/core/mapper";
 import { createMockRepository, createUserIdServiceMock } from "src/test/mocks";
 
