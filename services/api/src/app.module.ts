@@ -12,6 +12,7 @@ import { JournalModule } from "./core/journal/journal.module";
 import { LoggingModule } from "./core/logging/logging.module";
 import { NotificationModule } from "./core/notifications/notification.module";
 import { minioOptions } from "./core/object-storage/minio.config";
+import { BlogsModule } from "./features/blogs/blogs.module";
 import { ChatModule } from "./features/chat/chat.module";
 import { MatchesModule } from "./features/matches/matches.module";
 import { OrganizationModule } from "./features/organizations/organization.module";
@@ -23,6 +24,7 @@ import { dataSourceOptions } from "./infrastructure/database/data-source.config"
 
 @Module({
   imports: [
+    BlogsModule,
     ChatModule,
     ClassificationsModule,
     ErrorHandlingModule,
