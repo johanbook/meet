@@ -29,7 +29,7 @@ class MockRepository<T extends ObjectLiteral> {
 
     const index = this.data.findIndex((item) => item.id === element.id);
 
-    if (!index) {
+    if (index < 0) {
       throw new Error("Item not found");
     }
 
