@@ -1,4 +1,5 @@
 import {
+  BlogsApi,
   ChatsApi,
   Configuration,
   JournalApi,
@@ -13,6 +14,7 @@ const config = new Configuration({
   middleware: [],
 });
 
+export const blogsApi = new BlogsApi(config);
 export const chatsApi = new ChatsApi(config);
 export const journalApi = new JournalApi(config);
 export const matchesApi = new MatchesApi(config);
