@@ -33,7 +33,7 @@ export function DescriptionForm({
         multiline
         name="description"
         onChange={(event) => onChange(event.target.value)}
-        placeholder="Perhaps something flirty?"
+        placeholder="Perhaps something about yourself"
         rows={4}
         sx={{ paddingBottom: 2 }}
         value={value}

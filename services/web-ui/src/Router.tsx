@@ -5,13 +5,13 @@ import Nav from "src/components/ui/Nav";
 import { ChatPage } from "src/pages/ChatPage";
 
 import { NavigationTrackingProvider } from "./core/tracking/NavigationTrackingProvider";
+import { BlogPostPage } from "./pages/BlogPostPage";
 import { JournalPage } from "./pages/JournalPage";
 import { MatchesPage } from "./pages/MatchesPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { ProfileGuard } from "./pages/ProfileGuard";
 import { ProfilePage } from "./pages/ProfilePage";
 import { SettingsPage } from "./pages/SettingsPage";
-import { SwipingPage } from "./pages/SwipingPage";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <SwipingPage />,
+        element: <BlogPostPage />,
       },
       {
         path: "/chat",

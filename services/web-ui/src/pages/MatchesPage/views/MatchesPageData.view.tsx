@@ -17,7 +17,7 @@ export function MatchesPageDataView({
   return (
     <>
       <Typography gutterBottom variant="h5">
-        New matches
+        Connections
       </Typography>
 
       <Box sx={{ paddingBottom: 2 }}>
@@ -30,7 +30,7 @@ export function MatchesPageDataView({
 
       {data.talkedTo.length === 0 && (
         <Typography color="textSecondary">
-          No chats started yet. Why not start a conversation with one of your matches?{" "}
+          No chats started yet. Why not start a conversation ?{" "}
         </Typography>
       )}
 

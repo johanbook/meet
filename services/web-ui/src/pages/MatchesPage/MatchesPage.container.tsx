@@ -30,9 +30,9 @@ export function MatchesPageContainer(): React.ReactElement {
     return (
       <>
         <Typography gutterBottom variant="h6">
-          You do not have any matches yet
+          You have no open conversations yet
         </Typography>
-        <Typography>Keep on swiping to get your first match</Typography>
+        <Typography>Try writing something to someone</Typography>
       </>
     );
   }
