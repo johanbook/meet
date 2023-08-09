@@ -4,7 +4,7 @@ import { Logger } from "src/core/logging";
 import { mapAndValidate } from "src/core/mapper";
 import { ProfileCreatedEvent } from "src/features/profiles";
 
-import { CreateOrganizationCommand } from "../../contracts/commands/create-organization.command";
+import { CreatePersonalOrganizationCommand } from "../../contracts/commands/create-personal-organization.command";
 
 @EventsHandler(ProfileCreatedEvent)
 export class CreateOrganizationOnProfileCreatedHandler
@@ -19,9 +19,8 @@ export class CreateOrganizationOnProfileCreatedHandler
       msg: `Creating personal organization for profile with ID '${event.id}'`,
     });
 
-    const command = await mapAndValidate(CreateOrganizationCommand, {
+    const command = await mapAndValidate(CreatePersonalOrganizationCommand, {
       name: event.name,
-      personal: true,
     });
 
     this.commandBus.execute(command);
