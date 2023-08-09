@@ -17,7 +17,11 @@ describe(CreateBlogPostHandler.name, () => {
     blogPosts = createMockRepository<BlogPost>();
 
     const currentOrganizationService = {
-      fetchCurrentOrganizationId: jest.fn(),
+      fetchCurrentOrganizationId: jest.fn(() => "my-organization-id"),
+    } as any;
+
+    const currentProfileService = {
+      fetchCurrentProfileId: jest.fn(() => "my-profile-id"),
     } as any;
 
     blogPostService = new BlogPostService(blogPosts);
@@ -25,6 +29,7 @@ describe(CreateBlogPostHandler.name, () => {
     commandHandler = new CreateBlogPostHandler(
       blogPostService,
       currentOrganizationService,
+      currentProfileService,
     );
   });
 
@@ -36,6 +41,8 @@ describe(CreateBlogPostHandler.name, () => {
 
       expect(blogPosts.save).toHaveBeenCalledWith({
         content: "my-post",
+        organizationId: "my-organization-id",
+        profileId: "my-profile-id",
       });
     });
   });
