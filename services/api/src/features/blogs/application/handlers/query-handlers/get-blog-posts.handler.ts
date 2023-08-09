@@ -32,6 +32,8 @@ export class GetBlogPostsHandler
 
     return mapArray(BlogPostDetails, foundBlogPosts, (post) => ({
       content: post.content,
+      createdAt: post.createdAt.toISOString(),
+      id: post.id,
       profileId: post.profileId,
     }));
   }

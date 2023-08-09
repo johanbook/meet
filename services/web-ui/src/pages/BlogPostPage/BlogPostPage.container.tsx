@@ -1,13 +1,14 @@
 import React from "react";
 import { useQuery } from "react-query";
 
-import { List, ListItem, ListItemText, Typography } from "@mui/material";
+import { Avatar, Box, Card, Typography } from "@mui/material";
 
 import { blogsApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 
 import { BlogPostPageHeader } from "./BlogPostPage.header";
 import { BlogPostPageSkeleton } from "./BlogPostPage.skeleton";
+import { BlogPostForm } from "./components/BlogPostForm";
 
 export function BlogPostPageContainer(): React.ReactElement {
   const { error, data, isLoading } = useQuery("blog-posts", () =>
@@ -38,6 +39,8 @@ export function BlogPostPageContainer(): React.ReactElement {
       <>
         <BlogPostPageHeader />
         <Typography>No blog posts found</Typography>
+
+        <BlogPostForm />
       </>
     );
   }
@@ -46,13 +49,26 @@ export function BlogPostPageContainer(): React.ReactElement {
     <>
       <BlogPostPageHeader />
 
-      <List>
-        {data.map((post) => (
-          <ListItem key={post.content}>
-            <ListItemText primary={post.content} />
-          </ListItem>
-        ))}
-      </List>
+      {data.map((post) => (
+        <Card
+          key={post.id}
+          sx={{ marginBottom: 2, padding: 2 }}
+          variant="outlined"
+        >
+          <Box sx={{ alignItems: "center", display: "flex", paddingBottom: 2 }}>
+            <Avatar />
+
+            <Box sx={{ paddingLeft: 1 }}>
+              <Typography>published</Typography>
+              <Typography>{post.createdAt}</Typography>
+            </Box>
+          </Box>
+
+          <Typography>{post.content}</Typography>
+        </Card>
+      ))}
+
+      <BlogPostForm />
     </>
   );
 }
