@@ -7,11 +7,14 @@ import {
 } from "@nestjs/platform-fastify";
 import { SwaggerModule } from "@nestjs/swagger";
 
-import { Logger, createPinoLoggerOptions } from "src/core/logging";
+import {
+  Logger,
+  createPinoLoggerOptions,
+  LoggingInterceptor,
+} from "src/core/logging";
 import { createOpenApiDocument } from "src/core/openapi";
 
 import { AppModule } from "./app.module";
-import { LoggingInterceptor } from "./client/interceptors/logging.interceptor";
 
 const PATH_PREFIX = process.env.PATH_PREFIX || "/api";
 const PORT = Number.parseInt(process.env.PORT || "3000");

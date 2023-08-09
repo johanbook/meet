@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { UserIdService } from "src/client/context/user-id.service";
+import { UserIdService } from "src/core/authentication";
 
 import { Settings } from "../../infrastructure/entities/settings.entity";
 

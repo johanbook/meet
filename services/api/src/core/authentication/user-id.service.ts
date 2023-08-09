@@ -1,16 +1,15 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { AsyncLocalStorage } from "node:async_hooks";
 
-import { MissingUserIdError } from "src/core/authentication";
+import { IRequestContext, REQUEST_CONTEXT_KEY } from "src/core/request-context";
 
-import { REQUEST_CONTEXT_KEY } from "./als.module";
-import { RequestContext } from "./request-context.interface";
+import { MissingUserIdError } from "./missing-user-id.error";
 
 @Injectable()
 export class UserIdService {
   constructor(
     @Inject(REQUEST_CONTEXT_KEY)
-    private readonly als: AsyncLocalStorage<RequestContext>,
+    private readonly als: AsyncLocalStorage<IRequestContext>,
   ) {}
 
   getUserId() {

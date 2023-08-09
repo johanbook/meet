@@ -3,7 +3,7 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { UserIdService } from "src/client/context/user-id.service";
+import { UserIdService } from "src/core/authentication";
 import { ProfileService } from "src/features/profiles/domain/services/profile.service";
 
 import { Profile } from "../../../infrastructure/entities/profile.entity";

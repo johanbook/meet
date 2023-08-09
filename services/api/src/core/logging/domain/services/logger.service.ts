@@ -1,7 +1,7 @@
 import { LoggerService } from "@nestjs/common";
 import * as pino from "pino";
 
-import { REQUEST_CONTEXT_ALS } from "src/client/context/als.module";
+import { REQUEST_CONTEXT_ALS } from "src/core/request-context";
 
 export function getLogLevel(): string {
   const level = process.env.LOG_LEVEL || "info";

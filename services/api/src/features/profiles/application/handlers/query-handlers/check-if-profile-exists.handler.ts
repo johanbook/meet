@@ -2,7 +2,7 @@ import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { UserIdService } from "src/client/context/user-id.service";
+import { UserIdService } from "src/core/authentication";
 
 import { Profile } from "../../../infrastructure/entities/profile.entity";
 import { CheckIfProfileExistsQuery } from "../../contracts/queries/check-if-profile-exists.query";

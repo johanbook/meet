@@ -3,7 +3,7 @@ import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { UserIdService } from "src/client/context/user-id.service";
+import { UserIdService } from "src/core/authentication";
 import { map, mapArray } from "src/core/mapper";
 import { ObjectStorageService } from "src/core/object-storage";
 
