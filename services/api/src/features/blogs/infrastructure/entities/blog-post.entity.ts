@@ -1,8 +1,10 @@
-import { Column, Entity, ManyToOne } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 
 import { BaseEntity } from "src/core/database";
-import { Organization } from "src/features/organizations/infrastructure/entities/organization.entity";
-import { Profile } from "src/features/profiles/infrastructure/entities/profile.entity";
+import { Organization } from "src/features/organizations";
+import { Profile } from "src/features/profiles";
+
+import { BlogPostPhoto } from "./blog-post-photo.entity";
 
 @Entity()
 export class BlogPost extends BaseEntity {
@@ -14,6 +16,9 @@ export class BlogPost extends BaseEntity {
 
   @Column()
   organizationId!: number;
+
+  @OneToMany(() => BlogPostPhoto, (photo) => photo.blogPost)
+  photos!: BlogPostPhoto[];
 
   @ManyToOne(() => Profile)
   profile!: Profile;
