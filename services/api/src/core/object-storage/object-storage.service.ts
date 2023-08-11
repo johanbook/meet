@@ -1,14 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { MinioService } from "nestjs-minio-client";
-import { Readable as ReadableStream } from "node:stream";
 import { v4 as uuidv4 } from "uuid";
 
 import { BUCKET_NAMES } from "./buckets.config";
 import { minioOptions } from "./minio.config";
+import { IStorableObject } from "./object-storage.types";
 import { createPublicBucketPolicy } from "./policies";
 
 type ValueOf<T> = T[keyof T];
-type BucketName = ValueOf<typeof BUCKET_NAMES>;
+export type BucketName = ValueOf<typeof BUCKET_NAMES>;
 
 interface PutResult {
   id: string;
@@ -55,7 +55,7 @@ export class ObjectStorageService {
 
   async put(
     bucketName: BucketName,
-    stream: ReadableStream | Buffer | string,
+    stream: IStorableObject,
   ): Promise<PutResult> {
     const client = this.minioService.client;
     const id = uuidv4();
