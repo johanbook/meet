@@ -16,13 +16,14 @@ export class CurrentProfileService {
     private readonly userIdService: UserIdService,
   ) {}
 
-  async fetchCurrentProfile(): Promise<Profile> {
+  async fetchCurrentProfile(): Promise<{ id: number; name: string }> {
     const userId = this.userIdService.getUserId();
 
     const currentProfile = await this.profiles.findOne({
       cache: CURRENT_PROFILE_CACHE_PERIOD_MS,
       select: {
         id: true,
+        name: true,
       },
       where: { userId },
     });

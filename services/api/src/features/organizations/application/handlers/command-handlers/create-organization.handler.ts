@@ -20,7 +20,7 @@ export class CreateOrganizationHandler
 
     await this.organizationService.createOrganization({
       name: command.name,
-      owner: currentProfile,
+      ownerId: currentProfile.id,
       personal: false,
     });
   }

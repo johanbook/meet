@@ -22,7 +22,7 @@ export class CreatePersonalOrganizationHandler
 
     await this.organizationService.createOrganization({
       name: currentProfile.name,
-      owner: currentProfile,
+      ownerId: currentProfile.id,
       personal: true,
     });
   }
