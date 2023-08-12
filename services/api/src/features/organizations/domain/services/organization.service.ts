@@ -4,7 +4,6 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { map } from "src/core/mapper";
-import { Profile } from "src/features/profiles";
 
 import { OrganizationMembership } from "../../infrastructure/entities/organization-membership.entity";
 import { Organization } from "../../infrastructure/entities/organization.entity";
@@ -12,7 +11,7 @@ import { OrganizationCreatedEvent } from "../events/organization-created.event";
 
 interface CreateOrganizationProps {
   name: string;
-  owner: Profile;
+  ownerId: number;
   personal: boolean;
 }
 
@@ -30,7 +29,7 @@ export class OrganizationService {
     organization.name = props.name;
     organization.personal = props.personal;
 
-    const membership = await this.createMembership(organization, props.owner);
+    const membership = await this.createMembership(organization, props.ownerId);
     organization.memberships = [membership];
 
     const createdOrganization = await this.organizations.save(organization);
@@ -50,12 +49,12 @@ export class OrganizationService {
 
   private async createMembership(
     organization: Organization,
-    profile: Profile,
+    profileId: number,
   ): Promise<OrganizationMembership> {
     const membership = new OrganizationMembership();
 
     membership.organization = organization;
-    membership.profile = profile;
+    membership.profileId = profileId;
 
     return membership;
   }

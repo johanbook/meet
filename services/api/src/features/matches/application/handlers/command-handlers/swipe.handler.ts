@@ -22,8 +22,8 @@ export class SwipeHandler implements ICommandHandler<SwipeCommand, void> {
 
     const swipe = new Swipe();
     swipe.liked = command.liked;
-    swipe.profile = currentProfile;
-    swipe.shownProfile = shownProfile;
+    swipe.profileId = currentProfile.id;
+    swipe.shownProfileId = shownProfile.id;
 
     await this.swipeService.saveSwipe(swipe);
   }

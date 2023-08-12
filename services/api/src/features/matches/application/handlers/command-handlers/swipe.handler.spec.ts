@@ -36,8 +36,8 @@ describe(SwipeHandler.name, () => {
 
     expect(swipeService.saveSwipe).toHaveBeenCalledWith({
       liked: command.liked,
-      profile: profile,
-      shownProfile: shownProfile,
+      profileId: profile.id,
+      shownProfileId: shownProfile.id,
     });
   });
 });

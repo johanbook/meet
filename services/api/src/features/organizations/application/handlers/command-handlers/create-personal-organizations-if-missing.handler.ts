@@ -41,7 +41,7 @@ export class CreatePersonalOrganizationsIfMissingHandler
 
     await this.organizationService.createOrganization({
       name: profile.name,
-      owner: profile,
+      ownerId: profile.id,
       personal: true,
     });
   }

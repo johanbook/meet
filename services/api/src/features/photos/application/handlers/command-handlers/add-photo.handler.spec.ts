@@ -37,7 +37,7 @@ describe(AddPhotoHandler.name, () => {
 
       const findOneFn =
         currentProfileService.fetchCurrentProfile as unknown as jest.Mock;
-      findOneFn.mockImplementation(() => "my-profile-id");
+      findOneFn.mockImplementation(() => ({ id: "my-profile-id" }));
 
       const command = map(AddPhotoCommand, newProfile);
 
@@ -45,7 +45,7 @@ describe(AddPhotoHandler.name, () => {
 
       expect(profilePhotos.save).toHaveBeenCalledWith({
         objectId: "my-object-id",
-        profile: "my-profile-id",
+        profileId: "my-profile-id",
       });
     });
   });
