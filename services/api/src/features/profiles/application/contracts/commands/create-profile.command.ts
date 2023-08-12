@@ -15,7 +15,7 @@ export class CreateProfileCommand {
   public readonly description!: string;
 
   @IsAlpha()
-  @Length(0, 128)
+  @Length(1, 128)
   public readonly name!: string;
 
   @Type(() => Location)
