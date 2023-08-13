@@ -2,47 +2,55 @@
 
 The system supports receiving binary files via the HTTP REST multipart standard.
 
+Multipart requests are parsed using
+[@fastify/multipart](https://github.com/fastify/fastify-multipart). By default,
+they are accumulated in memory which allows using similar command declarations
+for JSON and Multipart requests. However, if there is need for larger file
+uploads, it is recommended to create a separate service to handle this.
+
 ## Guide
 
-The controller can be setup as following:
+Files are declared in the command using the `BinaryFile` or `BinaryFileArray`
+decorators from `sr/core/multipart` as shown below:
 
 ```ts
-import { Body, Controller, Delete, Post } from "@nestjs/common";
-import { CommandBus } from "@nestjs/cqrs";
+import { IsOptional, Length } from "class-validator";
+
+import { BinaryFileArray } from "src/core/multipart";
+import { IStorableObject } from "src/core/object-storage";
+
+export class CreateBlogPostCommand {
+  @Length(1, 2048)
+  content!: string;
+
+  @IsOptional()
+  @BinaryFileArray()
+  photos?: IStorableObject[];
+}
+```
+
+This command can then be used in the controller standard manner by as done
+below. The only difference is that the `Multipart` decorator is used on the
+method.
+
+```ts
+import { Body, Controller, Post, Query } from "@nestjs/common";
+import { CommandBus,  from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
-import { map } from "src/core/mapper";
-import { Multipart, MultipartFile, UploadedFile } from "src/core/multipart";
+import { Multipart } from "src/core/multipart";
 
-import { AddMonkeyFileCommand } from "../../application/contracts/commands/add-monkey-file.command";
+import { CreateBlogPostCommand } from "../../application/contracts/commands/create-blog-post.command";
 
-@Controller("monkies")
-@ApiTags("monkies")
-export class MonkeyController {
+@Controller("blogs")
+@ApiTags("blogs")
+export class BlogsController {
   constructor(private commandBus: CommandBus) {}
 
-  @Post("addMonkeyFile")
-  @Multipart({
-    schema: {
-      type: "object",
-      properties: {
-        file: {
-          type: "string",
-          format: "binary",
-        },
-      },
-    },
-  })
-  async addMonkeyFile(
-    @UploadedFile() multipartFile: MultipartFile
-  ): Promise<null> {
-    const command = map(AddMonkeyFileCommand, { file: multipartFile.file });
+  @Post()
+  @Multipart()
+  async createBlogPost(@Body() command: CreateBlogPostCommand): Promise<null> {
     return await this.commandBus.execute(command);
   }
 }
 ```
-
-It is also possible to use more specific file decorators that will also perform
-additional MIME type checks:
-
-- `UploadedImage` for binary images
