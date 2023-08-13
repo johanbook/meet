@@ -1,0 +1,1 @@
+export { Photo } from "./Photo";

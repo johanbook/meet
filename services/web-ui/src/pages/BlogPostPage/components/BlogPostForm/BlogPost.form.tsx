@@ -1,10 +1,14 @@
 import React, { SyntheticEvent } from "react";
 import { useMutation, useQueryClient } from "react-query";
 
-import { Box, TextField } from "@mui/material";
+import { InsertPhoto } from "@mui/icons-material";
+import { Box, InputAdornment, TextField } from "@mui/material";
 
 import { CreateBlogPostRequest } from "src/api";
 import { blogsApi } from "src/apis";
+import { Photo } from "src/components/ui/Photo";
+import { UploadIconButton } from "src/components/ui/UploadIconButton";
+import { useForm } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
 
 export function BlogPostForm(): React.ReactElement {
@@ -16,20 +20,17 @@ export function BlogPostForm(): React.ReactElement {
 
   const { t } = useTranslation("blog");
 
-  const [content, setContent] = React.useState("");
+  const form = useForm<CreateBlogPostRequest>({ content: "", photos: [] });
 
   async function handleSubmit(event: SyntheticEvent): Promise<void> {
     event.preventDefault();
 
-    await mutation.mutateAsync(
-      { content },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(["blog-posts"]);
-          setContent("");
-        },
-      }
-    );
+    await mutation.mutateAsync(form.value, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["blog-posts"]);
+        form.reset();
+      },
+    });
   }
 
   return (
@@ -38,11 +39,32 @@ export function BlogPostForm(): React.ReactElement {
         <TextField
           disabled={mutation.isLoading}
           fullWidth
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <UploadIconButton
+                  accept="image/*"
+                  onChange={(photos) =>
+                    form.setValue({
+                      photos: [...(form.value?.photos || []), ...photos],
+                    })
+                  }
+                >
+                  <InsertPhoto />
+                </UploadIconButton>
+              </InputAdornment>
+            ),
+          }}
           multiline
-          onChange={(event) => setContent(event.target.value)}
+          onChange={(event) => form.setValue({ content: event.target.value })}
           placeholder={t("form.placeholder") || ""}
-          value={content}
+          rows={4}
+          value={form.value.content}
         />
+
+        {form.value.photos?.map((photo, index) => (
+          <Photo alt="" key={index} src={photo} />
+        ))}
       </form>
     </Box>
   );
