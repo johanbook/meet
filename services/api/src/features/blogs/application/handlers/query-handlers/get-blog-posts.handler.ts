@@ -8,7 +8,7 @@ import { BlogPost } from "src/features/blogs/infrastructure/entities/blog-post.e
 import { CurrentOrganizationService } from "src/features/organizations";
 
 import { BlogPostDetails } from "../../contracts/dtos/blog-post-detail.dto";
-import { ProfileDetails } from "../../contracts/dtos/profile.dto";
+import { BlogPostProfileDetails } from "../../contracts/dtos/blog-post-profile.dto";
 import { GetBlogPostsQuery } from "../../contracts/queries/get-blog-posts.query";
 
 @QueryHandler(GetBlogPostsQuery)
@@ -28,19 +28,28 @@ export class GetBlogPostsHandler
 
     const foundBlogPosts = await this.queryService.find(this.blogPosts, {
       default: {
-        order: { createdAt: "desc" },
+        order: {
+          createdAt: "desc",
+        },
       },
       query,
-      required: { where: { organizationId: currentOrganizationId } },
+      required: {
+        relations: {
+          profile: true,
+        },
+        where: {
+          organizationId: currentOrganizationId,
+        },
+      },
     });
 
     return mapArray(BlogPostDetails, foundBlogPosts, (post) => ({
       content: post.content,
       createdAt: post.createdAt.toISOString(),
       id: post.id,
-      profile: map(ProfileDetails, {
+      profile: map(BlogPostProfileDetails, {
         id: post.profile.id,
-        name: "Unknown",
+        name: post.profile.name,
       }),
     }));
   }
