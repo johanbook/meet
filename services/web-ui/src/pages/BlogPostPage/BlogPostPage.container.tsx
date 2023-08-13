@@ -60,7 +60,9 @@ export function BlogPostPageContainer(): React.ReactElement {
             <Avatar />
 
             <Box sx={{ paddingLeft: 1 }}>
-              <Typography>published</Typography>
+              <Typography>
+                <b>{post.profile.name}</b> published
+              </Typography>
               <Typography variant="subtitle2">
                 {timeSince(post.createdAt)}
               </Typography>
