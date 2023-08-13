@@ -6,7 +6,7 @@ export function MatchesPageLoadingView(): React.ReactElement {
   return (
     <>
       <Typography gutterBottom variant="h5">
-        New matches
+        Connections
       </Typography>
 
       <Box sx={{ display: "flex", paddingBottom: 2 }}>
