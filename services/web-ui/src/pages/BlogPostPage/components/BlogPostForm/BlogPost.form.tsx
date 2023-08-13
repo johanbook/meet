@@ -3,12 +3,12 @@ import { useMutation, useQueryClient } from "react-query";
 
 import { Box, TextField } from "@mui/material";
 
-import { CreateBlogPostCommand } from "src/api";
+import { CreateBlogPostRequest } from "src/api";
 import { blogsApi } from "src/apis";
 
 export function BlogPostForm(): React.ReactElement {
-  const mutation = useMutation((createBlogPostCommand: CreateBlogPostCommand) =>
-    blogsApi.createBlogPost({ createBlogPostCommand })
+  const mutation = useMutation((command: CreateBlogPostRequest) =>
+    blogsApi.createBlogPost(command)
   );
 
   const queryClient = useQueryClient();
