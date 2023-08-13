@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Avatar, Box, Card, Typography } from "@mui/material";
+import { MoreVert } from "@mui/icons-material";
+import { Avatar, Box, Card, IconButton, Typography } from "@mui/material";
 
 import { BlogPostDetails } from "src/api";
 import { useTranslation } from "src/core/i18n";
@@ -19,7 +20,7 @@ export function BlogPostPageComponent({
 
   return (
     <>
-      <Box sx={{ paddingBottom: 2 }}>
+      <Box sx={{ paddingBottom: 2, paddingTop: 2 }}>
         <BlogPostForm />
       </Box>
 
@@ -32,7 +33,7 @@ export function BlogPostPageComponent({
           <Box sx={{ alignItems: "center", display: "flex", paddingBottom: 2 }}>
             <Avatar />
 
-            <Box sx={{ paddingLeft: 1 }}>
+            <Box sx={{ flexGrow: 1, paddingLeft: 1 }}>
               <Typography>
                 <b>{post.profile.name}</b> {t("published")}
               </Typography>
@@ -40,6 +41,10 @@ export function BlogPostPageComponent({
                 {timeSince(post.createdAt)}
               </Typography>
             </Box>
+
+            <IconButton>
+              <MoreVert />
+            </IconButton>
           </Box>
 
           <Typography>{post.content}</Typography>

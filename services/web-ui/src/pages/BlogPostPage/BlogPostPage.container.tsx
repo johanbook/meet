@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
 
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { blogsApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
@@ -39,7 +39,10 @@ export function BlogPostPageContainer(): React.ReactElement {
     return (
       <>
         <BlogPostPageHeader />
-        <BlogPostForm />
+
+        <Box sx={{ paddingBottom: 2, paddingTop: 2 }}>
+          <BlogPostForm />
+        </Box>
 
         <Typography>No blog posts found</Typography>
       </>
