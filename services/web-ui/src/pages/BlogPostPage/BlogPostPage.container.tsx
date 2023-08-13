@@ -5,6 +5,7 @@ import { Avatar, Box, Card, Typography } from "@mui/material";
 
 import { blogsApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
+import { timeSince } from "src/utils/time";
 
 import { BlogPostPageHeader } from "./BlogPostPage.header";
 import { BlogPostPageSkeleton } from "./BlogPostPage.skeleton";
@@ -60,7 +61,9 @@ export function BlogPostPageContainer(): React.ReactElement {
 
             <Box sx={{ paddingLeft: 1 }}>
               <Typography>published</Typography>
-              <Typography>{post.createdAt}</Typography>
+              <Typography variant="subtitle2">
+                {timeSince(post.createdAt)}
+              </Typography>
             </Box>
           </Box>
 
