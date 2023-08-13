@@ -1,6 +1,8 @@
+import { BlogPostProfileDetails } from "./blog-post-profile.dto";
+
 export class BlogPostDetails {
   id!: string;
   content!: string;
   createdAt!: string;
-  profileId!: number;
+  profile!: BlogPostProfileDetails;
 }

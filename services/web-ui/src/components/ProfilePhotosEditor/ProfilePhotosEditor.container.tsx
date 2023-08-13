@@ -26,7 +26,7 @@ export function ProfilePhotosEditorContainer({
 }: ProfilePhotosEditorContainerProps): React.ReactElement {
   const snackbar = useSnackbar();
 
-  const mutation = useMutation((file: File) => photosApi.addPhoto({ file }), {
+  const mutation = useMutation(() => photosApi.addPhoto(), {
     onError: () => snackbar.error("Image upload failed"),
   });
 
@@ -41,8 +41,8 @@ export function ProfilePhotosEditorContainer({
       return;
     }
 
-    const file = files[0];
-    await mutation.mutateAsync(file);
+    // TODO: Upload file
+    await mutation.mutateAsync();
 
     onRefresh();
 
