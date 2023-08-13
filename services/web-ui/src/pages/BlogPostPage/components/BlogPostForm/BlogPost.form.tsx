@@ -5,6 +5,7 @@ import { Box, TextField } from "@mui/material";
 
 import { CreateBlogPostRequest } from "src/api";
 import { blogsApi } from "src/apis";
+import { useTranslation } from "src/core/i18n";
 
 export function BlogPostForm(): React.ReactElement {
   const mutation = useMutation((command: CreateBlogPostRequest) =>
@@ -12,6 +13,8 @@ export function BlogPostForm(): React.ReactElement {
   );
 
   const queryClient = useQueryClient();
+
+  const { t } = useTranslation("blog");
 
   const [content, setContent] = React.useState("");
 
@@ -35,8 +38,9 @@ export function BlogPostForm(): React.ReactElement {
         <TextField
           disabled={mutation.isLoading}
           fullWidth
+          multiline
           onChange={(event) => setContent(event.target.value)}
-          placeholder="Say something about your day"
+          placeholder={t("form.placeholder") || ""}
           value={content}
         />
       </form>

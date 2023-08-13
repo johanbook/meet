@@ -1,4 +1,6 @@
 {
-  "description": "These are blog posts",
-  "title": "Blog"
+  "form": {
+    "placeholder": "Perhaps say something about your day"
+  },
+  "published": "published"
 }
