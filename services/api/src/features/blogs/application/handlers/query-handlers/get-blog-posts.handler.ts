@@ -26,6 +26,9 @@ export class GetBlogPostsHandler
       await this.currentOrganizationService.fetchCurrentOrganizationId();
 
     const foundBlogPosts = await this.queryService.find(this.blogPosts, {
+      default: {
+        order: { createdAt: "desc" },
+      },
       query,
       required: { where: { organizationId: currentOrganizationId } },
     });
