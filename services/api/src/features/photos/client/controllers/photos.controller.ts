@@ -14,17 +14,7 @@ export class PhotosController {
   constructor(private commandBus: CommandBus) {}
 
   @Post("add")
-  @Multipart({
-    schema: {
-      type: "object",
-      properties: {
-        file: {
-          type: "string",
-          format: "binary",
-        },
-      },
-    },
-  })
+  @Multipart()
   async addPhoto(@UploadedImage() file: MultipartFile): Promise<null> {
     const command = new AddPhotoCommand();
     command.photo = file.file;

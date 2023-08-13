@@ -36,7 +36,9 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
   app.useGlobalInterceptors(new LoggingInterceptor());
 
-  app.register(fastifyMultipart);
+  app.register(fastifyMultipart, {
+    attachFieldsToBody: "keyValues",
+  });
 
   await app.listen(PORT, "0.0.0.0");
 }
