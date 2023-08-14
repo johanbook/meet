@@ -48,6 +48,15 @@ export function BlogPostPageComponent({
           </Box>
 
           <Typography>{post.content}</Typography>
+
+          {post.photos.map((photo) => (
+            <img
+              alt={photo.description}
+              key={photo.id}
+              src={photo.url}
+              style={{ border: "1px solid gray", padding: 10 }}
+            />
+          ))}
         </Card>
       ))}
     </>
