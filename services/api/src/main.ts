@@ -38,6 +38,10 @@ async function bootstrap() {
 
   app.register(fastifyMultipart, {
     attachFieldsToBody: "keyValues",
+    limits: {
+      fileSize: 30 * 1000 * 1000,
+      files: 20,
+    },
   });
 
   await app.listen(PORT, "0.0.0.0");
