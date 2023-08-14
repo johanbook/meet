@@ -17,7 +17,12 @@ export class BlogPost extends BaseEntity {
   @Column()
   organizationId!: number;
 
-  @OneToMany(() => BlogPostPhoto, (photo) => photo.blogPost)
+  @OneToMany(
+    () => BlogPostPhoto,
+    (photo) => photo.blogPost,
+
+    { cascade: true },
+  )
   photos!: BlogPostPhoto[];
 
   @ManyToOne(() => Profile)

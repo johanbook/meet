@@ -14,5 +14,6 @@ export class CreateBlogPostCommand {
   @IsOptional()
   @IsDefined()
   @BinaryFileArray()
-  photos?: IStorableObject[];
+  // TODO: Temporary fix
+  photos?: IStorableObject | IStorableObject[];
 }

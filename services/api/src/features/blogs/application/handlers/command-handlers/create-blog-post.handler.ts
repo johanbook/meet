@@ -1,5 +1,8 @@
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
+import { IStorableObject } from "src/core/object-storage";
+import { PhotoService } from "src/core/photos";
+import { BlogPostPhoto } from "src/features/blogs/infrastructure/entities/blog-post-photo.entity";
 import { CurrentOrganizationService } from "src/features/organizations";
 import { CurrentProfileService } from "src/features/profiles";
 
@@ -15,6 +18,7 @@ export class CreateBlogPostHandler
     private readonly blogPostService: BlogPostService,
     private readonly currentOrganizationService: CurrentOrganizationService,
     private readonly currentProfileService: CurrentProfileService,
+    private readonly photoService: PhotoService,
   ) {}
 
   async execute(command: CreateBlogPostCommand) {
@@ -29,6 +33,34 @@ export class CreateBlogPostHandler
     blogPost.organizationId = currentOrganizationId;
     blogPost.profileId = currentProfileId;
 
+    if (command.photos) {
+      await this.addPhotos(
+        blogPost,
+        Array.isArray(command.photos) ? command.photos : [command.photos],
+        currentProfileId,
+      );
+    }
+
     await this.blogPostService.saveBlogPost(blogPost);
+  }
+
+  private async addPhotos(
+    blogPost: BlogPost,
+    photos: IStorableObject[],
+    profileId: number,
+  ): Promise<void> {
+    const blogPostPhotos: BlogPostPhoto[] = [];
+
+    for (const binary of photos) {
+      const blogPostPhoto = await this.photoService.uploadPhoto(
+        BlogPostPhoto,
+        "profile-photos",
+        binary,
+      );
+      blogPostPhoto.profileId = profileId;
+      blogPostPhotos.push(blogPostPhoto);
+    }
+
+    blogPost.photos = blogPostPhotos;
   }
 }
