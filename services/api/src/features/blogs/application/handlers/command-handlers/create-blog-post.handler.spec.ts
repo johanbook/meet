@@ -24,12 +24,15 @@ describe(CreateBlogPostHandler.name, () => {
       fetchCurrentProfileId: jest.fn(() => "my-profile-id"),
     } as any;
 
+    const photoService = {} as any;
+
     blogPostService = new BlogPostService(blogPosts);
 
     commandHandler = new CreateBlogPostHandler(
       blogPostService,
       currentOrganizationService,
       currentProfileService,
+      photoService,
     );
   });
 
