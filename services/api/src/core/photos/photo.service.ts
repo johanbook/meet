@@ -13,6 +13,10 @@ import { BasePhoto } from "./photo.entity";
 export class PhotoService {
   constructor(private readonly objectStorageService: ObjectStorageService) {}
 
+  getUrl<T extends BasePhoto>(photo: T, bucketName: BucketName): string {
+    return this.objectStorageService.getUrl(bucketName, photo.objectId);
+  }
+
   async uploadPhoto<T extends BasePhoto>(
     cls: Constructor<T>,
     bucketName: BucketName,

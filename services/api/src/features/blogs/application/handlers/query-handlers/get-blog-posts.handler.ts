@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { map, mapArray } from "src/core/mapper";
+import { PhotoService } from "src/core/photos";
 import { QueryService } from "src/core/query";
 import { BlogPost } from "src/features/blogs/infrastructure/entities/blog-post.entity";
 import { CurrentOrganizationService } from "src/features/organizations";
@@ -20,6 +21,7 @@ export class GetBlogPostsHandler
     private readonly currentOrganizationService: CurrentOrganizationService,
     @InjectRepository(BlogPost)
     private readonly blogPosts: Repository<BlogPost>,
+    private readonly photoService: PhotoService,
     private readonly queryService: QueryService<BlogPost>,
   ) {}
 
@@ -52,7 +54,7 @@ export class GetBlogPostsHandler
       photos: mapArray(BlogPostPhotoDetails, post.photos, (photo) => ({
         description: photo.description,
         id: photo.id,
-        url: "",
+        url: this.photoService.getUrl(photo, "blog-post-photo"),
       })),
       profile: map(BlogPostProfileDetails, {
         id: post.profile.id,
