@@ -43,7 +43,7 @@ async function bootstrap() {
       files: 20,
     },
     onFile: async (part: any) => {
-      part.value= await part.toBuffer();
+      part.value = await part.toBuffer();
     },
   });
 
