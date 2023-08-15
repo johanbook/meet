@@ -54,7 +54,10 @@ export function BlogPostPageComponent({
               alt={photo.description}
               key={photo.id}
               src={photo.url}
-              style={{ border: "1px solid gray", padding: 10 }}
+              style={{
+                padding: 10,
+                maxWidth: "100%",
+              }}
             />
           ))}
         </Card>
