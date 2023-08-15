@@ -8,6 +8,7 @@ import { BlogPost } from "src/features/blogs/infrastructure/entities/blog-post.e
 import { CurrentOrganizationService } from "src/features/organizations";
 
 import { BlogPostDetails } from "../../contracts/dtos/blog-post-detail.dto";
+import { BlogPostPhotoDetails } from "../../contracts/dtos/blog-post-photo.dto";
 import { BlogPostProfileDetails } from "../../contracts/dtos/blog-post-profile.dto";
 import { GetBlogPostsQuery } from "../../contracts/queries/get-blog-posts.query";
 
@@ -35,6 +36,7 @@ export class GetBlogPostsHandler
       query,
       required: {
         relations: {
+          photos: true,
           profile: true,
         },
         where: {
@@ -47,6 +49,11 @@ export class GetBlogPostsHandler
       content: post.content,
       createdAt: post.createdAt.toISOString(),
       id: post.id,
+      photos: mapArray(BlogPostPhotoDetails, post.photos, (photo) => ({
+        description: photo.description,
+        id: photo.id,
+        url: "",
+      })),
       profile: map(BlogPostProfileDetails, {
         id: post.profile.id,
         name: post.profile.name,

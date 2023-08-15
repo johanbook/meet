@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { HTMLProps, useEffect, useState } from "react";
 
 import { blobToBase64 } from "src/utils/blob";
 
-interface PhotoProps {
+interface PhotoProps extends Omit<HTMLProps<HTMLImageElement>, "src"> {
   alt: string;
   src: Blob;
 }

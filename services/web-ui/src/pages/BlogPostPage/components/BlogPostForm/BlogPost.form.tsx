@@ -1,8 +1,8 @@
 import React, { SyntheticEvent } from "react";
 import { useMutation, useQueryClient } from "react-query";
 
-import { InsertPhoto } from "@mui/icons-material";
-import { Box, InputAdornment, TextField } from "@mui/material";
+import { InsertPhoto, Send } from "@mui/icons-material";
+import { Box, IconButton, InputAdornment, TextField } from "@mui/material";
 
 import { CreateBlogPostRequest } from "src/api";
 import { blogsApi } from "src/apis";
@@ -40,6 +40,13 @@ export function BlogPostForm(): React.ReactElement {
           disabled={mutation.isLoading}
           fullWidth
           InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton type="submit">
+                  <Send />
+                </IconButton>
+              </InputAdornment>
+            ),
             startAdornment: (
               <InputAdornment position="start">
                 <UploadIconButton
@@ -63,7 +70,18 @@ export function BlogPostForm(): React.ReactElement {
         />
 
         {form.value.photos?.map((photo, index) => (
-          <Photo alt="" key={index} src={photo} />
+          <Photo
+            alt=""
+            key={index}
+            src={photo}
+            style={{
+              border: "1px solid rgb(200,200,200)",
+              borderRadius: 8,
+              marginTop: 10,
+              maxWidth: 200,
+              padding: 10,
+            }}
+          />
         ))}
       </form>
     </Box>
