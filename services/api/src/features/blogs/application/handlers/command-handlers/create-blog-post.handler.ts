@@ -54,7 +54,7 @@ export class CreateBlogPostHandler
     for (const binary of photos) {
       const blogPostPhoto = await this.photoService.uploadPhoto(
         BlogPostPhoto,
-        "profile-photos",
+        "blog-post-photo",
         binary,
       );
       blogPostPhoto.profileId = profileId;
