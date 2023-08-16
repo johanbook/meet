@@ -45,7 +45,7 @@ export function CurrentProfileDetails({
         {t("profile-editor.media")}
       </Typography>
 
-      <ProfilePhotosEditor onRefresh={refetchData} photos={profile.photos} />
+      <ProfilePhotosEditor onRefresh={refetchData} photo={profile.photo} />
 
       <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
         {t("profile-editor.description.title")}

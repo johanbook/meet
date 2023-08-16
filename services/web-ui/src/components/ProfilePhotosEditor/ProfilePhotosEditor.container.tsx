@@ -1,8 +1,8 @@
 import React from "react";
 import { useMutation } from "react-query";
 
-import { PhotoDetails } from "src/api";
-import { photosApi } from "src/apis";
+import { ProfilePhotoDetails } from "src/api";
+import { profileApi } from "src/apis";
 import { useSnackbar } from "src/core/snackbar";
 
 import { ProfilePhotosEditorComponent } from "./ProfilePhotosEditor.component";
@@ -17,18 +17,21 @@ function getPhotoLabel(index: number): string {
 
 export interface ProfilePhotosEditorContainerProps {
   onRefresh: () => void;
-  photos: PhotoDetails[];
+  photo?: ProfilePhotoDetails;
 }
 
 export function ProfilePhotosEditorContainer({
   onRefresh,
-  photos,
+  photo,
 }: ProfilePhotosEditorContainerProps): React.ReactElement {
   const snackbar = useSnackbar();
 
-  const mutation = useMutation(() => photosApi.addPhoto(), {
-    onError: () => snackbar.error("Image upload failed"),
-  });
+  const mutation = useMutation(
+    () => profileApi.updateCurrentProfilePhoto({ photo: [new Blob([])] }),
+    {
+      onError: () => snackbar.error("Image upload failed"),
+    }
+  );
 
   async function handleUpload(
     event: React.ChangeEvent<HTMLInputElement>
@@ -55,7 +58,7 @@ export function ProfilePhotosEditorContainer({
       getPhotoLabel={getPhotoLabel}
       handleUpload={handleUpload}
       onRefresh={onRefresh}
-      photos={photos}
+      photo={photo}
     />
   );
 }
