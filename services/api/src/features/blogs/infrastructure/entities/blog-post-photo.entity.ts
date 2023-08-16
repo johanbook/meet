@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne } from "typeorm";
 
 import { BasePhoto } from "src/core/photos";
+import { Profile } from "src/features/profiles";
 
 import { BlogPost } from "./blog-post.entity";
 
@@ -11,4 +12,10 @@ export class BlogPostPhoto extends BasePhoto {
 
   @ManyToOne(() => BlogPost, (post) => post.photos)
   blogPost!: BlogPost;
+
+  @Column()
+  profileId!: number;
+
+  @ManyToOne(() => Profile)
+  profile!: Profile;
 }

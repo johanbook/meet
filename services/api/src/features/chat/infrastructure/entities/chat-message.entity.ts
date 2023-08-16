@@ -22,12 +22,12 @@ export class ChatMessage {
   @Column()
   receiverId!: number;
 
-  @ManyToOne(() => Profile, (profile) => profile.receivedMessages)
+  @ManyToOne(() => Profile)
   receiver!: Profile;
 
   @Column()
   senderId!: number;
 
-  @ManyToOne(() => Profile, (profile) => profile.sentMessage)
+  @ManyToOne(() => Profile)
   sender!: Profile;
 }

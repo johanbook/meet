@@ -1,4 +1,4 @@
 export const BUCKET_NAMES = {
   BLOG_POST_PHOTO: "blog-post-photo",
-  PROFILE_PHOTOS: "profile-photos",
+  PROFILE_PHOTO: "profile-photo",
 } as const;

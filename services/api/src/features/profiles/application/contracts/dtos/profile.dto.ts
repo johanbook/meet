@@ -1,8 +1,8 @@
-import { PhotoDetails } from "./photo.dto";
+import { ProfilePhotoDetails } from "./profile-photo.dto";
 
 export class ProfileDetails {
   id!: number;
   description!: string;
   name!: string;
-  photos!: PhotoDetails[];
+  photo?: ProfilePhotoDetails;
 }
