@@ -16,7 +16,6 @@ import { BlogsModule } from "./features/blogs/blogs.module";
 import { ChatModule } from "./features/chat/chat.module";
 import { MatchesModule } from "./features/matches/matches.module";
 import { OrganizationModule } from "./features/organizations/organization.module";
-import { PhotosModule } from "./features/photos/photos.module";
 import { ProfileModule } from "./features/profiles/profile.module";
 import { SettingsModule } from "./features/settings/settings.module";
 import { WingmanModule } from "./features/wingman/wingman.module";
@@ -38,7 +37,6 @@ import { dataSourceOptions } from "./infrastructure/database/data-source.config"
     RequestContextModule,
     MinioModule.register({ ...minioOptions, isGlobal: true }),
     OrganizationModule,
-    PhotosModule,
     ProfileModule,
     SettingsModule,
     TypeOrmModule.forRoot({ ...dataSourceOptions, autoLoadEntities: true }),

@@ -43,6 +43,6 @@ export class GetMatchesHandler
   }
 
   private getPhotoUrl(photoId: string) {
-    return this.objectStorageService.getUrl("profile-photos", photoId);
+    return this.objectStorageService.getUrl("profile-photo", photoId);
   }
 }

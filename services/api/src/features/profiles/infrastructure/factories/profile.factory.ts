@@ -8,7 +8,6 @@ export default setSeederFactory(Profile, (faker: Faker) => {
   profile.name = faker.name.firstName();
   profile.description = faker.lorem.paragraph();
   profile.userId = faker.datatype.uuid();
-  profile.photos = [];
 
   // TODO: Use proper types here
   const recentLocation =

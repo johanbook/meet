@@ -4,11 +4,11 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
-import { map, mapArray } from "src/core/mapper";
-import { ObjectStorageService } from "src/core/object-storage";
+import { map } from "src/core/mapper";
+import { PhotoService } from "src/core/photos";
 
 import { Profile } from "../../../infrastructure/entities/profile.entity";
-import { PhotoDetails } from "../../contracts/dtos/photo.dto";
+import { ProfilePhotoDetails } from "../../contracts/dtos/profile-photo.dto";
 import { ProfileDetails } from "../../contracts/dtos/profile.dto";
 import { GetProfileQuery } from "../../contracts/queries/get-profile.query";
 
@@ -17,7 +17,7 @@ export class GetProfileHandler
   implements IQueryHandler<GetProfileQuery, ProfileDetails>
 {
   constructor(
-    private readonly objectStorageService: ObjectStorageService,
+    private readonly photoService: PhotoService,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
     private readonly userIdService: UserIdService,
@@ -33,7 +33,7 @@ export class GetProfileHandler
         description: true,
       },
       relations: {
-        photos: true,
+        profilePhoto: true,
       },
       where: { userId },
     });
@@ -46,14 +46,12 @@ export class GetProfileHandler
       id: profile.id,
       description: profile.description,
       name: profile.name,
-      photos: mapArray(PhotoDetails, profile.photos, (photo) => {
-        const imageUrl = this.objectStorageService.getUrl(
-          "profile-photos",
-          photo.objectId,
-        );
-
-        return { id: photo.id, imageUrl };
-      }),
+      photo:
+        profile.profilePhoto &&
+        map(ProfilePhotoDetails, {
+          id: profile.profilePhoto.id,
+          url: this.photoService.getUrl(profile.profilePhoto, "profile-photo"),
+        }),
     });
   }
 }
