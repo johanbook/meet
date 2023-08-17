@@ -1,17 +1,25 @@
 import React from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
-import { Box, FormControlLabel, FormGroup, Switch } from "@mui/material";
+import { Box, FormControlLabel, FormGroup } from "@mui/material";
 
+import { SettingsDetails } from "src/api";
 import { settingsApi } from "src/apis";
+import { Switch } from "src/components/ui";
 
 import { ErrorPage } from "../ErrorPage";
 import { SettingsPageHeader } from "./SettingsPage.header";
 import { SettingsPageSkeleton } from "./SettingsPage.skeleton";
 
 export function SettingsPageContainer(): React.ReactElement {
+  const queryClient = useQueryClient();
   const { error, data, isLoading } = useQuery(`settings`, () =>
     settingsApi.getCurrentSettings()
+  );
+
+  // TODO: Investigate why type is incorrect herej
+  const mutation = useMutation((body: object) =>
+    settingsApi.updateCurrentSettings({ body })
   );
 
   if (error) {
@@ -41,6 +49,14 @@ export function SettingsPageContainer(): React.ReactElement {
     );
   }
 
+  async function handleChange(settings: SettingsDetails): Promise<void> {
+    await mutation.mutateAsync(settings, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["settings"]);
+      },
+    });
+  }
+
   return (
     <Box
       sx={{
@@ -54,7 +70,17 @@ export function SettingsPageContainer(): React.ReactElement {
       <Box sx={{ flexGrow: 1 }}>
         <FormGroup>
           <FormControlLabel
-            control={<Switch value={data.darkmode} />}
+            control={
+              <Switch
+                onChange={(value) =>
+                  handleChange({
+                    ...data,
+                    darkmode: value,
+                  })
+                }
+                value={data.darkmode}
+              />
+            }
             label="Darkmode"
           />
         </FormGroup>
