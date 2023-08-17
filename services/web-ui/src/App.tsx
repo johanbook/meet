@@ -45,8 +45,8 @@ const QUERY_CLIENT = new QueryClient({
 export function App(): React.ReactElement {
   return (
     <QueryClientProvider client={QUERY_CLIENT}>
-      <CssBaseline />
       <ThemeProvider>
+        <CssBaseline />
         <AuthenticationGuard>
           <NotificationProvider>
             <Router />
