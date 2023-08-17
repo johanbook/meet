@@ -3,7 +3,10 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
+  OneToOne,
 } from "typeorm";
+
+import { Profile } from "src/features/profiles";
 
 @Entity()
 export class Settings {
@@ -16,6 +19,9 @@ export class Settings {
   @Column("boolean")
   darkmode!: boolean;
 
-  @Column("uuid")
-  userId!: string;
+  @OneToOne(() => Profile)
+  profile!: Profile;
+
+  @Column()
+  profileId!: number;
 }

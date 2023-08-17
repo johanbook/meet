@@ -3,7 +3,7 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { UserIdService } from "src/core/authentication";
+import { CurrentProfileService } from "src/features/profiles";
 import { CurrentSettingsService } from "src/features/settings/domain/services/current-settings.service";
 import { Settings } from "src/features/settings/infrastructure/entities/settings.entity";
 
@@ -14,10 +14,10 @@ export class CreateSettingsHandler
   implements ICommandHandler<CreateSettingsCommand, void>
 {
   constructor(
+    private readonly currentProfileService: CurrentProfileService,
     private readonly currentSettingsService: CurrentSettingsService,
     @InjectRepository(Settings)
     private readonly settings: Repository<Settings>,
-    private readonly userIdService: UserIdService,
   ) {}
 
   async execute() {
@@ -28,11 +28,12 @@ export class CreateSettingsHandler
       throw new BadRequestException("Settings has already been created");
     }
 
-    const userId = this.userIdService.getUserId();
+    const currentProfileId =
+      await this.currentProfileService.fetchCurrentProfileId();
 
     const newSettings = new Settings();
     newSettings.darkmode = false;
-    newSettings.userId = userId;
+    newSettings.profileId = currentProfileId;
 
     await this.settings.save(newSettings);
   }

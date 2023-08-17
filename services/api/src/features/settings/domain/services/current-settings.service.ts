@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { UserIdService } from "src/core/authentication";
+import { CurrentProfileService } from "src/features/profiles";
 
 import { Settings } from "../../infrastructure/entities/settings.entity";
 
@@ -11,23 +11,25 @@ const CURRENT_PROFILE_CACHE_PERIOD_MS = 1000;
 @Injectable()
 export class CurrentSettingsService {
   constructor(
+    private readonly currentProfileService: CurrentProfileService,
     @InjectRepository(Settings)
     private readonly settings: Repository<Settings>,
-    private readonly userIdService: UserIdService,
   ) {}
 
   async checkIfExists(): Promise<boolean> {
-    const userId = this.userIdService.getUserId();
+    const currentProfileId =
+      await this.currentProfileService.fetchCurrentProfileId();
 
-    return this.settings.exist({ where: { userId } });
+    return this.settings.exist({ where: { profileId: currentProfileId } });
   }
 
   async fetchCurrentSettings(): Promise<Settings> {
-    const userId = this.userIdService.getUserId();
+    const currentProfileId =
+      await this.currentProfileService.fetchCurrentProfileId();
 
     const currentSettings = await this.settings.findOne({
       cache: CURRENT_PROFILE_CACHE_PERIOD_MS,
-      where: { userId },
+      where: { profileId: currentProfileId },
     });
 
     if (!currentSettings) {
