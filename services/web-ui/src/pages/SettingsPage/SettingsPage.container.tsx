@@ -1,10 +1,11 @@
 import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-import { Box, FormControlLabel, FormGroup, Switch } from "@mui/material";
+import { Box, FormControlLabel, FormGroup } from "@mui/material";
 
 import { SettingsDetails } from "src/api";
 import { settingsApi } from "src/apis";
+import { Switch } from "src/components/ui";
 
 import { ErrorPage } from "../ErrorPage";
 import { SettingsPageHeader } from "./SettingsPage.header";
@@ -71,13 +72,13 @@ export function SettingsPageContainer(): React.ReactElement {
           <FormControlLabel
             control={
               <Switch
-                checked={data.darkmode}
-                onChange={(event) =>
+                onChange={(value) =>
                   handleChange({
                     ...data,
-                    darkmode: event.target.checked,
+                    darkmode: value,
                   })
                 }
+                value={data.darkmode}
               />
             }
             label="Darkmode"
