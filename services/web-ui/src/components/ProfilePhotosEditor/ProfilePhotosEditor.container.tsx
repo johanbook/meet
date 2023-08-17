@@ -27,7 +27,7 @@ export function ProfilePhotosEditorContainer({
   const snackbar = useSnackbar();
 
   const mutation = useMutation(
-    () => profileApi.updateCurrentProfilePhoto({ photo: [new Blob([])] }),
+    () => profileApi.updateCurrentProfilePhoto({ photo: new Blob([]) }),
     {
       onError: () => snackbar.error("Image upload failed"),
     }
