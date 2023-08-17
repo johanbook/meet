@@ -1,0 +1,12 @@
+{
+  "description": {
+    "title": "About me",
+    "label": "Description",
+    "placeholder": "Describe yourself in a few words"
+  },
+  "header": "Profile",
+  "save": "Save",
+  "update": {
+    "success": "Updated profile"
+  }
+}

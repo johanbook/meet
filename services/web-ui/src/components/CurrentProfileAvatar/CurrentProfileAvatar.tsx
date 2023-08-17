@@ -7,10 +7,10 @@ import { Avatar, Button } from "@mui/material";
 import { profileApi } from "src/apis";
 import { useSnackbar } from "src/core/snackbar";
 
-const HEIGHT = 120;
+const HEIGHT = 200;
 
 export interface CurrentProfileAvatarProps {
-  onUploadedNewProfilePhoto: () => void;
+  onUploadedNewProfilePhoto?: () => void;
   src?: string;
 }
 
@@ -36,7 +36,9 @@ export function CurrentProfileAvatar({
     // TODO: Upload file
     await mutation.mutateAsync();
 
-    onUploadedNewProfilePhoto();
+    if (onUploadedNewProfilePhoto) {
+      onUploadedNewProfilePhoto();
+    }
 
     success("Photo uploaded successfully");
   }

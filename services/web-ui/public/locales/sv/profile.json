@@ -1,0 +1,12 @@
+{
+  "description": {
+    "title": "Om mig",
+    "label": "Beskrivning",
+    "placeholder": "Beskriv dig i ord"
+  },
+  "header": "Profil",
+  "save": "Spara",
+  "update": {
+    "success": "Profil uppdaterad"
+  }
+}

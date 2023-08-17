@@ -8,7 +8,8 @@ import { ProfileDetails, UpdateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
 import { useSnackbar } from "src/core/snackbar";
 
-import { ProfilePhotosEditor } from "../ProfilePhotosEditor";
+import { CurrentProfileAvatar } from "../CurrentProfileAvatar";
+import { Center } from "../ui/Center";
 
 export interface CurrentProfileDetailsProps {
   profile: ProfileDetails;
@@ -19,7 +20,7 @@ export function CurrentProfileDetails({
   profile,
   refetchData,
 }: CurrentProfileDetailsProps): React.ReactElement {
-  const { t } = useTranslation();
+  const { t } = useTranslation("profile");
   const mutation = useMutation((updateProfileCommand: UpdateProfileCommand) =>
     profileApi.updateCurrentProfile({ updateProfileCommand })
   );
@@ -34,7 +35,7 @@ export function CurrentProfileDetails({
 
     refetchData();
 
-    snackbar.success(t("profile-editor.update.success"));
+    snackbar.success(t("update.success"));
   }
 
   const canSubmit = description !== profile.description && !mutation.isLoading;
@@ -42,24 +43,26 @@ export function CurrentProfileDetails({
   return (
     <>
       <Typography sx={{ paddingTop: 2 }} variant="h5">
-        {t("profile-editor.media")}
+        {t("header")}
       </Typography>
 
-      <ProfilePhotosEditor onRefresh={refetchData} photo={profile.photo} />
+      <Center>
+        <CurrentProfileAvatar src={profile.photo?.url} />
+      </Center>
 
       <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
-        {t("profile-editor.description.title")}
+        {t("description.title")}
       </Typography>
 
       <form>
         <TextField
           fullWidth
           disabled={mutation.isLoading}
-          label={t("profile-editor.description.label")}
+          label={t("description.label")}
           margin="normal"
           multiline
           onChange={(event) => setDescription(event.target.value)}
-          placeholder={t("profile-edtir.description.placeholder") ?? undefined}
+          placeholder={t("description.placeholder") ?? undefined}
           rows={4}
           value={description}
         />
@@ -71,7 +74,7 @@ export function CurrentProfileDetails({
             type="submit"
             variant="outlined"
           >
-            {t("general.save")}
+            {t("save")}
           </Button>
         </Box>
       </form>
