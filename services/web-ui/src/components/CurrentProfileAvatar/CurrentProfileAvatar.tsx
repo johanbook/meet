@@ -18,8 +18,8 @@ export function CurrentProfileAvatar({
   onUploadedNewProfilePhoto,
   src,
 }: CurrentProfileAvatarProps): React.ReactElement {
-  const mutation = useMutation(() =>
-    profileApi.updateCurrentProfilePhoto({ photo: [new Blob()] })
+  const mutation = useMutation((photo: File) =>
+    profileApi.updateCurrentProfilePhoto({ photo })
   );
   const { success } = useSnackbar();
 
@@ -33,8 +33,7 @@ export function CurrentProfileAvatar({
       return;
     }
 
-    // TODO: Upload file
-    await mutation.mutateAsync();
+    await mutation.mutateAsync(files[0]);
 
     if (onUploadedNewProfilePhoto) {
       onUploadedNewProfilePhoto();
