@@ -1,11 +1,9 @@
 import { Repository } from "typeorm";
 
-import { UserIdService } from "src/core/authentication";
 import { map } from "src/core/mapper";
 import { CurrentSettingsService } from "src/features/settings/domain/services/current-settings.service";
 import { Settings } from "src/features/settings/infrastructure/entities/settings.entity";
 import { createMockRepository } from "src/test/mocks/repository.mock";
-import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
 
 import { UpdateSettingsCommand } from "../../contracts/commands/update-settings.comamnd";
 import { UpdateSettingsHandler } from "./update-settings.handler";
@@ -14,15 +12,17 @@ describe(UpdateSettingsHandler.name, () => {
   let currentSettingsService: CurrentSettingsService;
   let commandHandler: UpdateSettingsHandler;
   let settings: Repository<Settings>;
-  let userIdService: UserIdService;
 
   beforeEach(() => {
     settings = createMockRepository<Settings>();
-    userIdService = createUserIdServiceMock();
+
+    const currentProfileService = {
+      fetchCurrentProfileId: jest.fn(() => 1),
+    } as any;
 
     currentSettingsService = new CurrentSettingsService(
+      currentProfileService,
       settings,
-      userIdService,
     );
 
     commandHandler = new UpdateSettingsHandler(

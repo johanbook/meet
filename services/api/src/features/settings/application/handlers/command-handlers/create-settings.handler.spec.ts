@@ -1,10 +1,8 @@
 import { Repository } from "typeorm";
 
-import { UserIdService } from "src/core/authentication";
 import { CurrentSettingsService } from "src/features/settings/domain/services/current-settings.service";
 import { Settings } from "src/features/settings/infrastructure/entities/settings.entity";
 import { createMockRepository } from "src/test/mocks/repository.mock";
-import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
 
 import { CreateSettingsHandler } from "./create-settings.handler";
 
@@ -12,21 +10,23 @@ describe(CreateSettingsHandler.name, () => {
   let currentSettingsService: CurrentSettingsService;
   let commandHandler: CreateSettingsHandler;
   let settings: Repository<Settings>;
-  let userIdService: UserIdService;
 
   beforeEach(() => {
     settings = createMockRepository<Settings>();
-    userIdService = createUserIdServiceMock();
+
+    const currentProfileService = {
+      fetchCurrentProfileId: jest.fn(() => 1),
+    } as any;
 
     currentSettingsService = new CurrentSettingsService(
+      currentProfileService,
       settings,
-      userIdService,
     );
 
     commandHandler = new CreateSettingsHandler(
+      currentProfileService,
       currentSettingsService,
       settings,
-      userIdService,
     );
   });
 
@@ -45,7 +45,7 @@ describe(CreateSettingsHandler.name, () => {
 
       expect(settings.save).toHaveBeenCalledWith({
         darkmode: false,
-        userId: "my-user-id",
+        profileId: 1,
       });
     });
   });
