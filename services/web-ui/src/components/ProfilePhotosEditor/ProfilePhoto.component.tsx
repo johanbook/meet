@@ -1,5 +1,4 @@
 import React from "react";
-import { useMutation } from "react-query";
 
 import { Delete } from "@mui/icons-material";
 import {
@@ -9,13 +8,12 @@ import {
   ImageListItemBar,
 } from "@mui/material";
 
-import { PhotoDetails, RemovePhotoCommand } from "src/api";
-import { photosApi } from "src/apis";
+import { ProfilePhotoDetails } from "src/api";
 import { useSnackbar } from "src/core/snackbar";
 
 export interface ProfilePhotoComponentProps {
   onRefresh: () => void;
-  photo: PhotoDetails;
+  photo?: ProfilePhotoDetails;
   title: string;
 }
 
@@ -25,14 +23,9 @@ export function ProfilePhotoComponent({
   title,
 }: ProfilePhotoComponentProps): React.ReactElement {
   const snackbar = useSnackbar();
-  const mutation = useMutation(
-    (removePhotoCommand: RemovePhotoCommand) =>
-      photosApi.removePhoto({ removePhotoCommand }),
-    { onError: () => snackbar.error("Failed to remove photo") }
-  );
 
   async function handleDelete(): Promise<void> {
-    await mutation.mutateAsync({ id: photo.id });
+    // await mutation.mutateAsync({ id: photo.id });
 
     onRefresh();
 
@@ -40,15 +33,11 @@ export function ProfilePhotoComponent({
   }
 
   return (
-    <ImageListItem component={Card} key={photo.id} variant="outlined">
-      <img alt="Profile" src={photo.imageUrl} />
+    <ImageListItem component={Card} variant="outlined">
+      <img alt="Profile" src={photo?.url} />
       <ImageListItemBar
         actionIcon={
-          <IconButton
-            disabled={mutation.isLoading}
-            onClick={handleDelete}
-            sx={{ color: "white" }}
-          >
+          <IconButton onClick={handleDelete} sx={{ color: "white" }}>
             <Delete />
           </IconButton>
         }

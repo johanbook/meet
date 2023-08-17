@@ -4,7 +4,7 @@ import { useMutation } from "react-query";
 import { AccountCircle } from "@mui/icons-material";
 import { Avatar, Button } from "@mui/material";
 
-import { photosApi } from "src/apis";
+import { profileApi } from "src/apis";
 import { useSnackbar } from "src/core/snackbar";
 
 const HEIGHT = 120;
@@ -18,7 +18,9 @@ export function CurrentProfileAvatar({
   onUploadedNewProfilePhoto,
   src,
 }: CurrentProfileAvatarProps): React.ReactElement {
-  const mutation = useMutation(() => photosApi.addPhoto());
+  const mutation = useMutation(() =>
+    profileApi.updateCurrentProfilePhoto({ photo: [new Blob()] })
+  );
   const { success } = useSnackbar();
 
   async function handleUpload(
