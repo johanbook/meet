@@ -24,6 +24,18 @@ module.exports = {
   rules: {
     "no-console": "error",
     "no-template-curly-in-string": "error",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        selector: "class",
+        format: ["StrictPascalCase"],
+      },
+      {
+        selector: "function",
+        /** Needed since React functional component use PascalCase */
+        format: ["StrictPascalCase", "strictCamelCase"],
+      },
+    ],
     /** Empty interfaces are useful for later adding props */
     "@typescript-eslint/no-empty-interface": "off",
     "unicorn/filename-case": "off",
