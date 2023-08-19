@@ -1,17 +1,18 @@
 import React from "react";
-import { useQuery } from "react-query";
 
 import { profileApi } from "src/apis";
 import { CurrentProfileDetails } from "src/components/CurrentProfileDetails";
 import { ProfileCreator } from "src/components/ProfileCreator";
+import { CacheKeysConstants, useQuery } from "src/core/query";
 
 import { ErrorPage } from "../ErrorPage";
 import { ProfilePageHeader } from "./ProfilePage.header";
 import { ProfilePageSkeleton } from "./ProfilePage.skeleton";
 
 export function ProfilePageContainer(): React.ReactElement {
-  const { error, data, isLoading, refetch } = useQuery("currentProfile", () =>
-    profileApi.getCurrentProfile()
+  const { error, data, isLoading, refetch } = useQuery(
+    CacheKeysConstants.CurrentProfile,
+    () => profileApi.getCurrentProfile()
   );
 
   if (error) {

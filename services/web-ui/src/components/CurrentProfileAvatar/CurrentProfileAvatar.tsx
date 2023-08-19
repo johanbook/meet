@@ -1,10 +1,11 @@
 import React from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
 import { AccountCircle } from "@mui/icons-material";
 import { Avatar, Button } from "@mui/material";
 
 import { profileApi } from "src/apis";
+import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 const HEIGHT = 200;
@@ -18,6 +19,7 @@ export function CurrentProfileAvatar({
   onUploadedNewProfilePhoto,
   src,
 }: CurrentProfileAvatarProps): React.ReactElement {
+  const queryClient = useQueryClient();
   const mutation = useMutation((photo: File) =>
     profileApi.updateCurrentProfilePhoto({ photo })
   );
@@ -38,6 +40,8 @@ export function CurrentProfileAvatar({
     if (onUploadedNewProfilePhoto) {
       onUploadedNewProfilePhoto();
     }
+
+    queryClient.invalidateQueries(CacheKeysConstants.CurrentProfile);
 
     success("Photo uploaded successfully");
   }
