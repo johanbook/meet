@@ -13,7 +13,7 @@
     "start:debug": "nest start --debug --watch",
     "prestart:prod": "NODE_ENV=production sh scripts/run-migrations && NODE_ENV=production sh scripts/seed-database",
     "start:prod": "NODE_ENV=production node dist/main",
-    "lint": "tsc && eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "lint": "tsc && eslint \"{src,apps,libs,test}/**/*.ts\" --max-warnings 0",
     "lint:ci": "npm run lint",
     "test": "jest",
     "test:ci": "jest --coverage",
