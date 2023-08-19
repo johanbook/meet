@@ -1,10 +1,8 @@
 import { Repository } from "typeorm";
 
-import { UserIdService } from "src/core/authentication";
 import { map } from "src/core/mapper";
 import { Profile } from "src/features/profiles";
-import { createMockRepository } from "src/test/mocks/repository.mock";
-import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
+import { createMockRepository } from "src/test/mocks";
 
 import { ChatMessage } from "../../../infrastructure/entities/chat-message.entity";
 import { GetChatMessagesQuery } from "../../contracts/queries/get-chat-messages.query";
@@ -12,8 +10,6 @@ import { GetChatMessagesHandler } from "./get-chat-messages.handler";
 
 describe(GetChatMessagesHandler.name, () => {
   let chatMessages: Repository<ChatMessage>;
-  let profiles: Repository<Profile>;
-  let userIdService: UserIdService;
 
   let receivingProfile: Profile;
   let sendingProfile: Profile;
@@ -27,23 +23,19 @@ describe(GetChatMessagesHandler.name, () => {
     sendingProfile = new Profile();
     sendingProfile.id = 1;
 
-    profiles = createMockRepository<Profile>([
-      receivingProfile,
-      sendingProfile,
-    ]);
-
     const chatMessage = new ChatMessage();
     chatMessage.receiverId = receivingProfile.id;
     chatMessage.senderId = sendingProfile.id;
 
     chatMessages = createMockRepository<ChatMessage>([chatMessage]);
 
-    userIdService = createUserIdServiceMock(sendingProfile.id);
+    const currentProfileService = {
+      fetchCurrentProfileId: jest.fn(() => sendingProfile.id),
+    } as any;
 
     queryHandler = new GetChatMessagesHandler(
       chatMessages,
-      profiles,
-      userIdService,
+      currentProfileService,
     );
   });
 

@@ -4,7 +4,9 @@ import { ApiTags } from "@nestjs/swagger";
 
 import { PostChatMessageCommand } from "../../application/contracts/commands/post-chat-message.command";
 import { ChatMessageDetails } from "../../application/contracts/dtos/chat.dto";
+import { ConnectionDetails } from "../../application/contracts/dtos/connetion.dto";
 import { GetChatMessagesQuery } from "../../application/contracts/queries/get-chat-messages.query";
+import { GetConnectionsQuery } from "../../application/contracts/queries/get-connections.query";
 
 @Controller("chats")
 @ApiTags("chats")
@@ -15,6 +17,13 @@ export class ChatsController {
   async getChats(
     @Query() query: GetChatMessagesQuery,
   ): Promise<ChatMessageDetails[]> {
+    return await this.queryBus.execute(query);
+  }
+
+  @Get("/connections")
+  async getConnections(
+    @Query() query: GetConnectionsQuery,
+  ): Promise<ConnectionDetails[]> {
     return await this.queryBus.execute(query);
   }
 

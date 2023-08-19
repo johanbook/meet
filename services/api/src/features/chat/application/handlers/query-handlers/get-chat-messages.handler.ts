@@ -1,11 +1,9 @@
-import { NotFoundException } from "@nestjs/common";
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { UserIdService } from "src/core/authentication";
 import { mapArray } from "src/core/mapper";
-import { Profile } from "src/features/profiles";
+import { CurrentProfileService } from "src/features/profiles";
 
 import { ChatMessage } from "../../..//infrastructure/entities/chat-message.entity";
 import { ChatMessageDetails } from "../../contracts/dtos/chat.dto";
@@ -18,26 +16,12 @@ export class GetChatMessagesHandler
   constructor(
     @InjectRepository(ChatMessage)
     private readonly chatMessages: Repository<ChatMessage>,
-    @InjectRepository(Profile)
-    private readonly profiles: Repository<Profile>,
-    private readonly userIdService: UserIdService,
+    private readonly currentProfileService: CurrentProfileService,
   ) {}
 
   async execute(query: GetChatMessagesQuery) {
-    const userId = this.userIdService.getUserId();
-
-    const profile = await this.profiles.findOne({
-      select: {
-        id: true,
-      },
-      where: { userId },
-    });
-
-    if (!profile) {
-      throw new NotFoundException();
-    }
-
-    const currentProfileId = profile.id;
+    const currentProfileId =
+      await this.currentProfileService.fetchCurrentProfileId();
     const targetProfileId = query.profileId;
 
     const foundChatMessages = await this.chatMessages.find({
@@ -51,7 +35,7 @@ export class GetChatMessagesHandler
       id: item.id,
       message: item.message,
       read: false,
-      sentByCurrentUser: item.senderId == profile.id,
+      sentByCurrentUser: item.senderId == currentProfileId,
     }));
   }
 }
