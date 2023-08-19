@@ -6,6 +6,7 @@ import { ProfileCreator } from "src/components/ProfileCreator";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 
 import { ErrorPage } from "../ErrorPage";
+import { SettingsPage } from "../SettingsPage";
 import { ProfilePageHeader } from "./ProfilePage.header";
 import { ProfilePageSkeleton } from "./ProfilePage.skeleton";
 
@@ -48,6 +49,8 @@ export function ProfilePageContainer(): React.ReactElement {
       <ProfilePageHeader />
 
       <CurrentProfileDetails profile={data} refetchData={refetch} />
+
+      <SettingsPage />
     </>
   );
 }
