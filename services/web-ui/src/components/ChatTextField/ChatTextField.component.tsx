@@ -3,6 +3,8 @@ import React from "react";
 import { Send } from "@mui/icons-material";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 
+import { useTranslation } from "src/core/i18n";
+
 export interface ChatTextFieldComponentProps {
   disabled: boolean;
   onChange: (value: string) => void;
@@ -16,6 +18,8 @@ export function ChatTextFieldComponent({
   onSubmit,
   value,
 }: ChatTextFieldComponentProps): React.ReactElement {
+  const { t } = useTranslation("chat");
+
   function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     onSubmit();
@@ -35,7 +39,7 @@ export function ChatTextFieldComponent({
             </InputAdornment>
           ),
         }}
-        placeholder="A chat message..."
+        placeholder={t("textfield.placeholder") || ""}
         onChange={(event) => onChange(event.target.value)}
         sx={{ paddingBottom: 2 }}
         value={value}

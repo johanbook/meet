@@ -1,0 +1,8 @@
+{
+  "name": {
+    "action": "Continue",
+    "description": "Pick the name you want to be known as on the platform. This cannot be changed later on.",
+    "header": "Enter your name",
+    "placeholder": "Name"
+  }
+}
