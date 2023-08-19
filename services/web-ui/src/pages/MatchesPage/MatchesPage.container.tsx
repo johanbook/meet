@@ -1,32 +1,32 @@
 import React from "react";
-import { useQuery } from "react-query";
 
 import { Typography } from "@mui/material";
 
-import { matchesApi } from "src/apis";
+import { chatsApi } from "src/apis";
+import { useQuery } from "src/core/query";
+import { ErrorPage } from "src/pages/ErrorPage";
 
-import { MatchesPageDataView } from "./views/MatchesPageData.view";
-import { MatchesPageErrorView } from "./views/MatchesPageError.view";
-import { MatchesPageLoadingView } from "./views/MatchesPageLoading.view";
+import { MatchesPageComponent } from "./MatchesPage.component";
+import { MatchesPageSkeleton } from "./MatchesPage.skeleton";
 
 export function MatchesPageContainer(): React.ReactElement {
-  const { error, data, isLoading } = useQuery("allChats", () =>
-    matchesApi.getMatches()
+  const { error, data, isLoading } = useQuery("matches", () =>
+    chatsApi.getConnections()
   );
 
   if (error) {
-    return <MatchesPageErrorView error={error as Error} />;
+    return <ErrorPage error={error as Error} />;
   }
 
   if (isLoading) {
     return (
       <>
-        <MatchesPageLoadingView />
+        <MatchesPageSkeleton />
       </>
     );
   }
 
-  if (!data || (data.notTalkedTo.length === 0 && data.talkedTo.length === 0)) {
+  if (!data || data.length === 0) {
     return (
       <>
         <Typography gutterBottom variant="h6">
@@ -39,7 +39,7 @@ export function MatchesPageContainer(): React.ReactElement {
 
   return (
     <>
-      <MatchesPageDataView data={data} />
+      <MatchesPageComponent data={data} />
     </>
   );
 }

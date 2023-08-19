@@ -1,1 +1,0 @@
-export { MatchesPageNewMatches } from "./MatchesPageNewMatches";
