@@ -39,7 +39,9 @@ export class GetBlogPostsHandler
       required: {
         relations: {
           photos: true,
-          profile: true,
+          profile: {
+            profilePhoto: true,
+          },
         },
         where: {
           organizationId: currentOrganizationId,
@@ -58,6 +60,9 @@ export class GetBlogPostsHandler
       })),
       profile: map(BlogPostProfileDetails, {
         id: post.profile.id,
+        imageUrl:
+          post.profile.profilePhoto &&
+          this.photoService.getUrl(post.profile.profilePhoto, "profile-photo"),
         name: post.profile.name,
       }),
     }));
