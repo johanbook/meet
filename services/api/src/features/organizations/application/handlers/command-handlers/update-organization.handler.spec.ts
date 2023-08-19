@@ -27,6 +27,7 @@ describe(UpdateOrganizationHandler.name, () => {
     organizations = createMockRepository<Organization>();
 
     currentOrganizationService = new CurrentOrganizationService(
+      {} as any,
       createMockRepository<Profile>([
         {
           organizationMemberships: [{ organization: { personal: true } }],

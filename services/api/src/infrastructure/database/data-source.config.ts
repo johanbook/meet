@@ -39,8 +39,7 @@ export const dataSourceOptions: DataSourceOptions & SeederOptions = {
   entities: [
     join(__dirname, "/entities/*.{ts,js}"),
     join(__dirname, "/views/*.{ts,js}"),
-    join(__dirname, "../../core/**/entities/*.{ts,js}"),
-    join(__dirname, "../../features/**/entities/*.{ts,js}"),
+    join(__dirname, "../../{core,features}/**/{entities,views}/*.{ts,js}"),
   ],
   subscribers: [],
   migrations: [
