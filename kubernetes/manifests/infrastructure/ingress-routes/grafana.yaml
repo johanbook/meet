@@ -8,8 +8,7 @@ spec:
   routes:
     - match: Host(`grafana.console.$DOMAIN`)
       kind: Rule
-      middlewares:
-        - name: console-auth
+      # We omit basic auth here as it interferes with Grafana's login
       services:
         - name: loki-stack-grafana
           port: 80
