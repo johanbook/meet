@@ -19,9 +19,7 @@ export function ChatMessage({ message }: ChatMessageProps): React.ReactElement {
           align: message.sentByCurrentUser ? "right" : "left",
         }}
         sx={{
-          background: message.sentByCurrentUser
-            ? theme.palette.background.paper
-            : theme.palette.grey[50],
+          background: theme.palette.background.paper,
           border: `1px solid ${theme.palette.divider} `,
           borderRadius: 3,
           padding: 1,
