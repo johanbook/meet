@@ -1,11 +1,12 @@
 import React from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
 import { Box, FormControlLabel, FormGroup } from "@mui/material";
 
 import { SettingsDetails } from "src/api";
 import { settingsApi } from "src/apis";
 import { Switch } from "src/components/ui";
+import { CacheKeysConstants, useQuery } from "src/core/query";
 
 import { ErrorPage } from "../ErrorPage";
 import { SettingsPageHeader } from "./SettingsPage.header";
@@ -13,7 +14,7 @@ import { SettingsPageSkeleton } from "./SettingsPage.skeleton";
 
 export function SettingsPageContainer(): React.ReactElement {
   const queryClient = useQueryClient();
-  const { error, data, isLoading } = useQuery(`settings`, () =>
+  const { error, data, isLoading } = useQuery(CacheKeysConstants.Settings, () =>
     settingsApi.getCurrentSettings()
   );
 
@@ -52,7 +53,7 @@ export function SettingsPageContainer(): React.ReactElement {
   async function handleChange(settings: SettingsDetails): Promise<void> {
     await mutation.mutateAsync(settings, {
       onSuccess: () => {
-        queryClient.invalidateQueries(["settings"]);
+        queryClient.invalidateQueries([CacheKeysConstants.Settings]);
       },
     });
   }
