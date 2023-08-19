@@ -66,7 +66,6 @@ export function SettingsPageContainer(): React.ReactElement {
       sx={{
         display: "flex",
         flexDirection: "column",
-        height: "100%",
       }}
     >
       <SettingsPageHeader />

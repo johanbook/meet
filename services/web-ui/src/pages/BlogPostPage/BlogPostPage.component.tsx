@@ -1,13 +1,13 @@
 import React from "react";
 
-import { MoreVert } from "@mui/icons-material";
-import { Avatar, Box, Card, IconButton, Typography } from "@mui/material";
+import { Avatar, Box, Card, Typography } from "@mui/material";
 
 import { BlogPostDetails } from "src/api";
 import { useTranslation } from "src/core/i18n";
 import { timeSince } from "src/utils/time";
 
 import { BlogPostForm } from "./components/BlogPostForm";
+import { BlogPostMenu } from "./components/BlogPostMenu";
 
 interface BlogPostPageComponentProps {
   data: BlogPostDetails[];
@@ -42,9 +42,7 @@ export function BlogPostPageComponent({
               </Typography>
             </Box>
 
-            <IconButton>
-              <MoreVert />
-            </IconButton>
+            <BlogPostMenu />
           </Box>
 
           <Typography>{post.content}</Typography>

@@ -2,5 +2,8 @@
   "form": {
     "placeholder": "Perhaps say something about your day"
   },
+  "menu": {
+    "delete": "Delete"
+  },
   "published": "published"
 }
