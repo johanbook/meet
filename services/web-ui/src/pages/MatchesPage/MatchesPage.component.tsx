@@ -19,8 +19,12 @@ export function MatchesPageComponent({
       </Typography>
 
       <List>
-        {data.map((match) => (
-          <MatchListItem key={match.profileId} data={match} />
+        {data.map((match, index) => (
+          <MatchListItem
+            divider={index < data.length - 1}
+            key={match.profileId}
+            data={match}
+          />
         ))}
       </List>
     </>

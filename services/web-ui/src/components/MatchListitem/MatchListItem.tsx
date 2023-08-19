@@ -10,22 +10,21 @@ import {
 } from "@mui/material";
 
 import { MatchDetails } from "src/api";
-import { FALLBACK_IMAGES } from "src/constants/images";
 
 export interface MatchListItemProps {
   data: MatchDetails;
+  divider?: boolean;
 }
 
 export function MatchListItem({
   data,
+  divider,
 }: MatchListItemProps): React.ReactElement {
-  const imageUrl = data.imageUrl || FALLBACK_IMAGES.PROFILE_IMAGE_URL;
-
   return (
-    <ListItem divider>
+    <ListItem divider={divider}>
       <ListItemButton component={Link} to={`/chat/${data.profileId}`}>
         <ListItemAvatar>
-          <Avatar src={imageUrl} />
+          <Avatar src={data.imageUrl} />
         </ListItemAvatar>
         <ListItemText primary={data.name} secondary={data.lastMessage} />
       </ListItemButton>
