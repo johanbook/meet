@@ -6,6 +6,7 @@ import { Box, FormControlLabel, FormGroup } from "@mui/material";
 import { SettingsDetails } from "src/api";
 import { settingsApi } from "src/apis";
 import { Switch } from "src/components/ui";
+import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 
 import { ErrorPage } from "../ErrorPage";
@@ -13,6 +14,8 @@ import { SettingsPageHeader } from "./SettingsPage.header";
 import { SettingsPageSkeleton } from "./SettingsPage.skeleton";
 
 export function SettingsPageContainer(): React.ReactElement {
+  const { t } = useTranslation("settings");
+
   const queryClient = useQueryClient();
   const { error, data, isLoading } = useQuery(CacheKeysConstants.Settings, () =>
     settingsApi.getCurrentSettings()
@@ -82,7 +85,7 @@ export function SettingsPageContainer(): React.ReactElement {
                 value={data.darkmode}
               />
             }
-            label="Darkmode"
+            label={t("darkmode")}
           />
         </FormGroup>
       </Box>
