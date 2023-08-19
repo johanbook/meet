@@ -31,7 +31,7 @@ export function BlogPostPageComponent({
           variant="outlined"
         >
           <Box sx={{ alignItems: "center", display: "flex", paddingBottom: 2 }}>
-            <Avatar />
+            <Avatar src={post.profile.imageUrl} />
 
             <Box sx={{ flexGrow: 1, paddingLeft: 1 }}>
               <Typography>
