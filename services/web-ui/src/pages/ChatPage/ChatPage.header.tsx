@@ -4,7 +4,11 @@ import { Link as ReactRouterLink } from "react-router-dom";
 import { ArrowBackIosNew } from "@mui/icons-material";
 import { Link as MuiLink, Typography } from "@mui/material";
 
+import { useTranslation } from "src/core/i18n";
+
 export function ChatPageHeader(): React.ReactElement {
+  const { t } = useTranslation("chat");
+
   return (
     <>
       <MuiLink
@@ -18,9 +22,9 @@ export function ChatPageHeader(): React.ReactElement {
         underline="hover"
       >
         <ArrowBackIosNew fontSize="small" />
-        <span>Back</span>
+        <span>{t("back")}</span>
       </MuiLink>
-      <Typography variant="h5">Chat</Typography>
+      <Typography variant="h5">{t("header")}</Typography>
     </>
   );
 }
