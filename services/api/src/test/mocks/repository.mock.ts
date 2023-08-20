@@ -5,7 +5,7 @@ import { ObjectLiteral, Repository } from "typeorm";
 class MockRepository<T extends ObjectLiteral> {
   private currentId = 1;
 
-  constructor(private readonly data: T[] = []) {}
+  constructor(private data: T[] = []) {}
 
   exist = jest.fn((element: T) => this.data.includes(element));
 
@@ -15,7 +15,15 @@ class MockRepository<T extends ObjectLiteral> {
 
   findOne = jest.fn(() => this.data[0]);
 
-  remove = jest.fn();
+  remove = jest.fn((element: T) => {
+    const index = this.data.findIndex((item) => item.id === element.id);
+
+    if (index < 0) {
+      throw new Error("Item not found");
+    }
+
+    this.data.splice(index, 1);
+  });
 
   save = jest.fn((element: T) => {
     if (!("id" in element)) {
