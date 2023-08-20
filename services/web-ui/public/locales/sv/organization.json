@@ -1,4 +1,8 @@
 {
   "header": "Grupp",
+  "members": {
+    "error": "Fel vid hämtning av gruppmedlemmar",
+    "header": "Medlemmar"
+  },
   "name": "Namn"
 }

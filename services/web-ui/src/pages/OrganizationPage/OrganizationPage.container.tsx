@@ -9,6 +9,7 @@ import { CacheKeysConstants, useQuery } from "src/core/query";
 import { ErrorPage } from "../ErrorPage";
 import { OrganizationPageNav } from "./OrganizationPage.nav";
 import { OrganizationPageSkeleton } from "./OrganizationPage.skeleton";
+import { OrganizationMembers } from "./components/OrganizationMembers";
 
 export function OrganizationPageContainer(): React.ReactElement {
   const { t } = useTranslation("organization");
@@ -47,6 +48,8 @@ export function OrganizationPageContainer(): React.ReactElement {
       <Typography>
         {t("name")}: {data.name}
       </Typography>
+
+      <OrganizationMembers />
     </OrganizationPageNav>
   );
 }
