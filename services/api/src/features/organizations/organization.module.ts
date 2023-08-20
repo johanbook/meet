@@ -12,6 +12,7 @@ import { CreatePersonalOrganizationsIfMissingHandler } from "./application/handl
 import { SwitchOrganizationHandler } from "./application/handlers/command-handlers/switch-organization.handler";
 import { UpdateOrganizationHandler } from "./application/handlers/command-handlers/update-organization.handler";
 import { CreateOrganizationOnProfileCreatedHandler } from "./application/handlers/event-handlers/create-organization-on-profile-created.handler";
+import { GetOrganizationListHandler } from "./application/handlers/query-handlers/get-organization-list.handler";
 import { GetOrganizationMembersHandler } from "./application/handlers/query-handlers/get-organization-members.handler";
 import { GetOrganizationHandler } from "./application/handlers/query-handlers/get-organization.handler";
 import { OrganizationsController } from "./client/controllers/organizations.controller";
@@ -37,6 +38,7 @@ import { Organization } from "./infrastructure/entities/organization.entity";
     CreatePersonalOrganizationsIfMissingHandler,
     CurrentOrganizationService,
     GetOrganizationHandler,
+    GetOrganizationListHandler,
     GetOrganizationMembersHandler,
     OrganizationJobs,
     OrganizationService,
