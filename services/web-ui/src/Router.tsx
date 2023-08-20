@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Nav from "src/components/ui/Nav";
@@ -8,6 +8,7 @@ import { NavigationTrackingProvider } from "./core/tracking/NavigationTrackingPr
 import { BlogPostPage } from "./pages/BlogPostPage";
 import { ConnectionsPage } from "./pages/ConnectionsPage";
 import { JournalPage } from "./pages/JournalPage";
+import { LoadingPage } from "./pages/LoadingPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { OrganizationPage } from "./pages/OrganizationPage";
 import { ProfileGuard } from "./pages/ProfileGuard";
@@ -18,9 +19,11 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <NavigationTrackingProvider>
-        <Nav />
-      </NavigationTrackingProvider>
+      <Suspense fallback={<LoadingPage />}>
+        <NavigationTrackingProvider>
+          <Nav />
+        </NavigationTrackingProvider>
+      </Suspense>
     ),
     errorElement: <NotFoundPage />,
     children: [
