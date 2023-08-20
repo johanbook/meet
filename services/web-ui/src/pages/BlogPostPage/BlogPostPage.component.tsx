@@ -42,14 +42,14 @@ export function BlogPostPageComponent({
               </Typography>
             </Box>
 
-            <BlogPostMenu />
+            <BlogPostMenu id={post.id} />
           </Box>
 
           <Typography>{post.content}</Typography>
 
           {post.photos.map((photo) => (
             <img
-              alt={photo.description}
+              alt={photo.description || "Blog post image"}
               key={photo.id}
               src={photo.url}
               style={{
