@@ -8,6 +8,7 @@ import { OrganizationModule } from "src/features/organizations/organization.modu
 import { ProfileModule } from "src/features/profiles/profile.module";
 
 import { CreateBlogPostHandler } from "./application/handlers/command-handlers/create-blog-post.handler";
+import { DeleteBlogPostHandler } from "./application/handlers/command-handlers/delete-blog-post.handler";
 import { UpdateBlogPostHandler } from "./application/handlers/command-handlers/update-blog-post-handler";
 import { GetBlogPostsHandler } from "./application/handlers/query-handlers/get-blog-posts.handler";
 import { BlogsController } from "./client/controllers/blogs.controller";
@@ -27,6 +28,7 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
   providers: [
     BlogPostService,
     CreateBlogPostHandler,
+    DeleteBlogPostHandler,
     GetBlogPostsHandler,
     UpdateBlogPostHandler,
   ],
