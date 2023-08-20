@@ -31,7 +31,11 @@ describe(CreateOrganizationHandler.name, () => {
     userIdService = createUserIdServiceMock();
 
     currentProfileService = new CurrentProfileService(profiles, userIdService);
-    organizationService = new OrganizationService(eventBus, organizations);
+    organizationService = new OrganizationService(
+      eventBus,
+      {} as any,
+      organizations,
+    );
     commandHandler = new CreateOrganizationHandler(
       currentProfileService,
       organizationService,

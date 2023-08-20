@@ -28,6 +28,7 @@ describe(UpdateOrganizationHandler.name, () => {
 
     currentOrganizationService = new CurrentOrganizationService(
       {} as any,
+      {} as any,
       createMockRepository<Profile>([
         {
           organizationMemberships: [{ organization: { personal: true } }],
@@ -35,7 +36,11 @@ describe(UpdateOrganizationHandler.name, () => {
       ]),
       createUserIdServiceMock(),
     );
-    organizationService = new OrganizationService(eventBus, organizations);
+    organizationService = new OrganizationService(
+      eventBus,
+      {} as any,
+      organizations,
+    );
     commandHandler = new UpdateOrganizationHandler(
       currentOrganizationService,
       organizationService,

@@ -3,6 +3,7 @@ import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
 import { CreateOrganizationCommand } from "../../application/contracts/commands/create-organization.command";
+import { SwitchOrganizationCommand } from "../../application/contracts/commands/switch-organization.command";
 import { UpdateOrganizationCommand } from "../../application/contracts/commands/update-organization.command";
 import { OrganizationMemberDetails } from "../../application/contracts/dtos/organization-member.dto";
 import { OrganizationDetails } from "../../application/contracts/dtos/organization.dto";
@@ -31,6 +32,13 @@ export class OrganizationsController {
   @Post("/create")
   async createOrganization(
     @Body() command: CreateOrganizationCommand,
+  ): Promise<null> {
+    return await this.commandBus.execute(command);
+  }
+
+  @Post("/switch")
+  async switchOrganization(
+    @Body() command: SwitchOrganizationCommand,
   ): Promise<null> {
     return await this.commandBus.execute(command);
   }

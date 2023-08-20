@@ -19,9 +19,20 @@ interface CreateOrganizationProps {
 export class OrganizationService {
   constructor(
     private readonly eventBus: EventBus,
+    @InjectRepository(OrganizationMembership)
+    private readonly organizationMemberships: Repository<OrganizationMembership>,
     @InjectRepository(Organization)
     private readonly organizations: Repository<Organization>,
   ) {}
+
+  async checkIfMember(
+    profileId: number,
+    organizationId: number,
+  ): Promise<boolean> {
+    return this.organizationMemberships.exist({
+      where: { profileId, organizationId },
+    });
+  }
 
   async createOrganization(props: CreateOrganizationProps): Promise<void> {
     const organization = new Organization();

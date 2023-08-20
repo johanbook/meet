@@ -18,6 +18,9 @@ export class GetOrganizationHandler
     const currentOrganization =
       await this.currentOrganizationService.fetchCurrentOrganization();
 
-    return map(OrganizationDetails, { name: currentOrganization.name });
+    return map(OrganizationDetails, {
+      id: currentOrganization.id,
+      name: currentOrganization.name,
+    });
   }
 }
