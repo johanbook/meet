@@ -84,6 +84,7 @@ export function SettingsPageContainer(): React.ReactElement {
                 value={data.darkmode}
               />
             }
+            disabled={isLoading || mutation.isLoading}
             label={t("darkmode")}
           />
         </FormGroup>
