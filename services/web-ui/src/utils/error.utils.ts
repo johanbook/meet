@@ -29,5 +29,9 @@ export async function errorToMessage(
     return error.message;
   }
 
+  if (typeof error === "string") {
+    return error;
+  }
+
   return "There was an error";
 }
