@@ -12,6 +12,7 @@ import { organizationsApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
+import { getDate } from "src/utils/time";
 
 export function OrganizationMembers(): React.ReactElement {
   const { t } = useTranslation("organization");
@@ -35,14 +36,19 @@ export function OrganizationMembers(): React.ReactElement {
 
   return (
     <>
-      <Typography sx={{ paddingTop: 2 }} variant="h6">
+      <Typography sx={{ paddingTop: 2 }} variant="h5">
         {t("members.header")}
       </Typography>
 
       <List>
         {data.map((member) => (
           <ListItem key={member.profileId}>
-            <ListItemText primary={member.profileId} />
+            <ListItemText
+              primary={member.name}
+              secondary={
+                t("members.member-since") + " " + getDate(member.joinedAt)
+              }
+            />
           </ListItem>
         ))}
       </List>
