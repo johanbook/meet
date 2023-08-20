@@ -1,7 +1,8 @@
 import type { Meta } from "@storybook/react";
 
 import { ConnectionDetails } from "src/api";
-import {MatchesPageComponent} from "./MatchesPage.component";
+
+import { ConnectionsPageComponent } from "./ConnectionsPage.component";
 
 const MATCHES_DATA: ConnectionDetails[] = [
   {
@@ -24,9 +25,9 @@ const MATCHES_DATA: ConnectionDetails[] = [
 ];
 
 export default {
-  title: "Pages/Matches/Views",
+  title: "Pages/Connections/Views",
 } as Meta;
 
 export const Default = {
-  render: () => <MatchesPageComponent data={MATCHES_DATA} />,
+  render: () => <ConnectionsPageComponent data={MATCHES_DATA} />,
 };

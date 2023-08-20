@@ -9,17 +9,17 @@ import {
   ListItemText,
 } from "@mui/material";
 
-import { MatchDetails } from "src/api";
+import { ConnectionDetails } from "src/api";
 
-export interface MatchListItemProps {
-  data: MatchDetails;
+export interface ConnectionListItemProps {
+  data: ConnectionDetails;
   divider?: boolean;
 }
 
-export function MatchListItem({
+export function ConnectionListItem({
   data,
   divider,
-}: MatchListItemProps): React.ReactElement {
+}: ConnectionListItemProps): React.ReactElement {
   return (
     <ListItem divider={divider}>
       <ListItemButton component={Link} to={`/chat/${data.profileId}`}>

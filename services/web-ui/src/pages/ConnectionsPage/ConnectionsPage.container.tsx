@@ -7,11 +7,11 @@ import { useTranslation } from "src/core/i18n";
 import { useQuery } from "src/core/query";
 import { ErrorPage } from "src/pages/ErrorPage";
 
+import { ConnectionsPageComponent } from "./ConnectionsPage.component";
 import { ConnectionsPageNav } from "./ConnectionsPage.nav";
-import { MatchesPageComponent } from "./MatchesPage.component";
-import { MatchesPageSkeleton } from "./MatchesPage.skeleton";
+import { ConnectionsPageSkeleton } from "./ConnectionsPage.skeleton";
 
-export function MatchesPageContainer(): React.ReactElement {
+export function ConnectionsPageContainer(): React.ReactElement {
   const { t } = useTranslation("connections");
 
   const { error, data, isLoading } = useQuery("matches", () =>
@@ -29,7 +29,7 @@ export function MatchesPageContainer(): React.ReactElement {
   if (isLoading) {
     return (
       <ConnectionsPageNav>
-        <MatchesPageSkeleton />
+        <ConnectionsPageSkeleton />
       </ConnectionsPageNav>
     );
   }
@@ -46,7 +46,7 @@ export function MatchesPageContainer(): React.ReactElement {
 
   return (
     <ConnectionsPageNav>
-      <MatchesPageComponent data={data} />
+      <ConnectionsPageComponent data={data} />
     </ConnectionsPageNav>
   );
 }

@@ -6,8 +6,8 @@ import { ChatPage } from "src/pages/ChatPage";
 
 import { NavigationTrackingProvider } from "./core/tracking/NavigationTrackingProvider";
 import { BlogPostPage } from "./pages/BlogPostPage";
+import { ConnectionsPage } from "./pages/ConnectionsPage";
 import { JournalPage } from "./pages/JournalPage";
-import { MatchesPage } from "./pages/MatchesPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { ProfileGuard } from "./pages/ProfileGuard";
 import { ProfilePage } from "./pages/ProfilePage";
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/chat",
-        element: <MatchesPage />,
+        element: <ConnectionsPage />,
       },
       {
         path: "/chat/:id",
