@@ -10,7 +10,6 @@ import { UpdateProfileCommand } from "../../application/contracts/commands/updat
 import { ProfileDetails } from "../../application/contracts/dtos/profile.dto";
 import { CheckIfProfileExistsQuery } from "../../application/contracts/queries/check-if-profile-exists.query";
 import { GetProfileQuery } from "../../application/contracts/queries/get-profile.query";
-import { GetProfilesNearbyQuery } from "../../application/contracts/queries/get-profiles-nearby.query";
 
 @Controller("profile")
 @ApiTags("profile")
@@ -28,13 +27,6 @@ export class ProfileController {
   async checkIfProfileExists(
     @Query() query: CheckIfProfileExistsQuery,
   ): Promise<boolean> {
-    return await this.queryBus.execute(query);
-  }
-
-  @Get("/nearby")
-  async getProfilesNearby(
-    @Query() query: GetProfilesNearbyQuery,
-  ): Promise<ProfileDetails[]> {
     return await this.queryBus.execute(query);
   }
 

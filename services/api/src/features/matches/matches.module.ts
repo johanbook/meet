@@ -10,7 +10,6 @@ import { ProfileModule } from "src/features/profiles/profile.module";
 import { SwipeHandler } from "./application/handlers/command-handlers/swipe.handler";
 import { NotifyProfilesOnNewMatch } from "./application/handlers/event-handlers/notify-profiles-on-new-match.handler";
 import { GetMatchesHandler } from "./application/handlers/query-handlers/get-matches.handler";
-import { MatchesController } from "./client/controllers/matches.controller";
 import { SwipeService } from "./domain/services/swipe.service";
 import { Swipe } from "./infrastructure/entities/swipe.entity";
 import { Match } from "./infrastructure/views/matches.view";
@@ -23,7 +22,7 @@ import { Match } from "./infrastructure/views/matches.view";
     ProfileModule,
     TypeOrmModule.forFeature([Match, Profile, Swipe]),
   ],
-  controllers: [MatchesController],
+  controllers: [],
   providers: [
     GetMatchesHandler,
     NotifyProfilesOnNewMatch,
