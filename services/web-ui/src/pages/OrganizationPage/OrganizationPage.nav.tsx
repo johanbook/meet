@@ -15,7 +15,7 @@ export function OrganizationPageNav({
 
   return (
     <>
-      <Typography gutterBottom variant="h5">
+      <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
         {t("header")}
       </Typography>
 

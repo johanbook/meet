@@ -2,7 +2,8 @@
   "header": "Grupp",
   "members": {
     "error": "Fel vid hämtning av gruppmedlemmar",
-    "header": "Medlemmar"
+    "header": "Medlemmar",
+    "member-since": "Medlem sedan"
   },
   "name": "Namn"
 }

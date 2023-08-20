@@ -2,7 +2,8 @@
   "header": "Group",
   "members": {
     "error": "Unable to retrieve organization members",
-    "header": "Members"
+    "header": "Members",
+    "member-since": "Member since"
   },
   "name": "Name"
 }
