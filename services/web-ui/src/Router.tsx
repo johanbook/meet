@@ -9,6 +9,7 @@ import { BlogPostPage } from "./pages/BlogPostPage";
 import { ConnectionsPage } from "./pages/ConnectionsPage";
 import { JournalPage } from "./pages/JournalPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
+import { OrganizationPage } from "./pages/OrganizationPage";
 import { ProfileGuard } from "./pages/ProfileGuard";
 import { ProfilePage } from "./pages/ProfilePage";
 import { SettingsPage } from "./pages/SettingsPage";
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/chat/:id",
         element: <ChatPage />,
+      },
+      {
+        path: "/group",
+        element: <OrganizationPage />,
       },
       {
         path: "/journal",
