@@ -42,7 +42,7 @@ export function BlogPostForm(): React.ReactElement {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton type="submit">
+                <IconButton disabled={!form.value.content} type="submit">
                   <Send />
                 </IconButton>
               </InputAdornment>
