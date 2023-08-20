@@ -10,18 +10,29 @@ import { Organization } from "../../infrastructure/entities/organization.entity"
 
 const CURRENT_ORGANIZATION_CACHE_PERIOD_MS = 1000;
 
+// TODO: This should be stored in a better place, e.g. a cookie or Reddis
+const CURRENT_ORGANIZATIONS: Record<string, number> = {};
+
 @Injectable()
 export class CurrentOrganizationService {
   constructor(
     @InjectRepository(OrganizationMembership)
     private readonly memberships: Repository<OrganizationMembership>,
+    @InjectRepository(Organization)
+    private readonly organizations: Repository<Organization>,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
     private readonly userIdService: UserIdService,
   ) {}
 
   async fetchCurrentOrganization(): Promise<Organization> {
-    const currentOrganization = await this.fetchPersonalOrganization();
+    const userId = this.userIdService.getUserId();
+
+    const organizationId = CURRENT_ORGANIZATIONS[userId];
+
+    const currentOrganization = organizationId
+      ? await this.organizations.findOne({ where: { id: organizationId } })
+      : await this.fetchPersonalOrganization();
 
     if (!currentOrganization) {
       throw new NotFoundException(
@@ -78,5 +89,11 @@ export class CurrentOrganizationService {
     });
 
     return membershipIds.map((x) => x.profileId);
+  }
+
+  switchCurrentOrganization(organizationId: number): void {
+    const userId = this.userIdService.getUserId();
+
+    CURRENT_ORGANIZATIONS[userId] = organizationId;
   }
 }

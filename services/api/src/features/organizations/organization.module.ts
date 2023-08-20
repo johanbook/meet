@@ -9,6 +9,7 @@ import { ProfileModule } from "src/features/profiles/profile.module";
 import { CreateOrganizationHandler } from "./application/handlers/command-handlers/create-organization.handler";
 import { CreatePersonalOrganizationHandler } from "./application/handlers/command-handlers/create-personal-organization.handler";
 import { CreatePersonalOrganizationsIfMissingHandler } from "./application/handlers/command-handlers/create-personal-organizations-if-missing.handler";
+import { SwitchOrganizationHandler } from "./application/handlers/command-handlers/switch-organization.handler";
 import { UpdateOrganizationHandler } from "./application/handlers/command-handlers/update-organization.handler";
 import { CreateOrganizationOnProfileCreatedHandler } from "./application/handlers/event-handlers/create-organization-on-profile-created.handler";
 import { GetOrganizationMembersHandler } from "./application/handlers/query-handlers/get-organization-members.handler";
@@ -39,6 +40,7 @@ import { Organization } from "./infrastructure/entities/organization.entity";
     GetOrganizationMembersHandler,
     OrganizationJobs,
     OrganizationService,
+    SwitchOrganizationHandler,
     UpdateOrganizationHandler,
   ],
 })

@@ -22,7 +22,11 @@ describe(CreatePersonalOrganizationsIfMissingHandler.name, () => {
       { organizationMemberships: [] } as any,
     ]);
 
-    organizationService = new OrganizationService(eventBus, organizations);
+    organizationService = new OrganizationService(
+      eventBus,
+      {} as any,
+      organizations,
+    );
     commandHandler = new CreatePersonalOrganizationsIfMissingHandler(
       organizationService,
       profiles,
