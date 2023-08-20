@@ -1,6 +1,6 @@
 import { TestRouter, render, screen } from "src/test";
 
-import Link from ".";
+import { Link } from ".";
 
 describe("<Link />", () => {
   it("renders", () => {
