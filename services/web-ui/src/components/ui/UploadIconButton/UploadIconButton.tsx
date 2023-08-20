@@ -5,12 +5,14 @@ import { IconButton } from "@mui/material";
 interface UploadIconButtonProps {
   accept: string;
   children: ReactNode;
+  multiple?: boolean;
   onChange: (files: File[]) => Promise<void> | void;
 }
 
 export function UploadIconButton({
   accept,
   children,
+  multiple,
   onChange,
 }: UploadIconButtonProps): React.ReactElement {
   async function handleChange(
@@ -34,7 +36,13 @@ export function UploadIconButton({
   return (
     <IconButton component="label">
       {children}
-      <input hidden accept={accept} type="file" onChange={handleChange} />
+      <input
+        accept={accept}
+        hidden
+        multiple={multiple}
+        onChange={handleChange}
+        type="file"
+      />
     </IconButton>
   );
 }

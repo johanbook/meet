@@ -51,6 +51,7 @@ export function BlogPostForm(): React.ReactElement {
               <InputAdornment position="start">
                 <UploadIconButton
                   accept="image/*"
+                  multiple
                   onChange={(photos) =>
                     form.setValue({
                       photos: [...(form.value?.photos || []), ...photos],
