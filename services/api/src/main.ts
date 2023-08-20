@@ -1,4 +1,4 @@
-import fastifyMultipart from "@fastify/multipart";
+import fastifyMultipart, { MultipartFile } from "@fastify/multipart";
 import { ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import {
@@ -42,8 +42,8 @@ async function bootstrap() {
       fileSize: 30 * 1000 * 1000,
       files: 20,
     },
-    onFile: async (part: any) => {
-      part.value = await part.toBuffer();
+    onFile: async (part: MultipartFile) => {
+      (part as any).value = await part.toBuffer();
     },
   });
 
