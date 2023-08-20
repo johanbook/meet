@@ -10,5 +10,6 @@
   "menu": {
     "delete": "Delete"
   },
+  "no-posts": "Seems like no one has posted anything here yet. Be the first one to make a post!",
   "published": "published"
 }

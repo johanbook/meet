@@ -10,5 +10,6 @@
   "menu": {
     "delete": "Ta bort"
   },
+  "no-posts": "Det ser ut som att ingen har postat någonting än. Bli den första att göra ett inlägg!",
   "published": "publicerade"
 }
