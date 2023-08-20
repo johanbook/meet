@@ -25,10 +25,17 @@ export class GetOrganizationMembersHandler
       await this.currentOrganizationService.fetchCurrentOrganizationId();
 
     const members = await this.organizationMemberships.find({
-      where: { organizationId: currentOrganizationId },
+      relations: {
+        profile: true,
+      },
+      where: {
+        organizationId: currentOrganizationId,
+      },
     });
 
     return mapArray(OrganizationMemberDetails, members, (member) => ({
+      joinedAt: member.created.toISOString(),
+      name: member.profile.name,
       profileId: member.profileId,
     }));
   }

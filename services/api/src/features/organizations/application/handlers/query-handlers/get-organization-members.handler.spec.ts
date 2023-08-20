@@ -6,12 +6,17 @@ import { OrganizationMembership } from "../../../infrastructure/entities/organiz
 import { GetOrganizationMembersHandler } from "./get-organization-members.handler";
 
 describe(GetOrganizationMembersHandler.name, () => {
+  const date = new Date();
   let queryHandler: GetOrganizationMembersHandler;
   let organizationMemberships: Repository<OrganizationMembership>;
 
   beforeEach(() => {
     organizationMemberships = createMockRepository<OrganizationMembership>([
-      { profileId: 1 },
+      {
+        created: date,
+        profile: { name: "my-name" },
+        profileId: 1,
+      },
     ] as any);
 
     const currentOrganizationService = {
@@ -27,7 +32,13 @@ describe(GetOrganizationMembersHandler.name, () => {
     it("should return objects", async () => {
       const result = await queryHandler.execute();
 
-      expect(result).toEqual([{ profileId: 1 }]);
+      expect(result).toEqual([
+        {
+          joinedAt: date.toISOString(),
+          name: "my-name",
+          profileId: 1,
+        },
+      ]);
     });
   });
 });
