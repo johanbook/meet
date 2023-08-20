@@ -1,4 +1,9 @@
 {
+  "actions": {
+    "delete": {
+      "error": "Något gick fel när blogposten skulle tas bort"
+    }
+  },
   "form": {
     "placeholder": "Säg något om din dag"
   },

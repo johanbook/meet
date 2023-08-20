@@ -1,4 +1,9 @@
 {
+  "actions": {
+    "delete": {
+      "error": "Something went wrong when trying to delete the blog post"
+    }
+  },
   "form": {
     "placeholder": "Perhaps say something about your day"
   },
