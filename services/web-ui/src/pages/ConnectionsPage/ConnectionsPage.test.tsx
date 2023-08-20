@@ -1,13 +1,13 @@
 import { ReactQueryTestProvider, TestRouter, render, screen } from "src/test";
 
-import { MatchesPage } from ".";
+import { ConnectionsPage } from ".";
 
-describe.skip("<MatchesPage />", () => {
+describe.skip("<ConnectionsPage />", () => {
   it("renders message when no matches", async () => {
     render(
       <TestRouter>
         <ReactQueryTestProvider>
-          <MatchesPage />
+          <ConnectionsPage />
         </ReactQueryTestProvider>
       </TestRouter>
     );
