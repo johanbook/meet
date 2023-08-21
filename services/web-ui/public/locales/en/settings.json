@@ -1,4 +1,13 @@
 {
+  "advanced": {
+    "header": "Advanded settings",
+    "links": {
+      "current-organization": "Current group",
+      "journal": "Journal",
+      "list-organizations": "Available groups",
+      "new-organization": "Create new group"
+    }
+  },
   "darkmode": "Darkmode",
   "header": "Settings"
 }

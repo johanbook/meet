@@ -4,12 +4,6 @@
     "label": "Description",
     "placeholder": "Describe yourself in a few words"
   },
-  "group": {
-    "header": "Group settings",
-    "link": {
-      "name": "Current group"
-    }
-  },
   "header": "Profile",
   "save": "Save",
   "update": {
