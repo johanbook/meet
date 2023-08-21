@@ -4,7 +4,7 @@ import { SwaggerModule, DocumentBuilder, OpenAPIObject } from "@nestjs/swagger";
 import { Logger } from "src/core/logging";
 
 const APP_NAME = "Meet";
-const APP_VERSION = process.env.npm_package_version;
+const APP_VERSION = "latest";
 
 export function createOpenApiDocument(app: INestApplication): OpenAPIObject {
   const logger = new Logger("NestJS");
