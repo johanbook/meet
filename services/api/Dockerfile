@@ -25,6 +25,8 @@ COPY scripts/ ./scripts
 COPY --from=builder /app/dist ./dist
 RUN npm ci
 
+USER node
+
 ENTRYPOINT [ "node" ]
 CMD [   "dist/main" ]
 EXPOSE 80
