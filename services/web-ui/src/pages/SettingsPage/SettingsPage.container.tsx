@@ -5,6 +5,7 @@ import { Box, FormControlLabel, FormGroup } from "@mui/material";
 
 import { SettingsDetails } from "src/api";
 import { settingsApi } from "src/apis";
+import { Link, List, ListItem, Typography } from "src/components/ui";
 import { Switch } from "src/components/ui";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
@@ -89,6 +90,25 @@ export function SettingsPageContainer(): React.ReactElement {
           />
         </FormGroup>
       </Box>
+
+      <Typography gutterBottom sx={{ paddingTop: 3 }} variant="h5">
+        {t("advanced.header")}
+      </Typography>
+
+      <List>
+        <ListItem>
+          <Link to="/group/new">{t("advanced.links.new-organization")}</Link>
+        </ListItem>
+        <ListItem>
+          <Link to="/group/list">{t("advanced.links.list-organizations")}</Link>
+        </ListItem>
+        <ListItem>
+          <Link to="/group">{t("advanced.links.current-organization")}</Link>
+        </ListItem>
+        <ListItem>
+          <Link to="/journal">{t("advanced.links.journal")}</Link>
+        </ListItem>
+      </List>
     </Box>
   );
 }

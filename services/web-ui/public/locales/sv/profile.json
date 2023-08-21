@@ -4,12 +4,6 @@
     "label": "Beskrivning",
     "placeholder": "Beskriv dig i ord"
   },
-  "group": {
-    "header": "Gruppinställningar",
-    "link": {
-      "name": "Nuvarande grupp"
-    }
-  },
   "header": "Profil",
   "save": "Spara",
   "update": {

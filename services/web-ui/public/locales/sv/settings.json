@@ -1,4 +1,13 @@
 {
+  "advanced": {
+    "header": "Avancerade inställningar",
+    "links": {
+      "current-organization": "Nuvarande grupp",
+      "journal": "Journal",
+      "list-organizations": "Tillgängliga grupper",
+      "new-organization": "Skapa ny grupp"
+    }
+  },
   "darkmode": "Mörkerläge",
   "header": "Inställningar"
 }

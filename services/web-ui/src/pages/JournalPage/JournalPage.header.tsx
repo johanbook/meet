@@ -2,13 +2,18 @@ import React from "react";
 
 import { Typography } from "@mui/material";
 
+import { useTranslation } from "src/core/i18n";
+
 export function JournalPageHeader(): React.ReactElement {
+  const { t } = useTranslation("journal");
+
   return (
     <>
-      <Typography variant="h5">Journal</Typography>
+      <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
+        {t("header")}
+      </Typography>
       <Typography color="textSecondary" gutterBottom>
-        These are the actions that has been performed in the system by your
-        account
+        {t("description")}
       </Typography>
     </>
   );
