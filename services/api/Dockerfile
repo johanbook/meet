@@ -18,12 +18,13 @@ FROM node:20.5.0-alpine
 WORKDIR /app
 
 ENV PORT=80
+ENV NODE_ENV=production
 
 COPY package.json package-lock.json ./
 COPY scripts/ ./scripts
 COPY --from=builder /app/dist ./dist
 RUN npm ci
 
-ENTRYPOINT [ "npm" ]
-CMD [  "run", "start:prod" ]
+ENTRYPOINT [ "node" ]
+CMD [   "dist/main" ]
 EXPOSE 80

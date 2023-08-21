@@ -12,6 +12,7 @@ services:
       service: "api"
     build:
       context: "./services/api"
+    entrypoint: "npm"
     command:
       - "run"
       - "start:dev"
