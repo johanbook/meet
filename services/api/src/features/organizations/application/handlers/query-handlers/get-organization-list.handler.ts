@@ -33,6 +33,7 @@ export class GetOrganizationListHandler
     });
 
     return mapArray(OrganizationDetails, memberships, (membership) => ({
+      created: membership.created.toUTCString(),
       id: membership.organizationId,
       name: membership.organization.name,
     }));

@@ -22,9 +22,13 @@ describe(GetOrganizationMembersHandler.name, () => {
     const currentOrganizationService = {
       fetchCurrentOrganizationId: jest.fn(),
     } as any;
+
+    const photosService = { getUrl: jest.fn() } as any;
+
     queryHandler = new GetOrganizationMembersHandler(
       currentOrganizationService,
       organizationMemberships,
+      photosService,
     );
   });
 
