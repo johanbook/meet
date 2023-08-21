@@ -11,13 +11,15 @@ interface OrganizationListPageNavProps {
 export function OrganizationListPageNav({
   children,
 }: OrganizationListPageNavProps): React.ReactElement {
-  const { t } = useTranslation("organization");
+  const { t } = useTranslation("organization-list");
 
   return (
     <>
       <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
         {t("header")}
       </Typography>
+
+      <Typography color="textSecondary">{t("description")}</Typography>
 
       {children}
     </>

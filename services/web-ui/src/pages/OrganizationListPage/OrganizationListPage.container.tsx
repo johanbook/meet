@@ -5,13 +5,14 @@ import { ListItem, ListItemText } from "@mui/material";
 import { organizationsApi } from "src/apis";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
+import { getDate } from "src/utils/time";
 
 import { ErrorPage } from "../ErrorPage";
 import { OrganizationListPageNav } from "./OrganizationListPage.nav";
 import { OrganizationListPageSkeleton } from "./OrganizationListPage.skeleton";
 
 export function OrganizationListPageContainer(): React.ReactElement {
-  const { t } = useTranslation("organization");
+  const { t } = useTranslation("organization-list");
 
   const { error, data, isLoading } = useQuery(
     CacheKeysConstants.OrganizationList,
@@ -46,7 +47,10 @@ export function OrganizationListPageContainer(): React.ReactElement {
     <OrganizationListPageNav>
       {data.map((organization) => (
         <ListItem key={organization.id}>
-          <ListItemText primary={organization.name} />{" "}
+          <ListItemText
+            primary={organization.name}
+            secondary={getDate(organization.created)}
+          />
         </ListItem>
       ))}
     </OrganizationListPageNav>
