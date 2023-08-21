@@ -19,6 +19,7 @@ export class GetOrganizationHandler
       await this.currentOrganizationService.fetchCurrentOrganization();
 
     return map(OrganizationDetails, {
+      created: currentOrganization.created.toUTCString(),
       id: currentOrganization.id,
       name: currentOrganization.name,
     });

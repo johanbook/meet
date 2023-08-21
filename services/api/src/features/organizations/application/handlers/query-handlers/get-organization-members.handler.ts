@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { mapArray } from "src/core/mapper";
+import { PhotoService } from "src/core/photos";
 
 import { CurrentOrganizationService } from "../../../domain/services/current-organization.service";
 import { OrganizationMembership } from "../../../infrastructure/entities/organization-membership.entity";
@@ -18,6 +19,7 @@ export class GetOrganizationMembersHandler
     private readonly currentOrganizationService: CurrentOrganizationService,
     @InjectRepository(OrganizationMembership)
     private readonly organizationMemberships: Repository<OrganizationMembership>,
+    private readonly photoSevice: PhotoService,
   ) {}
 
   async execute() {
@@ -26,7 +28,9 @@ export class GetOrganizationMembersHandler
 
     const members = await this.organizationMemberships.find({
       relations: {
-        profile: true,
+        profile: {
+          profilePhoto: true,
+        },
       },
       where: {
         organizationId: currentOrganizationId,
@@ -35,6 +39,9 @@ export class GetOrganizationMembersHandler
 
     return mapArray(OrganizationMemberDetails, members, (member) => ({
       joinedAt: member.created.toISOString(),
+      imageUrl:
+        member.profile.profilePhoto &&
+        this.photoSevice.getUrl(member.profile.profilePhoto, "profile-photo"),
       name: member.profile.name,
       profileId: member.profileId,
     }));

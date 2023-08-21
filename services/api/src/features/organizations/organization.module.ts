@@ -3,6 +3,7 @@ import { CqrsModule } from "@nestjs/cqrs";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AuthenticationModule } from "src/core/authentication/authentication.module";
+import { PhotosModule } from "src/core/photos/photos.module";
 import { Profile } from "src/features/profiles";
 import { ProfileModule } from "src/features/profiles/profile.module";
 
@@ -30,6 +31,7 @@ import { Organization } from "./infrastructure/entities/organization.entity";
   imports: [
     AuthenticationModule,
     CqrsModule,
+    PhotosModule,
     ProfileModule,
     TypeOrmModule.forFeature([
       ActiveOrganization,
