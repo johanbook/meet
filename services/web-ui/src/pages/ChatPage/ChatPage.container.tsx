@@ -12,7 +12,7 @@ import { NotificationEventsConstants } from "src/core/notifications";
 import { useHandleNotification } from "src/core/notifications";
 
 import { ErrorPage } from "../ErrorPage";
-import { ChatPageHeader } from "./ChatPage.header";
+import { ChatPageNav } from "./ChatPage.nav";
 import { ChatPageSkeleton } from "./ChatPage.skeleton";
 
 export function ChatPageContainer(): React.ReactElement {
@@ -30,10 +30,9 @@ export function ChatPageContainer(): React.ReactElement {
 
   if (!id) {
     return (
-      <>
-        <ChatPageHeader />
+      <ChatPageNav>
         <ErrorMessage message="Unable to find profile" />
-      </>
+      </ChatPageNav>
     );
   }
 
@@ -41,24 +40,51 @@ export function ChatPageContainer(): React.ReactElement {
 
   if (error) {
     return (
-      <>
-        <ChatPageHeader />
+      <ChatPageNav>
         <ErrorPage error={error} />
-      </>
+      </ChatPageNav>
     );
   }
 
   if (isLoading) {
     return (
-      <>
-        <ChatPageHeader />
+      <ChatPageNav>
         <ChatPageSkeleton />
-      </>
+      </ChatPageNav>
     );
   }
 
   if (!data || data.length === 0) {
     return (
+      <ChatPageNav>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
+          }}
+        >
+          <Box sx={{ flexGrow: 1 }}>
+            <Typography gutterBottom variant="h6">
+              No messages in chat
+            </Typography>
+
+            <Typography color="textSecondary">
+              Send a message and say 'hi'!
+            </Typography>
+          </Box>
+
+          <ChatTextField
+            onSentMessage={refetch}
+            receiverProfileId={receiverProfileId}
+          />
+        </Box>
+      </ChatPageNav>
+    );
+  }
+
+  return (
+    <ChatPageNav>
       <Box
         sx={{
           display: "flex",
@@ -66,16 +92,8 @@ export function ChatPageContainer(): React.ReactElement {
           height: "100%",
         }}
       >
-        <ChatPageHeader />
-
         <Box sx={{ flexGrow: 1 }}>
-          <Typography gutterBottom variant="h6">
-            No messages in chat
-          </Typography>
-
-          <Typography color="textSecondary">
-            Send a message and say 'hi'!
-          </Typography>
+          <ChatMessageList messages={data} />
         </Box>
 
         <ChatTextField
@@ -83,27 +101,6 @@ export function ChatPageContainer(): React.ReactElement {
           receiverProfileId={receiverProfileId}
         />
       </Box>
-    );
-  }
-
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-      }}
-    >
-      <ChatPageHeader />
-
-      <Box sx={{ flexGrow: 1 }}>
-        <ChatMessageList messages={data} />
-      </Box>
-
-      <ChatTextField
-        onSentMessage={refetch}
-        receiverProfileId={receiverProfileId}
-      />
-    </Box>
+    </ChatPageNav>
   );
 }
