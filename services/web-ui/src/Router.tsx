@@ -10,6 +10,7 @@ import { ConnectionsPage } from "./pages/ConnectionsPage";
 import { JournalPage } from "./pages/JournalPage";
 import { LoadingPage } from "./pages/LoadingPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
+import { OrganizationListPage } from "./pages/OrganizationListPage";
 import { OrganizationPage } from "./pages/OrganizationPage";
 import { ProfileGuard } from "./pages/ProfileGuard";
 import { ProfilePage } from "./pages/ProfilePage";
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/group",
         element: <OrganizationPage />,
+      },
+      {
+        path: "/group/list",
+        element: <OrganizationListPage />,
       },
       {
         path: "/journal",
