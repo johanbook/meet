@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { EventBus } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
@@ -24,6 +24,21 @@ export class OrganizationService {
     @InjectRepository(Organization)
     private readonly organizations: Repository<Organization>,
   ) {}
+
+  async addMember(organizationId: number, profileId: number): Promise<void> {
+    const organization = await this.organizations.findOne({
+      relations: { memberships: true },
+      where: { id: organizationId },
+    });
+
+    if (!organization) {
+      throw new NotFoundException("Organization not found");
+    }
+
+    const membership = await this.createMembership(organization, profileId);
+    organization.memberships.push(membership);
+    this.organizations.save(organization);
+  }
 
   async checkIfMember(
     profileId: number,

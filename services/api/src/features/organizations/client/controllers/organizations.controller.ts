@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post, Query } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
+import { AddMemberToOrganizationCommand } from "../../application/contracts/commands/add-member-to-organization.command";
 import { CreateOrganizationCommand } from "../../application/contracts/commands/create-organization.command";
 import { SwitchOrganizationCommand } from "../../application/contracts/commands/switch-organization.command";
 import { UpdateOrganizationCommand } from "../../application/contracts/commands/update-organization.command";
@@ -35,6 +36,13 @@ export class OrganizationsController {
     @Query() query: GetOrganizationMembersQuery,
   ): Promise<OrganizationMemberDetails[]> {
     return await this.queryBus.execute(query);
+  }
+
+  @Post("/current/member")
+  async addMemberToOrganization(
+    @Body() command: AddMemberToOrganizationCommand,
+  ): Promise<null> {
+    return await this.commandBus.execute(command);
   }
 
   @Post("/create")

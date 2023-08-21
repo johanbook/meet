@@ -6,6 +6,7 @@ import { AuthenticationModule } from "src/core/authentication/authentication.mod
 import { Profile } from "src/features/profiles";
 import { ProfileModule } from "src/features/profiles/profile.module";
 
+import { AddMemberToOrganizationHandler } from "./application/handlers/command-handlers/add-member-to-organization.handler";
 import { CreateOrganizationHandler } from "./application/handlers/command-handlers/create-organization.handler";
 import { CreatePersonalOrganizationHandler } from "./application/handlers/command-handlers/create-personal-organization.handler";
 import { CreatePersonalOrganizationsIfMissingHandler } from "./application/handlers/command-handlers/create-personal-organizations-if-missing.handler";
@@ -38,6 +39,7 @@ import { Organization } from "./infrastructure/entities/organization.entity";
     ]),
   ],
   providers: [
+    AddMemberToOrganizationHandler,
     CreateOrganizationHandler,
     CreateOrganizationOnProfileCreatedHandler,
     CreatePersonalOrganizationHandler,
