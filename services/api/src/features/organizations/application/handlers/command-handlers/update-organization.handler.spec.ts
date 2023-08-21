@@ -11,11 +11,13 @@ import {
 } from "src/test/mocks";
 
 import { OrganizationService } from "../../../domain/services/organization.service";
+import { ActiveOrganization } from "../../../infrastructure/entities/active-organization.entity";
 import { Organization } from "../../../infrastructure/entities/organization.entity";
 import { UpdateOrganizationCommand } from "../../contracts/commands/update-organization.command";
 import { UpdateOrganizationHandler } from "./update-organization.handler";
 
 describe(UpdateOrganizationHandler.name, () => {
+  let activeOrganizations: Repository<ActiveOrganization>;
   let commandHandler: UpdateOrganizationHandler;
   let currentOrganizationService: CurrentOrganizationService;
   let eventBus: EventBus;
@@ -24,9 +26,15 @@ describe(UpdateOrganizationHandler.name, () => {
 
   beforeEach(() => {
     eventBus = createEventBusMock();
+
+    activeOrganizations = createMockRepository<ActiveOrganization>();
     organizations = createMockRepository<Organization>();
 
+    const currentProfileService = { fetchCurrentProfileId: jest.fn() } as any;
+
     currentOrganizationService = new CurrentOrganizationService(
+      activeOrganizations,
+      currentProfileService,
       {} as any,
       {} as any,
       createMockRepository<Profile>([

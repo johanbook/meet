@@ -3,19 +3,20 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
-import { Profile } from "src/features/profiles";
+import { CurrentProfileService, Profile } from "src/features/profiles";
 
+import { ActiveOrganization } from "../../infrastructure/entities/active-organization.entity";
 import { OrganizationMembership } from "../../infrastructure/entities/organization-membership.entity";
 import { Organization } from "../../infrastructure/entities/organization.entity";
 
 const CURRENT_ORGANIZATION_CACHE_PERIOD_MS = 1000;
 
-// TODO: This should be stored in a better place, e.g. a cookie or Reddis
-const CURRENT_ORGANIZATIONS: Record<string, number> = {};
-
 @Injectable()
 export class CurrentOrganizationService {
   constructor(
+    @InjectRepository(ActiveOrganization)
+    private readonly activeOrganizations: Repository<ActiveOrganization>,
+    private readonly currentProfileService: CurrentProfileService,
     @InjectRepository(OrganizationMembership)
     private readonly memberships: Repository<OrganizationMembership>,
     @InjectRepository(Organization)
@@ -25,10 +26,18 @@ export class CurrentOrganizationService {
     private readonly userIdService: UserIdService,
   ) {}
 
-  async fetchCurrentOrganization(): Promise<Organization> {
-    const userId = this.userIdService.getUserId();
+  async fetchCurrentActiveOrganization(): Promise<ActiveOrganization | null> {
+    const currentProfileId =
+      await this.currentProfileService.fetchCurrentProfileId();
 
-    const organizationId = CURRENT_ORGANIZATIONS[userId];
+    return await this.activeOrganizations.findOne({
+      where: { profileId: currentProfileId },
+    });
+  }
+
+  async fetchCurrentOrganization(): Promise<Organization> {
+    const activeOrganization = await this.fetchCurrentActiveOrganization();
+    const organizationId = activeOrganization?.organizationId;
 
     const currentOrganization = organizationId
       ? await this.organizations.findOne({ where: { id: organizationId } })
@@ -91,9 +100,19 @@ export class CurrentOrganizationService {
     return membershipIds.map((x) => x.profileId);
   }
 
-  switchCurrentOrganization(organizationId: number): void {
-    const userId = this.userIdService.getUserId();
+  async switchCurrentOrganization(organizationId: number): Promise<void> {
+    const currentProfileId =
+      await this.currentProfileService.fetchCurrentProfileId();
 
-    CURRENT_ORGANIZATIONS[userId] = organizationId;
+    let activeOrganization = await this.fetchCurrentActiveOrganization();
+
+    if (!activeOrganization) {
+      activeOrganization = new ActiveOrganization();
+      activeOrganization.profileId = currentProfileId;
+    }
+
+    activeOrganization.organizationId = organizationId;
+
+    this.activeOrganizations.save(activeOrganization);
   }
 }

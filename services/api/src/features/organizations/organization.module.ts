@@ -19,6 +19,7 @@ import { OrganizationsController } from "./client/controllers/organizations.cont
 import { OrganizationJobs } from "./client/jobs/organization.jobs";
 import { CurrentOrganizationService } from "./domain/services/current-organization.service";
 import { OrganizationService } from "./domain/services/organization.service";
+import { ActiveOrganization } from "./infrastructure/entities/active-organization.entity";
 import { OrganizationMembership } from "./infrastructure/entities/organization-membership.entity";
 import { Organization } from "./infrastructure/entities/organization.entity";
 
@@ -29,7 +30,12 @@ import { Organization } from "./infrastructure/entities/organization.entity";
     AuthenticationModule,
     CqrsModule,
     ProfileModule,
-    TypeOrmModule.forFeature([Organization, OrganizationMembership, Profile]),
+    TypeOrmModule.forFeature([
+      ActiveOrganization,
+      Organization,
+      OrganizationMembership,
+      Profile,
+    ]),
   ],
   providers: [
     CreateOrganizationHandler,
