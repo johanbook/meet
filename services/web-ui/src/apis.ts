@@ -16,6 +16,6 @@ const config = new Configuration({
 export const blogsApi = new BlogsApi(config);
 export const chatsApi = new ChatsApi(config);
 export const journalApi = new JournalApi(config);
-export const organizationsApi = new OrganizationsApi();
+export const organizationsApi = new OrganizationsApi(config);
 export const profileApi = new ProfileApi(config);
 export const settingsApi = new SettingsApi(config);
