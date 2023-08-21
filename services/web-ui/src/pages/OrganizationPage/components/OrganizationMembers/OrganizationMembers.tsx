@@ -1,8 +1,10 @@
 import React from "react";
 
 import {
+  Avatar,
   List,
   ListItem,
+  ListItemAvatar,
   ListItemText,
   Skeleton,
   Typography,
@@ -43,6 +45,9 @@ export function OrganizationMembers(): React.ReactElement {
       <List>
         {data.map((member) => (
           <ListItem key={member.profileId}>
+            <ListItemAvatar>
+              <Avatar src={member.imageUrl} />
+            </ListItemAvatar>
             <ListItemText
               primary={member.name}
               secondary={
