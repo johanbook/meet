@@ -7,7 +7,9 @@ class MockRepository<T extends ObjectLiteral> {
 
   constructor(private data: T[] = []) {}
 
-  exist = jest.fn((element: T) => this.data.includes(element));
+  exist = jest.fn((element: T) =>
+    this.data.find((item) => item.id === element.where.id),
+  );
 
   find = jest.fn(() => this.data);
 
