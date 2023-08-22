@@ -1,4 +1,10 @@
 {
+  "actions": {
+    "activate": {
+      "error": "Unable to switch current group",
+      "success": "Current group has been updated"
+    }
+  },
   "description": "These are the groups you are a member of",
   "header": "Groups"
 }
