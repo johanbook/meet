@@ -3,6 +3,7 @@ import { useMutation } from "react-query";
 
 import { CreateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
+import { useTranslation } from "src/core/i18n";
 import { useSnackbar } from "src/core/snackbar";
 import { useCurrentLocation } from "src/hooks/useCurrentLocation";
 
@@ -15,6 +16,8 @@ export interface ProfileCreationPageContainerProps {
 export function ProfileCreationPageContainer({
   onProfileCreated,
 }: ProfileCreationPageContainerProps): React.ReactElement {
+  const { t } = useTranslation("profile-creation");
+
   const location = useCurrentLocation();
   const snackbar = useSnackbar();
 
@@ -22,9 +25,8 @@ export function ProfileCreationPageContainer({
     (createProfileCommand: CreateProfileCommand) =>
       profileApi.createCurrentProfile({ createProfileCommand }),
     {
-      onError: () => snackbar.error("Unable to create profile"),
-      onSuccess: () =>
-        snackbar.success("Your profile was successfully created!"),
+      onError: () => snackbar.error(t("actions.create.error")),
+      onSuccess: () => snackbar.success(t("actions.create.success")),
     }
   );
 

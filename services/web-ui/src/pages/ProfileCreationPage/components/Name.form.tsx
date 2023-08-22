@@ -4,6 +4,7 @@ import { Button, TextField, Typography } from "@mui/material";
 
 import { Center } from "src/components/ui/Center";
 import { VerticalCenter } from "src/components/ui/VerticalCenter";
+import { useTranslation } from "src/core/i18n";
 
 export interface NameFormProps {
   onChange: (value: string) => void;
@@ -16,18 +17,17 @@ export function NameForm({
   onNext,
   value,
 }: NameFormProps): React.ReactElement {
+  const { t } = useTranslation("profile-creation");
+
   return (
     <VerticalCenter>
       <Center>
         <Typography color="primary" variant="h5" sx={{ paddingBottom: 2 }}>
-          Enter your name
+          {t("name.header")}
         </Typography>
       </Center>
 
-      <Typography sx={{ paddingBottom: 2 }}>
-        Pick the name you want to be known as on the platform. This{" "}
-        <b>cannot</b> be changed later on.
-      </Typography>
+      <Typography sx={{ paddingBottom: 2 }}>{t("name.description")}</Typography>
 
       <TextField
         fullWidth
@@ -40,7 +40,7 @@ export function NameForm({
 
       <Center>
         <Button disabled={!value} onClick={onNext} variant="contained">
-          Continue
+          {t("name.continue")}
         </Button>
       </Center>
     </VerticalCenter>
