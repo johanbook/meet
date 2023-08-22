@@ -7,6 +7,7 @@ import { PhotoService } from "src/core/photos";
 import { QueryService } from "src/core/query";
 import { BlogPost } from "src/features/blogs/infrastructure/entities/blog-post.entity";
 import { CurrentOrganizationService } from "src/features/organizations";
+import { CurrentProfileService } from "src/features/profiles";
 
 import { BlogPostDetails } from "../../contracts/dtos/blog-post-detail.dto";
 import { BlogPostPhotoDetails } from "../../contracts/dtos/blog-post-photo.dto";
@@ -19,6 +20,7 @@ export class GetBlogPostsHandler
 {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
+    private readonly currentProfileService: CurrentProfileService,
     @InjectRepository(BlogPost)
     private readonly blogPosts: Repository<BlogPost>,
     private readonly photoService: PhotoService,
@@ -28,6 +30,9 @@ export class GetBlogPostsHandler
   async execute(query: GetBlogPostsQuery) {
     const currentOrganizationId =
       await this.currentOrganizationService.fetchCurrentOrganizationId();
+
+    const currentProfileId =
+      await this.currentProfileService.fetchCurrentProfileId();
 
     const foundBlogPosts = await this.queryService.find(this.blogPosts, {
       default: {
@@ -53,6 +58,7 @@ export class GetBlogPostsHandler
       content: post.content,
       createdAt: post.createdAt.toISOString(),
       id: post.id,
+      ownedByCurrentUser: post.profileId === currentProfileId,
       photos: mapArray(BlogPostPhotoDetails, post.photos, (photo) => ({
         description: photo.description,
         id: photo.id,
