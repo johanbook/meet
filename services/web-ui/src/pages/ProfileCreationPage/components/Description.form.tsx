@@ -4,6 +4,7 @@ import { Button, TextField, Typography } from "@mui/material";
 
 import { Center } from "src/components/ui/Center";
 import { VerticalCenter } from "src/components/ui/VerticalCenter";
+import { useTranslation } from "src/core/i18n";
 
 export interface DescriptionFormProps {
   onChange: (value: string) => void;
@@ -16,16 +17,18 @@ export function DescriptionForm({
   onNext,
   value,
 }: DescriptionFormProps): React.ReactElement {
+  const { t } = useTranslation("profile-creation");
+
   return (
     <VerticalCenter>
       <Center>
         <Typography color="primary" variant="h5" sx={{ paddingBottom: 2 }}>
-          Add something about you
+          {t("description.header")}
         </Typography>
       </Center>
 
       <Typography sx={{ paddingBottom: 2 }}>
-        Write a short description about yourself. This will be shown to others.
+        {t("description.description")}
       </Typography>
 
       <TextField
@@ -41,7 +44,7 @@ export function DescriptionForm({
 
       <Center>
         <Button disabled={!value} onClick={onNext} variant="contained">
-          Finish
+          {t("description.continue")}
         </Button>
       </Center>
     </VerticalCenter>

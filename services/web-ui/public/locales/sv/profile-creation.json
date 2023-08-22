@@ -1,0 +1,34 @@
+{
+  "actions": {
+    "create": {
+      "error": "Något gick fel när din profil skulle skapas. Försök igen senare.",
+      "success": "Grattis! Din profil har nu skapats"
+    }
+  },
+  "date-of-birth": {
+    "continue": "Slutgör",
+    "description": "Skriv in din födelsedag",
+    "header": "Ange födelsedag"
+  },
+  "description": {
+    "continue": "Skapa",
+    "description": "Skriv in en kort beskrivning om dig själv",
+    "header": "Skriv en beskrivning"
+  },
+  "name": {
+    "continue": "Fortsätt",
+    "description": "Skriv in förnamn. Detta kommer vara namn som visas för andra på platformen.",
+    "header": "Ange namn"
+  },
+  "steps": {
+    "date-of-birth": "Födelsedag",
+    "description": "Beskrivning",
+    "name": "Namn",
+    "welcome": "Välkommen"
+  },
+  "welcome": {
+    "continue": "Skapa en profil",
+    "description": "Meet är en platform för att dela ditt liv med andra. Det första vi ska göra för att komma igång är att skapa en profil för dig.",
+    "header": "Välkommen till Meet"
+  }
+}
