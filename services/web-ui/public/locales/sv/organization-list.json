@@ -1,4 +1,10 @@
 {
+  "actions": {
+    "activate": {
+      "error": "Något gick fel vid ändring av grupp",
+      "success": "Din nuvarande grupp har ändrats"
+    }
+  },
   "description": "De här är de grupper som du är medlem i",
   "header": "Grupper"
 }
