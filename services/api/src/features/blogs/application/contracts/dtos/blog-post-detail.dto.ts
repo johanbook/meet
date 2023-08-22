@@ -5,6 +5,7 @@ export class BlogPostDetails {
   id!: string;
   content!: string;
   createdAt!: string;
+  ownedByCurrentUser!: boolean;
   photos!: BlogPostPhotoDetails[];
   profile!: BlogPostProfileDetails;
 }
