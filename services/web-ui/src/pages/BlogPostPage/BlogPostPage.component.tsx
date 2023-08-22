@@ -42,7 +42,7 @@ export function BlogPostPageComponent({
               </Typography>
             </Box>
 
-            <BlogPostMenu id={post.id} />
+            {post.ownedByCurrentUser && <BlogPostMenu id={post.id} />}
           </Box>
 
           <Typography>{post.content}</Typography>
