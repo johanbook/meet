@@ -1,6 +1,7 @@
 {
   "back": "Tillbaka",
   "header": "Konversation",
+  "no-messages": "Ni har inte skickat några meddelanden till varandra än. Varför inte skicka ett 'hej'?",
   "textfield": {
     "placeholder": "Skriv ett meddelande här..."
   }

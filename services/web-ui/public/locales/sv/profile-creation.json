@@ -6,12 +6,12 @@
     }
   },
   "date-of-birth": {
-    "continue": "Slutgör",
+    "continue": "Fortsätt",
     "description": "Skriv in din födelsedag",
     "header": "Ange födelsedag"
   },
   "description": {
-    "continue": "Skapa",
+    "continue": "Slutgör",
     "description": "Skriv in en kort beskrivning om dig själv",
     "header": "Skriv en beskrivning"
   },
