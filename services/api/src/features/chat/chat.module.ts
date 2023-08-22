@@ -16,7 +16,7 @@ import { GetConnectionsHandler } from "./application/handlers/query-handlers/get
 import { ChatsController } from "./client/controllers/chats.controller";
 import { ChatMessageService } from "./domain/services/chat-message.service";
 import { ChatMessage } from "./infrastructure/entities/chat-message.entity";
-import { Connection } from "./infrastructure/views/connetion.view";
+import { Connection } from "./infrastructure/views/connection.view";
 
 @Module({
   imports: [

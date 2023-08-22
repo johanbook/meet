@@ -4,7 +4,7 @@ import { ApiTags } from "@nestjs/swagger";
 
 import { PostChatMessageCommand } from "../../application/contracts/commands/post-chat-message.command";
 import { ChatMessageDetails } from "../../application/contracts/dtos/chat.dto";
-import { ConnectionDetails } from "../../application/contracts/dtos/connetion.dto";
+import { ConnectionDetails } from "../../application/contracts/dtos/connection.dto";
 import { GetChatMessagesQuery } from "../../application/contracts/queries/get-chat-messages.query";
 import { GetConnectionsQuery } from "../../application/contracts/queries/get-connections.query";
 

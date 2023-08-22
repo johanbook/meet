@@ -1,14 +1,14 @@
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
-import { And, In, Not, Repository } from "typeorm";
+import { Repository } from "typeorm";
 
 import { mapArray } from "src/core/mapper";
 import { PhotoService } from "src/core/photos";
 import { CurrentOrganizationService } from "src/features/organizations";
 import { CurrentProfileService } from "src/features/profiles";
 
-import { Connection } from "../../../infrastructure/views/connetion.view";
-import { ConnectionDetails } from "../../contracts/dtos/connetion.dto";
+import { Connection } from "../../../infrastructure/views/connection.view";
+import { ConnectionDetails } from "../../contracts/dtos/connection.dto";
 import { GetConnectionsQuery } from "../../contracts/queries/get-connections.query";
 
 @QueryHandler(GetConnectionsQuery)
@@ -30,18 +30,21 @@ export class GetConnectionsHandler
     const currentOrganizationId =
       await this.currentOrganizationService.fetchCurrentOrganizationId();
 
-    const profileIds =
-      await this.currentOrganizationService.fetchCurrentOrganizationMemberIds();
-
     const matchingConnections = await this.connections.find({
       where: {
+        currentProfileId,
         organizationId: currentOrganizationId,
-        profileId: And(In(profileIds), Not(currentProfileId)),
       },
     });
 
     return mapArray(ConnectionDetails, matchingConnections, (connection) => ({
-      imageUrl: undefined,
+      imageUrl:
+        connection.profilePhotoObjectId &&
+        this.photoService.getUrl(
+          // This is a hack since it's difficult to get photo object reference
+          { objectId: connection.profilePhotoObjectId } as any,
+          "profile-photo",
+        ),
       lastMessage: connection.lastMessage,
       lastMessageSent: connection.lastMessageSent,
       name: connection.name,
