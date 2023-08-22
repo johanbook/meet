@@ -1,6 +1,7 @@
 {
   "back": "Back",
   "header": "Chat",
+  "no-messages": "This conversation is empty. Why not start by sending a 'hi'?",
   "textfield": {
     "placeholder": "A chat message..."
   }

@@ -31,7 +31,9 @@ export function ChatPageNav({
         <ArrowBackIosNew fontSize="small" sx={{ paddingRight: 1 / 2 }} />
         <span>{t("back")}</span>
       </MuiLink>
-      <Typography variant="h5">{t("header")}</Typography>
+      <Typography gutterBottom variant="h5">
+        {t("header")}
+      </Typography>
 
       {children}
     </>

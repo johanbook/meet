@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 
 import { InsertPhoto, Send } from "@mui/icons-material";
 import { Box, IconButton, InputAdornment, TextField } from "@mui/material";
+import { CacheKeysConstants, } from "src/core/query";
 
 import { CreateBlogPostRequest } from "src/api";
 import { blogsApi } from "src/apis";
@@ -27,7 +28,7 @@ export function BlogPostForm(): React.ReactElement {
 
     await mutation.mutateAsync(form.value, {
       onSuccess: () => {
-        queryClient.invalidateQueries(["blog-posts"]);
+        queryClient.invalidateQueries([CacheKeysConstants.BlogPosts]);
         form.reset();
       },
     });
