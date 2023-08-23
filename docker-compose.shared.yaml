@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   traefik:
-    image: "traefik:v2.4"
+    image: "traefik:v2.10"
     container_name: "traefik"
     command:
       - "--accesslog=true"
@@ -47,6 +47,7 @@ services:
       - "traefik.http.routers.api.rule=Host(`$DOMAIN`)&&PathPrefix(`/api`)"
       - "traefik.http.routers.api.entrypoints=web"
       - "traefik.http.routers.api.middlewares=auth"
+    restart:  "unless-stopped"
 
   console:
     image: ghcr.io/benphelps/homepage:latest
@@ -75,6 +76,7 @@ services:
       API_URL: "$PROTOCOL://$DOMAIN"
       UI_URL: "$PROTOCOL://$DOMAIN"
       SUPERTOKENS_URL: "http://supertokens:3567"
+    restart:  "unless-stopped"
 
   db:
     image: "postgis/postgis:15-3.3-alpine"
@@ -113,8 +115,9 @@ services:
     container_name: "web-ui"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.web-ui.rule=Host(`$DOMAIN`)"
+      - "traefik.http.routers.web-ui.rule=Host(`$DOMAIN`)&&!PathPrefix(`/api`)"
       - "traefik.http.routers.web-ui.entrypoints=web"
+    restart:  "unless-stopped"
 
   minio:
     image: "minio/minio"
