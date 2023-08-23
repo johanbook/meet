@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   traefik:
-    image: "traefik:v2.4"
+    image: "traefik:v2.10"
     container_name: "traefik"
     command:
       - "--accesslog=true"
@@ -113,7 +113,7 @@ services:
     container_name: "web-ui"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.web-ui.rule=Host(`$DOMAIN`)"
+      - "traefik.http.routers.web-ui.rule=Host(`$DOMAIN`)&&!PathPrefix(`/api`)"
       - "traefik.http.routers.web-ui.entrypoints=web"
 
   minio:
