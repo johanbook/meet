@@ -12,7 +12,7 @@ export class UserIdService {
     private readonly als: AsyncLocalStorage<IRequestContext>,
   ) {}
 
-  getUserId() {
+  getUserId(): string {
     const store = this.als.getStore();
 
     if (!store) {
@@ -21,6 +21,12 @@ export class UserIdService {
       );
     }
 
-    return store.userId;
+    const userId = store.userId;
+
+    if (!userId) {
+      throw new MissingUserIdError("Unable to obtain user ID");
+    }
+
+    return userId;
   }
 }

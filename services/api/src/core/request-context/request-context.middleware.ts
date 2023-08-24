@@ -33,7 +33,7 @@ export class RequestContextMiddleware implements NestModule {
           next: () => void,
         ) => {
           const correlationId = req.headers["x-correlation-id"];
-          const userId = req.headers["x-user-id"];
+          let userId: string | undefined;
 
           if (typeof correlationId != "string") {
             this.logger.error(
@@ -45,14 +45,9 @@ export class RequestContextMiddleware implements NestModule {
             );
           }
 
-          if (typeof userId != "string") {
-            this.logger.error(
-              "Failed authentication attempt. This indicates an error in the reverse proxy.",
-            );
-
-            throw new UnauthorizedException(
-              "Unable to parse user ID from request",
-            );
+          const headerUserId = req.headers["x-user-id"];
+          if (typeof headerUserId === "string") {
+            userId = headerUserId;
           }
 
           const store: IRequestContext = {
