@@ -1,14 +1,13 @@
 import { Controller, Get, HttpStatus, Res } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { FastifyReply } from "fastify";
+import EmailPassword from "supertokens-node/recipe/emailpassword";
 
 import { Logger } from "../logging/logger.service";
 import { Session } from "../supertokens/session.decorator";
 import { ISession } from "../supertokens/session.interface";
 
-const PATH_PREFIX = process.env.PATH_PREFIX || `/login`;
-const UI_DOMAIN = process.env.UI_URL || `http://localhost`;
-
+const HTTP_HEADER_EMAIL = process.env.EMAIL_HTTP_HEADER || "x-email";
 const HTTP_HEADER_USER_ID = process.env.USER_ID_HTTP_HEADER || "x-user-id";
 
 @Controller()
@@ -17,13 +16,13 @@ export class AuthenticationController {
   private logger = new Logger(AuthenticationController.name);
 
   @Get("/authenticate")
-  authenticate(
+  async authenticate(
     @Res({ passthrough: false }) response: FastifyReply,
     @Session({
       sessionRequired: false,
     })
     session: ISession,
-  ): void {
+  ): Promise<void> {
     if (!session) {
       this.logger.trace("Denied authentication");
 
@@ -32,33 +31,21 @@ export class AuthenticationController {
       return;
     }
 
-    this.logger.trace("Authentication approved");
+    const userId = session.getUserId();
+    const userInfo = await EmailPassword.getUserById(userId);
 
-    response.header(HTTP_HEADER_USER_ID, session.getUserId());
-    response.status(HttpStatus.OK).send();
-  }
+    if (!userId || !userInfo) {
+      this.logger.error("UserID or user info missing");
 
-  @Get("/authenticate-with-redirect")
-  authenticateWithRedirect(
-    @Res({ passthrough: false }) response: FastifyReply,
-    @Session({
-      sessionRequired: false,
-    })
-    session: ISession | undefined,
-  ): void {
-    if (!session) {
-      this.logger.trace("Denied authentication. Redirecting");
-
-      response
-        .status(HttpStatus.TEMPORARY_REDIRECT)
-        .redirect(`${UI_DOMAIN}${PATH_PREFIX}`);
+      response.status(HttpStatus.UNAUTHORIZED).send();
 
       return;
     }
 
     this.logger.trace("Authentication approved");
 
-    response.header(HTTP_HEADER_USER_ID, session.getUserId());
+    response.header(HTTP_HEADER_EMAIL, userInfo.email);
+    response.header(HTTP_HEADER_USER_ID, userId);
     response.status(HttpStatus.OK).send();
   }
 
