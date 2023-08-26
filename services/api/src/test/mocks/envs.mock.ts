@@ -8,4 +8,8 @@ export function createDummyEnvs(): void {
   process.env["DB_HOST"] = "my-db-host";
   process.env["DB_PASSWORD"] = "my-db-password";
   process.env["DB_USERNAME"] = "my-db-username";
+
+  process.env["SMTP_HOST"] = "my-smtp-host";
+  process.env["SMTP_PASSWORD"] = "my-smtp-password";
+  process.env["SMTP_USERNAME"] = "my-smtp-username";
 }

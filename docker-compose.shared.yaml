@@ -42,6 +42,9 @@ services:
       S3_ENDPOINT: "minio"
       S3_PUBLIC_ENDPOINT: "$PROTOCOL://s3.$DOMAIN"
       S3_SECRET_KEY: "$MINIO_SECRET_KEY"
+      SMTP_HOST: "$SMTP_HOST"
+      SMTP_PASSWORD: "$SMTP_PASSWORD"
+      SMTP_USERNAME: "$SMTP_USERNAME"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=Host(`$DOMAIN`)&&PathPrefix(`/api`)"
