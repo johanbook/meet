@@ -71,9 +71,7 @@ services:
       - "traefik.http.routers.auth.rule=Host(`$DOMAIN`)&&(PathPrefix(`/login`)||PathPrefix(`/logout`))"
       - "traefik.http.routers.auth.entrypoints=web"
       - "traefik.http.middlewares.auth.forwardauth.address=http://auth/authenticate"
-      - "traefik.http.middlewares.auth.forwardauth.authResponseHeaders=x-user-id"
-      - "traefik.http.middlewares.auth-redirect.forwardauth.address=http://auth/authenticate-with-redirect"
-      - "traefik.http.middlewares.auth-redirect.forwardauth.authResponseHeaders=x-user-id"
+      - "traefik.http.middlewares.auth.forwardauth.authResponseHeaders=x-user-id,x-email"
     environment:
       API_URL: "$PROTOCOL://$DOMAIN"
       UI_URL: "$PROTOCOL://$DOMAIN"
