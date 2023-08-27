@@ -4,12 +4,14 @@ import { In, Repository } from "typeorm";
 
 import { Profile } from "src/features/profiles";
 
+import { EmailService } from "../email/domain/services/email.service";
 import { NotificationGateway } from "./notification.gateway";
 import { INotification } from "./types";
 
 @Injectable()
 export class NotificationService {
   constructor(
+    private emailService: EmailService,
     private readonly notificationGateway: NotificationGateway,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
@@ -30,6 +32,30 @@ export class NotificationService {
   }
 
   notifyUsersIfAvailable(userIds: string[], notification: INotification): void {
-    this.notificationGateway.notifyUsersIfAvailable(userIds, notification);
+    const result = this.notificationGateway.notifyUsersIfAvailable(
+      userIds,
+      notification,
+    );
+
+    const usersToBeNotifiedByEmail = Object.entries(result)
+      /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+      .filter(([_, wasNotified]) => !wasNotified)
+      .map(([userId]) => userId);
+
+    this.notifyUsersByEmail(usersToBeNotifiedByEmail, notification);
+  }
+
+  async notifyUsersByEmail(
+    userIds: string[],
+    notification: INotification,
+  ): Promise<void> {
+    // TODO: Lookup
+    const targetEmails = [""];
+
+    await this.emailService.sendEmail({
+      receivers: targetEmails,
+      subject: notification.message,
+      text: "",
+    });
   }
 }
