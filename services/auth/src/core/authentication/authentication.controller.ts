@@ -1,4 +1,4 @@
-import { Controller, Get, HttpStatus, Res } from "@nestjs/common";
+import { Body, Controller, Get, HttpStatus, Post, Res } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { FastifyReply } from "fastify";
 import EmailPassword from "supertokens-node/recipe/emailpassword";
@@ -6,6 +6,8 @@ import EmailPassword from "supertokens-node/recipe/emailpassword";
 import { Logger } from "../logging/logger.service";
 import { Session } from "../supertokens/session.decorator";
 import { ISession } from "../supertokens/session.interface";
+import { GetUserInfoListByIdQuery } from "./get-user-info-list-by-id.query";
+import { UserDetails } from "./user.dto";
 
 const HTTP_HEADER_EMAIL = process.env.EMAIL_HTTP_HEADER || "x-email";
 const HTTP_HEADER_USER_ID = process.env.USER_ID_HTTP_HEADER || "x-user-id";
@@ -70,5 +72,19 @@ export class AuthenticationController {
     this.logger.trace("Logout successful");
 
     response.status(HttpStatus.OK).send();
+  }
+
+  // Endpoint is POST due to size limitations on URL in GET requests
+  @Post("/userinfo/list-by-userid")
+  async getUserInfo(
+    @Body() body: GetUserInfoListByIdQuery,
+  ): Promise<Record<string, UserDetails>> {
+    const result: Record<string, EmailPassword.User> = {};
+
+    for (const userId of body.userIds) {
+      result[userId] = await EmailPassword.getUserById(userId);
+    }
+
+    return result;
   }
 }
