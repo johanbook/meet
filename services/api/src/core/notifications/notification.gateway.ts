@@ -27,16 +27,24 @@ export class NotificationGateway
     delete this.connections[userId];
   }
 
-  notifyUsersIfAvailable(userIds: string[], notification: INotification): void {
+  notifyUsersIfAvailable(
+    userIds: string[],
+    notification: INotification,
+  ): Record<string, boolean> {
+    const results: Record<string, boolean> = {};
+
     for (const userId of userIds) {
-      this.notifyUserIfAvailable(userId, notification);
+      const succeeded = this.notifyUserIfAvailable(userId, notification);
+      results[userId] = succeeded;
     }
+
+    return results;
   }
 
   private notifyUserIfAvailable(
     userId: string,
     { data = {}, message, type }: INotification,
-  ): void {
+  ): boolean {
     const socket = this.connections[userId];
 
     if (!socket) {
@@ -44,10 +52,13 @@ export class NotificationGateway
         msg: `Unable to find active socket for user id. Skipping notification.`,
         targetUserId: userId,
       });
-      return;
+
+      return false;
     }
 
     socket.emit("notification", { data, message, type });
+
+    return true;
   }
 
   private parseUserIdFromSocket(socket: Socket): string {
