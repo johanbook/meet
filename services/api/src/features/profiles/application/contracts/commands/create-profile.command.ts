@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsAlpha, Length, IsString, ValidateNested } from "class-validator";
+import { Length, IsString, ValidateNested } from "class-validator";
 
 import { DateIsBefore } from "src/core/validation/custom-validators/date-is-before.validator";
 
@@ -14,7 +14,7 @@ export class CreateProfileCommand {
   @Length(0, 1024)
   public readonly description!: string;
 
-  @IsAlpha()
+  @IsString()
   @Length(1, 128)
   public readonly name!: string;
 
