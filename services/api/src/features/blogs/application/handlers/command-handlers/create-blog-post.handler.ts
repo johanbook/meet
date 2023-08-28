@@ -41,7 +41,7 @@ export class CreateBlogPostHandler
       );
     }
 
-    await this.blogPostService.saveBlogPost(blogPost);
+    await this.blogPostService.createBlogPost(blogPost);
   }
 
   private async addPhotos(

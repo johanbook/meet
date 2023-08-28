@@ -33,10 +33,13 @@ export class NotificationService {
 
     const ids = profiles.map((profile) => profile.userId);
 
-    this.notificationGateway.notifyUsersIfAvailable(ids, notification);
+    await this.notifyUsersIfAvailable(ids, notification);
   }
 
-  notifyUsersIfAvailable(userIds: string[], notification: INotification): void {
+  async notifyUsersIfAvailable(
+    userIds: string[],
+    notification: INotification,
+  ): Promise<void> {
     const result = this.notificationGateway.notifyUsersIfAvailable(
       userIds,
       notification,
@@ -47,7 +50,7 @@ export class NotificationService {
       .filter(([_, wasNotified]) => !wasNotified)
       .map(([userId]) => userId);
 
-    this.notifyUsersByEmail(usersToBeNotifiedByEmail, notification);
+    await this.notifyUsersByEmail(usersToBeNotifiedByEmail, notification);
   }
 
   async notifyUsersByEmail(
