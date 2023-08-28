@@ -17,4 +17,8 @@ export const emailConfig: SMTPTransport.Options = {
   },
   host: getRequiredStringConfig("SMTP_HOST"),
   port: getRequiredIntConfig("SMTP_PORT", 465),
+
+  // Configurations needed with Mailtrap
+  requireTLS: true,
+  secure: false,
 };

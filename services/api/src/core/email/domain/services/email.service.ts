@@ -19,7 +19,7 @@ export class EmailService {
 
   async sendEmail({ receivers, subject, text }: SendEmailProps) {
     return await this.transporter.sendMail({
-      from: '"Meet" <no-replay@meetly.site>',
+      from: '"Meet" <no-reply@meetly.site>',
       to: receivers.join(","),
       subject,
       text,
