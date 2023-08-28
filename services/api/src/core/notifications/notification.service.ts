@@ -2,6 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { In, Repository } from "typeorm";
 
+import { UserIdService } from "src/core/authentication";
+import { Logger } from "src/core/logging";
 import { Profile } from "src/features/profiles";
 
 import { EmailService } from "../email/domain/services/email.service";
@@ -10,11 +12,14 @@ import { INotification } from "./types";
 
 @Injectable()
 export class NotificationService {
+  private logger = new Logger(NotificationGateway.name);
+
   constructor(
     private emailService: EmailService,
     private readonly notificationGateway: NotificationGateway,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
+    private readonly userIdService: UserIdService,
   ) {}
 
   async notifyProfilesIfAvailable(
@@ -49,8 +54,11 @@ export class NotificationService {
     userIds: string[],
     notification: INotification,
   ): Promise<void> {
-    // TODO: Lookup
-    const targetEmails = [""];
+    this.logger.trace("Notifying users via email");
+
+    const targetEmails = await this.userIdService.fetchUserEmailsByUserIds(
+      userIds,
+    );
 
     await this.emailService.sendEmail({
       receivers: targetEmails,
