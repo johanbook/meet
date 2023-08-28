@@ -72,7 +72,9 @@ export class NotificationService {
       .filter(([_, wasNotified]) => !wasNotified)
       .map(([userId]) => userId);
 
-    await this.notifyUsersByEmail(usersToBeNotifiedByEmail, notification);
+    if (usersToBeNotifiedByEmail.length > 0) {
+      await this.notifyUsersByEmail(usersToBeNotifiedByEmail, notification);
+    }
   }
 
   async notifyUsersByEmail(

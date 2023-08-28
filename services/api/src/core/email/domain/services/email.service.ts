@@ -3,6 +3,8 @@ import { createTransport, Transporter } from "nodemailer";
 
 import { emailConfig } from "../../email.config";
 
+const EMAIL_SENDER = '"Meet" <no-reply@meetly.site>';
+
 interface SendEmailProps {
   receivers: string[];
   subject: string;
@@ -18,8 +20,12 @@ export class EmailService {
   }
 
   async sendEmail({ receivers, subject, text }: SendEmailProps) {
+    if (receivers.length === 0) {
+      return;
+    }
+
     return await this.transporter.sendMail({
-      from: '"Meet" <no-replay@meetly.site>',
+      from: EMAIL_SENDER,
       to: receivers.join(","),
       subject,
       text,
