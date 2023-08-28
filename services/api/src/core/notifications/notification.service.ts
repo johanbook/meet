@@ -1,9 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { In, Repository } from "typeorm";
+import { In, Not, Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
 import { Logger } from "src/core/logging";
+import { OrganizationMembership } from "src/features/organizations/infrastructure/entities/organization-membership.entity";
 import { Profile } from "src/features/profiles";
 
 import { EmailService } from "../email/domain/services/email.service";
@@ -17,10 +18,31 @@ export class NotificationService {
   constructor(
     private emailService: EmailService,
     private readonly notificationGateway: NotificationGateway,
+    @InjectRepository(OrganizationMembership)
+    private readonly organizationMemberships: Repository<OrganizationMembership>,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
     private readonly userIdService: UserIdService,
   ) {}
+
+  async notifyOrganization(
+    organizationId: number,
+    notification: INotification,
+    exceptProfilsIds: number[] = [],
+  ): Promise<void> {
+    const memberships = await this.organizationMemberships.find({
+      relations: {
+        profile: true,
+      },
+      where: {
+        organizationId,
+        profileId: Not(In(exceptProfilsIds)),
+      },
+    });
+
+    const userIds = memberships.map((membership) => membership.profile.userId);
+    await this.notifyUsersIfAvailable(userIds, notification);
+  }
 
   async notifyProfilesIfAvailable(
     profileIds: number[],
