@@ -17,5 +17,4 @@ export const emailConfig: SMTPTransport.Options = {
   },
   host: getRequiredStringConfig("SMTP_HOST"),
   port: getRequiredIntConfig("SMTP_PORT", 465),
-  secure: true,
 };
