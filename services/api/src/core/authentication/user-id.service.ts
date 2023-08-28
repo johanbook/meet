@@ -1,4 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
+import axios from "axios";
 import { AsyncLocalStorage } from "node:async_hooks";
 
 import { IRequestContext, REQUEST_CONTEXT_KEY } from "src/core/request-context";
@@ -28,5 +29,15 @@ export class UserIdService {
     }
 
     return userId;
+  }
+
+  async fetchUserEmailsByUserIds(userIds: string[]): Promise<string[]> {
+    const { data } = await axios.post("http://auth/userinfo/list-by-userid", {
+      userIds,
+    });
+
+    return Object.values(data as Record<string, { email: string }>).map(
+      (user) => user.email,
+    );
   }
 }
