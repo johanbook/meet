@@ -1,7 +1,8 @@
+import { EventBus } from "@nestjs/cqrs";
 import { Repository } from "typeorm";
 
 import { map } from "src/core/mapper";
-import { createMockRepository } from "src/test/mocks/repository.mock";
+import { createEventBusMock, createMockRepository } from "src/test/mocks";
 
 import { BlogPostService } from "../../../domain/services/blog-post.service";
 import { BlogPost } from "../../../infrastructure/entities/blog-post.entity";
@@ -12,9 +13,11 @@ describe(CreateBlogPostHandler.name, () => {
   let blogPosts: Repository<BlogPost>;
   let blogPostService: BlogPostService;
   let commandHandler: CreateBlogPostHandler;
+  let eventBus: EventBus;
 
   beforeEach(() => {
     blogPosts = createMockRepository<BlogPost>();
+    eventBus = createEventBusMock();
 
     const currentOrganizationService = {
       fetchCurrentOrganizationId: jest.fn(() => "my-organization-id"),
@@ -26,7 +29,7 @@ describe(CreateBlogPostHandler.name, () => {
 
     const photoService = {} as any;
 
-    blogPostService = new BlogPostService(blogPosts);
+    blogPostService = new BlogPostService(blogPosts, eventBus);
 
     commandHandler = new CreateBlogPostHandler(
       blogPostService,
