@@ -90,7 +90,7 @@ export class NotificationService {
     await this.emailService.sendEmail({
       receivers: targetEmails,
       subject: notification.message,
-      text: "",
+      text: notification.description,
     });
   }
 }
