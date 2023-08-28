@@ -15,6 +15,7 @@ export class NotifyProfilesOnNewMatch implements IEventHandler<MatchMadeEvent> {
     this.notificationService.notifyProfilesIfAvailable(
       [event.swipedProfileId, event.swipingProfileId],
       {
+        description: "There was a match",
         message: "You got a new match",
         type: NotificationEventsConstants.NEW_MATCH,
       },

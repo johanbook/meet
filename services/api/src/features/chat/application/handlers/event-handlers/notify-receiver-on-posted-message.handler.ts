@@ -4,6 +4,7 @@ import {
   NotificationEventsConstants,
   NotificationService,
 } from "src/core/notifications";
+import { INotification } from "src/core/notifications/types";
 
 import { ChatMessageSentEvent } from "../../../domain/events/chat-message-sent.event";
 
@@ -14,10 +15,16 @@ export class NotifyReceiverOnPostedChatMessageHandler
   constructor(private readonly notificationService: NotificationService) {}
 
   handle(event: ChatMessageSentEvent) {
-    this.notificationService.notifyProfilesIfAvailable([event.receiverId], {
+    const notification: INotification = {
       data: { receiverId: event.receiverId, senderId: event.senderId },
-      message: "Reveived new message",
+      description: "Someone sent you a message in Meet",
+      message: "You reveived a new message",
       type: NotificationEventsConstants.NEW_CHAT_MESSAGE,
-    });
+    };
+
+    this.notificationService.notifyProfilesIfAvailable(
+      [event.receiverId],
+      notification,
+    );
   }
 }
