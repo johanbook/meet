@@ -4,12 +4,17 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { EmailModule } from "src/core/email/email.module";
 import { Profile } from "src/features/profiles";
 
+import { AuthenticationModule } from "../authentication/authentication.module";
 import { NotificationGateway } from "./notification.gateway";
 import { NotificationService } from "./notification.service";
 
 @Module({
   exports: [NotificationService],
-  imports: [EmailModule, TypeOrmModule.forFeature([Profile])],
+  imports: [
+    AuthenticationModule,
+    EmailModule,
+    TypeOrmModule.forFeature([Profile]),
+  ],
   providers: [NotificationGateway, NotificationService],
 })
 export class NotificationModule {}

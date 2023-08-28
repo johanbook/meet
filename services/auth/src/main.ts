@@ -1,5 +1,6 @@
 import { fastifyHttpProxy } from "@fastify/http-proxy";
 import { fastifyStatic } from "@fastify/static";
+import { ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import {
   FastifyAdapter,
@@ -54,6 +55,7 @@ async function bootstrap() {
   }
 
   app.useGlobalFilters(new SupertokensExceptionFilter());
+  app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
 
   const document = createOpenApiDocument(app);
   SwaggerModule.setup("/login/docs", app, document);
