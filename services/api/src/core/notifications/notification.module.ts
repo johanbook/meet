@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { EmailModule } from "src/core/email/email.module";
+import { OrganizationMembership } from "src/features/organizations/infrastructure/entities/organization-membership.entity";
 import { Profile } from "src/features/profiles";
 
 import { AuthenticationModule } from "../authentication/authentication.module";
@@ -13,7 +14,7 @@ import { NotificationService } from "./notification.service";
   imports: [
     AuthenticationModule,
     EmailModule,
-    TypeOrmModule.forFeature([Profile]),
+    TypeOrmModule.forFeature([OrganizationMembership, Profile]),
   ],
   providers: [NotificationGateway, NotificationService],
 })

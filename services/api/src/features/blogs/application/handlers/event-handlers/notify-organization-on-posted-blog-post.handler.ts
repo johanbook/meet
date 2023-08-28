@@ -14,9 +14,13 @@ export class NotifyOrganizationOnPostedBlogPostHandler
   constructor(private readonly notificationService: NotificationService) {}
 
   handle(event: BlogPostCreatedEvent) {
-    this.notificationService.notifyProfilesIfAvailable([event.profileId], {
+    const notification = {
       message: "A user in your organization created a new post",
       type: NotificationEventsConstants.NEW_BLOG_POST,
-    });
+    };
+
+    this.notificationService.notifyOrganization(event.profileId, notification, [
+      event.profileId,
+    ]);
   }
 }
