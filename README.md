@@ -14,6 +14,7 @@ To run the project locally, see the [contribution guide](./CONTRIBUTING.md).
 
 The software includes builtin opinionated frameworks for the following:
 
+- [Authentication](./docs/authentication.md)
 - [Authorization](./docs/authorization.md)
 - [Classifications](./docs/classifications.md)
 - [Database migrations](./docs/migrations.md)
