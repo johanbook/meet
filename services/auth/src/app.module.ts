@@ -1,7 +1,8 @@
 import { Module } from "@nestjs/common";
 
-import { AuthenticationModule } from "./core/authentication/authentication.module";
-import { SupertokensModule } from "./core/supertokens/supertokens.module";
+import { AuthenticationModule } from "src/core/authentication/authentication.module";
+import { SupertokensModule } from "src/core/supertokens/supertokens.module";
+import { UserInfoModule } from "src/features/userinfo/user-info.module";
 
 const API_DOMAIN = process.env.API_URL || `http://localhost`;
 const UI_DOMAIN = process.env.UI_URL || `http://localhost`;
@@ -20,6 +21,7 @@ const SUPERTOKENS_URL = process.env.SUPERTOKENS_URL || "http://localhost";
         websiteBasePath: "/login",
       },
     }),
+    UserInfoModule,
   ],
   controllers: [],
   providers: [],
