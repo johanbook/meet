@@ -6,8 +6,7 @@
 
 **meet** (also known as **organize**) is a white-label app for organizing
 resources. It focuses on authorization, maintainence and extensability. The
-default implementation for the system is a dating app that allows one to find
-matches based on your location.
+default implementation for the system is a social platform.
 
 To run the project locally, see the [contribution guide](./CONTRIBUTING.md).
 
