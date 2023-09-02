@@ -1,4 +1,4 @@
-name: auth
+name: auth-api
 
 on:
   push:
@@ -7,14 +7,14 @@ on:
     branches:
       - "main"
     paths:
-      - "services/auth/**"
+      - "services/auth-api/**"
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./services/auth
+        working-directory: ./services/auth-api
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -29,16 +29,13 @@ jobs:
       - name: Install server NodeJS dependencies
         run: npm ci --legacy-peer-deps -D --ignore-scripts
 
-      - name: Install client NodeJS dependencies
-        run: cd client && npm ci --legacy-peer-deps -D --ignore-scripts
-
       - name: Run linting
         run: npm run lint:ci
   test:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./services/auth
+        working-directory: ./services/auth-api
     needs: ["lint"]
     steps:
       - name: Checkout repository
@@ -54,25 +51,22 @@ jobs:
       - name: Install server NodeJS dependencies
         run: npm ci --legacy-peer-deps -D --ignore-scripts
 
-      - name: Install client NodeJS dependencies
-        run: cd client && npm ci --legacy-peer-deps -D --ignore-scripts
-
       - name: Run tests
         run: npm run test:ci
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
-          flags: auth
+          flags: auth-api
 
   build-and-push-docker-image:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     defaults:
       run:
-        working-directory: ./services/auth
+        working-directory: ./services/auth-api
     env:
-      TAG: ghcr.io/johanbook/meet/auth:latest
+      TAG: ghcr.io/johanbook/meet/auth-api:latest
     needs: ["test"]
     steps:
       - name: Checkout repository

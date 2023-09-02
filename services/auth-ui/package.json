@@ -8,7 +8,8 @@
     "format": "prettier --write '{scripts,src}/**/*.{js,jsx,ts,tsx}'",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}' --max-warnings 0",
     "lint:ci": "npm run lint",
-    "start:dev": "PORT=8080 react-scripts start",
+    "prestart:dev": "./scripts/create-envs build/__env.json",
+    "start:dev": "react-scripts start",
     "test": "react-scripts test",
     "test:ci": "CI=true react-scripts test"
   },
