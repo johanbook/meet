@@ -15,6 +15,10 @@ export const emailConfig: SMTPTransport.Options = {
     pass: getRequiredStringConfig("SMTP_PASSWORD"),
     user: getRequiredStringConfig("SMTP_USERNAME"),
   },
+  from: getRequiredStringConfig(
+    "SMTP_SYSTEM_SENDER",
+    '"Meet" <no-reply@meetly.site>',
+  ),
   host: getRequiredStringConfig("SMTP_HOST"),
   port: getRequiredIntConfig("SMTP_PORT", 465),
 
