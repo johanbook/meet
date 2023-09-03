@@ -14,11 +14,11 @@ const SUPERTOKENS_URL = process.env.SUPERTOKENS_URL || "http://localhost";
     SupertokensModule.forRoot({
       connectionURI: SUPERTOKENS_URL,
       appInfo: {
+        apiBasePath: "/auth/api",
         appName: "Auth",
         apiDomain: API_DOMAIN,
-        websiteDomain: UI_DOMAIN,
-        apiBasePath: "/login",
         websiteBasePath: "/login",
+        websiteDomain: UI_DOMAIN,
       },
     }),
     UserInfoModule,

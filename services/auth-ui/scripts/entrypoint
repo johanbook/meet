@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+node ./scripts/create-envs build/__env.json
+
+wait
+
+node server.js

@@ -53,12 +53,19 @@ services:
       service: "api"
     image: ghcr.io/johanbook/meet/api:latest
 
-  auth:
+  auth-api:
     logging: *logging
     extends:
       file: "./docker-compose.shared.yaml"
       service: "auth"
-    image: ghcr.io/johanbook/meet/auth:latest
+    image: ghcr.io/johanbook/meet/auth-api:latest
+
+  auth-ui:
+    logging: *logging
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "auth-ui"
+    image: ghcr.io/johanbook/meet/auth-ui:latest
 
   console:
     logging: *logging

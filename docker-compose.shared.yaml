@@ -25,6 +25,7 @@ services:
       - "traefik.http.services.edge-router.loadbalancer.server.port=8080"
     ports:
       - 80:80
+    restart: "unless-stopped"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
@@ -67,14 +68,26 @@ services:
       - "$PWD/config/console/:/app/config"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
-  auth:
-    container_name: "auth"
+  auth-api:
+    container_name: "auth-api"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.auth.rule=Host(`$DOMAIN`)&&(PathPrefix(`/login`)||PathPrefix(`/logout`))"
-      - "traefik.http.routers.auth.entrypoints=web"
-      - "traefik.http.middlewares.auth.forwardauth.address=http://auth/authenticate"
-      - "traefik.http.middlewares.auth.forwardauth.authResponseHeaders=x-user-id,x-email"
+      - "traefik.http.routers.auth-api.rule=Host(`$DOMAIN`)&&(PathPrefix(`/auth/api`)||PathPrefix(`/logout`))"
+      - "traefik.http.routers.auth-api.entrypoints=web"
+      - "traefik.http.middlewares.auth.forwardauth.address=http://auth-api/authenticate"
+      - "traefik.http.middlewares.auth.forwardauth.authResponseHeaders=x-user-id"
+    environment:
+      API_URL: "$PROTOCOL://$DOMAIN"
+      UI_URL: "$PROTOCOL://$DOMAIN"
+      SUPERTOKENS_URL: "http://supertokens:3567"
+    restart: "unless-stopped"
+
+  auth-ui:
+    container_name: "auth-ui"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.auth-ui.rule=Host(`$DOMAIN`)&&PathPrefix(`/login`)"
+      - "traefik.http.routers.auth-ui.entrypoints=web"
     environment:
       API_URL: "$PROTOCOL://$DOMAIN"
       UI_URL: "$PROTOCOL://$DOMAIN"
@@ -94,6 +107,7 @@ services:
     volumes:
       - "$PWD/config/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql"
       - ".data/postgres:/var/lib/postgresql/data:rw"
+    restart: "unless-stopped"
 
   pgadmin:
     image: "dpage/pgadmin4"
@@ -113,6 +127,7 @@ services:
     container_name: "supertokens"
     environment:
       POSTGRESQL_CONNECTION_URI: "postgresql://$POSTGRES_USERNAME:$POSTGRES_PASSWORD@db:5432/"
+    restart: "unless-stopped"
 
   web-ui:
     container_name: "web-ui"
@@ -144,6 +159,7 @@ services:
       - "traefik.http.routers.s3.rule=Host(`s3.$DOMAIN`)"
       - "traefik.http.routers.s3.service=s3"
       - "traefik.http.services.s3.loadbalancer.server.port=9000"
+    restart: "unless-stopped"
     volumes:
       - ".data/mino:/data:rw"
 
@@ -153,3 +169,4 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.tracking.rule=Host(`$DOMAIN`)&&(PathPrefix(`/tracking`))"
       - "traefik.http.routers.tracking.entrypoints=web"
+    restart: "unless-stopped"

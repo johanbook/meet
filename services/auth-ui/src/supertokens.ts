@@ -11,11 +11,11 @@ export async function initializeSuperTokens(
 
   SuperTokens.init({
     appInfo: {
+      apiBasePath: "/auth/api",
       appName: "Login",
       apiDomain: config.API_DOMAIN,
-      websiteDomain: config.UI_DOMAIN,
-      apiBasePath: "/login",
       websiteBasePath: "/login",
+      websiteDomain: config.UI_DOMAIN,
     },
     recipeList: [
       EmailPassword.init({

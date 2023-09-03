@@ -24,19 +24,33 @@ services:
       file: "./docker-compose.shared.yaml"
       service: "console"
 
-  auth:
+  auth-api:
     extends:
       file: "./docker-compose.shared.yaml"
-      service: "auth"
+      service: "auth-api"
     build:
-      context: "./services/auth"
+      context: "./services/auth-api"
     command:
       - "run"
       - "start:dev"
     entrypoint:
       - "npm"
     volumes:
-      - "$PWD/services/auth/:/app"
+      - "$PWD/services/auth-api/:/app"
+
+  auth-ui:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "auth-ui"
+    build:
+      context: "./services/auth-ui"
+    command:
+      - "run"
+      - "start:dev"
+    entrypoint:
+      - "npm"
+    volumes:
+      - "$PWD/services/auth-ui/:/app"
 
   db:
     extends:
