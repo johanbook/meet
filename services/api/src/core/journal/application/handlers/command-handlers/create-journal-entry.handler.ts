@@ -4,6 +4,7 @@ import { Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
 import { MissingUserIdError } from "src/core/authentication";
+import { redactBinaries } from "src/utils/object.helper";
 
 import { JournalEntry } from "../../../infrastructure/entities/journal-entry.entity";
 import { CreateJournalEntryCommand } from "../../contracts/commands/create-journal-entry.command";
@@ -36,7 +37,7 @@ export class CreateJournalEntryHandler
     const newJournalEntry = new JournalEntry();
 
     newJournalEntry.commandName = command.commandName;
-    newJournalEntry.payload = command.payload;
+    newJournalEntry.payload = redactBinaries(command.payload);
     newJournalEntry.userId = userId;
 
     await this.journalEntries.save(newJournalEntry);
