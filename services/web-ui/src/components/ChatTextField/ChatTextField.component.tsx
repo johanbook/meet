@@ -33,7 +33,12 @@ export function ChatTextFieldComponent({
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <IconButton color="primary" onClick={handleSubmit} type="submit">
+              <IconButton
+                color="primary"
+                disabled={!value}
+                onClick={handleSubmit}
+                type="submit"
+              >
                 <Send />
               </IconButton>
             </InputAdornment>
