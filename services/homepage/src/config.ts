@@ -8,5 +8,6 @@ export const CONFIG = {
   URLS: {
     // TODO: Remove hardcoding
     APP: "https://app.meetly.site",
+    SIGNUP_UP: "https://app.meetly.site/login?show=signup",
   },
 };

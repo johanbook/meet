@@ -24,7 +24,11 @@ export function LandingPageComponent(): React.ReactElement {
         </Typography>
 
         <Center>
-          <Button component="a" href={CONFIG.URLS.APP} variant="contained">
+          <Button
+            component="a"
+            href={CONFIG.URLS.SIGNUP_UP}
+            variant="contained"
+          >
             {t("landingpage.hero.signup")}
           </Button>
         </Center>
