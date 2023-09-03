@@ -57,7 +57,7 @@ services:
     logging: *logging
     extends:
       file: "./docker-compose.shared.yaml"
-      service: "auth"
+      service: "auth-api"
     image: ghcr.io/johanbook/meet/auth-api:latest
 
   auth-ui:
