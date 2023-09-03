@@ -1,6 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { createTransport, Transporter } from "nodemailer";
 
+import { Logger } from "src/core/logging";
+
 import { emailConfig } from "../../email.config";
 
 interface SendEmailProps {
@@ -11,6 +13,7 @@ interface SendEmailProps {
 
 @Injectable()
 export class EmailService {
+  private logger = new Logger(EmailService.name);
   private transporter: Transporter;
 
   constructor() {
@@ -21,6 +24,12 @@ export class EmailService {
     if (receivers.length === 0) {
       return;
     }
+
+    this.logger.debug({
+      msg: "Sending email",
+      subject,
+      numReceivers: receivers.length,
+    });
 
     return await this.transporter.sendMail({
       from: emailConfig.from,

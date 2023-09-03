@@ -81,7 +81,7 @@ export class NotificationService {
     userIds: string[],
     notification: INotification,
   ): Promise<void> {
-    this.logger.trace("Notifying users via email");
+    this.logger.debug({ msg: "Notifying users via email", userIds });
 
     const targetEmails = await this.userIdService.fetchUserEmailsByUserIds(
       userIds,
