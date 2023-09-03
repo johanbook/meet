@@ -1,6 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { CommandBus, ICommand } from "@nestjs/cqrs";
 
+import { stringifyAndRedactBinary } from "src/utils/string.helper";
+
 import { Logger } from "./domain/services/logger.service";
 
 @Injectable()
@@ -11,7 +13,7 @@ export class CommandLogger {
     this.commandBus.subscribe((command: ICommand) => {
       const commandName = command.constructor.name;
       this.logger.debug({
-        args: command,
+        args: stringifyAndRedactBinary(command),
         command: commandName,
         msg: `Executed ${commandName}`,
       });
