@@ -1,5 +1,6 @@
 import SuperTokens from "supertokens-auth-react";
 import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
+import EmailVerification from "supertokens-auth-react/recipe/emailverification";
 import Session from "supertokens-auth-react/recipe/session";
 
 import { fetchConfig } from "./config";
@@ -40,6 +41,9 @@ export async function initializeSuperTokens(
               }
             `,
         useShadowDom: false,
+      }),
+      EmailVerification.init({
+        mode: "REQUIRED",
       }),
       Session.init(),
     ],

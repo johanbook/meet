@@ -4,6 +4,7 @@ import Dashboard from "supertokens-node/recipe/dashboard";
 import EmailPassword, {
   APIInterface,
 } from "supertokens-node/recipe/emailpassword";
+import EmailVerification from "supertokens-node/recipe/emailverification";
 import Session from "supertokens-node/recipe/session";
 
 import { Logger } from "../logging/logger.service";
@@ -43,6 +44,7 @@ export class SupertokensService {
             },
           },
         }),
+        EmailVerification.init({ mode: "REQUIRED" }),
         Session.init(),
         Dashboard.init(),
       ],
