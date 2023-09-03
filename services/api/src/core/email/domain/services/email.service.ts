@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { createTransport, Transporter } from "nodemailer";
 
-import { emailConfig } from "../../email.config";
+import { Logger } from "src/core/logging";
 
-const EMAIL_SENDER = '"Meet" <no-reply@meetly.site>';
+import { emailConfig } from "../../email.config";
 
 interface SendEmailProps {
   receivers: string[];
@@ -13,6 +13,7 @@ interface SendEmailProps {
 
 @Injectable()
 export class EmailService {
+  private logger = new Logger(EmailService.name);
   private transporter: Transporter;
 
   constructor() {
@@ -24,8 +25,14 @@ export class EmailService {
       return;
     }
 
+    this.logger.debug({
+      msg: "Sending email",
+      subject,
+      numReceivers: receivers.length,
+    });
+
     return await this.transporter.sendMail({
-      from: EMAIL_SENDER,
+      from: emailConfig.from,
       to: receivers.join(","),
       subject,
       text,
