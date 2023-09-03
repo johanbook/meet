@@ -6,6 +6,8 @@ import { IRequestContext, REQUEST_CONTEXT_KEY } from "src/core/request-context";
 
 import { MissingUserIdError } from "./missing-user-id.error";
 
+const AUTH_API_URL = "http://auth-api";
+
 @Injectable()
 export class UserIdService {
   constructor(
@@ -32,9 +34,12 @@ export class UserIdService {
   }
 
   async fetchUserEmailsByUserIds(userIds: string[]): Promise<string[]> {
-    const { data } = await axios.post("http://auth/userinfo/list-by-userid", {
-      userIds,
-    });
+    const { data } = await axios.post(
+      `${AUTH_API_URL}/userinfo/list-by-userid`,
+      {
+        userIds,
+      },
+    );
 
     return Object.values(data as Record<string, { email: string }>).map(
       (user) => user.email,
