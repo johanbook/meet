@@ -45,6 +45,7 @@ services:
       S3_SECRET_KEY: "$MINIO_SECRET_KEY"
       SMTP_HOST: "$SMTP_HOST"
       SMTP_PASSWORD: "$SMTP_PASSWORD"
+      SMTP_PORT: "$SMTP_PORT"
       SMTP_USERNAME: "$SMTP_USERNAME"
     labels:
       - "traefik.enable=true"
