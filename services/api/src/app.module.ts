@@ -18,7 +18,6 @@ import { MatchesModule } from "./features/matches/matches.module";
 import { OrganizationModule } from "./features/organizations/organization.module";
 import { ProfileModule } from "./features/profiles/profile.module";
 import { SettingsModule } from "./features/settings/settings.module";
-import { WingmanModule } from "./features/wingman/wingman.module";
 import { dataSourceOptions } from "./infrastructure/database/data-source.config";
 
 @Module({
@@ -40,7 +39,6 @@ import { dataSourceOptions } from "./infrastructure/database/data-source.config"
     ProfileModule,
     SettingsModule,
     TypeOrmModule.forRoot({ ...dataSourceOptions, autoLoadEntities: true }),
-    WingmanModule,
   ],
   providers: [],
 })
