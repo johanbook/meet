@@ -13,8 +13,8 @@ fastify.register(require("@fastify/static"), {
   wildcard: true,
 });
 
-fastify.get("*", function (req, reply) {
-  reply.sendFile("index.html");
+fastify.setNotFoundHandler((_, reply) => {
+  return reply.sendFile("index.html");
 });
 
 fastify.listen(
