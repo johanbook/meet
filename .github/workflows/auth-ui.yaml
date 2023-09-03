@@ -73,12 +73,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Download Swagger stubs
-        uses: actions/download-artifact@v3
-        with:
-          name: openapi-server
-          path: ./services/auth-ui/src/api/
-
       - name: Login to ghcr.io
         uses: docker/login-action@v1
         with:
