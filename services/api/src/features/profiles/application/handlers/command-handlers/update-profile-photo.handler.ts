@@ -36,10 +36,15 @@ export class UpdateProfilePhotoHandler
 
     // TODO: Remove existing photo
 
+    const resizedPhoto = await this.photoService.compress(
+      command.photo as Buffer,
+      [50, 50],
+    );
+
     const photo = await this.photoService.uploadPhoto(
       ProfilePhoto,
       "profile-photo",
-      command.photo,
+      resizedPhoto,
     );
     photo.profileId = profile.id;
 

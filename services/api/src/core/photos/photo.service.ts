@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { Constructor } from "@nestjs/cqrs";
+import sharp from "sharp";
 
 import {
   BucketName,
@@ -31,5 +32,12 @@ export class PhotoService {
     photo.objectId = objectMetadata.id;
 
     return photo;
+  }
+
+  async compress(buffer: Buffer, size: [number, number]): Promise<Buffer> {
+    return await sharp(buffer)
+      .resize(...size)
+      .png()
+      .toBuffer();
   }
 }

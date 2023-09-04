@@ -23,6 +23,8 @@ ENV NODE_ENV=production
 COPY package.json package-lock.json ./
 COPY scripts/ ./scripts
 COPY --from=builder /app/dist ./dist
+
+RUN apk add vips-dev # Needed for `sharp` dependency
 RUN npm ci
 
 USER node
