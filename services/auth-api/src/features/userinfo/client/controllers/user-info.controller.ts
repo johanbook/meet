@@ -5,16 +5,31 @@ import EmailPassword from "supertokens-node/recipe/emailpassword";
 import { Session } from "src/core/supertokens/session.decorator";
 import { ISession } from "src/core/supertokens/session.interface";
 
-import { GetUserInfoListByIdQuery } from "./get-user-info-list-by-id.query";
-import { UpdateEmailCommand } from "./update-email.command";
-import { UserDetails } from "./user.dto";
+import { UpdateEmailCommand } from "../../application/contracts/commands/update-email.command";
+import { UserDetails } from "../../application/contracts/dtos/user.dto";
+import { GetUserInfoListByEmailQuery } from "../../application/contracts/queries/get-user-info-list-by-email.query";
+import { GetUserInfoListByIdQuery } from "../../application/contracts/queries/get-user-info-list-by-id.query";
 
 @Controller()
 @ApiTags("userinfo")
 export class UserInfoController {
   // Endpoint is POST due to size limitations on URL in GET requests
+  @Post("/userinfo/list-by-email")
+  async getUserInfoListByEmail(
+    @Body() body: GetUserInfoListByEmailQuery,
+  ): Promise<Record<string, UserDetails>> {
+    const result: Record<string, EmailPassword.User> = {};
+
+    for (const email of body.emails) {
+      result[email] = await EmailPassword.getUserByEmail(email);
+    }
+
+    return result;
+  }
+
+  // Endpoint is POST due to size limitations on URL in GET requests
   @Post("/userinfo/list-by-userid")
-  async getUserInfo(
+  async getUserInfoListByUserId(
     @Body() body: GetUserInfoListByIdQuery,
   ): Promise<Record<string, UserDetails>> {
     const result: Record<string, EmailPassword.User> = {};
