@@ -39,6 +39,7 @@
     "class-validator": "^0.14.0",
     "csv-parse": "^5.4.0",
     "geojson": "^0.5.0",
+    "jimp": "^0.22.10",
     "nestjs-minio-client": "^2.0.0",
     "nodemailer": "^6.9.4",
     "pg": "^8.10.0",

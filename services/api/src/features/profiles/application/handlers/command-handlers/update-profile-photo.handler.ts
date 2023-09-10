@@ -34,12 +34,17 @@ export class UpdateProfilePhotoHandler
       throw new BadRequestException("Profile not found");
     }
 
+    const resizedPhoto = await this.photoService.resize(
+      command.photo as Buffer,
+      200,
+    );
+
     // TODO: Remove existing photo
 
     const photo = await this.photoService.uploadPhoto(
       ProfilePhoto,
       "profile-photo",
-      command.photo,
+      resizedPhoto,
     );
     photo.profileId = profile.id;
 
