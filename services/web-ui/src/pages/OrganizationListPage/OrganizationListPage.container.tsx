@@ -1,5 +1,6 @@
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
+import { useNavigate } from "react-router";
 
 import { ListItemButton, ListItemText } from "@mui/material";
 
@@ -16,8 +17,9 @@ import { OrganizationListPageSkeleton } from "./OrganizationListPage.skeleton";
 
 export function OrganizationListPageContainer(): React.ReactElement {
   const { t } = useTranslation("organization-list");
-  const snackbar = useSnackbar();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const snackbar = useSnackbar();
 
   const { error, data, isLoading } = useQuery(
     CacheKeysConstants.OrganizationList,
@@ -58,7 +60,10 @@ export function OrganizationListPageContainer(): React.ReactElement {
       { organizationId: organization.id },
       {
         onError: () => snackbar.success(t("actions.activate.error")),
-        onSuccess: () => snackbar.success(t("actions.activate.success")),
+        onSuccess: () => {
+          navigate("/");
+          snackbar.success(t("actions.activate.success"));
+        },
       }
     );
 
