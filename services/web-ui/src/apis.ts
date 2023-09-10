@@ -9,6 +9,12 @@ import {
 } from "src/api";
 import { Logger } from "src/core/logging";
 
+declare global {
+  interface Response {
+    errorMessage?: string;
+  }
+}
+
 const logger = new Logger("API");
 
 const config = new Configuration({
@@ -25,10 +31,25 @@ const config = new Configuration({
           return;
         }
 
+        let message = "";
+        const contentType = response.headers.get("content-type");
+
+        if (contentType?.startsWith("application/json")) {
+          const json = await response.json();
+          message = json.message;
+        } else {
+          message = await response.text();
+        }
+
+        response.errorMessage = message;
+
         logger.error("Request failed", {
+          message,
           status: response.status,
           url: response.url,
         });
+
+        return response;
       },
     },
   ],
