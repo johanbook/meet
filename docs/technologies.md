@@ -18,6 +18,15 @@ HTTP servers.
 
 [TypeORM](https://github.com/typeorm/typeorm) is used as an ORM.
 
+### Image processing
+
+[Jimp](https://github.com/jimp-dev/jimp) is used for image processing. This
+library was picked over more performant libraries such as
+[Sharp](https://github.com/lovell/sharp) due to it being fully written in
+JavaScript, eliminating the need for external libraries. This simplifies local
+development and enhances project portability. The implementation should be
+written such that can be easily replaced if the need arises.
+
 ## Persistence
 
 ### Database: Postgres
