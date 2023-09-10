@@ -14,10 +14,10 @@ import { BasePhoto } from "./photo.entity";
 export class PhotoService {
   constructor(private readonly objectStorageService: ObjectStorageService) {}
 
-  async resize(buffer: Buffer, size: [number, number]): Promise<Buffer> {
+  async resize(buffer: Buffer, size: number): Promise<Buffer> {
     const jimp = await Jimp.read(buffer);
 
-    return jimp.resize(...size).getBufferAsync(Jimp.MIME_PNG);
+    return jimp.resize(size, Jimp.AUTO).getBufferAsync(Jimp.MIME_PNG);
   }
 
   getUrl<T extends BasePhoto>(photo: T, bucketName: BucketName): string {
