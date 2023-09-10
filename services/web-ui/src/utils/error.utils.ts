@@ -1,26 +1,16 @@
 import { ResponseError } from "src/api";
 
-async function reponseErrorToMessage(
-  error: ResponseError
-): Promise<string | undefined> {
+function reponseErrorToMessage(error: ResponseError): string | undefined {
   const response = error.response;
 
-  if (response.bodyUsed) {
-    return;
-  }
-
-  const json = await response.json();
-
-  if ("message" in json) {
-    return json["message"];
+  if (response.errorMessage) {
+    return response.errorMessage;
   }
 
   return response.statusText;
 }
 
-export async function errorToMessage(
-  error: unknown
-): Promise<string | undefined> {
+export function errorToMessage(error: unknown): string | undefined {
   if (error instanceof ResponseError) {
     return reponseErrorToMessage(error);
   }

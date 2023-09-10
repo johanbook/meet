@@ -16,11 +16,10 @@ export function JournalPageContainer(): React.ReactElement {
   );
 
   if (error) {
-    const message = (error as Error).message;
     return (
       <>
         <JournalPageHeader />
-        <ErrorMessage message={message} />
+        <ErrorMessage error={error} />
       </>
     );
   }

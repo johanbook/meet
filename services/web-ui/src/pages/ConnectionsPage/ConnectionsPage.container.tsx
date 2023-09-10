@@ -21,7 +21,7 @@ export function ConnectionsPageContainer(): React.ReactElement {
   if (error) {
     return (
       <ConnectionsPageNav>
-        <ErrorPage error={error as Error} />
+        <ErrorPage error={error} />
       </ConnectionsPageNav>
     );
   }

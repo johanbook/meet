@@ -21,11 +21,10 @@ export function BlogPostPageContainer(): React.ReactElement {
   );
 
   if (error) {
-    const message = (error as Error).message;
     return (
       <>
         <BlogPostPageHeader />
-        <ErrorMessage message={message} />
+        <ErrorMessage error={error} />
       </>
     );
   }
