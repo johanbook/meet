@@ -5,7 +5,10 @@ import { Repository } from "typeorm";
 
 import { map } from "src/core/mapper";
 
-import { OrganizationMembership } from "../../infrastructure/entities/organization-membership.entity";
+import {
+  OrganizationMembership,
+  OrganizationMembershipRole,
+} from "../../infrastructure/entities/organization-membership.entity";
 import { Organization } from "../../infrastructure/entities/organization.entity";
 import { OrganizationCreatedEvent } from "../events/organization-created.event";
 
@@ -35,7 +38,11 @@ export class OrganizationService {
       throw new NotFoundException("Organization not found");
     }
 
-    const membership = await this.createMembership(organization, profileId);
+    const membership = await this.createMembership(
+      organization,
+      profileId,
+      OrganizationMembershipRole.Member,
+    );
     organization.memberships.push(membership);
     this.organizations.save(organization);
   }
@@ -55,7 +62,11 @@ export class OrganizationService {
     organization.name = props.name;
     organization.personal = props.personal;
 
-    const membership = await this.createMembership(organization, props.ownerId);
+    const membership = await this.createMembership(
+      organization,
+      props.ownerId,
+      OrganizationMembershipRole.Admin,
+    );
     organization.memberships = [membership];
 
     const createdOrganization = await this.organizations.save(organization);
@@ -76,11 +87,13 @@ export class OrganizationService {
   private async createMembership(
     organization: Organization,
     profileId: number,
+    role: OrganizationMembershipRole,
   ): Promise<OrganizationMembership> {
     const membership = new OrganizationMembership();
 
     membership.organization = organization;
     membership.profileId = profileId;
+    membership.role = role;
 
     return membership;
   }
