@@ -44,6 +44,7 @@ export class GetOrganizationMembersHandler
         this.photoSevice.getUrl(member.profile.profilePhoto, "profile-photo"),
       name: member.profile.name,
       profileId: member.profileId,
+      role: member.role,
     }));
   }
 }

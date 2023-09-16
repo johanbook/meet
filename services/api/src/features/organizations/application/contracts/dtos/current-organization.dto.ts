@@ -1,9 +1,6 @@
 import { OrganizationMembershipRole } from "../../../infrastructure/entities/organization-membership.entity";
+import { OrganizationDetails } from "./organization.dto";
 
-export class OrganizationMemberDetails {
-  joinedAt!: string;
-  name!: string;
-  imageUrl?: string;
-  profileId!: number;
+export class CurrentOrganizationDetails extends OrganizationDetails {
   role!: OrganizationMembershipRole;
 }
