@@ -10,6 +10,11 @@ import { Profile } from "src/features/profiles/infrastructure/entities/profile.e
 
 import { Organization } from "./organization.entity";
 
+export enum OrganizationMembershipRole {
+  Admin = "admin",
+  Member = "member",
+}
+
 @Entity()
 export class OrganizationMembership {
   @PrimaryGeneratedColumn()
@@ -29,4 +34,11 @@ export class OrganizationMembership {
 
   @ManyToOne(() => Profile, (profile) => profile.organizationMemberships)
   profile!: Profile;
+
+  @Column({
+    type: "enum",
+    enum: OrganizationMembershipRole,
+    default: OrganizationMembershipRole.Member,
+  })
+  role!: OrganizationMembershipRole;
 }
