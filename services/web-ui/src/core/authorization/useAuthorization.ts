@@ -1,8 +1,9 @@
+import { OrganizationMemberDetailsRoleEnum } from "src/api";
 import { organizationsApi } from "src/apis";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 
 interface UseAuthorizationResult {
-  role?: string;
+  role?: OrganizationMemberDetailsRoleEnum;
 }
 
 export function useAuthorization(): UseAuthorizationResult {
