@@ -1,14 +1,14 @@
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 
 import { map } from "src/core/mapper";
-import { CurrentOrganizationService } from "src/features/organizations/domain/services/current-organization.service";
 
-import { OrganizationDetails } from "../../contracts/dtos/organization.dto";
+import { CurrentOrganizationService } from "../../../domain/services/current-organization.service";
+import { CurrentOrganizationDetails } from "../../contracts/dtos/current-organization.dto";
 import { GetOrganizationQuery } from "../../contracts/queries/get-organization.query";
 
 @QueryHandler(GetOrganizationQuery)
 export class GetOrganizationHandler
-  implements IQueryHandler<GetOrganizationQuery, OrganizationDetails>
+  implements IQueryHandler<GetOrganizationQuery, CurrentOrganizationDetails>
 {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
@@ -18,10 +18,14 @@ export class GetOrganizationHandler
     const currentOrganization =
       await this.currentOrganizationService.fetchCurrentOrganization();
 
-    return map(OrganizationDetails, {
+    const membership =
+      await this.currentOrganizationService.fetchCurrentMembership();
+
+    return map(CurrentOrganizationDetails, {
       created: currentOrganization.created.toUTCString(),
       id: currentOrganization.id,
       name: currentOrganization.name,
+      role: membership.role,
     });
   }
 }
