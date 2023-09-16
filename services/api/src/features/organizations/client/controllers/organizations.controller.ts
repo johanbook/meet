@@ -6,6 +6,7 @@ import { AddMemberToOrganizationCommand } from "../../application/contracts/comm
 import { CreateOrganizationCommand } from "../../application/contracts/commands/create-organization.command";
 import { SwitchOrganizationCommand } from "../../application/contracts/commands/switch-organization.command";
 import { UpdateOrganizationCommand } from "../../application/contracts/commands/update-organization.command";
+import { CurrentOrganizationDetails } from "../../application/contracts/dtos/current-organization.dto";
 import { OrganizationMemberDetails } from "../../application/contracts/dtos/organization-member.dto";
 import { OrganizationDetails } from "../../application/contracts/dtos/organization.dto";
 import { GetOrganizationListQuery } from "../../application/contracts/queries/get-organization-list.query";
@@ -27,7 +28,7 @@ export class OrganizationsController {
   @Get("/current")
   async getCurrentOrganization(
     @Query() query: GetOrganizationQuery,
-  ): Promise<OrganizationDetails> {
+  ): Promise<CurrentOrganizationDetails> {
     return await this.queryBus.execute(query);
   }
 
