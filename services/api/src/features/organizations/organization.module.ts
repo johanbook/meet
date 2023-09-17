@@ -17,6 +17,7 @@ import { CreateOrganizationOnProfileCreatedHandler } from "./application/handler
 import { GetOrganizationListHandler } from "./application/handlers/query-handlers/get-organization-list.handler";
 import { GetOrganizationMembersHandler } from "./application/handlers/query-handlers/get-organization-members.handler";
 import { GetOrganizationHandler } from "./application/handlers/query-handlers/get-organization.handler";
+import { CurrentOrganizationController } from "./client/controllers/current-organization.controller";
 import { OrganizationsController } from "./client/controllers/organizations.controller";
 import { OrganizationJobs } from "./client/jobs/organization.jobs";
 import { CurrentOrganizationService } from "./domain/services/current-organization.service";
@@ -26,7 +27,7 @@ import { OrganizationMembership } from "./infrastructure/entities/organization-m
 import { Organization } from "./infrastructure/entities/organization.entity";
 
 @Module({
-  controllers: [OrganizationsController],
+  controllers: [CurrentOrganizationController, OrganizationsController],
   exports: [CurrentOrganizationService],
   imports: [
     AuthenticationModule,
