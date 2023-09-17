@@ -3,7 +3,14 @@
   "members": {
     "error": "Fel vid hämtning av gruppmedlemmar",
     "header": "Medlemmar",
-    "member-since": "Medlem sedan"
+    "member-since": "Medlem sedan",
+    "menu": {
+      "edit": "Redigera"
+    },
+    "update": {
+      "header": "Redigera medlem",
+      "text": "Här kan du redigera denna medlemmen"
+    }
   },
   "name": "Namn"
 }

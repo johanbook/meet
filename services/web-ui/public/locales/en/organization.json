@@ -3,7 +3,14 @@
   "members": {
     "error": "Unable to retrieve organization members",
     "header": "Members",
-    "member-since": "Member since"
+    "member-since": "Member since",
+    "menu": {
+      "edit": "Edit"
+    },
+    "update": {
+      "header": "Edit member",
+      "text": "Here you can edit this member"
+    }
   },
   "name": "Name"
 }
