@@ -17,6 +17,8 @@ import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 import { getDate } from "src/utils/time";
 
+import { OrganizationMemberMenu } from "../OrganizationMemberMenu";
+
 export function OrganizationMembers(): React.ReactElement {
   const { t } = useTranslation("organization");
   const authorization = useAuthorization();
@@ -46,7 +48,10 @@ export function OrganizationMembers(): React.ReactElement {
 
       <List>
         {data.map((member) => (
-          <ListItem key={member.profileId}>
+          <ListItem
+            key={member.profileId}
+            secondaryAction={<OrganizationMemberMenu />}
+          >
             <ListItemAvatar>
               <Avatar src={member.imageUrl} />
             </ListItemAvatar>
