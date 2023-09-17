@@ -39,6 +39,7 @@ export class GetOrganizationMembersHandler
 
     return mapArray(OrganizationMemberDetails, members, (member) => ({
       joinedAt: member.created.toISOString(),
+      id: member.id,
       imageUrl:
         member.profile.profilePhoto &&
         this.photoSevice.getUrl(member.profile.profilePhoto, "profile-photo"),
