@@ -8,11 +8,13 @@
       "edit": "Redigera"
     },
     "update": {
+      "cancel": "Avbryt",
       "header": "Redigera medlem",
       "role": {
         "error": "Ett fel inträffade när medlemmens roll skulle uppdateras",
         "success": "Medlemmens roll har uppdaterats"
       },
+      "save": "Spara",
       "text": "Här kan du redigera denna medlemmen"
     }
   },

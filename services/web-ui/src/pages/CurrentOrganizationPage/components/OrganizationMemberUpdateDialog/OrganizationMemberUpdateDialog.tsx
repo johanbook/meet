@@ -49,12 +49,12 @@ export function OrganizationMemberUpdateDialog({
     <Dialog
       Actions={({ closeDialog }) => (
         <>
-          <Button onClick={closeDialog}>Cancel</Button>
+          <Button onClick={closeDialog}>{t("members.update.cancel")}</Button>
           <Button
             disabled={role === member.role}
             onClick={() => handleSave(closeDialog)}
           >
-            Save
+            {t("members.update.save")}
           </Button>
         </>
       )}
