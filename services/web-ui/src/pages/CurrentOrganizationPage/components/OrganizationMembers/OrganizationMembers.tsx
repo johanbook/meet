@@ -50,7 +50,7 @@ export function OrganizationMembers(): React.ReactElement {
         {data.map((member) => (
           <ListItem
             key={member.profileId}
-            secondaryAction={<OrganizationMemberMenu />}
+            secondaryAction={<OrganizationMemberMenu member={member} />}
           >
             <ListItemAvatar>
               <Avatar src={member.imageUrl} />

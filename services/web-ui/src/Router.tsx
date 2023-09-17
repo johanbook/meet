@@ -7,11 +7,11 @@ import { ChatPage } from "src/pages/ChatPage";
 import { NavigationTrackingProvider } from "./core/tracking/NavigationTrackingProvider";
 import { BlogPostPage } from "./pages/BlogPostPage";
 import { ConnectionsPage } from "./pages/ConnectionsPage";
+import { CurrentOrganizationPage } from "./pages/CurrentOrganizationPage";
 import { JournalPage } from "./pages/JournalPage";
 import { LoadingPage } from "./pages/LoadingPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { OrganizationListPage } from "./pages/OrganizationListPage";
-import { OrganizationPage } from "./pages/OrganizationPage";
 import { ProfileGuard } from "./pages/ProfileGuard";
 import { ProfilePage } from "./pages/ProfilePage";
 import { SettingsPage } from "./pages/SettingsPage";
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/group",
-        element: <OrganizationPage />,
+        element: <CurrentOrganizationPage />,
       },
       {
         path: "/group/list",

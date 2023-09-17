@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuItem from "@mui/material/MenuItem";
 
+import { OrganizationMemberDetails } from "src/api";
 import { Menu } from "src/components/ui/Menu";
 import { Permissions, useAuthorization } from "src/core/authorization";
 import { useDialog } from "src/core/dialog";
@@ -14,17 +15,19 @@ import { useTranslation } from "src/core/i18n";
 import { OrganizationMemberUpdateDialog } from "../OrganizationMemberUpdateDialog/OrganizationMemberUpdateDialog";
 
 export interface OrganizationMemberMenuProps {
-  id: string;
+  member: OrganizationMemberDetails;
 }
 
-export function OrganizationMemberMenu(): ReactElement {
+export function OrganizationMemberMenu({
+  member,
+}: OrganizationMemberMenuProps): ReactElement {
   const authorization = useAuthorization();
   const { t } = useTranslation("organization");
 
   const { openDialog } = useDialog();
 
   function handleOpenEditDialog(): void {
-    openDialog(OrganizationMemberUpdateDialog, {});
+    openDialog(OrganizationMemberUpdateDialog, { member });
   }
 
   if (authorization.error || authorization.isLoading) {

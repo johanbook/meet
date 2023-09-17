@@ -1,13 +1,13 @@
 import { ReactQueryTestProvider, TestRouter, render, screen } from "src/test";
 
-import { OrganizationPage } from ".";
+import { CurrentOrganizationPage } from ".";
 
-describe.skip("<OrganizationPage />", () => {
+describe.skip("<CurrentOrganizationPage />", () => {
   it("renders message when no matches", async () => {
     render(
       <TestRouter>
         <ReactQueryTestProvider>
-          <OrganizationPage />
+          <CurrentOrganizationPage />
         </ReactQueryTestProvider>
       </TestRouter>
     );
