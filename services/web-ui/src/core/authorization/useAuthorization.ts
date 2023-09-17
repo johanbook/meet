@@ -1,19 +1,61 @@
-import { OrganizationMemberDetailsRoleEnum } from "src/api";
+import { OrganizationMemberDetailsRoleEnum as Role } from "src/api";
 import { organizationsApi } from "src/apis";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 
-interface UseAuthorizationResult {
-  role?: OrganizationMemberDetailsRoleEnum;
-}
+type UseAuthorizationResult =
+  | {
+      error: undefined;
+      isLoading: true;
+      hasPermission: undefined;
+      role: undefined;
+    }
+  | {
+      error: undefined;
+      isLoading: false;
+      hasPermission: (roles: Role[]) => boolean;
+      role: Role;
+    }
+  | {
+      error: Error;
+      isLoading: false;
+      hasPermission: undefined;
+      role: undefined;
+    };
 
 export function useAuthorization(): UseAuthorizationResult {
-  const { data } = useQuery(CacheKeysConstants.CurrentOrganization, () =>
-    organizationsApi.getCurrentOrganization()
+  const { data, isLoading } = useQuery(
+    CacheKeysConstants.CurrentOrganization,
+    () => organizationsApi.getCurrentOrganization()
   );
 
-  if (!data) {
-    return {};
+  if (isLoading) {
+    return {
+      error: undefined,
+      isLoading: true,
+      hasPermission: undefined,
+      role: undefined,
+    };
   }
 
-  return { role: data.role };
+  if (!data) {
+    return {
+      error: new Error("Unable to get data"),
+      isLoading: false,
+      hasPermission: undefined,
+      role: undefined,
+    };
+  }
+
+  const currentRole = data.role;
+
+  function hasPermission(roles: Role[]): boolean {
+    return roles.includes(currentRole);
+  }
+
+  return {
+    error: undefined,
+    isLoading: false,
+    hasPermission,
+    role: currentRole,
+  };
 }

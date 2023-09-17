@@ -12,25 +12,25 @@ import {
 
 import { organizationsApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
-import { useAuthorization, Role } from "src/core/authorization";
+import { Permissions, useAuthorization } from "src/core/authorization";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 import { getDate } from "src/utils/time";
 
 export function OrganizationMembers(): React.ReactElement {
   const { t } = useTranslation("organization");
-  const { role } = useAuthorization();
+  const authorization = useAuthorization();
 
   const { error, data, isLoading } = useQuery(
     CacheKeysConstants.CurrentOrganizationMembers,
     () => organizationsApi.getCurrentOrganizationMembers()
   );
 
-  if (error) {
-    return <ErrorMessage error={error} />;
+  if (error || authorization.error) {
+    return <ErrorMessage error={error || authorization.error} />;
   }
 
-  if (isLoading) {
+  if (isLoading || authorization.isLoading) {
     return <Skeleton />;
   }
 
@@ -52,7 +52,7 @@ export function OrganizationMembers(): React.ReactElement {
             </ListItemAvatar>
             <ListItemText
               primary={
-                role === Role.Admin
+                authorization.hasPermission(Permissions.Organization.ViewRole)
                   ? `${member.name} (${member.role})`
                   : member.name
               }
