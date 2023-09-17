@@ -9,6 +9,10 @@
     },
     "update": {
       "header": "Redigera medlem",
+      "role": {
+        "error": "Ett fel inträffade när medlemmens roll skulle uppdateras",
+        "success": "Medlemmens roll har uppdaterats"
+      },
       "text": "Här kan du redigera denna medlemmen"
     }
   },

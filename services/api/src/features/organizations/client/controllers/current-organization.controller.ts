@@ -3,6 +3,7 @@ import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
 import { AddMemberToOrganizationCommand } from "../../application/contracts/commands/add-member-to-organization.command";
+import { UpdateMemberRoleCommand } from "../../application/contracts/commands/update-member-role.command";
 import { UpdateOrganizationCommand } from "../../application/contracts/commands/update-organization.command";
 import { CurrentOrganizationDetails } from "../../application/contracts/dtos/current-organization.dto";
 import { OrganizationMemberDetails } from "../../application/contracts/dtos/organization-member.dto";
@@ -31,6 +32,13 @@ export class CurrentOrganizationController {
   @Post("/members")
   async addMemberToOrganization(
     @Body() command: AddMemberToOrganizationCommand,
+  ): Promise<null> {
+    return await this.commandBus.execute(command);
+  }
+
+  @Post("/members/role")
+  async changeMemberRole(
+    @Body() command: UpdateMemberRoleCommand,
   ): Promise<null> {
     return await this.commandBus.execute(command);
   }

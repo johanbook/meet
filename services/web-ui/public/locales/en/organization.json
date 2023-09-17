@@ -9,6 +9,10 @@
     },
     "update": {
       "header": "Edit member",
+      "role": {
+        "error": "An error occured when updating member role",
+        "success": "The member's role was successfully updated"
+      },
       "text": "Here you can edit this member"
     }
   },
