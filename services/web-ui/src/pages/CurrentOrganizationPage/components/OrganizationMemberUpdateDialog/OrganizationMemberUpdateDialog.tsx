@@ -2,15 +2,19 @@ import { ReactElement } from "react";
 
 import { Button, MenuItem, Select, Typography } from "@mui/material";
 
+import { OrganizationMemberDetails } from "src/api";
 import { Dialog } from "src/components/ui/Dialog";
 import { Role } from "src/core/authorization";
 import { GlobalDialogProps } from "src/core/dialog/dialog.context";
 import { useTranslation } from "src/core/i18n";
 
-export interface OrganizationMemberUpdateDialogProps
-  extends GlobalDialogProps {}
+export interface OrganizationMemberUpdateDialogProps extends GlobalDialogProps {
+  member: OrganizationMemberDetails;
+}
 
-export function OrganizationMemberUpdateDialog(): ReactElement {
+export function OrganizationMemberUpdateDialog({
+  member,
+}: OrganizationMemberUpdateDialogProps): ReactElement {
   const { t } = useTranslation("organization");
 
   return (
@@ -28,7 +32,7 @@ export function OrganizationMemberUpdateDialog(): ReactElement {
           {t("members.update.text")}
         </Typography>
 
-        <Select fullWidth label="Role" value={Role.Admin}>
+        <Select fullWidth label="Role" value={member.role}>
           {Object.entries(Role).map(([name, value]) => (
             <MenuItem key={value} value={value}>
               {name}

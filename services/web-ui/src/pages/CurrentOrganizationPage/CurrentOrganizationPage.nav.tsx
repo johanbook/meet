@@ -4,13 +4,13 @@ import { Typography } from "@mui/material";
 
 import { useTranslation } from "src/core/i18n";
 
-interface OrganizationPageNavProps {
+interface CurrentOrganizationPageNavProps {
   children: ReactNode;
 }
 
-export function OrganizationPageNav({
+export function CurrentOrganizationPageNav({
   children,
-}: OrganizationPageNavProps): React.ReactElement {
+}: CurrentOrganizationPageNavProps): React.ReactElement {
   const { t } = useTranslation("organization");
 
   return (
