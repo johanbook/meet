@@ -37,42 +37,27 @@ not require any authorization checks, this has to be specified explicitly.
 
 #### Available roles
 
-Roles are defined in `./services/api/src/core/authorization/roles.ts`
-
-```ts
-export enum Roles {
-  member,
-  owner,
-}
-```
+Roles are defined in `./services/api/src/core/authorization/organization-roles.enum.ts`.
 
 #### Creating permissions
 
 All permissions are kept in a permissions file
-`src/features/my-module/permissions.ts`:
+src/features/my-module/permissions.ts:
 
 ```ts
-import {
-  createPermission,
-  PermissionsDefinition,
-} from "src/core/authorization";
+import { OrganizationRole } from "src/core/authorization";
 
-export class ProfilePermissions extends PermissionsDefinition {
-  static Create = createPermission(Permissions.Update(Profile), {
-    admin: true,
-    viewer: false,
-  });
-
-  static Read = createPermission(Permissions.Update(Profile), {
-    admin: true,
-    viewer: true,
-  });
-
-  static Update = createPermission(Permissions.Update(Profile), {
-    admin: true,
-    viewer: false,
-  });
-}
+export const organizationPermissions = {
+  CurrentOrganization: {
+    Read: [OrganizationRole.Admin, OrganizationRole.Member],
+    Members: {
+      Add: [OrganizationRole.Admin],
+      Read: [OrganizationRole.Admin, OrganizationRole.Member],
+      UpdateOrganizationRole: [OrganizationRole.Admin],
+    },
+    Update: [OrganizationRole.Admin],
+  },
+};
 ```
 
 #### Requiring permissions
@@ -81,34 +66,29 @@ An authorization check is added to command and query using the
 `RequirePermissions` keyword like so:
 
 ```ts
-import { BadRequestException } from "@nestjs/common";
-import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { Body, Controller, Get, Query } from "@nestjs/common";
+import { QueryBus } from "@nestjs/cqrs";
+import { ApiTags } from "@nestjs/swagger";
 
-import { RequirePermissions, Permission } from "src/core/authorization";
-import { Profile } from "src/features/profiles";
+import { RequiresPermissions } from "src/core/authorization";
 
-import { UpdateProfileCommand } from "../contracts/update-profile.command";
+import { GetOrganizationQuery } from "../../application/contracts/queries/get-organization.query";
+import { organizationPermissions } from "../../organization.permissions";
 
-@CommandHandler(UpdateProfileCommand)
-@RequirePermissions([Permissions.Update(Profile)]) // <-- Adds permission check to handler
-export class UpdateProfileHandler
-  implements ICommandHandler<UpdateProfileCommand, void>
-{
-  constructor(
-    @InjectRepository(Profile)
-    private readonly profiles: Repository<Profile>,
-  ) {}
+@Controller("organizations/current")
+@ApiTags("organizations")
+export class CurrentOrganizationController {
+  constructor(private queryBus: QueryBus) {}
 
-  async execute(command: UpdateProfileCommand) {
-    // Code goes here ...
+  @Get()
+  @RequiresPermissions(organizationPermissions.CurrentOrganization.Read)
+  async getCurrentOrganization(
+    @Query() query: GetOrganizationQuery
+  ): Promise<CurrentOrganizationDetails> {
+    return await this.queryBus.execute(query);
   }
 }
 ```
-
-If a handler should not do any authorization checks, one should instead use the
-`RequireNoPermissions()` decorator.
 
 ### Frontend
 
