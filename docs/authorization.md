@@ -29,8 +29,6 @@ Types of permissions:
 
 ### Backend
 
-**The backend authorization is currently under construction**
-
 When the authorization module is enabled, all command and query handlers have to
 specify which permissions are required when being executed. If a handler does
 not require any authorization checks, this has to be specified explicitly.
@@ -70,7 +68,7 @@ import { Body, Controller, Get, Query } from "@nestjs/common";
 import { QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
-import { RequiresPermissions } from "src/core/authorization";
+import { RequiresOrganizationPermissions } from "src/core/authorization";
 
 import { GetOrganizationQuery } from "../../application/contracts/queries/get-organization.query";
 import { organizationPermissions } from "../../organization.permissions";
@@ -81,7 +79,7 @@ export class CurrentOrganizationController {
   constructor(private queryBus: QueryBus) {}
 
   @Get()
-  @RequiresPermissions(organizationPermissions.CurrentOrganization.Read)
+  @RequiresOrganizationPermissions(organizationPermissions.CurrentOrganization.Read)
   async getCurrentOrganization(
     @Query() query: GetOrganizationQuery
   ): Promise<CurrentOrganizationDetails> {
