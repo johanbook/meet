@@ -2,9 +2,9 @@ import { Injectable, CanActivate, ExecutionContext } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 
 import { CurrentOrganizationService } from "src/features/organizations";
-import { OrganizationMembershipRole as Role } from "src/features/organizations/infrastructure/entities/organization-membership.entity";
 
-import { ROLES_KEY } from "../decorators/roles.decorator";
+import { OrganizationRole } from "../../organization-roles.enum";
+import { REQUIRED_ORGANIZATION_ROLES_KEY } from "../decorators/roles.decorator";
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -14,10 +14,10 @@ export class RolesGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const requiredRoles = this.reflector.getAllAndOverride<Role[]>(ROLES_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]);
+    const requiredRoles = this.reflector.getAllAndOverride<OrganizationRole[]>(
+      REQUIRED_ORGANIZATION_ROLES_KEY,
+      [context.getHandler(), context.getClass()],
+    );
 
     if (!requiredRoles) {
       return true;

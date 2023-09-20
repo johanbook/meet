@@ -1,6 +1,7 @@
-import { OrganizationMembershipRole } from "../../../infrastructure/entities/organization-membership.entity";
+import { OrganizationRole } from "src/core/authorization";
+
 import { OrganizationDetails } from "./organization.dto";
 
 export class CurrentOrganizationDetails extends OrganizationDetails {
-  role!: OrganizationMembershipRole;
+  role!: OrganizationRole;
 }
