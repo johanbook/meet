@@ -4,7 +4,7 @@ import { Reflector } from "@nestjs/core";
 import { CurrentOrganizationService } from "src/features/organizations";
 
 import { OrganizationRole } from "../../organization-roles.enum";
-import { REQUIRED_ORGANIZATION_ROLES_KEY } from "../decorators/roles.decorator";
+import { REQUIRED_ORGANIZATION_ROLES_KEY } from "../decorators/requires-organization-permissions.decorator";
 
 @Injectable()
 export class RolesGuard implements CanActivate {
