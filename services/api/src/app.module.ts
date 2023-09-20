@@ -5,7 +5,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { MinioModule } from "nestjs-minio-client";
 
 import { AuthenticationModule } from "src/core/authentication/authentication.module";
-import { RolesGuard } from "src/core/authorization/roles.guard";
+import { RolesGuard } from "src/core/authorization";
 import { ClassificationsModule } from "src/core/classifications/classifications.module";
 import { ErrorHandlingModule } from "src/core/error-handling/error-handling.module";
 import { HealthChecksModule } from "src/core/health-checks/health-checks.module";
