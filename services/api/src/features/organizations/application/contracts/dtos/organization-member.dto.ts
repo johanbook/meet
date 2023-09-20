@@ -1,4 +1,4 @@
-import { OrganizationMembershipRole } from "../../../infrastructure/entities/organization-membership.entity";
+import { OrganizationRole } from "src/core/authorization/organization-roles.enum";
 
 export class OrganizationMemberDetails {
   joinedAt!: string;
@@ -6,5 +6,5 @@ export class OrganizationMemberDetails {
   id!: number;
   imageUrl?: string;
   profileId!: number;
-  role!: OrganizationMembershipRole;
+  role!: OrganizationRole;
 }

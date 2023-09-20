@@ -1,2 +1,3 @@
-export { RequiresPermissions } from "./client/decorators/roles.decorator";
+export { RequiresOrganizationPermissions } from "./client/decorators/requires-organization-permissions.decorator";
 export { RolesGuard } from "./client/guards/roles.guard";
+export { OrganizationRole } from "./organization-roles.enum";

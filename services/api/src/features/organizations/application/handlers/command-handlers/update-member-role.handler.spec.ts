@@ -1,15 +1,13 @@
 import { Repository } from "typeorm";
 
+import { OrganizationRole } from "src/core/authorization";
 import { map } from "src/core/mapper";
 import { CurrentOrganizationService } from "src/features/organizations/domain/services/current-organization.service";
 import { Profile } from "src/features/profiles";
 import { createMockRepository, createUserIdServiceMock } from "src/test/mocks";
 
 import { ActiveOrganization } from "../../../infrastructure/entities/active-organization.entity";
-import {
-  OrganizationMembership,
-  OrganizationMembershipRole,
-} from "../../../infrastructure/entities/organization-membership.entity";
+import { OrganizationMembership } from "../../../infrastructure/entities/organization-membership.entity";
 import { UpdateMemberRoleCommand } from "../../contracts/commands/update-member-role.command";
 import { UpdateMemberRoleHandler } from "./update-member-role.handler";
 
@@ -48,7 +46,7 @@ describe(UpdateMemberRoleHandler.name, () => {
     it("should save changes to organization", async () => {
       const command = map(UpdateMemberRoleCommand, {
         id: 1,
-        role: OrganizationMembershipRole.Member,
+        role: OrganizationRole.Member,
       });
       await commandHandler.execute(command);
 
