@@ -1,4 +1,4 @@
-import { OrganizationRole } from "src/core/authorization";
+import { OrganizationRole } from "src/core/authorization/organization-roles.enum";
 
 export class OrganizationMemberDetails {
   joinedAt!: string;
