@@ -52,10 +52,14 @@ export class CreateBlogPostHandler
     const blogPostPhotos: BlogPostPhoto[] = [];
 
     for (const binary of photos) {
+      const resizedPhoto = await this.photoService.resize(binary as Buffer, {
+        height: 100,
+      });
+
       const blogPostPhoto = await this.photoService.uploadPhoto(
         BlogPostPhoto,
         "blog-post-photo",
-        binary,
+        resizedPhoto,
       );
       blogPostPhoto.profileId = profileId;
       blogPostPhotos.push(blogPostPhoto);
