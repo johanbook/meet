@@ -1,9 +1,7 @@
 # Authorization
 
-The software system comes with a RBAC-based authorization framework.
-
-The system uses an authorization-first approach, meaning permissions has to be
-specified (or disabled) for every action taken in the system.
+The software system comes with a organization-level RBAC-based authorization
+framework.
 
 ## Types of resources
 
@@ -12,7 +10,8 @@ There are three types of resources in the system:
 - **Individual resources** which are owned by a single account. Examples are
   account settings.
 - **Organizational resources** which are owned by an organization. They can also
-  be owned by both an organization and an account at the same time.
+  be owned by both an organization and an account at the same time. Examples are
+  blog posts and chat messages.
 - **System resources** that are owned by the system, for example
   [classifications](./classifications.md).
 
@@ -29,39 +28,34 @@ Types of permissions:
 
 ### Backend
 
-When the authorization module is enabled, all command and query handlers have to
-specify which permissions are required when being executed. If a handler does
-not require any authorization checks, this has to be specified explicitly.
+Authorization is specified on a route level inside the controllers.
 
 #### Available roles
 
-Roles are defined in `./services/api/src/core/authorization/organization-roles.enum.ts`.
+Roles are defined in
+`./services/api/src/core/authorization/organization-roles.enum.ts`. They will
+however later be moved into the database.
 
 #### Creating permissions
 
 All permissions are kept in a permissions file
-src/features/my-module/permissions.ts:
+`src/features/my-module/my-module.permissions.ts`:
 
 ```ts
-import { OrganizationRole } from "src/core/authorization";
+import { OrganizationRole, Permissions } from "src/core/authorization";
 
-export const organizationPermissions = {
-  CurrentOrganization: {
-    Read: [OrganizationRole.Admin, OrganizationRole.Member],
-    Members: {
-      Add: [OrganizationRole.Admin],
-      Read: [OrganizationRole.Admin, OrganizationRole.Member],
-      UpdateOrganizationRole: [OrganizationRole.Admin],
-    },
-    Update: [OrganizationRole.Admin],
-  },
+export const monkeyPermissions: Permissions = {
+  Create: [OrganizationRole.Admin, OrganizationRole.Member],
+  Delete: [OrganizationRole.Admin],
+  Read: [OrganizationRole.Admin, OrganizationRole.Member],
+  Update: [OrganizationRole.Admin],
 };
 ```
 
 #### Requiring permissions
 
-An authorization check is added to command and query using the
-`RequirePermissions` keyword like so:
+An authorization check is added to a controller using the
+`RequiresOrganizationPermissions` decorator like so:
 
 ```ts
 import { Body, Controller, Get, Query } from "@nestjs/common";
@@ -70,19 +64,18 @@ import { ApiTags } from "@nestjs/swagger";
 
 import { RequiresOrganizationPermissions } from "src/core/authorization";
 
-import { GetOrganizationQuery } from "../../application/contracts/queries/get-organization.query";
+import { MonkeyDetails } from "../../application/contracts/dtos/monkey-details.dto.query";
+import { GetMonkiesQuery } from "../../application/contracts/queries/get-monkies.query";
 import { organizationPermissions } from "../../organization.permissions";
 
-@Controller("organizations/current")
-@ApiTags("organizations")
-export class CurrentOrganizationController {
+@Controller("monkies")
+@ApiTags("monkies")
+export class MonkeyController {
   constructor(private queryBus: QueryBus) {}
 
   @Get()
-  @RequiresOrganizationPermissions(organizationPermissions.CurrentOrganization.Read)
-  async getCurrentOrganization(
-    @Query() query: GetOrganizationQuery
-  ): Promise<CurrentOrganizationDetails> {
+  @RequiresOrganizationPermissions(monkeyPermissions.Read)
+  async getMonkies(@Query() query: GetMonkiesQuery): Promise<MonkeyDetails[]> {
     return await this.queryBus.execute(query);
   }
 }
