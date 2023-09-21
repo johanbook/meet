@@ -1,6 +1,6 @@
-import { OrganizationRole } from "src/core/authorization";
+import { OrganizationRole, Permissions } from "src/core/authorization";
 
-export const organizationPermissions = {
+export const organizationPermissions: Permissions = {
   CurrentOrganization: {
     Read: [OrganizationRole.Admin, OrganizationRole.Member],
     Members: {
