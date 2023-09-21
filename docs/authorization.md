@@ -42,7 +42,7 @@ All permissions are kept in a permissions file
 `src/features/my-module/my-module.permissions.ts`:
 
 ```ts
-import { OrganizationRole, Permissions } from "src/core/authorization";
+import { OrganizationRole } from "src/core/authorization";
 
 export const monkeyPermissions: Permissions = {
   Create: [OrganizationRole.Admin, OrganizationRole.Member],
