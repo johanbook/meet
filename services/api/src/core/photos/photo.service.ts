@@ -10,14 +10,23 @@ import {
 
 import { BasePhoto } from "./photo.entity";
 
+interface ResizeOptions {
+  height?: number;
+  width?: number;
+}
+
 @Injectable()
 export class PhotoService {
   constructor(private readonly objectStorageService: ObjectStorageService) {}
 
-  async resize(buffer: Buffer, size: number): Promise<Buffer> {
+  async resize(buffer: Buffer, options: ResizeOptions): Promise<Buffer> {
     const jimp = await Jimp.read(buffer);
 
-    return jimp.resize(size, Jimp.AUTO).getBufferAsync(Jimp.MIME_PNG);
+    const { width, height } = options;
+
+    return jimp
+      .resize(width || Jimp.AUTO, height || Jimp.AUTO)
+      .getBufferAsync(Jimp.MIME_PNG);
   }
 
   getUrl<T extends BasePhoto>(photo: T, bucketName: BucketName): string {
