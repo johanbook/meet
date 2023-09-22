@@ -12,23 +12,27 @@ import {
 
 import { organizationsApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
+import { Permissions, useAuthorization } from "src/core/authorization";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 import { getDate } from "src/utils/time";
 
+import { OrganizationMemberMenu } from "../OrganizationMemberMenu";
+
 export function OrganizationMembers(): React.ReactElement {
   const { t } = useTranslation("organization");
+  const authorization = useAuthorization();
 
   const { error, data, isLoading } = useQuery(
     CacheKeysConstants.CurrentOrganizationMembers,
     () => organizationsApi.getCurrentOrganizationMembers()
   );
 
-  if (error) {
-    return <ErrorMessage error={error} />;
+  if (error || authorization.error) {
+    return <ErrorMessage error={error || authorization.error} />;
   }
 
-  if (isLoading) {
+  if (isLoading || authorization.isLoading) {
     return <Skeleton />;
   }
 
@@ -44,12 +48,19 @@ export function OrganizationMembers(): React.ReactElement {
 
       <List>
         {data.map((member) => (
-          <ListItem key={member.profileId}>
+          <ListItem
+            key={member.profileId}
+            secondaryAction={<OrganizationMemberMenu member={member} />}
+          >
             <ListItemAvatar>
               <Avatar src={member.imageUrl} />
             </ListItemAvatar>
             <ListItemText
-              primary={member.name}
+              primary={
+                authorization.hasPermission(Permissions.Organization.ViewRole)
+                  ? `${member.name} (${member.role})`
+                  : member.name
+              }
               secondary={
                 t("members.member-since") + " " + getDate(member.joinedAt)
               }

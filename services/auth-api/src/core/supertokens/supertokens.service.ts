@@ -44,7 +44,9 @@ export class SupertokensService {
             },
           },
         }),
-        EmailVerification.init({ mode: "REQUIRED" }),
+        EmailVerification.init({
+          mode: process.env.NODE_ENV === "production" ? "REQUIRED" : "OPTIONAL",
+        }),
         Session.init(),
         Dashboard.init(),
       ],

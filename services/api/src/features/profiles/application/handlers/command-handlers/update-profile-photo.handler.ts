@@ -36,7 +36,9 @@ export class UpdateProfilePhotoHandler
 
     const resizedPhoto = await this.photoService.resize(
       command.photo as Buffer,
-      200,
+      {
+        width: 200,
+      },
     );
 
     // TODO: Remove existing photo

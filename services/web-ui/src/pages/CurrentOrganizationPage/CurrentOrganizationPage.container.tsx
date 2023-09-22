@@ -7,11 +7,11 @@ import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 
 import { ErrorPage } from "../ErrorPage";
-import { OrganizationPageNav } from "./OrganizationPage.nav";
-import { OrganizationPageSkeleton } from "./OrganizationPage.skeleton";
+import { CurrentOrganizationPageNav } from "./CurrentOrganizationPage.nav";
+import { CurrentOrganizationPageSkeleton } from "./CurrentOrganizationPage.skeleton";
 import { OrganizationMembers } from "./components/OrganizationMembers";
 
-export function OrganizationPageContainer(): React.ReactElement {
+export function CurrentOrganizationPageContainer(): React.ReactElement {
   const { t } = useTranslation("organization");
 
   const { error, data, isLoading } = useQuery(
@@ -21,35 +21,35 @@ export function OrganizationPageContainer(): React.ReactElement {
 
   if (error) {
     return (
-      <OrganizationPageNav>
+      <CurrentOrganizationPageNav>
         <ErrorPage error={error} />
-      </OrganizationPageNav>
+      </CurrentOrganizationPageNav>
     );
   }
 
   if (isLoading) {
     return (
-      <OrganizationPageNav>
-        <OrganizationPageSkeleton />
-      </OrganizationPageNav>
+      <CurrentOrganizationPageNav>
+        <CurrentOrganizationPageSkeleton />
+      </CurrentOrganizationPageNav>
     );
   }
 
   if (!data) {
     return (
-      <OrganizationPageNav>
+      <CurrentOrganizationPageNav>
         <ErrorPage error={new Error("Organization not found")} />
-      </OrganizationPageNav>
+      </CurrentOrganizationPageNav>
     );
   }
 
   return (
-    <OrganizationPageNav>
+    <CurrentOrganizationPageNav>
       <Typography>
         {t("name")}: {data.name}
       </Typography>
 
       <OrganizationMembers />
-    </OrganizationPageNav>
+    </CurrentOrganizationPageNav>
   );
 }

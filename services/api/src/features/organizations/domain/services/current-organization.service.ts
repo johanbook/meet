@@ -35,6 +35,26 @@ export class CurrentOrganizationService {
     });
   }
 
+  async fetchCurrentMembership(): Promise<OrganizationMembership> {
+    const profileId = await this.currentProfileService.fetchCurrentProfileId();
+    const organizationId = await this.fetchCurrentOrganizationId();
+
+    const membership = await this.memberships.findOne({
+      where: {
+        organizationId,
+        profileId,
+      },
+    });
+
+    if (!membership) {
+      throw new NotFoundException(
+        "Unable to find membership to current organization. Please contact support",
+      );
+    }
+
+    return membership;
+  }
+
   async fetchCurrentOrganization(): Promise<Organization> {
     const activeOrganization = await this.fetchCurrentActiveOrganization();
     const organizationId = activeOrganization?.organizationId;
