@@ -31,7 +31,7 @@
     "@nestjs/platform-fastify": "^10.1.2",
     "@nestjs/platform-socket.io": "^10.1.2",
     "@nestjs/schedule": "^3.0.1",
-    "@nestjs/swagger": "^7.1.2",
+    "@nestjs/swagger": "^7.1.10",
     "@nestjs/typeorm": "^10.0.0",
     "@nestjs/websockets": "^10.1.2",
     "axios": "^1.5.0",
