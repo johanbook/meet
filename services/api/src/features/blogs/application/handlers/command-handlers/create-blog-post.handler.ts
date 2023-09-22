@@ -53,7 +53,7 @@ export class CreateBlogPostHandler
 
     for (const binary of photos) {
       const resizedPhoto = await this.photoService.resize(binary as Buffer, {
-        height: 100,
+        height: 500,
       });
 
       const blogPostPhoto = await this.photoService.uploadPhoto(
