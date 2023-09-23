@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
+import { AuthorizationModule } from "src/core/authorization/authorization.module";
 import { NotificationModule } from "src/core/notifications/notification.module";
 import { PhotosModule } from "src/core/photos/photos.module";
 import { QueryModule } from "src/core/query/query.module";
@@ -19,6 +20,7 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
 
 @Module({
   imports: [
+    AuthorizationModule,
     CqrsModule,
     OrganizationModule,
     NotificationModule,

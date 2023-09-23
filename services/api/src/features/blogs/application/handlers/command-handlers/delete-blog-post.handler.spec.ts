@@ -16,9 +16,13 @@ describe(DeleteBlogPostHandler.name, () => {
   beforeEach(() => {
     blogPosts = createMockRepository<BlogPost>();
 
-    commandHandler = new DeleteBlogPostHandler(blogPosts, {
-      removePhoto: jest.fn(),
-    } as any);
+    commandHandler = new DeleteBlogPostHandler(
+      { authorizeOwnerOrAdmin: jest.fn() } as any,
+      blogPosts,
+      {
+        removePhoto: jest.fn(),
+      } as any,
+    );
   });
 
   describe("can update blog post", () => {
