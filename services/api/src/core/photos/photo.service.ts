@@ -33,6 +33,13 @@ export class PhotoService {
     return this.objectStorageService.getUrl(bucketName, photo.objectId);
   }
 
+  async removePhoto<T extends BasePhoto>(
+    photo: T,
+    bucketName: BucketName,
+  ): Promise<void> {
+    await this.objectStorageService.delete(bucketName, photo.objectId);
+  }
+
   async uploadPhoto<T extends BasePhoto>(
     cls: Constructor<T>,
     bucketName: BucketName,
