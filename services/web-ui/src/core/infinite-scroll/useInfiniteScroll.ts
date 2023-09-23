@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 interface useInfiniteScrollProps {
-  onNext: () => Promise<void>;
+  onNext: () => void;
 }
 
 export function useInfiniteScroll({ onNext }: useInfiniteScrollProps) {
@@ -16,7 +16,7 @@ export function useInfiniteScroll({ onNext }: useInfiniteScrollProps) {
           onNext();
         }
       },
-      { threshold: 1 }
+      { threshold: 0.1 }
     );
 
     if (current) {

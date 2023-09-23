@@ -10,7 +10,7 @@ import { BlogPostForm } from "./components/BlogPostForm";
 import { BlogPostMenu } from "./components/BlogPostMenu";
 
 interface BlogPostPageComponentProps {
-  data: BlogPostDetails[];
+  data: BlogPostDetails[][];
 }
 
 export function BlogPostPageComponent({
@@ -24,41 +24,47 @@ export function BlogPostPageComponent({
         <BlogPostForm />
       </Box>
 
-      {data.map((post) => (
-        <Card
-          key={post.id}
-          sx={{ marginBottom: 2, padding: 2 }}
-          variant="outlined"
-        >
-          <Box sx={{ alignItems: "center", display: "flex", paddingBottom: 2 }}>
-            <Avatar src={post.profile.imageUrl} />
+      {data.map((group, groupIndex) => (
+        <React.Fragment key={groupIndex}>
+          {group.map((post) => (
+            <Card
+              key={post.id}
+              sx={{ marginBottom: 2, padding: 2 }}
+              variant="outlined"
+            >
+              <Box
+                sx={{ alignItems: "center", display: "flex", paddingBottom: 2 }}
+              >
+                <Avatar src={post.profile.imageUrl} />
 
-            <Box sx={{ flexGrow: 1, paddingLeft: 1 }}>
-              <Typography>
-                <b>{post.profile.name}</b> {t("published")}
-              </Typography>
-              <Typography variant="subtitle2">
-                {timeSince(post.createdAt)}
-              </Typography>
-            </Box>
+                <Box sx={{ flexGrow: 1, paddingLeft: 1 }}>
+                  <Typography>
+                    <b>{post.profile.name}</b> {t("published")}
+                  </Typography>
+                  <Typography variant="subtitle2">
+                    {timeSince(post.createdAt)}
+                  </Typography>
+                </Box>
 
-            {post.ownedByCurrentUser && <BlogPostMenu id={post.id} />}
-          </Box>
+                {post.ownedByCurrentUser && <BlogPostMenu id={post.id} />}
+              </Box>
 
-          <Typography>{post.content}</Typography>
+              <Typography>{post.content}</Typography>
 
-          {post.photos.map((photo) => (
-            <img
-              alt={photo.description || "Blog post image"}
-              key={photo.id}
-              src={photo.url}
-              style={{
-                padding: 10,
-                maxWidth: "100%",
-              }}
-            />
+              {post.photos.map((photo) => (
+                <img
+                  alt={photo.description || "Blog post image"}
+                  key={photo.id}
+                  src={photo.url}
+                  style={{
+                    padding: 10,
+                    maxWidth: "100%",
+                  }}
+                />
+              ))}
+            </Card>
           ))}
-        </Card>
+        </React.Fragment>
       ))}
     </>
   );
