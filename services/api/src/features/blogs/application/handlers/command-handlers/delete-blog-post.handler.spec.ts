@@ -16,7 +16,9 @@ describe(DeleteBlogPostHandler.name, () => {
   beforeEach(() => {
     blogPosts = createMockRepository<BlogPost>();
 
-    commandHandler = new DeleteBlogPostHandler(blogPosts);
+    commandHandler = new DeleteBlogPostHandler(blogPosts, {
+      removePhoto: jest.fn(),
+    } as any);
   });
 
   describe("can update blog post", () => {
@@ -34,6 +36,8 @@ describe(DeleteBlogPostHandler.name, () => {
 
     it("should save changes to blog post", async () => {
       const initalPost = new BlogPost();
+      initalPost.photos = [];
+
       const { id } = await blogPosts.save(initalPost);
 
       const command = map(DeleteBlogPostCommand, {
