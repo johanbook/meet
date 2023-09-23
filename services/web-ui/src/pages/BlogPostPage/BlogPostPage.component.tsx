@@ -35,7 +35,10 @@ export function BlogPostPageComponent({
               <Box
                 sx={{ alignItems: "center", display: "flex", paddingBottom: 2 }}
               >
-                <Avatar src={post.profile.imageUrl} />
+                <Avatar
+                  imgProps={{ loading: "lazy" }}
+                  src={post.profile.imageUrl}
+                />
 
                 <Box sx={{ flexGrow: 1, paddingLeft: 1 }}>
                   <Typography>
@@ -55,6 +58,8 @@ export function BlogPostPageComponent({
                 <img
                   alt={photo.description || "Blog post image"}
                   key={photo.id}
+                  loading="lazy"
+                  height={500}
                   src={photo.url}
                   style={{
                     padding: 10,

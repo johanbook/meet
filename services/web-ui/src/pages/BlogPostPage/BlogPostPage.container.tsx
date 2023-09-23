@@ -55,7 +55,7 @@ export function BlogPostPageContainer(): React.ReactElement {
     );
   }
 
-  if (!data || data.pages.length === 0) {
+  if (!data || data.pages[0].length === 0) {
     return (
       <>
         <BlogPostPageHeader />
