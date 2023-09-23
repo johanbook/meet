@@ -27,7 +27,13 @@ export function BlogPostPageContainer(): React.ReactElement {
           top: (pageParam + 1) * ITEMS_PER_PAGE,
         }),
       {
-        getNextPageParam: (_, pages) => pages.length - 1,
+        getNextPageParam: (lastPage, pages) => {
+          if (lastPage.length < ITEMS_PER_PAGE) {
+            return;
+          }
+
+          return pages.length - 1;
+        },
       }
     );
 
