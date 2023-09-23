@@ -36,6 +36,7 @@ export function BlogPostMenu({ id }: BlogPostMenuProps): ReactElement {
           snackbar.error(t("actions.delete.error"));
         },
         onSuccess: () => {
+          snackbar.success(t("actions.delete.success"));
           queryClient.invalidateQueries([CacheKeysConstants.BlogPosts]);
         },
       }

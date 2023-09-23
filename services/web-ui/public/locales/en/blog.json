@@ -1,7 +1,8 @@
 {
   "actions": {
     "delete": {
-      "error": "Something went wrong when trying to delete the blog post"
+      "error": "Something went wrong when trying to delete the blog post",
+      "success": "The blost post was successfully deleted"
     }
   },
   "form": {
