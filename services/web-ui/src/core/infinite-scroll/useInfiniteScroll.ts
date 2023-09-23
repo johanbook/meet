@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
 
-interface useInfiniteScrollProps {
-  onNext: () => void;
+interface UseInfiniteScrollProps {
+  onObserve: () => void;
 }
 
-export function useInfiniteScroll({ onNext }: useInfiniteScrollProps) {
+export function useInfiniteScroll({ onObserve }: UseInfiniteScrollProps) {
   const observerTarget = useRef(null);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export function useInfiniteScroll({ onNext }: useInfiniteScrollProps) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          onNext();
+          onObserve();
         }
       },
       { threshold: 0.1 }
@@ -29,7 +29,7 @@ export function useInfiniteScroll({ onNext }: useInfiniteScrollProps) {
       }
     };
     /* eslint-disable-next-line react-hooks/exhaustive-deps */
-  }, [observerTarget.current]);
+  }, [observerTarget]);
 
   return { observerTarget };
 }
