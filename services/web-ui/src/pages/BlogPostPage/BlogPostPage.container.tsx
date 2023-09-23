@@ -32,7 +32,7 @@ export function BlogPostPageContainer(): React.ReactElement {
             return;
           }
 
-          return pages.length - 1;
+          return pages.length;
         },
       }
     );
