@@ -1,11 +1,11 @@
 import React from "react";
 
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box,Typography } from "@mui/material";
 
 import { blogsApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { useTranslation } from "src/core/i18n";
-import { useInfiniteScroll } from "src/core/infinite-scroll";
+import { InteractionObserver } from "src/core/infinite-scroll";
 import { CacheKeysConstants, useInfiniteQuery } from "src/core/query";
 
 import { BlogPostPageComponent } from "./BlogPostPage.component";
@@ -36,10 +36,6 @@ export function BlogPostPageContainer(): React.ReactElement {
         },
       }
     );
-
-  const { observerTarget } = useInfiniteScroll({
-    onNext: fetchNextPage,
-  });
 
   if (error) {
     return (
@@ -79,20 +75,7 @@ export function BlogPostPageContainer(): React.ReactElement {
 
       <BlogPostPageComponent data={data.pages} />
 
-      {hasNextPage && (
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            height: 100,
-          }}
-          ref={observerTarget}
-        >
-          <CircularProgress />
-        </Box>
-      )}
+      {hasNextPage && <InteractionObserver onObserve={fetchNextPage} />}
     </>
   );
 }
