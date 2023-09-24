@@ -65,10 +65,10 @@ export function BlogPostPageComponent({
                   alt={photo.description || "Blog post image"}
                   key={photo.id}
                   loading="lazy"
-                  height={500}
                   src={photo.url}
                   style={{
                     padding: 10,
+                    minHeight: 100,
                     maxWidth: "100%",
                   }}
                 />
