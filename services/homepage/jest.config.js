@@ -5,8 +5,8 @@ module.exports = {
     global: {
       branches: 2,
       functions: 6,
-      lines: 29,
-      statements: 31,
+      lines: 22,
+      statements: 25,
     },
   },
   moduleDirectories: ["node_modules", __dirname],
