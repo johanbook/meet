@@ -3,12 +3,10 @@ import { EventBus } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { OrganizationRole } from "src/core/authorization";
 import { map } from "src/core/mapper";
 
-import {
-  OrganizationMembership,
-  OrganizationMembershipRole,
-} from "../../infrastructure/entities/organization-membership.entity";
+import { OrganizationMembership } from "../../infrastructure/entities/organization-membership.entity";
 import { Organization } from "../../infrastructure/entities/organization.entity";
 import { OrganizationCreatedEvent } from "../events/organization-created.event";
 
@@ -41,7 +39,7 @@ export class OrganizationService {
     const membership = await this.createMembership(
       organization,
       profileId,
-      OrganizationMembershipRole.Member,
+      OrganizationRole.Member,
     );
     organization.memberships.push(membership);
     this.organizations.save(organization);
@@ -65,7 +63,7 @@ export class OrganizationService {
     const membership = await this.createMembership(
       organization,
       props.ownerId,
-      OrganizationMembershipRole.Admin,
+      OrganizationRole.Admin,
     );
     organization.memberships = [membership];
 
@@ -87,7 +85,7 @@ export class OrganizationService {
   private async createMembership(
     organization: Organization,
     profileId: number,
-    role: OrganizationMembershipRole,
+    role: OrganizationRole,
   ): Promise<OrganizationMembership> {
     const membership = new OrganizationMembership();
 

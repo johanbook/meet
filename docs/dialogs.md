@@ -7,7 +7,8 @@ example, a dialog can be defined as as below:
 
 ```tsx
 import { ReactElement } from "react";
-import { Dialog } from "src/components";
+
+import { Dialog } from "src/components/ui";
 import { GlobalDialogProps } from "src/core/dialog";
 
 interface MyDialogProps extends GlobalDialogProps {

@@ -1,23 +1,21 @@
 import { Module } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { RequestContextModule } from "src/core/request-context/request-context.module";
+import { OrganizationModule } from "src/features/organizations/organization.module";
+import { ProfileModule } from "src/features/profiles/profile.module";
 
-import { PermissionsService } from "./application/permissions.service";
 import { AuthorizationAlsModule } from "./client/context/authorization-als.module";
-import { PermissionsController } from "./client/controllers/permissions.controller";
-import { AuthorizationMiddleware } from "./client/middleware/authorization.middleware";
-import { Permission } from "./infrastructure/entitities/permission.entity";
+import { AuthorizationService } from "./domain/services/authorization.service";
 
 @Module({
-  controllers: [PermissionsController],
-  exports: [AuthorizationAlsModule, PermissionsService],
+  controllers: [],
+  exports: [AuthorizationAlsModule, AuthorizationService],
   imports: [
     AuthorizationAlsModule,
-    AuthorizationMiddleware,
+    OrganizationModule,
+    ProfileModule,
     RequestContextModule,
-    TypeOrmModule.forFeature([Permission]),
   ],
-  providers: [PermissionsService],
+  providers: [AuthorizationService],
 })
 export class AuthorizationModule {}

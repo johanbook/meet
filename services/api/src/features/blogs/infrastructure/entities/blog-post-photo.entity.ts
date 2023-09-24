@@ -10,7 +10,7 @@ export class BlogPostPhoto extends BasePhoto {
   @Column({ type: "varchar", length: 2048, default: "" })
   description!: string;
 
-  @ManyToOne(() => BlogPost, (post) => post.photos)
+  @ManyToOne(() => BlogPost, (post) => post.photos, { onDelete: "CASCADE" })
   blogPost!: BlogPost;
 
   @Column()
