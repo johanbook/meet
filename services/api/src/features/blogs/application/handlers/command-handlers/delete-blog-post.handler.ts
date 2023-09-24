@@ -3,6 +3,7 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { AuthorizationService } from "src/core/authorization";
 import { PhotoService } from "src/core/photos";
 
 import { BlogPost } from "../../../infrastructure/entities/blog-post.entity";
@@ -13,6 +14,7 @@ export class DeleteBlogPostHandler
   implements ICommandHandler<DeleteBlogPostCommand, void>
 {
   constructor(
+    private readonly authorizationService: AuthorizationService,
     @InjectRepository(BlogPost)
     private readonly blogPosts: Repository<BlogPost>,
     private readonly photoService: PhotoService,
@@ -31,6 +33,8 @@ export class DeleteBlogPostHandler
     if (!blogPost) {
       throw new NotFoundException("Blog post not found");
     }
+
+    await this.authorizationService.authorizeOwnerOrAdmin(blogPost);
 
     await this.deleteBlogPostPhotos(blogPost);
 
