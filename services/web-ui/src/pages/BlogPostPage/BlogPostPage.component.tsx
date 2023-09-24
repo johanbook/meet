@@ -3,6 +3,7 @@ import React from "react";
 import { Avatar, Box, Card, Typography } from "@mui/material";
 
 import { BlogPostDetails } from "src/api";
+import { Role, useAuthorization } from "src/core/authorization";
 import { useTranslation } from "src/core/i18n";
 import { timeSince } from "src/utils/time";
 
@@ -17,6 +18,8 @@ export function BlogPostPageComponent({
   data,
 }: BlogPostPageComponentProps): React.ReactElement {
   const { t } = useTranslation("blog");
+
+  const authorization = useAuthorization();
 
   return (
     <>
@@ -49,7 +52,10 @@ export function BlogPostPageComponent({
                   </Typography>
                 </Box>
 
-                {post.ownedByCurrentUser && <BlogPostMenu id={post.id} />}
+                {(post.ownedByCurrentUser ||
+                  authorization.role === Role.Admin) && (
+                  <BlogPostMenu id={post.id} />
+                )}
               </Box>
 
               <Typography>{post.content}</Typography>

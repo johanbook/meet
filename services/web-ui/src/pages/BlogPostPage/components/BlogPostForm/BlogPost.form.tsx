@@ -52,7 +52,11 @@ export function BlogPostForm(): React.ReactElement {
                 {mutation.isLoading ? (
                   <CircularProgress />
                 ) : (
-                  <IconButton disabled={!form.value.content} type="submit">
+                  <IconButton
+                    color="primary"
+                    disabled={!form.value.content}
+                    type="submit"
+                  >
                     <Send />
                   </IconButton>
                 )}
