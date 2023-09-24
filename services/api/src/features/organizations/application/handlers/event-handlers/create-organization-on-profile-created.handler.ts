@@ -23,6 +23,6 @@ export class CreateOrganizationOnProfileCreatedHandler
       name: event.name,
     });
 
-    this.commandBus.execute(command);
+    await this.commandBus.execute(command);
   }
 }

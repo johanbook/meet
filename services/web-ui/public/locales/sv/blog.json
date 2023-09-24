@@ -1,7 +1,8 @@
 {
   "actions": {
     "delete": {
-      "error": "Något gick fel när blogposten skulle tas bort"
+      "error": "Något gick fel när blogposten skulle tas bort",
+      "success": "Blogposten har tagits bort"
     }
   },
   "form": {

@@ -2,8 +2,13 @@ import React, { SyntheticEvent } from "react";
 import { useMutation, useQueryClient } from "react-query";
 
 import { InsertPhoto, Send } from "@mui/icons-material";
-import { Box, IconButton, InputAdornment, TextField } from "@mui/material";
-import { CacheKeysConstants, } from "src/core/query";
+import {
+  Box,
+  CircularProgress,
+  IconButton,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
 
 import { CreateBlogPostRequest } from "src/api";
 import { blogsApi } from "src/apis";
@@ -11,6 +16,7 @@ import { Photo } from "src/components/ui/Photo";
 import { UploadIconButton } from "src/components/ui/UploadIconButton";
 import { useForm } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
+import { CacheKeysConstants } from "src/core/query";
 
 export function BlogPostForm(): React.ReactElement {
   const mutation = useMutation((command: CreateBlogPostRequest) =>
@@ -43,9 +49,17 @@ export function BlogPostForm(): React.ReactElement {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton disabled={!form.value.content} type="submit">
-                  <Send />
-                </IconButton>
+                {mutation.isLoading ? (
+                  <CircularProgress />
+                ) : (
+                  <IconButton
+                    color="primary"
+                    disabled={!form.value.content}
+                    type="submit"
+                  >
+                    <Send />
+                  </IconButton>
+                )}
               </InputAdornment>
             ),
             startAdornment: (

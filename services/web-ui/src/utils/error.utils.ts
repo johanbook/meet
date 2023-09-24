@@ -4,6 +4,10 @@ function reponseErrorToMessage(error: ResponseError): string | undefined {
   const response = error.response;
 
   if (response.errorMessage) {
+    if (Array.isArray(response.errorMessage)) {
+      return response.errorMessage.join(", ");
+    }
+
     return response.errorMessage;
   }
 

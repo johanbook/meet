@@ -6,14 +6,10 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 
+import { OrganizationRole } from "src/core/authorization/organization-roles.enum";
 import { Profile } from "src/features/profiles/infrastructure/entities/profile.entity";
 
 import { Organization } from "./organization.entity";
-
-export enum OrganizationMembershipRole {
-  Admin = "admin",
-  Member = "member",
-}
 
 @Entity()
 export class OrganizationMembership {
@@ -37,8 +33,8 @@ export class OrganizationMembership {
 
   @Column({
     type: "enum",
-    enum: OrganizationMembershipRole,
-    default: OrganizationMembershipRole.Member,
+    enum: OrganizationRole,
+    default: OrganizationRole.Member,
   })
-  role!: OrganizationMembershipRole;
+  role!: OrganizationRole;
 }
