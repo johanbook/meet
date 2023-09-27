@@ -23,7 +23,7 @@ export function LandingPageComponent(): React.ReactElement {
         alt=""
         src={BackgroundImage}
         style={{
-          objectFit: "fill",
+          objectFit: "cover",
           position: "absolute",
           left: 0,
           top: 0,
