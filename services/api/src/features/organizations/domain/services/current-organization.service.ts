@@ -5,17 +5,16 @@ import { Repository } from "typeorm";
 import { UserIdService } from "src/core/authentication";
 import { CurrentProfileService, Profile } from "src/features/profiles";
 
-import { ActiveOrganization } from "../../infrastructure/entities/active-organization.entity";
 import { OrganizationMembership } from "../../infrastructure/entities/organization-membership.entity";
 import { Organization } from "../../infrastructure/entities/organization.entity";
+import { ActiveOrganizationService } from "./active-organization.service";
 
 const CURRENT_ORGANIZATION_CACHE_PERIOD_MS = 1000;
 
 @Injectable()
 export class CurrentOrganizationService {
   constructor(
-    @InjectRepository(ActiveOrganization)
-    private readonly activeOrganizations: Repository<ActiveOrganization>,
+    private readonly activeOrganizationService: ActiveOrganizationService,
     private readonly currentProfileService: CurrentProfileService,
     @InjectRepository(OrganizationMembership)
     private readonly memberships: Repository<OrganizationMembership>,
@@ -25,15 +24,6 @@ export class CurrentOrganizationService {
     private readonly profiles: Repository<Profile>,
     private readonly userIdService: UserIdService,
   ) {}
-
-  async fetchCurrentActiveOrganization(): Promise<ActiveOrganization | null> {
-    const currentProfileId =
-      await this.currentProfileService.fetchCurrentProfileId();
-
-    return await this.activeOrganizations.findOne({
-      where: { profileId: currentProfileId },
-    });
-  }
 
   async fetchCurrentMembership(): Promise<OrganizationMembership> {
     const profileId = await this.currentProfileService.fetchCurrentProfileId();
@@ -56,7 +46,8 @@ export class CurrentOrganizationService {
   }
 
   async fetchCurrentOrganization(): Promise<Organization> {
-    const activeOrganization = await this.fetchCurrentActiveOrganization();
+    const activeOrganization =
+      await this.activeOrganizationService.fetchCurrentActiveOrganization();
     const organizationId = activeOrganization?.organizationId;
 
     const currentOrganization = organizationId
@@ -121,18 +112,8 @@ export class CurrentOrganizationService {
   }
 
   async switchCurrentOrganization(organizationId: number): Promise<void> {
-    const currentProfileId =
-      await this.currentProfileService.fetchCurrentProfileId();
-
-    let activeOrganization = await this.fetchCurrentActiveOrganization();
-
-    if (!activeOrganization) {
-      activeOrganization = new ActiveOrganization();
-      activeOrganization.profileId = currentProfileId;
-    }
-
-    activeOrganization.organizationId = organizationId;
-
-    this.activeOrganizations.save(activeOrganization);
+    await this.activeOrganizationService.switchCurrentOrganization(
+      organizationId,
+    );
   }
 }

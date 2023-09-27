@@ -15,6 +15,20 @@ export class Cache<V> {
     return await this.cache.get(key);
   }
 
+  async getOrUpdate(key: string, getValue: () => Promise<V>): Promise<V> {
+    const cachedValue = await this.get(key);
+
+    if (cachedValue) {
+      return cachedValue;
+    }
+
+    const value = await getValue();
+
+    await this.set(key, value);
+
+    return value;
+  }
+
   async set(key: string, value: V, ttlInMs?: number): Promise<void> {
     await this.cache.set(key, value, ttlInMs || this.ttlInMs);
   }

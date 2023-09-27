@@ -21,6 +21,7 @@ import { GetOrganizationHandler } from "./application/handlers/query-handlers/ge
 import { CurrentOrganizationController } from "./client/controllers/current-organization.controller";
 import { OrganizationsController } from "./client/controllers/organizations.controller";
 import { OrganizationJobs } from "./client/jobs/organization.jobs";
+import { ActiveOrganizationService } from "./domain/services/active-organization.service";
 import { CurrentOrganizationService } from "./domain/services/current-organization.service";
 import { OrganizationService } from "./domain/services/organization.service";
 import { ActiveOrganization } from "./infrastructure/entities/active-organization.entity";
@@ -43,6 +44,7 @@ import { Organization } from "./infrastructure/entities/organization.entity";
     ]),
   ],
   providers: [
+    ActiveOrganizationService,
     AddMemberToOrganizationHandler,
     CreateOrganizationHandler,
     CreateOrganizationOnProfileCreatedHandler,
