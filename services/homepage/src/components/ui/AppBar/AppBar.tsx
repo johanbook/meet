@@ -27,7 +27,7 @@ export function AppBar(): React.ReactElement {
           </Typography>
         </Box>
 
-        <Button component="a" href={CONFIG.URLS.APP} variant="contained">
+        <Button component="a" href={CONFIG.URLS.APP} variant="text">
           {t("nav.login")}
         </Button>
       </Toolbar>
