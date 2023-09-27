@@ -3,11 +3,12 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
-import { CurrentProfileService, Profile } from "src/features/profiles";
+import { Profile } from "src/features/profiles";
 
 import { OrganizationMembership } from "../../infrastructure/entities/organization-membership.entity";
 import { Organization } from "../../infrastructure/entities/organization.entity";
 import { ActiveOrganizationService } from "./active-organization.service";
+import { MembershipService } from "./membership.service";
 
 const CURRENT_ORGANIZATION_CACHE_PERIOD_MS = 1000;
 
@@ -15,9 +16,7 @@ const CURRENT_ORGANIZATION_CACHE_PERIOD_MS = 1000;
 export class CurrentOrganizationService {
   constructor(
     private readonly activeOrganizationService: ActiveOrganizationService,
-    private readonly currentProfileService: CurrentProfileService,
-    @InjectRepository(OrganizationMembership)
-    private readonly memberships: Repository<OrganizationMembership>,
+    private readonly membershipService: MembershipService,
     @InjectRepository(Organization)
     private readonly organizations: Repository<Organization>,
     @InjectRepository(Profile)
@@ -26,23 +25,9 @@ export class CurrentOrganizationService {
   ) {}
 
   async fetchCurrentMembership(): Promise<OrganizationMembership> {
-    const profileId = await this.currentProfileService.fetchCurrentProfileId();
     const organizationId = await this.fetchCurrentOrganizationId();
 
-    const membership = await this.memberships.findOne({
-      where: {
-        organizationId,
-        profileId,
-      },
-    });
-
-    if (!membership) {
-      throw new NotFoundException(
-        "Unable to find membership to current organization. Please contact support",
-      );
-    }
-
-    return membership;
+    return await this.membershipService.fetchCurrentMembership(organizationId);
   }
 
   async fetchCurrentOrganization(): Promise<Organization> {
@@ -103,12 +88,9 @@ export class CurrentOrganizationService {
   async fetchCurrentOrganizationMemberIds(): Promise<number[]> {
     const currentOrganizationId = await this.fetchCurrentOrganizationId();
 
-    const membershipIds = await this.memberships.find({
-      select: ["profileId"],
-      where: { organizationId: currentOrganizationId },
-    });
-
-    return membershipIds.map((x) => x.profileId);
+    return this.membershipService.fetchCurrentOrganizationMemberIds(
+      currentOrganizationId,
+    );
   }
 
   async switchCurrentOrganization(organizationId: number): Promise<void> {

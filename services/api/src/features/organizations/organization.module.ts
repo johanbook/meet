@@ -23,6 +23,7 @@ import { OrganizationsController } from "./client/controllers/organizations.cont
 import { OrganizationJobs } from "./client/jobs/organization.jobs";
 import { ActiveOrganizationService } from "./domain/services/active-organization.service";
 import { CurrentOrganizationService } from "./domain/services/current-organization.service";
+import { MembershipService } from "./domain/services/membership.service";
 import { OrganizationService } from "./domain/services/organization.service";
 import { ActiveOrganization } from "./infrastructure/entities/active-organization.entity";
 import { OrganizationMembership } from "./infrastructure/entities/organization-membership.entity";
@@ -54,6 +55,7 @@ import { Organization } from "./infrastructure/entities/organization.entity";
     GetOrganizationHandler,
     GetOrganizationListHandler,
     GetOrganizationMembersHandler,
+    MembershipService,
     OrganizationJobs,
     OrganizationService,
     SwitchOrganizationHandler,
