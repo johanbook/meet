@@ -38,7 +38,7 @@ export class ActiveOrganizationService {
     const currentProfileId =
       await this.currentProfileService.fetchCurrentProfileId();
 
-    await this.cache.delete(String(organizationId));
+    await this.cache.delete(String(currentProfileId));
 
     let activeOrganization = await this.fetchCurrentActiveOrganization();
 
