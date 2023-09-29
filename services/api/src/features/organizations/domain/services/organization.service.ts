@@ -9,6 +9,7 @@ import { map } from "src/core/mapper";
 import { OrganizationMembership } from "../../infrastructure/entities/organization-membership.entity";
 import { Organization } from "../../infrastructure/entities/organization.entity";
 import { OrganizationCreatedEvent } from "../events/organization-created.event";
+import { MembershipService } from "./membership.service";
 
 interface CreateOrganizationProps {
   name: string;
@@ -20,8 +21,7 @@ interface CreateOrganizationProps {
 export class OrganizationService {
   constructor(
     private readonly eventBus: EventBus,
-    @InjectRepository(OrganizationMembership)
-    private readonly organizationMemberships: Repository<OrganizationMembership>,
+    private readonly membershipService: MembershipService,
     @InjectRepository(Organization)
     private readonly organizations: Repository<Organization>,
   ) {}
@@ -49,12 +49,10 @@ export class OrganizationService {
     profileId: number,
     organizationId: number,
   ): Promise<boolean> {
-    return this.organizationMemberships.exist({
-      where: { profileId, organizationId },
-    });
+    return this.membershipService.checkIfMember(profileId, organizationId);
   }
 
-  async createOrganization(props: CreateOrganizationProps): Promise<void> {
+  async createOrganization(props: CreateOrganizationProps): Promise<number> {
     const organization = new Organization();
 
     organization.name = props.name;
@@ -76,6 +74,19 @@ export class OrganizationService {
     });
 
     this.eventBus.publish(event);
+
+    return createdOrganization.id;
+  }
+
+  async checkIfPersonalOrganizationExists(profileId: number): Promise<boolean> {
+    return await this.organizations.exist({
+      where: {
+        memberships: {
+          profileId,
+        },
+        personal: true,
+      },
+    });
   }
 
   async updateOrganization(organization: Organization): Promise<void> {
