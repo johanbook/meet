@@ -1,10 +1,14 @@
+import { NotFoundException } from "@nestjs/common";
 import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
 import {
   NotificationEventsConstants,
   NotificationService,
 } from "src/core/notifications";
 import { INotification } from "src/core/notifications/types";
+import { Profile } from "src/features/profiles";
 
 import { ChatMessageSentEvent } from "../../../domain/events/chat-message-sent.event";
 
@@ -12,17 +16,34 @@ import { ChatMessageSentEvent } from "../../../domain/events/chat-message-sent.e
 export class NotifyReceiverOnPostedChatMessageHandler
   implements IEventHandler<ChatMessageSentEvent>
 {
-  constructor(private readonly notificationService: NotificationService) {}
+  constructor(
+    private readonly notificationService: NotificationService,
+    @InjectRepository(Profile)
+    private readonly profiles: Repository<Profile>,
+  ) {}
 
-  handle(event: ChatMessageSentEvent) {
+  async handle(event: ChatMessageSentEvent) {
+    const profile = await this.profiles.findOne({
+      select: {
+        name: true,
+      },
+      where: {
+        id: event.senderId,
+      },
+    });
+
+    if (!profile) {
+      throw new NotFoundException("Profile not found");
+    }
+
     const notification: INotification = {
       data: { receiverId: event.receiverId, senderId: event.senderId },
-      description: "Someone sent you a message in Meet",
-      message: "You reveived a new message",
+      description: `${profile.name} sent you a message in Meet`,
+      message: `${profile.name} sent you a new message`,
       type: NotificationEventsConstants.NEW_CHAT_MESSAGE,
     };
 
-    this.notificationService.notifyProfilesIfAvailable(
+    await this.notificationService.notifyProfilesIfAvailable(
       [event.receiverId],
       notification,
     );
