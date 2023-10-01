@@ -7,6 +7,7 @@ import { NotificationModule } from "src/core/notifications/notification.module";
 import { PhotosModule } from "src/core/photos/photos.module";
 import { QueryModule } from "src/core/query/query.module";
 import { OrganizationModule } from "src/features/organizations/organization.module";
+import { Profile } from "src/features/profiles";
 import { ProfileModule } from "src/features/profiles/profile.module";
 
 import { CreateBlogPostHandler } from "./application/handlers/command-handlers/create-blog-post.handler";
@@ -27,7 +28,7 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
     PhotosModule,
     ProfileModule,
     QueryModule,
-    TypeOrmModule.forFeature([BlogPost]),
+    TypeOrmModule.forFeature([BlogPost, Profile]),
   ],
   controllers: [BlogsController],
   providers: [
