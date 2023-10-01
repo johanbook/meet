@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from "@nestjs/common";
+import { Body, Controller, Get, Patch, Post, Put, Query } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
@@ -48,7 +48,7 @@ export class CurrentOrganizationController {
     return await this.commandBus.execute(command);
   }
 
-  @Post("/members/role")
+  @Put("/members/role")
   @RequiresOrganizationPermissions(
     organizationPermissions.CurrentOrganization.Members.UpdateRole,
   )
@@ -58,7 +58,7 @@ export class CurrentOrganizationController {
     return await this.commandBus.execute(command);
   }
 
-  @Post()
+  @Patch()
   @RequiresOrganizationPermissions(
     organizationPermissions.CurrentOrganization.Update,
   )

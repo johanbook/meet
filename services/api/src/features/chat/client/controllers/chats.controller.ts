@@ -14,20 +14,20 @@ export class ChatsController {
   constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
 
   @Get()
-  async getChats(
-    @Query() query: GetChatMessagesQuery,
-  ): Promise<ChatMessageDetails[]> {
-    return await this.queryBus.execute(query);
-  }
-
-  @Get("/connections")
   async getConnections(
     @Query() query: GetConnectionsQuery,
   ): Promise<ConnectionDetails[]> {
     return await this.queryBus.execute(query);
   }
 
-  @Post()
+  @Get("/messages")
+  async getChats(
+    @Query() query: GetChatMessagesQuery,
+  ): Promise<ChatMessageDetails[]> {
+    return await this.queryBus.execute(query);
+  }
+
+  @Post("/messages")
   async postChatMessage(
     @Body() command: PostChatMessageCommand,
   ): Promise<void> {

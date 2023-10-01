@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Put, Query } from "@nestjs/common";
+import { Body, Controller, Get, Patch, Post, Put, Query } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
@@ -30,21 +30,21 @@ export class CurrentProfileController {
     return await this.queryBus.execute(query);
   }
 
-  @Post("/create")
+  @Post()
   async createCurrentProfile(
     @Body() command: CreateProfileCommand,
   ): Promise<null> {
     return await this.commandBus.execute(command);
   }
 
-  @Post("/update")
+  @Patch()
   async updateCurrentProfile(
     @Body() command: UpdateProfileCommand,
   ): Promise<null> {
     return await this.commandBus.execute(command);
   }
 
-  @Put("/photo/update")
+  @Put("/photo")
   @Multipart()
   async updateCurrentProfilePhoto(
     @Body() command: UpdateProfilePhotoCommand,
