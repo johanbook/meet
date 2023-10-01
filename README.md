@@ -1,7 +1,9 @@
 # meet
 
 ![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/api.yaml)
-![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/auth.yaml)
+![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/auth-ui.yaml)
+![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/auth-api.yaml)
+![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/tracking.yaml)
 ![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/web-ui.yaml)
 
 **meet** (also known as **organize**) is a white-label app for organizing
