@@ -1,11 +1,11 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { useMutation } from "react-query";
 
 import { Box, Button, TextField, Typography } from "@mui/material";
 
 import { ProfileDetails, UpdateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
+import { useTranslation } from "src/core/i18n";
 import { useSnackbar } from "src/core/snackbar";
 
 import { CurrentProfileAvatar } from "../CurrentProfileAvatar";
@@ -42,10 +42,6 @@ export function CurrentProfileDetails({
 
   return (
     <>
-      <Typography sx={{ paddingTop: 2 }} variant="h5">
-        {t("header")}
-      </Typography>
-
       <Center>
         <CurrentProfileAvatar src={profile.photo?.url} />
       </Center>
