@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { Module, forwardRef } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
@@ -36,7 +36,7 @@ import { Organization } from "./infrastructure/entities/organization.entity";
     AuthenticationModule,
     CqrsModule,
     PhotosModule,
-    ProfileModule,
+    forwardRef(() => ProfileModule),
     TypeOrmModule.forFeature([
       ActiveOrganization,
       Organization,

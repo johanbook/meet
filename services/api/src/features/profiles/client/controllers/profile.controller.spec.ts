@@ -7,7 +7,7 @@ import { ProfilePhoto } from "../../infrastructure/entities/profile-photo.entity
 import { Profile } from "../../infrastructure/entities/profile.entity";
 import { ProfileController } from "./profile.controller";
 
-describe.skip("ProfileController", () => {
+describe.skip(ProfileController.name, () => {
   let appController!: ProfileController;
 
   beforeEach(async () => {
@@ -31,7 +31,7 @@ describe.skip("ProfileController", () => {
 
   describe("getCurrentProfile", () => {
     it("should return profile id", async () => {
-      const currentProfile = await appController.getCurrentProfile(
+      const currentProfile = await appController.getProfile(
         new GetProfileQuery(),
       );
       expect(currentProfile.id).toBe("1");
