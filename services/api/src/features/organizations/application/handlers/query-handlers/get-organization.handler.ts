@@ -22,7 +22,7 @@ export class GetOrganizationHandler
       await this.currentOrganizationService.fetchCurrentMembership();
 
     return map(CurrentOrganizationDetails, {
-      created: currentOrganization.created.toUTCString(),
+      created: currentOrganization.created,
       id: currentOrganization.id,
       name: currentOrganization.name,
       role: membership.role,

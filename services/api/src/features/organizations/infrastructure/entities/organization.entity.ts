@@ -14,7 +14,7 @@ export class Organization {
   id!: number;
 
   @CreateDateColumn()
-  created!: Date;
+  created!: string;
 
   @Column({ type: "varchar", length: 512, default: "" })
   description!: string;
