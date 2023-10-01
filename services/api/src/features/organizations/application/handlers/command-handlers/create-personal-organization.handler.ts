@@ -1,3 +1,4 @@
+import { UnauthorizedException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
 import { OrganizationService } from "src/features/organizations/domain/services/organization.service";
@@ -7,7 +8,7 @@ import { CreatePersonalOrganizationCommand } from "../../contracts/commands/crea
 
 @CommandHandler(CreatePersonalOrganizationCommand)
 export class CreatePersonalOrganizationHandler
-  implements ICommandHandler<CreatePersonalOrganizationCommand, void>
+  implements ICommandHandler<CreatePersonalOrganizationCommand, number>
 {
   constructor(
     private readonly currentProfileService: CurrentProfileService,
@@ -18,9 +19,18 @@ export class CreatePersonalOrganizationHandler
     const currentProfile =
       await this.currentProfileService.fetchCurrentProfile();
 
-    // TODO: Check if there already exsits a personal organization
+    const personalOrganizationExists =
+      await this.organizationService.checkIfPersonalOrganizationExists(
+        currentProfile.id,
+      );
 
-    await this.organizationService.createOrganization({
+    if (personalOrganizationExists) {
+      throw new UnauthorizedException(
+        "Personal organization does already exist",
+      );
+    }
+
+    return await this.organizationService.createOrganization({
       name: currentProfile.name,
       ownerId: currentProfile.id,
       personal: true,

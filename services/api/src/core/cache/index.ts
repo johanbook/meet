@@ -1,1 +1,1 @@
-export { Cache } from "./cache.decorator";
+export { Cache } from "./cache";

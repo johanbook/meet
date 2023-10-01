@@ -25,7 +25,7 @@ export class ActiveOrganizationService {
     const currentProfileId =
       await this.currentProfileService.fetchCurrentProfileId();
 
-    return await this.cache.getOrUpdate(String(currentProfileId), () =>
+    return await this.cache.getOrUpdate(currentProfileId, () =>
       this.activeOrganizations.findOne({
         where: {
           profileId: currentProfileId,

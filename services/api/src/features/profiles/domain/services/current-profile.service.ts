@@ -7,25 +7,32 @@ import { Cache } from "src/core/cache";
 
 import { Profile } from "../../infrastructure/entities/profile.entity";
 
+// Mapping between user id and profile is not expected to ever change
+// and can therefore be cached hard
+const CACHE_MS = 60 * 60 * 1000;
+
 @Injectable()
 export class CurrentProfileService {
+  private cache = new Cache<Profile | null>(CACHE_MS);
+
   constructor(
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
     private readonly userIdService: UserIdService,
   ) {}
 
-  @Cache({ ttlMs: 5000 })
   private async fetchProfile(
     userId: string,
   ): Promise<{ id: number; name: string } | null> {
-    return await this.profiles.findOne({
-      select: {
-        id: true,
-        name: true,
-      },
-      where: { userId },
-    });
+    return await this.cache.getOrUpdate(userId, () =>
+      this.profiles.findOne({
+        select: {
+          id: true,
+          name: true,
+        },
+        where: { userId },
+      }),
+    );
   }
 
   async fetchCurrentProfile(): Promise<{ id: number; name: string }> {

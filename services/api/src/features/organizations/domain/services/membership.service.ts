@@ -14,6 +14,18 @@ export class MembershipService {
     private readonly memberships: Repository<OrganizationMembership>,
   ) {}
 
+  async checkIfMember(
+    profileId: number,
+    organizationId: number,
+  ): Promise<boolean> {
+    return this.memberships.exist({
+      where: {
+        profileId,
+        organizationId,
+      },
+    });
+  }
+
   async fetchCurrentMembership(
     organizationId: number,
   ): Promise<OrganizationMembership> {
