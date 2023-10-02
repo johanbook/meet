@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Post, Query } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Patch,
+  Post,
+  Query,
+} from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
@@ -28,7 +36,7 @@ export class BlogsController {
     return await this.commandBus.execute(command);
   }
 
-  @Post("/update")
+  @Patch()
   async updateBlogPost(@Body() command: UpdateBlogPostCommand): Promise<null> {
     return await this.commandBus.execute(command);
   }

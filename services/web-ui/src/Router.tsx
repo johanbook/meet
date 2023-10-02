@@ -8,6 +8,7 @@ import { NavigationTrackingProvider } from "./core/tracking/NavigationTrackingPr
 import { BlogPostPage } from "./pages/BlogPostPage";
 import { ConnectionsPage } from "./pages/ConnectionsPage";
 import { CurrentOrganizationPage } from "./pages/CurrentOrganizationPage";
+import { CurrentProfilePage } from "./pages/CurrentProfilePage";
 import { JournalPage } from "./pages/JournalPage";
 import { LoadingPage } from "./pages/LoadingPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
+        element: <CurrentProfilePage />,
+      },
+      {
+        path: "/profile/:id",
         element: <ProfilePage />,
       },
       {

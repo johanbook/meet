@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from "@nestjs/common";
+import { Body, Controller, Get, Patch, Query } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
@@ -18,7 +18,7 @@ export class SettingsController {
     return await this.queryBus.execute(query);
   }
 
-  @Post("/update")
+  @Patch()
   async updateCurrentSettings(
     @Body() command: UpdateSettingsCommand,
   ): Promise<null> {

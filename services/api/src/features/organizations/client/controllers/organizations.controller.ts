@@ -19,7 +19,7 @@ export class OrganizationsController {
     return await this.queryBus.execute(query);
   }
 
-  @Post("/create")
+  @Post()
   async createOrganization(
     @Body() command: CreateOrganizationCommand,
   ): Promise<null> {
