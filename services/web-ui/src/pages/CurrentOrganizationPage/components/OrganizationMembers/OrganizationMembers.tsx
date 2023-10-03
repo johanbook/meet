@@ -1,10 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import {
   Avatar,
   List,
   ListItem,
   ListItemAvatar,
+  ListItemButton,
   ListItemText,
   Skeleton,
   Typography,
@@ -52,19 +54,24 @@ export function OrganizationMembers(): React.ReactElement {
             key={member.profileId}
             secondaryAction={<OrganizationMemberMenu member={member} />}
           >
-            <ListItemAvatar>
-              <Avatar src={member.imageUrl} />
-            </ListItemAvatar>
-            <ListItemText
-              primary={
-                authorization.hasPermission(Permissions.Organization.ViewRole)
-                  ? `${member.name} (${member.role})`
-                  : member.name
-              }
-              secondary={
-                t("members.member-since") + " " + getDate(member.joinedAt)
-              }
-            />
+            <ListItemButton
+              component={Link}
+              to={`/profile/${member.profileId}`}
+            >
+              <ListItemAvatar>
+                <Avatar src={member.imageUrl} />
+              </ListItemAvatar>
+              <ListItemText
+                primary={
+                  authorization.hasPermission(Permissions.Organization.ViewRole)
+                    ? `${member.name} (${member.role})`
+                    : member.name
+                }
+                secondary={
+                  t("members.member-since") + " " + getDate(member.joinedAt)
+                }
+              />
+            </ListItemButton>
           </ListItem>
         ))}
       </List>
