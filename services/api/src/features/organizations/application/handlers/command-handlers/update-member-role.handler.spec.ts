@@ -21,6 +21,7 @@ describe(UpdateMemberRoleHandler.name, () => {
 
     commandHandler = new UpdateMemberRoleHandler(
       currentOrganizationService,
+      { fetchCurrentProfileId: jest.fn(() => 1) } as any,
       memberships,
     );
   });
