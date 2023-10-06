@@ -1,6 +1,6 @@
-import React from "react";
+import { ReactElement } from "react";
 
-import { TextField, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 import { ProfileDetails } from "src/api";
 import { CurrentProfileAvatar } from "src/components/CurrentProfileAvatar";
@@ -13,10 +13,8 @@ export interface ProfilePageComponentProps {
 
 export function ProfilePageComponent({
   profile,
-}: ProfilePageComponentProps): React.ReactElement {
+}: ProfilePageComponentProps): ReactElement {
   const { t } = useTranslation("profile");
-
-  const [description, setDescription] = React.useState(profile.description);
 
   return (
     <>
@@ -28,17 +26,7 @@ export function ProfilePageComponent({
         {t("description.title")}
       </Typography>
 
-      <TextField
-        fullWidth
-        disabled
-        label={t("description.label")}
-        margin="normal"
-        multiline
-        onChange={(event) => setDescription(event.target.value)}
-        placeholder={t("description.placeholder") ?? undefined}
-        rows={4}
-        value={description}
-      />
+      <Typography>{profile.description}</Typography>
     </>
   );
 }
