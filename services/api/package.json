@@ -9,6 +9,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
+    "prestart:dev": "npm run build && NODE_ENV=development sh scripts/run-migrations && NODE_ENV=development sh scripts/seed-database",
     "start:dev": "NODE_ENV=development nest start --watch",
     "start:debug": "NODE_ENV=development nest start --debug --watch",
     "prestart:prod": "NODE_ENV=production sh scripts/run-migrations && NODE_ENV=production sh scripts/seed-database",
