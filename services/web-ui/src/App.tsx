@@ -38,7 +38,10 @@ const QUERY_CLIENT = new QueryClient({
           },
         });
       },
+      // Limit reqtries
       retry: 1,
+      // Consider data to be fresh for 20 seconds
+      staleTime: 20 * 1000,
     },
   },
 });
