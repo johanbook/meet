@@ -17,6 +17,7 @@ import { UploadIconButton } from "src/components/ui/UploadIconButton";
 import { useForm } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants } from "src/core/query";
+import { useSnackbar } from "src/core/snackbar";
 
 export function BlogPostForm(): React.ReactElement {
   const mutation = useMutation((command: CreateBlogPostRequest) =>
@@ -24,6 +25,8 @@ export function BlogPostForm(): React.ReactElement {
   );
 
   const queryClient = useQueryClient();
+
+  const snackbar = useSnackbar();
 
   const { t } = useTranslation("blog");
 
@@ -33,6 +36,9 @@ export function BlogPostForm(): React.ReactElement {
     event.preventDefault();
 
     await mutation.mutateAsync(form.value, {
+      onError: () => {
+        snackbar.error(t("actions.create.error"));
+      },
       onSuccess: () => {
         queryClient.invalidateQueries([CacheKeysConstants.BlogPosts]);
         form.reset();
