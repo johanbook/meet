@@ -1,5 +1,8 @@
 {
   "actions": {
+    "create": {
+      "error": "Något gick fel när blogposten skulle skapas"
+    },
     "delete": {
       "error": "Något gick fel när blogposten skulle tas bort",
       "success": "Blogposten har tagits bort"
