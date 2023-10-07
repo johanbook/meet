@@ -5,7 +5,6 @@ import { CreateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
 import { useTranslation } from "src/core/i18n";
 import { useSnackbar } from "src/core/snackbar";
-import { useCurrentLocation } from "src/hooks/useCurrentLocation";
 
 import { ProfileCreationPageComponent } from "./ProfileCreationPage.component";
 
@@ -18,7 +17,6 @@ export function ProfileCreationPageContainer({
 }: ProfileCreationPageContainerProps): React.ReactElement {
   const { t } = useTranslation("profile-creation");
 
-  const location = useCurrentLocation();
   const snackbar = useSnackbar();
 
   const mutation = useMutation(
@@ -38,24 +36,11 @@ export function ProfileCreationPageContainer({
   });
 
   async function handleSubmit(): Promise<void> {
-    const coordinates = location.coordinates;
-
-    const completedForm = form as CreateProfileCommand;
-    const lat = coordinates?.latitude || 0;
-    const lon = coordinates?.longitude || 0;
-
-    await mutation.mutateAsync({
-      ...completedForm,
-      recentLocation: { lat, lon },
-    });
+    await mutation.mutateAsync(form as CreateProfileCommand);
 
     if (onProfileCreated) {
       onProfileCreated();
     }
-  }
-
-  if (location.error) {
-    return <p>Please enable your location</p>;
   }
 
   return (
