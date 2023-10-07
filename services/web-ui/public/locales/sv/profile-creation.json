@@ -8,7 +8,8 @@
   "date-of-birth": {
     "continue": "Fortsätt",
     "description": "Skriv in din födelsedag",
-    "header": "Ange födelsedag"
+    "header": "Ange födelsedag",
+    "min-age": "Du måste vara minst {{minAge}} år för att fortsätta"
   },
   "description": {
     "continue": "Slutgör",
