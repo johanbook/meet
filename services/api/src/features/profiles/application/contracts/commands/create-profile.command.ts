@@ -7,7 +7,7 @@ import { Location } from "../dtos/location.dto";
 
 export class CreateProfileCommand {
   @Type(() => Date)
-  @DateIsBefore({ years: 18 })
+  @DateIsBefore({ years: 14 })
   public readonly dateOfBirth!: Date;
 
   @IsString()
