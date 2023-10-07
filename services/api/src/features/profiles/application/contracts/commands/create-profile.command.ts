@@ -1,3 +1,4 @@
+import { Optional } from "@nestjs/common";
 import { Type } from "class-transformer";
 import { Length, IsString, ValidateNested } from "class-validator";
 
@@ -18,7 +19,8 @@ export class CreateProfileCommand {
   @Length(1, 128)
   public readonly name!: string;
 
+  @Optional()
   @Type(() => Location)
   @ValidateNested()
-  public readonly recentLocation!: Location;
+  public readonly recentLocation?: Location;
 }

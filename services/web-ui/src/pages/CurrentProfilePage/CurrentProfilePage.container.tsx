@@ -2,7 +2,6 @@ import React from "react";
 
 import { profileApi } from "src/apis";
 import { CurrentProfileDetails } from "src/components/CurrentProfileDetails";
-import { ProfileCreator } from "src/components/ProfileCreator";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 
 import { ErrorPage } from "../ErrorPage";
@@ -35,7 +34,7 @@ export function CurrentProfilePageContainer(): React.ReactElement {
   if (!data) {
     return (
       <CurrentProfilePageNav>
-        <ProfileCreator onCreateProfile={refetch} />
+        <ErrorPage error="Unable to fetch profile" />
       </CurrentProfilePageNav>
     );
   }

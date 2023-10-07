@@ -44,8 +44,9 @@ export class CreateProfileHandler
     profile.dateOfBirth = command.dateOfBirth;
     profile.description = command.description;
     profile.name = command.name;
-    profile.recentLocation =
-      `${command.recentLocation.lat}, ${command.recentLocation.lon}` as any;
+    profile.recentLocation = `${command.recentLocation?.lat || 0}, ${
+      command.recentLocation?.lon || 0
+    }` as any;
     profile.userId = userId;
 
     await this.profileService.createProfile(profile);
