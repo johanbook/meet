@@ -32,7 +32,6 @@ export function ProfileCreationPageContainer({
     dateOfBirth: new Date(),
     name: "",
     description: "",
-    recentLocation: { lat: 0, lon: 0 },
   });
 
   async function handleSubmit(): Promise<void> {
