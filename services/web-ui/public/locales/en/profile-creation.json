@@ -8,7 +8,8 @@
   "date-of-birth": {
     "continue": "Continue",
     "description": "Enter your date of birth",
-    "header": "Enter date of birth"
+    "header": "Enter date of birth",
+    "min-age": "You must be at least {{minAge}} years old to continue"
   },
   "description": {
     "continue": "Finish",
