@@ -9,6 +9,7 @@ import { BlogPost } from "src/features/blogs/infrastructure/entities/blog-post.e
 import { CurrentOrganizationService } from "src/features/organizations";
 import { CurrentProfileService } from "src/features/profiles";
 
+import { BlogPostCommentDetails } from "../../contracts/dtos/blog-post-comment.dto";
 import { BlogPostDetails } from "../../contracts/dtos/blog-post-detail.dto";
 import { BlogPostPhotoDetails } from "../../contracts/dtos/blog-post-photo.dto";
 import { BlogPostProfileDetails } from "../../contracts/dtos/blog-post-profile.dto";
@@ -38,11 +39,15 @@ export class GetBlogPostsHandler
       default: {
         order: {
           createdAt: "desc",
+          comments: {
+            createdAt: "desc",
+          },
         },
       },
       query,
       required: {
         relations: {
+          comments: true,
           photos: true,
           profile: {
             profilePhoto: true,
@@ -55,6 +60,11 @@ export class GetBlogPostsHandler
     });
 
     return mapArray(BlogPostDetails, foundBlogPosts, (post) => ({
+      comments: mapArray(BlogPostCommentDetails, post.comments, (comment) => ({
+        content: comment.content,
+        createdAt: comment.createdAt.toISOString(),
+        id: comment.id,
+      })),
       content: post.content,
       createdAt: post.createdAt.toISOString(),
       id: post.id,
