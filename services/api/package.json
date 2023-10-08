@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@fastify/multipart": "^8.0.0",
-    "@fastify/static": "^6.10.0",
+    "@fastify/static": "^6.11.2",
     "@nestjs/common": "^10.1.2",
     "@nestjs/core": "^10.1.2",
     "@nestjs/cqrs": "^10.2.5",
