@@ -10,8 +10,10 @@
       "error": "Något gick fel när blogposten skulle tas bort",
       "success": "Blogposten har tagits bort"
     },
-    "hide-comments": "Göm {{numComments}} kommentarer",
-    "view-comments": "Visa {{numComments}} kommentarer"
+    "hide-comments_one": "Dölj {{count}} kommentar",
+    "hide-comments_other": "Dölj {{count}} kommentarer",
+    "view-comments_one": "Visa {{count}} kommentar",
+    "view-comments_other": "Visa {{count}} kommentarer"
   },
   "comments": {
     "placeholder": "Lämna en kommentar"

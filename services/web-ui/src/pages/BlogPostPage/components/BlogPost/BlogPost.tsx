@@ -87,7 +87,7 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
           <Button onClick={() => setShowComments(!showComments)}>
             {t(
               showComments ? "actions.hide-comments" : "actions.view-comments",
-              { numComments: post.comments.length }
+              { count: post.comments.length }
             )}
           </Button>
         </CardActions>
