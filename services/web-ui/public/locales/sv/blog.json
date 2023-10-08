@@ -3,10 +3,18 @@
     "create": {
       "error": "Något gick fel när blogposten skulle skapas"
     },
+    "create-comment": {
+      "error": "Något gick fel när kommentaren skulle postas"
+    },
     "delete": {
       "error": "Något gick fel när blogposten skulle tas bort",
       "success": "Blogposten har tagits bort"
-    }
+    },
+    "hide-comments": "Göm {{numComments}} kommentarer",
+    "view-comments": "Visa {{numComments}} kommentarer"
+  },
+  "comments": {
+    "placeholder": "Lämna en kommentar"
   },
   "form": {
     "placeholder": "Säg något om din dag"
