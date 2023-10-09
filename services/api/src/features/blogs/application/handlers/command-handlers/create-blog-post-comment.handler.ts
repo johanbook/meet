@@ -51,8 +51,6 @@ export class CreateBlogPostCommentHandler
     blogPostComment.content = command.content;
     blogPostComment.profileId = currentProfileId;
 
-    blogPost.comments.push(blogPostComment);
-
-    await this.blogPostService.updateBlogPost(blogPost);
+    await this.blogPostService.addCommentToBlogPost(blogPostComment, blogPost);
   }
 }
