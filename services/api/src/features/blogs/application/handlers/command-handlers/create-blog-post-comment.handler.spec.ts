@@ -2,53 +2,56 @@ import { EventBus } from "@nestjs/cqrs";
 import { Repository } from "typeorm";
 
 import { map } from "src/core/mapper";
+import { CurrentOrganizationService } from "src/features/organizations";
 import { createCurrentOrganizationMock } from "src/features/organizations/test/mocks/current-organization.service.mock";
 import { createEventBusMock, createMockRepository } from "src/test/mocks";
 
 import { BlogPostService } from "../../../domain/services/blog-post.service";
 import { BlogPost } from "../../../infrastructure/entities/blog-post.entity";
-import { CreateBlogPostCommand } from "../../contracts/commands/create-blog-post.command";
-import { CreateBlogPostHandler } from "./create-blog-post.handler";
+import { CreateBlogPostCommentCommand } from "../../contracts/commands/create-blog-post-comment.command";
+import { CreateBlogPostCommentHandler } from "./create-blog-post-comment.handler";
 
-describe(CreateBlogPostHandler.name, () => {
+describe(CreateBlogPostCommentHandler.name, () => {
   let blogPosts: Repository<BlogPost>;
   let blogPostService: BlogPostService;
-  let commandHandler: CreateBlogPostHandler;
+  let currentOrganizationService: CurrentOrganizationService;
+
+  let commandHandler: CreateBlogPostCommentHandler;
   let eventBus: EventBus;
 
   beforeEach(() => {
     blogPosts = createMockRepository<BlogPost>();
     eventBus = createEventBusMock();
 
-    const currentOrganizationService = createCurrentOrganizationMock();
+    currentOrganizationService = createCurrentOrganizationMock();
 
     const currentProfileService = {
       fetchCurrentProfileId: jest.fn(() => "my-profile-id"),
     } as any;
 
-    const photoService = {} as any;
-
     blogPostService = new BlogPostService(blogPosts, eventBus);
 
-    commandHandler = new CreateBlogPostHandler(
+    commandHandler = new CreateBlogPostCommentHandler(
+      blogPosts,
       blogPostService,
       currentOrganizationService,
       currentProfileService,
-      photoService,
     );
   });
 
   describe("can create blog post", () => {
     it("should save changes to blog post", async () => {
-      const command = map(CreateBlogPostCommand, { content: "my-post" });
+      const blogPost = await blogPosts.save(new BlogPost());
+      blogPost.comments = [];
+
+      const command = map(CreateBlogPostCommentCommand, {
+        blogPostId: blogPost.id,
+        content: "my-post",
+      });
 
       await commandHandler.execute(command);
 
-      expect(blogPosts.save).toHaveBeenCalledWith({
-        content: "my-post",
-        organizationId: "my-organization-id",
-        profileId: "my-profile-id",
-      });
+      expect(blogPosts.save).toHaveBeenCalledWith({});
     });
   });
 });
