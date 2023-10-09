@@ -40,7 +40,7 @@ export class GetBlogPostsHandler
         order: {
           createdAt: "desc",
           comments: {
-            createdAt: "desc",
+            createdAt: "asc",
           },
         },
       },
