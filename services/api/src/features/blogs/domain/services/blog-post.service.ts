@@ -43,9 +43,9 @@ export class BlogPostService {
     await this.blogPosts.save(blogPost);
 
     const event = map(BlogPostCommentCreatedEvent, {
-      id: blogPost.id,
+      id: blogPostComment.id,
       organizationId: blogPost.organizationId,
-      profileId: blogPost.profileId,
+      profileId: blogPostComment.profileId,
     });
 
     this.eventBus.publish(event);
