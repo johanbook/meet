@@ -40,14 +40,18 @@ export class GetBlogPostsHandler
         order: {
           createdAt: "desc",
           comments: {
-            createdAt: "desc",
+            createdAt: "asc",
           },
         },
       },
       query,
       required: {
         relations: {
-          comments: true,
+          comments: {
+            profile: {
+              profilePhoto: true,
+            },
+          },
           photos: true,
           profile: {
             profilePhoto: true,
@@ -64,6 +68,16 @@ export class GetBlogPostsHandler
         content: comment.content,
         createdAt: comment.createdAt.toISOString(),
         id: comment.id,
+        profile: map(BlogPostProfileDetails, {
+          id: comment.profile.id,
+          imageUrl:
+            comment.profile.profilePhoto &&
+            this.photoService.getUrl(
+              comment.profile.profilePhoto,
+              "profile-photo",
+            ),
+          name: comment.profile.name,
+        }),
       })),
       content: post.content,
       createdAt: post.createdAt.toISOString(),

@@ -10,8 +10,10 @@
       "error": "Something went wrong when trying to delete the blog post",
       "success": "The blost post was successfully deleted"
     },
-    "hide-comments": "Hide {{numComments}} comments",
-    "view-comments": "Show {{numComments}} comments"
+    "hide-comments_one": "Hide {{count}} comment",
+    "hide-comments_other": "Hide {{count}} comments",
+    "view-comments_one": "Show {{count}} comment",
+    "view-comments_other": "Show {{count}} comments"
   },
   "comments": {
     "placeholder": "Leave a comment"

@@ -12,8 +12,6 @@ import {
   IconButton,
   List,
   ListItem,
-  ListItemAvatar,
-  ListItemText,
   Typography,
 } from "@mui/material";
 
@@ -87,7 +85,7 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
           <Button onClick={() => setShowComments(!showComments)}>
             {t(
               showComments ? "actions.hide-comments" : "actions.view-comments",
-              { numComments: post.comments.length }
+              { count: post.comments.length }
             )}
           </Button>
         </CardActions>
@@ -97,14 +95,20 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
         <List>
           {post.comments.map((comment) => (
             <ListItem key={comment.id}>
-              <ListItemAvatar>
-                <Avatar />
-              </ListItemAvatar>
+              <Avatar src={comment.profile.imageUrl} />
 
-              <ListItemText
-                primary={comment.content}
-                secondary={timeSince(comment.createdAt)}
-              />
+              <Box sx={{ paddingLeft: 1 }}>
+                <Box sx={{ alignItems: "center", display: "flex" }}>
+                  <Typography>
+                    <b>{comment.profile.name}</b>
+                  </Typography>
+                  <Typography sx={{ paddingLeft: 1 / 2 }} variant="subtitle2">
+                    {timeSince(comment.createdAt)}
+                  </Typography>
+                </Box>
+
+                <Typography>{comment.content}</Typography>
+              </Box>
             </ListItem>
           ))}
         </List>
