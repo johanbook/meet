@@ -94,7 +94,7 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
       <Collapse in={showComments}>
         <List>
           {post.comments.map((comment) => (
-            <ListItem key={comment.id}>
+            <ListItem key={comment.id} style={{ alignItems: "start" }}>
               <Avatar src={comment.profile.imageUrl} />
 
               <Box sx={{ paddingLeft: 1 }}>
