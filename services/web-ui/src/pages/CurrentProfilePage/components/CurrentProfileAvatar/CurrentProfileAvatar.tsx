@@ -5,6 +5,7 @@ import { AccountCircle } from "@mui/icons-material";
 import { Avatar, Button } from "@mui/material";
 
 import { profileApi } from "src/apis";
+import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
@@ -17,10 +18,14 @@ export interface CurrentProfileAvatarProps {
 export function CurrentProfileAvatar({
   src,
 }: CurrentProfileAvatarProps): React.ReactElement {
+  const { t } = useTranslation("profile");
+
   const queryClient = useQueryClient();
+
   const mutation = useMutation((photo: File) =>
     profileApi.updateCurrentProfilePhoto({ photo })
   );
+
   const snackbar = useSnackbar();
 
   async function handleUpload(
@@ -34,10 +39,9 @@ export function CurrentProfileAvatar({
     }
 
     await mutation.mutateAsync(files[0], {
-      onError: () =>
-        snackbar.error("There was an error when uploading the photo"),
+      onError: () => snackbar.error(t("actions.update-photo.error")),
       onSuccess: () => {
-        snackbar.success("Photo uploaded successfully");
+        snackbar.success(t("actions.update-photo.success"));
         queryClient.invalidateQueries(CacheKeysConstants.CurrentProfile);
       },
     });

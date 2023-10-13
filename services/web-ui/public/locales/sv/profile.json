@@ -1,4 +1,10 @@
 {
+  "actions": {
+    "update-photo": {
+      "error": "Något gick fel när ditt profilfoto skulle uppdateras",
+      "success": "Profilfoto uppdaterat"
+    }
+  },
   "description": {
     "title": "Om mig",
     "label": "Beskrivning",
