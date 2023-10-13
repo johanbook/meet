@@ -5,8 +5,6 @@ import { useParams } from "react-router";
 import { Box, Typography } from "@mui/material";
 
 import { chatsApi } from "src/apis";
-import { ChatMessageList } from "src/components/ChatMessageList";
-import { ChatTextField } from "src/components/ChatTextField";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { useTranslation } from "src/core/i18n";
 import { NotificationEventsConstants } from "src/core/notifications";
@@ -15,6 +13,8 @@ import { useHandleNotification } from "src/core/notifications";
 import { ErrorPage } from "../ErrorPage";
 import { ChatPageNav } from "./ChatPage.nav";
 import { ChatPageSkeleton } from "./ChatPage.skeleton";
+import { ChatMessageList } from "./components/ChatMessageList";
+import { ChatTextField } from "./components/ChatTextField";
 
 export function ChatPageContainer(): React.ReactElement {
   const { id } = useParams();

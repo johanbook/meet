@@ -5,7 +5,7 @@ import { createChatMessagesMock } from "src/test/mocks/chatMessage.mock";
 import { ChatMessageList } from ".";
 
 export default {
-  title: "Components/ChatMessageList",
+  title: "Pages/Chat messages/ChatMessageList",
   component: ChatMessageList,
 } as Meta;
 
