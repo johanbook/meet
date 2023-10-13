@@ -1,61 +1,47 @@
 import React from "react";
-import { useQuery } from "react-query";
 
-import { List, ListItem, ListItemText, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 import { journalApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
-import { format } from "src/utils/string";
+import { CacheKeysConstants, useQuery } from "src/core/query";
 
-import { JournalPageHeader } from "./JournalPage.header";
+import { JournalPageComponent } from "./JournalPage.component";
+import { JournalPageNav } from "./JournalPage.nav";
 import { JournalPageSkeleton } from "./JournalPage.skeleton";
 
 export function JournalPageContainer(): React.ReactElement {
-  const { error, data, isLoading } = useQuery("journal", () =>
+  const { error, data, isLoading } = useQuery(CacheKeysConstants.Journal, () =>
     journalApi.getJournal()
   );
 
   if (error) {
     return (
-      <>
-        <JournalPageHeader />
+      <JournalPageNav>
         <ErrorMessage error={error} />
-      </>
+      </JournalPageNav>
     );
   }
 
   if (isLoading) {
     return (
-      <>
-        <JournalPageHeader />
+      <JournalPageNav>
         <JournalPageSkeleton />
-      </>
+      </JournalPageNav>
     );
   }
 
   if (!data || data.entries.length === 0) {
     return (
-      <>
-        <JournalPageHeader />
+      <JournalPageNav>
         <Typography>No entries found in journal</Typography>
-      </>
+      </JournalPageNav>
     );
   }
 
   return (
-    <>
-      <JournalPageHeader />
-
-      <List>
-        {data.entries.map((element) => (
-          <ListItem>
-            <ListItemText
-              primary={format(element.commandName)}
-              secondary={element.created.toLocaleString()}
-            />
-          </ListItem>
-        ))}
-      </List>
-    </>
+    <JournalPageNav>
+      <JournalPageComponent data={data.entries} />
+    </JournalPageNav>
   );
 }

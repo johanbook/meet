@@ -5,8 +5,8 @@ import { Typography } from "@mui/material";
 import { organizationsApi } from "src/apis";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
+import { ErrorView } from "src/views/ErrorView";
 
-import { ErrorPage } from "../ErrorPage";
 import { CurrentOrganizationPageNav } from "./CurrentOrganizationPage.nav";
 import { CurrentOrganizationPageSkeleton } from "./CurrentOrganizationPage.skeleton";
 import { OrganizationMembers } from "./components/OrganizationMembers";
@@ -22,7 +22,7 @@ export function CurrentOrganizationPageContainer(): React.ReactElement {
   if (error) {
     return (
       <CurrentOrganizationPageNav>
-        <ErrorPage error={error} />
+        <ErrorView error={error} />
       </CurrentOrganizationPageNav>
     );
   }
@@ -38,7 +38,7 @@ export function CurrentOrganizationPageContainer(): React.ReactElement {
   if (!data) {
     return (
       <CurrentOrganizationPageNav>
-        <ErrorPage error={new Error("Organization not found")} />
+        <ErrorView error="Organization not found" />
       </CurrentOrganizationPageNav>
     );
   }

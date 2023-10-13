@@ -1,8 +1,8 @@
-import React from "react";
+import { ReactElement } from "react";
 
 import { Box, CircularProgress } from "@mui/material";
 
-export function LoadingPage(): React.ReactElement {
+export function LoadingView(): ReactElement {
   return (
     <Box
       sx={{

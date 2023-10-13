@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Button } from ".";
 
+/* eslint-disable sonarjs/no-duplicate-string */
+
 export default {
   title: "Core/Button",
   component: Button,
@@ -9,10 +11,26 @@ export default {
 
 type Story = StoryObj<typeof Button>;
 
-export const Default: Story = {
+export const Contained: Story = {
   args: {
     children: "Click me",
     onClick: () => alert("I was clicked"),
+    variant: "contained",
   },
 };
 
+export const Outlined: Story = {
+  args: {
+    children: "Click me",
+    onClick: () => alert("I was clicked"),
+    variant: "outlined",
+  },
+};
+
+export const Text: Story = {
+  args: {
+    children: "Click me",
+    onClick: () => alert("I was clicked"),
+    variant: "text",
+  },
+};
