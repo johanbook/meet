@@ -43,7 +43,9 @@ export function BlogPostCommentForm({
   async function handleSubmit(event: SyntheticEvent): Promise<void> {
     event.preventDefault();
 
-    await mutation.mutateAsync(form.value, {
+    const { data } = form.validate();
+
+    await mutation.mutateAsync(data, {
       onError: () => {
         snackbar.error(t("actions.create-comment.error"));
       },
@@ -68,7 +70,7 @@ export function BlogPostCommentForm({
                 ) : (
                   <IconButton
                     color="primary"
-                    disabled={!form.value.content}
+                    disabled={!form.state.content.value}
                     type="submit"
                   >
                     <Send />
@@ -79,7 +81,7 @@ export function BlogPostCommentForm({
           }}
           onChange={(event) => form.setValue({ content: event.target.value })}
           placeholder={t("comments.placeholder") || ""}
-          value={form.value.content}
+          value={form.state.content.value}
         />
       </form>
     </Box>

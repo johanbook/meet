@@ -1,5 +1,5 @@
 import { useLocalStorage } from "./useLocalStorage";
-import { Form, getValue, toForm } from "./utils";
+import { Form, FormValue, getValue, toForm } from "./utils";
 
 type Validators<T> = Record<keyof T, (value: T) => boolean | string>;
 
@@ -9,23 +9,29 @@ interface UseFormProps {
 
 export function useForm<T>(
   initialValue: T,
-  validators: Validators<T>,
+  validators?: Validators<T>,
   options?: UseFormProps
 ) {
   const [form, setForm] = useLocalStorage<Form<T>>(
     options?.localStorageKey,
     toForm(initialValue),
     {
-      deserializer: (value) => toForm(JSON.parse(value)),
+      deserializer: (value) => toForm<T>(JSON.parse(value)),
       serializer: (value) => JSON.stringify(getValue(value)),
     }
   );
 
+  const isValid = Object.values<FormValue<T[keyof T]>>(form).some(
+    (value) => value.error
+  );
+
+  /** Updates form **without** without performing any validation */
   function handleSetState(value: Partial<T>): void {
     setForm({ ...form, ...value });
   }
 
-  function handleValidation(value: T): void {
+  /** Updates form and validates changed values */
+  function handleValidation(value: Partial<T>): void {
     if (!validators) {
       return;
     }
@@ -43,10 +49,19 @@ export function useForm<T>(
     setForm(newForm);
   }
 
+  /** Validates form */
+  function validate() {
+    return {
+      data: getValue(form),
+      isValid,
+    };
+  }
+
   return {
+    isValid,
     reset: () => setForm(toForm(initialValue)),
     setValue: handleSetState,
-    validate: handleValidation,
-    value: form,
+    state: form,
+    validate,
   };
 }
