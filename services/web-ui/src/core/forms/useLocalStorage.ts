@@ -31,6 +31,7 @@ export function useLocalStorage<T>(
     }
 
     window.localStorage.setItem(key, serialize(value));
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [key, value]);
 
   return [value, setValue];

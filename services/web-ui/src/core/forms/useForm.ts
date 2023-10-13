@@ -9,7 +9,7 @@ interface UseFormProps {
 
 export function useForm<T>(
   initialValue: T,
-  validators?: Validators<T>,
+  _?: Validators<T>,
   options?: UseFormProps
 ) {
   const [form, setForm] = useLocalStorage<Form<T>>(
@@ -27,27 +27,33 @@ export function useForm<T>(
 
   /** Updates form **without** without performing any validation */
   function handleSetState(value: Partial<T>): void {
-    setForm({ ...form, ...value });
-  }
-
-  /** Updates form and validates changed values */
-  function handleValidation(value: Partial<T>): void {
-    if (!validators) {
-      return;
-    }
-
     const newForm = { ...form };
 
     for (const key in value) {
-      const validator = validators[key];
-
-      const result = validator(value[key] as T);
-
-      newForm[key].error = result;
+      newForm[key] = { ...newForm[key], touched: true, value: value[key] };
     }
 
     setForm(newForm);
   }
+
+  /** Updates form and validates changed values */
+  // function handleValidation(value: Partial<T>): void {
+  //   if (!validators) {
+  //     return;
+  //   }
+
+  //   const newForm = { ...form };
+
+  //   for (const key in value) {
+  //     const validator = validators[key];
+
+  //     const result = validator(value[key] as T);
+
+  //     newForm[key].error = result;
+  //   }
+
+  //   setForm(newForm);
+  // }
 
   /** Validates form */
   function validate() {
