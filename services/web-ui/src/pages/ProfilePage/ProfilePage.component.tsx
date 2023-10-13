@@ -1,9 +1,8 @@
 import { ReactElement } from "react";
 
-import { Typography } from "@mui/material";
+import { Avatar, Typography } from "@mui/material";
 
 import { ProfileDetails } from "src/api";
-import { CurrentProfileAvatar } from "src/components/CurrentProfileAvatar";
 import { Center } from "src/components/ui/Center";
 import { useTranslation } from "src/core/i18n";
 
@@ -19,7 +18,7 @@ export function ProfilePageComponent({
   return (
     <>
       <Center>
-        <CurrentProfileAvatar src={profile.photo?.url} />
+        <Avatar src={profile.photo?.url} />
       </Center>
 
       <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">

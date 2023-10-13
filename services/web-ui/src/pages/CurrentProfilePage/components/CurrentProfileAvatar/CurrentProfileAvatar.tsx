@@ -11,19 +11,17 @@ import { useSnackbar } from "src/core/snackbar";
 const HEIGHT = 200;
 
 export interface CurrentProfileAvatarProps {
-  onUploadedNewProfilePhoto?: () => void;
   src?: string;
 }
 
 export function CurrentProfileAvatar({
-  onUploadedNewProfilePhoto,
   src,
 }: CurrentProfileAvatarProps): React.ReactElement {
   const queryClient = useQueryClient();
   const mutation = useMutation((photo: File) =>
     profileApi.updateCurrentProfilePhoto({ photo })
   );
-  const { success } = useSnackbar();
+  const snackbar = useSnackbar();
 
   async function handleUpload(
     event: React.ChangeEvent<HTMLInputElement>
@@ -35,15 +33,14 @@ export function CurrentProfileAvatar({
       return;
     }
 
-    await mutation.mutateAsync(files[0]);
-
-    if (onUploadedNewProfilePhoto) {
-      onUploadedNewProfilePhoto();
-    }
-
-    queryClient.invalidateQueries(CacheKeysConstants.CurrentProfile);
-
-    success("Photo uploaded successfully");
+    await mutation.mutateAsync(files[0], {
+      onError: () =>
+        snackbar.error("There was an error when uploading the photo"),
+      onSuccess: () => {
+        snackbar.success("Photo uploaded successfully");
+        queryClient.invalidateQueries(CacheKeysConstants.CurrentProfile);
+      },
+    });
   }
 
   if (src) {
