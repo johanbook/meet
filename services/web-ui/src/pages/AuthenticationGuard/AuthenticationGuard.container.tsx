@@ -3,8 +3,8 @@ import { useQuery } from "react-query";
 
 import { ResponseError } from "src/api";
 import { profileApi } from "src/apis";
+import { ErrorView } from "src/views/ErrorView";
 
-import { ErrorPage } from "../ErrorPage";
 import { AuthenticationGuardNav } from "./AuthenticationGuard.nav";
 import { AuthenticationGuardSkeleton } from "./AuthenticationGuard.skeleton";
 
@@ -35,7 +35,7 @@ export function AuthenticationGuardContainer({
     const message = `Unable to verify if logged in. Try refreshing the page.`;
     return (
       <AuthenticationGuardNav>
-        <ErrorPage error={error} message={message} />
+        <ErrorView error={error} message={message} />
       </AuthenticationGuardNav>
     );
   }

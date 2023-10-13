@@ -2,8 +2,8 @@ import React from "react";
 
 import { profileApi } from "src/apis";
 import { CacheKeysConstants, useQuery } from "src/core/query";
-import { ErrorPage } from "src/pages/ErrorPage";
 import { SettingsPage } from "src/pages/SettingsPage";
+import { ErrorView } from "src/views/ErrorView";
 
 import { CurrentProfilePageNav } from "./CurrentProfilePage.nav";
 import { CurrentProfilePageSkeleton } from "./CurrentProfilePage.skeleton";
@@ -18,7 +18,7 @@ export function CurrentProfilePageContainer(): React.ReactElement {
   if (error) {
     return (
       <CurrentProfilePageNav>
-        <ErrorPage error={error} />
+        <ErrorView error={error} />
       </CurrentProfilePageNav>
     );
   }
@@ -34,7 +34,7 @@ export function CurrentProfilePageContainer(): React.ReactElement {
   if (!data) {
     return (
       <CurrentProfilePageNav>
-        <ErrorPage error="Unable to fetch profile" />
+        <ErrorView error="Unable to fetch profile" />
       </CurrentProfilePageNav>
     );
   }

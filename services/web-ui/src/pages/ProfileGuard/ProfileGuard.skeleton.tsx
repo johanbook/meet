@@ -1,7 +1,7 @@
-import React from "react";
+import { ReactElement } from "react";
 
-import { LoadingPage } from "../LoadingPage";
+import { LoadingView } from "src/views/LoadingView";
 
-export function ProfileGuardSkeleton(): React.ReactElement {
-  return <LoadingPage />;
+export function ProfileGuardSkeleton(): ReactElement {
+  return <LoadingView />;
 }
