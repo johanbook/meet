@@ -12,6 +12,7 @@ import { ProfileModule } from "src/features/profiles/profile.module";
 
 import { CreateBlogPostCommentHandler } from "./application/handlers/command-handlers/create-blog-post-comment.handler";
 import { CreateBlogPostHandler } from "./application/handlers/command-handlers/create-blog-post.handler";
+import { DeleteBlogPostCommentHandler } from "./application/handlers/command-handlers/delete-blog-post-comment.handler";
 import { DeleteBlogPostHandler } from "./application/handlers/command-handlers/delete-blog-post.handler";
 import { UpdateBlogPostHandler } from "./application/handlers/command-handlers/update-blog-post-handler";
 import { NotifyOrganizationOnPostedBlogPostCommentHandler } from "./application/handlers/event-handlers/notify-organization-on-posted-blog-post-comment.handler";
@@ -46,6 +47,7 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
     CreateBlogPostHandler,
     CreateBlogPostCommentHandler,
     DeleteBlogPostHandler,
+    DeleteBlogPostCommentHandler,
     GetBlogPostsHandler,
     NotifyOrganizationOnPostedBlogPostHandler,
     NotifyOrganizationOnPostedBlogPostCommentHandler,

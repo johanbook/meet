@@ -1,13 +1,13 @@
-import React from "react";
+import { ReactElement } from "react";
 
 import { Box } from "@mui/material";
 
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { ErrorMessageProps } from "src/components/ui/ErrorMessage/ErrorMessage";
 
-export interface ErrorPageProps extends ErrorMessageProps {}
+export interface ErrorViewProps extends ErrorMessageProps {}
 
-export function ErrorPage(props: ErrorPageProps): React.ReactElement {
+export function ErrorView(props: ErrorViewProps): ReactElement {
   return (
     <Box
       sx={{

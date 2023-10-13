@@ -5,7 +5,7 @@ import { Typography } from "@mui/material";
 import { chatsApi } from "src/apis";
 import { useTranslation } from "src/core/i18n";
 import { useQuery } from "src/core/query";
-import { ErrorPage } from "src/pages/ErrorPage";
+import { ErrorView } from "src/views/ErrorView";
 
 import { ConnectionsPageComponent } from "./ConnectionsPage.component";
 import { ConnectionsPageNav } from "./ConnectionsPage.nav";
@@ -21,7 +21,7 @@ export function ConnectionsPageContainer(): React.ReactElement {
   if (error) {
     return (
       <ConnectionsPageNav>
-        <ErrorPage error={error} />
+        <ErrorView error={error} />
       </ConnectionsPageNav>
     );
   }
