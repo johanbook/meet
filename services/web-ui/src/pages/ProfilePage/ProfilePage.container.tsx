@@ -5,8 +5,8 @@ import { Typography } from "@mui/material";
 
 import { profileApi } from "src/apis";
 import { CacheKeysConstants, useQuery } from "src/core/query";
+import { ErrorView } from "src/views/ErrorView";
 
-import { ErrorPage } from "../ErrorPage";
 import { ProfilePageComponent } from "./ProfilePage.component";
 import { ProfilePageHeader } from "./ProfilePage.header";
 import { ProfilePageSkeleton } from "./ProfilePage.skeleton";
@@ -23,7 +23,7 @@ export function ProfilePageContainer(): React.ReactElement {
     return (
       <>
         <ProfilePageHeader />
-        <ErrorPage error={error} />
+        <ErrorView error={error} />
       </>
     );
   }

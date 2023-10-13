@@ -9,8 +9,8 @@ import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { useTranslation } from "src/core/i18n";
 import { NotificationEventsConstants } from "src/core/notifications";
 import { useHandleNotification } from "src/core/notifications";
+import { ErrorView } from "src/views/ErrorView";
 
-import { ErrorPage } from "../ErrorPage";
 import { ChatPageNav } from "./ChatPage.nav";
 import { ChatPageSkeleton } from "./ChatPage.skeleton";
 import { ChatMessageList } from "./components/ChatMessageList";
@@ -43,7 +43,7 @@ export function ChatPageContainer(): React.ReactElement {
   if (error) {
     return (
       <ChatPageNav>
-        <ErrorPage error={error} />
+        <ErrorView error={error} />
       </ChatPageNav>
     );
   }

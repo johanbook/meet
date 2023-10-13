@@ -9,8 +9,8 @@ import { Link, List, ListItem, Typography } from "src/components/ui";
 import { Switch } from "src/components/ui";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
+import { ErrorView } from "src/views/ErrorView";
 
-import { ErrorPage } from "../ErrorPage";
 import { SettingsPageHeader } from "./SettingsPage.header";
 import { SettingsPageSkeleton } from "./SettingsPage.skeleton";
 
@@ -31,7 +31,7 @@ export function SettingsPageContainer(): React.ReactElement {
     return (
       <>
         <SettingsPageHeader />
-        <ErrorPage error={error} />
+        <ErrorView error={error} />
       </>
     );
   }
@@ -49,7 +49,7 @@ export function SettingsPageContainer(): React.ReactElement {
     return (
       <>
         <SettingsPageHeader />
-        <ErrorPage error={new Error("Settings not found")} />
+        <ErrorView error="Settings not found" />
       </>
     );
   }

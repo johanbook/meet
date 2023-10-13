@@ -1,10 +1,16 @@
-import React from "react";
+import { ReactElement, ReactNode } from "react";
 
 import { Typography } from "@mui/material";
 
 import { useTranslation } from "src/core/i18n";
 
-export function JournalPageHeader(): React.ReactElement {
+interface JournalPageNavProps {
+  children: ReactNode;
+}
+
+export function JournalPageNav({
+  children,
+}: JournalPageNavProps): ReactElement {
   const { t } = useTranslation("journal");
 
   return (
@@ -15,6 +21,8 @@ export function JournalPageHeader(): React.ReactElement {
       <Typography color="textSecondary" gutterBottom>
         {t("description")}
       </Typography>
+
+      {children}
     </>
   );
 }
