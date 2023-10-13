@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ChatTextFieldComponent } from "./ChatTextField.component";
 
 export default {
-  title: "Components/ChatTextField",
+  title: "Pages/Chat messages/ChatTextField",
   component: ChatTextFieldComponent,
 } as Meta;
 
