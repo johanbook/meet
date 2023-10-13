@@ -7,6 +7,7 @@
   "header": "Profile",
   "save": "Save",
   "update": {
+    "error": "There was en error when trying to update your profile",
     "success": "Updated profile"
   }
 }

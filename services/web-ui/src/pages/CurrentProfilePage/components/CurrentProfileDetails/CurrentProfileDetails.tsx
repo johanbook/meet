@@ -1,24 +1,23 @@
 import React from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
 import { Box, Button, TextField, Typography } from "@mui/material";
 
 import { ProfileDetails, UpdateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
+import { Center } from "src/components/ui/Center";
 import { useTranslation } from "src/core/i18n";
+import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 import { CurrentProfileAvatar } from "../CurrentProfileAvatar";
-import { Center } from "../ui/Center";
 
 export interface CurrentProfileDetailsProps {
   profile: ProfileDetails;
-  refetchData: () => void;
 }
 
 export function CurrentProfileDetails({
   profile,
-  refetchData,
 }: CurrentProfileDetailsProps): React.ReactElement {
   const { t } = useTranslation("profile");
   const mutation = useMutation((updateProfileCommand: UpdateProfileCommand) =>
@@ -26,16 +25,25 @@ export function CurrentProfileDetails({
   );
 
   const [description, setDescription] = React.useState(profile.description);
+
+  const queryClient = useQueryClient();
+
   const snackbar = useSnackbar();
 
   async function handleSubmit(event: React.SyntheticEvent): Promise<void> {
     event.preventDefault();
 
-    await mutation.mutateAsync({ description });
+    await mutation.mutateAsync(
+      { description },
+      {
+        onError: () => snackbar.error(t("update.error")),
+        onSuccess: () => {
+          snackbar.success(t("update.success"));
 
-    refetchData();
-
-    snackbar.success(t("update.success"));
+          queryClient.invalidateQueries([CacheKeysConstants.CurrentProfile]);
+        },
+      }
+    );
   }
 
   const canSubmit = description !== profile.description && !mutation.isLoading;
