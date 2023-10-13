@@ -59,15 +59,17 @@ export function OrganizationListPageContainer(): React.ReactElement {
     await mutation.mutateAsync(
       { organizationId: organization.id },
       {
-        onError: () => snackbar.success(t("actions.activate.error")),
+        onError: () => snackbar.error(t("actions.activate.error")),
         onSuccess: () => {
+          queryClient.invalidateQueries([
+            CacheKeysConstants.BlogPosts,
+            CacheKeysConstants.CurrentOrganization,
+          ]);
           navigate("/");
           snackbar.success(t("actions.activate.success"));
         },
       }
     );
-
-    queryClient.invalidateQueries([CacheKeysConstants.CurrentOrganization]);
   }
 
   return (

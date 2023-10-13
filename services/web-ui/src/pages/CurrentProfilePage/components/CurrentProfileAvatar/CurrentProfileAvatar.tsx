@@ -5,25 +5,28 @@ import { AccountCircle } from "@mui/icons-material";
 import { Avatar, Button } from "@mui/material";
 
 import { profileApi } from "src/apis";
+import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 const HEIGHT = 200;
 
 export interface CurrentProfileAvatarProps {
-  onUploadedNewProfilePhoto?: () => void;
   src?: string;
 }
 
 export function CurrentProfileAvatar({
-  onUploadedNewProfilePhoto,
   src,
 }: CurrentProfileAvatarProps): React.ReactElement {
+  const { t } = useTranslation("profile");
+
   const queryClient = useQueryClient();
+
   const mutation = useMutation((photo: File) =>
     profileApi.updateCurrentProfilePhoto({ photo })
   );
-  const { success } = useSnackbar();
+
+  const snackbar = useSnackbar();
 
   async function handleUpload(
     event: React.ChangeEvent<HTMLInputElement>
@@ -35,15 +38,13 @@ export function CurrentProfileAvatar({
       return;
     }
 
-    await mutation.mutateAsync(files[0]);
-
-    if (onUploadedNewProfilePhoto) {
-      onUploadedNewProfilePhoto();
-    }
-
-    queryClient.invalidateQueries(CacheKeysConstants.CurrentProfile);
-
-    success("Photo uploaded successfully");
+    await mutation.mutateAsync(files[0], {
+      onError: () => snackbar.error(t("actions.update-photo.error")),
+      onSuccess: () => {
+        snackbar.success(t("actions.update-photo.success"));
+        queryClient.invalidateQueries(CacheKeysConstants.CurrentProfile);
+      },
+    });
   }
 
   if (src) {

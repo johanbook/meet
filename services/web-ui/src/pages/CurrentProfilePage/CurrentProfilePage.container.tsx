@@ -1,16 +1,16 @@
 import React from "react";
 
 import { profileApi } from "src/apis";
-import { CurrentProfileDetails } from "src/components/CurrentProfileDetails";
 import { CacheKeysConstants, useQuery } from "src/core/query";
+import { ErrorPage } from "src/pages/ErrorPage";
+import { SettingsPage } from "src/pages/SettingsPage";
 
-import { ErrorPage } from "../ErrorPage";
-import { SettingsPage } from "../SettingsPage";
 import { CurrentProfilePageNav } from "./CurrentProfilePage.nav";
 import { CurrentProfilePageSkeleton } from "./CurrentProfilePage.skeleton";
+import { CurrentProfileDetails } from "./components/CurrentProfileDetails";
 
 export function CurrentProfilePageContainer(): React.ReactElement {
-  const { error, data, isLoading, refetch } = useQuery(
+  const { error, data, isLoading } = useQuery(
     CacheKeysConstants.CurrentProfile,
     () => profileApi.getCurrentProfile()
   );
@@ -41,7 +41,7 @@ export function CurrentProfilePageContainer(): React.ReactElement {
 
   return (
     <CurrentProfilePageNav>
-      <CurrentProfileDetails profile={data} refetchData={refetch} />
+      <CurrentProfileDetails profile={data} />
       <SettingsPage />
     </CurrentProfilePageNav>
   );

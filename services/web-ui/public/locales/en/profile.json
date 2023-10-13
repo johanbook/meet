@@ -1,4 +1,10 @@
 {
+  "actions": {
+    "update-photo": {
+      "error": "There was an error when trying to upload your new profile photo",
+      "success": "Profile photo updated"
+    }
+  },
   "description": {
     "title": "About me",
     "label": "Description",
@@ -7,6 +13,7 @@
   "header": "Profile",
   "save": "Save",
   "update": {
+    "error": "There was an error when trying to update your profile",
     "success": "Updated profile"
   }
 }
