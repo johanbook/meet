@@ -6,8 +6,6 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import MobileStepper from "@mui/material/MobileStepper";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 
 interface CarouselImage {
@@ -37,21 +35,7 @@ export function Carousel({ images }: CarouselProps): ReactElement {
   };
 
   return (
-    <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
-      <Paper
-        square
-        elevation={0}
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          height: 50,
-          pl: 2,
-          bgcolor: "background.default",
-        }}
-      >
-        <Typography>{images[activeStep].label}</Typography>
-      </Paper>
-
+    <Box>
       <SwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
@@ -59,23 +43,29 @@ export function Carousel({ images }: CarouselProps): ReactElement {
         enableMouseEvents
       >
         {images.map((image, index) => (
-          <div key={image.label}>
-            {Math.abs(activeStep - index) <= 2 && (
-              <Box
-                component="img"
-                loading="lazy"
-                sx={{
-                  height: 255,
-                  display: "block",
-                  maxWidth: "100%",
-                  overflow: "hidden",
-                  width: "100%",
-                }}
-                src={image.src}
-                alt={image.label}
-              />
-            )}
-          </div>
+          <Box
+            key={image.label || index}
+            sx={{
+              backgroundColor: theme.palette.grey[100],
+              display: "flex",
+              justifyContent: "center",
+              height: "100%",
+              marginLeft: 1,
+              marginRight: 1,
+              width: "100%",
+            }}
+          >
+            <img
+              alt={image.label || "Blog post image"}
+              loading="lazy"
+              src={image.src}
+              style={{
+                minHeight: 100,
+                maxWidth: "100%",
+                objectFit: "contain",
+              }}
+            />
+          </Box>
         ))}
       </SwipeableViews>
 
