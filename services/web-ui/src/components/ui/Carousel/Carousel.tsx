@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 
 interface CarouselImage {
-  label: string;
+  label?: string;
   src: string;
 }
 
@@ -63,10 +63,11 @@ export function Carousel({ images }: CarouselProps): ReactElement {
             {Math.abs(activeStep - index) <= 2 && (
               <Box
                 component="img"
+                loading="lazy"
                 sx={{
                   height: 255,
                   display: "block",
-                  maxWidth: 400,
+                  maxWidth: "100%",
                   overflow: "hidden",
                   width: "100%",
                 }}

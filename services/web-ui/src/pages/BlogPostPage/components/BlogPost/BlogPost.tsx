@@ -22,6 +22,7 @@ import { timeSince } from "src/utils/time";
 
 import { BlogPostCommentForm } from "../BlogPostCommentForm/BlogPostComment.form";
 import { BlogPostMenu } from "../BlogPostMenu";
+import { BlogPostPhotos } from "../BlogPostPhotos/BlogPostPhotos";
 
 interface BlogPostProps {
   post: BlogPostDetails;
@@ -56,19 +57,7 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
         <Typography>{post.content}</Typography>
       </CardContent>
 
-      {post.photos.map((photo) => (
-        <img
-          alt={photo.description || "Blog post image"}
-          key={photo.id}
-          loading="lazy"
-          src={photo.url}
-          style={{
-            padding: 10,
-            minHeight: 100,
-            maxWidth: "100%",
-          }}
-        />
-      ))}
+      <BlogPostPhotos photos={post.photos} />
 
       <CardActions disableSpacing>
         <IconButton aria-label="like" disabled sx={{ display: "none" }}>
