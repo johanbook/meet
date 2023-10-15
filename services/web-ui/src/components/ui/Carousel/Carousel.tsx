@@ -46,7 +46,10 @@ export function Carousel({ images }: CarouselProps): ReactElement {
           <Box
             key={image.label || index}
             sx={{
-              backgroundColor: theme.palette.grey[100],
+              backgroundColor:
+                theme.palette.mode === "dark"
+                  ? theme.palette.grey[900]
+                  : theme.palette.grey[100],
               display: "flex",
               justifyContent: "center",
               height: "100%",

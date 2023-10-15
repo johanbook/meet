@@ -20,7 +20,10 @@ export function BlogPostPhotos({ photos }: BlogPostPhotosProps): ReactElement {
     return (
       <Box
         sx={(theme) => ({
-          backgroundColor: theme.palette.grey[100],
+          backgroundColor:
+            theme.palette.mode === "dark"
+              ? theme.palette.grey[900]
+              : theme.palette.grey[100],
           display: "flex",
           justifyContent: "center",
           height: "100%",
@@ -35,7 +38,6 @@ export function BlogPostPhotos({ photos }: BlogPostPhotosProps): ReactElement {
           loading="lazy"
           src={photo.url}
           style={{
-            padding: 10,
             minHeight: 100,
             maxWidth: "100%",
           }}
