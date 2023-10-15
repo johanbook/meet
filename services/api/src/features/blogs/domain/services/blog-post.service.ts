@@ -43,6 +43,8 @@ export class BlogPostService {
     await this.blogPosts.save(blogPost);
 
     const event = map(BlogPostCommentCreatedEvent, {
+      blogPostId: blogPost.id,
+      content: blogPostComment.content,
       id: blogPostComment.id,
       organizationId: blogPost.organizationId,
       profileId: blogPostComment.profileId,
