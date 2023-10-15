@@ -160,6 +160,8 @@ services:
       - "traefik.http.routers.s3.rule=Host(`s3.$DOMAIN`)"
       - "traefik.http.routers.s3.service=s3"
       - "traefik.http.services.s3.loadbalancer.server.port=9000"
+      - "traefik.http.middlewares.s3-cache.headers.customresponseheaders.Cache-Control=max-age=604800" # Cached for 1 week. Objects should be immutable and we can use a hard cache
+      - "traefik.http.routers.s3.middlewares=s3-cache"
     restart: "unless-stopped"
     volumes:
       - ".data/mino:/data:rw"
