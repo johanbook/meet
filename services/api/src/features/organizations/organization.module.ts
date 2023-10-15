@@ -3,6 +3,7 @@ import { CqrsModule } from "@nestjs/cqrs";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AuthenticationModule } from "src/core/authentication/authentication.module";
+import { AuthorizationModule } from "src/core/authorization/authorization.module";
 import { PhotosModule } from "src/core/photos/photos.module";
 import { Profile } from "src/features/profiles";
 import { ProfileModule } from "src/features/profiles/profile.module";
@@ -11,6 +12,7 @@ import { AddMemberToOrganizationHandler } from "./application/handlers/command-h
 import { CreateOrganizationHandler } from "./application/handlers/command-handlers/create-organization.handler";
 import { CreatePersonalOrganizationHandler } from "./application/handlers/command-handlers/create-personal-organization.handler";
 import { CreatePersonalOrganizationsIfMissingHandler } from "./application/handlers/command-handlers/create-personal-organizations-if-missing.handler";
+import { RemoveMemberFromCurrentOrganizationHandler } from "./application/handlers/command-handlers/remove-member-from-current-organization.handler";
 import { SwitchOrganizationHandler } from "./application/handlers/command-handlers/switch-organization.handler";
 import { UpdateMemberRoleHandler } from "./application/handlers/command-handlers/update-member-role.handler";
 import { UpdateOrganizationHandler } from "./application/handlers/command-handlers/update-organization.handler";
@@ -33,10 +35,11 @@ import { Organization } from "./infrastructure/entities/organization.entity";
   controllers: [CurrentOrganizationController, OrganizationsController],
   exports: [CurrentOrganizationService],
   imports: [
+    forwardRef(() => AuthorizationModule),
+    forwardRef(() => ProfileModule),
     AuthenticationModule,
     CqrsModule,
     PhotosModule,
-    forwardRef(() => ProfileModule),
     TypeOrmModule.forFeature([
       ActiveOrganization,
       Organization,
@@ -58,6 +61,7 @@ import { Organization } from "./infrastructure/entities/organization.entity";
     MembershipService,
     OrganizationJobs,
     OrganizationService,
+    RemoveMemberFromCurrentOrganizationHandler,
     SwitchOrganizationHandler,
     UpdateMemberRoleHandler,
     UpdateOrganizationHandler,
