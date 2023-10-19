@@ -10,7 +10,6 @@ import { ThemeProvider } from "src/core/theme";
 
 import "./App.css";
 import { Router } from "./Router";
-import { GlobalDialogProvider } from "./core/dialog";
 import { AuthenticationGuard } from "./pages/AuthenticationGuard";
 
 const logger = new Logger(QueryClient.name);
@@ -52,12 +51,10 @@ export function App(): React.ReactElement {
       <ThemeProvider>
         <CssBaseline />
         <AuthenticationGuard>
-          <GlobalDialogProvider>
-            <NotificationProvider>
-              <Router />
-              <SnackbarProvider dense />
-            </NotificationProvider>
-          </GlobalDialogProvider>
+          <NotificationProvider>
+            <Router />
+            <SnackbarProvider dense />
+          </NotificationProvider>
         </AuthenticationGuard>
       </ThemeProvider>
     </QueryClientProvider>

@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Nav from "src/components/ui/Nav";
+import { GlobalDialogProvider } from "src/core/dialog";
 import { NavigationTrackingProvider } from "src/core/tracking/NavigationTrackingProvider";
 import { BlogPostPage } from "src/pages/BlogPostPage";
 import { ChatPage } from "src/pages/ChatPage";
@@ -22,7 +23,9 @@ const router = createBrowserRouter([
     element: (
       <Suspense fallback={<LoadingView />}>
         <NavigationTrackingProvider>
-          <Nav />
+          <GlobalDialogProvider>
+            <Nav />
+          </GlobalDialogProvider>
         </NavigationTrackingProvider>
       </Suspense>
     ),
