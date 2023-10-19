@@ -27,6 +27,11 @@ export class GetOrganizationMembersHandler
       await this.currentOrganizationService.fetchCurrentOrganizationId();
 
     const members = await this.organizationMemberships.find({
+      order: {
+        profile: {
+          name: "asc",
+        },
+      },
       relations: {
         profile: {
           profilePhoto: true,
