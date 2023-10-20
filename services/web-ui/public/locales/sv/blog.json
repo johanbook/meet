@@ -7,6 +7,10 @@
       "error": "Något gick fel när kommentaren skulle postas"
     },
     "delete": {
+      "dialog": {
+        "description": "Detta kommer att permanent ta bort denna blogposten",
+        "title": "Bekräfta borttagning av blogpost"
+      },
       "error": "Något gick fel när blogposten skulle tas bort",
       "success": "Blogposten har tagits bort"
     },

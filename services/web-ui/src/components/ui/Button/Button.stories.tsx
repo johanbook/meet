@@ -19,6 +19,15 @@ export const Contained: Story = {
   },
 };
 
+export const ContainedLoading: Story = {
+  args: {
+    children: "Click me",
+    isLoading: true,
+    onClick: () => alert("I was clicked"),
+    variant: "contained",
+  },
+};
+
 export const Outlined: Story = {
   args: {
     children: "Click me",
