@@ -18,6 +18,7 @@ export function mapToJournalDetails({
   const mappedEntries = mapArray(JournalEntryDetails, entries, (entry) => ({
     commandName: formatCommandName(entry.commandName),
     created: entry.created,
+    id: entry.id,
     payload: entry.payload,
   }));
 
