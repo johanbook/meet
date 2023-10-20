@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { journalApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
@@ -48,7 +48,9 @@ export function JournalPageContainer(): React.ReactElement {
 
   return (
     <JournalPageNav onDateChange={setDateRange} values={dateRange}>
-      <JournalPageComponent data={data.entries} />
+      <Box sx={{ marginTop: 2 }}>
+        <JournalPageComponent data={data.entries} />
+      </Box>
     </JournalPageNav>
   );
 }

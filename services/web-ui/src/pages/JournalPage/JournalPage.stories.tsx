@@ -8,11 +8,13 @@ const JOURNAL_ENTRIES: JournalEntryDetails[] = [
   {
     commandName: "Did the thing",
     created: new Date("2020"),
+    id: 1,
     payload: {},
   },
   {
     commandName: "Did the thing again",
     created: new Date("2020"),
+    id: 2,
     payload: {},
   },
 ];

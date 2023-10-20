@@ -1,9 +1,24 @@
 import { ReactElement } from "react";
 
-import { List, ListItem, ListItemText } from "@mui/material";
-
 import { JournalEntryDetails } from "src/api";
+import { Table } from "src/components/ui";
+import { Column } from "src/components/ui/Table";
 import { format } from "src/utils/string";
+
+const columns: Column<JournalEntryDetails>[] = [
+  {
+    field: "commandName",
+    headerName: "Action",
+    valueGetter: (params) => format(params.value || ""),
+    width: 400,
+  },
+  {
+    field: "created",
+    headerName: "Date",
+    valueGetter: (params) => params.value.toLocaleString(),
+    width: 400,
+  },
+];
 
 interface JournalPageComponentProps {
   data: JournalEntryDetails[];
@@ -12,16 +27,5 @@ interface JournalPageComponentProps {
 export function JournalPageComponent({
   data,
 }: JournalPageComponentProps): ReactElement {
-  return (
-    <List>
-      {data.map((element) => (
-        <ListItem>
-          <ListItemText
-            primary={format(element.commandName)}
-            secondary={element.created.toLocaleString()}
-          />
-        </ListItem>
-      ))}
-    </List>
-  );
+  return <Table columns={columns} height="60vh" rows={data} />;
 }
