@@ -12,6 +12,8 @@ export function useLocalStorage<T>(
   initialValue: T,
   options: UseLocalStorageProps<T> = {}
 ): UseLocalStorageResult<T> {
+  key = key && `useLocalStorage::${key}`;
+
   const deserialize = options.deserializer || JSON.parse;
   const serialize = options.serializer || JSON.stringify;
 
