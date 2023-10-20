@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Typography } from "@mui/material";
 
@@ -11,13 +11,19 @@ import { JournalPageNav } from "./JournalPage.nav";
 import { JournalPageSkeleton } from "./JournalPage.skeleton";
 
 export function JournalPageContainer(): React.ReactElement {
-  const { error, data, isLoading } = useQuery(CacheKeysConstants.Journal, () =>
-    journalApi.getJournal()
+  const [dateRange, setDateRange] = useState({
+    to: new Date(),
+    from: new Date(),
+  });
+
+  const { error, data, isLoading } = useQuery(
+    [CacheKeysConstants.Journal, dateRange.from, dateRange.to],
+    () => journalApi.getJournal(dateRange)
   );
 
   if (error) {
     return (
-      <JournalPageNav>
+      <JournalPageNav onDateChange={setDateRange} values={dateRange}>
         <ErrorMessage error={error} />
       </JournalPageNav>
     );
@@ -25,7 +31,7 @@ export function JournalPageContainer(): React.ReactElement {
 
   if (isLoading) {
     return (
-      <JournalPageNav>
+      <JournalPageNav onDateChange={setDateRange} values={dateRange}>
         <JournalPageSkeleton />
       </JournalPageNav>
     );
@@ -33,14 +39,14 @@ export function JournalPageContainer(): React.ReactElement {
 
   if (!data || data.entries.length === 0) {
     return (
-      <JournalPageNav>
+      <JournalPageNav onDateChange={setDateRange} values={dateRange}>
         <Typography>No entries found in journal</Typography>
       </JournalPageNav>
     );
   }
 
   return (
-    <JournalPageNav>
+    <JournalPageNav onDateChange={setDateRange} values={dateRange}>
       <JournalPageComponent data={data.entries} />
     </JournalPageNav>
   );
