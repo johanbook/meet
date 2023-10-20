@@ -1,6 +1,6 @@
 import { ReactElement, ReactNode } from "react";
 
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 import { DatePicker } from "src/components/ui/DatePicker";
 import { useTranslation } from "src/core/i18n";
@@ -32,18 +32,23 @@ export function JournalPageNav({
         {t("description")}
       </Typography>
 
-      <DatePicker
-        label="From"
-        onChange={(from) => onDateChange({ ...values, from })}
-        sx={{ marginRight: 2 }}
-        value={values.from}
-      />
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <DatePicker
+            label="From"
+            onChange={(from) => onDateChange({ ...values, from })}
+            value={values.from}
+          />
+        </Grid>
 
-      <DatePicker
-        label="To"
-        onChange={(to) => onDateChange({ ...values, to })}
-        value={values.to}
-      />
+        <Grid item xs={6}>
+          <DatePicker
+            label="To"
+            onChange={(to) => onDateChange({ ...values, to })}
+            value={values.to}
+          />
+        </Grid>
+      </Grid>
 
       {children}
     </>
