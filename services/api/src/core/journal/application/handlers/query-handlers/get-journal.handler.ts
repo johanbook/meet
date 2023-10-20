@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { And, LessThan, MoreThan, Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
 import { QueryService } from "src/core/query";
@@ -32,7 +32,10 @@ export class GetJournalHandler
         },
         query,
         required: {
-          where: { userId: userId },
+          where: {
+            created: And(LessThan(query.to), MoreThan(query.from)),
+            userId,
+          },
         },
       },
     );
