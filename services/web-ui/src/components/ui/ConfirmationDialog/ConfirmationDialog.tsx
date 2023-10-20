@@ -34,7 +34,7 @@ export function ConfirmationDialog({
           </Button>
           <Button
             color="error"
-            isLoading={isLoading}
+            loading={isLoading}
             onClick={async () => {
               setIsLoading(true);
               try {

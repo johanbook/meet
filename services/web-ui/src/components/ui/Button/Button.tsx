@@ -7,18 +7,18 @@ import {
 } from "@mui/material";
 
 export interface ButtonProps extends MuiButtonProps {
-  isLoading?: boolean;
+  loading?: boolean;
 }
 
 export function Button({
   children,
   disabled,
-  isLoading,
+  loading,
   ...props
 }: ButtonProps): ReactElement {
   return (
-    <MuiButton disabled={disabled || isLoading} {...props}>
-      {isLoading && (
+    <MuiButton disabled={disabled || loading} {...props}>
+      {loading && (
         <CircularProgress size={15} sx={{ marginRight: 1 }} thickness={5} />
       )}
 

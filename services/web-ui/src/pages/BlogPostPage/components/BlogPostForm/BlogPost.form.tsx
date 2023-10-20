@@ -37,9 +37,9 @@ export function BlogPostForm(): React.ReactElement {
       photos: [],
     },
     {
-      content: ({ content }) => Boolean(content),
-      descriptions: () => true,
-      photos: () => true,
+      content: ({ content }) => (content) ? false : "Required",
+      descriptions: () => false,
+      photos: () => false,
     },
     {
       localStorageKey: "create-blog-post-form",
