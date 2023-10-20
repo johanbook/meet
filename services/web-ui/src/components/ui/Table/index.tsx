@@ -1,2 +1,2 @@
 export { Table } from "./Table";
-export { GridColDef as Column } from "@mui/x-data-grid";
+export type { GridColDef as Column } from "@mui/x-data-grid";
