@@ -5,6 +5,7 @@ import { Typography } from "@mui/material";
 import { journalApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { CacheKeysConstants, useQuery } from "src/core/query";
+import { getDateDaysAgo } from "src/utils/time";
 
 import { JournalPageComponent } from "./JournalPage.component";
 import { JournalPageNav } from "./JournalPage.nav";
@@ -13,7 +14,7 @@ import { JournalPageSkeleton } from "./JournalPage.skeleton";
 export function JournalPageContainer(): React.ReactElement {
   const [dateRange, setDateRange] = useState({
     to: new Date(),
-    from: new Date(),
+    from: getDateDaysAgo(2),
   });
 
   const { error, data, isLoading } = useQuery(
