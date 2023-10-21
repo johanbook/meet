@@ -14,7 +14,7 @@ import { CreateBlogPostRequest } from "src/api";
 import { blogsApi } from "src/apis";
 import { Photo } from "src/components/ui/Photo";
 import { UploadIconButton } from "src/components/ui/UploadIconButton";
-import { useForm } from "src/core/forms";
+import { useForm, validators } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
@@ -37,7 +37,7 @@ export function BlogPostForm(): React.ReactElement {
       photos: [],
     },
     {
-      content: ({ content }) => (content) ? false : "Required",
+      content: ({ content }) => validators.required(content),
       descriptions: () => false,
       photos: () => false,
     },

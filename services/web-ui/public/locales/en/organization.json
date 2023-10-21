@@ -3,6 +3,16 @@
   "members": {
     "error": "Unable to retrieve organization members",
     "header": "Members",
+    "invite": {
+      "email": {
+        "label": "Email"
+      },
+      "submit": {
+        "button": "Invite",
+        "error": "An error occured when inviting the user",
+        "success": "The user was successfully added to the group"
+      }
+    },
     "member-since": "Member since",
     "menu": {
       "edit": "Edit"

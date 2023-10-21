@@ -1,9 +1,9 @@
-export type ValidationResult = false | string;
+export type ValidationResult = string | false;
 export type Validator<T> = (value: T) => ValidationResult;
 export type Validators<T> = Record<keyof T, Validator<T>>;
 
 export interface FormValue<T> {
-  error: ValidationResult;
+  error: string | undefined;
   touched: boolean;
   value: T;
 }
