@@ -3,12 +3,17 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { And, LessThan, MoreThan, Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
+import { map, mapArray } from "src/core/mapper";
 import { QueryService } from "src/core/query";
 
 import { JournalEntry } from "../../../infrastructure/entities/journal-entry.entity";
 import { JournalDetails } from "../../contracts/dtos/journal-details.dto";
+import { JournalEntryDetails } from "../../contracts/dtos/journal-entry-details.dto";
 import { GetJournalQuery } from "../../contracts/queries/get-journal.query";
-import { mapToJournalDetails } from "../../mappers/journal.mapper";
+
+function formatCommandName(commandName: string): string {
+  return commandName.replace(/Command$/, "");
+}
 
 @QueryHandler(GetJournalQuery)
 export class GetJournalHandler
@@ -40,6 +45,13 @@ export class GetJournalHandler
       },
     );
 
-    return mapToJournalDetails({ entries: foundJournalEntries });
+    return map(JournalDetails, {
+      entries: mapArray(JournalEntryDetails, foundJournalEntries, (entry) => ({
+        commandName: formatCommandName(entry.commandName),
+        created: entry.created,
+        id: entry.id,
+        payload: entry.payload,
+      })),
+    });
   }
 }
