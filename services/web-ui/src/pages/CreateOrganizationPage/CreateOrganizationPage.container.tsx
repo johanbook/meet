@@ -50,37 +50,39 @@ export function CreateOrganizationPageContainer(): ReactElement {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Typography gutterBottom variant="h5">
+    <>
+      <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
         {t("header")}
       </Typography>
 
-      <Typography color="textSecondary" sx={{ paddingBottom: 2 }}>
+      <Typography color="textSecondary" sx={{ paddingBottom: 3 }}>
         {t("description")}
       </Typography>
 
-      <TextField
-        error={form.state.name.error || ""}
-        fullWidth
-        label={t("fields.name.label")}
-        onBlur={() => form.validate()}
-        onChange={(name) => form.setValue({ name })}
-        sx={{ marginBottom: 1 }}
-        value={form.state.name.value}
-      />
+      <form onSubmit={handleSubmit}>
+        <TextField
+          error={form.state.name.error || ""}
+          fullWidth
+          label={t("fields.name.label")}
+          onBlur={() => form.validate()}
+          onChange={(name) => form.setValue({ name })}
+          sx={{ marginBottom: 2 }}
+          value={form.state.name.value}
+        />
 
-      <Box sx={{ gap: 1, display: "flex", justifyContent: "flex-end" }}>
-        <Button variant="outlined">{t("actions.cancel.button")}</Button>
+        <Box sx={{ gap: 1, display: "flex", justifyContent: "flex-end" }}>
+          <Button variant="outlined">{t("actions.cancel.button")}</Button>
 
-        <Button
-          disabled={!form.isValid}
-          loading={mutation.isLoading}
-          type="submit"
-          variant="contained"
-        >
-          {t("actions.submit.button")}
-        </Button>
-      </Box>
-    </form>
+          <Button
+            disabled={!form.isValid}
+            loading={mutation.isLoading}
+            type="submit"
+            variant="contained"
+          >
+            {t("actions.submit.button")}
+          </Button>
+        </Box>
+      </form>
+    </>
   );
 }
