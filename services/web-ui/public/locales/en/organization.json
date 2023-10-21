@@ -5,7 +5,14 @@
     "header": "Members",
     "member-since": "Member since",
     "menu": {
-      "edit": "Edit"
+      "edit": "Edit",
+      "remove": "Remove member from group"
+    },
+    "remove": {
+      "description": "This will remove the member from this group",
+      "error": "An error occured when removing the member",
+      "header": "Confirm removing member from group",
+      "success": "The member has been removed from this group"
     },
     "update": {
       "cancel": "Cancel",

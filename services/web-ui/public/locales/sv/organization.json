@@ -5,7 +5,14 @@
     "header": "Medlemmar",
     "member-since": "Medlem sedan",
     "menu": {
-      "edit": "Redigera"
+      "edit": "Redigera",
+      "remove": "Ta bort medlem från grupp"
+    },
+    "remove": {
+      "description": "Detta kommer att ta bort denna medlem från gruppen så att de inte längre kan se något av innehållet",
+      "error": "Ett fel inträffade när medlemmens skulle tas bort",
+      "header": "Bekräfta borttagning av medlem från grupp",
+      "success": "Medlemmen har tagits bort från gruppen"
     },
     "update": {
       "cancel": "Avbryt",
