@@ -8,6 +8,7 @@ import { PhotosModule } from "src/core/photos/photos.module";
 import { Profile } from "src/features/profiles";
 import { ProfileModule } from "src/features/profiles/profile.module";
 
+import { AddMemberToOrganizationViaEmailHandler } from "./application/handlers/command-handlers/add-member-to-organization-via-email.handler";
 import { AddMemberToOrganizationHandler } from "./application/handlers/command-handlers/add-member-to-organization.handler";
 import { CreateOrganizationHandler } from "./application/handlers/command-handlers/create-organization.handler";
 import { CreatePersonalOrganizationHandler } from "./application/handlers/command-handlers/create-personal-organization.handler";
@@ -50,6 +51,7 @@ import { Organization } from "./infrastructure/entities/organization.entity";
   providers: [
     ActiveOrganizationService,
     AddMemberToOrganizationHandler,
+    AddMemberToOrganizationViaEmailHandler,
     CreateOrganizationHandler,
     CreateOrganizationOnProfileCreatedHandler,
     CreatePersonalOrganizationHandler,

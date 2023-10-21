@@ -3,10 +3,10 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { CurrentOrganizationService } from "src/features/organizations/domain/services/current-organization.service";
-import { OrganizationService } from "src/features/organizations/domain/services/organization.service";
 import { Profile } from "src/features/profiles";
 
+import { CurrentOrganizationService } from "../../../domain/services/current-organization.service";
+import { OrganizationService } from "../../../domain/services/organization.service";
 import { AddMemberToOrganizationCommand } from "../../contracts/commands/add-member-to-organization.command";
 
 @CommandHandler(AddMemberToOrganizationCommand)

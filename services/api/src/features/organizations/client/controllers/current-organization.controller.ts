@@ -13,6 +13,7 @@ import { ApiTags } from "@nestjs/swagger";
 
 import { RequiresOrganizationPermissions } from "src/core/authorization";
 
+import { AddMemberToOrganizationViaEmailCommand } from "../../application/contracts/commands/add-member-to-organization-via-email.command";
 import { AddMemberToOrganizationCommand } from "../../application/contracts/commands/add-member-to-organization.command";
 import { RemoveMemberFromCurrentOrganizationCommand } from "../../application/contracts/commands/remove-member-from-current-organization.command";
 import { UpdateMemberRoleCommand } from "../../application/contracts/commands/update-member-role.command";
@@ -54,6 +55,16 @@ export class CurrentOrganizationController {
   )
   async addMemberToOrganization(
     @Body() command: AddMemberToOrganizationCommand,
+  ): Promise<null> {
+    return await this.commandBus.execute(command);
+  }
+
+  @Post("/members/email")
+  @RequiresOrganizationPermissions(
+    organizationPermissions.CurrentOrganization.Members.Add,
+  )
+  async addMemberToOrganizationViaEmail(
+    @Body() command: AddMemberToOrganizationViaEmailCommand,
   ): Promise<null> {
     return await this.commandBus.execute(command);
   }
