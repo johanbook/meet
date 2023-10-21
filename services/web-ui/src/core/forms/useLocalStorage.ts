@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface UseLocalStorageProps<T> {
   deserializer?: (value: string) => T;
@@ -27,14 +27,15 @@ export function useLocalStorage<T>(
     return previousValue || initialValue;
   });
 
-  useEffect(() => {
+  function handleSetValue(value: T): void {
+    setValue(value);
+
     if (!key) {
       return;
     }
 
     window.localStorage.setItem(key, serialize(value));
-    /* eslint-disable-next-line react-hooks/exhaustive-deps */
-  }, [key, value]);
+  }
 
-  return [value, setValue];
+  return [value, handleSetValue];
 }
