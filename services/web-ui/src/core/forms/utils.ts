@@ -1,12 +1,4 @@
-export interface FormValue<T> {
-  error: string | false;
-  touched: boolean;
-  value: T;
-}
-
-export type Form<T> = {
-  [K in keyof Required<T>]: FormValue<T[K]>;
-};
+import { Form } from "./types";
 
 export function toForm<T>(value: T): Form<T> {
   const form: Partial<Form<T>> = {};
