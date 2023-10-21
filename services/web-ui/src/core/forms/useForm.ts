@@ -46,7 +46,7 @@ export function useForm<T>(
       const validator = validators[key];
       const currentValue = getValue(newForm);
 
-      const result = validator(currentValue);
+      const result = validator(currentValue, { form: newForm, name: key });
 
       /* eslint-disable-next-line unicorn/prefer-logical-operator-over-ternary */
       newForm[key].error = result ? result : undefined;
