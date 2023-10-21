@@ -45,4 +45,15 @@ export class UserIdService {
       (user) => user.email,
     );
   }
+
+  async fetchUserIdByEmail(email: string): Promise<string | undefined> {
+    const { data } = await axios.post<Record<string, string>>(
+      `${AUTH_API_URL}/userinfo/list-by-email`,
+      {
+        emails: [email],
+      },
+    );
+
+    return data[email];
+  }
 }

@@ -48,7 +48,8 @@ export function useForm<T>(
 
       const result = validator(currentValue);
 
-      newForm[key].error = result;
+      /* eslint-disable-next-line unicorn/prefer-logical-operator-over-ternary */
+      newForm[key].error = result ? result : undefined;
     }
 
     setForm(newForm);

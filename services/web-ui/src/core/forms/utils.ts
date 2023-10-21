@@ -5,7 +5,7 @@ export function toForm<T>(value: T): Form<T> {
 
   for (const key in value) {
     form[key] = {
-      error: false,
+      error: undefined,
       touched: false,
       value: value[key],
     };

@@ -3,6 +3,16 @@
   "members": {
     "error": "Fel vid hämtning av gruppmedlemmar",
     "header": "Medlemmar",
+    "invite": {
+      "email": {
+        "label": "Email"
+      },
+      "submit": {
+        "button": "Bjud in",
+        "error": "Ett fel inträffade när användaren skulle bjudas in",
+        "success": "Användaren har lagts till i gruppen"
+      }
+    },
     "member-since": "Medlem sedan",
     "menu": {
       "edit": "Redigera",
