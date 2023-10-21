@@ -30,6 +30,11 @@ export function CreateOrganizationPageContainer(): ReactElement {
     { localStorageKey: "create-organization" }
   );
 
+  function handleCancel(): void {
+    form.reset();
+    navigate("/profile");
+  }
+
   async function handleSubmit(event: SyntheticEvent): Promise<void> {
     event.preventDefault();
     const { data, isValid } = form.validate();
@@ -72,7 +77,9 @@ export function CreateOrganizationPageContainer(): ReactElement {
         />
 
         <Box sx={{ gap: 1, display: "flex", justifyContent: "flex-end" }}>
-          <Button variant="outlined">{t("actions.cancel.button")}</Button>
+          <Button onClick={handleCancel} variant="outlined">
+            {t("actions.cancel.button")}
+          </Button>
 
           <Button
             disabled={!form.isValid}
