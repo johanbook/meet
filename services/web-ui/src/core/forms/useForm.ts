@@ -1,7 +1,7 @@
 import { useLocalStorage } from "./useLocalStorage";
 import { Form, FormValue, getValue, toForm } from "./utils";
 
-type Validators<T> = Record<keyof T, (value: T) => boolean | string>;
+type Validators<T> = Record<keyof T, (value: T) => false | string>;
 
 interface UseFormProps {
   localStorageKey?: string;
@@ -9,7 +9,7 @@ interface UseFormProps {
 
 export function useForm<T>(
   initialValue: T,
-  _?: Validators<T>,
+  validators?: Validators<T>,
   options?: UseFormProps
 ) {
   const [form, setForm] = useLocalStorage<Form<T>>(
@@ -21,9 +21,8 @@ export function useForm<T>(
     }
   );
 
-  const isValid = Object.values<FormValue<T[keyof T]>>(form).some(
-    (value) => value.error
-  );
+  const checkIfValid = () =>
+    Object.values<FormValue<T[keyof T]>>(form).every((value) => !value.error);
 
   /** Updates form **without** without performing any validation */
   function handleSetState(value: Partial<T>): void {
@@ -37,34 +36,41 @@ export function useForm<T>(
   }
 
   /** Updates form and validates changed values */
-  // function handleValidation(value: Partial<T>): void {
-  //   if (!validators) {
-  //     return;
-  //   }
+  function handleValidation(keys: (keyof T)[]): void {
+    if (!validators) {
+      return;
+    }
 
-  //   const newForm = { ...form };
+    const newForm = { ...form };
 
-  //   for (const key in value) {
-  //     const validator = validators[key];
+    for (const key of keys) {
+      const validator = validators[key];
+      const currentValue = getValue(newForm);
 
-  //     const result = validator(value[key] as T);
+      const result = validator(currentValue);
 
-  //     newForm[key].error = result;
-  //   }
+      newForm[key].error = result;
+    }
 
-  //   setForm(newForm);
-  // }
+    setForm(newForm);
+  }
 
   /** Validates form */
-  function validate() {
+  function validate(keys?: (keyof T)[]) {
+    if (keys) {
+      handleValidation(keys);
+    } else {
+      handleValidation(Object.keys(form) as (keyof T)[]);
+    }
+
     return {
       data: getValue(form),
-      isValid,
+      isValid: checkIfValid(),
     };
   }
 
   return {
-    isValid,
+    isValid: checkIfValid(),
     reset: () => setForm(toForm(initialValue)),
     setValue: handleSetState,
     state: form,

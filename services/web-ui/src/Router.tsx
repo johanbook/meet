@@ -7,6 +7,7 @@ import { NavigationTrackingProvider } from "src/core/tracking/NavigationTracking
 import { BlogPostPage } from "src/pages/BlogPostPage";
 import { ChatPage } from "src/pages/ChatPage";
 import { ConnectionsPage } from "src/pages/ConnectionsPage";
+import { CreateOrganizationPage } from "src/pages/CreateOrganizationPage";
 import { CurrentOrganizationPage } from "src/pages/CurrentOrganizationPage";
 import { CurrentProfilePage } from "src/pages/CurrentProfilePage";
 import { JournalPage } from "src/pages/JournalPage";
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/group",
         element: <CurrentOrganizationPage />,
+      },
+      {
+        path: "/group/create",
+        element: <CreateOrganizationPage />,
       },
       {
         path: "/group/list",

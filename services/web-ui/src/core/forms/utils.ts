@@ -1,5 +1,5 @@
 export interface FormValue<T> {
-  error: string | boolean;
+  error: string | false;
   touched: boolean;
   value: T;
 }

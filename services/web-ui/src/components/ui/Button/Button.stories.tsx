@@ -22,7 +22,7 @@ export const Contained: Story = {
 export const ContainedLoading: Story = {
   args: {
     children: "Click me",
-    isLoading: true,
+    loading: true,
     onClick: () => alert("I was clicked"),
     variant: "contained",
   },
