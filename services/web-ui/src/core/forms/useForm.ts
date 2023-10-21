@@ -1,7 +1,6 @@
+import { Form, FormValue, Validators } from "./types";
 import { useLocalStorage } from "./useLocalStorage";
-import { Form, FormValue, getValue, toForm } from "./utils";
-
-type Validators<T> = Record<keyof T, (value: T) => false | string>;
+import { getValue, toForm } from "./utils";
 
 interface UseFormProps {
   localStorageKey?: string;

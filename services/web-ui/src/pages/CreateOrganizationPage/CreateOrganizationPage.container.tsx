@@ -7,7 +7,7 @@ import { Box } from "@mui/material";
 import { CreateOrganizationCommand } from "src/api";
 import { organizationsApi } from "src/apis";
 import { Button, TextField, Typography } from "src/components/ui";
-import { useForm } from "src/core/forms";
+import { useForm, validators } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
@@ -26,7 +26,7 @@ export function CreateOrganizationPageContainer(): ReactElement {
     {
       name: "",
     },
-    { name: ({ name }) => (name ? false : "Required field") },
+    { name: ({ name }) => validators.required(name) },
     { localStorageKey: "create-organization" }
   );
 
@@ -66,6 +66,7 @@ export function CreateOrganizationPageContainer(): ReactElement {
           label={t("fields.name.label")}
           onBlur={() => form.validate()}
           onChange={(name) => form.setValue({ name })}
+          required
           sx={{ marginBottom: 2 }}
           value={form.state.name.value}
         />
