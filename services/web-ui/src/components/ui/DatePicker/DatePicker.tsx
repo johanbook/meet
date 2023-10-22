@@ -15,6 +15,7 @@ export interface DatePickerProps {
 }
 
 export function DatePicker({
+  fullWidth,
   label,
   onChange,
   value,
@@ -28,6 +29,11 @@ export function DatePicker({
           if (newValue) {
             onChange(newValue.toDate());
           }
+        }}
+        slotProps={{
+          textField: {
+            fullWidth,
+          },
         }}
         value={dayjs(value)}
         {...props}
