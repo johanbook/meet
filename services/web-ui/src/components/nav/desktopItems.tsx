@@ -22,6 +22,9 @@ export const desktopNavItems: NavItem[] = [
     name: "Conversations",
     url: "/chat",
   },
+];
+
+export const bottomNavItems: NavItem[] = [
   {
     Icon: AccountCircle,
     name: "Profile",
