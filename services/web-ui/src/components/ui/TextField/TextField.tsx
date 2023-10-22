@@ -22,6 +22,7 @@ export function TextField({
     <MuiTextField
       error={Boolean(error)}
       helperText={error}
+      InputLabelProps={{ shrink: true }}
       onChange={(event) => onChange(event.target.value)}
       value={value}
       {...props}

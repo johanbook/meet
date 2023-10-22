@@ -1,7 +1,6 @@
-import React from "react";
+import { ReactElement } from "react";
 
-import { Button, TextField, Typography } from "@mui/material";
-
+import { Button, TextField, Typography } from "src/components/ui";
 import { Center } from "src/components/ui/Center";
 import { VerticalCenter } from "src/components/ui/VerticalCenter";
 import { useTranslation } from "src/core/i18n";
@@ -16,7 +15,7 @@ export function DescriptionForm({
   onChange,
   onNext,
   value,
-}: DescriptionFormProps): React.ReactElement {
+}: DescriptionFormProps): ReactElement {
   const { t } = useTranslation("profile-creation");
 
   return (
@@ -33,10 +32,11 @@ export function DescriptionForm({
 
       <TextField
         fullWidth
+        label={t("description.label")}
         multiline
         name="description"
-        onChange={(event) => onChange(event.target.value)}
-        placeholder="Perhaps something about yourself"
+        onChange={(value) => onChange(value)}
+        placeholder={t("description.placeholder") || ""}
         rows={4}
         sx={{ paddingBottom: 2 }}
         value={value}

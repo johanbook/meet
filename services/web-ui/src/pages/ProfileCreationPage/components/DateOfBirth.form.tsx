@@ -47,7 +47,7 @@ export function DateOfBirthForm({
 
       <DatePicker
         fullWidth
-        label="Date"
+        label={t("date-of-birth.label")}
         onChange={(event) => {
           onChange(event || new Date());
           setIsTouched(true);
