@@ -42,7 +42,8 @@ export class OrganizationService {
       OrganizationRole.Member,
     );
     organization.memberships.push(membership);
-    this.organizations.save(organization);
+
+    await this.organizations.save(organization);
   }
 
   async checkIfMember(
