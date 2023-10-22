@@ -47,13 +47,13 @@ export class UserIdService {
   }
 
   async fetchUserIdByEmail(email: string): Promise<string | undefined> {
-    const { data } = await axios.post<Record<string, string>>(
-      `${AUTH_API_URL}/userinfo/list-by-email`,
+    const resp = await axios.post<Record<string, string>>(
+      `${AUTH_API_URL}/userinfo/email`,
       {
-        emails: [email],
+        email,
       },
     );
 
-    return data[email];
+    return resp.data[email];
   }
 }
