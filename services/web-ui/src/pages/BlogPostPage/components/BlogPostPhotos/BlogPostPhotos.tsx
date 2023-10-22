@@ -29,7 +29,6 @@ export function BlogPostPhotos({ photos }: BlogPostPhotosProps): ReactElement {
           height: "100%",
           marginLeft: 1,
           marginRight: 1,
-          width: "100%",
         })}
       >
         <img
@@ -39,7 +38,7 @@ export function BlogPostPhotos({ photos }: BlogPostPhotosProps): ReactElement {
           src={photo.url}
           style={{
             minHeight: 100,
-            maxWidth: "100%",
+            width: "100%",
           }}
         />
       </Box>
