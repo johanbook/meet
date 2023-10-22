@@ -26,7 +26,7 @@ export function CreateOrganizationPageContainer(): ReactElement {
     {
       name: "",
     },
-    { name: ({ name }) => validators.required(name) },
+    { name: validators.required() },
     { localStorageKey: "create-organization" }
   );
 

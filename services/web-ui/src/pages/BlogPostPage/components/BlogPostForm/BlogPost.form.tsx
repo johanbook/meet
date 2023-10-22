@@ -37,7 +37,7 @@ export function BlogPostForm(): React.ReactElement {
       photos: [],
     },
     {
-      content: ({ content }) => validators.required(content),
+      content: validators.required(),
       descriptions: () => false,
       photos: () => false,
     },

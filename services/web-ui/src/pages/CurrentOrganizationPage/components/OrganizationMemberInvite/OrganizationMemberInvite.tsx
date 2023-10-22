@@ -32,7 +32,7 @@ export function OrganizationMemberInvite(): ReactElement {
   const form = useForm<AddMemberToOrganizationViaEmailCommand>(
     { email: "" },
     {
-      email: ({ email }) => validators.required(email),
+      email: validators.required(),
     }
   );
 

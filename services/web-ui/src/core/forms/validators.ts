@@ -1,9 +1,17 @@
-import { ValidationResult } from "./types";
+import { Validator } from "./types";
 
-export function required<T>(value: T): ValidationResult {
-  if (!value) {
-    return "This field is required";
-  }
+/* eslint-disable unicorn/consistent-function-scoping */
 
-  return false;
+export function required<T>(): Validator<T> {
+  const validator: Validator<T> = (form, { name, t }) => {
+    const value = form[name];
+
+    if (!value) {
+      return t("validation.required");
+    }
+
+    return false;
+  };
+
+  return validator;
 }

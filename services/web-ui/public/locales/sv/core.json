@@ -2,5 +2,8 @@
   "general": {
     "cancel": "Avbryt",
     "confirm": "Bekräfta"
+  },
+  "validation": {
+    "required": "Detta fält är obligatoriskt"
   }
 }

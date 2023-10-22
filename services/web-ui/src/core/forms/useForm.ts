@@ -1,3 +1,5 @@
+import { useTranslation } from "src/core/i18n";
+
 import { Form, FormValue, Validators } from "./types";
 import { useLocalStorage } from "./useLocalStorage";
 import { getValue, toForm } from "./utils";
@@ -20,8 +22,13 @@ export function useForm<T>(
     }
   );
 
-  const checkIfValid = () =>
-    Object.values<FormValue<T[keyof T]>>(form).every((value) => !value.error);
+  const { t } = useTranslation("core");
+
+  function checkIfValid() {
+    return Object.values<FormValue<T[keyof T]>>(form).every(
+      (value) => !value.error
+    );
+  }
 
   /** Updates form **without** without performing any validation */
   function handleSetState(value: Partial<T>): void {
@@ -46,7 +53,7 @@ export function useForm<T>(
       const validator = validators[key];
       const currentValue = getValue(newForm);
 
-      const result = validator(currentValue, { form: newForm, name: key });
+      const result = validator(currentValue, { form: newForm, name: key, t });
 
       /* eslint-disable-next-line unicorn/prefer-logical-operator-over-ternary */
       newForm[key].error = result ? result : undefined;
