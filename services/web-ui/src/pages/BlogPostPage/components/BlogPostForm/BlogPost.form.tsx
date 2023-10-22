@@ -42,7 +42,8 @@ export function BlogPostForm(): React.ReactElement {
       photos: () => false,
     },
     {
-      localStorageKey: "create-blog-post-form",
+      // TODO: Enable when there is proper image serialization
+      // localStorageKey: "create-blog-post-form",
     }
   );
 
