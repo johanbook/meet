@@ -5,6 +5,7 @@ import { Box, Container, List, Toolbar } from "@mui/material";
 
 import { AppBar } from "src/components/ui/AppBar";
 import { Drawer } from "src/components/ui/Drawer";
+import { DRAWER_WIDTH } from "src/components/ui/Drawer/DesktopDrawer";
 import { useIsMobile } from "src/hooks/useIsMobile";
 
 import { BottomNavigation } from "./BottomNavigation";
@@ -47,6 +48,7 @@ export function Nav(): ReactElement {
         sx={{
           display: "flex",
           flexDirection: "column",
+          marginLeft: isMobile ? undefined : `${DRAWER_WIDTH}px`,
           paddingLeft: 3,
           paddingRight: 3,
           paddingTop: 1,
