@@ -9,6 +9,8 @@ import {
   ListItemText,
 } from "@mui/material";
 
+import { useTranslation } from "src/core/i18n";
+
 import { NavItem } from "./desktopItems";
 
 export interface NavLinkListItemProps {
@@ -17,6 +19,7 @@ export interface NavLinkListItemProps {
 
 export function NavLinkListItem({ item }: NavLinkListItemProps): ReactElement {
   const match = useMatch(item.url);
+  const { t } = useTranslation("core");
 
   return (
     <ListItem>
@@ -26,7 +29,7 @@ export function NavLinkListItem({ item }: NavLinkListItemProps): ReactElement {
         </ListItemIcon>
 
         <ListItemText
-          primary={item.name}
+          primary={t(item.name)}
           primaryTypographyProps={{
             sx: {
               fontWeight: match ? 600 : 400,

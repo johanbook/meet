@@ -3,6 +3,11 @@
     "cancel": "Avbryt",
     "confirm": "Bekräfta"
   },
+  "navigation": {
+    "blog": "Blog",
+    "chat": "Konversationer",
+    "profile": "Profil"
+  },
   "validation": {
     "required": "Detta fält är obligatoriskt"
   }

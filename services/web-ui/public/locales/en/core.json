@@ -3,6 +3,11 @@
     "cancel": "Cancel",
     "confirm": "Confirm"
   },
+  "navigation": {
+    "blog": "Blog",
+    "chat": "Conversations",
+    "profile": "Profile"
+  },
   "validation": {
     "required": "This field is required"
   }

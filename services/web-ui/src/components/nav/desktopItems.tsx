@@ -14,12 +14,12 @@ export interface NavItem {
 export const desktopNavItems: NavItem[] = [
   {
     Icon: Feed,
-    name: "Blogs",
+    name: "navigation.blog",
     url: "/",
   },
   {
     Icon: Chat,
-    name: "Conversations",
+    name: "navigation.chat",
     url: "/chat",
   },
 ];
@@ -27,7 +27,7 @@ export const desktopNavItems: NavItem[] = [
 export const bottomNavItems: NavItem[] = [
   {
     Icon: AccountCircle,
-    name: "Profile",
+    name: "navigation.profile",
     url: "/profile",
   },
 ];
