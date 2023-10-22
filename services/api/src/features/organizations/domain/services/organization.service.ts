@@ -28,8 +28,12 @@ export class OrganizationService {
 
   async addMember(organizationId: number, profileId: number): Promise<void> {
     const organization = await this.organizations.findOne({
-      relations: { memberships: true },
-      where: { id: organizationId },
+      relations: {
+        memberships: true,
+      },
+      where: {
+        id: organizationId,
+      },
     });
 
     if (!organization) {

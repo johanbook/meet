@@ -1,4 +1,4 @@
-import { NotFoundException } from "@nestjs/common";
+import { ConflictException, NotFoundException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
@@ -30,6 +30,15 @@ export class AddMemberToOrganizationHandler
 
     if (!profileExists) {
       throw new NotFoundException("Profile not found");
+    }
+
+    const isAlreadyMember = await this.organizationService.checkIfMember(
+      command.profileId,
+      currentOrganizationId,
+    );
+
+    if (isAlreadyMember) {
+      throw new ConflictException("Profile already member of organization");
     }
 
     await this.organizationService.addMember(
