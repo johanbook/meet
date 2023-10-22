@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { useMatch } from "react-router";
-import { NavLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 import {
   ListItem,
@@ -20,19 +20,17 @@ export function NavLinkListItem({ item }: NavLinkListItemProps): ReactElement {
 
   return (
     <ListItem>
-      <ListItemButton
-        component={NavLink}
-        selected={Boolean(match)}
-        to={item.url}
-      >
+      <ListItemButton component={RouterLink} to={item.url}>
         <ListItemIcon>
-          <item.Icon />
+          <item.Icon color={match ? "secondary" : undefined} />
         </ListItemIcon>
 
         <ListItemText
           primary={item.name}
-          sx={{
-            fontWeight: match ? 600 : 400,
+          primaryTypographyProps={{
+            sx: {
+              fontWeight: match ? 600 : 400,
+            },
           }}
         />
       </ListItemButton>

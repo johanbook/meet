@@ -4,12 +4,12 @@ import { Outlet } from "react-router-dom";
 import { Box, Container, List, Toolbar } from "@mui/material";
 
 import { AppBar } from "src/components/ui/AppBar";
-import { BottomNavigation } from "src/components/ui/BottomNavigation";
 import { Drawer } from "src/components/ui/Drawer";
 import { useIsMobile } from "src/hooks/useIsMobile";
 
+import { BottomNavigation } from "./BottomNavigation";
 import { NavLinkListItem } from "./NavLinkListItem";
-import { desktopNavItems } from "./desktopItems";
+import { bottomNavItems, desktopNavItems } from "./desktopItems";
 
 export interface NavProps {}
 
@@ -19,11 +19,25 @@ export function Nav(): ReactElement {
   return (
     <Box sx={{ height: "100vh", minHeight: "100%" }}>
       <Drawer>
-        <List>
-          {desktopNavItems.map((item) => (
-            <NavLinkListItem item={item} key={item.url} />
-          ))}
-        </List>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
+          }}
+        >
+          <List sx={{ flexGrow: 1 }}>
+            {desktopNavItems.map((item) => (
+              <NavLinkListItem item={item} key={item.url} />
+            ))}
+          </List>
+
+          <List>
+            {bottomNavItems.map((item) => (
+              <NavLinkListItem item={item} key={item.url} />
+            ))}
+          </List>
+        </Box>
       </Drawer>
 
       <AppBar />

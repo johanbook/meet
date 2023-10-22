@@ -26,7 +26,14 @@ export function DesktopDrawer({ children }: DrawerProps): React.ReactElement {
         variant="permanent"
       >
         <Toolbar />
-        <Box sx={{ overflow: "auto" }}>{children}</Box>
+        <Box
+          sx={{
+            height: "100%",
+            overflow: "auto",
+          }}
+        >
+          {children}
+        </Box>
       </MuiDrawer>
     </>
   );

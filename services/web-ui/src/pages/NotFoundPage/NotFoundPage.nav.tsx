@@ -2,8 +2,8 @@ import React from "react";
 
 import { Box, Toolbar } from "@mui/material";
 
+import { BottomNavigation } from "src/components/nav/BottomNavigation";
 import { AppBar } from "src/components/ui/AppBar";
-import { BottomNavigation } from "src/components/ui/BottomNavigation";
 
 export interface NotFoundNavProps {
   children: React.ReactNode;
