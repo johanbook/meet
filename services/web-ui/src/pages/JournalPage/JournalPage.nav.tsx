@@ -35,6 +35,7 @@ export function JournalPageNav({
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <DatePicker
+            fullWidth
             label="From"
             onChange={(from) => onDateChange({ ...values, from })}
             value={values.from}
@@ -43,6 +44,7 @@ export function JournalPageNav({
 
         <Grid item xs={6}>
           <DatePicker
+            fullWidth
             label="To"
             onChange={(to) => onDateChange({ ...values, to })}
             value={values.to}
