@@ -8,6 +8,7 @@ import { map } from "src/core/mapper";
 
 import { OrganizationMembership } from "../../infrastructure/entities/organization-membership.entity";
 import { Organization } from "../../infrastructure/entities/organization.entity";
+import { MemberAddedToOrganizaionEvent } from "../events/member-added-to-organization.event";
 import { OrganizationCreatedEvent } from "../events/organization-created.event";
 import { MembershipService } from "./membership.service";
 
@@ -48,6 +49,13 @@ export class OrganizationService {
     organization.memberships.push(membership);
 
     await this.organizations.save(organization);
+
+    const event = map(MemberAddedToOrganizaionEvent, {
+      organizationId,
+      profileId,
+    });
+
+    this.eventBus.publish(event);
   }
 
   async checkIfMember(
