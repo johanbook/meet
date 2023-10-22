@@ -61,10 +61,7 @@ export function OrganizationListPageContainer(): React.ReactElement {
       {
         onError: () => snackbar.error(t("actions.activate.error")),
         onSuccess: () => {
-          queryClient.invalidateQueries([
-            CacheKeysConstants.BlogPosts,
-            CacheKeysConstants.CurrentOrganization,
-          ]);
+          queryClient.invalidateQueries();
           navigate("/");
           snackbar.success(t("actions.activate.success"));
         },
