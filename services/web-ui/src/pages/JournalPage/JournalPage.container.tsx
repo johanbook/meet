@@ -9,7 +9,6 @@ import { getDateDaysAgo } from "src/utils/time";
 
 import { JournalPageComponent } from "./JournalPage.component";
 import { JournalPageNav } from "./JournalPage.nav";
-import { JournalPageSkeleton } from "./JournalPage.skeleton";
 
 export function JournalPageContainer(): React.ReactElement {
   const [dateRange, setDateRange] = useState({
@@ -33,12 +32,14 @@ export function JournalPageContainer(): React.ReactElement {
   if (isLoading) {
     return (
       <JournalPageNav onDateChange={setDateRange} values={dateRange}>
-        <JournalPageSkeleton />
+        <Box sx={{ marginTop: 2 }}>
+          <JournalPageComponent data={[]} loading />
+        </Box>
       </JournalPageNav>
     );
   }
 
-  if (!data || data.entries.length === 0) {
+  if (!data) {
     return (
       <JournalPageNav onDateChange={setDateRange} values={dateRange}>
         <Typography>No entries found in journal</Typography>

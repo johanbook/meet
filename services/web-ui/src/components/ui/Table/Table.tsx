@@ -11,6 +11,7 @@ export function Table({
   columns,
   height = 400,
   rows,
+  ...props
 }: TableProps): ReactElement {
   return (
     <Box sx={{ height, width: "100%" }}>
@@ -26,6 +27,7 @@ export function Table({
         }}
         pageSizeOptions={[5]}
         disableRowSelectionOnClick
+        {...props}
       />
     </Box>
   );

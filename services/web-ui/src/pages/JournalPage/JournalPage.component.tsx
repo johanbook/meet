@@ -22,10 +22,14 @@ const columns: Column<JournalEntryDetails>[] = [
 
 interface JournalPageComponentProps {
   data: JournalEntryDetails[];
+  loading?: boolean;
 }
 
 export function JournalPageComponent({
   data,
+  loading,
 }: JournalPageComponentProps): ReactElement {
-  return <Table columns={columns} height="60vh" rows={data} />;
+  return (
+    <Table columns={columns} height="60vh" loading={loading} rows={data} />
+  );
 }
