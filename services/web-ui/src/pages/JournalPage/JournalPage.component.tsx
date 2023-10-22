@@ -30,6 +30,16 @@ export function JournalPageComponent({
   loading,
 }: JournalPageComponentProps): ReactElement {
   return (
-    <Table columns={columns} height="60vh" loading={loading} rows={data} />
+    <Table
+      columns={columns}
+      height="60vh"
+      initialState={{
+        sorting: {
+          sortModel: [{ field: "created", sort: "desc" }],
+        },
+      }}
+      loading={loading}
+      rows={data}
+    />
   );
 }
