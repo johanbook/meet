@@ -103,6 +103,11 @@ export function SettingsPageContainer(): React.ReactElement {
           <Link to="/group">{t("advanced.links.current-organization")}</Link>
         </ListItem>
         <ListItem>
+          <Link to="/group/create">
+            {t("advanced.links.create-organization")}
+          </Link>
+        </ListItem>
+        <ListItem>
           <Link to="/journal">{t("advanced.links.journal")}</Link>
         </ListItem>
       </List>

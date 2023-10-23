@@ -1,7 +1,6 @@
-import React from "react";
+import { ReactElement } from "react";
 
-import { Button, TextField, Typography } from "@mui/material";
-
+import { Button, TextField, Typography } from "src/components/ui";
 import { Center } from "src/components/ui/Center";
 import { VerticalCenter } from "src/components/ui/VerticalCenter";
 import { useTranslation } from "src/core/i18n";
@@ -16,7 +15,7 @@ export function NameForm({
   onChange,
   onNext,
   value,
-}: NameFormProps): React.ReactElement {
+}: NameFormProps): ReactElement {
   const { t } = useTranslation("profile-creation");
 
   return (
@@ -31,9 +30,10 @@ export function NameForm({
 
       <TextField
         fullWidth
+        label={t("name.label")}
         name="name"
-        onChange={(event) => onChange(event.target.value)}
-        placeholder="Name"
+        onChange={(value) => onChange(value)}
+        placeholder={t("name.placeholder") || ""}
         sx={{ paddingBottom: 2 }}
         value={value}
       />

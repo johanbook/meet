@@ -19,6 +19,7 @@ import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 import { getDate } from "src/utils/time";
 
+import { OrganizationMemberInvite } from "../OrganizationMemberInvite";
 import { OrganizationMemberMenu } from "../OrganizationMemberMenu";
 
 export function OrganizationMembers(): React.ReactElement {
@@ -47,6 +48,8 @@ export function OrganizationMembers(): React.ReactElement {
       <Typography sx={{ paddingTop: 2 }} variant="h5">
         {t("members.header")}
       </Typography>
+
+      <OrganizationMemberInvite />
 
       <List>
         {data.map((member) => (

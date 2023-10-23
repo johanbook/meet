@@ -18,7 +18,7 @@ export function ProfilePageComponent({
   return (
     <>
       <Center>
-        <Avatar src={profile.photo?.url} />
+        <Avatar src={profile.photo?.url} sx={{ height: 150, width: 150 }} />
       </Center>
 
       <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">

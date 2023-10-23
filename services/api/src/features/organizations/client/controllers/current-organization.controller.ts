@@ -1,10 +1,21 @@
-import { Body, Controller, Get, Patch, Post, Put, Query } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Patch,
+  Post,
+  Put,
+  Query,
+} from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
 import { RequiresOrganizationPermissions } from "src/core/authorization";
 
+import { AddMemberToOrganizationViaEmailCommand } from "../../application/contracts/commands/add-member-to-organization-via-email.command";
 import { AddMemberToOrganizationCommand } from "../../application/contracts/commands/add-member-to-organization.command";
+import { RemoveMemberFromCurrentOrganizationCommand } from "../../application/contracts/commands/remove-member-from-current-organization.command";
 import { UpdateMemberRoleCommand } from "../../application/contracts/commands/update-member-role.command";
 import { UpdateOrganizationCommand } from "../../application/contracts/commands/update-organization.command";
 import { CurrentOrganizationDetails } from "../../application/contracts/dtos/current-organization.dto";
@@ -44,6 +55,23 @@ export class CurrentOrganizationController {
   )
   async addMemberToOrganization(
     @Body() command: AddMemberToOrganizationCommand,
+  ): Promise<null> {
+    return await this.commandBus.execute(command);
+  }
+
+  @Post("/members/email")
+  @RequiresOrganizationPermissions(
+    organizationPermissions.CurrentOrganization.Members.Add,
+  )
+  async addMemberToOrganizationViaEmail(
+    @Body() command: AddMemberToOrganizationViaEmailCommand,
+  ): Promise<null> {
+    return await this.commandBus.execute(command);
+  }
+
+  @Delete("/members")
+  async removeMemberFromCurrentOrganization(
+    @Query() command: RemoveMemberFromCurrentOrganizationCommand,
   ): Promise<null> {
     return await this.commandBus.execute(command);
   }

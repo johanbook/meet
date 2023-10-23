@@ -8,12 +8,15 @@ import dayjs, { Dayjs } from "dayjs";
 
 export interface DatePickerProps {
   fullWidth?: boolean;
+  label: string;
   onChange: (date: Date) => void;
   sx?: SxProps;
   value: Date;
 }
 
 export function DatePicker({
+  fullWidth,
+  label,
   onChange,
   value,
   ...props
@@ -21,11 +24,16 @@ export function DatePicker({
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <MuiDatePicker
-        label="Controlled picker"
+        label={label}
         onChange={(newValue: Dayjs | null) => {
           if (newValue) {
             onChange(newValue.toDate());
           }
+        }}
+        slotProps={{
+          textField: {
+            fullWidth,
+          },
         }}
         value={dayjs(value)}
         {...props}

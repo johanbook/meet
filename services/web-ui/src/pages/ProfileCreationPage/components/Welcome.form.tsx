@@ -1,7 +1,6 @@
-import React from "react";
+import { ReactElement } from "react";
 
-import { Button, Typography } from "@mui/material";
-
+import { Button, Typography } from "src/components/ui";
 import { Center } from "src/components/ui/Center";
 import { VerticalCenter } from "src/components/ui/VerticalCenter";
 import { useTranslation } from "src/core/i18n";
@@ -10,7 +9,7 @@ export interface WelcomeFormProps {
   onNext: () => void;
 }
 
-export function WelcomeForm({ onNext }: WelcomeFormProps): React.ReactElement {
+export function WelcomeForm({ onNext }: WelcomeFormProps): ReactElement {
   const { t } = useTranslation("profile-creation");
 
   return (

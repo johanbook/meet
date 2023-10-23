@@ -1,0 +1,17 @@
+{
+  "general": {
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "navigation": {
+    "blog": "Blog",
+    "chat": "Conversations",
+    "profile": "Profile"
+  },
+  "table": {
+    "no-data": "No data"
+  },
+  "validation": {
+    "required": "This field is required"
+  }
+}
