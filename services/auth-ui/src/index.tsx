@@ -2,7 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { App } from "./App";
+import { registerI18n } from "./core/i18n";
 import { reportWebVitals } from "./utils/reportWebVitals";
+
+registerI18n();
 
 ReactDOM.render(
   <React.StrictMode>
