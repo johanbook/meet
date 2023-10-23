@@ -37,7 +37,7 @@ export class NotifyOrganizationOnPostedBlogPostHandler
     }
 
     const notification: INotification = {
-      description: `${profile.name} made a new blog post in your organization. Go in and take a look.`,
+      description: `${profile.name} made a new blog post in your organization.`,
       message: `${profile.name} made a new post`,
       resourcePath: `/blog/${event.id}`,
       type: NotificationEventsConstants.NEW_BLOG_POST,
@@ -46,7 +46,7 @@ export class NotifyOrganizationOnPostedBlogPostHandler
     await this.notificationService.notifyOrganization(
       event.organizationId,
       notification,
-      [],
+      [event.profileId],
     );
   }
 }

@@ -6,10 +6,13 @@ import { UserIdService } from "src/core/authentication";
 import { Logger } from "src/core/logging";
 import { OrganizationMembership } from "src/features/organizations/infrastructure/entities/organization-membership.entity";
 import { Profile } from "src/features/profiles";
+import { getRequiredStringConfig } from "src/utils/config.helper";
 
 import { EmailService } from "../email/domain/services/email.service";
 import { NotificationGateway } from "./notification.gateway";
 import { INotification } from "./types";
+
+const UI_DOMAIN = getRequiredStringConfig("UI_DOMAIN");
 
 @Injectable()
 export class NotificationService {
@@ -91,7 +94,7 @@ export class NotificationService {
       receivers: targetEmails,
       subject: notification.message,
       text: notification.description,
-      url: "localhost" + notification.resourcePath,
+      url: UI_DOMAIN + notification.resourcePath,
     });
   }
 }
