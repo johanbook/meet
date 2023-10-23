@@ -12,4 +12,6 @@ export function createDummyEnvs(): void {
   process.env["SMTP_HOST"] = "my-smtp-host";
   process.env["SMTP_PASSWORD"] = "my-smtp-password";
   process.env["SMTP_USERNAME"] = "my-smtp-username";
+
+  process.env["UI_DOMAIN"] = "localhost";
 }

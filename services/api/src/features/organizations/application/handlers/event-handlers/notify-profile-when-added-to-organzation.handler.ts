@@ -40,6 +40,7 @@ export class NotifyReceiverOnPostedChatMessageHandler
       data: {},
       description: `You were added to an organization sent you a message in Meet`,
       message: `You were added to the organization ${organization.name}`,
+      resourcePath: "/",
       type: NotificationEventsConstants.ADDED_TO_ORGANIZATION,
     };
 

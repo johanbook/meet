@@ -6,5 +6,6 @@ export type INotification = {
   description: string;
   data?: NotificationData;
   message: string;
+  resourcePath: string;
   type: NotificationEventsConstants;
 };
