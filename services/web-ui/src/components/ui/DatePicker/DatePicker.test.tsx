@@ -4,6 +4,6 @@ import { DatePicker } from ".";
 
 describe("<DatePicker />", () => {
   it("renders", () => {
-    render(<DatePicker onChange={jest.fn()} value={new Date()} />);
+    render(<DatePicker label="Date" onChange={jest.fn()} value={new Date()} />);
   });
 });

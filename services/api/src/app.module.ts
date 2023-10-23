@@ -16,7 +16,6 @@ import { minioOptions } from "src/core/object-storage/minio.config";
 import { RequestContextModule } from "src/core/request-context/request-context.module";
 import { BlogsModule } from "src/features/blogs/blogs.module";
 import { ChatModule } from "src/features/chat/chat.module";
-import { MatchesModule } from "src/features/matches/matches.module";
 import { OrganizationModule } from "src/features/organizations/organization.module";
 import { ProfileModule } from "src/features/profiles/profile.module";
 import { SettingsModule } from "src/features/settings/settings.module";
@@ -32,7 +31,6 @@ import { dataSourceOptions } from "src/infrastructure/database/data-source.confi
     HealthChecksModule,
     JournalModule,
     LoggingModule,
-    MatchesModule,
     NotificationModule,
     ScheduleModule.forRoot(),
     RequestContextModule,

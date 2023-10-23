@@ -14,9 +14,10 @@ import { CreateBlogPostRequest } from "src/api";
 import { blogsApi } from "src/apis";
 import { Photo } from "src/components/ui/Photo";
 import { UploadIconButton } from "src/components/ui/UploadIconButton";
-import { useForm } from "src/core/forms";
+import { useForm, validators } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants } from "src/core/query";
+import { useSnackbar } from "src/core/snackbar";
 
 export function BlogPostForm(): React.ReactElement {
   const mutation = useMutation((command: CreateBlogPostRequest) =>
@@ -25,14 +26,36 @@ export function BlogPostForm(): React.ReactElement {
 
   const queryClient = useQueryClient();
 
+  const snackbar = useSnackbar();
+
   const { t } = useTranslation("blog");
 
-  const form = useForm<CreateBlogPostRequest>({ content: "", photos: [] });
+  const form = useForm<CreateBlogPostRequest>(
+    {
+      content: "",
+      descriptions: [],
+      photos: [],
+    },
+    {
+      content: validators.required(),
+      descriptions: () => false,
+      photos: () => false,
+    },
+    {
+      // TODO: Enable when there is proper image serialization
+      // localStorageKey: "create-blog-post-form",
+    }
+  );
 
   async function handleSubmit(event: SyntheticEvent): Promise<void> {
     event.preventDefault();
 
-    await mutation.mutateAsync(form.value, {
+    const { data } = form.validate();
+
+    await mutation.mutateAsync(data, {
+      onError: () => {
+        snackbar.error(t("actions.create.error"));
+      },
       onSuccess: () => {
         queryClient.invalidateQueries([CacheKeysConstants.BlogPosts]);
         form.reset();
@@ -54,7 +77,7 @@ export function BlogPostForm(): React.ReactElement {
                 ) : (
                   <IconButton
                     color="primary"
-                    disabled={!form.value.content}
+                    disabled={!form.state.content.value}
                     type="submit"
                   >
                     <Send />
@@ -69,7 +92,7 @@ export function BlogPostForm(): React.ReactElement {
                   multiple
                   onChange={(photos) =>
                     form.setValue({
-                      photos: [...(form.value?.photos || []), ...photos],
+                      photos: [...(form.state.photos.value || []), ...photos],
                     })
                   }
                 >
@@ -82,10 +105,10 @@ export function BlogPostForm(): React.ReactElement {
           onChange={(event) => form.setValue({ content: event.target.value })}
           placeholder={t("form.placeholder") || ""}
           rows={4}
-          value={form.value.content}
+          value={form.state.content.value}
         />
 
-        {form.value.photos?.map((photo, index) => (
+        {form.state.photos.value?.map((photo, index) => (
           <Photo
             alt=""
             key={index}

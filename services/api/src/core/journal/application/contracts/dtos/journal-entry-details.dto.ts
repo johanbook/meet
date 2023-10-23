@@ -7,5 +7,7 @@ export class JournalEntryDetails {
 
   public readonly created!: Date;
 
+  public readonly id!: number;
+
   public readonly payload!: unknown;
 }

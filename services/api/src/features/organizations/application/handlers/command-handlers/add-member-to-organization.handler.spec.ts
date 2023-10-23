@@ -31,7 +31,7 @@ describe(AddMemberToOrganizationHandler.name, () => {
 
     organizationService = new OrganizationService(
       eventBus,
-      {} as any,
+      { checkIfMember: jest.fn(() => false) } as any,
       organizations,
     );
     commandHandler = new AddMemberToOrganizationHandler(

@@ -25,7 +25,7 @@ const MATCHES_DATA: ConnectionDetails[] = [
 ];
 
 export default {
-  title: "Pages/Connections/Views",
+  title: "Pages/Conversations/Views",
 } as Meta;
 
 export const Default = {

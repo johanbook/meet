@@ -1,26 +1,29 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+
+import { Typography } from "@mui/material";
 
 import { profileApi } from "src/apis";
-import { CurrentProfileDetails } from "src/components/CurrentProfileDetails";
-import { ProfileCreator } from "src/components/ProfileCreator";
 import { CacheKeysConstants, useQuery } from "src/core/query";
+import { ErrorView } from "src/views/ErrorView";
 
-import { ErrorPage } from "../ErrorPage";
-import { SettingsPage } from "../SettingsPage";
+import { ProfilePageComponent } from "./ProfilePage.component";
 import { ProfilePageHeader } from "./ProfilePage.header";
 import { ProfilePageSkeleton } from "./ProfilePage.skeleton";
 
 export function ProfilePageContainer(): React.ReactElement {
-  const { error, data, isLoading, refetch } = useQuery(
-    CacheKeysConstants.CurrentProfile,
-    () => profileApi.getCurrentProfile()
+  const { id } = useParams();
+
+  const { error, data, isLoading } = useQuery(
+    [CacheKeysConstants.CurrentProfile, id],
+    () => profileApi.getProfile({ id: Number(id) })
   );
 
   if (error) {
     return (
       <>
         <ProfilePageHeader />
-        <ErrorPage error={error} />
+        <ErrorView error={error} />
       </>
     );
   }
@@ -39,7 +42,7 @@ export function ProfilePageContainer(): React.ReactElement {
       <>
         <ProfilePageHeader />
 
-        <ProfileCreator onCreateProfile={refetch} />
+        <Typography>Nothing found</Typography>
       </>
     );
   }
@@ -48,9 +51,7 @@ export function ProfilePageContainer(): React.ReactElement {
     <>
       <ProfilePageHeader />
 
-      <CurrentProfileDetails profile={data} refetchData={refetch} />
-
-      <SettingsPage />
+      <ProfilePageComponent profile={data} />
     </>
   );
 }

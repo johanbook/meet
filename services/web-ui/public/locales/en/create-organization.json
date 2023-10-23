@@ -1,0 +1,19 @@
+{
+  "actions": {
+    "cancel": {
+      "button": "Cancel"
+    },
+    "submit": {
+      "button": "Create",
+      "error": "Something went wrong when trying to create your group",
+      "success": "Your now group has been created"
+    }
+  },
+  "fields": {
+    "name": {
+      "label": "Name"
+    }
+  },
+  "description": "By creating a new group you can organize friends and content in one place",
+  "header": "Create a new group"
+}

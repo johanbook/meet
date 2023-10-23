@@ -1,0 +1,19 @@
+{
+  "actions": {
+    "cancel": {
+      "button": "Avbryt"
+    },
+    "submit": {
+      "button": "Skapa",
+      "error": "Något gick fel när din grupp skulle skapas. Försök igen senare.",
+      "success": "Din nya grupp har nu skapats"
+    }
+  },
+  "fields": {
+    "name": {
+      "label": "Namn"
+    }
+  },
+  "description": "Genom att skapa ny grupp kan du samla vänner och innehåll på en plats",
+  "header": "Skapa ny grupp"
+}

@@ -8,6 +8,7 @@ import { map } from "src/core/mapper";
 
 import { OrganizationMembership } from "../../infrastructure/entities/organization-membership.entity";
 import { Organization } from "../../infrastructure/entities/organization.entity";
+import { MemberAddedToOrganizationEvent } from "../events/member-added-to-organization.event";
 import { OrganizationCreatedEvent } from "../events/organization-created.event";
 import { MembershipService } from "./membership.service";
 
@@ -28,8 +29,12 @@ export class OrganizationService {
 
   async addMember(organizationId: number, profileId: number): Promise<void> {
     const organization = await this.organizations.findOne({
-      relations: { memberships: true },
-      where: { id: organizationId },
+      relations: {
+        memberships: true,
+      },
+      where: {
+        id: organizationId,
+      },
     });
 
     if (!organization) {
@@ -42,7 +47,15 @@ export class OrganizationService {
       OrganizationRole.Member,
     );
     organization.memberships.push(membership);
-    this.organizations.save(organization);
+
+    await this.organizations.save(organization);
+
+    const event = map(MemberAddedToOrganizationEvent, {
+      organizationId,
+      profileId,
+    });
+
+    this.eventBus.publish(event);
   }
 
   async checkIfMember(

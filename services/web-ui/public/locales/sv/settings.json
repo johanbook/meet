@@ -2,6 +2,7 @@
   "advanced": {
     "header": "Avancerade inställningar",
     "links": {
+      "create-organization": "Skapa ny grupp",
       "current-organization": "Nuvarande grupp",
       "journal": "Journal",
       "list-organizations": "Tillgängliga grupper",

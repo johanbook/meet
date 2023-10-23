@@ -2,6 +2,7 @@
   "advanced": {
     "header": "Advanded settings",
     "links": {
+      "create-organization": "Create new group",
       "current-organization": "Current group",
       "journal": "Journal",
       "list-organizations": "Available groups",

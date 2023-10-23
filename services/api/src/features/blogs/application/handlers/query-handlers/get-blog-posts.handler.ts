@@ -5,14 +5,23 @@ import { Repository } from "typeorm";
 import { map, mapArray } from "src/core/mapper";
 import { PhotoService } from "src/core/photos";
 import { QueryService } from "src/core/query";
+import { BlogPostComment } from "src/features/blogs/infrastructure/entities/blog-post-comment.entity";
 import { BlogPost } from "src/features/blogs/infrastructure/entities/blog-post.entity";
 import { CurrentOrganizationService } from "src/features/organizations";
 import { CurrentProfileService } from "src/features/profiles";
 
+import { BlogPostCommentDetails } from "../../contracts/dtos/blog-post-comment.dto";
 import { BlogPostDetails } from "../../contracts/dtos/blog-post-detail.dto";
 import { BlogPostPhotoDetails } from "../../contracts/dtos/blog-post-photo.dto";
 import { BlogPostProfileDetails } from "../../contracts/dtos/blog-post-profile.dto";
 import { GetBlogPostsQuery } from "../../contracts/queries/get-blog-posts.query";
+
+// Sorting inside TypeORM query causes pagination to break,
+// therefore we do this sorting outside
+const sortByDates = (x: BlogPostComment[]) =>
+  x.sort((a: BlogPostComment, b: BlogPostComment) =>
+    a.createdAt > b.createdAt ? 1 : -1,
+  );
 
 @QueryHandler(GetBlogPostsQuery)
 export class GetBlogPostsHandler
@@ -43,6 +52,11 @@ export class GetBlogPostsHandler
       query,
       required: {
         relations: {
+          comments: {
+            profile: {
+              profilePhoto: true,
+            },
+          },
           photos: true,
           profile: {
             profilePhoto: true,
@@ -55,6 +69,25 @@ export class GetBlogPostsHandler
     });
 
     return mapArray(BlogPostDetails, foundBlogPosts, (post) => ({
+      comments: mapArray(
+        BlogPostCommentDetails,
+        sortByDates(post.comments),
+        (comment) => ({
+          content: comment.content,
+          createdAt: comment.createdAt.toISOString(),
+          id: comment.id,
+          profile: map(BlogPostProfileDetails, {
+            id: comment.profile.id,
+            imageUrl:
+              comment.profile.profilePhoto &&
+              this.photoService.getUrl(
+                comment.profile.profilePhoto,
+                "profile-photo",
+              ),
+            name: comment.profile.name,
+          }),
+        }),
+      ),
       content: post.content,
       createdAt: post.createdAt.toISOString(),
       id: post.id,
