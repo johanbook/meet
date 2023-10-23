@@ -22,7 +22,7 @@
     "@fastify/static": "^6.11.2",
     "@nestjs/common": "^9.4.3",
     "@nestjs/core": "^9.4.3",
-    "@nestjs/cqrs": "^9.0.3",
+    "@nestjs/cqrs": "^9.0.4",
     "@nestjs/platform-express": "^9.4.3",
     "@nestjs/platform-fastify": "^9.4.0",
     "@nestjs/swagger": "^6.3.0",
