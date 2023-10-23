@@ -47,6 +47,7 @@ services:
       SMTP_PASSWORD: "$SMTP_PASSWORD"
       SMTP_PORT: "$SMTP_PORT"
       SMTP_USERNAME: "$SMTP_USERNAME"
+      UI_DOMAIN: "$PROTOCOL://$DOMAIN"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=Host(`$DOMAIN`)&&PathPrefix(`/api`)"
