@@ -10,6 +10,7 @@ interface SendEmailProps {
   receivers: string[];
   subject: string;
   text: string;
+  url: string;
 }
 
 @Injectable()
@@ -21,7 +22,7 @@ export class EmailService {
     this.transporter = createTransport(emailConfig);
   }
 
-  async sendEmail({ receivers, subject, text }: SendEmailProps) {
+  async sendEmail({ receivers, subject, text, url }: SendEmailProps) {
     if (receivers.length === 0) {
       return;
     }
@@ -34,7 +35,11 @@ export class EmailService {
 
     return await this.transporter.sendMail({
       from: emailConfig.from,
-      html: createEmail({ content: text, header: subject, url: "localhost" }),
+      html: createEmail({
+        content: text,
+        header: subject,
+        url,
+      }),
       to: receivers.join(","),
       subject,
       text,

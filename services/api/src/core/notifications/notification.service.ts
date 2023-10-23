@@ -91,6 +91,7 @@ export class NotificationService {
       receivers: targetEmails,
       subject: notification.message,
       text: notification.description,
+      url: "localhost" + notification.resourcePath,
     });
   }
 }
