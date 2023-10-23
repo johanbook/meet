@@ -58,7 +58,7 @@ export class NotifyOrganizationOnPostedBlogPostCommentHandler
     }
 
     const notification: INotification = {
-      description: `${profile.name} made the comment '${event.content}' on ${blogPost.profile.name}'s post in your organization.`,
+      description: `${profile.name} commented '${event.content}' on ${blogPost.profile.name}'s post.`,
       message: `${profile.name} commented on ${blogPost.profile.name}'s post`,
       resourcePath: `/blog/${event.blogPostId}`,
       type: NotificationEventsConstants.NEW_BLOG_POST,
