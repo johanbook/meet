@@ -3,7 +3,7 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "assets": ["**/*.csv"],
+    "assets": ["**/*.csv", "**/*.html"],
     "deleteOutDir": true,
     "plugins": [
       {

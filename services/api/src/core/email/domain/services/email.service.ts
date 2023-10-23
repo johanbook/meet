@@ -4,6 +4,7 @@ import { createTransport, Transporter } from "nodemailer";
 import { Logger } from "src/core/logging";
 
 import { emailConfig } from "../../email.config";
+import { createEmail } from "./email.template";
 
 interface SendEmailProps {
   receivers: string[];
@@ -33,6 +34,7 @@ export class EmailService {
 
     return await this.transporter.sendMail({
       from: emailConfig.from,
+      html: createEmail({ content: text, header: subject, url: "localhost" }),
       to: receivers.join(","),
       subject,
       text,
