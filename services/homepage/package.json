@@ -39,7 +39,7 @@
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.46",
     "@types/react": "^18.2.21",
-    "@types/react-dom": "^18.0.11",
+    "@types/react-dom": "^18.2.8",
     "@use-gesture/react": "^10.2.26",
     "i18next": "^23.2.11",
     "i18next-browser-languagedetector": "^7.1.0",
