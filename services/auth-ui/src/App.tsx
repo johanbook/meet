@@ -1,18 +1,22 @@
-import React from "react";
+import { ReactElement, useEffect, useState } from "react";
+
+import i18n from "i18next";
 
 import { Router } from "./Router";
-import { LoadingPage } from "./pages/LoadingPage";
 import { initializeSuperTokens } from "./supertokens";
+import { LoadingView } from "./views/LoadingView";
 
-export function App(): React.ReactElement {
-  const [isInitialized, setInitialized] = React.useState(false);
+export function App(): ReactElement {
+  const [isSupertokensReady, setSupertokensIsReady] = useState(false);
+  const [i18nIsReady, setI18nIsReady] = useState(false);
 
-  React.useEffect(() => {
-    initializeSuperTokens(() => setInitialized(true));
+  useEffect(() => {
+    i18n.on("loaded", () => setI18nIsReady(true));
+    initializeSuperTokens(() => setSupertokensIsReady(true));
   }, []);
 
-  if (!isInitialized) {
-    return <LoadingPage />;
+  if (!isSupertokensReady || !i18nIsReady) {
+    return <LoadingView />;
   }
 
   return <Router />;

@@ -1,15 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import { registerI18n } from "src/core/i18n";
+import { ThemeProvider } from "src/core/theme";
+
 import { App } from "./App";
-import { registerI18n } from "./core/i18n";
 import { reportWebVitals } from "./utils/reportWebVitals";
 
 registerI18n();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.querySelector("#root") as HTMLElement
 );
