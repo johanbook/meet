@@ -64,7 +64,9 @@ jobs:
 
   build-and-publish:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    # if: github.ref == 'refs/heads/main'
+    # TODO: Reenable this when needed
+    if: github.ref == 'noop'
     env:
       GITHUB_NPM_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     defaults:
