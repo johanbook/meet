@@ -1,61 +1,57 @@
-import React from "react";
-import { useQuery } from "react-query";
+import React, { useState } from "react";
 
-import { List, ListItem, ListItemText, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { journalApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
-import { format } from "src/utils/string";
+import { CacheKeysConstants, useQuery } from "src/core/query";
+import { getDateDaysAgo } from "src/utils/time";
 
-import { JournalPageHeader } from "./JournalPage.header";
-import { JournalPageSkeleton } from "./JournalPage.skeleton";
+import { JournalPageComponent } from "./JournalPage.component";
+import { JournalPageNav } from "./JournalPage.nav";
 
 export function JournalPageContainer(): React.ReactElement {
-  const { error, data, isLoading } = useQuery("journal", () =>
-    journalApi.getJournal()
+  const [dateRange, setDateRange] = useState({
+    to: new Date(),
+    from: getDateDaysAgo(2),
+  });
+
+  const { error, data, isLoading } = useQuery(
+    [CacheKeysConstants.Journal, dateRange.from, dateRange.to],
+    () => journalApi.getJournal(dateRange)
   );
 
   if (error) {
     return (
-      <>
-        <JournalPageHeader />
+      <JournalPageNav onDateChange={setDateRange} values={dateRange}>
         <ErrorMessage error={error} />
-      </>
+      </JournalPageNav>
     );
   }
 
   if (isLoading) {
     return (
-      <>
-        <JournalPageHeader />
-        <JournalPageSkeleton />
-      </>
+      <JournalPageNav onDateChange={setDateRange} values={dateRange}>
+        <Box sx={{ marginTop: 2 }}>
+          <JournalPageComponent data={[]} loading />
+        </Box>
+      </JournalPageNav>
     );
   }
 
-  if (!data || data.entries.length === 0) {
+  if (!data) {
     return (
-      <>
-        <JournalPageHeader />
+      <JournalPageNav onDateChange={setDateRange} values={dateRange}>
         <Typography>No entries found in journal</Typography>
-      </>
+      </JournalPageNav>
     );
   }
 
   return (
-    <>
-      <JournalPageHeader />
-
-      <List>
-        {data.entries.map((element) => (
-          <ListItem>
-            <ListItemText
-              primary={format(element.commandName)}
-              secondary={element.created.toLocaleString()}
-            />
-          </ListItem>
-        ))}
-      </List>
-    </>
+    <JournalPageNav onDateChange={setDateRange} values={dateRange}>
+      <Box sx={{ marginTop: 2 }}>
+        <JournalPageComponent data={data.entries} />
+      </Box>
+    </JournalPageNav>
   );
 }

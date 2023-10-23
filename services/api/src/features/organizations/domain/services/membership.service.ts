@@ -51,7 +51,9 @@ export class MembershipService {
     currentOrganizationId: number,
   ): Promise<number[]> {
     const membershipIds = await this.memberships.find({
-      select: ["profileId"],
+      select: {
+        profileId: true,
+      },
       where: {
         organizationId: currentOrganizationId,
       },

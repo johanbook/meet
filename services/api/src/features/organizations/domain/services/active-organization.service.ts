@@ -7,7 +7,7 @@ import { CurrentProfileService } from "src/features/profiles";
 
 import { ActiveOrganization } from "../../infrastructure/entities/active-organization.entity";
 
-const ACTIVE_ORGANIZATION_CACHE_PERIOD_MS = 5000;
+const ACTIVE_ORGANIZATION_CACHE_PERIOD_MS = 10_000;
 
 @Injectable()
 export class ActiveOrganizationService {
@@ -38,8 +38,6 @@ export class ActiveOrganizationService {
     const currentProfileId =
       await this.currentProfileService.fetchCurrentProfileId();
 
-    await this.cache.delete(String(currentProfileId));
-
     let activeOrganization = await this.fetchCurrentActiveOrganization();
 
     if (!activeOrganization) {
@@ -49,6 +47,8 @@ export class ActiveOrganizationService {
 
     activeOrganization.organizationId = organizationId;
 
-    this.activeOrganizations.save(activeOrganization);
+    await this.activeOrganizations.save(activeOrganization);
+
+    await this.cache.set(currentProfileId, activeOrganization);
   }
 }

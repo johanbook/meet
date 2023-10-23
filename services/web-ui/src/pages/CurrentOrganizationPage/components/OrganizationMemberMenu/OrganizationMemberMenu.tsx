@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import { Edit, MoreVert } from "@mui/icons-material";
+import { Delete, Edit, MoreVert } from "@mui/icons-material";
 import { ListItemText } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -12,6 +12,7 @@ import { Permissions, useAuthorization } from "src/core/authorization";
 import { useDialog } from "src/core/dialog";
 import { useTranslation } from "src/core/i18n";
 
+import { OrganizationMemberRemoveDialog } from "../OrganizationMemberRemoveDialog/OrganizationMemberRemoveDialog";
 import { OrganizationMemberUpdateDialog } from "../OrganizationMemberUpdateDialog/OrganizationMemberUpdateDialog";
 
 export interface OrganizationMemberMenuProps {
@@ -28,6 +29,10 @@ export function OrganizationMemberMenu({
 
   function handleOpenEditDialog(): void {
     openDialog(OrganizationMemberUpdateDialog, { member });
+  }
+
+  function handleOpenRemoveDialog(): void {
+    openDialog(OrganizationMemberRemoveDialog, { member });
   }
 
   if (authorization.error || authorization.isLoading) {
@@ -51,6 +56,13 @@ export function OrganizationMemberMenu({
           <Edit />
         </ListItemIcon>
         <ListItemText>{t("members.menu.edit")}</ListItemText>
+      </MenuItem>
+
+      <MenuItem onClick={handleOpenRemoveDialog}>
+        <ListItemIcon>
+          <Delete />
+        </ListItemIcon>
+        <ListItemText>{t("members.menu.remove")}</ListItemText>
       </MenuItem>
     </Menu>
   );

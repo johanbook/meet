@@ -1,0 +1,17 @@
+{
+  "general": {
+    "cancel": "Avbryt",
+    "confirm": "Bekräfta"
+  },
+  "navigation": {
+    "blog": "Blog",
+    "chat": "Konversationer",
+    "profile": "Profil"
+  },
+  "table": {
+    "no-data": "Ingen data"
+  },
+  "validation": {
+    "required": "Detta fält är obligatoriskt"
+  }
+}

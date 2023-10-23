@@ -10,8 +10,8 @@ import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 import { getDate } from "src/utils/time";
+import { ErrorView } from "src/views/ErrorView";
 
-import { ErrorPage } from "../ErrorPage";
 import { OrganizationListPageNav } from "./OrganizationListPage.nav";
 import { OrganizationListPageSkeleton } from "./OrganizationListPage.skeleton";
 
@@ -34,7 +34,7 @@ export function OrganizationListPageContainer(): React.ReactElement {
   if (error) {
     return (
       <OrganizationListPageNav>
-        <ErrorPage error={error} />
+        <ErrorView error={error} />
       </OrganizationListPageNav>
     );
   }
@@ -50,7 +50,7 @@ export function OrganizationListPageContainer(): React.ReactElement {
   if (!data || data.length === 0) {
     return (
       <OrganizationListPageNav>
-        <ErrorPage error={t("organization-list.error")} />
+        <ErrorView error={t("organization-list.error")} />
       </OrganizationListPageNav>
     );
   }
@@ -59,15 +59,14 @@ export function OrganizationListPageContainer(): React.ReactElement {
     await mutation.mutateAsync(
       { organizationId: organization.id },
       {
-        onError: () => snackbar.success(t("actions.activate.error")),
+        onError: () => snackbar.error(t("actions.activate.error")),
         onSuccess: () => {
+          queryClient.invalidateQueries();
           navigate("/");
           snackbar.success(t("actions.activate.success"));
         },
       }
     );
-
-    queryClient.invalidateQueries([CacheKeysConstants.CurrentOrganization]);
   }
 
   return (

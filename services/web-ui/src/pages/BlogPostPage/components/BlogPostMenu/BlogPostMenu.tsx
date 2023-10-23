@@ -9,7 +9,9 @@ import MenuItem from "@mui/material/MenuItem";
 
 import { DeleteBlogPostCommand } from "src/api";
 import { blogsApi } from "src/apis";
+import { ConfirmationDialog } from "src/components/ui";
 import { Menu } from "src/components/ui/Menu";
+import { useDialog } from "src/core/dialog";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
@@ -20,6 +22,7 @@ interface BlogPostMenuProps {
 
 export function BlogPostMenu({ id }: BlogPostMenuProps): ReactElement {
   const { t } = useTranslation("blog");
+  const { openDialog } = useDialog();
   const queryClient = useQueryClient();
   const snackbar = useSnackbar();
 
@@ -28,7 +31,7 @@ export function BlogPostMenu({ id }: BlogPostMenuProps): ReactElement {
       blogsApi.deletelogPost({ deleteBlogPostCommand })
   );
 
-  async function handleDelete(): Promise<void> {
+  async function handleDelete(onSuccess: () => void): Promise<void> {
     await deleteMutation.mutateAsync(
       { id },
       {
@@ -36,11 +39,20 @@ export function BlogPostMenu({ id }: BlogPostMenuProps): ReactElement {
           snackbar.error(t("actions.delete.error"));
         },
         onSuccess: () => {
+          onSuccess();
           snackbar.success(t("actions.delete.success"));
           queryClient.invalidateQueries([CacheKeysConstants.BlogPosts]);
         },
       }
     );
+  }
+
+  function handleClickDelete(): void {
+    openDialog(ConfirmationDialog, {
+      description: t("actions.delete.dialog.description"),
+      onConfirm: handleDelete,
+      title: t("actions.delete.dialog.title"),
+    });
   }
 
   return (
@@ -51,7 +63,7 @@ export function BlogPostMenu({ id }: BlogPostMenuProps): ReactElement {
         </IconButton>
       )}
     >
-      <MenuItem disabled={deleteMutation.isLoading} onClick={handleDelete}>
+      <MenuItem disabled={deleteMutation.isLoading} onClick={handleClickDelete}>
         <ListItemIcon>
           <Delete />
         </ListItemIcon>

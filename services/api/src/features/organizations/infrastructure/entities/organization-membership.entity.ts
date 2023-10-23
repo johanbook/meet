@@ -4,6 +4,7 @@ import {
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
+  Unique,
 } from "typeorm";
 
 import { OrganizationRole } from "src/core/authorization/organization-roles.enum";
@@ -12,6 +13,7 @@ import { Profile } from "src/features/profiles/infrastructure/entities/profile.e
 import { Organization } from "./organization.entity";
 
 @Entity()
+@Unique(["organizationId", "profileId"])
 export class OrganizationMembership {
   @PrimaryGeneratedColumn()
   id!: number;

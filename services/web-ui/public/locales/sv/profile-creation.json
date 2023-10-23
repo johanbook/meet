@@ -8,17 +8,23 @@
   "date-of-birth": {
     "continue": "Fortsätt",
     "description": "Skriv in din födelsedag",
-    "header": "Ange födelsedag"
+    "header": "Ange födelsedag",
+    "label": "Datum",
+    "min-age": "Du måste vara minst {{minAge}} år för att fortsätta"
   },
   "description": {
     "continue": "Slutgör",
     "description": "Skriv in en kort beskrivning om dig själv",
-    "header": "Skriv en beskrivning"
+    "header": "Skriv en beskrivning",
+    "label": "Beskrivning",
+    "placeholder": "Kanske något om dig själv"
   },
   "name": {
     "continue": "Fortsätt",
     "description": "Skriv in förnamn. Detta kommer vara namn som visas för andra på platformen.",
-    "header": "Ange namn"
+    "header": "Ange namn",
+    "label": "Namn",
+    "placeholder": "Ditt namn"
   },
   "steps": {
     "date-of-birth": "Födelsedag",

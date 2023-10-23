@@ -1,3 +1,4 @@
+import { Optional } from "@nestjs/common";
 import { Type } from "class-transformer";
 import { Length, IsString, ValidateNested } from "class-validator";
 
@@ -7,7 +8,7 @@ import { Location } from "../dtos/location.dto";
 
 export class CreateProfileCommand {
   @Type(() => Date)
-  @DateIsBefore({ years: 18 })
+  @DateIsBefore({ years: 14 })
   public readonly dateOfBirth!: Date;
 
   @IsString()
@@ -18,7 +19,8 @@ export class CreateProfileCommand {
   @Length(1, 128)
   public readonly name!: string;
 
+  @Optional()
   @Type(() => Location)
   @ValidateNested()
-  public readonly recentLocation!: Location;
+  public readonly recentLocation?: Location;
 }

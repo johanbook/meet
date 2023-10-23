@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { forwardRef, Module } from "@nestjs/common";
 
 import { RequestContextModule } from "src/core/request-context/request-context.module";
 import { OrganizationModule } from "src/features/organizations/organization.module";
@@ -11,9 +11,9 @@ import { AuthorizationService } from "./domain/services/authorization.service";
   controllers: [],
   exports: [AuthorizationAlsModule, AuthorizationService],
   imports: [
-    AuthorizationAlsModule,
-    OrganizationModule,
-    ProfileModule,
+    forwardRef(() => AuthorizationAlsModule),
+    forwardRef(() => OrganizationModule),
+    forwardRef(() => ProfileModule),
     RequestContextModule,
   ],
   providers: [AuthorizationService],

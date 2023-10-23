@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import dayjs from "dayjs";
 
 import { Center } from "src/components/ui/Center";
 import { DatePicker } from "src/components/ui/DatePicker";
 import { VerticalCenter } from "src/components/ui/VerticalCenter";
 import { useTranslation } from "src/core/i18n";
+
+const MIN_AGE = 14;
+
+const checkifDateIsBefore = (date: Date, years: number): boolean => {
+  const currentDate = dayjs();
+  const inputDate = dayjs(date);
+  const diffInYears = currentDate.diff(inputDate, "year");
+  return diffInYears >= years;
+};
 
 export interface DateOfBirthFormProps {
   onChange: (value: Date) => void;
@@ -19,6 +29,9 @@ export function DateOfBirthForm({
   value,
 }: DateOfBirthFormProps): React.ReactElement {
   const { t } = useTranslation("profile-creation");
+  const [isTouched, setIsTouched] = useState(false);
+
+  const dateIsValid = checkifDateIsBefore(value, MIN_AGE);
 
   return (
     <VerticalCenter>
@@ -34,13 +47,29 @@ export function DateOfBirthForm({
 
       <DatePicker
         fullWidth
-        onChange={(event) => onChange(event || new Date())}
-        sx={{ paddingBottom: 2 }}
+        label={t("date-of-birth.label")}
+        onChange={(event) => {
+          onChange(event || new Date());
+          setIsTouched(true);
+        }}
+        sx={{ paddingBottom: 1 }}
         value={value}
       />
 
+      <Box sx={{ paddingBottom: 1 }}>
+        {isTouched && !dateIsValid && (
+          <Typography color="error" gutterBottom>
+            {t("date-of-birth.min-age", { minAge: MIN_AGE })}
+          </Typography>
+        )}
+      </Box>
+
       <Center>
-        <Button disabled={!value} onClick={onNext} variant="contained">
+        <Button
+          disabled={!value || !dateIsValid}
+          onClick={onNext}
+          variant="contained"
+        >
           {t("date-of-birth.continue")}
         </Button>
       </Center>

@@ -10,7 +10,6 @@ import { ThemeProvider } from "src/core/theme";
 
 import "./App.css";
 import { Router } from "./Router";
-import { GlobalDialogProvider } from "./core/dialog";
 import { AuthenticationGuard } from "./pages/AuthenticationGuard";
 
 const logger = new Logger(QueryClient.name);
@@ -38,7 +37,10 @@ const QUERY_CLIENT = new QueryClient({
           },
         });
       },
+      // Limit reqtries
       retry: 1,
+      // Consider data to be fresh for 20 seconds
+      staleTime: 20 * 1000,
     },
   },
 });
@@ -49,12 +51,10 @@ export function App(): React.ReactElement {
       <ThemeProvider>
         <CssBaseline />
         <AuthenticationGuard>
-          <GlobalDialogProvider>
-            <NotificationProvider>
-              <Router />
-              <SnackbarProvider dense />
-            </NotificationProvider>
-          </GlobalDialogProvider>
+          <NotificationProvider>
+            <Router />
+            <SnackbarProvider dense />
+          </NotificationProvider>
         </AuthenticationGuard>
       </ThemeProvider>
     </QueryClientProvider>

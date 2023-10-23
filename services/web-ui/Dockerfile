@@ -1,7 +1,7 @@
 ################################
 # Build assets
 ################################
-FROM node:20.7-alpine as builder
+FROM node:20.8.1-alpine as builder
 
 WORKDIR /app
 
@@ -13,7 +13,7 @@ RUN npm run build
 ################################
 # Create server
 ################################
-FROM node:20.7-alpine
+FROM node:20.8.1-alpine
 
 WORKDIR /app
 

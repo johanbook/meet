@@ -9,7 +9,7 @@ import { Organization } from "../../infrastructure/entities/organization.entity"
 import { ActiveOrganizationService } from "./active-organization.service";
 import { MembershipService } from "./membership.service";
 
-const ORGANIZATION_CACHE_MS = 1000;
+const ORGANIZATION_CACHE_MS = 10_000;
 
 @Injectable()
 export class CurrentOrganizationService {

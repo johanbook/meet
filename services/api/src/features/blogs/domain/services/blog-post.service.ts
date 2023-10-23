@@ -5,7 +5,9 @@ import { Repository } from "typeorm";
 
 import { map } from "src/core/mapper";
 
+import { BlogPostComment } from "../../infrastructure/entities/blog-post-comment.entity";
 import { BlogPost } from "../../infrastructure/entities/blog-post.entity";
+import { BlogPostCommentCreatedEvent } from "../events/blog-post-comment-created.event";
 import { BlogPostCreatedEvent } from "../events/blog-post-created.event";
 
 @Injectable()
@@ -30,5 +32,24 @@ export class BlogPostService {
 
   async updateBlogPost(blogPost: BlogPost): Promise<void> {
     await this.blogPosts.save(blogPost);
+  }
+
+  async addCommentToBlogPost(
+    blogPostComment: BlogPostComment,
+    blogPost: BlogPost,
+  ): Promise<void> {
+    blogPost.comments.push(blogPostComment);
+
+    await this.blogPosts.save(blogPost);
+
+    const event = map(BlogPostCommentCreatedEvent, {
+      blogPostId: blogPost.id,
+      content: blogPostComment.content,
+      id: blogPostComment.id,
+      organizationId: blogPost.organizationId,
+      profileId: blogPostComment.profileId,
+    });
+
+    this.eventBus.publish(event);
   }
 }
