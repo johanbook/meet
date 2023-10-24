@@ -23,7 +23,7 @@ export class TypeOrmLogger implements TypeOrmBaseLogger {
   }
 
   logQuery(query: string, parameters?: any[]): void {
-    this.logger.debug({ query, parameters });
+    this.logger.debug("Executing query", { query, parameters });
   }
 
   logQueryError(
@@ -31,11 +31,15 @@ export class TypeOrmLogger implements TypeOrmBaseLogger {
     query: string,
     parameters?: any[],
   ): void {
-    this.logger.debug({ error, query, parameters });
+    this.logger.debug("Encountered error in query", {
+      error,
+      query,
+      parameters,
+    });
   }
 
   logQuerySlow(time: number, query: string, parameters?: any[]): void {
-    this.logger.debug({ time, query, parameters });
+    this.logger.debug("Executing slow query", { time, query, parameters });
   }
 
   logSchemaBuild(message: string): void {

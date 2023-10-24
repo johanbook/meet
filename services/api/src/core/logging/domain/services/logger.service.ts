@@ -52,35 +52,35 @@ export class Logger implements LoggerService {
     this.logger = pino.pino(loggerOptions);
   }
 
-  debug(message: any): void {
-    this.logger.debug(message);
+  debug(message: string, props?: any): void {
+    this.logger.debug(props, message);
   }
 
-  error(message: any): void {
-    this.logger.error(message);
+  error(message: string, props?: any): void {
+    this.logger.error(props, message);
   }
 
-  fatal(message: any): void {
-    this.logger.fatal(message);
+  fatal(message: string, props?: any): void {
+    this.logger.fatal(props, message);
   }
 
-  info(message: any): void {
-    this.logger.info(message);
+  info(message: string, props?: any): void {
+    this.logger.info(props, message);
   }
 
-  log(message: any): void {
-    this.logger.info(message);
+  log(message: string, props?: any): void {
+    this.logger.info(props, message);
   }
 
-  trace(message: any): void {
-    this.logger.trace(message);
+  trace(message: string, props?: any): void {
+    this.logger.trace(props, message);
   }
 
-  verbose(message: any): void {
-    this.logger.debug(message);
+  verbose(message: string, props?: any): void {
+    this.logger.debug(props, message);
   }
 
-  warn(message: any): void {
-    this.logger.warn(message);
+  warn(message: string, props?: any): void {
+    this.logger.warn(props, message);
   }
 }
