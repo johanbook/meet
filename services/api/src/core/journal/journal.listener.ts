@@ -29,7 +29,7 @@ export class JournalLogger {
         return;
       }
 
-      this.logger.trace({ msg: "Writing journal entry", commandName, payload });
+      this.logger.trace("Writing journal entry", { commandName, payload });
 
       this.commandBus.execute(
         map(CreateJournalEntryCommand, {

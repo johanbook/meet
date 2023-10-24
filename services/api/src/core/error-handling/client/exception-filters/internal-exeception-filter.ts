@@ -32,9 +32,8 @@ export class InternalExceptionFilter implements ExceptionFilter {
 
     const errorId = uuidv4();
 
-    this.logger.error({
+    this.logger.error(exception.message, {
       errorId,
-      msg: exception.message,
       stackTrace: exception.stack,
     });
 

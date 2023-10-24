@@ -16,9 +16,9 @@ export class CreateOrganizationOnProfileCreatedHandler
   constructor(private commandBus: CommandBus) {}
 
   async handle(event: ProfileCreatedEvent) {
-    this.logger.debug({
-      msg: `Creating personal organization for profile with ID '${event.id}'`,
-    });
+    this.logger.debug(
+      `Creating personal organization for profile with ID '${event.id}'`,
+    );
 
     const createOrganizationCommand = await mapAndValidate(
       CreatePersonalOrganizationCommand,

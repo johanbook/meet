@@ -27,8 +27,7 @@ export class EmailService {
       return;
     }
 
-    this.logger.debug({
-      msg: "Sending email",
+    this.logger.debug("Sending email", {
       subject,
       numReceivers: receivers.length,
     });
