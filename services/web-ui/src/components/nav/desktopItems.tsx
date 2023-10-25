@@ -7,6 +7,7 @@ import {
 
 export interface NavItem {
   Icon: SvgIconComponent;
+  isActive?: RegExp;
   name: string;
   url: string;
 }
@@ -14,6 +15,7 @@ export interface NavItem {
 export const desktopNavItems: NavItem[] = [
   {
     Icon: Feed,
+    isActive: /^(\/$|\/blog)/,
     name: "navigation.blog",
     url: "/",
   },
