@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Nav } from "src/components/nav";
 import { GlobalDialogProvider } from "src/core/dialog";
 import { NavigationTrackingProvider } from "src/core/tracking/NavigationTrackingProvider";
+import { BlogPostListPage } from "src/pages/BlogPostListPage";
 import { BlogPostPage } from "src/pages/BlogPostPage";
 import { ChatPage } from "src/pages/ChatPage";
 import { ConnectionsPage } from "src/pages/ConnectionsPage";
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <BlogPostPage />,
+        element: <BlogPostListPage />,
       },
       {
         path: "/blog/:id",
