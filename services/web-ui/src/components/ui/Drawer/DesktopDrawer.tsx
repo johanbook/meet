@@ -12,29 +12,27 @@ export const DRAWER_WIDTH = 300;
 
 export function DesktopDrawer({ children }: DrawerProps): React.ReactElement {
   return (
-    <>
-      <MuiDrawer
-        open={true}
-        sx={{
+    <MuiDrawer
+      open={true}
+      sx={{
+        width: DRAWER_WIDTH,
+        flexShrink: 0,
+        [`& .MuiDrawer-paper`]: {
           width: DRAWER_WIDTH,
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: {
-            width: DRAWER_WIDTH,
-            boxSizing: "border-box",
-          },
+          boxSizing: "border-box",
+        },
+      }}
+      variant="permanent"
+    >
+      <Toolbar />
+      <Box
+        sx={{
+          height: "100%",
+          overflow: "auto",
         }}
-        variant="permanent"
       >
-        <Toolbar />
-        <Box
-          sx={{
-            height: "100%",
-            overflow: "auto",
-          }}
-        >
-          {children}
-        </Box>
-      </MuiDrawer>
-    </>
+        {children}
+      </Box>
+    </MuiDrawer>
   );
 }
