@@ -63,7 +63,7 @@ export class UserIdService {
 
       // 404 are part of normal operation. All other error codes are not
       if (status !== 404) {
-        this.logger.warn({ msg: "Faailed to lookup user email", error });
+        this.logger.warn("Failed to lookup user email", { error });
       }
 
       if (!status || status >= 500) {

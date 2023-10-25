@@ -1,31 +1,24 @@
+import { NotFoundException } from "@nestjs/common";
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { map, mapArray } from "src/core/mapper";
 import { PhotoService } from "src/core/photos";
-import { QueryService } from "src/core/query";
-import { BlogPostComment } from "src/features/blogs/infrastructure/entities/blog-post-comment.entity";
 import { BlogPost } from "src/features/blogs/infrastructure/entities/blog-post.entity";
 import { CurrentOrganizationService } from "src/features/organizations";
 import { CurrentProfileService } from "src/features/profiles";
+import { sortByField } from "src/utils/sorting.helper";
 
 import { BlogPostCommentDetails } from "../../contracts/dtos/blog-post-comment.dto";
 import { BlogPostDetails } from "../../contracts/dtos/blog-post-detail.dto";
 import { BlogPostPhotoDetails } from "../../contracts/dtos/blog-post-photo.dto";
 import { BlogPostProfileDetails } from "../../contracts/dtos/blog-post-profile.dto";
-import { GetBlogPostsQuery } from "../../contracts/queries/get-blog-posts.query";
+import { GetBlogPostQuery } from "../../contracts/queries/get-blog-post.query";
 
-// Sorting inside TypeORM query causes pagination to break,
-// therefore we do this sorting outside
-const sortByDates = (x: BlogPostComment[]) =>
-  x.sort((a: BlogPostComment, b: BlogPostComment) =>
-    a.createdAt > b.createdAt ? 1 : -1,
-  );
-
-@QueryHandler(GetBlogPostsQuery)
-export class GetBlogPostsHandler
-  implements IQueryHandler<GetBlogPostsQuery, BlogPostDetails[]>
+@QueryHandler(GetBlogPostQuery)
+export class GetBlogPostHandler
+  implements IQueryHandler<GetBlogPostQuery, BlogPostDetails>
 {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
@@ -33,45 +26,41 @@ export class GetBlogPostsHandler
     @InjectRepository(BlogPost)
     private readonly blogPosts: Repository<BlogPost>,
     private readonly photoService: PhotoService,
-    private readonly queryService: QueryService<BlogPost>,
   ) {}
 
-  async execute(query: GetBlogPostsQuery) {
+  async execute(query: GetBlogPostQuery) {
     const currentOrganizationId =
       await this.currentOrganizationService.fetchCurrentOrganizationId();
 
     const currentProfileId =
       await this.currentProfileService.fetchCurrentProfileId();
 
-    const foundBlogPosts = await this.queryService.find(this.blogPosts, {
-      default: {
-        order: {
-          createdAt: "desc",
-        },
-      },
-      query,
-      required: {
-        relations: {
-          comments: {
-            profile: {
-              profilePhoto: true,
-            },
-          },
-          photos: true,
+    const blogPost = await this.blogPosts.findOne({
+      relations: {
+        comments: {
           profile: {
             profilePhoto: true,
           },
         },
-        where: {
-          organizationId: currentOrganizationId,
+        photos: true,
+        profile: {
+          profilePhoto: true,
         },
+      },
+      where: {
+        id: query.id,
+        organizationId: currentOrganizationId,
       },
     });
 
-    return mapArray(BlogPostDetails, foundBlogPosts, (post) => ({
+    if (!blogPost) {
+      throw new NotFoundException("Blog post not found");
+    }
+
+    return map(BlogPostDetails, {
       comments: mapArray(
         BlogPostCommentDetails,
-        sortByDates(post.comments),
+        sortByField(blogPost.comments, (comment) => comment.createdAt),
         (comment) => ({
           content: comment.content,
           createdAt: comment.createdAt.toISOString(),
@@ -88,22 +77,25 @@ export class GetBlogPostsHandler
           }),
         }),
       ),
-      content: post.content,
-      createdAt: post.createdAt.toISOString(),
-      id: post.id,
-      ownedByCurrentUser: post.profileId === currentProfileId,
-      photos: mapArray(BlogPostPhotoDetails, post.photos, (photo) => ({
+      content: blogPost.content,
+      createdAt: blogPost.createdAt.toISOString(),
+      id: blogPost.id,
+      ownedByCurrentUser: blogPost.profileId === currentProfileId,
+      photos: mapArray(BlogPostPhotoDetails, blogPost.photos, (photo) => ({
         description: photo.description,
         id: photo.id,
         url: this.photoService.getUrl(photo, "blog-post-photo"),
       })),
       profile: map(BlogPostProfileDetails, {
-        id: post.profile.id,
+        id: blogPost.profile.id,
         imageUrl:
-          post.profile.profilePhoto &&
-          this.photoService.getUrl(post.profile.profilePhoto, "profile-photo"),
-        name: post.profile.name,
+          blogPost.profile.profilePhoto &&
+          this.photoService.getUrl(
+            blogPost.profile.profilePhoto,
+            "profile-photo",
+          ),
+        name: blogPost.profile.name,
       }),
-    }));
+    });
   }
 }

@@ -54,7 +54,7 @@ export class HealthCheckService {
       errors.push(error);
       status = "error";
 
-      this.logger.error({ msg: "Unable to reach database", error });
+      this.logger.error("Unable to reach database", { error });
     } finally {
       await queryRunner.release();
     }

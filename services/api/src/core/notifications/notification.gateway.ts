@@ -48,10 +48,12 @@ export class NotificationGateway
     const socket = this.connections[userId];
 
     if (!socket) {
-      this.logger.debug({
-        msg: `Unable to find active socket for user id. Skipping notification.`,
-        targetUserId: userId,
-      });
+      this.logger.debug(
+        `Unable to find active socket for user id. Skipping notification.`,
+        {
+          targetUserId: userId,
+        },
+      );
 
       return false;
     }
