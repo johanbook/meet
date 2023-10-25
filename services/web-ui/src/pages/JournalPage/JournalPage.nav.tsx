@@ -2,7 +2,7 @@ import { ReactElement, ReactNode } from "react";
 
 import { Grid, Typography } from "@mui/material";
 
-import { Page } from "src/components/layout";
+import { PageWithNav } from "src/components/layout";
 import { DatePicker } from "src/components/ui/DatePicker";
 import { useTranslation } from "src/core/i18n";
 
@@ -25,7 +25,7 @@ export function JournalPageNav({
   const { t } = useTranslation("journal");
 
   return (
-    <Page header={t("header")}>
+    <PageWithNav header={t("header")} linkText={t("links.back")} to="/profile">
       <Typography color="textSecondary" sx={{ paddingBottom: 3 }}>
         {t("description")}
       </Typography>
@@ -51,6 +51,6 @@ export function JournalPageNav({
       </Grid>
 
       {children}
-    </Page>
+    </PageWithNav>
   );
 }
