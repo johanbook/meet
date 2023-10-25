@@ -25,6 +25,9 @@
   "form": {
     "placeholder": "Perhaps say something about your day"
   },
+  "links": {
+    "back": "Back"
+  },
   "menu": {
     "delete": "Delete"
   },

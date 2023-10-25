@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactElement } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 
 import { AccountCircle, Chat, Feed } from "@mui/icons-material";
@@ -8,11 +8,15 @@ import {
   Paper,
 } from "@mui/material";
 
-export function BottomNavigation(): React.ReactElement {
+export function BottomNavigation(): ReactElement {
   const location = useLocation();
 
   // Strips away ie chat id, meaning `/chat/12` -> `/chat`
-  const pathname = "/" + location.pathname.split("/")[1];
+  let pathname = "/" + location.pathname.split("/")[1];
+
+  if (pathname === "/") {
+    pathname = "/blog";
+  }
 
   return (
     <Paper
@@ -25,7 +29,7 @@ export function BottomNavigation(): React.ReactElement {
           component={RouterLink}
           icon={<Feed />}
           to="/"
-          value="/"
+          value="/blog"
         />
         <BottomNavigationAction
           component={RouterLink}
