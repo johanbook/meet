@@ -16,15 +16,13 @@ export class LoggingInterceptor implements NestInterceptor {
   private readonly logger = new Logger(LoggingInterceptor.name);
 
   private logRequestDuration(durationInMs: number, request: Request): void {
-    this.logger.debug({
+    this.logger.debug(`Request took ${durationInMs}ms`, {
       duration: durationInMs,
-      msg: `Request took ${durationInMs}ms`,
     });
 
     if (durationInMs > WARNING_DURATION_THRESHOLD_MS) {
-      this.logger.warn({
+      this.logger.warn("Request took longer than usual", {
         durationInMs,
-        msg: "Request took longer than usual",
         method: request.method,
         pathname: request.url,
       });

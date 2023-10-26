@@ -1,81 +1,53 @@
-import React from "react";
+import { ReactElement } from "react";
+import { useParams } from "react-router";
 
-import { Box,Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 import { blogsApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { useTranslation } from "src/core/i18n";
-import { InteractionObserver } from "src/core/infinite-scroll";
-import { CacheKeysConstants, useInfiniteQuery } from "src/core/query";
+import { CacheKeysConstants, useQuery } from "src/core/query";
 
-import { BlogPostPageComponent } from "./BlogPostPage.component";
-import { BlogPostPageHeader } from "./BlogPostPage.header";
+import { BlogPostPageNav } from "./BlogPostPage.nav";
 import { BlogPostPageSkeleton } from "./BlogPostPage.skeleton";
-import { BlogPostForm } from "./components/BlogPostForm";
+import { BlogPost } from "./components/BlogPost";
 
-const ITEMS_PER_PAGE = 10;
-
-export function BlogPostPageContainer(): React.ReactElement {
+export function BlogPostPageContainer(): ReactElement {
   const { t } = useTranslation("blog");
+  const { id = "" } = useParams();
 
-  const { error, data, isLoading, fetchNextPage, hasNextPage } =
-    useInfiniteQuery(
-      [CacheKeysConstants.BlogPosts],
-      ({ pageParam = 0 }) =>
-        blogsApi.getBlogPosts({
-          skip: pageParam * ITEMS_PER_PAGE,
-          top: (pageParam + 1) * ITEMS_PER_PAGE,
-        }),
-      {
-        getNextPageParam: (lastPage, pages) => {
-          if (lastPage.length < ITEMS_PER_PAGE) {
-            return;
-          }
-
-          return pages.length;
-        },
-      }
-    );
+  const { error, data, isLoading } = useQuery(
+    [CacheKeysConstants.BlogPosts, id],
+    () => blogsApi.getBlogPost({ id })
+  );
 
   if (error) {
     return (
-      <>
-        <BlogPostPageHeader />
+      <BlogPostPageNav>
         <ErrorMessage error={error} />
-      </>
+      </BlogPostPageNav>
     );
   }
 
   if (isLoading) {
     return (
-      <>
-        <BlogPostPageHeader />
+      <BlogPostPageNav>
         <BlogPostPageSkeleton />
-      </>
+      </BlogPostPageNav>
     );
   }
 
-  if (!data || data.pages[0].length === 0) {
+  if (!data) {
     return (
-      <>
-        <BlogPostPageHeader />
-
-        <Box sx={{ paddingBottom: 2, paddingTop: 2 }}>
-          <BlogPostForm />
-        </Box>
-
+      <BlogPostPageNav>
         <Typography>{t("no-posts")}</Typography>
-      </>
+      </BlogPostPageNav>
     );
   }
 
   return (
-    <>
-      <BlogPostPageHeader />
-
-      <BlogPostPageComponent data={data.pages} />
-
-      {hasNextPage && <InteractionObserver onObserve={fetchNextPage} />}
-    </>
+    <BlogPostPageNav>
+      <BlogPost post={data} />
+    </BlogPostPageNav>
   );
 }

@@ -1,7 +1,7 @@
-import React, { SyntheticEvent } from "react";
+import { ReactElement, SyntheticEvent } from "react";
 import { useMutation, useQueryClient } from "react-query";
 
-import { InsertPhoto, Send } from "@mui/icons-material";
+import { Close, InsertPhoto, Send } from "@mui/icons-material";
 import {
   Box,
   CircularProgress,
@@ -19,7 +19,7 @@ import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
-export function BlogPostForm(): React.ReactElement {
+export function BlogPostForm(): ReactElement {
   const mutation = useMutation((command: CreateBlogPostRequest) =>
     blogsApi.createBlogPost(command)
   );
@@ -46,6 +46,13 @@ export function BlogPostForm(): React.ReactElement {
       // localStorageKey: "create-blog-post-form",
     }
   );
+
+  function handleRemovePhoto(photoToDelete: Blob): void {
+    const photos = form.state.photos.value;
+    form.setValue({
+      photos: photos?.filter((photo) => photo !== photoToDelete),
+    });
+  }
 
   async function handleSubmit(event: SyntheticEvent): Promise<void> {
     event.preventDefault();
@@ -108,20 +115,37 @@ export function BlogPostForm(): React.ReactElement {
           value={form.state.content.value}
         />
 
-        {form.state.photos.value?.map((photo, index) => (
-          <Photo
-            alt=""
-            key={index}
-            src={photo}
-            style={{
-              border: "1px solid rgb(200,200,200)",
-              borderRadius: 8,
-              marginTop: 10,
-              maxWidth: 200,
-              padding: 10,
-            }}
-          />
-        ))}
+        <Box sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
+          {form.state.photos.value?.map((photo, index) => (
+            <Box key={index} sx={{ position: "relative" }}>
+              <Photo
+                alt=""
+                src={photo}
+                style={{
+                  border: "1px solid rgb(200,200,200)",
+                  borderRadius: 8,
+                  marginTop: 10,
+                  padding: 10,
+                  width: 100,
+                }}
+              />
+
+              <IconButton
+                onClick={() => handleRemovePhoto(photo)}
+                sx={{
+                  bgcolor: "background.paper",
+                  border: 1,
+                  padding: 0,
+                  position: "absolute",
+                  top: 0,
+                  right: -5,
+                }}
+              >
+                <Close />
+              </IconButton>
+            </Box>
+          ))}
+        </Box>
       </form>
     </Box>
   );
