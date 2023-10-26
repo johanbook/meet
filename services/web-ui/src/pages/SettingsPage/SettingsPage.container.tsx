@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactElement } from "react";
 import { useMutation, useQueryClient } from "react-query";
 
 import { Box, FormControlLabel, FormGroup } from "@mui/material";
@@ -14,7 +14,7 @@ import { ErrorView } from "src/views/ErrorView";
 import { SettingsPageHeader } from "./SettingsPage.header";
 import { SettingsPageSkeleton } from "./SettingsPage.skeleton";
 
-export function SettingsPageContainer(): React.ReactElement {
+export function SettingsPageContainer(): ReactElement {
   const { t } = useTranslation("settings");
 
   const queryClient = useQueryClient();
