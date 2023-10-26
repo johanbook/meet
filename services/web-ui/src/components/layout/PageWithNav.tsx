@@ -6,7 +6,7 @@ import { Link as MuiLink, Typography } from "@mui/material";
 
 interface PageWithNavProps {
   children: ReactNode;
-  header?: string;
+  header?: string | null;
   linkText: string;
   to: string;
 }

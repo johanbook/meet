@@ -62,12 +62,12 @@ const router = createBrowserRouter([
         element: <OrganizationListPage />,
       },
       {
-        path: "/journal",
-        element: <JournalPage />,
-      },
-      {
         path: "/profile",
         element: <CurrentProfilePage />,
+      },
+      {
+        path: "/profile/journal",
+        element: <JournalPage />,
       },
       {
         path: "/profile/:id",

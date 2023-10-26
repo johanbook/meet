@@ -1,11 +1,22 @@
 import { ReactElement, ReactNode } from "react";
 
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 interface PageProps {
   children: ReactNode;
+  header?: string | null;
 }
 
-export function Page({ children }: PageProps): ReactElement {
-  return <Box sx={{ paddingTop: 2 }}>{children}</Box>;
+export function Page({ children, header }: PageProps): ReactElement {
+  return (
+    <Box sx={{ paddingTop: 2 }}>
+      {header && (
+        <Typography gutterBottom variant="h5">
+          {header}
+        </Typography>
+      )}
+
+      {children}
+    </Box>
+  );
 }
