@@ -3,10 +3,10 @@ import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
 import { PostChatMessageCommand } from "../../application/contracts/commands/post-chat-message.command";
+import { ChatConversationDetails } from "../../application/contracts/dtos/chat-conversation.dto";
 import { ChatMessageDetails } from "../../application/contracts/dtos/chat.dto";
-import { ConnectionDetails } from "../../application/contracts/dtos/connection.dto";
 import { GetChatMessagesQuery } from "../../application/contracts/queries/get-chat-messages.query";
-import { GetConnectionsQuery } from "../../application/contracts/queries/get-connections.query";
+import { GetConversationListQuery } from "../../application/contracts/queries/get-conversation-list.query";
 
 @Controller("chats")
 @ApiTags("chats")
@@ -14,9 +14,9 @@ export class ChatsController {
   constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
 
   @Get()
-  async getConnections(
-    @Query() query: GetConnectionsQuery,
-  ): Promise<ConnectionDetails[]> {
+  async getConversations(
+    @Query() query: GetConversationListQuery,
+  ): Promise<ChatConversationDetails[]> {
     return await this.queryBus.execute(query);
   }
 

@@ -12,11 +12,11 @@ import { ProfileModule } from "../profiles/profile.module";
 import { PostChatMessageHandler } from "./application/handlers/command-handlers/post-chat-message.handler";
 import { NotifyReceiverOnPostedChatMessageHandler } from "./application/handlers/event-handlers/notify-receiver-on-posted-message.handler";
 import { GetChatMessagesHandler } from "./application/handlers/query-handlers/get-chat-messages.handler";
-import { GetConnectionsHandler } from "./application/handlers/query-handlers/get-connections.handler";
+import { GetConversationListHandler } from "./application/handlers/query-handlers/get-conversation-list.handler";
 import { ChatsController } from "./client/controllers/chats.controller";
 import { ChatMessageService } from "./domain/services/chat-message.service";
+import { ChatConversation } from "./infrastructure/entities/chat-conversation.entity";
 import { ChatMessage } from "./infrastructure/entities/chat-message.entity";
-import { Connection } from "./infrastructure/views/connection.view";
 
 @Module({
   imports: [
@@ -26,13 +26,13 @@ import { Connection } from "./infrastructure/views/connection.view";
     OrganizationModule,
     PhotosModule,
     ProfileModule,
-    TypeOrmModule.forFeature([ChatMessage, Connection, Profile]),
+    TypeOrmModule.forFeature([ChatMessage, ChatConversation, Profile]),
   ],
   controllers: [ChatsController],
   providers: [
     ChatMessageService,
     GetChatMessagesHandler,
-    GetConnectionsHandler,
+    GetConversationListHandler,
     NotifyReceiverOnPostedChatMessageHandler,
     PostChatMessageHandler,
   ],

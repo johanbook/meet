@@ -17,14 +17,10 @@ describe(GetChatMessagesHandler.name, () => {
   let queryHandler: GetChatMessagesHandler;
 
   beforeEach(() => {
-    receivingProfile = new Profile();
-    receivingProfile.id = 2;
-
     sendingProfile = new Profile();
     sendingProfile.id = 1;
 
     const chatMessage = new ChatMessage();
-    chatMessage.receiverId = receivingProfile.id;
     chatMessage.senderId = sendingProfile.id;
 
     chatMessages = createMockRepository<ChatMessage>([chatMessage]);
