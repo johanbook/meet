@@ -79,8 +79,7 @@ export class MonkeyService {
   private logger = new Logger(CommandLogger.name);
 
   pingMonkey(name: string) {
-    this.logger.debug({
-      msg: "Monkey was pinged",
+    this.logger.debug("Monkey was pinged", {
       name,
     });
   }
@@ -102,9 +101,7 @@ export function MonkeyComponent(): React.ReactElement {
   const logger = useLogger(MonkeyComponent.name);
 
   function handleClick(): void {
-    logger.debug({
-      msg: "I was clicked",
-    });
+    logger.debug("I was clicked");
   }
 
   return <span onClick={handleClick}>Click me!</span>;

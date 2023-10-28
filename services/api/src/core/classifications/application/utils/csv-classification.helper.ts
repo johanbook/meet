@@ -78,7 +78,7 @@ export async function loadClassificationsFromCsv(
       );
     }
   } catch (error) {
-    logger.error({ msg: "Unable to run migration", error, filePath });
+    logger.error("Unable to run migration", { error, filePath });
   } finally {
     await queryRunner.release();
   }

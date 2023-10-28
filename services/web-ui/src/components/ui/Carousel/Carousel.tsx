@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import MobileStepper from "@mui/material/MobileStepper";
 import { useTheme } from "@mui/material/styles";
 
-interface CarouselImage {
+export interface CarouselImage {
   label?: string;
   src: string;
 }

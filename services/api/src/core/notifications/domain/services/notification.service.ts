@@ -3,14 +3,15 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { In, Not, Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
+import { EmailService } from "src/core/email/domain/services/email.service";
 import { Logger } from "src/core/logging";
 import { OrganizationMembership } from "src/features/organizations/infrastructure/entities/organization-membership.entity";
 import { Profile } from "src/features/profiles";
 import { getRequiredStringConfig } from "src/utils/config.helper";
 
-import { EmailService } from "../email/domain/services/email.service";
-import { NotificationGateway } from "./notification.gateway";
-import { INotification } from "./types";
+import { Notification } from "../../infrastructure/entities/notification.entity";
+import { NotificationGateway } from "../../notification.gateway";
+import { INotification } from "../../types";
 
 const UI_DOMAIN = getRequiredStringConfig("UI_DOMAIN");
 
@@ -19,7 +20,9 @@ export class NotificationService {
   private logger = new Logger(NotificationGateway.name);
 
   constructor(
-    private emailService: EmailService,
+    private readonly emailService: EmailService,
+    @InjectRepository(Notification)
+    private readonly notifications: Repository<Notification>,
     private readonly notificationGateway: NotificationGateway,
     @InjectRepository(OrganizationMembership)
     private readonly organizationMemberships: Repository<OrganizationMembership>,
@@ -28,10 +31,11 @@ export class NotificationService {
     private readonly userIdService: UserIdService,
   ) {}
 
+  /** Sends notification to all members of an organization */
   async notifyOrganization(
     organizationId: number,
     notification: INotification,
-    exceptProfilsIds: number[] = [],
+    ignoredProfileIds: number[] = [],
   ): Promise<void> {
     const memberships = await this.organizationMemberships.find({
       relations: {
@@ -39,18 +43,30 @@ export class NotificationService {
       },
       where: {
         organizationId,
-        profileId: Not(In(exceptProfilsIds)),
+        profileId: Not(In(ignoredProfileIds)),
       },
     });
 
+    const newNotifications = memberships.map((membership) => {
+      const newNotification = new Notification();
+      newNotification.description = notification.description;
+      newNotification.message = notification.message;
+      newNotification.organizationId = organizationId;
+      newNotification.profileId = membership.profileId;
+      newNotification.read = false;
+      newNotification.resourcePath = notification.resourcePath;
+      newNotification.type = notification.type;
+
+      return newNotification;
+    });
+    await this.notifications.save(newNotifications);
+
     const userIds = memberships.map((membership) => membership.profile.userId);
-    await this.notifyUsersIfAvailable(userIds, notification);
+    await this.notifyUsers(userIds, notification);
   }
 
-  async notifyProfilesIfAvailable(
-    profileIds: number[],
-    notification: INotification,
-  ) {
+  /** Sends notification to profiles */
+  async notifyProfiles(profileIds: number[], notification: INotification) {
     const profiles = await this.profiles.find({
       select: ["userId"],
       where: { id: In(profileIds) },
@@ -58,10 +74,10 @@ export class NotificationService {
 
     const ids = profiles.map((profile) => profile.userId);
 
-    await this.notifyUsersIfAvailable(ids, notification);
+    await this.notifyUsers(ids, notification);
   }
 
-  async notifyUsersIfAvailable(
+  async notifyUsers(
     userIds: string[],
     notification: INotification,
   ): Promise<void> {
@@ -84,7 +100,7 @@ export class NotificationService {
     userIds: string[],
     notification: INotification,
   ): Promise<void> {
-    this.logger.debug({ msg: "Notifying users via email", userIds });
+    this.logger.debug("Notifying users via email", { userIds });
 
     const targetEmails = await this.userIdService.fetchUserEmailsByUserIds(
       userIds,

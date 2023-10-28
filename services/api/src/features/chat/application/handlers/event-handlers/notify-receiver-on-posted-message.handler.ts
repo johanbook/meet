@@ -44,7 +44,7 @@ export class NotifyReceiverOnPostedChatMessageHandler
       type: NotificationEventsConstants.NEW_CHAT_MESSAGE,
     };
 
-    await this.notificationService.notifyProfilesIfAvailable(
+    await this.notificationService.notifyProfiles(
       [event.receiverId],
       notification,
     );

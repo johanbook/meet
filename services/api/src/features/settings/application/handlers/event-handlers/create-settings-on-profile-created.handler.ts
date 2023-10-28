@@ -14,9 +14,7 @@ export class CreateSettingsOnProfileCreatedHandler
   constructor(private commandBus: CommandBus) {}
 
   async handle(event: ProfileCreatedEvent) {
-    this.logger.debug({
-      msg: `Creating settings for profile with ID '${event.id}'`,
-    });
+    this.logger.debug(`Creating settings for profile with ID '${event.id}'`);
 
     const command = new CreateSettingsCommand();
     await this.commandBus.execute(command);

@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { useMatch } from "react-router";
+import { useLocation } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
 
 import {
@@ -18,7 +18,10 @@ export interface NavLinkListItemProps {
 }
 
 export function NavLinkListItem({ item }: NavLinkListItemProps): ReactElement {
-  const match = useMatch(item.url);
+  const location = useLocation();
+  const regexp = new RegExp(item.isActive || item.url);
+  const match = regexp.test(location.pathname);
+
   const { t } = useTranslation("core");
 
   return (

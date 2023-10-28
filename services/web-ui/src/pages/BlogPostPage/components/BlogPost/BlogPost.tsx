@@ -1,14 +1,12 @@
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 
-import { FavoriteBorder, ModeCommentOutlined } from "@mui/icons-material";
+import { FavoriteBorder } from "@mui/icons-material";
 import {
   Avatar,
   Box,
-  Button,
   Card,
   CardActions,
   CardContent,
-  Collapse,
   IconButton,
   List,
   ListItem,
@@ -29,7 +27,6 @@ interface BlogPostProps {
 }
 
 export function BlogPost({ post }: BlogPostProps): ReactElement {
-  const [showComments, setShowComments] = useState(false);
   const { t } = useTranslation("blog");
 
   const authorization = useAuthorization();
@@ -63,47 +60,30 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
         <IconButton aria-label="like" disabled sx={{ display: "none" }}>
           <FavoriteBorder />
         </IconButton>
-
-        <IconButton aria-label="comment" onClick={() => setShowComments(true)}>
-          <ModeCommentOutlined />
-        </IconButton>
       </CardActions>
 
-      {post.comments.length > 0 && (
-        <CardActions disableSpacing>
-          <Button onClick={() => setShowComments(!showComments)}>
-            {t(
-              showComments ? "actions.hide-comments" : "actions.view-comments",
-              { count: post.comments.length }
-            )}
-          </Button>
-        </CardActions>
-      )}
+      <List>
+        {post.comments.map((comment) => (
+          <ListItem key={comment.id} style={{ alignItems: "start" }}>
+            <Avatar src={comment.profile.imageUrl} />
 
-      <Collapse in={showComments}>
-        <List>
-          {post.comments.map((comment) => (
-            <ListItem key={comment.id} style={{ alignItems: "start" }}>
-              <Avatar src={comment.profile.imageUrl} />
-
-              <Box sx={{ paddingLeft: 1 }}>
-                <Box sx={{ alignItems: "center", display: "flex" }}>
-                  <Typography>
-                    <b>{comment.profile.name}</b>
-                  </Typography>
-                  <Typography sx={{ paddingLeft: 1 / 2 }} variant="subtitle2">
-                    {timeSince(comment.createdAt)}
-                  </Typography>
-                </Box>
-
-                <Typography>{comment.content}</Typography>
+            <Box sx={{ paddingLeft: 1 }}>
+              <Box sx={{ alignItems: "center", display: "flex" }}>
+                <Typography>
+                  <b>{comment.profile.name}</b>
+                </Typography>
+                <Typography sx={{ paddingLeft: 1 / 2 }} variant="subtitle2">
+                  {timeSince(comment.createdAt)}
+                </Typography>
               </Box>
-            </ListItem>
-          ))}
-        </List>
 
-        <BlogPostCommentForm blogPostId={post.id} />
-      </Collapse>
+              <Typography>{comment.content}</Typography>
+            </Box>
+          </ListItem>
+        ))}
+      </List>
+
+      <BlogPostCommentForm blogPostId={post.id} />
     </Card>
   );
 }

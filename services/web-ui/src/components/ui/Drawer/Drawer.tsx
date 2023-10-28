@@ -1,19 +1,18 @@
-import React from "react";
+import { ReactElement, ReactNode } from "react";
 
 import { useIsMobile } from "src/hooks/useIsMobile";
 
 import { DesktopDrawer } from "./DesktopDrawer";
-import { MobileDrawer } from "./MobileDrawer";
 
 interface DrawerProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-export function Drawer({ children }: DrawerProps): React.ReactElement {
+export function Drawer({ children }: DrawerProps): ReactElement {
   const isMobile = useIsMobile();
 
   if (isMobile) {
-    return <MobileDrawer>{children}</MobileDrawer>;
+    return <></>;
   }
 
   return <DesktopDrawer>{children}</DesktopDrawer>;

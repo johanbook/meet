@@ -16,7 +16,8 @@ import { CreateBlogPostCommand } from "../../application/contracts/commands/crea
 import { DeleteBlogPostCommand } from "../../application/contracts/commands/delete-blog-post.command";
 import { UpdateBlogPostCommand } from "../../application/contracts/commands/update-blog-post.command";
 import { BlogPostDetails } from "../../application/contracts/dtos/blog-post-detail.dto";
-import { GetBlogPostsQuery } from "../../application/contracts/queries/get-blog-posts.query";
+import { GetBlogPostListQuery } from "../../application/contracts/queries/get-blog-post-list.query";
+import { GetBlogPostQuery } from "../../application/contracts/queries/get-blog-post.query";
 
 @Controller("blogs")
 @ApiTags("blogs")
@@ -25,8 +26,15 @@ export class BlogsController {
 
   @Get()
   async getBlogPosts(
-    @Query() query: GetBlogPostsQuery,
+    @Query() query: GetBlogPostListQuery,
   ): Promise<BlogPostDetails[]> {
+    return await this.queryBus.execute(query);
+  }
+
+  @Get("byId")
+  async getBlogPost(
+    @Query() query: GetBlogPostQuery,
+  ): Promise<BlogPostDetails> {
     return await this.queryBus.execute(query);
   }
 

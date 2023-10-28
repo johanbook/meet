@@ -1,4 +1,4 @@
-import { NotificationService } from "../../notification.service";
+import { NotificationService } from "../../domain/services/notification.service";
 
 /* eslint-disable unicorn/consistent-function-scoping */
 

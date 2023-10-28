@@ -1,4 +1,7 @@
 {
   "description": "These are the actions that has been performed in the system by your account",
-  "header": "Journal"
+  "header": "Journal",
+  "links": {
+    "back": "Back"
+  }
 }

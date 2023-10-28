@@ -27,6 +27,6 @@ RUN npm ci
 
 USER node
 
-ENTRYPOINT [ "node" ]
-CMD [   "dist/main" ]
+ENTRYPOINT [ "sh" ]
+CMD [   "scripts/start" ]
 EXPOSE 80

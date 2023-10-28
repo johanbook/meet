@@ -13,7 +13,7 @@ import { MemberAddedToOrganizationEvent } from "../../../domain/events/member-ad
 import { Organization } from "../../../infrastructure/entities/organization.entity";
 
 @EventsHandler(MemberAddedToOrganizationEvent)
-export class NotifyReceiverOnPostedChatMessageHandler
+export class NotifyProfileWhenAddedToOrganizationHandler
   implements IEventHandler<MemberAddedToOrganizationEvent>
 {
   constructor(
@@ -44,7 +44,7 @@ export class NotifyReceiverOnPostedChatMessageHandler
       type: NotificationEventsConstants.ADDED_TO_ORGANIZATION,
     };
 
-    await this.notificationService.notifyProfilesIfAvailable(
+    await this.notificationService.notifyProfiles(
       [event.profileId],
       notification,
     );
