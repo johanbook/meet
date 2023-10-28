@@ -9,6 +9,7 @@ import { OrganizationMembership } from "src/features/organizations/infrastructur
 import { Profile } from "src/features/profiles";
 import { getRequiredStringConfig } from "src/utils/config.helper";
 
+import { Notification } from "../../infrastructure/entities/notification.entity";
 import { NotificationGateway } from "../../notification.gateway";
 import { INotification } from "../../types";
 
@@ -20,6 +21,8 @@ export class NotificationService {
 
   constructor(
     private readonly emailService: EmailService,
+    @InjectRepository(Notification)
+    private readonly notifications: Repository<Notification>,
     private readonly notificationGateway: NotificationGateway,
     @InjectRepository(OrganizationMembership)
     private readonly organizationMemberships: Repository<OrganizationMembership>,
@@ -43,6 +46,20 @@ export class NotificationService {
         profileId: Not(In(ignoredProfileIds)),
       },
     });
+
+    const newNotifications = memberships.map((membership) => {
+      const newNotification = new Notification();
+      newNotification.description = notification.description;
+      newNotification.message = notification.message;
+      newNotification.organizationId = organizationId;
+      newNotification.profileId = membership.profileId;
+      newNotification.read = false;
+      newNotification.resourcePath = notification.resourcePath;
+      newNotification.type = notification.type;
+
+      return newNotification;
+    });
+    await this.notifications.save(newNotifications);
 
     const userIds = memberships.map((membership) => membership.profile.userId);
     await this.notifyUsers(userIds, notification);
