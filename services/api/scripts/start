@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export NODE_ENV=production
+
+sh scripts/run-migrations
+sh scripts/seed-database
+
+node dist/main
