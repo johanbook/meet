@@ -79,6 +79,7 @@ export function BlogPostCommentForm({
               </InputAdornment>
             ),
           }}
+          multiline
           onChange={(event) => form.setValue({ content: event.target.value })}
           placeholder={t("comments.placeholder") || ""}
           value={form.state.content.value}
