@@ -61,7 +61,7 @@ export class NotifyOrganizationOnPostedBlogPostCommentHandler
       description: `${profile.name} commented '${event.content}' on ${blogPost.profile.name}'s post.`,
       message: `${profile.name} commented on ${blogPost.profile.name}'s post`,
       resourcePath: `/blog/${event.blogPostId}`,
-      type: NotificationEventsConstants.NEW_BLOG_POST,
+      type: NotificationEventsConstants.NEW_BLOG_POST_COMMENT,
     };
 
     await this.notificationService.notifyOrganization(

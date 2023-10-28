@@ -9,7 +9,7 @@ export class Notification extends BaseEntity {
   @Column({ type: "varchar", length: 4096, default: "" })
   description!: string;
 
-  @Column({ type: "varchar", length: 2048, default: "" })
+  @Column({ type: "varchar", length: 2048 })
   message!: string;
 
   @ManyToOne(() => Organization)
@@ -24,17 +24,17 @@ export class Notification extends BaseEntity {
   @Column()
   profileId!: number;
 
-  @Column()
+  @Column({ type: "boolean", default: false })
   read!: boolean;
 
   @Column({
     type: "timestamp without time zone",
   })
-  readAt!: Date;
+  readAt?: Date;
 
   @Column({ type: "varchar", length: 2048, default: "" })
   resourcePath!: string;
 
-  @Column({ type: "varchar", length: 256, default: "" })
+  @Column({ type: "varchar", length: 256 })
   type!: string;
 }
