@@ -5,6 +5,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { AuthenticationModule } from "src/core/authentication/authentication.module";
 import { NotificationModule } from "src/core/notifications/notification.module";
 import { PhotosModule } from "src/core/photos/photos.module";
+import { QueryModule } from "src/core/query/query.module";
 import { OrganizationModule } from "src/features/organizations/organization.module";
 import { Profile } from "src/features/profiles";
 
@@ -26,6 +27,7 @@ import { Connection } from "./infrastructure/views/connection.view";
     OrganizationModule,
     PhotosModule,
     ProfileModule,
+    QueryModule,
     TypeOrmModule.forFeature([ChatMessage, Connection, Profile]),
   ],
   controllers: [ChatsController],
