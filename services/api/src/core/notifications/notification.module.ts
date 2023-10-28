@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { Module, forwardRef } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
@@ -20,11 +20,11 @@ import { NotificationGateway } from "./notification.gateway";
   controllers: [NotificationsController],
   exports: [NotificationService],
   imports: [
+    forwardRef(() => OrganizationModule),
+    forwardRef(() => ProfileModule),
     AuthenticationModule,
     CqrsModule,
     EmailModule,
-    OrganizationModule,
-    ProfileModule,
     QueryModule,
     TypeOrmModule.forFeature([Notification, OrganizationMembership, Profile]),
   ],

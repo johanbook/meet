@@ -4,6 +4,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AuthenticationModule } from "src/core/authentication/authentication.module";
 import { AuthorizationModule } from "src/core/authorization/authorization.module";
+import { NotificationModule } from "src/core/notifications/notification.module";
 import { PhotosModule } from "src/core/photos/photos.module";
 import { Profile } from "src/features/profiles";
 import { ProfileModule } from "src/features/profiles/profile.module";
@@ -18,6 +19,7 @@ import { SwitchOrganizationHandler } from "./application/handlers/command-handle
 import { UpdateMemberRoleHandler } from "./application/handlers/command-handlers/update-member-role.handler";
 import { UpdateOrganizationHandler } from "./application/handlers/command-handlers/update-organization.handler";
 import { CreateOrganizationOnProfileCreatedHandler } from "./application/handlers/event-handlers/create-organization-on-profile-created.handler";
+import { NotifyProfileWhenAddedToOrganizationHandler } from "./application/handlers/event-handlers/notify-profile-when-added-to-organzation.handler";
 import { GetOrganizationListHandler } from "./application/handlers/query-handlers/get-organization-list.handler";
 import { GetOrganizationMembersHandler } from "./application/handlers/query-handlers/get-organization-members.handler";
 import { GetOrganizationHandler } from "./application/handlers/query-handlers/get-organization.handler";
@@ -38,6 +40,7 @@ import { Organization } from "./infrastructure/entities/organization.entity";
   imports: [
     forwardRef(() => AuthorizationModule),
     forwardRef(() => ProfileModule),
+    forwardRef(() => NotificationModule),
     AuthenticationModule,
     CqrsModule,
     PhotosModule,
@@ -61,6 +64,7 @@ import { Organization } from "./infrastructure/entities/organization.entity";
     GetOrganizationListHandler,
     GetOrganizationMembersHandler,
     MembershipService,
+    NotifyProfileWhenAddedToOrganizationHandler,
     OrganizationJobs,
     OrganizationService,
     RemoveMemberFromCurrentOrganizationHandler,

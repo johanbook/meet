@@ -19,7 +19,7 @@ export class NotificationService {
   private logger = new Logger(NotificationGateway.name);
 
   constructor(
-    private emailService: EmailService,
+    private readonly emailService: EmailService,
     private readonly notificationGateway: NotificationGateway,
     @InjectRepository(OrganizationMembership)
     private readonly organizationMemberships: Repository<OrganizationMembership>,
@@ -28,10 +28,11 @@ export class NotificationService {
     private readonly userIdService: UserIdService,
   ) {}
 
+  /** Sends notification to all members of an organization */
   async notifyOrganization(
     organizationId: number,
     notification: INotification,
-    exceptProfilsIds: number[] = [],
+    ignoredProfileIds: number[] = [],
   ): Promise<void> {
     const memberships = await this.organizationMemberships.find({
       relations: {
@@ -39,18 +40,16 @@ export class NotificationService {
       },
       where: {
         organizationId,
-        profileId: Not(In(exceptProfilsIds)),
+        profileId: Not(In(ignoredProfileIds)),
       },
     });
 
     const userIds = memberships.map((membership) => membership.profile.userId);
-    await this.notifyUsersIfAvailable(userIds, notification);
+    await this.notifyUsers(userIds, notification);
   }
 
-  async notifyProfilesIfAvailable(
-    profileIds: number[],
-    notification: INotification,
-  ) {
+  /** Sends notification to profiles */
+  async notifyProfiles(profileIds: number[], notification: INotification) {
     const profiles = await this.profiles.find({
       select: ["userId"],
       where: { id: In(profileIds) },
@@ -58,10 +57,10 @@ export class NotificationService {
 
     const ids = profiles.map((profile) => profile.userId);
 
-    await this.notifyUsersIfAvailable(ids, notification);
+    await this.notifyUsers(ids, notification);
   }
 
-  async notifyUsersIfAvailable(
+  async notifyUsers(
     userIds: string[],
     notification: INotification,
   ): Promise<void> {
