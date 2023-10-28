@@ -31,7 +31,7 @@
     "@nestjs/platform-express": "^10.2.4",
     "@nestjs/platform-fastify": "^10.2.4",
     "@nestjs/platform-socket.io": "^10.2.4",
-    "@nestjs/schedule": "^3.0.1",
+    "@nestjs/schedule": "^3.0.4",
     "@nestjs/swagger": "^7.1.10",
     "@nestjs/typeorm": "^10.0.0",
     "@nestjs/websockets": "^10.2.4",
