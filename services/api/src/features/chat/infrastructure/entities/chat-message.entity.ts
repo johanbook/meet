@@ -21,6 +21,9 @@ export class ChatMessage {
   @ManyToOne(() => ChatConversation, (conversation) => conversation.messages)
   conversation!: ChatConversation;
 
+  @Column()
+  conversationId!: string;
+
   @Column("text")
   message!: string;
 

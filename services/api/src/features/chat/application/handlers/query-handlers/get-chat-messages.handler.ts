@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { mapArray } from "src/core/mapper";
+import { QueryService } from "src/core/query";
 import { CurrentProfileService } from "src/features/profiles";
 
 import { ChatMessage } from "../../..//infrastructure/entities/chat-message.entity";
@@ -17,18 +18,20 @@ export class GetChatMessagesHandler
     @InjectRepository(ChatMessage)
     private readonly chatMessages: Repository<ChatMessage>,
     private readonly currentProfileService: CurrentProfileService,
+    private readonly queryService: QueryService<ChatMessage>,
   ) {}
 
   async execute(query: GetChatMessagesQuery) {
     const currentProfileId =
       await this.currentProfileService.fetchCurrentProfileId();
-    const targetProfileId = query.profileId;
 
-    const foundChatMessages = await this.chatMessages.find({
-      where: [
-        { receiverId: currentProfileId, senderId: targetProfileId },
-        { receiverId: targetProfileId, senderId: currentProfileId },
-      ],
+    const foundChatMessages = await this.queryService.find(this.chatMessages, {
+      required: {
+        where: {
+          conversationId: query.conversationId,
+        },
+      },
+      query,
     });
 
     return mapArray(ChatMessageDetails, foundChatMessages, (item) => ({
