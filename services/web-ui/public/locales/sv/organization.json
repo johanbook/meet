@@ -7,11 +7,14 @@
     "error": "Fel vid hämtning av gruppmedlemmar",
     "header": "Medlemmar",
     "invite": {
+      "button": "Lägg till användare",
+      "description": "Genom att lägga till en användare till gruppen kan de se allt som delats och skapa nytt innehåll",
       "email": {
         "label": "Email"
       },
+      "header": "Lägg till användare",
       "submit": {
-        "button": "Bjud in",
+        "button": "Lägg till",
         "error": "Ett fel inträffade när användaren skulle bjudas in",
         "success": "Användaren har lagts till i gruppen"
       }
