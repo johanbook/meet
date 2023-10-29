@@ -10,6 +10,6 @@ export function useNotification(): UseQueryResult<
 > {
   return useQuery([CacheKeysConstants.Notifications], async () => {
     const result = await notificationsApi.getNotifactions();
-    return groupBy(result, (item) => item.resourcePath);
+    return groupBy(result, (item) => item.type);
   });
 }
