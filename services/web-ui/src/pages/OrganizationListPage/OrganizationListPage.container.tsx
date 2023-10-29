@@ -61,7 +61,7 @@ export function OrganizationListPageContainer(): React.ReactElement {
       {
         onError: () => snackbar.error(t("actions.activate.error")),
         onSuccess: () => {
-          queryClient.invalidateQueries();
+          queryClient.resetQueries();
           navigate("/");
           snackbar.success(t("actions.activate.success"));
         },
