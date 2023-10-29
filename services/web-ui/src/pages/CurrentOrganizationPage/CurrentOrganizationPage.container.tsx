@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactElement } from "react";
 
 import { Typography } from "@mui/material";
 
@@ -11,7 +11,7 @@ import { CurrentOrganizationPageNav } from "./CurrentOrganizationPage.nav";
 import { CurrentOrganizationPageSkeleton } from "./CurrentOrganizationPage.skeleton";
 import { OrganizationMembers } from "./components/OrganizationMembers";
 
-export function CurrentOrganizationPageContainer(): React.ReactElement {
+export function CurrentOrganizationPageContainer(): ReactElement {
   const { t } = useTranslation("organization");
 
   const { error, data, isLoading } = useQuery(

@@ -12,8 +12,8 @@ import { Permissions, useAuthorization } from "src/core/authorization";
 import { useDialog } from "src/core/dialog";
 import { useTranslation } from "src/core/i18n";
 
-import { OrganizationMemberRemoveDialog } from "../OrganizationMemberRemoveDialog/OrganizationMemberRemoveDialog";
-import { OrganizationMemberUpdateDialog } from "../OrganizationMemberUpdateDialog/OrganizationMemberUpdateDialog";
+import { OrganizationMemberRemoveDialog } from "../../dialogs/OrganizationMemberRemoveDialog";
+import { OrganizationMemberUpdateDialog } from "../../dialogs/OrganizationMemberUpdateDialog";
 
 export interface OrganizationMemberMenuProps {
   member: OrganizationMemberDetails;

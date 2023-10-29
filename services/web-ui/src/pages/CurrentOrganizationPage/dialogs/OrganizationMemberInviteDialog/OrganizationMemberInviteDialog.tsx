@@ -1,20 +1,21 @@
-import { ReactElement, SyntheticEvent } from "react";
+import { ReactElement } from "react";
 import { useMutation, useQueryClient } from "react-query";
-
-import { Box } from "@mui/material";
 
 import { AddMemberToOrganizationViaEmailCommand } from "src/api";
 import { organizationsApi } from "src/apis";
-import { Button, TextField } from "src/components/ui";
+import { Button, TextField, Typography } from "src/components/ui";
+import { Dialog } from "src/components/ui/Dialog";
 import { Permissions, useAuthorization } from "src/core/authorization";
+import { GlobalDialogProps } from "src/core/dialog";
 import { useForm, validators } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
-export interface OrganizationMemberInviteProps {}
+export interface OrganizationMemberInviteDialogProps
+  extends GlobalDialogProps {}
 
-export function OrganizationMemberInvite(): ReactElement {
+export function OrganizationMemberInviteDialog(): ReactElement {
   const authorization = useAuthorization();
   const { t } = useTranslation("organization");
   const queryClient = useQueryClient();
@@ -44,9 +45,7 @@ export function OrganizationMemberInvite(): ReactElement {
     return <> </>;
   }
 
-  function handleSubmit(event: SyntheticEvent): void {
-    event.preventDefault();
-
+  function handleSubmit(onSuccess: () => void): void {
     const { data, isValid } = form.validate();
 
     if (!isValid) {
@@ -61,16 +60,34 @@ export function OrganizationMemberInvite(): ReactElement {
           CacheKeysConstants.CurrentOrganizationMembers,
         ]);
         snackbar.success(t("members.invite.submit.success"));
+        onSuccess();
       },
     });
   }
 
   return (
-    <Box
-      component="form"
-      onSubmit={handleSubmit}
-      sx={{ alignItems: "flex-start", display: "flex", gap: 1 }}
+    <Dialog
+      Actions={({ closeDialog }) => (
+        <>
+          <Button onClick={closeDialog}>{t("members.update.cancel")}</Button>
+
+          <Button
+            disabled={!form.isValid}
+            onClick={() => handleSubmit(closeDialog)}
+            sx={{ whiteSpace: "nowrap" }}
+            type="submit"
+            variant="outlined"
+          >
+            {t("members.invite.submit.button")}
+          </Button>
+        </>
+      )}
+      title={t("members.invite.header") || ""}
     >
+      <Typography color="textSecondary" sx={{ paddingBottom: 3 }}>
+        {t("members.invite.description")}
+      </Typography>
+
       <TextField
         error={form.state.email.error}
         fullWidth
@@ -79,15 +96,6 @@ export function OrganizationMemberInvite(): ReactElement {
         onChange={(email) => form.setValue({ email })}
         value={form.state.email.value}
       />
-
-      <Button
-        disabled={!form.isValid}
-        sx={{ whiteSpace: "nowrap" }}
-        type="submit"
-        variant="outlined"
-      >
-        {t("members.invite.submit.button")}
-      </Button>
-    </Box>
+    </Dialog>
   );
 }
