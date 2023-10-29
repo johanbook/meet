@@ -1,36 +1,61 @@
 import { ReactElement } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 
-import {
-  BottomNavigationAction,
-  BottomNavigation as MuiBottomNavigation,
-  Paper,
-} from "@mui/material";
+import { Box, Button, Paper } from "@mui/material";
 
 import { mobileNav } from "../nav.items";
+import { NavItem } from "../types";
+
+interface BottomNavigationListItemProps {
+  fractionalWidth: number;
+  item: NavItem;
+}
+
+function BottomNavigationListItem({
+  fractionalWidth,
+  item,
+}: BottomNavigationListItemProps): ReactElement {
+  const location = useLocation();
+  const regexp = new RegExp(item.isActive || item.url);
+  const match = regexp.test(location.pathname);
+
+  return (
+    <Button
+      component={RouterLink}
+      to={item.url}
+      sx={{ width: `${100 * fractionalWidth}%` }}
+    >
+      <item.Icon
+        sx={{
+          color: match ? "primary.main" : "action.active",
+        }}
+      />
+    </Button>
+  );
+}
 
 export function BottomNavigation(): ReactElement {
-  const location = useLocation();
-
-  // Strips away ie chat id, meaning `/chat/12` -> `/chat`
-  const pathname = "/" + location.pathname.split("/")[1];
-
   return (
     <Paper
       component="footer"
       elevation={3}
       sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
     >
-      <MuiBottomNavigation value={pathname}>
+      <Box
+        sx={{
+          display: "flex",
+          padding: 1,
+          height: 56,
+        }}
+      >
         {mobileNav.bottom.map((item) => (
-          <BottomNavigationAction
-            component={RouterLink}
-            icon={<item.Icon />}
-            to={item.url}
-            value={item.url}
+          <BottomNavigationListItem
+            fractionalWidth={1 / mobileNav.bottom.length}
+            key={item.url}
+            item={item}
           />
         ))}
-      </MuiBottomNavigation>
+      </Box>
     </Paper>
   );
 }
