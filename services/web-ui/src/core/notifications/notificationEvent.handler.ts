@@ -28,8 +28,10 @@ export class NotificationEventHandler {
     NotificationEventsConstants,
     Record<string, Handler>
   > = {
+    [NotificationEventsConstants.ADDED_TO_ORGANIZATION]: {},
+    [NotificationEventsConstants.NEW_BLOG_POST]: {},
+    [NotificationEventsConstants.NEW_BLOG_POST_COMMENT]: {},
     [NotificationEventsConstants.NEW_CHAT_MESSAGE]: {},
-    [NotificationEventsConstants.NEW_MATCH]: {},
   };
 
   private readonly socket: Socket;

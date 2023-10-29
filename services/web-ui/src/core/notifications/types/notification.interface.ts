@@ -4,13 +4,6 @@ interface BaseNotification {
   message: string;
 }
 
-export interface NewMatchNotification extends BaseNotification {
-  data: {
-    profileId: string;
-  };
-  type: NotificationEventsConstants.NEW_MATCH;
-}
-
 export interface NewChatMessageNotification extends BaseNotification {
   data: {
     receiverId: string;
@@ -19,4 +12,4 @@ export interface NewChatMessageNotification extends BaseNotification {
   type: NotificationEventsConstants.NEW_CHAT_MESSAGE;
 }
 
-export type INotification = NewMatchNotification | NewChatMessageNotification;
+export type INotification = NewChatMessageNotification;

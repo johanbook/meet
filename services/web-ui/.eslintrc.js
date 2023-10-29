@@ -38,6 +38,8 @@ module.exports = {
     ],
     /** Empty interfaces are useful for later adding props */
     "@typescript-eslint/no-empty-interface": "off",
+    /** We want to be able to do `obj.name` as test name */
+    "jest/valid-title": "off",
     "unicorn/filename-case": "off",
     "unicorn/no-process-exit": "off",
     "unicorn/prevent-abbreviations": "off",

@@ -8,9 +8,9 @@ import { Drawer } from "src/components/ui/Drawer";
 import { DRAWER_WIDTH } from "src/components/ui/Drawer/DesktopDrawer";
 import { useIsMobile } from "src/hooks/useIsMobile";
 
-import { BottomNavigation } from "./BottomNavigation";
-import { NavLinkListItem } from "./NavLinkListItem";
-import { bottomNavItems, desktopNavItems } from "./desktopItems";
+import { BottomNavigation } from "../BottomNavigation";
+import { NavLinkListItem } from "../NavLinkListItem";
+import { bottomNavItems, desktopNavItems } from "../nav.items";
 
 export interface NavProps {}
 

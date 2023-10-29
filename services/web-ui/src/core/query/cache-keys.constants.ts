@@ -4,6 +4,7 @@ export enum CacheKeysConstants {
   CurrentOrganizationMembers = "CurrentOrganizationMembers",
   CurrentProfile = "currentProfile",
   Journal = "journal",
+  Notifications = "notifications",
   OrganizationList = "organizationList",
   Settings = "settings",
 }

@@ -33,3 +33,22 @@ export const bottomNavItems: NavItem[] = [
     url: "/profile",
   },
 ];
+
+export const mobileNavItems: NavItem[] = [
+  {
+    Icon: Feed,
+    isActive: /^(\/$|\/blog)/,
+    name: "navigation.blog",
+    url: "/",
+  },
+  {
+    Icon: Chat,
+    name: "navigation.chat",
+    url: "/chat",
+  },
+  {
+    Icon: AccountCircle,
+    name: "navigation.profile",
+    url: "/profile",
+  },
+];
