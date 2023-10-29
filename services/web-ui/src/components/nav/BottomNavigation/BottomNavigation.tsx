@@ -3,12 +3,19 @@ import { Link as RouterLink, useLocation } from "react-router-dom";
 
 import { AccountCircle, Chat, Feed } from "@mui/icons-material";
 import {
+  Badge,
   BottomNavigationAction,
   BottomNavigation as MuiBottomNavigation,
   Paper,
 } from "@mui/material";
 
+import {
+  NotificationEventsConstants,
+  useNotifications,
+} from "src/core/notifications";
+
 export function BottomNavigation(): ReactElement {
+  const notifications = useNotifications();
   const location = useLocation();
 
   // Strips away ie chat id, meaning `/chat/12` -> `/chat`
@@ -17,6 +24,8 @@ export function BottomNavigation(): ReactElement {
   if (pathname === "/") {
     pathname = "/blog";
   }
+
+  const notificationData = notifications.data || {};
 
   return (
     <Paper
@@ -27,7 +36,18 @@ export function BottomNavigation(): ReactElement {
       <MuiBottomNavigation value={pathname}>
         <BottomNavigationAction
           component={RouterLink}
-          icon={<Feed />}
+          icon={
+            <Badge
+              color="error"
+              variant={
+                notificationData[NotificationEventsConstants.NEW_BLOG_POST]
+                  ? "dot"
+                  : undefined
+              }
+            >
+              <Feed />
+            </Badge>
+          }
           to="/"
           value="/blog"
         />
