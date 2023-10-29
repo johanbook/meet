@@ -1,7 +1,6 @@
-import React, { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
-import { Typography } from "@mui/material";
-
+import { NavLayout } from "src/components/layout";
 import { useTranslation } from "src/core/i18n";
 
 interface CurrentOrganizationPageNavProps {
@@ -10,16 +9,12 @@ interface CurrentOrganizationPageNavProps {
 
 export function CurrentOrganizationPageNav({
   children,
-}: CurrentOrganizationPageNavProps): React.ReactElement {
+}: CurrentOrganizationPageNavProps): ReactElement {
   const { t } = useTranslation("organization");
 
   return (
-    <>
-      <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
-        {t("header")}
-      </Typography>
-
+    <NavLayout header={t("header")} linkText={t("links.back")} to="/profile">
       {children}
-    </>
+    </NavLayout>
   );
 }

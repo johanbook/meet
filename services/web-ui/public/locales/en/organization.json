@@ -1,5 +1,8 @@
 {
   "header": "Group",
+  "links": {
+    "back": "Back"
+  },
   "members": {
     "error": "Unable to retrieve organization members",
     "header": "Members",
