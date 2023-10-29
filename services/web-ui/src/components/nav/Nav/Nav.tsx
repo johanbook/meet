@@ -10,7 +10,7 @@ import { useIsMobile } from "src/hooks/useIsMobile";
 
 import { BottomNavigation } from "../BottomNavigation";
 import { NavLinkListItem } from "../NavLinkListItem";
-import { bottomNavItems, desktopNavItems } from "../nav.items";
+import { desktopNav } from "../nav.items";
 
 export interface NavProps {}
 
@@ -28,13 +28,13 @@ export function Nav(): ReactElement {
           }}
         >
           <List sx={{ flexGrow: 1 }}>
-            {desktopNavItems.map((item) => (
+            {desktopNav.top.map((item) => (
               <NavLinkListItem item={item} key={item.url} />
             ))}
           </List>
 
           <List>
-            {bottomNavItems.map((item) => (
+            {desktopNav.bottom.map((item) => (
               <NavLinkListItem item={item} key={item.url} />
             ))}
           </List>
