@@ -40,10 +40,11 @@ export class NotifyReceiverOnPostedChatMessageHandler
       data: { receiverId: event.receiverId, senderId: event.senderId },
       description: `${profile.name} sent you a message in Meet`,
       message: `${profile.name} sent you a new message`,
+      resourcePath: `/chat/${event.senderId}`,
       type: NotificationEventsConstants.NEW_CHAT_MESSAGE,
     };
 
-    await this.notificationService.notifyProfilesIfAvailable(
+    await this.notificationService.notifyProfiles(
       [event.receiverId],
       notification,
     );

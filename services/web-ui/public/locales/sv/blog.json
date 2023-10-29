@@ -25,6 +25,9 @@
   "form": {
     "placeholder": "Säg något om din dag"
   },
+  "links": {
+    "back": "Tillbaka"
+  },
   "menu": {
     "delete": "Ta bort"
   },

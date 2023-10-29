@@ -45,6 +45,9 @@ export class NotifyOrganizationOnPostedBlogPostCommentHandler
           name: true,
         },
       },
+      relations: {
+        profile: true,
+      },
       where: {
         id: event.blogPostId,
       },
@@ -55,9 +58,10 @@ export class NotifyOrganizationOnPostedBlogPostCommentHandler
     }
 
     const notification: INotification = {
-      description: `${profile.name} made the comment '${event.content}' on ${blogPost.profile.name}'s post in your organization.\n\nGo in and take a look.`,
-      message: `${profile.name} commented on ${blogPost.profile.name}'s post in your organization`,
-      type: NotificationEventsConstants.NEW_BLOG_POST,
+      description: `${profile.name} commented '${event.content}' on ${blogPost.profile.name}'s post.`,
+      message: `${profile.name} commented on ${blogPost.profile.name}'s post`,
+      resourcePath: `/blog/${event.blogPostId}`,
+      type: NotificationEventsConstants.NEW_BLOG_POST_COMMENT,
     };
 
     await this.notificationService.notifyOrganization(

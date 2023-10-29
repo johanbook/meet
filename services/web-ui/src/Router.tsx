@@ -1,9 +1,10 @@
-import React, { Suspense } from "react";
+import { ReactElement, Suspense } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import Nav from "src/components/ui/Nav";
+import { Nav } from "src/components/nav";
 import { GlobalDialogProvider } from "src/core/dialog";
 import { NavigationTrackingProvider } from "src/core/tracking/NavigationTrackingProvider";
+import { BlogPostListPage } from "src/pages/BlogPostListPage";
 import { BlogPostPage } from "src/pages/BlogPostPage";
 import { ChatPage } from "src/pages/ChatPage";
 import { ConnectionsPage } from "src/pages/ConnectionsPage";
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <BlogPostListPage />,
+      },
+      {
+        path: "/blog/:id",
         element: <BlogPostPage />,
       },
       {
@@ -57,12 +62,12 @@ const router = createBrowserRouter([
         element: <OrganizationListPage />,
       },
       {
-        path: "/journal",
-        element: <JournalPage />,
-      },
-      {
         path: "/profile",
         element: <CurrentProfilePage />,
+      },
+      {
+        path: "/profile/journal",
+        element: <JournalPage />,
       },
       {
         path: "/profile/:id",
@@ -76,7 +81,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-export function Router(): React.ReactElement {
+export function Router(): ReactElement {
   return (
     <ProfileGuard>
       <RouterProvider router={router} />

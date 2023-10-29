@@ -1,3 +1,4 @@
+import i18next from "i18next";
 import SuperTokens from "supertokens-auth-react";
 import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
 import EmailVerification from "supertokens-auth-react/recipe/emailverification";
@@ -17,6 +18,12 @@ export async function initializeSuperTokens(
       apiDomain: config.API_DOMAIN,
       websiteBasePath: "/login",
       websiteDomain: config.UI_DOMAIN,
+    },
+    languageTranslations: {
+      translationFunc: (key) => {
+        const translation = i18next.t(key);
+        return translation === key ? "" : translation;
+      },
     },
     recipeList: [
       EmailPassword.init({
@@ -48,6 +55,10 @@ export async function initializeSuperTokens(
       Session.init(),
     ],
   });
+
+  // These are used to trigger a re-rendering since the SDK can't detect the change otherwise.
+  i18next.on("languageChanged", (lng) => SuperTokens.changeLanguage(lng));
+  i18next.on("loaded", () => SuperTokens.loadTranslation({}));
 
   callback();
 }

@@ -9,11 +9,13 @@ export class UnhandledExceptionLogger {
 
   constructor(private readonly unhandledExceptionBus: UnhandledExceptionBus) {
     this.unhandledExceptionBus.subscribe((exceptionInfo) => {
-      this.logger.error({
-        cause: exceptionInfo.cause,
-        error: exceptionInfo.exception,
-        msg: `Encountered unhandled exception ${exceptionInfo.exception.message}`,
-      });
+      this.logger.error(
+        `Encountered unhandled exception ${exceptionInfo.exception.message}`,
+        {
+          cause: exceptionInfo.cause,
+          error: exceptionInfo.exception,
+        },
+      );
     });
   }
 }

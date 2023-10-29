@@ -108,7 +108,7 @@ export function SettingsPageContainer(): React.ReactElement {
           </Link>
         </ListItem>
         <ListItem>
-          <Link to="/journal">{t("advanced.links.journal")}</Link>
+          <Link to="/profile/journal">{t("advanced.links.journal")}</Link>
         </ListItem>
       </List>
     </Box>

@@ -1,4 +1,7 @@
 {
   "description": "Detta är alla de handlingar som har utförts av din profil",
-  "header": "Journal"
+  "header": "Journal",
+  "links": {
+    "back": "Tillbaka"
+  }
 }

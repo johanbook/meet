@@ -2,6 +2,7 @@ import { ReactElement, ReactNode } from "react";
 
 import { Grid, Typography } from "@mui/material";
 
+import { PageWithNav } from "src/components/layout";
 import { DatePicker } from "src/components/ui/DatePicker";
 import { useTranslation } from "src/core/i18n";
 
@@ -24,17 +25,15 @@ export function JournalPageNav({
   const { t } = useTranslation("journal");
 
   return (
-    <>
-      <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
-        {t("header")}
-      </Typography>
-      <Typography color="textSecondary" sx={{ paddingBottom: 2 }}>
+    <PageWithNav header={t("header")} linkText={t("links.back")} to="/profile">
+      <Typography color="textSecondary" sx={{ paddingBottom: 3 }}>
         {t("description")}
       </Typography>
 
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <DatePicker
+            fullWidth
             label="From"
             onChange={(from) => onDateChange({ ...values, from })}
             value={values.from}
@@ -43,6 +42,7 @@ export function JournalPageNav({
 
         <Grid item xs={6}>
           <DatePicker
+            fullWidth
             label="To"
             onChange={(to) => onDateChange({ ...values, to })}
             value={values.to}
@@ -51,6 +51,6 @@ export function JournalPageNav({
       </Grid>
 
       {children}
-    </>
+    </PageWithNav>
   );
 }

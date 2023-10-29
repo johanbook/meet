@@ -22,7 +22,7 @@ export function AuthenticationGuardContainer({
   );
 
   if (error instanceof ResponseError && error.response.status === 401) {
-    window.location.href = "/login";
+    window.location.href = `/login?redirectToPath=${window.location.pathname}`;
 
     return (
       <AuthenticationGuardNav>

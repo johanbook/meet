@@ -18,8 +18,7 @@ export class HealthChecksJobs {
     if (result.status === "ok") {
       this.logger.debug("Diagnostics completed. Everything OK.");
     } else {
-      this.logger.error({
-        msg: "Errors encountered when running diagnostics",
+      this.logger.error("Encountered errors when running diagnostics", {
         errors: result.errors,
       });
     }

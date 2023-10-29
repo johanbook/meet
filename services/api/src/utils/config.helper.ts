@@ -1,4 +1,8 @@
-import { ConfigurationError } from "src/core/error-handling";
+import { Logger } from "src/core/logging";
+
+/* eslint-disable sonarjs/no-duplicate-string */
+
+const logger = new Logger("ConfigHelper");
 
 function readEnv(key: string): string | undefined {
   return process.env[key];
@@ -11,9 +15,8 @@ export function getRequiredBooleanConfig(
   const value = readEnv(key) || defaultValue;
 
   if (typeof value !== "boolean") {
-    throw new ConfigurationError(
-      `Required environment variable '${key}' is undefined`,
-    );
+    logger.error("Required environment variable is undefined", { env: key });
+    process.exit(1);
   }
 
   return value;
@@ -33,9 +36,8 @@ export function getRequiredIntConfig(
   value = value || defaultValue;
 
   if (typeof value !== "number") {
-    throw new ConfigurationError(
-      `Required environment variable '${key}' is undefined`,
-    );
+    logger.error("Required environment variable is undefined", { env: key });
+    process.exit();
   }
 
   return value;
@@ -48,9 +50,9 @@ export function getRequiredStringConfig(
   const value = readEnv(key) ?? defaultValue;
 
   if (typeof value !== "string") {
-    throw new ConfigurationError(
-      `Required environment variable '${key}' is undefined`,
-    );
+    logger.error("Required environment variable is undefined", { env: key });
+
+    process.exit();
   }
 
   return value;
