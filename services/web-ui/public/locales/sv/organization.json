@@ -1,5 +1,8 @@
 {
   "header": "Grupp",
+  "links": {
+    "back": "Tillbaka"
+  },
   "members": {
     "error": "Fel vid hämtning av gruppmedlemmar",
     "header": "Medlemmar",

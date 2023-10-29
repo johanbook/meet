@@ -15,5 +15,8 @@
     }
   },
   "description": "Genom att skapa ny grupp kan du samla vänner och innehåll på en plats",
-  "header": "Skapa ny grupp"
+  "header": "Skapa ny grupp",
+  "links": {
+    "back": "Tillbaka"
+  }
 }

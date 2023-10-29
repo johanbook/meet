@@ -6,6 +6,7 @@ import { Box } from "@mui/material";
 
 import { CreateOrganizationCommand } from "src/api";
 import { organizationsApi } from "src/apis";
+import { NavLayout } from "src/components/layout";
 import { Button, TextField, Typography } from "src/components/ui";
 import { useForm, validators } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
@@ -55,11 +56,7 @@ export function CreateOrganizationPageContainer(): ReactElement {
   }
 
   return (
-    <>
-      <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
-        {t("header")}
-      </Typography>
-
+    <NavLayout header={t("header")} linkText={t("links.back")} to="/profile">
       <Typography color="textSecondary" sx={{ paddingBottom: 3 }}>
         {t("description")}
       </Typography>
@@ -91,6 +88,6 @@ export function CreateOrganizationPageContainer(): ReactElement {
           </Button>
         </Box>
       </form>
-    </>
+    </NavLayout>
   );
 }
