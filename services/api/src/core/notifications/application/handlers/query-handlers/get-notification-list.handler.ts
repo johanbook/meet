@@ -46,7 +46,9 @@ export class GetNotificationListHandler
       fountNotifications,
       (notification) => ({
         id: notification.id,
+        message: notification.message,
         resourcePath: notification.resourcePath,
+        type: notification.type,
       }),
     );
   }
