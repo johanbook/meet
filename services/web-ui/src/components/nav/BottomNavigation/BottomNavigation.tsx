@@ -7,7 +7,7 @@ import {
   Paper,
 } from "@mui/material";
 
-import { mobileNavItems } from "../nav.items";
+import { mobileNav } from "../nav.items";
 
 export function BottomNavigation(): ReactElement {
   const location = useLocation();
@@ -22,7 +22,7 @@ export function BottomNavigation(): ReactElement {
       sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
     >
       <MuiBottomNavigation value={pathname}>
-        {mobileNavItems.map((item) => (
+        {mobileNav.bottom.map((item) => (
           <BottomNavigationAction
             component={RouterLink}
             icon={<item.Icon />}
