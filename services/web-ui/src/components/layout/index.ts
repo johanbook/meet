@@ -1,2 +1,2 @@
 export { Page } from "./Page";
-export { PageWithNav } from "./PageWithNav";
+export { NavLayout } from "./NavLayout";

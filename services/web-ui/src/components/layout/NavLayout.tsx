@@ -4,19 +4,19 @@ import { Link as ReactRouterLink } from "react-router-dom";
 import { ArrowBackIosNew } from "@mui/icons-material";
 import { Link as MuiLink, Typography } from "@mui/material";
 
-interface PageWithNavProps {
+interface NavLayoutProps {
   children: ReactNode;
   header?: string | null;
   linkText: string;
   to: string;
 }
 
-export function PageWithNav({
+export function NavLayout({
   children,
   header,
   linkText,
   to,
-}: PageWithNavProps): ReactElement {
+}: NavLayoutProps): ReactElement {
   return (
     <>
       <MuiLink
