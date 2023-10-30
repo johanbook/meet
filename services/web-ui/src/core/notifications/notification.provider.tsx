@@ -1,22 +1,23 @@
-import React from "react";
+import { ReactElement, ReactNode, createContext, useState } from "react";
 
 import { useSnackbar } from "src/core/snackbar";
+
 import { NotificationEventHandler } from "./notificationEvent.handler";
 
-export const NotificationContext = React.createContext<
+export const NotificationContext = createContext<
   NotificationEventHandler | undefined
 >(undefined);
 
 interface NotificationProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function NotificationProvider({
   children,
-}: NotificationProviderProps): React.ReactElement {
+}: NotificationProviderProps): ReactElement {
   const snackbar = useSnackbar();
 
-  const notificationHandler = React.useState(() => {
+  const notificationHandler = useState(() => {
     return new NotificationEventHandler(({ message }) =>
       snackbar.info(message)
     );
