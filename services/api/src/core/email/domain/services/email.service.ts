@@ -39,7 +39,7 @@ export class EmailService {
         header: subject,
         url,
       }),
-      to: receivers.join(","),
+      bcc: receivers.join(","),
       subject,
       text,
     });
