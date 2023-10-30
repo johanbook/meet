@@ -1,7 +1,6 @@
-import React from "react";
+import { ReactElement } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
-import CssBaseline from "@mui/material/CssBaseline";
 import { SnackbarProvider } from "notistack";
 
 import { Logger } from "src/core/logging";
@@ -37,7 +36,7 @@ const QUERY_CLIENT = new QueryClient({
           },
         });
       },
-      // Limit reqtries
+      // Limit retries
       retry: 1,
       // Consider data to be fresh for 20 seconds
       staleTime: 20 * 1000,
@@ -45,11 +44,10 @@ const QUERY_CLIENT = new QueryClient({
   },
 });
 
-export function App(): React.ReactElement {
+export function App(): ReactElement {
   return (
     <QueryClientProvider client={QUERY_CLIENT}>
       <ThemeProvider>
-        <CssBaseline />
         <AuthenticationGuard>
           <NotificationProvider>
             <Router />
