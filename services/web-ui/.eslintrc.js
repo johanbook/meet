@@ -3,6 +3,7 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   extends: [
     "eslint:recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:sonarjs/recommended",
@@ -20,7 +21,7 @@ module.exports = {
       },
     },
   ],
-  plugins: ["@typescript-eslint", "sonarjs", "unicorn"],
+  plugins: ["@tanstack/query", "@typescript-eslint", "sonarjs", "unicorn"],
   rules: {
     "no-console": "error",
     "no-template-curly-in-string": "error",
