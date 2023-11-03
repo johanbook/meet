@@ -73,6 +73,11 @@ export class NotificationEventHandler {
 
     this.logger.trace("Received notification", { notification });
 
+    const event = new CustomEvent("notification", {
+      detail: notification,
+    });
+    window.dispatchEvent(event);
+
     let eventWasHandled = false;
 
     for (const handler of handlers) {

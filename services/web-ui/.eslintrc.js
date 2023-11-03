@@ -29,7 +29,7 @@ module.exports = {
       "error",
       {
         selector: "class",
-        format: ["StrictPascalCase"],
+        format: ["PascalCase"],
       },
       {
         selector: "function",
