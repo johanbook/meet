@@ -12,9 +12,9 @@ import { AuthenticationModule } from "../authentication/authentication.module";
 import { QueryModule } from "../query/query.module";
 import { GetNotificationListHandler } from "./application/handlers/query-handlers/get-notification-list.handler";
 import { NotificationsController } from "./client/controllers/notifications.controller";
+import { NotificationGateway } from "./client/gateways/notification.gateway";
 import { NotificationService } from "./domain/services/notification.service";
 import { Notification } from "./infrastructure/entities/notification.entity";
-import { NotificationGateway } from "./notification.gateway";
 
 @Module({
   controllers: [NotificationsController],
