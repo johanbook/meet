@@ -4,7 +4,7 @@ import { EmailPasswordPreBuiltUI } from "supertokens-auth-react/recipe/emailpass
 import { canHandleRoute, getRoutingComponent } from "supertokens-auth-react/ui";
 
 export function Router(): ReactElement {
-  if (canHandleRoute([EmailPasswordPreBuiltUI])) {
+  if (!canHandleRoute([EmailPasswordPreBuiltUI])) {
     return <p>An unexpected error has occurred: Unable to handle route</p>;
   }
 
