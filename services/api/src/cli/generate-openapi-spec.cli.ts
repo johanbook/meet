@@ -46,6 +46,9 @@ export async function generateOpenApiJsonFile(path: string): Promise<void> {
 
   console.log(`Writing OpenAPI specification to '${path}'`);
   fs.writeFileSync(path, json);
+
+  // Needed for proccess to exit cleanly
+  process.exit(0)
 }
 
 generateOpenApiJsonFile(FILE_PATH);

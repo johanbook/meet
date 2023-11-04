@@ -1,10 +1,13 @@
 import { Socket, io } from "socket.io-client";
 import { v4 as uuid } from "uuid";
 
+import { NotificationMetaDetailsWsEventNamesEnum } from "src/api";
 import { Logger } from "src/core/logging";
 
 import { NotificationEventsConstants } from "./constants/notification-events.constants";
 import { INotification } from "./types/notification.interface";
+
+const eventName = NotificationMetaDetailsWsEventNamesEnum.Notification;
 
 interface Handler {
   execute: (notification: unknown) => void;
@@ -43,7 +46,7 @@ export class NotificationEventHandler {
       path: "/api/notifications/ws",
     });
 
-    this.socket.on("notification", (notification: INotification) =>
+    this.socket.on(eventName, (notification: INotification) =>
       this.handle(notification)
     );
   }
@@ -75,6 +78,11 @@ export class NotificationEventHandler {
     const handlers = Object.values(this.handlers[notification.type]);
 
     this.logger.trace("Received notification", { notification });
+
+    const event = new CustomEvent(eventName, {
+      detail: notification,
+    });
+    document.dispatchEvent(event);
 
     let eventWasHandled = false;
 
