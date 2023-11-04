@@ -8,6 +8,11 @@ import { Socket } from "socket.io";
 
 import { Logger } from "src/core/logging";
 
+import { map } from "../mapper";
+import {
+  NotificationEventNames,
+  WebSocketNotificationDetail,
+} from "./application/contracts/dtos/notification-meta.dto";
 import { INotification } from "./types";
 
 @WebSocketGateway({ path: "/api/notifications" })
@@ -43,7 +48,7 @@ export class NotificationGateway
 
   private notifyUserIfAvailable(
     userId: string,
-    { data = {}, message, type }: INotification,
+    notification: INotification,
   ): boolean {
     const socket = this.connections[userId];
 
@@ -58,7 +63,9 @@ export class NotificationGateway
       return false;
     }
 
-    socket.emit("notification", { data, message, type });
+    const notificationDto = map(WebSocketNotificationDetail, notification);
+
+    socket.emit(NotificationEventNames.Notification, notificationDto);
 
     return true;
   }

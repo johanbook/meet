@@ -1,7 +1,13 @@
-import { Controller, Get, Query } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  NotImplementedException,
+  Query,
+} from "@nestjs/common";
 import { QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
+import { NotificationMetaDetails } from "../../application/contracts/dtos/notification-meta.dto";
 import { NotificationDetails } from "../../application/contracts/dtos/notification.dto";
 import { GetNotificationListQuery } from "../../application/contracts/queries/get-notification-list.query";
 
@@ -15,5 +21,10 @@ export class NotificationsController {
     @Query() query: GetNotificationListQuery,
   ): Promise<NotificationDetails[]> {
     return await this.queryBus.execute(query);
+  }
+
+  @Get("meta")
+  getMeta(): NotificationMetaDetails {
+    throw new NotImplementedException();
   }
 }
