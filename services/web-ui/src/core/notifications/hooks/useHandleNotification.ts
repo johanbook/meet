@@ -1,8 +1,8 @@
-import React from "react";
+import { useContext, useEffect } from "react";
 
 import { NotificationEventsConstants } from "../constants/notification-events.constants";
 import { NotificationContext } from "../notification.provider";
-import { INotification } from "../types/notification.interface";
+import { INotification } from "../types";
 
 interface UseHandleNotificationProps<
   T extends NotificationEventsConstants,
@@ -21,9 +21,9 @@ export function useHandleNotification<
   onNotification,
   type,
 }: UseHandleNotificationProps<T, V>): void {
-  const notificationHandler = React.useContext(NotificationContext);
+  const notificationHandler = useContext(NotificationContext);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!notificationHandler) {
       throw new Error(
         "Unable to register notification handler. Make sure the NotificationProvider is correctly setup."
