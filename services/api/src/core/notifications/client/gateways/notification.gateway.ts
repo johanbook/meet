@@ -15,7 +15,7 @@ import {
 } from "../../application/contracts/dtos/notification-meta.dto";
 import { INotification } from "../../types";
 
-@WebSocketGateway({ path: "/api/notifications" })
+@WebSocketGateway({ path: "/api/notifications/ws" })
 export class NotificationGateway
   implements OnGatewayConnection, OnGatewayDisconnect
 {

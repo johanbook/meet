@@ -39,7 +39,10 @@ export class NotificationEventHandler {
   constructor(defaultHandler: (notification: INotification) => void) {
     this.defaultHandler = defaultHandler;
 
-    this.socket = io(window.location.hostname, { path: "/api/notifications" });
+    this.socket = io(window.location.hostname, {
+      path: "/api/notifications/ws",
+    });
+
     this.socket.on("notification", (notification: INotification) =>
       this.handle(notification)
     );
