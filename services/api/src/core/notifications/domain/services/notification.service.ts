@@ -9,8 +9,8 @@ import { OrganizationMembership } from "src/features/organizations/infrastructur
 import { Profile } from "src/features/profiles";
 import { getRequiredStringConfig } from "src/utils/config.helper";
 
+import { NotificationGateway } from "../../client/gateways/notification.gateway";
 import { Notification } from "../../infrastructure/entities/notification.entity";
-import { NotificationGateway } from "../../notification.gateway";
 import { INotification } from "../../types";
 
 const UI_DOMAIN = getRequiredStringConfig("UI_DOMAIN");

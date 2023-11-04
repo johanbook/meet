@@ -7,13 +7,13 @@ import {
 import { Socket } from "socket.io";
 
 import { Logger } from "src/core/logging";
+import { map } from "src/core/mapper";
 
-import { map } from "../mapper";
 import {
   NotificationEventNames,
   WebSocketNotificationDetail,
-} from "./application/contracts/dtos/notification-meta.dto";
-import { INotification } from "./types";
+} from "../../application/contracts/dtos/notification-meta.dto";
+import { INotification } from "../../types";
 
 @WebSocketGateway({ path: "/api/notifications" })
 export class NotificationGateway

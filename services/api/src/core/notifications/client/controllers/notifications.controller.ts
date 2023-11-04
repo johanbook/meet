@@ -7,7 +7,6 @@ import {
 import { QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
-import { NotificationMetaDetails } from "../../application/contracts/dtos/notification-meta.dto";
 import { NotificationDetails } from "../../application/contracts/dtos/notification.dto";
 import { GetNotificationListQuery } from "../../application/contracts/queries/get-notification-list.query";
 
@@ -24,7 +23,7 @@ export class NotificationsController {
   }
 
   @Get("meta")
-  getMeta(): NotificationMetaDetails {
+  async getMeta(): Promise<string> {
     throw new NotImplementedException();
   }
 }
