@@ -11,7 +11,7 @@ import { map } from "src/core/mapper";
 
 import {
   NotificationEventNames,
-  WebSocketNotificationDetail,
+  NotificationWebSocketDetails,
 } from "../../application/contracts/dtos/notification-meta.dto";
 import { INotification } from "../../types";
 
@@ -63,7 +63,7 @@ export class NotificationGateway
       return false;
     }
 
-    const notificationDto = map(WebSocketNotificationDetail, notification);
+    const notificationDto = map(NotificationWebSocketDetails, notification);
 
     socket.emit(NotificationEventNames.Notification, notificationDto);
 

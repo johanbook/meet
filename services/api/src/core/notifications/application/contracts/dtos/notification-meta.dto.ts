@@ -5,7 +5,7 @@ export enum NotificationEventNames {
   Notification = "notification",
 }
 
-export class WebSocketNotificationDetail {
+export class NotificationWebSocketDetails {
   description!: string;
   data?: NotificationData;
   message!: string;
@@ -15,7 +15,7 @@ export class WebSocketNotificationDetail {
 
 export class NotificationMetaDetails {
   ws!: {
-    detail: WebSocketNotificationDetail;
+    details: NotificationWebSocketDetails;
     eventNames: NotificationEventNames;
   };
 }
