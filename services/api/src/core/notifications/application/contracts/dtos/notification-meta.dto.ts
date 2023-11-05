@@ -7,7 +7,7 @@ export enum NotificationEventNames {
 
 export class NotificationWebSocketDetails {
   description!: string;
-  data?: NotificationData;
+  data!: NotificationData;
   message!: string;
   resourcePath!: string;
   type!: NotificationEventsConstants;

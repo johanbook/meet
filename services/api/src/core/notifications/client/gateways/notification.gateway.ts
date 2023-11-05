@@ -63,7 +63,10 @@ export class NotificationGateway
       return false;
     }
 
-    const notificationDto = map(NotificationWebSocketDetails, notification);
+    const notificationDto = map(NotificationWebSocketDetails, {
+      data: {},
+      ...notification,
+    });
 
     socket.emit(NotificationEventNames.Notification, notificationDto);
 
