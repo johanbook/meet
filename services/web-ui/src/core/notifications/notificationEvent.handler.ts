@@ -4,8 +4,10 @@ import { v4 as uuid } from "uuid";
 import { NotificationMetaDetailsWsEventNamesEnum } from "src/api";
 import { Logger } from "src/core/logging";
 
+import { dispatchEvent } from "../events";
 import { NotificationEventsConstants } from "./constants/notification-events.constants";
-import { INotification } from "./types/notification.interface";
+import { NotificationEvent } from "./notification.event";
+import { INotification } from "./types";
 
 const eventName = NotificationMetaDetailsWsEventNamesEnum.Notification;
 
@@ -31,10 +33,10 @@ export class NotificationEventHandler {
     NotificationEventsConstants,
     Record<string, Handler>
   > = {
-    [NotificationEventsConstants.ADDED_TO_ORGANIZATION]: {},
-    [NotificationEventsConstants.NEW_BLOG_POST]: {},
-    [NotificationEventsConstants.NEW_BLOG_POST_COMMENT]: {},
-    [NotificationEventsConstants.NEW_CHAT_MESSAGE]: {},
+    [NotificationEventsConstants.AddedToOrganization]: {},
+    [NotificationEventsConstants.NewBlogPost]: {},
+    [NotificationEventsConstants.NewBlogPostComment]: {},
+    [NotificationEventsConstants.NewChatMessage]: {},
   };
 
   private readonly socket: Socket;
@@ -79,10 +81,8 @@ export class NotificationEventHandler {
 
     this.logger.trace("Received notification", { notification });
 
-    const event = new CustomEvent(eventName, {
-      detail: notification,
-    });
-    document.dispatchEvent(event);
+    const event = new NotificationEvent(notification);
+    dispatchEvent(event);
 
     let eventWasHandled = false;
 
