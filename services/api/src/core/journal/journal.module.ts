@@ -2,8 +2,8 @@ import { Module } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
+import { ProfileModule } from "src/core/profiles/profile.module";
 import { QueryModule } from "src/core/query/query.module";
-import { ProfileModule } from "src/features/profiles/profile.module";
 
 import { AuthenticationModule } from "../authentication/authentication.module";
 import { CreateJournalEntryHandler } from "./application/handlers/command-handlers/create-journal-entry.handler";

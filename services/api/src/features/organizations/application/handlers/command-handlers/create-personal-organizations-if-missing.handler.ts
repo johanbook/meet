@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { Logger } from "src/core/logging";
-import { Profile } from "src/features/profiles";
+import { Profile } from "src/core/profiles";
 
 import { OrganizationService } from "../../../domain/services/organization.service";
 import { CreatePersonalOrganizationsIfMissingCommand } from "../../contracts/commands/create-personal-organizations-if-missing.command";

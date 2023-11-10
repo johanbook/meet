@@ -2,9 +2,9 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
 import { IStorableObject } from "src/core/object-storage";
 import { PhotoService } from "src/core/photos";
+import { CurrentProfileService } from "src/core/profiles";
 import { BlogPostPhoto } from "src/features/blogs/infrastructure/entities/blog-post-photo.entity";
 import { CurrentOrganizationService } from "src/features/organizations";
-import { CurrentProfileService } from "src/features/profiles";
 
 import { BlogPostService } from "../../../domain/services/blog-post.service";
 import { BlogPost } from "../../../infrastructure/entities/blog-post.entity";

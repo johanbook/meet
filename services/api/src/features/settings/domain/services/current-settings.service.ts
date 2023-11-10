@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { CurrentProfileService } from "src/features/profiles";
+import { CurrentProfileService } from "src/core/profiles";
 
 import { Settings } from "../../infrastructure/entities/settings.entity";
 

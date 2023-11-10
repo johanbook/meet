@@ -5,9 +5,9 @@ import { Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
 import { PhotoService } from "src/core/photos";
-import { ProfileService } from "src/features/profiles/domain/services/profile.service";
-import { ProfilePhoto } from "src/features/profiles/infrastructure/entities/profile-photo.entity";
-import { Profile } from "src/features/profiles/infrastructure/entities/profile.entity";
+import { ProfileService } from "src/core/profiles/domain/services/profile.service";
+import { ProfilePhoto } from "src/core/profiles/infrastructure/entities/profile-photo.entity";
+import { Profile } from "src/core/profiles/infrastructure/entities/profile.entity";
 
 import { UpdateProfilePhotoCommand } from "../../contracts/commands/update-profile-photo.command";
 

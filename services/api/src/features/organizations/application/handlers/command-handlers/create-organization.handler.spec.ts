@@ -3,7 +3,7 @@ import { Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
 import { map } from "src/core/mapper";
-import { CurrentProfileService, Profile } from "src/features/profiles";
+import { CurrentProfileService, Profile } from "src/core/profiles";
 import {
   createEventBusMock,
   createMockRepository,

@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { Cache } from "src/core/cache/cache";
-import { CurrentProfileService } from "src/features/profiles";
+import { CurrentProfileService } from "src/core/profiles";
 
 import { ActiveOrganization } from "../../infrastructure/entities/active-organization.entity";
 
