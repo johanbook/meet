@@ -1,24 +1,26 @@
-import {
-  CreateDateColumn,
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-} from "typeorm";
+import { Column, Entity, ManyToOne } from "typeorm";
+
+import { BaseEntity } from "src/core/database";
+import { Organization } from "src/core/organizations";
+import { Profile } from "src/core/profiles";
 
 @Entity()
-export class JournalEntry {
-  @PrimaryGeneratedColumn()
-  id!: number;
-
-  @CreateDateColumn()
-  created!: Date;
-
+export class JournalEntry extends BaseEntity {
   @Column("text")
   commandName!: string;
+
+  @ManyToOne(() => Organization)
+  organization!: Organization;
+
+  @Column()
+  organizationId!: number;
 
   @Column("json")
   payload!: unknown;
 
-  @Column("uuid")
-  userId!: string;
+  @ManyToOne(() => Profile)
+  profile!: Profile;
+
+  @Column()
+  profileId!: number;
 }

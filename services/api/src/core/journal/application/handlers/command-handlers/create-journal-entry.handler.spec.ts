@@ -2,6 +2,9 @@ import { Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
 import { map } from "src/core/mapper";
+import { CurrentOrganizationService } from "src/core/organizations";
+import { createCurrentOrganizationMock } from "src/core/organizations/test/mocks/current-organization.service.mock";
+import { CurrentProfileService, Profile } from "src/core/profiles";
 import { createMockRepository, createUserIdServiceMock } from "src/test/mocks";
 
 import { JournalEntry } from "../../../infrastructure/entities/journal-entry.entity";
@@ -11,15 +14,24 @@ import { CreateJournalEntryHandler } from "./create-journal-entry.handler";
 describe(CreateJournalEntryHandler.name, () => {
   let commandHandler: CreateJournalEntryHandler;
   let journalEntries: Repository<JournalEntry>;
+  let currentOrganizationService: CurrentOrganizationService;
+  let currentProfileService: CurrentProfileService;
+  let profiles: Repository<Profile>;
   let userIdService: UserIdService;
 
   beforeEach(() => {
+    profiles = createMockRepository<Profile>([{} as any]);
     journalEntries = createMockRepository<JournalEntry>();
     userIdService = createUserIdServiceMock();
 
+    currentOrganizationService = createCurrentOrganizationMock();
+
+    currentProfileService = new CurrentProfileService(profiles, userIdService);
+
     commandHandler = new CreateJournalEntryHandler(
+      currentOrganizationService,
+      currentProfileService,
       journalEntries,
-      userIdService,
     );
   });
 

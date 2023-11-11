@@ -1,45 +1,47 @@
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
-import { And, LessThan, MoreThan, Repository } from "typeorm";
+import { Between, Repository } from "typeorm";
 
-import { UserIdService } from "src/core/authentication";
 import { map, mapArray } from "src/core/mapper";
+import { CurrentOrganizationService } from "src/core/organizations";
 import { QueryService } from "src/core/query";
 
 import { JournalEntry } from "../../../infrastructure/entities/journal-entry.entity";
 import { JournalDetails } from "../../contracts/dtos/journal-details.dto";
 import { JournalEntryDetails } from "../../contracts/dtos/journal-entry-details.dto";
-import { GetJournalQuery } from "../../contracts/queries/get-journal.query";
+import { JournalProfileDetails } from "../../contracts/dtos/journal-profile-details.dto";
+import { GetCurrentOrganizationJournalQuery } from "../../contracts/queries/get-current-organization-journal.query";
 
 function formatCommandName(commandName: string): string {
   return commandName.replace(/Command$/, "");
 }
 
-@QueryHandler(GetJournalQuery)
-export class GetJournalHandler
-  implements IQueryHandler<GetJournalQuery, JournalDetails>
+@QueryHandler(GetCurrentOrganizationJournalQuery)
+export class GetCurrentOrganizationJournalHandler
+  implements IQueryHandler<GetCurrentOrganizationJournalQuery, JournalDetails>
 {
   constructor(
+    private readonly currentOrganizationService: CurrentOrganizationService,
     @InjectRepository(JournalEntry)
     private readonly journalEntries: Repository<JournalEntry>,
     private readonly queryService: QueryService<JournalEntry>,
-    private readonly userIdService: UserIdService,
   ) {}
 
-  async execute(query: GetJournalQuery) {
-    const userId = this.userIdService.getUserId();
+  async execute(query: GetCurrentOrganizationJournalQuery) {
+    const currentOrganizationId =
+      await this.currentOrganizationService.fetchCurrentOrganizationId();
 
     const foundJournalEntries = await this.queryService.find(
       this.journalEntries,
       {
         default: {
-          order: { created: "desc" },
+          order: { createdAt: "desc" },
         },
         query,
         required: {
           where: {
-            created: And(LessThan(query.to), MoreThan(query.from)),
-            userId,
+            createdAt: Between(query.from, query.to),
+            organizationId: currentOrganizationId,
           },
         },
       },
@@ -48,9 +50,12 @@ export class GetJournalHandler
     return map(JournalDetails, {
       entries: mapArray(JournalEntryDetails, foundJournalEntries, (entry) => ({
         commandName: formatCommandName(entry.commandName),
-        created: entry.created,
+        createdAt: entry.createdAt,
         id: entry.id,
         payload: entry.payload,
+        profile: map(JournalProfileDetails, {
+          id: entry.profileId,
+        }),
       })),
     });
   }

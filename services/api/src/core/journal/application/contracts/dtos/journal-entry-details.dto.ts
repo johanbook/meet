@@ -1,13 +1,13 @@
-import { IsString, Length } from "class-validator";
+import { JournalProfileDetails } from "./journal-profile-details.dto";
 
 export class JournalEntryDetails {
-  @IsString()
-  @Length(0, 1024)
   public readonly commandName!: string;
 
-  public readonly created!: Date;
+  public readonly createdAt!: Date;
 
-  public readonly id!: number;
+  public readonly id!: string;
 
   public readonly payload!: unknown;
+
+  public readonly profile!: JournalProfileDetails;
 }
