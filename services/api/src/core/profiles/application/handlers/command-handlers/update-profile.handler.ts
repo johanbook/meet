@@ -4,7 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
-import { ProfileService } from "src/features/profiles/domain/services/profile.service";
+import { ProfileService } from "src/core/profiles/domain/services/profile.service";
 
 import { Profile } from "../../../infrastructure/entities/profile.entity";
 import { UpdateProfileCommand } from "../../contracts/commands/update-profile.command";

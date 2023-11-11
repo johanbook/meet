@@ -2,7 +2,7 @@ import { EventBus } from "@nestjs/cqrs";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
-import { CurrentProfileService, Profile } from "src/features/profiles";
+import { CurrentProfileService, Profile } from "src/core/profiles";
 import {
   createEventBusMock,
   createMockRepository,

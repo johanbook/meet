@@ -5,10 +5,10 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { AuthenticationModule } from "src/core/authentication/authentication.module";
 import { NotificationModule } from "src/core/notifications/notification.module";
 import { PhotosModule } from "src/core/photos/photos.module";
+import { Profile } from "src/core/profiles";
+import { ProfileModule } from "src/core/profiles/profile.module";
 import { OrganizationModule } from "src/features/organizations/organization.module";
-import { Profile } from "src/features/profiles";
 
-import { ProfileModule } from "../profiles/profile.module";
 import { PostChatMessageHandler } from "./application/handlers/command-handlers/post-chat-message.handler";
 import { NotifyReceiverOnPostedChatMessageHandler } from "./application/handlers/event-handlers/notify-receiver-on-posted-message.handler";
 import { GetChatMessagesHandler } from "./application/handlers/query-handlers/get-chat-messages.handler";

@@ -2,7 +2,7 @@ import { CommandBus, EventsHandler, IEventHandler } from "@nestjs/cqrs";
 
 import { Logger } from "src/core/logging";
 import { mapAndValidate } from "src/core/mapper";
-import { ProfileCreatedEvent } from "src/features/profiles";
+import { ProfileCreatedEvent } from "src/core/profiles";
 
 import { CreatePersonalOrganizationCommand } from "../../contracts/commands/create-personal-organization.command";
 import { SwitchOrganizationCommand } from "../../contracts/commands/switch-organization.command";

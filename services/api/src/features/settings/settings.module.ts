@@ -3,8 +3,8 @@ import { CqrsModule } from "@nestjs/cqrs";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AuthenticationModule } from "src/core/authentication/authentication.module";
-import { Profile } from "src/features/profiles";
-import { ProfileModule } from "src/features/profiles/profile.module";
+import { Profile } from "src/core/profiles";
+import { ProfileModule } from "src/core/profiles/profile.module";
 
 import { CreateSettingsIfMissingHandler } from "./application/handlers/command-handlers/create-settings-if-missing.handler";
 import { CreateSettingsHandler } from "./application/handlers/command-handlers/create-settings.handler";

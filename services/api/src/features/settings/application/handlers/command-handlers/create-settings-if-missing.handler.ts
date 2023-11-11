@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { In, Repository } from "typeorm";
 
 import { Logger } from "src/core/logging";
-import { Profile } from "src/features/profiles";
+import { Profile } from "src/core/profiles";
 import { Settings } from "src/features/settings/infrastructure/entities/settings.entity";
 
 import { CreateSettingsIfMissingCommand } from "../../contracts/commands/create-settings-if-missing.command";

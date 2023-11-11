@@ -8,7 +8,7 @@ import {
 } from "typeorm";
 
 import { OrganizationRole } from "src/core/authorization/organization-roles.enum";
-import { Profile } from "src/features/profiles/infrastructure/entities/profile.entity";
+import { Profile } from "src/core/profiles/infrastructure/entities/profile.entity";
 
 import { Organization } from "./organization.entity";
 

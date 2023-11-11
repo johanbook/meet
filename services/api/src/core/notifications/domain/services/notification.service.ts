@@ -5,8 +5,8 @@ import { In, Not, Repository } from "typeorm";
 import { UserIdService } from "src/core/authentication";
 import { EmailService } from "src/core/email/domain/services/email.service";
 import { Logger } from "src/core/logging";
+import { Profile } from "src/core/profiles";
 import { OrganizationMembership } from "src/features/organizations/infrastructure/entities/organization-membership.entity";
-import { Profile } from "src/features/profiles";
 import { getRequiredStringConfig } from "src/utils/config.helper";
 
 import { NotificationGateway } from "../../client/gateways/notification.gateway";

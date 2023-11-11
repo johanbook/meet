@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { mapArray } from "src/core/mapper";
-import { CurrentProfileService } from "src/features/profiles";
+import { CurrentProfileService } from "src/core/profiles";
 
 import { ChatMessage } from "../../..//infrastructure/entities/chat-message.entity";
 import { ChatMessageDetails } from "../../contracts/dtos/chat.dto";

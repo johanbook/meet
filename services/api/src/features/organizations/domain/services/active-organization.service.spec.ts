@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
 
-import { CurrentProfileService } from "src/features/profiles";
+import { CurrentProfileService } from "src/core/profiles";
 import { createMockRepository } from "src/test/mocks";
 
 import { ActiveOrganization } from "../../infrastructure/entities/active-organization.entity";
