@@ -2,8 +2,8 @@ import { EventBus } from "@nestjs/cqrs";
 import { Repository } from "typeorm";
 
 import { map } from "src/core/mapper";
-import { CurrentOrganizationService } from "src/features/organizations/domain/services/current-organization.service";
-import { createCurrentOrganizationMock } from "src/features/organizations/test/mocks/current-organization.service.mock";
+import { CurrentOrganizationService } from "src/core/organizations/domain/services/current-organization.service";
+import { createCurrentOrganizationMock } from "src/core/organizations/test/mocks/current-organization.service.mock";
 import { createEventBusMock, createMockRepository } from "src/test/mocks";
 
 import { OrganizationService } from "../../../domain/services/organization.service";

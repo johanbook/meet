@@ -3,10 +3,10 @@ import { CqrsModule } from "@nestjs/cqrs";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { EmailModule } from "src/core/email/email.module";
+import { OrganizationMembership } from "src/core/organizations/infrastructure/entities/organization-membership.entity";
+import { OrganizationModule } from "src/core/organizations/organization.module";
 import { Profile } from "src/core/profiles";
 import { ProfileModule } from "src/core/profiles/profile.module";
-import { OrganizationMembership } from "src/features/organizations/infrastructure/entities/organization-membership.entity";
-import { OrganizationModule } from "src/features/organizations/organization.module";
 
 import { AuthenticationModule } from "../authentication/authentication.module";
 import { QueryModule } from "../query/query.module";

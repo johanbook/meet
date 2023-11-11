@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
+import { OrganizationService } from "src/core/organizations/domain/services/organization.service";
 import { CurrentProfileService } from "src/core/profiles";
-import { OrganizationService } from "src/features/organizations/domain/services/organization.service";
 
 import { CreateOrganizationCommand } from "../../contracts/commands/create-organization.command";
 

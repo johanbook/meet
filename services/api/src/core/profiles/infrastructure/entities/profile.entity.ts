@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 
-import { OrganizationMembership } from "src/features/organizations/infrastructure/entities/organization-membership.entity";
+import { OrganizationMembership } from "src/core/organizations/infrastructure/entities/organization-membership.entity";
 
 import { ProfilePhoto } from "./profile-photo.entity";
 

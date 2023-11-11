@@ -13,11 +13,11 @@ import { JournalModule } from "src/core/journal/journal.module";
 import { LoggingModule } from "src/core/logging/logging.module";
 import { NotificationModule } from "src/core/notifications/notification.module";
 import { minioOptions } from "src/core/object-storage/minio.config";
+import { OrganizationModule } from "src/core/organizations/organization.module";
 import { ProfileModule } from "src/core/profiles/profile.module";
 import { RequestContextModule } from "src/core/request-context/request-context.module";
 import { BlogsModule } from "src/features/blogs/blogs.module";
 import { ChatModule } from "src/features/chat/chat.module";
-import { OrganizationModule } from "src/features/organizations/organization.module";
 import { SettingsModule } from "src/features/settings/settings.module";
 import { dataSourceOptions } from "src/infrastructure/database/data-source.config";
 

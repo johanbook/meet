@@ -3,11 +3,11 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { map, mapArray } from "src/core/mapper";
+import { CurrentOrganizationService } from "src/core/organizations";
 import { PhotoService } from "src/core/photos";
 import { CurrentProfileService } from "src/core/profiles";
 import { QueryService } from "src/core/query";
 import { BlogPost } from "src/features/blogs/infrastructure/entities/blog-post.entity";
-import { CurrentOrganizationService } from "src/features/organizations";
 import { sortByField } from "src/utils/sorting.helper";
 
 import { BlogPostCommentDetails } from "../../contracts/dtos/blog-post-comment.dto";

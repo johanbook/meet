@@ -3,9 +3,9 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { mapArray } from "src/core/mapper";
+import { CurrentOrganizationService } from "src/core/organizations";
 import { PhotoService } from "src/core/photos";
 import { CurrentProfileService } from "src/core/profiles";
-import { CurrentOrganizationService } from "src/features/organizations";
 
 import { Connection } from "../../../infrastructure/views/connection.view";
 import { ConnectionDetails } from "../../contracts/dtos/connection.dto";

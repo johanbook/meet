@@ -4,9 +4,9 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
+import { CurrentOrganizationService } from "src/core/organizations/domain/services/current-organization.service";
+import { OrganizationService } from "src/core/organizations/domain/services/organization.service";
 import { Profile } from "src/core/profiles";
-import { CurrentOrganizationService } from "src/features/organizations/domain/services/current-organization.service";
-import { OrganizationService } from "src/features/organizations/domain/services/organization.service";
 
 import { AddMemberToOrganizationViaEmailCommand } from "../../contracts/commands/add-member-to-organization-via-email.command";
 
