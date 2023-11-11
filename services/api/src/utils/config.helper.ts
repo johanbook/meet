@@ -15,7 +15,7 @@ export function getRequiredBooleanConfig(
   const value = readEnv(key) || defaultValue;
 
   if (typeof value !== "boolean") {
-    logger.error("Required environment variable is undefined", { env: key });
+    logger.fatal("Required environment variable is undefined", { env: key });
     process.exit(1);
   }
 
@@ -36,8 +36,8 @@ export function getRequiredIntConfig(
   value = value || defaultValue;
 
   if (typeof value !== "number") {
-    logger.error("Required environment variable is undefined", { env: key });
-    process.exit();
+    logger.fatal("Required environment variable is undefined", { env: key });
+    process.exit(1);
   }
 
   return value;
@@ -50,9 +50,9 @@ export function getRequiredStringConfig(
   const value = readEnv(key) ?? defaultValue;
 
   if (typeof value !== "string") {
-    logger.error("Required environment variable is undefined", { env: key });
+    logger.fatal("Required environment variable is undefined", { env: key });
 
-    process.exit();
+    process.exit(1);
   }
 
   return value;
