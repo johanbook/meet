@@ -3,8 +3,8 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-DATA_SOURCE=dist/infrastructure/database/data-source.js
-MIGRATION_DIRECTORY=./src/infrastructure/database/migrations
+DATA_SOURCE=dist/core/database/data-source.js
+MIGRATION_DIRECTORY=./src/core/database/migrations
 MIGRATION_NAME=$1
 
 # Check that `MIGRATION_NAME` is defined

@@ -25,6 +25,7 @@ The software includes builtin opinionated frameworks for the following:
 - [Journaling](./docs/journaling.md)
 - [Logging](./docs/logging.md)
 - [Notifications](./docs/notifications.md)
+- [Organizations](./docs/organization.md)
 - [Seeding](./docs/seeding.md)
 - [Testing](./docs/testing.md)
 - [Validation](./docs/validation.md)
