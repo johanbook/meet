@@ -35,9 +35,9 @@ export class CurrentProfileController {
 
   @Delete()
   async deleteCurrentProfile(
-    @Query() query: DeleteCurrentProfileCommand,
+    @Query() command: DeleteCurrentProfileCommand,
   ): Promise<null> {
-    return await this.queryBus.execute(query);
+    return await this.commandBus.execute(command);
   }
 
   @Get("/exists")
