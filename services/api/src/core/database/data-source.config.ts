@@ -38,25 +38,13 @@ export const dataSourceOptions: DataSourceOptions & SeederOptions = {
   logging,
   logger: new TypeOrmLogger(),
   entities: [
-    join(__dirname, "/entities/*.{ts,js}"),
-    join(__dirname, "/views/*.{ts,js}"),
     join(__dirname, "../../{core,features}/**/{entities,views}/*.{ts,js}"),
   ],
   subscribers: [],
   migrations: [
     // Note that glob should be on both `ts` and `js` to work in both dev and production
-    join(__dirname, "/migrations/*.{ts,js}"),
-    join(__dirname, "../../core/**/migrations/*.{ts,js}"),
-    join(__dirname, "../../features/**/migrations/*.{ts,js}"),
+    join(__dirname, "../../{core,features}/**/migrations/*.{ts,js}"),
   ],
-  factories: [
-    join(__dirname, "/factories/*.{ts,js}"),
-    join(__dirname, "/../../core/**/factories/*.{ts,js}"),
-    join(__dirname, "/../../features/**/factories/*.{ts,js}"),
-  ],
-  seeds: [
-    join(__dirname, "/seeds/*.{ts,js}"),
-    join(__dirname, "/../../core/**/seeds/*.{ts,js}"),
-    join(__dirname, "/../../features/**/seeds/*.{ts,js}"),
-  ],
+  factories: [join(__dirname, "/../../{core,features}/**/factories/*.{ts,js}")],
+  seeds: [join(__dirname, "/../../{core,features}/**/seeds/*.{ts,js}")],
 };
