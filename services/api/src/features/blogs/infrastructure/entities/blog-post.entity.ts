@@ -1,8 +1,8 @@
 import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 
 import { BaseEntity } from "src/core/database";
-import { Organization } from "src/features/organizations";
-import { Profile } from "src/features/profiles";
+import { Organization } from "src/core/organizations";
+import { Profile } from "src/core/profiles";
 
 import { BlogPostComment } from "./blog-post-comment.entity";
 import { BlogPostPhoto } from "./blog-post-photo.entity";

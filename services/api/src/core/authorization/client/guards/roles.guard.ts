@@ -1,7 +1,7 @@
 import { Injectable, CanActivate, ExecutionContext } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 
-import { CurrentOrganizationService } from "src/features/organizations";
+import { CurrentOrganizationService } from "src/core/organizations";
 
 import { OrganizationRole } from "../../organization-roles.enum";
 import { REQUIRED_ORGANIZATION_ROLES_KEY } from "../decorators/requires-organization-permissions.decorator";

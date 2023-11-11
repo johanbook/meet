@@ -2,7 +2,7 @@ import { Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
 import { map } from "src/core/mapper";
-import { Profile } from "src/features/profiles";
+import { Profile } from "src/core/profiles";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
 

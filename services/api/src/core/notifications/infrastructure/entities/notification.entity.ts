@@ -1,8 +1,8 @@
 import { Column, Entity, ManyToOne } from "typeorm";
 
 import { BaseEntity } from "src/core/database";
-import { Organization } from "src/features/organizations";
-import { Profile } from "src/features/profiles";
+import { Organization } from "src/core/organizations";
+import { Profile } from "src/core/profiles";
 
 @Entity()
 export class Notification extends BaseEntity {

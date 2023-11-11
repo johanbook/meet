@@ -7,7 +7,7 @@ import * as fs from "node:fs";
 
 import { AppModule } from "src/app.module";
 import { createOpenApiDocument } from "src/core/openapi";
-import { dataSourceOptions } from "src/infrastructure/database/data-source.config";
+import { dataSourceOptions } from "src/core/database/data-source.config";
 import { ObjectStorageService } from "src/core/object-storage";
 import { DataSourceMock } from "src/test/data-source.mock";
 
@@ -46,6 +46,9 @@ export async function generateOpenApiJsonFile(path: string): Promise<void> {
 
   console.log(`Writing OpenAPI specification to '${path}'`);
   fs.writeFileSync(path, json);
+
+  // Needed for proccess to exit cleanly
+  process.exit(0)
 }
 
 generateOpenApiJsonFile(FILE_PATH);

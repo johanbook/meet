@@ -3,9 +3,9 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { CurrentOrganizationService } from "src/core/organizations";
+import { CurrentProfileService } from "src/core/profiles";
 import { BlogPostComment } from "src/features/blogs/infrastructure/entities/blog-post-comment.entity";
-import { CurrentOrganizationService } from "src/features/organizations";
-import { CurrentProfileService } from "src/features/profiles";
 
 import { BlogPostService } from "../../../domain/services/blog-post.service";
 import { BlogPost } from "../../../infrastructure/entities/blog-post.entity";

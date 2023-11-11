@@ -6,10 +6,6 @@ import { blogsApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { useTranslation } from "src/core/i18n";
 import { InteractionObserver } from "src/core/infinite-scroll";
-import {
-  NotificationEventsConstants,
-  useHandleNotification,
-} from "src/core/notifications";
 import { CacheKeysConstants, useInfiniteQuery } from "src/core/query";
 
 import { BlogPostPageComponent } from "./BlogPostListPage.component";
@@ -22,7 +18,7 @@ const ITEMS_PER_PAGE = 10;
 export function BlogPostListPageContainer(): ReactElement {
   const { t } = useTranslation("blog");
 
-  const { error, data, isLoading, fetchNextPage, hasNextPage, refetch } =
+  const { error, data, isLoading, fetchNextPage, hasNextPage } =
     useInfiniteQuery(
       [CacheKeysConstants.BlogPosts],
       ({ pageParam = 0 }) =>
@@ -40,11 +36,6 @@ export function BlogPostListPageContainer(): ReactElement {
         },
       }
     );
-
-  useHandleNotification({
-    onNotification: () => refetch(),
-    type: NotificationEventsConstants.NEW_BLOG_POST,
-  });
 
   if (error) {
     return (

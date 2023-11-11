@@ -1,8 +1,8 @@
 import { forwardRef, Module } from "@nestjs/common";
 
+import { OrganizationModule } from "src/core/organizations/organization.module";
+import { ProfileModule } from "src/core/profiles/profile.module";
 import { RequestContextModule } from "src/core/request-context/request-context.module";
-import { OrganizationModule } from "src/features/organizations/organization.module";
-import { ProfileModule } from "src/features/profiles/profile.module";
 
 import { AuthorizationAlsModule } from "./client/context/authorization-als.module";
 import { AuthorizationService } from "./domain/services/authorization.service";

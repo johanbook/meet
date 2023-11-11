@@ -8,7 +8,7 @@ import {
   NotificationService,
 } from "src/core/notifications";
 import { INotification } from "src/core/notifications/types";
-import { Profile } from "src/features/profiles";
+import { Profile } from "src/core/profiles";
 
 import { BlogPostCreatedEvent } from "../../../domain/events/blog-post-created.event";
 

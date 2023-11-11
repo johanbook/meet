@@ -25,9 +25,10 @@ export function ChatPageContainer(): React.ReactElement {
   );
 
   useHandleNotification({
-    onCondition: (event) => String(event.data.senderId) === id,
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    onCondition: (event: any) => String(event.data.senderId) === id,
     onNotification: () => refetch(),
-    type: NotificationEventsConstants.NEW_CHAT_MESSAGE,
+    type: NotificationEventsConstants.NewChatMessage,
   });
 
   if (!id) {
