@@ -2,4 +2,4 @@ export { NotificationEventsConstants } from "./constants/notification-events.con
 export { useHandleNotification } from "./hooks/useHandleNotification";
 export { useNotifications } from "./hooks/useNotifications";
 export { NotificationProvider } from "./notification.provider";
-export { INotification } from "./types";
+export type { INotification } from "./types";
