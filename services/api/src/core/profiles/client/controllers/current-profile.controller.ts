@@ -1,10 +1,20 @@
-import { Body, Controller, Get, Patch, Post, Put, Query } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Patch,
+  Post,
+  Put,
+  Query,
+} from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
 import { Multipart } from "src/core/multipart";
 
 import { CreateProfileCommand } from "../../application/contracts/commands/create-profile.command";
+import { DeleteCurrentProfileCommand } from "../../application/contracts/commands/delete-current-profile.command";
 import { UpdateProfilePhotoCommand } from "../../application/contracts/commands/update-profile-photo.command";
 import { UpdateProfileCommand } from "../../application/contracts/commands/update-profile.command";
 import { ProfileDetails } from "../../application/contracts/dtos/profile.dto";
@@ -20,6 +30,13 @@ export class CurrentProfileController {
   async getCurrentProfile(
     @Query() query: GetCurrentProfileQuery,
   ): Promise<ProfileDetails> {
+    return await this.queryBus.execute(query);
+  }
+
+  @Delete()
+  async deleteCurrentProfile(
+    @Query() query: DeleteCurrentProfileCommand,
+  ): Promise<null> {
     return await this.queryBus.execute(query);
   }
 

@@ -8,6 +8,7 @@ import { OrganizationModule } from "src/core/organizations/organization.module";
 import { PhotosModule } from "src/core/photos/photos.module";
 
 import { CreateProfileHandler } from "./application/handlers/command-handlers/create-profile.handler";
+import { DeleteCurrentProfileHandler } from "./application/handlers/command-handlers/delete-current-profile.handler";
 import { UpdateProfilePhotoHandler } from "./application/handlers/command-handlers/update-profile-photo.handler";
 import { UpdateProfileHandler } from "./application/handlers/command-handlers/update-profile.handler";
 import { CheckIfProfileExistsHandler } from "./application/handlers/query-handlers/check-if-profile-exists.handler";
@@ -35,6 +36,7 @@ import { Profile } from "./infrastructure/entities/profile.entity";
     CurrentProfileService,
     CheckIfProfileExistsHandler,
     CreateProfileHandler,
+    DeleteCurrentProfileHandler,
     GetCurrentProfileHandler,
     GetProfileHandler,
     ProfileService,
