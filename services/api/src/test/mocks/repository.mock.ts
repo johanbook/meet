@@ -7,6 +7,16 @@ class MockRepository<T extends ObjectLiteral> {
 
   constructor(private data: T[] = []) {}
 
+  delete = jest.fn((id: string | number) => {
+    const index = this.data.findIndex((item) => item.id === id);
+
+    if (index < 0) {
+      throw new Error("Item not found");
+    }
+
+    this.data.splice(index, 1);
+  });
+
   exist = jest.fn((element: T) =>
     this.data.find((item) => item.id === element.where.id),
   );
@@ -18,13 +28,7 @@ class MockRepository<T extends ObjectLiteral> {
   findOne = jest.fn(() => this.data[0]);
 
   remove = jest.fn((element: T) => {
-    const index = this.data.findIndex((item) => item.id === element.id);
-
-    if (index < 0) {
-      throw new Error("Item not found");
-    }
-
-    this.data.splice(index, 1);
+    this.delete(element.id);
   });
 
   save = jest.fn((element: T) => {

@@ -7,6 +7,7 @@ import { map } from "src/core/mapper";
 
 import { Profile } from "../../infrastructure/entities/profile.entity";
 import { ProfileCreatedEvent } from "../events/profile-created.event";
+import { ProfileDeletedEvent } from "../events/profile-deleted.event";
 import { ProfileUpdatedEvent } from "../events/profile-updated.event";
 
 @Injectable()
@@ -24,6 +25,16 @@ export class ProfileService {
       id: createdProfile.id,
       description: createdProfile.description,
       name: createdProfile.name,
+    });
+
+    this.eventBus.publish(event);
+  }
+
+  async deleteProfile(profile: { id: number }): Promise<void> {
+    await this.profiles.delete(profile.id);
+
+    const event = map(ProfileDeletedEvent, {
+      id: profile.id,
     });
 
     this.eventBus.publish(event);
