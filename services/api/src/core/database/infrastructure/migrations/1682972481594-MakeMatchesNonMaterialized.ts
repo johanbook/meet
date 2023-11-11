@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-import { MigrationError } from "../../../core/error-handling";
+import { MigrationError } from "src/core/error-handling";
 
 export class MakeMatchesNonMatcherialized1682972481594 implements MigrationInterface {
     name = 'MakeMatchesNonMatcherialized1682972481594'
@@ -24,7 +24,7 @@ export class MakeMatchesNonMatcherialized1682972481594 implements MigrationInter
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-      throw new MigrationError("No supported");
+      throw new MigrationError("Not supported");
     }
 
 }

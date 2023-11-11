@@ -3,8 +3,9 @@ import { join } from "node:path";
 import { DataSourceOptions } from "typeorm";
 import { SeederOptions } from "typeorm-extension";
 
-import { ConfigurationError } from "../../core/error-handling";
-import { TypeOrmLogger } from "../typeorm.logger";
+import { ConfigurationError } from "src/core/error-handling";
+
+import { TypeOrmLogger } from "./typeorm.logger";
 
 /* eslint-disable unicorn/prefer-module */
 
