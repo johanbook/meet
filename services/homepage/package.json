@@ -41,7 +41,7 @@
     "@types/react": "^18.2.25",
     "@types/react-dom": "^18.2.13",
     "@use-gesture/react": "^10.2.26",
-    "i18next": "^23.2.11",
+    "i18next": "^23.6.0",
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-http-backend": "^2.2.1",
     "jest-environment-jsdom": "^29.7.0",
