@@ -46,7 +46,7 @@ export class NotifyOrganizationOnPostedBlogPostHandler
     await this.notificationService.notifyOrganization(
       event.organizationId,
       notification,
-      [],
+      [event.profileId],
     );
   }
 }
