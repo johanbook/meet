@@ -3,9 +3,9 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { mapArray } from "src/core/mapper";
+import { CurrentOrganizationService } from "src/core/organizations";
 import { CurrentProfileService } from "src/core/profiles";
 import { QueryService } from "src/core/query";
-import { CurrentOrganizationService } from "src/features/organizations";
 
 import { Notification } from "../../../infrastructure/entities/notification.entity";
 import { NotificationDetails } from "../../contracts/dtos/notification.dto";

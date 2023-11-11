@@ -4,8 +4,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AuthenticationModule } from "src/core/authentication/authentication.module";
 import { ObjectStorageModule } from "src/core/object-storage/object-storage.module";
+import { OrganizationModule } from "src/core/organizations/organization.module";
 import { PhotosModule } from "src/core/photos/photos.module";
-import { OrganizationModule } from "src/features/organizations/organization.module";
 
 import { CreateProfileHandler } from "./application/handlers/command-handlers/create-profile.handler";
 import { UpdateProfilePhotoHandler } from "./application/handlers/command-handlers/update-profile-photo.handler";

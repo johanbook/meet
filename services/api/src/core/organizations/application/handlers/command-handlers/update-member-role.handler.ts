@@ -3,9 +3,9 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { CurrentOrganizationService } from "src/core/organizations/domain/services/current-organization.service";
+import { OrganizationMembership } from "src/core/organizations/infrastructure/entities/organization-membership.entity";
 import { CurrentProfileService } from "src/core/profiles";
-import { CurrentOrganizationService } from "src/features/organizations/domain/services/current-organization.service";
-import { OrganizationMembership } from "src/features/organizations/infrastructure/entities/organization-membership.entity";
 
 import { UpdateMemberRoleCommand } from "../../contracts/commands/update-member-role.command";
 

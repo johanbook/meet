@@ -4,11 +4,11 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AuthorizationModule } from "src/core/authorization/authorization.module";
 import { NotificationModule } from "src/core/notifications/notification.module";
+import { OrganizationModule } from "src/core/organizations/organization.module";
 import { PhotosModule } from "src/core/photos/photos.module";
 import { Profile } from "src/core/profiles";
 import { ProfileModule } from "src/core/profiles/profile.module";
 import { QueryModule } from "src/core/query/query.module";
-import { OrganizationModule } from "src/features/organizations/organization.module";
 
 import { CreateBlogPostCommentHandler } from "./application/handlers/command-handlers/create-blog-post-comment.handler";
 import { CreateBlogPostHandler } from "./application/handlers/command-handlers/create-blog-post.handler";
