@@ -38,7 +38,7 @@
     "axios": "^1.6.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
-    "csv-parse": "^5.4.0",
+    "csv-parse": "^5.5.2",
     "geojson": "^0.5.0",
     "jimp": "^0.22.10",
     "keyv": "^4.5.3",
