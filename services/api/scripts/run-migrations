@@ -6,7 +6,7 @@ set -e
 sh ./scripts/create-database-if-not-exists
 
 DATA_SOURCE=./dist/core/database/data-source.js
-MIGRATION_DIRECTORY=./dist/core/database/migrations
+MIGRATION_DIRECTORY=./dist/core/database/infrastructure/migrations
 
 # Check that `MIGRATION_DIRECTORY` exists
 if [ ! -d "$MIGRATION_DIRECTORY" ]; then

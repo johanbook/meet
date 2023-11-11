@@ -3,7 +3,7 @@ import { IsDate } from "class-validator";
 
 import { BaseQuery } from "src/core/query";
 
-export class GetJournalQuery extends BaseQuery {
+export class GetCurrentOrganizationJournalQuery extends BaseQuery {
   @IsDate()
   @Type(() => Date)
   from!: Date;

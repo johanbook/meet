@@ -4,7 +4,7 @@
 set -e
 
 DATA_SOURCE=dist/core/database/data-source.js
-MIGRATION_DIRECTORY=./src/core/database/migrations
+MIGRATION_DIRECTORY=./src/core/database/infrastructure/migrations
 MIGRATION_NAME=$1
 
 # Check that `MIGRATION_NAME` is defined
