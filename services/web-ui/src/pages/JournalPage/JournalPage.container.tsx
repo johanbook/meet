@@ -18,7 +18,7 @@ export function JournalPageContainer(): React.ReactElement {
 
   const { error, data, isLoading } = useQuery(
     [CacheKeysConstants.Journal, dateRange.from, dateRange.to],
-    () => journalApi.getJournal(dateRange)
+    () => journalApi.getProfileJournal(dateRange)
   );
 
   if (error) {
