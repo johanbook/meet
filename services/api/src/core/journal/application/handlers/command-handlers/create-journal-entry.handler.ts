@@ -3,6 +3,7 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { MissingUserIdError } from "src/core/authentication";
 import { CurrentOrganizationService } from "src/core/organizations";
 import { CurrentProfileService } from "src/core/profiles";
 import { redactBinaries } from "src/utils/object.helper";
@@ -32,7 +33,10 @@ export class CreateJournalEntryHandler
         await this.currentOrganizationService.fetchCurrentOrganizationId();
       profileId = await this.currentProfileService.fetchCurrentProfileId();
     } catch (error) {
-      if (error instanceof NotFoundException) {
+      if (
+        error instanceof MissingUserIdError ||
+        error instanceof NotFoundException
+      ) {
         return;
       }
 
