@@ -38,7 +38,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.58",
-    "@types/react": "^18.2.25",
+    "@types/react": "^18.2.31",
     "@types/react-dom": "^18.2.13",
     "@use-gesture/react": "^10.2.26",
     "i18next": "^23.2.11",
