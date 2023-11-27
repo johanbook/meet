@@ -7,15 +7,21 @@ import { JournalPageComponent } from "./JournalPage.component";
 const JOURNAL_ENTRIES: JournalEntryDetails[] = [
   {
     commandName: "Did the thing",
-    created: new Date("2020"),
-    id: 1,
+    createdAt: new Date("2020"),
+    id: "1",
     payload: {},
+    profile: {
+      id: 1,
+    },
   },
   {
     commandName: "Did the thing again",
-    created: new Date("2020"),
-    id: 2,
+    createdAt: new Date("2020"),
+    id: "2",
     payload: {},
+    profile: {
+      id: 1,
+    },
   },
 ];
 
