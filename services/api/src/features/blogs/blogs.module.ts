@@ -24,6 +24,7 @@ import { BlogsController } from "./client/controllers/blogs.controller";
 import { BlogPostService } from "./domain/services/blog-post.service";
 import { BlogPostComment } from "./infrastructure/entities/blog-post-comment.entity";
 import { BlogPostPhoto } from "./infrastructure/entities/blog-post-photo.entity";
+import { BlogPostReaction } from "./infrastructure/entities/blog-post-reaction.entity";
 import { BlogPost } from "./infrastructure/entities/blog-post.entity";
 
 @Module({
@@ -39,6 +40,7 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
       BlogPost,
       BlogPostComment,
       BlogPostPhoto,
+      BlogPostReaction,
       Profile,
     ]),
   ],
