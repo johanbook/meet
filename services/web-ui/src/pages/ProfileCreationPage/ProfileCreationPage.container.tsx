@@ -1,12 +1,14 @@
-import React from "react";
+import { ReactElement, useState } from "react";
 import { useMutation } from "react-query";
 
 import { CreateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
+import { useDialog } from "src/core/dialog";
 import { useTranslation } from "src/core/i18n";
 import { useSnackbar } from "src/core/snackbar";
 
 import { ProfileCreationPageComponent } from "./ProfileCreationPage.component";
+import { ProfileCreatedDialog } from "./dialogs/ProfileCreated.dialog";
 
 export interface ProfileCreationPageContainerProps {
   onProfileCreated?: () => void;
@@ -14,8 +16,9 @@ export interface ProfileCreationPageContainerProps {
 
 export function ProfileCreationPageContainer({
   onProfileCreated,
-}: ProfileCreationPageContainerProps): React.ReactElement {
+}: ProfileCreationPageContainerProps): ReactElement {
   const { t } = useTranslation("profile-creation");
+  const { openDialog } = useDialog();
 
   const snackbar = useSnackbar();
 
@@ -24,18 +27,19 @@ export function ProfileCreationPageContainer({
       profileApi.createCurrentProfile({ createProfileCommand }),
     {
       onError: () => snackbar.error(t("actions.create.error")),
-      onSuccess: () => snackbar.success(t("actions.create.success")),
     }
   );
 
-  const [form, setForm] = React.useState<CreateProfileCommand>({
+  const [form, setForm] = useState<CreateProfileCommand>({
     dateOfBirth: new Date(),
     name: "",
     description: "",
   });
 
   async function handleSubmit(): Promise<void> {
-    await mutation.mutateAsync(form as CreateProfileCommand);
+    await mutation.mutateAsync(form);
+
+    openDialog(ProfileCreatedDialog, {});
 
     if (onProfileCreated) {
       onProfileCreated();
