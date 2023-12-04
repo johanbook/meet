@@ -16,10 +16,10 @@ export function BlogPostPageContainer(): ReactElement {
   const { t } = useTranslation("blog");
   const { id = "" } = useParams();
 
-  const { error, data, isLoading } = useQuery(
-    [CacheKeysConstants.BlogPosts, id],
-    () => blogsApi.getBlogPost({ id })
-  );
+  const { error, data, isPending } = useQuery({
+    queryKey: [CacheKeysConstants.BlogPosts, id],
+    queryFn: () => blogsApi.getBlogPost({ id }),
+  });
 
   if (error) {
     return (
@@ -29,7 +29,7 @@ export function BlogPostPageContainer(): ReactElement {
     );
   }
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <BlogPostPageNav>
         <BlogPostPageSkeleton />

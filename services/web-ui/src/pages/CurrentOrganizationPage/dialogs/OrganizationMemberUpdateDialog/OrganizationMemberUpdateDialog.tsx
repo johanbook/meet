@@ -1,5 +1,4 @@
 import { ReactElement, useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
 
 import { Button, MenuItem, Select, Typography } from "@mui/material";
 
@@ -9,6 +8,7 @@ import { Dialog } from "src/components/ui/Dialog";
 import { Role } from "src/core/authorization";
 import { GlobalDialogProps } from "src/core/dialog/dialog.context";
 import { useTranslation } from "src/core/i18n";
+import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
@@ -24,10 +24,10 @@ export function OrganizationMemberUpdateDialog({
   const { t } = useTranslation("organization");
   const [role, setRole] = useState<Role>(member.role);
 
-  const mutation = useMutation(
-    (updateMemberRoleCommand: UpdateMemberRoleCommand) =>
-      organizationsApi.changeMemberRole({ updateMemberRoleCommand })
-  );
+  const mutation = useMutation({
+    mutationFn: (updateMemberRoleCommand: UpdateMemberRoleCommand) =>
+      organizationsApi.changeMemberRole({ updateMemberRoleCommand }),
+  });
 
   async function handleSave(onSuccess: () => void): Promise<void> {
     await mutation.mutateAsync(
@@ -36,9 +36,9 @@ export function OrganizationMemberUpdateDialog({
         onError: () => snackbar.error(t("members.update.role.error")),
         onSuccess: () => {
           snackbar.success(t("members.update.role.success"));
-          queryClient.invalidateQueries([
-            CacheKeysConstants.CurrentOrganizationMembers,
-          ]);
+          queryClient.invalidateQueries({
+            queryKey: [CacheKeysConstants.CurrentOrganizationMembers],
+          });
           onSuccess();
         },
       }

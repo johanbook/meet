@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
-import { QueryClientProvider } from "react-query";
 
+import { QueryClientProvider } from "@tanstack/react-query";
 import { SnackbarProvider } from "notistack";
 
 import { NotificationProvider } from "src/core/notifications";

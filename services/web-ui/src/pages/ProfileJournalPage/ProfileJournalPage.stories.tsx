@@ -2,29 +2,35 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { JournalEntryDetails } from "src/api";
 
-import { JournalPageComponent } from "./JournalPage.component";
+import { ProfileJournalPageComponent } from "./ProfileJournalPage.component";
 
 const JOURNAL_ENTRIES: JournalEntryDetails[] = [
   {
     commandName: "Did the thing",
-    created: new Date("2020"),
-    id: 1,
+    createdAt: new Date("2020"),
+    id: "1",
     payload: {},
+    profile: {
+      id: 1,
+    },
   },
   {
     commandName: "Did the thing again",
-    created: new Date("2020"),
-    id: 2,
+    createdAt: new Date("2020"),
+    id: "2",
     payload: {},
+    profile: {
+      id: 1,
+    },
   },
 ];
 
 export default {
-  title: "Pages/Journal/View",
-  component: JournalPageComponent,
+  title: "Pages/Profile/Journal",
+  component: ProfileJournalPageComponent,
 } as Meta;
 
-type Story = StoryObj<typeof JournalPageComponent>;
+type Story = StoryObj<typeof ProfileJournalPageComponent>;
 
 export const Default: Story = {
   args: {
