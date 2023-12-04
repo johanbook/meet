@@ -13,22 +13,22 @@ const columns: Column<JournalEntryDetails>[] = [
     width: 400,
   },
   {
-    field: "created",
+    field: "createdAt",
     headerName: "Date",
     valueGetter: (params) => params.value.toLocaleString(),
     width: 400,
   },
 ];
 
-interface JournalPageComponentProps {
+interface ProfileJournalPageComponentProps {
   data: JournalEntryDetails[];
   loading?: boolean;
 }
 
-export function JournalPageComponent({
+export function ProfileJournalPageComponent({
   data,
   loading,
-}: JournalPageComponentProps): ReactElement {
+}: ProfileJournalPageComponentProps): ReactElement {
   return (
     <Table
       columns={columns}

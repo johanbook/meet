@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { JournalEntryDetails } from "src/api";
 
-import { JournalPageComponent } from "./JournalPage.component";
+import { ProfileJournalPageComponent } from "./ProfileJournalPage.component";
 
 const JOURNAL_ENTRIES: JournalEntryDetails[] = [
   {
@@ -27,10 +27,10 @@ const JOURNAL_ENTRIES: JournalEntryDetails[] = [
 
 export default {
   title: "Pages/Journal/View",
-  component: JournalPageComponent,
+  component: ProfileJournalPageComponent,
 } as Meta;
 
-type Story = StoryObj<typeof JournalPageComponent>;
+type Story = StoryObj<typeof ProfileJournalPageComponent>;
 
 export const Default: Story = {
   args: {

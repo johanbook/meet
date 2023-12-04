@@ -7,10 +7,10 @@ import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 import { getDateDaysAgo } from "src/utils/time";
 
-import { JournalPageComponent } from "./JournalPage.component";
-import { JournalPageNav } from "./JournalPage.nav";
+import { ProfileJournalPageComponent } from "./ProfileJournalPage.component";
+import { ProfileJournalPageNav } from "./ProfileJournalPage.nav";
 
-export function JournalPageContainer(): React.ReactElement {
+export function ProfileJournalPageContainer(): React.ReactElement {
   const [dateRange, setDateRange] = useState({
     to: new Date(),
     from: getDateDaysAgo(2),
@@ -23,35 +23,35 @@ export function JournalPageContainer(): React.ReactElement {
 
   if (error) {
     return (
-      <JournalPageNav onDateChange={setDateRange} values={dateRange}>
+      <ProfileJournalPageNav onDateChange={setDateRange} values={dateRange}>
         <ErrorMessage error={error} />
-      </JournalPageNav>
+      </ProfileJournalPageNav>
     );
   }
 
   if (isLoading) {
     return (
-      <JournalPageNav onDateChange={setDateRange} values={dateRange}>
+      <ProfileJournalPageNav onDateChange={setDateRange} values={dateRange}>
         <Box sx={{ marginTop: 2 }}>
-          <JournalPageComponent data={[]} loading />
+          <ProfileJournalPageComponent data={[]} loading />
         </Box>
-      </JournalPageNav>
+      </ProfileJournalPageNav>
     );
   }
 
   if (!data) {
     return (
-      <JournalPageNav onDateChange={setDateRange} values={dateRange}>
+      <ProfileJournalPageNav onDateChange={setDateRange} values={dateRange}>
         <Typography>No entries found in journal</Typography>
-      </JournalPageNav>
+      </ProfileJournalPageNav>
     );
   }
 
   return (
-    <JournalPageNav onDateChange={setDateRange} values={dateRange}>
+    <ProfileJournalPageNav onDateChange={setDateRange} values={dateRange}>
       <Box sx={{ marginTop: 2 }}>
-        <JournalPageComponent data={data.entries} />
+        <ProfileJournalPageComponent data={data.entries} />
       </Box>
-    </JournalPageNav>
+    </ProfileJournalPageNav>
   );
 }
