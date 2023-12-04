@@ -23,10 +23,10 @@ type UseAuthorizationResult =
     };
 
 export function useAuthorization(): UseAuthorizationResult {
-  const { data, isLoading } = useQuery(
-    CacheKeysConstants.CurrentOrganization,
-    () => organizationsApi.getCurrentOrganization()
-  );
+  const { data, isLoading } = useQuery({
+    queryKey: [CacheKeysConstants.CurrentOrganization],
+    queryFn: () => organizationsApi.getCurrentOrganization(),
+  });
 
   if (isLoading) {
     return {

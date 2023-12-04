@@ -14,10 +14,10 @@ import { OrganizationMembers } from "./components/OrganizationMembers";
 export function CurrentOrganizationPageContainer(): ReactElement {
   const { t } = useTranslation("organization");
 
-  const { error, data, isLoading } = useQuery(
-    CacheKeysConstants.CurrentOrganization,
-    () => organizationsApi.getCurrentOrganization()
-  );
+  const { error, data, isPending } = useQuery({
+    queryKey: [CacheKeysConstants.CurrentOrganization],
+    queryFn: () => organizationsApi.getCurrentOrganization(),
+  });
 
   if (error) {
     return (
@@ -27,7 +27,7 @@ export function CurrentOrganizationPageContainer(): ReactElement {
     );
   }
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <CurrentOrganizationPageNav>
         <CurrentOrganizationPageSkeleton />
