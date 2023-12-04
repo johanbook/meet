@@ -4,6 +4,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AuthenticationModule } from "src/core/authentication/authentication.module";
 import { OrganizationModule } from "src/core/organizations/organization.module";
+import { PhotosModule } from "src/core/photos/photos.module";
 import { ProfileModule } from "src/core/profiles/profile.module";
 import { QueryModule } from "src/core/query/query.module";
 
@@ -19,6 +20,7 @@ import { JournalLogger } from "./journal.listener";
     AuthenticationModule,
     CqrsModule,
     OrganizationModule,
+    PhotosModule,
     ProfileModule,
     TypeOrmModule.forFeature([JournalEntry]),
     QueryModule,
