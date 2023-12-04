@@ -9,13 +9,19 @@ const columns: Column<JournalEntryDetails>[] = [
   {
     field: "commandName",
     headerName: "Action",
-    valueGetter: (params) => format(params.value || ""),
+    valueGetter: ({ value }) => format(value || ""),
     width: 400,
   },
   {
     field: "createdAt",
     headerName: "Date",
-    valueGetter: (params) => params.value.toLocaleString(),
+    valueGetter: ({ value }) => value.toLocaleString(),
+    width: 400,
+  },
+  {
+    field: "profile",
+    headerName: "Profile ID",
+    valueGetter: ({ value }) => value.id,
     width: 400,
   },
 ];
