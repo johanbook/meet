@@ -12,6 +12,8 @@ const JOURNAL_ENTRIES: JournalEntryDetails[] = [
     payload: {},
     profile: {
       id: 1,
+      name: "Erik",
+      imageUrl: undefined,
     },
   },
   {
@@ -21,6 +23,9 @@ const JOURNAL_ENTRIES: JournalEntryDetails[] = [
     payload: {},
     profile: {
       id: 1,
+      name: "Johan",
+      imageUrl:
+        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.pexels.com%2Fphotos%2F45201%2Fkitty-cat-kitten-pet-45201.jpeg&f=1&nofb=1&ipt=54fe246cbebd9e63aa90e53ee71e647b3a337d8c3c5f1ac20eab33a04b1c7fb1&ipo=images",
     },
   },
 ];

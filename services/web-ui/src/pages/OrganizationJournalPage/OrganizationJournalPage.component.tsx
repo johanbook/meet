@@ -1,6 +1,7 @@
 import { ReactElement } from "react";
 
 import { JournalEntryDetails } from "src/api";
+import { ProfileAvatar } from "src/components/ProfileAvatar";
 import { Table } from "src/components/ui";
 import { Column } from "src/components/ui/Table";
 import { format } from "src/utils/string";
@@ -20,8 +21,10 @@ const columns: Column<JournalEntryDetails>[] = [
   },
   {
     field: "profile",
-    headerName: "Profile ID",
-    valueGetter: ({ value }) => value.id,
+    headerName: "Profile",
+    renderCell: ({ value }) => (
+      <ProfileAvatar name={value.name} src={value.imageUrl} />
+    ),
     width: 400,
   },
 ];
