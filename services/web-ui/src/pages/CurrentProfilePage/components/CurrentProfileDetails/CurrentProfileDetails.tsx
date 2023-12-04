@@ -1,5 +1,4 @@
-import React from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { ReactElement, SyntheticEvent, useState } from "react";
 
 import { Box, Button, TextField, Typography } from "@mui/material";
 
@@ -7,6 +6,7 @@ import { ProfileDetails, UpdateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
 import { Center } from "src/components/ui/Center";
 import { useTranslation } from "src/core/i18n";
+import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
@@ -18,19 +18,20 @@ export interface CurrentProfileDetailsProps {
 
 export function CurrentProfileDetails({
   profile,
-}: CurrentProfileDetailsProps): React.ReactElement {
+}: CurrentProfileDetailsProps): ReactElement {
   const { t } = useTranslation("profile");
-  const mutation = useMutation((updateProfileCommand: UpdateProfileCommand) =>
-    profileApi.updateCurrentProfile({ updateProfileCommand })
-  );
+  const mutation = useMutation({
+    mutationFn: (updateProfileCommand: UpdateProfileCommand) =>
+      profileApi.updateCurrentProfile({ updateProfileCommand }),
+  });
 
-  const [description, setDescription] = React.useState(profile.description);
+  const [description, setDescription] = useState(profile.description);
 
   const queryClient = useQueryClient();
 
   const snackbar = useSnackbar();
 
-  async function handleSubmit(event: React.SyntheticEvent): Promise<void> {
+  async function handleSubmit(event: SyntheticEvent): Promise<void> {
     event.preventDefault();
 
     await mutation.mutateAsync(
@@ -40,13 +41,15 @@ export function CurrentProfileDetails({
         onSuccess: () => {
           snackbar.success(t("update.success"));
 
-          queryClient.invalidateQueries([CacheKeysConstants.CurrentProfile]);
+          queryClient.invalidateQueries({
+            queryKey: [CacheKeysConstants.CurrentProfile],
+          });
         },
       }
     );
   }
 
-  const canSubmit = description !== profile.description && !mutation.isLoading;
+  const canSubmit = description !== profile.description && !mutation.isPending;
 
   return (
     <>
@@ -61,7 +64,7 @@ export function CurrentProfileDetails({
       <form>
         <TextField
           fullWidth
-          disabled={mutation.isLoading}
+          disabled={mutation.isPending}
           label={t("description.label")}
           margin="normal"
           multiline

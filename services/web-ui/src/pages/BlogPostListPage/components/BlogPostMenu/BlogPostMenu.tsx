@@ -1,5 +1,4 @@
 import { ReactElement } from "react";
-import { useMutation, useQueryClient } from "react-query";
 
 import { Delete, MoreVert } from "@mui/icons-material";
 import { ListItemText } from "@mui/material";
@@ -13,6 +12,7 @@ import { ConfirmationDialog } from "src/components/ui";
 import { Menu } from "src/components/ui/Menu";
 import { useDialog } from "src/core/dialog";
 import { useTranslation } from "src/core/i18n";
+import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
@@ -26,10 +26,10 @@ export function BlogPostMenu({ id }: BlogPostMenuProps): ReactElement {
   const queryClient = useQueryClient();
   const snackbar = useSnackbar();
 
-  const deleteMutation = useMutation(
-    (deleteBlogPostCommand: DeleteBlogPostCommand) =>
-      blogsApi.deletelogPost({ deleteBlogPostCommand })
-  );
+  const deleteMutation = useMutation({
+    mutationFn: (deleteBlogPostCommand: DeleteBlogPostCommand) =>
+      blogsApi.deletelogPost({ deleteBlogPostCommand }),
+  });
 
   async function handleDelete(onSuccess: () => void): Promise<void> {
     await deleteMutation.mutateAsync(
@@ -41,7 +41,9 @@ export function BlogPostMenu({ id }: BlogPostMenuProps): ReactElement {
         onSuccess: () => {
           onSuccess();
           snackbar.success(t("actions.delete.success"));
-          queryClient.invalidateQueries([CacheKeysConstants.BlogPosts]);
+          queryClient.invalidateQueries({
+            queryKey: [CacheKeysConstants.BlogPosts],
+          });
         },
       }
     );
@@ -63,7 +65,7 @@ export function BlogPostMenu({ id }: BlogPostMenuProps): ReactElement {
         </IconButton>
       )}
     >
-      <MenuItem disabled={deleteMutation.isLoading} onClick={handleClickDelete}>
+      <MenuItem disabled={deleteMutation.isPending} onClick={handleClickDelete}>
         <ListItemIcon>
           <Delete />
         </ListItemIcon>

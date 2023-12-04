@@ -18,24 +18,23 @@ const ITEMS_PER_PAGE = 10;
 export function BlogPostListPageContainer(): ReactElement {
   const { t } = useTranslation("blog");
 
-  const { error, data, isLoading, fetchNextPage, hasNextPage } =
-    useInfiniteQuery(
-      [CacheKeysConstants.BlogPosts],
-      ({ pageParam = 0 }) =>
+  const { error, data, isPending, fetchNextPage, hasNextPage } =
+    useInfiniteQuery({
+      queryKey: [CacheKeysConstants.BlogPosts],
+      queryFn: ({ pageParam = 0 }) =>
         blogsApi.getBlogPosts({
           skip: pageParam * ITEMS_PER_PAGE,
           top: (pageParam + 1) * ITEMS_PER_PAGE,
         }),
-      {
-        getNextPageParam: (lastPage, pages) => {
-          if (lastPage.length < ITEMS_PER_PAGE) {
-            return;
-          }
+      initialPageParam: 0,
+      getNextPageParam: (lastPage, pages) => {
+        if (lastPage.length < ITEMS_PER_PAGE) {
+          return;
+        }
 
-          return pages.length;
-        },
-      }
-    );
+        return pages.length;
+      },
+    });
 
   if (error) {
     return (
@@ -46,7 +45,7 @@ export function BlogPostListPageContainer(): ReactElement {
     );
   }
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <>
         <BlogPostListPageHeader />
