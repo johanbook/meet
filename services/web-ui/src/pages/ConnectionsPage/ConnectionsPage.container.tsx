@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactElement } from "react";
 
 import { Typography } from "@mui/material";
 
@@ -11,12 +11,13 @@ import { ConnectionsPageComponent } from "./ConnectionsPage.component";
 import { ConnectionsPageNav } from "./ConnectionsPage.nav";
 import { ConnectionsPageSkeleton } from "./ConnectionsPage.skeleton";
 
-export function ConnectionsPageContainer(): React.ReactElement {
+export function ConnectionsPageContainer(): ReactElement {
   const { t } = useTranslation("connections");
 
-  const { error, data, isLoading } = useQuery("matches", () =>
-    chatsApi.getConnections()
-  );
+  const { error, data, isPending } = useQuery({
+    queryKey: ["matches"],
+    queryFn: () => chatsApi.getConnections(),
+  });
 
   if (error) {
     return (
@@ -26,7 +27,7 @@ export function ConnectionsPageContainer(): React.ReactElement {
     );
   }
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <ConnectionsPageNav>
         <ConnectionsPageSkeleton />

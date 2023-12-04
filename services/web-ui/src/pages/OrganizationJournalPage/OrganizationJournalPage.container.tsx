@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { ReactElement, useState } from "react";
 
 import { Box, Typography } from "@mui/material";
 
@@ -10,16 +10,16 @@ import { getDateDaysAgo } from "src/utils/time";
 import { OrganizationJournalPageComponent } from "./OrganizationJournalPage.component";
 import { OrganizationJournalPageNav } from "./OrganizationJournalPage.nav";
 
-export function OrganizationJournalPageContainer(): React.ReactElement {
+export function OrganizationJournalPageContainer(): ReactElement {
   const [dateRange, setDateRange] = useState({
     to: new Date(),
     from: getDateDaysAgo(2),
   });
 
-  const { error, data, isLoading } = useQuery(
-    [CacheKeysConstants.Journal, dateRange.from, dateRange.to],
-    () => journalApi.getCurrentOrganizationJournal(dateRange)
-  );
+  const { error, data, isPending } = useQuery({
+    queryKey: [CacheKeysConstants.Journal, dateRange],
+    queryFn: () => journalApi.getCurrentOrganizationJournal(dateRange),
+  });
 
   if (error) {
     return (
@@ -32,7 +32,7 @@ export function OrganizationJournalPageContainer(): React.ReactElement {
     );
   }
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <OrganizationJournalPageNav
         onDateChange={setDateRange}
