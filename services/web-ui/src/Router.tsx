@@ -11,10 +11,11 @@ import { ConnectionsPage } from "src/pages/ConnectionsPage";
 import { CreateOrganizationPage } from "src/pages/CreateOrganizationPage";
 import { CurrentOrganizationPage } from "src/pages/CurrentOrganizationPage";
 import { CurrentProfilePage } from "src/pages/CurrentProfilePage";
-import { JournalPage } from "src/pages/JournalPage";
 import { NotFoundPage } from "src/pages/NotFoundPage";
+import { OrganizationJournalPage } from "src/pages/OrganizationJournalPage";
 import { OrganizationListPage } from "src/pages/OrganizationListPage";
 import { ProfileGuard } from "src/pages/ProfileGuard";
+import { ProfileJournalPage } from "src/pages/ProfileJournalPage";
 import { ProfilePage } from "src/pages/ProfilePage";
 import { SettingsPage } from "src/pages/SettingsPage";
 import { LoadingView } from "src/views/LoadingView";
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
         element: <CreateOrganizationPage />,
       },
       {
+        path: "/group/journal",
+        element: <OrganizationJournalPage />,
+      },
+      {
         path: "/group/list",
         element: <OrganizationListPage />,
       },
@@ -67,7 +72,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile/journal",
-        element: <JournalPage />,
+        element: <ProfileJournalPage />,
       },
       {
         path: "/profile/:id",
