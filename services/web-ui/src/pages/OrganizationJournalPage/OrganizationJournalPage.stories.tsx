@@ -26,7 +26,7 @@ const JOURNAL_ENTRIES: JournalEntryDetails[] = [
 ];
 
 export default {
-  title: "Pages/Journal/View",
+  title: "Pages/Organization/Journal",
   component: OrganizationJournalPageComponent,
 } as Meta;
 

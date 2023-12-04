@@ -32,7 +32,7 @@ const IMAGES: BlogPostPhotoDetails[] = [
 ];
 
 export default {
-  title: "Pages/Blog posts/BlogPost",
+  title: "Pages/Blog post list/BlogPost",
   component: BlogPost,
 } as Meta;
 
