@@ -20,15 +20,15 @@ const columns: Column<JournalEntryDetails>[] = [
   },
 ];
 
-interface JournalPageComponentProps {
+interface ProfileJournalPageComponentProps {
   data: JournalEntryDetails[];
   loading?: boolean;
 }
 
-export function JournalPageComponent({
+export function ProfileJournalPageComponent({
   data,
   loading,
-}: JournalPageComponentProps): ReactElement {
+}: ProfileJournalPageComponentProps): ReactElement {
   return (
     <Table
       columns={columns}
