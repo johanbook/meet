@@ -11,17 +11,17 @@ export interface DateRange {
   to: Date;
 }
 
-interface JournalPageNavProps {
+interface ProfileJournalPageNavProps {
   children: ReactNode;
   onDateChange: (value: DateRange) => void;
   values: DateRange;
 }
 
-export function JournalPageNav({
+export function ProfileJournalPageNav({
   children,
   onDateChange,
   values,
-}: JournalPageNavProps): ReactElement {
+}: ProfileJournalPageNavProps): ReactElement {
   const { t } = useTranslation("journal");
 
   return (

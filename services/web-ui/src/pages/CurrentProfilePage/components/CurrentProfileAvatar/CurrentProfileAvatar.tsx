@@ -1,11 +1,11 @@
-import React from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { ReactElement } from "react";
 
 import { AccountCircle } from "@mui/icons-material";
 import { Avatar, Button } from "@mui/material";
 
 import { profileApi } from "src/apis";
 import { useTranslation } from "src/core/i18n";
+import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
@@ -17,14 +17,15 @@ export interface CurrentProfileAvatarProps {
 
 export function CurrentProfileAvatar({
   src,
-}: CurrentProfileAvatarProps): React.ReactElement {
+}: CurrentProfileAvatarProps): ReactElement {
   const { t } = useTranslation("profile");
 
   const queryClient = useQueryClient();
 
-  const mutation = useMutation((photo: File) =>
-    profileApi.updateCurrentProfilePhoto({ photo })
-  );
+  const mutation = useMutation({
+    mutationFn: (photo: File) =>
+      profileApi.updateCurrentProfilePhoto({ photo }),
+  });
 
   const snackbar = useSnackbar();
 
@@ -42,14 +43,16 @@ export function CurrentProfileAvatar({
       onError: () => snackbar.error(t("actions.update-photo.error")),
       onSuccess: () => {
         snackbar.success(t("actions.update-photo.success"));
-        queryClient.invalidateQueries(CacheKeysConstants.CurrentProfile);
+        queryClient.invalidateQueries({
+          queryKey: [CacheKeysConstants.CurrentProfile],
+        });
       },
     });
   }
 
   if (src) {
     return (
-      <Button component="label" disabled={mutation.isLoading}>
+      <Button component="label" disabled={mutation.isPending}>
         <Avatar sx={{ height: HEIGHT, width: HEIGHT }} src={src} />
         <input hidden accept="image/*" type="file" onChange={handleUpload} />
       </Button>
@@ -57,7 +60,7 @@ export function CurrentProfileAvatar({
   }
 
   return (
-    <Button component="label" disabled={mutation.isLoading}>
+    <Button component="label" disabled={mutation.isPending}>
       <Avatar sx={{ height: HEIGHT, width: HEIGHT }}>
         <AccountCircle sx={{ height: HEIGHT, width: HEIGHT }} />
       </Avatar>

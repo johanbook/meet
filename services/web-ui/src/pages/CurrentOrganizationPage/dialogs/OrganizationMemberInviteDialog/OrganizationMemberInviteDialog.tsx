@@ -1,5 +1,4 @@
 import { ReactElement } from "react";
-import { useMutation, useQueryClient } from "react-query";
 
 import { AddMemberToOrganizationViaEmailCommand } from "src/api";
 import { organizationsApi } from "src/apis";
@@ -9,6 +8,7 @@ import { Permissions, useAuthorization } from "src/core/authorization";
 import { GlobalDialogProps } from "src/core/dialog";
 import { useForm, validators } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
+import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
@@ -21,14 +21,14 @@ export function OrganizationMemberInviteDialog(): ReactElement {
   const queryClient = useQueryClient();
   const snackbar = useSnackbar();
 
-  const mutation = useMutation(
-    (
+  const mutation = useMutation({
+    mutationFn: (
       addMemberToOrganizationViaEmailCommand: AddMemberToOrganizationViaEmailCommand
     ) =>
       organizationsApi.addMemberToOrganizationViaEmail({
         addMemberToOrganizationViaEmailCommand,
-      })
-  );
+      }),
+  });
 
   const form = useForm<AddMemberToOrganizationViaEmailCommand>(
     { email: "" },
@@ -56,9 +56,9 @@ export function OrganizationMemberInviteDialog(): ReactElement {
       onError: () => snackbar.error(t("members.invite.submit.error")),
       onSuccess: () => {
         form.reset();
-        queryClient.invalidateQueries([
-          CacheKeysConstants.CurrentOrganizationMembers,
-        ]);
+        queryClient.invalidateQueries({
+          queryKey: [CacheKeysConstants.CurrentOrganizationMembers],
+        });
         snackbar.success(t("members.invite.submit.success"));
         onSuccess();
       },

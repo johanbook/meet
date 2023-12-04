@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactElement } from "react";
 import { useParams } from "react-router-dom";
 
 import { Typography } from "@mui/material";
@@ -11,13 +11,13 @@ import { ProfilePageComponent } from "./ProfilePage.component";
 import { ProfilePageHeader } from "./ProfilePage.header";
 import { ProfilePageSkeleton } from "./ProfilePage.skeleton";
 
-export function ProfilePageContainer(): React.ReactElement {
+export function ProfilePageContainer(): ReactElement {
   const { id } = useParams();
 
-  const { error, data, isLoading } = useQuery(
-    [CacheKeysConstants.CurrentProfile, id],
-    () => profileApi.getProfile({ id: Number(id) })
-  );
+  const { error, data, isPending } = useQuery({
+    queryKey: [CacheKeysConstants.CurrentProfile, id],
+    queryFn: () => profileApi.getProfile({ id: Number(id) }),
+  });
 
   if (error) {
     return (
@@ -28,7 +28,7 @@ export function ProfilePageContainer(): React.ReactElement {
     );
   }
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <>
         <ProfilePageHeader />

@@ -5,6 +5,8 @@ import { QUERY_CLIENT } from "src/queryQlient";
 
 addEventListener(NotificationEvent, (event) => {
   if (event.notification.type === "new_blog_post") {
-    QUERY_CLIENT.invalidateQueries([CacheKeysConstants.BlogPosts]);
+    QUERY_CLIENT.invalidateQueries({
+      queryKey: [CacheKeysConstants.BlogPosts],
+    });
   }
 });

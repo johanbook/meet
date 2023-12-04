@@ -1,7 +1,7 @@
 import React from "react";
-import { QueryClient, QueryClientProvider } from "react-query";
 
 import CssBaseline from "@mui/material/CssBaseline";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SnackbarProvider } from "notistack";
 
 import "./App.css";

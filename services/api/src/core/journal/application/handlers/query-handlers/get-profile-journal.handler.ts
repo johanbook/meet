@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Between, Repository } from "typeorm";
 
 import { map, mapArray } from "src/core/mapper";
+import { PhotoService } from "src/core/photos";
 import { CurrentProfileService } from "src/core/profiles";
 import { QueryService } from "src/core/query";
 
@@ -24,6 +25,7 @@ export class GetProfileJournalHandler
     private readonly currentProfileService: CurrentProfileService,
     @InjectRepository(JournalEntry)
     private readonly journalEntries: Repository<JournalEntry>,
+    private readonly photoService: PhotoService,
     private readonly queryService: QueryService<JournalEntry>,
   ) {}
 
@@ -39,6 +41,11 @@ export class GetProfileJournalHandler
         },
         query,
         required: {
+          relations: {
+            profile: {
+              profilePhoto: true,
+            },
+          },
           where: {
             createdAt: Between(query.from, query.to),
             profileId: currentProfileId,
@@ -55,6 +62,13 @@ export class GetProfileJournalHandler
         payload: entry.payload,
         profile: map(JournalProfileDetails, {
           id: entry.profileId,
+          imageUrl:
+            entry.profile.profilePhoto?.objectId &&
+            this.photoService.getUrl(
+              entry.profile.profilePhoto,
+              "profile-photo",
+            ),
+          name: entry.profile.name,
         }),
       })),
     });
