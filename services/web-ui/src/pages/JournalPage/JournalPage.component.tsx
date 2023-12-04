@@ -13,7 +13,7 @@ const columns: Column<JournalEntryDetails>[] = [
     width: 400,
   },
   {
-    field: "created",
+    field: "createdAt",
     headerName: "Date",
     valueGetter: (params) => params.value.toLocaleString(),
     width: 400,
