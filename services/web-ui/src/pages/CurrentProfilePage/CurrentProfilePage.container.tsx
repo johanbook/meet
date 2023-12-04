@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactElement } from "react";
 
 import { profileApi } from "src/apis";
 import { CacheKeysConstants, useQuery } from "src/core/query";
@@ -9,11 +9,11 @@ import { CurrentProfilePageNav } from "./CurrentProfilePage.nav";
 import { CurrentProfilePageSkeleton } from "./CurrentProfilePage.skeleton";
 import { CurrentProfileDetails } from "./components/CurrentProfileDetails";
 
-export function CurrentProfilePageContainer(): React.ReactElement {
-  const { error, data, isLoading } = useQuery(
-    CacheKeysConstants.CurrentProfile,
-    () => profileApi.getCurrentProfile()
-  );
+export function CurrentProfilePageContainer(): ReactElement {
+  const { error, data, isPending } = useQuery({
+    queryKey: [CacheKeysConstants.CurrentProfile],
+    queryFn: () => profileApi.getCurrentProfile(),
+  });
 
   if (error) {
     return (
@@ -23,7 +23,7 @@ export function CurrentProfilePageContainer(): React.ReactElement {
     );
   }
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <CurrentProfilePageNav>
         <CurrentProfilePageSkeleton />

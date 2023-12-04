@@ -13,9 +13,10 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const { data } = useQuery(CacheKeysConstants.Settings, () =>
-    settingsApi.getCurrentSettings()
-  );
+  const { data } = useQuery({
+    queryKey: [CacheKeysConstants.Settings],
+    queryFn: () => settingsApi.getCurrentSettings(),
+  });
   const theme = createTheme(data?.darkmode);
 
   return (

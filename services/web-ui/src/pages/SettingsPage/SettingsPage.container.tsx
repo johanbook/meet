@@ -1,5 +1,4 @@
-import React from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { ReactElement } from "react";
 
 import { Box, FormControlLabel, FormGroup } from "@mui/material";
 
@@ -8,24 +7,26 @@ import { settingsApi } from "src/apis";
 import { Link, List, ListItem, Typography } from "src/components/ui";
 import { Switch } from "src/components/ui";
 import { useTranslation } from "src/core/i18n";
+import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 import { ErrorView } from "src/views/ErrorView";
 
 import { SettingsPageHeader } from "./SettingsPage.header";
 import { SettingsPageSkeleton } from "./SettingsPage.skeleton";
 
-export function SettingsPageContainer(): React.ReactElement {
+export function SettingsPageContainer(): ReactElement {
   const { t } = useTranslation("settings");
 
   const queryClient = useQueryClient();
-  const { error, data, isLoading } = useQuery(CacheKeysConstants.Settings, () =>
-    settingsApi.getCurrentSettings()
-  );
+  const { error, data, isPending } = useQuery({
+    queryKey: [CacheKeysConstants.Settings],
+    queryFn: () => settingsApi.getCurrentSettings(),
+  });
 
   // TODO: Investigate why type is incorrect herej
-  const mutation = useMutation((body: object) =>
-    settingsApi.updateCurrentSettings({ body })
-  );
+  const mutation = useMutation({
+    mutationFn: (body: object) => settingsApi.updateCurrentSettings({ body }),
+  });
 
   if (error) {
     return (
@@ -36,7 +37,7 @@ export function SettingsPageContainer(): React.ReactElement {
     );
   }
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <>
         <SettingsPageHeader />
@@ -57,7 +58,9 @@ export function SettingsPageContainer(): React.ReactElement {
   async function handleChange(settings: SettingsDetails): Promise<void> {
     await mutation.mutateAsync(settings, {
       onSuccess: () => {
-        queryClient.invalidateQueries([CacheKeysConstants.Settings]);
+        queryClient.invalidateQueries({
+          queryKey: [CacheKeysConstants.Settings],
+        });
       },
     });
   }
@@ -85,7 +88,7 @@ export function SettingsPageContainer(): React.ReactElement {
                 value={data.darkmode}
               />
             }
-            disabled={isLoading || mutation.isLoading}
+            disabled={isPending || mutation.isPending}
             label={t("darkmode")}
           />
         </FormGroup>

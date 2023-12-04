@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { ReactElement, useState } from "react";
 
 import { Box, Typography } from "@mui/material";
 
@@ -10,16 +10,16 @@ import { getDateDaysAgo } from "src/utils/time";
 import { ProfileJournalPageComponent } from "./ProfileJournalPage.component";
 import { ProfileJournalPageNav } from "./ProfileJournalPage.nav";
 
-export function ProfileJournalPageContainer(): React.ReactElement {
+export function ProfileJournalPageContainer(): ReactElement {
   const [dateRange, setDateRange] = useState({
     to: new Date(),
     from: getDateDaysAgo(2),
   });
 
-  const { error, data, isLoading } = useQuery(
-    [CacheKeysConstants.Journal, dateRange.from, dateRange.to],
-    () => journalApi.getProfileJournal(dateRange)
-  );
+  const { error, data, isLoading } = useQuery({
+    queryKey: [CacheKeysConstants.Journal, dateRange],
+    queryFn: () => journalApi.getProfileJournal(dateRange),
+  });
 
   if (error) {
     return (

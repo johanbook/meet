@@ -1,4 +1,4 @@
-import { QueryClient } from "react-query";
+import { QueryClient } from "@tanstack/react-query";
 
 import { Logger } from "src/core/logging";
 
@@ -18,15 +18,6 @@ export const QUERY_CLIENT = new QueryClient({
       },
     },
     queries: {
-      onError: (err) => {
-        const error = err as Error;
-        logger.error("Failed to execute query", {
-          error: {
-            message: error.message,
-            stackTrace: error.stack,
-          },
-        });
-      },
       // Limit retries
       retry: 1,
       // Consider data to be fresh for 20 seconds

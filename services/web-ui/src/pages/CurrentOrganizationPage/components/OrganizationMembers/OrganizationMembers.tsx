@@ -30,16 +30,16 @@ export function OrganizationMembers(): ReactElement {
   const authorization = useAuthorization();
   const { openDialog } = useDialog();
 
-  const { error, data, isLoading } = useQuery(
-    CacheKeysConstants.CurrentOrganizationMembers,
-    () => organizationsApi.getCurrentOrganizationMembers()
-  );
+  const { error, data, isPending } = useQuery({
+    queryKey: [CacheKeysConstants.CurrentOrganizationMembers],
+    queryFn: () => organizationsApi.getCurrentOrganizationMembers(),
+  });
 
   if (error || authorization.error) {
     return <ErrorMessage error={error || authorization.error} />;
   }
 
-  if (isLoading || authorization.isLoading) {
+  if (isPending || authorization.isLoading) {
     return <Skeleton />;
   }
 

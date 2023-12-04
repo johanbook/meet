@@ -1,5 +1,4 @@
 import { ReactElement } from "react";
-import { useMutation, useQueryClient } from "react-query";
 
 import {
   OrganizationMemberDetails,
@@ -9,6 +8,7 @@ import { organizationsApi } from "src/apis";
 import { ConfirmationDialog } from "src/components/ui";
 import { GlobalDialogProps } from "src/core/dialog/dialog.context";
 import { useTranslation } from "src/core/i18n";
+import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
@@ -24,10 +24,10 @@ export function OrganizationMemberRemoveDialog({
   const snackbar = useSnackbar();
   const { t } = useTranslation("organization");
 
-  const mutation = useMutation(
-    (request: RemoveMemberFromCurrentOrganizationRequest) =>
-      organizationsApi.removeMemberFromCurrentOrganization(request)
-  );
+  const mutation = useMutation({
+    mutationFn: (request: RemoveMemberFromCurrentOrganizationRequest) =>
+      organizationsApi.removeMemberFromCurrentOrganization(request),
+  });
 
   function handleSave(onSuccess: () => void): void {
     mutation.mutate(
@@ -36,9 +36,9 @@ export function OrganizationMemberRemoveDialog({
         onError: () => snackbar.error(t("members.remove.error")),
         onSuccess: () => {
           snackbar.success(t("members.remove.success"));
-          queryClient.invalidateQueries([
-            CacheKeysConstants.CurrentOrganizationMembers,
-          ]);
+          queryClient.invalidateQueries({
+            queryKey: [CacheKeysConstants.CurrentOrganizationMembers],
+          });
           onSuccess();
         },
       }

@@ -1,9 +1,9 @@
-import React from "react";
-import { useMutation } from "react-query";
+import { ReactElement, useState } from "react";
 
 import { CreateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
 import { useTranslation } from "src/core/i18n";
+import { useMutation } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 import { ProfileCreationPageComponent } from "./ProfileCreationPage.component";
@@ -14,21 +14,19 @@ export interface ProfileCreationPageContainerProps {
 
 export function ProfileCreationPageContainer({
   onProfileCreated,
-}: ProfileCreationPageContainerProps): React.ReactElement {
+}: ProfileCreationPageContainerProps): ReactElement {
   const { t } = useTranslation("profile-creation");
 
   const snackbar = useSnackbar();
 
-  const mutation = useMutation(
-    (createProfileCommand: CreateProfileCommand) =>
+  const mutation = useMutation({
+    mutationFn: (createProfileCommand: CreateProfileCommand) =>
       profileApi.createCurrentProfile({ createProfileCommand }),
-    {
-      onError: () => snackbar.error(t("actions.create.error")),
-      onSuccess: () => snackbar.success(t("actions.create.success")),
-    }
-  );
+    onError: () => snackbar.error(t("actions.create.error")),
+    onSuccess: () => snackbar.success(t("actions.create.success")),
+  });
 
-  const [form, setForm] = React.useState<CreateProfileCommand>({
+  const [form, setForm] = useState<CreateProfileCommand>({
     dateOfBirth: new Date(),
     name: "",
     description: "",

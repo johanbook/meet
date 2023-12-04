@@ -1,8 +1,8 @@
-import React from "react";
-import { useMutation } from "react-query";
+import { ReactElement, useState } from "react";
 
 import { PostChatMessageCommand } from "src/api";
 import { chatsApi } from "src/apis";
+import { useMutation } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 import { ChatTextFieldComponent } from "./ChatTextField.component";
@@ -15,15 +15,16 @@ export interface ChatTextFieldContainerProps {
 export function ChatTextFieldContainer({
   onSentMessage,
   receiverProfileId,
-}: ChatTextFieldContainerProps): React.ReactElement {
+}: ChatTextFieldContainerProps): ReactElement {
   const snackbar = useSnackbar();
 
-  const mutation = useMutation(
-    (postChatMessageCommand: PostChatMessageCommand) =>
+  const mutation = useMutation({
+    mutationFn: (postChatMessageCommand: PostChatMessageCommand) =>
       chatsApi.postChatMessage({ postChatMessageCommand }),
-    { onError: () => snackbar.error("Unable to send message") }
-  );
-  const [value, setValue] = React.useState("");
+    onError: () => snackbar.error("Unable to send message"),
+  });
+
+  const [value, setValue] = useState("");
 
   async function handleSubmit(): Promise<void> {
     const message = value;
@@ -37,7 +38,7 @@ export function ChatTextFieldContainer({
 
   return (
     <ChatTextFieldComponent
-      disabled={mutation.isLoading}
+      disabled={mutation.isPending}
       onChange={setValue}
       onSubmit={handleSubmit}
       value={value}

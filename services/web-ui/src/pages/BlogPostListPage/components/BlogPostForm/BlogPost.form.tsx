@@ -1,5 +1,4 @@
 import { ReactElement, SyntheticEvent } from "react";
-import { useMutation, useQueryClient } from "react-query";
 
 import { Close, InsertPhoto, Send } from "@mui/icons-material";
 import {
@@ -16,13 +15,15 @@ import { Photo } from "src/components/ui/Photo";
 import { UploadIconButton } from "src/components/ui/UploadIconButton";
 import { useForm, validators } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
+import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 export function BlogPostForm(): ReactElement {
-  const mutation = useMutation((command: CreateBlogPostRequest) =>
-    blogsApi.createBlogPost(command)
-  );
+  const mutation = useMutation({
+    mutationFn: (command: CreateBlogPostRequest) =>
+      blogsApi.createBlogPost(command),
+  });
 
   const queryClient = useQueryClient();
 
@@ -64,7 +65,9 @@ export function BlogPostForm(): ReactElement {
         snackbar.error(t("actions.create.error"));
       },
       onSuccess: () => {
-        queryClient.invalidateQueries([CacheKeysConstants.BlogPosts]);
+        queryClient.invalidateQueries({
+          queryKey: [CacheKeysConstants.BlogPosts],
+        });
         form.reset();
       },
     });
@@ -74,12 +77,12 @@ export function BlogPostForm(): ReactElement {
     <Box>
       <form onSubmit={handleSubmit}>
         <TextField
-          disabled={mutation.isLoading}
+          disabled={mutation.isPending}
           fullWidth
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                {mutation.isLoading ? (
+                {mutation.isPending ? (
                   <CircularProgress />
                 ) : (
                   <IconButton
