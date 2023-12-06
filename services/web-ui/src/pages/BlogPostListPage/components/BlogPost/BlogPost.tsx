@@ -1,6 +1,6 @@
 import { ReactElement, useState } from "react";
 
-import { FavoriteBorder, ModeCommentOutlined } from "@mui/icons-material";
+import { ModeCommentOutlined } from "@mui/icons-material";
 import {
   Avatar,
   Box,
@@ -21,6 +21,7 @@ import { useTranslation } from "src/core/i18n";
 import { timeSince } from "src/utils/time";
 
 import { BlogPostCommentForm } from "../BlogPostCommentForm/BlogPostComment.form";
+import { BlogPostLikeButton } from "../BlogPostLikeButton/BlogPostLikeButton";
 import { BlogPostMenu } from "../BlogPostMenu";
 import { BlogPostPhotos } from "../BlogPostPhotos/BlogPostPhotos";
 
@@ -60,14 +61,23 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
       <BlogPostPhotos photos={post.photos} />
 
       <CardActions disableSpacing>
-        <IconButton aria-label="like" disabled sx={{ display: "none" }}>
-          <FavoriteBorder />
-        </IconButton>
+        <BlogPostLikeButton
+          blogPostId={post.id}
+          reactionId={post.reactions.currentProfileReactionId}
+        />
 
         <IconButton aria-label="comment" onClick={() => setShowComments(true)}>
           <ModeCommentOutlined />
         </IconButton>
       </CardActions>
+
+      {post.reactions.count > 0 && (
+        <CardContent sx={{ py: 0 }}>
+          <Typography variant="subtitle2">
+            {t("reactions.count", { count: post.reactions.count })}
+          </Typography>
+        </CardContent>
+      )}
 
       {post.comments.length > 0 && (
         <CardActions disableSpacing>

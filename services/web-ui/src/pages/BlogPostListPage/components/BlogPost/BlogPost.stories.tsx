@@ -49,6 +49,10 @@ const BLOG_POST: BlogPostDetails = {
     id: 1,
     name: "John Doe",
   },
+  reactions: {
+    count: 0,
+    currentProfileReactionId: undefined,
+  },
 };
 
 const COMMENT: BlogPostCommentDetails = {
