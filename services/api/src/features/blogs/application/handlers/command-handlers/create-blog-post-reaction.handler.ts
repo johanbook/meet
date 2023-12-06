@@ -45,6 +45,7 @@ export class CreateBlogPostReactionHandler
     }
 
     const blogPostReaction = new BlogPostReaction();
+    blogPostReaction.blogPostId = blogPost.id;
     blogPostReaction.reaction = command.reaction;
     blogPostReaction.profileId = currentProfileId;
 
