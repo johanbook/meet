@@ -6,6 +6,7 @@ import { Profile } from "src/core/profiles";
 
 import { BlogPostComment } from "./blog-post-comment.entity";
 import { BlogPostPhoto } from "./blog-post-photo.entity";
+import { BlogPostReaction } from "./blog-post-reaction.entity";
 
 @Entity()
 export class BlogPost extends BaseEntity {
@@ -36,4 +37,9 @@ export class BlogPost extends BaseEntity {
 
   @Column()
   profileId!: number;
+
+  @OneToMany(() => BlogPostReaction, (reaction) => reaction.blogPost, {
+    cascade: true,
+  })
+  reactions!: BlogPostReaction[];
 }
