@@ -25,6 +25,7 @@ const columns: Column<JournalEntryDetails>[] = [
     renderCell: ({ value }) => (
       <ProfileAvatar name={value.name} src={value.imageUrl} />
     ),
+    sortComparator: (a, b) => a.name.localeCompare(b.name),
     width: 400,
   },
 ];
