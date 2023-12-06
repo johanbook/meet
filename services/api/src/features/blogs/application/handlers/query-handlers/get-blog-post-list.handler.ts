@@ -102,7 +102,7 @@ export class GetBlogPostListHandler
       reactions: map(BlogPostReactionDetails, {
         count: post.reactions.length,
         currentProfileReactionId: post.reactions.find(
-          (reaction) => reaction.profileId === currentOrganizationId,
+          (reaction) => reaction.profileId === currentProfileId,
         )?.id,
       }),
     }));
