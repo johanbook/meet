@@ -32,5 +32,9 @@
     "delete": "Delete"
   },
   "no-posts": "Seems like no one has posted anything here yet. Be the first one to make a post!",
-  "published": "published"
+  "published": "published",
+  "reactions": {
+    "count_one": "{{count}} like",
+    "count_other": "{{count}} likes"
+  }
 }
