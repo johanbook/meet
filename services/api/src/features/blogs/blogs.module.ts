@@ -11,6 +11,7 @@ import { ProfileModule } from "src/core/profiles/profile.module";
 import { QueryModule } from "src/core/query/query.module";
 
 import { CreateBlogPostCommentHandler } from "./application/handlers/command-handlers/create-blog-post-comment.handler";
+import { CreateBlogPostReactionHandler } from "./application/handlers/command-handlers/create-blog-post-reaction.handler";
 import { CreateBlogPostHandler } from "./application/handlers/command-handlers/create-blog-post.handler";
 import { DeleteBlogPostCommentHandler } from "./application/handlers/command-handlers/delete-blog-post-comment.handler";
 import { DeleteBlogPostHandler } from "./application/handlers/command-handlers/delete-blog-post.handler";
@@ -20,6 +21,7 @@ import { NotifyOrganizationOnPostedBlogPostHandler } from "./application/handler
 import { GetBlogPostListHandler } from "./application/handlers/query-handlers/get-blog-post-list.handler";
 import { GetBlogPostHandler } from "./application/handlers/query-handlers/get-blog-post.handler";
 import { BlogCommentsController } from "./client/controllers/blog-comments.controller";
+import { BlogReactionsController } from "./client/controllers/blog-reactions.controller";
 import { BlogsController } from "./client/controllers/blogs.controller";
 import { BlogPostService } from "./domain/services/blog-post.service";
 import { BlogPostComment } from "./infrastructure/entities/blog-post-comment.entity";
@@ -44,11 +46,16 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
       Profile,
     ]),
   ],
-  controllers: [BlogsController, BlogCommentsController],
+  controllers: [
+    BlogsController,
+    BlogCommentsController,
+    BlogReactionsController,
+  ],
   providers: [
     BlogPostService,
     CreateBlogPostHandler,
     CreateBlogPostCommentHandler,
+    CreateBlogPostReactionHandler,
     DeleteBlogPostHandler,
     DeleteBlogPostCommentHandler,
     GetBlogPostHandler,

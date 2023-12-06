@@ -14,6 +14,7 @@ import { BlogPostCommentDetails } from "../../contracts/dtos/blog-post-comment.d
 import { BlogPostDetails } from "../../contracts/dtos/blog-post-detail.dto";
 import { BlogPostPhotoDetails } from "../../contracts/dtos/blog-post-photo.dto";
 import { BlogPostProfileDetails } from "../../contracts/dtos/blog-post-profile.dto";
+import { BlogPostReactionDetails } from "../../contracts/dtos/blog-post-reactions.dto";
 import { GetBlogPostListQuery } from "../../contracts/queries/get-blog-post-list.query";
 
 @QueryHandler(GetBlogPostListQuery)
@@ -54,6 +55,7 @@ export class GetBlogPostListHandler
           profile: {
             profilePhoto: true,
           },
+          reactions: true,
         },
         where: {
           organizationId: currentOrganizationId,
@@ -96,6 +98,12 @@ export class GetBlogPostListHandler
           post.profile.profilePhoto &&
           this.photoService.getUrl(post.profile.profilePhoto, "profile-photo"),
         name: post.profile.name,
+      }),
+      reactions: map(BlogPostReactionDetails, {
+        count: post.reactions.length,
+        currentProfileReactionId: post.reactions.find(
+          (reaction) => reaction.profileId === currentOrganizationId,
+        )?.id,
       }),
     }));
   }
