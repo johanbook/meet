@@ -44,7 +44,7 @@
     "@use-gesture/react": "^10.2.26",
     "i18next": "^23.2.11",
     "i18next-browser-languagedetector": "^7.1.0",
-    "i18next-http-backend": "^2.2.1",
+    "i18next-http-backend": "^2.4.1",
     "jest-environment-jsdom": "^29.7.0",
     "notistack": "^3.0.1",
     "react": "^18.2.0",
