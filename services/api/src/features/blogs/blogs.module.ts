@@ -14,6 +14,7 @@ import { CreateBlogPostCommentHandler } from "./application/handlers/command-han
 import { CreateBlogPostReactionHandler } from "./application/handlers/command-handlers/create-blog-post-reaction.handler";
 import { CreateBlogPostHandler } from "./application/handlers/command-handlers/create-blog-post.handler";
 import { DeleteBlogPostCommentHandler } from "./application/handlers/command-handlers/delete-blog-post-comment.handler";
+import { DeleteBlogPostReactionHandler } from "./application/handlers/command-handlers/delete-blog-post-reaction.handler";
 import { DeleteBlogPostHandler } from "./application/handlers/command-handlers/delete-blog-post.handler";
 import { UpdateBlogPostHandler } from "./application/handlers/command-handlers/update-blog-post-handler";
 import { NotifyOrganizationOnPostedBlogPostCommentHandler } from "./application/handlers/event-handlers/notify-organization-on-posted-blog-post-comment.handler";
@@ -58,6 +59,7 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
     CreateBlogPostReactionHandler,
     DeleteBlogPostHandler,
     DeleteBlogPostCommentHandler,
+    DeleteBlogPostReactionHandler,
     GetBlogPostHandler,
     GetBlogPostListHandler,
     NotifyOrganizationOnPostedBlogPostHandler,
