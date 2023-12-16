@@ -48,6 +48,7 @@
     "@types/uuid": "^9.0.1",
     "@use-gesture/react": "^10.2.26",
     "dayjs": "^1.11.8",
+    "framer-motion": "^10.16.16",
     "i18next": "^22.5.1",
     "i18next-browser-languagedetector": "^7.0.2",
     "i18next-http-backend": "^2.2.1",

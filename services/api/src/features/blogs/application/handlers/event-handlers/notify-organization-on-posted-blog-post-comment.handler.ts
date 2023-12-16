@@ -48,6 +48,7 @@ export class NotifyOrganizationOnPostedBlogPostCommentHandler
       relations: {
         comments: true,
         profile: true,
+        reactions: true,
       },
       where: {
         id: event.blogPostId,
@@ -69,6 +70,7 @@ export class NotifyOrganizationOnPostedBlogPostCommentHandler
     const profileIds = [
       blogPost.profileId,
       ...blogPost.comments.map((comment) => comment.profileId),
+      ...blogPost.reactions.map((reaction) => reaction.profileId),
     ].filter((id) => id !== event.profileId);
 
     await this.notificationService.notifyProfiles(profileIds, notification);
