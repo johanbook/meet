@@ -46,6 +46,7 @@ export class NotifyOrganizationOnPostedBlogPostCommentHandler
         },
       },
       relations: {
+        comments: true,
         profile: true,
       },
       where: {
@@ -64,10 +65,12 @@ export class NotifyOrganizationOnPostedBlogPostCommentHandler
       type: NotificationEventsConstants.NEW_BLOG_POST_COMMENT,
     };
 
-    await this.notificationService.notifyOrganization(
-      event.organizationId,
-      notification,
-      [event.profileId],
-    );
+    // Notify everyone involved in post except profile that made the new comment
+    const profileIds = [
+      blogPost.profileId,
+      ...blogPost.comments.map((comment) => comment.profileId),
+    ].filter((id) => id !== event.profileId);
+
+    await this.notificationService.notifyProfiles(profileIds, notification);
   }
 }
