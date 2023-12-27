@@ -47,7 +47,9 @@ export class GetBlogPostHandler
         profile: {
           profilePhoto: true,
         },
-        reactions: true,
+        reactions: {
+          profile: true,
+        },
       },
       where: {
         id: query.id,
@@ -103,6 +105,7 @@ export class GetBlogPostHandler
         currentProfileReactionId: blogPost.reactions.find(
           (reaction) => reaction.profileId === currentProfileId,
         )?.id,
+        names: blogPost.reactions.map((reaction) => reaction.profile.name),
       }),
     });
   }
