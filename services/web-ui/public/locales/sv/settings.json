@@ -3,9 +3,9 @@
     "header": "Avancerade inställningar",
     "links": {
       "create-organization": "Skapa ny grupp",
-      "current-organization": "Nuvarande grupp",
+      "current-organization": "Hantera nuvarande grupp",
       "journal": "Journal",
-      "list-organizations": "Dina grupper",
+      "list-organizations": "Se dina grupper",
       "new-organization": "Skapa ny grupp"
     }
   },
