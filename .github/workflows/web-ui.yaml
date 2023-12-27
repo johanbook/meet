@@ -30,7 +30,7 @@ jobs:
         run: npm ci --legacy-peer-deps -D --ignore-scripts
 
       - name: Download OpenAPI specification
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@v3.0.0
         with:
           name: openapi-schema
           path: ./services/web-ui/
@@ -40,7 +40,7 @@ jobs:
         run: ./scripts/generate-swagger
 
       - name: Upload Swagger stubs
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: openapi-server
           path: ./services/web-ui/src/api
