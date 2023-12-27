@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
+import { useAnimate } from "framer-motion";
 
 import {
   CreateBlogPostReactionCommand,
@@ -23,6 +24,7 @@ export function BlogPostLikeButton({
   blogPostId,
   reactionId,
 }: BlogPostLikeButtonProps): ReactElement {
+  const [scope, animate] = useAnimate();
   const createMutation = useMutation({
     mutationFn: (
       createBlogPostReactionCommand: CreateBlogPostReactionCommand
@@ -52,6 +54,8 @@ export function BlogPostLikeButton({
       return;
     }
 
+    animate(scope.current, { scale: [1, 1.4, 1] }, { duration: 0.4 });
+
     await createMutation.mutateAsync(
       { blogPostId, reaction: ":like" },
       {
@@ -72,6 +76,7 @@ export function BlogPostLikeButton({
       color={reactionId ? "primary" : "default"}
       disabled={isLoading}
       onClick={handleToggleReaction}
+      ref={scope}
     >
       {reactionId ? <Favorite /> : <FavoriteBorder />}
     </IconButton>
