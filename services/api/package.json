@@ -30,7 +30,7 @@
     "@nestjs/cqrs": "^10.0.3",
     "@nestjs/platform-express": "^10.2.7",
     "@nestjs/platform-fastify": "^10.2.7",
-    "@nestjs/platform-socket.io": "^10.2.7",
+    "@nestjs/platform-socket.io": "^10.2.10",
     "@nestjs/schedule": "^3.0.4",
     "@nestjs/swagger": "^7.1.14",
     "@nestjs/typeorm": "^10.0.0",
