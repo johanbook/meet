@@ -34,7 +34,7 @@
   "no-posts": "Det ser ut som att ingen har postat någonting än. Bli den första att göra ett inlägg!",
   "published": "publicerade",
   "reactions": {
-    "count_one": "{{count}} person gillar detta",
-    "count_other": "{{count}} personer gillar detta"
+    "count_one": "{{last}} gillar detta",
+    "count_other": "{{first}} och {{last}} gillar detta"
   }
 }
