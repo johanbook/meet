@@ -8,7 +8,7 @@ import { ErrorView } from "src/views/ErrorView";
 export function Router(): ReactElement {
   if (!canHandleRoute([EmailPasswordPreBuiltUI])) {
     return (
-      <ErrorView message="An unexpected error has occurred: Unable to handle route" />
+      <ErrorView message="An unexpected error has occurred: Unable to handle route. Please contact support." />
     );
   }
 
@@ -16,7 +16,7 @@ export function Router(): ReactElement {
 
   if (!component) {
     return (
-      <ErrorView message="An unexpected error has occurred: Component not found" />
+      <ErrorView message="An unexpected error has occurred: Component not found. Please contact support." />
     );
   }
 
