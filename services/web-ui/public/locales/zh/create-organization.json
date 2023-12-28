@@ -1,0 +1,22 @@
+{
+  "actions": {
+    "cancel": {
+      "button": "取消"
+    },
+    "submit": {
+      "button": "创建",
+      "error": "尝试创建您的群组时出了点问题",
+      "success": "您的新群组已创建"
+    }
+  },
+  "fields": {
+    "name": {
+      "label": "名称"
+    }
+  },
+  "description": "通过创建一个新的群组，您可以在一个地方组织好友和内容",
+  "header": "创建一个新的群组",
+  "links": {
+    "back": "返回"
+  }
+}

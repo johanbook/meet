@@ -1,0 +1,17 @@
+{
+  "general": {
+    "cancel": "取消",
+    "confirm": "确认"
+  },
+  "navigation": {
+    "blog": "博客",
+    "chat": "对话",
+    "profile": "个人资料"
+  },
+  "table": {
+    "no-data": "没有数据"
+  },
+  "validation": {
+    "required": "该字段是必需的"
+  }
+}
