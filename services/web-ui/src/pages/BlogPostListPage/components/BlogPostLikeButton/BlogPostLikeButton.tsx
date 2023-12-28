@@ -57,7 +57,7 @@ export function BlogPostLikeButton({
     animate(scope.current, { scale: [1, 1.4, 1] }, { duration: 0.4 });
 
     await createMutation.mutateAsync(
-      { blogPostId, reaction: ":like" },
+      { blogPostId, reaction: ":heart:" },
       {
         onSuccess: () => {
           queryClient.invalidateQueries({
