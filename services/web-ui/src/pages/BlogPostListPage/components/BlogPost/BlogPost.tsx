@@ -35,6 +35,9 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
 
   const authorization = useAuthorization();
 
+  const firstReactions = [...post.reactions.names];
+  const lastReaction = firstReactions.pop();
+
   return (
     <Card key={post.id} sx={{ marginBottom: 2, padding: 2 }} variant="outlined">
       <Box sx={{ alignItems: "center", display: "flex", paddingBottom: 2 }}>
@@ -74,7 +77,11 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
       {post.reactions.count > 0 && (
         <CardContent sx={{ py: 0 }}>
           <Typography variant="subtitle2">
-            {t("reactions.count", { count: post.reactions.count })}
+            {t("reactions.count", {
+              count: post.reactions.count,
+              first: firstReactions.join(", "),
+              last: lastReaction,
+            })}
           </Typography>
         </CardContent>
       )}

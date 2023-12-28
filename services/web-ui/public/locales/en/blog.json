@@ -34,7 +34,7 @@
   "no-posts": "Seems like no one has posted anything here yet. Be the first one to make a post!",
   "published": "published",
   "reactions": {
-    "count_one": "{{count}} like",
-    "count_other": "{{count}} likes"
+    "count_one": "{{last}} likes this",
+    "count_other": "{{first}} and {{last}} like this"
   }
 }

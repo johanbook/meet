@@ -3,9 +3,9 @@
     "header": "Advanded settings",
     "links": {
       "create-organization": "Create new group",
-      "current-organization": "Current group",
+      "current-organization": "Manage current group",
       "journal": "Journal",
-      "list-organizations": "Available groups",
+      "list-organizations": "See available groups",
       "new-organization": "Create new group"
     }
   },
