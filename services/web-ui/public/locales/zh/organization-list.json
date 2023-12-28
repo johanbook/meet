@@ -1,0 +1,13 @@
+{
+  "actions": {
+    "activate": {
+      "error": "无法切换当前组",
+      "success": "当前组已更新"
+    }
+  },
+  "description": "您是其成员的组",
+  "header": "组",
+  "links": {
+    "back": "后退"
+  }
+}

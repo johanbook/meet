@@ -1,0 +1,45 @@
+{
+  "header": "组",
+  "links": {
+    "back": "返回"
+  },
+  "members": {
+    "error": "无法检索组织成员",
+    "header": "成员",
+    "invite": {
+      "button": "邀请用户",
+      "email": {
+        "label": "电子邮件"
+      },
+      "description": "通过将成员添加到此群组，他们可以查看其所有内容并创建新内容",
+      "header": "邀请成员加入群组",
+      "submit": {
+        "button": "邀请",
+        "error": "邀请用户时发生错误",
+        "success": "用户已成功添加到该组"
+      }
+    },
+    "member-since": "成为会员自",
+    "menu": {
+      "edit": "编辑",
+      "remove": "从群组中删除成员"
+    },
+    "remove": {
+      "description": "这将从该组中删除该成员",
+      "error": "删除成员时发生错误",
+      "header": "确认从群组中删除成员",
+      "success": "该成员已从该组中删除"
+    },
+    "update": {
+      "cancel": "取消",
+      "header": "编辑成员",
+      "role": {
+        "error": "更新成员角色时发生错误",
+        "success": "成员的角色已成功更新"
+      },
+      "save": "保存",
+      "text": "您在这里可以编辑此成员"
+    }
+  },
+  "name": "名称"
+}

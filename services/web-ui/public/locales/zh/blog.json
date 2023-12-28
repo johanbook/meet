@@ -1,0 +1,40 @@
+{
+  "actions": {
+    "create": {
+      "error": "尝试创建博客文章时出错"
+    },
+    "create-comment": {
+      "error": "尝试发布评论时出错"
+    },
+    "delete": {
+      "dialog": {
+        "description": "这将永久删除此博客文章",
+        "title": "确认删除博客文章"
+      },
+      "error": "尝试删除博客文章时出错",
+      "success": "博客文章已成功删除"
+    },
+    "hide-comments_one": "隐藏 {{count}} 条评论",
+    "hide-comments_other": "隐藏 {{count}} 条评论",
+    "view-comments_one": "显示 {{count}} 条评论",
+    "view-comments_other": "显示 {{count}} 条评论"
+  },
+  "comments": {
+    "placeholder": "留下评论"
+  },
+  "form": {
+    "placeholder": "或许说说你的一天"
+  },
+  "links": {
+    "back": "返回"
+  },
+  "menu": {
+    "delete": "删除"
+  },
+  "no-posts": "看起来这里还没有人发过任何内容。成为第一个发布文章的人吧！",
+  "published": "已发布",
+  "reactions": {
+    "count_one": "{{last}} 喜欢这个",
+    "count_other": "{{first}} 和 {{last}} 都喜欢这个"
+  }
+}
