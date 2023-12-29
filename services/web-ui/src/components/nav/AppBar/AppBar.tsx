@@ -105,6 +105,10 @@ function AppBarContent(): ReactElement {
 
   return (
     <Menu
+      anchorOrigin={{
+        horizontal: "right",
+        vertical: "bottom",
+      }}
       Button={(props) => (
         <ButtonBase>
           <Typography
