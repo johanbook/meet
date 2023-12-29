@@ -12,6 +12,7 @@ import {
 
 import { OrganizationDetails, SwitchOrganizationCommand } from "src/api";
 import { organizationsApi } from "src/apis";
+import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { Menu } from "src/components/ui/Menu";
 import { config } from "src/config";
 import { useTranslation } from "src/core/i18n";
@@ -22,8 +23,6 @@ import {
   useQueryClient,
 } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
-
-import { ErrorMessage } from "../ErrorMessage";
 
 interface MenuContentProps {
   currentOrganizationId: number;

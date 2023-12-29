@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 import { Box, Container, List, Toolbar } from "@mui/material";
 
-import { AppBar } from "src/components/ui/AppBar";
+import { AppBar } from "src/components/nav/AppBar";
 import { Drawer } from "src/components/ui/Drawer";
 import { DRAWER_WIDTH } from "src/components/ui/Drawer/DesktopDrawer";
 import { useIsMobile } from "src/hooks/useIsMobile";
