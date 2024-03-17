@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "homepage": "https://johanbook.com/",
   "scripts": {
-    "build": "react-scripts build",
+    "build": "vite build",
     "format": "prettier --write '{scripts,src}/**/*.{js,jsx,ts,tsx}'",
     "lint": "tsc && eslint 'src/**/*.{js,jsx,ts,tsx}' --max-warnings 0",
     "lint:ci": "npm run lint",
     "release": "standard-version",
-    "start:dev": "react-scripts start",
+    "start:dev": "vite",
     "test": "jest src  --ci --coverage",
     "test:ci": "npm run test"
   },
@@ -42,6 +42,7 @@
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.13",
     "@use-gesture/react": "^10.2.26",
+    "@vitejs/plugin-react": "^4.2.1",
     "i18next": "^23.2.11",
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-http-backend": "^2.4.1",
@@ -52,9 +53,10 @@
     "react-i18next": "^13.4.1",
     "react-router": "^6.15.0",
     "react-router-dom": "^6.17.0",
-    "react-scripts": "5.0.1",
     "ts-jest": "^29.0.5",
     "typescript": "^4.9.5",
+    "vite": "^5.1.6",
+    "vite-tsconfig-paths": "^4.3.2",
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
@@ -63,6 +65,8 @@
     "@typescript-eslint/eslint-plugin": "5.54.1",
     "@typescript-eslint/parser": "5.54.1",
     "eslint": "8.35.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-sonarjs": "0.18.0",
     "eslint-plugin-unicorn": "46.0.0",
     "jest": "^29.5.0",
