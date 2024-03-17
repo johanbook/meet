@@ -19,7 +19,7 @@ WORKDIR /app
 
 ENV PORT=80
 
-COPY --from=builder /app/build ./build
+COPY --from=builder /app/dist ./build
 COPY server.js .
 RUN npm i fastify @fastify/static
 
