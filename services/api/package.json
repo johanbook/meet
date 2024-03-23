@@ -32,7 +32,7 @@
     "@nestjs/platform-fastify": "^10.2.7",
     "@nestjs/platform-socket.io": "^10.2.10",
     "@nestjs/schedule": "^3.0.4",
-    "@nestjs/swagger": "^7.1.14",
+    "@nestjs/swagger": "^7.3.0",
     "@nestjs/typeorm": "^10.0.0",
     "@nestjs/websockets": "^10.2.8",
     "axios": "^1.6.4",
