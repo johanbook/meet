@@ -16,6 +16,7 @@ import { CreateBlogPostHandler } from "./application/handlers/command-handlers/c
 import { DeleteBlogPostCommentHandler } from "./application/handlers/command-handlers/delete-blog-post-comment.handler";
 import { DeleteBlogPostReactionHandler } from "./application/handlers/command-handlers/delete-blog-post-reaction.handler";
 import { DeleteBlogPostHandler } from "./application/handlers/command-handlers/delete-blog-post.handler";
+import { SendBlogPostSummaryCommandHandler } from "./application/handlers/command-handlers/send-blog-post-summary.handler";
 import { UpdateBlogPostHandler } from "./application/handlers/command-handlers/update-blog-post-handler";
 import { NotifyOrganizationOnPostedBlogPostCommentHandler } from "./application/handlers/event-handlers/notify-organization-on-posted-blog-post-comment.handler";
 import { NotifyOrganizationOnPostedBlogPostHandler } from "./application/handlers/event-handlers/notify-organization-on-posted-blog-post.handler";
@@ -24,6 +25,7 @@ import { GetBlogPostHandler } from "./application/handlers/query-handlers/get-bl
 import { BlogCommentsController } from "./client/controllers/blog-comments.controller";
 import { BlogReactionsController } from "./client/controllers/blog-reactions.controller";
 import { BlogsController } from "./client/controllers/blogs.controller";
+import { SendSummaryJobs } from "./client/jobs/send-summary.jobs";
 import { BlogPostService } from "./domain/services/blog-post.service";
 import { BlogPostComment } from "./infrastructure/entities/blog-post-comment.entity";
 import { BlogPostPhoto } from "./infrastructure/entities/blog-post-photo.entity";
@@ -64,6 +66,8 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
     GetBlogPostListHandler,
     NotifyOrganizationOnPostedBlogPostHandler,
     NotifyOrganizationOnPostedBlogPostCommentHandler,
+    SendBlogPostSummaryCommandHandler,
+    SendSummaryJobs,
     UpdateBlogPostHandler,
   ],
 })
