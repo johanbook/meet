@@ -3,7 +3,7 @@ import { Repository } from "typeorm";
 import { UserIdService } from "src/core/authentication";
 import { map } from "src/core/mapper";
 import { CurrentOrganizationService } from "src/core/organizations";
-import { createCurrentOrganizationMock } from "src/core/organizations/test/mocks/current-organization.service.mock";
+import { createCurrentOrganizationServiceMock } from "src/core/organizations/test";
 import { CurrentProfileService, Profile } from "src/core/profiles";
 import { createMockRepository, createUserIdServiceMock } from "src/test/mocks";
 
@@ -24,7 +24,7 @@ describe(CreateJournalEntryHandler.name, () => {
     journalEntries = createMockRepository<JournalEntry>();
     userIdService = createUserIdServiceMock();
 
-    currentOrganizationService = createCurrentOrganizationMock();
+    currentOrganizationService = createCurrentOrganizationServiceMock();
 
     currentProfileService = new CurrentProfileService(profiles, userIdService);
 

@@ -3,7 +3,7 @@ import { Repository } from "typeorm";
 import { OrganizationRole } from "src/core/authorization";
 import { map } from "src/core/mapper";
 import { CurrentOrganizationService } from "src/core/organizations/domain/services/current-organization.service";
-import { createCurrentOrganizationMock } from "src/core/organizations/test/mocks/current-organization.service.mock";
+import { createCurrentOrganizationServiceMock } from "src/core/organizations/test";
 import { createMockRepository } from "src/test/mocks";
 
 import { OrganizationMembership } from "../../../infrastructure/entities/organization-membership.entity";
@@ -16,7 +16,7 @@ describe(UpdateMemberRoleHandler.name, () => {
   let memberships: Repository<OrganizationMembership>;
 
   beforeEach(() => {
-    currentOrganizationService = createCurrentOrganizationMock();
+    currentOrganizationService = createCurrentOrganizationServiceMock();
     memberships = createMockRepository<OrganizationMembership>([{}] as any);
 
     commandHandler = new UpdateMemberRoleHandler(

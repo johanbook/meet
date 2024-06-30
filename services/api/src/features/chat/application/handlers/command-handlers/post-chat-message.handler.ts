@@ -34,7 +34,7 @@ export class PostChatMessageHandler
 
     const chatMessage = new ChatMessage();
     chatMessage.message = command.message;
-    chatMessage.receiverId = command.profileId;
+    // chatMessage.receiverId = command.profileId;
     chatMessage.senderId = currentProfile.id;
 
     await this.chatMessageService.saveChatMessage(chatMessage);

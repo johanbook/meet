@@ -2,7 +2,7 @@ import { EventBus } from "@nestjs/cqrs";
 import { Repository } from "typeorm";
 
 import { map } from "src/core/mapper";
-import { createCurrentOrganizationMock } from "src/core/organizations/test/mocks/current-organization.service.mock";
+import { createCurrentOrganizationServiceMock } from "src/core/organizations/test";
 import { createEventBusMock, createMockRepository } from "src/test/mocks";
 
 import { BlogPostService } from "../../../domain/services/blog-post.service";
@@ -20,7 +20,7 @@ describe(CreateBlogPostCommentHandler.name, () => {
     blogPosts = createMockRepository<BlogPost>();
     eventBus = createEventBusMock();
 
-    const currentOrganizationService = createCurrentOrganizationMock();
+    const currentOrganizationService = createCurrentOrganizationServiceMock();
 
     const currentProfileService = {
       fetchCurrentProfileId: jest.fn(() => "my-profile-id"),

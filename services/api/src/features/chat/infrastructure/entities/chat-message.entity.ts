@@ -8,6 +8,8 @@ import {
 
 import { Profile } from "src/core/profiles/infrastructure/entities/profile.entity";
 
+import { ChatConversation } from "./chat-conversation.entity";
+
 @Entity()
 export class ChatMessage {
   @PrimaryGeneratedColumn()
@@ -16,18 +18,18 @@ export class ChatMessage {
   @CreateDateColumn()
   created!: Date;
 
+  @ManyToOne(() => ChatConversation, (conversation) => conversation.messages)
+  conversation!: ChatConversation;
+
+  @Column()
+  conversationId!: string;
+
   @Column("text")
   message!: string;
 
-  @Column()
-  receiverId!: number;
-
   @ManyToOne(() => Profile)
-  receiver!: Profile;
+  sender!: Profile;
 
   @Column()
   senderId!: number;
-
-  @ManyToOne(() => Profile)
-  sender!: Profile;
 }

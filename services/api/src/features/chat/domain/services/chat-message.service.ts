@@ -20,9 +20,9 @@ export class ChatMessageService {
     const createdChatMessage = await this.chatMessages.save(chatMessage);
 
     const event = map(ChatMessageSentEvent, {
+      conversationId: createdChatMessage.conversationId,
       id: createdChatMessage.id,
       message: createdChatMessage.message,
-      receiverId: createdChatMessage.receiverId,
       senderId: createdChatMessage.senderId,
     });
 

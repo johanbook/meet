@@ -11,12 +11,15 @@ import { INotification } from "src/core/notifications/types";
 import { Profile } from "src/core/profiles";
 
 import { ChatMessageSentEvent } from "../../../domain/events/chat-message-sent.event";
+import { ChatConversation } from "../../../infrastructure/entities/chat-conversation.entity";
 
 @EventsHandler(ChatMessageSentEvent)
 export class NotifyReceiverOnPostedChatMessageHandler
   implements IEventHandler<ChatMessageSentEvent>
 {
   constructor(
+    @InjectRepository(ChatConversation)
+    private readonly chatConversations: Repository<ChatConversation>,
     private readonly notificationService: NotificationService,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
@@ -36,17 +39,31 @@ export class NotifyReceiverOnPostedChatMessageHandler
       throw new NotFoundException("Profile not found");
     }
 
+    const conversation = await this.chatConversations.findOne({
+      select: {
+        members: {
+          profileId: true,
+        },
+      },
+      where: {
+        id: event.conversationId,
+      },
+    });
+
+    if (!conversation) {
+      throw new NotFoundException("Conversation not found");
+    }
+
+    const receivers = conversation.members.map((member) => member.profileId);
+
     const notification: INotification = {
-      data: { receiverId: event.receiverId, senderId: event.senderId },
+      data: { senderId: event.senderId },
       description: `${profile.name} sent you a message in Meet`,
       message: `${profile.name} sent you a new message`,
       resourcePath: `/chat/${event.senderId}`,
       type: NotificationEventsConstants.NEW_CHAT_MESSAGE,
     };
 
-    await this.notificationService.notifyProfiles(
-      [event.receiverId],
-      notification,
-    );
+    await this.notificationService.notifyProfiles(receivers, notification);
   }
 }

@@ -5,7 +5,7 @@ import { createMockRepository } from "src/test/mocks";
 
 import { CurrentOrganizationService } from "../../../domain/services/current-organization.service";
 import { OrganizationMembership } from "../../../infrastructure/entities/organization-membership.entity";
-import { createCurrentOrganizationMock } from "../../../test/mocks/current-organization.service.mock";
+import { createCurrentOrganizationServiceMock } from "../../../test/mocks/current-organization.service.mock";
 import { RemoveMemberFromCurrentOrganizationCommand } from "../../contracts/commands/remove-member-from-current-organization.command";
 import { RemoveMemberFromCurrentOrganizationHandler } from "./remove-member-from-current-organization.handler";
 
@@ -17,7 +17,7 @@ describe(RemoveMemberFromCurrentOrganizationHandler.name, () => {
   beforeEach(() => {
     memberships = createMockRepository<OrganizationMembership>();
 
-    currentOrganizationService = createCurrentOrganizationMock();
+    currentOrganizationService = createCurrentOrganizationServiceMock();
 
     commandHandler = new RemoveMemberFromCurrentOrganizationHandler(
       { authorizeOwnerOrAdmin: jest.fn() } as any,
