@@ -48,7 +48,6 @@ describe(PostChatMessageHandler.name, () => {
 
       expect(chatMessageService.saveChatMessage).toHaveBeenCalledWith({
         message: command.message,
-        receiverId: command.profileId,
         senderId: mockProfile.id,
       });
     });

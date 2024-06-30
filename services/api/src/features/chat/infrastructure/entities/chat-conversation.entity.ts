@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne, OneToMany, OneToOne } from "typeorm";
 
 import { BaseEntity } from "src/core/database";
-import { Organization } from "src/features/organizations";
+import { Organization } from "src/core/organizations";
 
 import { ChatConversationMember } from "./chat-conversation-member.entity";
 import { ChatConversationPhoto } from "./chat-conversation-photo.entity";

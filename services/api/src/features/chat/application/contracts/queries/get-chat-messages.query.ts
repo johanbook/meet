@@ -1,8 +1,6 @@
-import { Type } from "class-transformer";
-import { IsPositive } from "class-validator";
+import { IsUUID } from "class-validator";
 
 export class GetChatMessagesQuery {
-  @Type(() => Number)
-  @IsPositive()
-  public readonly profileId!: number;
+  @IsUUID()
+  public readonly conversationId!: string;
 }

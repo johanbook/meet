@@ -3,9 +3,9 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { mapArray } from "src/core/mapper";
+import { CurrentOrganizationService } from "src/core/organizations";
 import { PhotoService } from "src/core/photos";
-import { CurrentOrganizationService } from "src/features/organizations";
-import { CurrentProfileService } from "src/features/profiles";
+import { CurrentProfileService } from "src/core/profiles";
 
 import { ChatConversation } from "../../../infrastructure/entities/chat-conversation.entity";
 import { ChatConversationDetails } from "../../contracts/dtos/chat-conversation.dto";
@@ -53,8 +53,9 @@ export class GetConversationListHandler
             conversation.photo,
             "chat-conversation-photo",
           ),
-        lastMessage: conversation.lastMessage,
-        lastMessageSent: conversation.lastMessageSent,
+        // TODO: Fix this
+        lastMessage: "", //conversation.lastMessage,
+        lastMessageSent: new Date(), //conversation.lastMessageSent,
         name: conversation.name,
       }),
     );

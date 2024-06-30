@@ -8,7 +8,7 @@ import { createEventBusMock, createMockRepository } from "src/test/mocks";
 import { CurrentOrganizationService } from "../../../domain/services/current-organization.service";
 import { OrganizationService } from "../../../domain/services/organization.service";
 import { Organization } from "../../../infrastructure/entities/organization.entity";
-import { createCurrentOrganizationMock } from "../../../test/mocks/current-organization.service.mock";
+import { createCurrentOrganizationServiceMock } from "../../../test/mocks/current-organization.service.mock";
 import { AddMemberToOrganizationCommand } from "../../contracts/commands/add-member-to-organization.command";
 import { AddMemberToOrganizationHandler } from "./add-member-to-organization.handler";
 
@@ -27,7 +27,7 @@ describe(AddMemberToOrganizationHandler.name, () => {
     ]);
     profiles = createMockRepository<Profile>([]);
 
-    currentOrganizationService = createCurrentOrganizationMock();
+    currentOrganizationService = createCurrentOrganizationServiceMock();
 
     organizationService = new OrganizationService(
       eventBus,

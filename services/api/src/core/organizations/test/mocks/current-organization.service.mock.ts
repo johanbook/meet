@@ -8,6 +8,6 @@ class CurrentOrganizationMock {
   fetchCurrentOrganizationId = jest.fn();
 }
 
-export function createCurrentOrganizationMock(): CurrentOrganizationService {
+export function createCurrentOrganizationServiceMock(): CurrentOrganizationService {
   return new CurrentOrganizationMock() as any;
 }
