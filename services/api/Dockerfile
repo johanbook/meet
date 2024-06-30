@@ -1,7 +1,7 @@
 ################################
 # Build assets
 ################################
-FROM node:20.8.0-alpine as builder
+FROM node:20.13.0-alpine as builder
 
 WORKDIR /app
 
@@ -13,7 +13,7 @@ RUN npm run build
 ################################
 # Create server
 ################################
-FROM node:20.8.0-alpine
+FROM node:20.13.0-alpine
 
 WORKDIR /app
 
@@ -27,6 +27,6 @@ RUN npm ci
 
 USER node
 
-ENTRYPOINT [ "node" ]
-CMD [   "dist/main" ]
+ENTRYPOINT [ "sh" ]
+CMD [   "scripts/start" ]
 EXPOSE 80

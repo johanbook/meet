@@ -8,7 +8,7 @@ import {
   NotificationService,
 } from "src/core/notifications";
 import { INotification } from "src/core/notifications/types";
-import { Profile } from "src/features/profiles";
+import { Profile } from "src/core/profiles";
 
 import { ChatMessageSentEvent } from "../../../domain/events/chat-message-sent.event";
 
@@ -44,7 +44,7 @@ export class NotifyReceiverOnPostedChatMessageHandler
       type: NotificationEventsConstants.NEW_CHAT_MESSAGE,
     };
 
-    await this.notificationService.notifyProfilesIfAvailable(
+    await this.notificationService.notifyProfiles(
       [event.receiverId],
       notification,
     );

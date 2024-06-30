@@ -1,7 +1,7 @@
 ################################
 # Build assets
 ################################
-FROM node:20.8.1-alpine as builder
+FROM node:20.13.0-alpine as builder
 
 WORKDIR /app
 
@@ -13,13 +13,13 @@ RUN npm run build
 ################################
 # Create server
 ################################
-FROM node:20.8.1-alpine
+FROM node:20.13.0-alpine
 
 WORKDIR /app
 
 ENV PORT=80
 
-COPY --from=builder /app/build ./build
+COPY --from=builder /app/dist ./build
 COPY server.js .
 RUN npm i fastify @fastify/static
 

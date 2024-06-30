@@ -1,5 +1,4 @@
-import React from "react";
-import { useQuery } from "react-query";
+import { ReactElement } from "react";
 import { useParams } from "react-router";
 
 import { Box, Typography } from "@mui/material";
@@ -9,6 +8,7 @@ import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { useTranslation } from "src/core/i18n";
 import { NotificationEventsConstants } from "src/core/notifications";
 import { useHandleNotification } from "src/core/notifications";
+import { useQuery } from "src/core/query";
 import { ErrorView } from "src/views/ErrorView";
 
 import { ChatPageNav } from "./ChatPage.nav";
@@ -16,18 +16,20 @@ import { ChatPageSkeleton } from "./ChatPage.skeleton";
 import { ChatMessageList } from "./components/ChatMessageList";
 import { ChatTextField } from "./components/ChatTextField";
 
-export function ChatPageContainer(): React.ReactElement {
+export function ChatPageContainer(): ReactElement {
   const { id } = useParams();
   const { t } = useTranslation("chat");
 
-  const { error, data, isLoading, refetch } = useQuery(`chat-${id}`, () =>
-    chatsApi.getChats({ profileId: Number.parseInt(id || "") })
-  );
+  const { error, data, isLoading, refetch } = useQuery({
+    queryKey: ["chat", id],
+    queryFn: () => chatsApi.getChats({ profileId: Number.parseInt(id || "") }),
+  });
 
   useHandleNotification({
-    onCondition: (event) => String(event.data.senderId) === id,
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    onCondition: (event: any) => String(event.data.senderId) === id,
     onNotification: () => refetch(),
-    type: NotificationEventsConstants.NEW_CHAT_MESSAGE,
+    type: NotificationEventsConstants.NewChatMessage,
   });
 
   if (!id) {

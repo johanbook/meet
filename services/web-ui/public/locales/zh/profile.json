@@ -1,0 +1,19 @@
+{
+  "actions": {
+    "update-photo": {
+      "error": "尝试上传新的个人资料照片时出错",
+      "success": "已更新个人资料照片"
+    }
+  },
+  "description": {
+    "title": "关于我",
+    "label": "描述",
+    "placeholder": "简单描述一下自己"
+  },
+  "header": "个人资料",
+  "save": "保存",
+  "update": {
+    "error": "尝试更新您的个人资料时出错",
+    "success": "已更新个人资料"
+  }
+}

@@ -1,6 +1,6 @@
 import { ReactElement, ReactNode } from "react";
 
-import { PageWithNav } from "src/components/layout";
+import { NavLayout } from "src/components/layout";
 import { useTranslation } from "src/core/i18n";
 
 interface BlogPostPageNavProps {
@@ -13,8 +13,8 @@ export function BlogPostPageNav({
   const { t } = useTranslation("blog");
 
   return (
-    <PageWithNav linkText={t("links.back")} to="/">
+    <NavLayout linkText={t("links.back")} to="/">
       {children}
-    </PageWithNav>
+    </NavLayout>
   );
 }

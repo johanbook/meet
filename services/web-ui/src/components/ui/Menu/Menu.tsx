@@ -1,13 +1,13 @@
 import { FC, ReactElement, ReactNode, SyntheticEvent, useState } from "react";
 
-import MuiMenu from "@mui/material/Menu";
+import MuiMenu, { MenuProps as MuiMenuProps } from "@mui/material/Menu";
 
-interface MenuProps {
+interface MenuProps extends Omit<MuiMenuProps, "open"> {
   Button: FC<{ onClick: (event: SyntheticEvent) => void }>;
   children: ReactNode;
 }
 
-export function Menu({ Button, children }: MenuProps): ReactElement {
+export function Menu({ Button, children, ...props }: MenuProps): ReactElement {
   const [anchorEl, setAnchorEl] = useState<Element | undefined>();
   const open = Boolean(anchorEl);
 
@@ -29,6 +29,7 @@ export function Menu({ Button, children }: MenuProps): ReactElement {
         open={open}
         onClose={handleClose}
         onClick={handleClose}
+        {...props}
       >
         {children}
       </MuiMenu>

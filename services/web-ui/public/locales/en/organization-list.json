@@ -6,5 +6,8 @@
     }
   },
   "description": "These are the groups you are a member of",
-  "header": "Groups"
+  "header": "Groups",
+  "links": {
+    "back": "Back"
+  }
 }

@@ -1,23 +1,27 @@
 import { ReactElement, SyntheticEvent } from "react";
-import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 
 import { Box } from "@mui/material";
 
 import { CreateOrganizationCommand } from "src/api";
 import { organizationsApi } from "src/apis";
+import { NavLayout } from "src/components/layout";
 import { Button, TextField, Typography } from "src/components/ui";
 import { useForm, validators } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
-import { CacheKeysConstants } from "src/core/query";
+import {
+  CacheKeysConstants,
+  useMutation,
+  useQueryClient,
+} from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 export function CreateOrganizationPageContainer(): ReactElement {
   const { t } = useTranslation("create-organization");
-  const mutation = useMutation(
-    (createOrganizationCommand: CreateOrganizationCommand) =>
-      organizationsApi.createOrganization({ createOrganizationCommand })
-  );
+  const mutation = useMutation({
+    mutationFn: (createOrganizationCommand: CreateOrganizationCommand) =>
+      organizationsApi.createOrganization({ createOrganizationCommand }),
+  });
   const snackbar = useSnackbar();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -48,18 +52,16 @@ export function CreateOrganizationPageContainer(): ReactElement {
       onSuccess: () => {
         form.reset();
         snackbar.success(t("actions.submit.success"));
-        queryClient.invalidateQueries([CacheKeysConstants.OrganizationList]);
+        queryClient.invalidateQueries({
+          queryKey: [CacheKeysConstants.OrganizationList],
+        });
         navigate("/group/list");
       },
     });
   }
 
   return (
-    <>
-      <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
-        {t("header")}
-      </Typography>
-
+    <NavLayout header={t("header")} linkText={t("links.back")} to="/profile">
       <Typography color="textSecondary" sx={{ paddingBottom: 3 }}>
         {t("description")}
       </Typography>
@@ -83,7 +85,7 @@ export function CreateOrganizationPageContainer(): ReactElement {
 
           <Button
             disabled={!form.isValid}
-            loading={mutation.isLoading}
+            loading={mutation.isPending}
             type="submit"
             variant="contained"
           >
@@ -91,6 +93,6 @@ export function CreateOrganizationPageContainer(): ReactElement {
           </Button>
         </Box>
       </form>
-    </>
+    </NavLayout>
   );
 }

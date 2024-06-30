@@ -3,17 +3,18 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { map, mapArray } from "src/core/mapper";
+import { CurrentOrganizationService } from "src/core/organizations";
 import { PhotoService } from "src/core/photos";
+import { CurrentProfileService } from "src/core/profiles";
 import { QueryService } from "src/core/query";
 import { BlogPost } from "src/features/blogs/infrastructure/entities/blog-post.entity";
-import { CurrentOrganizationService } from "src/features/organizations";
-import { CurrentProfileService } from "src/features/profiles";
 import { sortByField } from "src/utils/sorting.helper";
 
 import { BlogPostCommentDetails } from "../../contracts/dtos/blog-post-comment.dto";
 import { BlogPostDetails } from "../../contracts/dtos/blog-post-detail.dto";
 import { BlogPostPhotoDetails } from "../../contracts/dtos/blog-post-photo.dto";
 import { BlogPostProfileDetails } from "../../contracts/dtos/blog-post-profile.dto";
+import { BlogPostReactionDetails } from "../../contracts/dtos/blog-post-reactions.dto";
 import { GetBlogPostListQuery } from "../../contracts/queries/get-blog-post-list.query";
 
 @QueryHandler(GetBlogPostListQuery)
@@ -53,6 +54,9 @@ export class GetBlogPostListHandler
           photos: true,
           profile: {
             profilePhoto: true,
+          },
+          reactions: {
+            profile: true,
           },
         },
         where: {
@@ -96,6 +100,13 @@ export class GetBlogPostListHandler
           post.profile.profilePhoto &&
           this.photoService.getUrl(post.profile.profilePhoto, "profile-photo"),
         name: post.profile.name,
+      }),
+      reactions: map(BlogPostReactionDetails, {
+        count: post.reactions.length,
+        currentProfileReactionId: post.reactions.find(
+          (reaction) => reaction.profileId === currentProfileId,
+        )?.id,
+        names: post.reactions.map((reaction) => reaction.profile.name),
       }),
     }));
   }

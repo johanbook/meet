@@ -8,7 +8,7 @@ import {
   NotificationService,
 } from "src/core/notifications";
 import { INotification } from "src/core/notifications/types";
-import { Profile } from "src/features/profiles";
+import { Profile } from "src/core/profiles";
 
 import { BlogPostCreatedEvent } from "../../../domain/events/blog-post-created.event";
 
@@ -37,7 +37,7 @@ export class NotifyOrganizationOnPostedBlogPostHandler
     }
 
     const notification: INotification = {
-      description: `${profile.name} made a new blog post in your organization.`,
+      description: `${profile.name} posted '${event.content}' in your organization.`,
       message: `${profile.name} made a new post`,
       resourcePath: `/blog/${event.id}`,
       type: NotificationEventsConstants.NEW_BLOG_POST,

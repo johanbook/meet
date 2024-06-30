@@ -1,7 +1,7 @@
 import { CommandBus, EventsHandler, IEventHandler } from "@nestjs/cqrs";
 
 import { Logger } from "src/core/logging";
-import { ProfileCreatedEvent } from "src/features/profiles";
+import { ProfileCreatedEvent } from "src/core/profiles";
 
 import { CreateSettingsCommand } from "../../contracts/commands/create-settings.command";
 

@@ -1,7 +1,6 @@
-import React, { SyntheticEvent } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { ReactElement, SyntheticEvent } from "react";
 
-import { InsertPhoto, Send } from "@mui/icons-material";
+import { Close, InsertPhoto, Send } from "@mui/icons-material";
 import {
   Box,
   CircularProgress,
@@ -16,13 +15,15 @@ import { Photo } from "src/components/ui/Photo";
 import { UploadIconButton } from "src/components/ui/UploadIconButton";
 import { useForm, validators } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
+import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
-export function BlogPostForm(): React.ReactElement {
-  const mutation = useMutation((command: CreateBlogPostRequest) =>
-    blogsApi.createBlogPost(command)
-  );
+export function BlogPostForm(): ReactElement {
+  const mutation = useMutation({
+    mutationFn: (command: CreateBlogPostRequest) =>
+      blogsApi.createBlogPost(command),
+  });
 
   const queryClient = useQueryClient();
 
@@ -47,6 +48,13 @@ export function BlogPostForm(): React.ReactElement {
     }
   );
 
+  function handleRemovePhoto(photoToDelete: Blob): void {
+    const photos = form.state.photos.value;
+    form.setValue({
+      photos: photos?.filter((photo) => photo !== photoToDelete),
+    });
+  }
+
   async function handleSubmit(event: SyntheticEvent): Promise<void> {
     event.preventDefault();
 
@@ -57,7 +65,9 @@ export function BlogPostForm(): React.ReactElement {
         snackbar.error(t("actions.create.error"));
       },
       onSuccess: () => {
-        queryClient.invalidateQueries([CacheKeysConstants.BlogPosts]);
+        queryClient.invalidateQueries({
+          queryKey: [CacheKeysConstants.BlogPosts],
+        });
         form.reset();
       },
     });
@@ -67,12 +77,12 @@ export function BlogPostForm(): React.ReactElement {
     <Box>
       <form onSubmit={handleSubmit}>
         <TextField
-          disabled={mutation.isLoading}
+          disabled={mutation.isPending}
           fullWidth
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                {mutation.isLoading ? (
+                {mutation.isPending ? (
                   <CircularProgress />
                 ) : (
                   <IconButton
@@ -108,20 +118,37 @@ export function BlogPostForm(): React.ReactElement {
           value={form.state.content.value}
         />
 
-        {form.state.photos.value?.map((photo, index) => (
-          <Photo
-            alt=""
-            key={index}
-            src={photo}
-            style={{
-              border: "1px solid rgb(200,200,200)",
-              borderRadius: 8,
-              marginTop: 10,
-              maxWidth: 200,
-              padding: 10,
-            }}
-          />
-        ))}
+        <Box sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
+          {form.state.photos.value?.map((photo, index) => (
+            <Box key={index} sx={{ position: "relative" }}>
+              <Photo
+                alt=""
+                src={photo}
+                style={{
+                  border: "1px solid rgb(200,200,200)",
+                  borderRadius: 8,
+                  marginTop: 10,
+                  padding: 10,
+                  width: 100,
+                }}
+              />
+
+              <IconButton
+                onClick={() => handleRemovePhoto(photo)}
+                sx={{
+                  bgcolor: "background.paper",
+                  border: 1,
+                  padding: 0,
+                  position: "absolute",
+                  top: 0,
+                  right: -5,
+                }}
+              >
+                <Close />
+              </IconButton>
+            </Box>
+          ))}
+        </Box>
       </form>
     </Box>
   );

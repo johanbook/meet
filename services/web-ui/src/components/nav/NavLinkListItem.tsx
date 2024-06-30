@@ -11,7 +11,7 @@ import {
 
 import { useTranslation } from "src/core/i18n";
 
-import { NavItem } from "./desktopItems";
+import { NavItem } from "./types";
 
 export interface NavLinkListItemProps {
   item: NavItem;

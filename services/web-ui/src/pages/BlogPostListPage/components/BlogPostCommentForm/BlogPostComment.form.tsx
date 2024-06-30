@@ -1,5 +1,4 @@
 import { ReactElement, SyntheticEvent } from "react";
-import { useMutation, useQueryClient } from "react-query";
 
 import { Send } from "@mui/icons-material";
 import {
@@ -14,6 +13,7 @@ import { CreateBlogPostCommentCommand } from "src/api";
 import { blogsApi } from "src/apis";
 import { useForm } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
+import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
@@ -24,10 +24,10 @@ interface BlogPostCommentFormProps {
 export function BlogPostCommentForm({
   blogPostId,
 }: BlogPostCommentFormProps): ReactElement {
-  const mutation = useMutation(
-    (createBlogPostCommentCommand: CreateBlogPostCommentCommand) =>
-      blogsApi.createBlogPostComment({ createBlogPostCommentCommand })
-  );
+  const mutation = useMutation({
+    mutationFn: (createBlogPostCommentCommand: CreateBlogPostCommentCommand) =>
+      blogsApi.createBlogPostComment({ createBlogPostCommentCommand }),
+  });
 
   const queryClient = useQueryClient();
 
@@ -50,7 +50,9 @@ export function BlogPostCommentForm({
         snackbar.error(t("actions.create-comment.error"));
       },
       onSuccess: () => {
-        queryClient.invalidateQueries([CacheKeysConstants.BlogPosts]);
+        queryClient.invalidateQueries({
+          queryKey: [CacheKeysConstants.BlogPosts],
+        });
         form.reset();
       },
     });
@@ -60,12 +62,12 @@ export function BlogPostCommentForm({
     <Box>
       <form onSubmit={handleSubmit}>
         <TextField
-          disabled={mutation.isLoading}
+          disabled={mutation.isPending}
           fullWidth
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                {mutation.isLoading ? (
+                {mutation.isPending ? (
                   <CircularProgress />
                 ) : (
                   <IconButton
@@ -79,6 +81,7 @@ export function BlogPostCommentForm({
               </InputAdornment>
             ),
           }}
+          multiline
           onChange={(event) => form.setValue({ content: event.target.value })}
           placeholder={t("comments.placeholder") || ""}
           value={form.state.content.value}

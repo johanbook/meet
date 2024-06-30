@@ -6,7 +6,7 @@ import {
   ManyToOne,
 } from "typeorm";
 
-import { Profile } from "src/features/profiles/infrastructure/entities/profile.entity";
+import { Profile } from "src/core/profiles/infrastructure/entities/profile.entity";
 
 import { ChatConversation } from "./chat-conversation.entity";
 

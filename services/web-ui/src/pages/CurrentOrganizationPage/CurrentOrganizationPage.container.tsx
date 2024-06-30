@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactElement } from "react";
 
 import { Typography } from "@mui/material";
 
@@ -11,13 +11,13 @@ import { CurrentOrganizationPageNav } from "./CurrentOrganizationPage.nav";
 import { CurrentOrganizationPageSkeleton } from "./CurrentOrganizationPage.skeleton";
 import { OrganizationMembers } from "./components/OrganizationMembers";
 
-export function CurrentOrganizationPageContainer(): React.ReactElement {
+export function CurrentOrganizationPageContainer(): ReactElement {
   const { t } = useTranslation("organization");
 
-  const { error, data, isLoading } = useQuery(
-    CacheKeysConstants.CurrentOrganization,
-    () => organizationsApi.getCurrentOrganization()
-  );
+  const { error, data, isPending } = useQuery({
+    queryKey: [CacheKeysConstants.CurrentOrganization],
+    queryFn: () => organizationsApi.getCurrentOrganization(),
+  });
 
   if (error) {
     return (
@@ -27,7 +27,7 @@ export function CurrentOrganizationPageContainer(): React.ReactElement {
     );
   }
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <CurrentOrganizationPageNav>
         <CurrentOrganizationPageSkeleton />

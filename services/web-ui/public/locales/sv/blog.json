@@ -32,5 +32,9 @@
     "delete": "Ta bort"
   },
   "no-posts": "Det ser ut som att ingen har postat någonting än. Bli den första att göra ett inlägg!",
-  "published": "publicerade"
+  "published": "publicerade",
+  "reactions": {
+    "count_one": "{{last}} gillar detta",
+    "count_other": "{{first}} och {{last}} gillar detta"
+  }
 }

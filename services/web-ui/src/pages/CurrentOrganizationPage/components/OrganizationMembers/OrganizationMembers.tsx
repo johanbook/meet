@@ -1,8 +1,9 @@
-import React from "react";
+import { ReactElement } from "react";
 import { Link } from "react-router-dom";
 
 import {
   Avatar,
+  Box,
   List,
   ListItem,
   ListItemAvatar,
@@ -13,29 +14,32 @@ import {
 } from "@mui/material";
 
 import { organizationsApi } from "src/apis";
+import { Button } from "src/components/ui";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { Permissions, useAuthorization } from "src/core/authorization";
+import { useDialog } from "src/core/dialog";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 import { getDate } from "src/utils/time";
 
-import { OrganizationMemberInvite } from "../OrganizationMemberInvite";
+import { OrganizationMemberInviteDialog } from "../../dialogs/OrganizationMemberInviteDialog";
 import { OrganizationMemberMenu } from "../OrganizationMemberMenu";
 
-export function OrganizationMembers(): React.ReactElement {
+export function OrganizationMembers(): ReactElement {
   const { t } = useTranslation("organization");
   const authorization = useAuthorization();
+  const { openDialog } = useDialog();
 
-  const { error, data, isLoading } = useQuery(
-    CacheKeysConstants.CurrentOrganizationMembers,
-    () => organizationsApi.getCurrentOrganizationMembers()
-  );
+  const { error, data, isPending } = useQuery({
+    queryKey: [CacheKeysConstants.CurrentOrganizationMembers],
+    queryFn: () => organizationsApi.getCurrentOrganizationMembers(),
+  });
 
   if (error || authorization.error) {
     return <ErrorMessage error={error || authorization.error} />;
   }
 
-  if (isLoading || authorization.isLoading) {
+  if (isPending || authorization.isLoading) {
     return <Skeleton />;
   }
 
@@ -43,13 +47,23 @@ export function OrganizationMembers(): React.ReactElement {
     return <ErrorMessage error={t("members.error")} />;
   }
 
+  function handleOpenInviteDialog(): void {
+    openDialog(OrganizationMemberInviteDialog, {});
+  }
+
   return (
     <>
-      <Typography sx={{ paddingTop: 2 }} variant="h5">
-        {t("members.header")}
-      </Typography>
+      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+        <Typography sx={{ flexGrow: 1, paddingTop: 2 }} variant="h5">
+          {t("members.header")}
+        </Typography>
 
-      <OrganizationMemberInvite />
+        {authorization.role === "admin" && (
+          <Button onClick={handleOpenInviteDialog} variant="text">
+            {t("members.invite.button")}
+          </Button>
+        )}
+      </Box>
 
       <List>
         {data.map((member) => (

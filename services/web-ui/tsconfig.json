@@ -12,6 +12,5 @@
     "strict": true,
     "target": "ES2022"
   },
-  "include": ["src"],
-  "exclude": ["src/api"]
+  "include": ["src"]
 }

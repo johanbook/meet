@@ -2,7 +2,7 @@ import React from "react";
 
 import { Box, Container, Toolbar } from "@mui/material";
 
-import { AppBar } from "src/components/ui/AppBar";
+import { AppBar } from "src/components/nav/AppBar";
 
 export interface ProfileGuardNavProps {
   children: React.ReactNode;

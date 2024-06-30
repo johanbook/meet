@@ -1,7 +1,7 @@
 import { ForbiddenException, Injectable } from "@nestjs/common";
 
-import { CurrentOrganizationService } from "src/features/organizations";
-import { CurrentProfileService } from "src/features/profiles";
+import { CurrentOrganizationService } from "src/core/organizations";
+import { CurrentProfileService } from "src/core/profiles";
 
 import { OrganizationRole } from "../../organization-roles.enum";
 

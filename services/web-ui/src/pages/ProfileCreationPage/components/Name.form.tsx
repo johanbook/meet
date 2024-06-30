@@ -29,6 +29,7 @@ export function NameForm({
       <Typography sx={{ paddingBottom: 2 }}>{t("name.description")}</Typography>
 
       <TextField
+        autoComplete="given-name"
         fullWidth
         label={t("name.label")}
         name="name"

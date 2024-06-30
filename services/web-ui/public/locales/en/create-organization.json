@@ -15,5 +15,8 @@
     }
   },
   "description": "By creating a new group you can organize friends and content in one place",
-  "header": "Create a new group"
+  "header": "Create a new group",
+  "links": {
+    "back": "Back"
+  }
 }

@@ -1,12 +1,18 @@
 {
   "header": "Group",
+  "links": {
+    "back": "Back"
+  },
   "members": {
     "error": "Unable to retrieve organization members",
     "header": "Members",
     "invite": {
+      "button": "Invite user",
       "email": {
         "label": "Email"
       },
+      "description": "By adding a member to this group, they can see all its content and create new",
+      "header": "Invite member to group",
       "submit": {
         "button": "Invite",
         "error": "An error occured when inviting the user",

@@ -16,7 +16,7 @@ export class JournalLogger {
     private readonly commandBus: CommandBus,
     private readonly reflector: Reflector,
   ) {
-    this.commandBus.subscribe((command: ICommand) => {
+    this.commandBus.subscribe(async (command: ICommand) => {
       const commandName = command.constructor.name;
       const payload = command;
 
@@ -31,7 +31,7 @@ export class JournalLogger {
 
       this.logger.trace("Writing journal entry", { commandName, payload });
 
-      this.commandBus.execute(
+      await this.commandBus.execute(
         map(CreateJournalEntryCommand, {
           commandName,
           payload,

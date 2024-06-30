@@ -4,16 +4,17 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { map, mapArray } from "src/core/mapper";
+import { CurrentOrganizationService } from "src/core/organizations";
 import { PhotoService } from "src/core/photos";
+import { CurrentProfileService } from "src/core/profiles";
 import { BlogPost } from "src/features/blogs/infrastructure/entities/blog-post.entity";
-import { CurrentOrganizationService } from "src/features/organizations";
-import { CurrentProfileService } from "src/features/profiles";
 import { sortByField } from "src/utils/sorting.helper";
 
 import { BlogPostCommentDetails } from "../../contracts/dtos/blog-post-comment.dto";
 import { BlogPostDetails } from "../../contracts/dtos/blog-post-detail.dto";
 import { BlogPostPhotoDetails } from "../../contracts/dtos/blog-post-photo.dto";
 import { BlogPostProfileDetails } from "../../contracts/dtos/blog-post-profile.dto";
+import { BlogPostReactionDetails } from "../../contracts/dtos/blog-post-reactions.dto";
 import { GetBlogPostQuery } from "../../contracts/queries/get-blog-post.query";
 
 @QueryHandler(GetBlogPostQuery)
@@ -45,6 +46,9 @@ export class GetBlogPostHandler
         photos: true,
         profile: {
           profilePhoto: true,
+        },
+        reactions: {
+          profile: true,
         },
       },
       where: {
@@ -95,6 +99,13 @@ export class GetBlogPostHandler
             "profile-photo",
           ),
         name: blogPost.profile.name,
+      }),
+      reactions: map(BlogPostReactionDetails, {
+        count: blogPost.reactions.length,
+        currentProfileReactionId: blogPost.reactions.find(
+          (reaction) => reaction.profileId === currentProfileId,
+        )?.id,
+        names: blogPost.reactions.map((reaction) => reaction.profile.name),
       }),
     });
   }

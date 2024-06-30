@@ -1,0 +1,20 @@
+{
+  "back": {
+    "en": "Back",
+    "zh": "返回"
+  },
+  "header": {
+    "en": "Chat",
+    "zh": "聊天"
+  },
+  "no-messages": {
+    "en": "This conversation is empty. Why not start by sending a 'hi'?",
+    "zh": "此对话为空。为什么不开始发一个“嗨”呢？"
+  },
+  "textfield": {
+    "placeholder": {
+      "en": "A chat message...",
+      "zh": "聊天信息..."
+    }
+  }
+}

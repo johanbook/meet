@@ -6,7 +6,7 @@ import {
   OneToOne,
 } from "typeorm";
 
-import { Profile } from "src/features/profiles";
+import { Profile } from "src/core/profiles";
 
 @Entity()
 export class Settings {
