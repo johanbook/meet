@@ -1,5 +1,6 @@
 // @ts-check
 import eslint from "@eslint/js";
+import sonarjs from "eslint-plugin-sonarjs";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import tseslint from "typescript-eslint";
 
@@ -7,6 +8,7 @@ export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   eslintPluginUnicorn.configs["flat/recommended"],
+  sonarjs.configs.recommended,
   {
     ignores: ["dist", "jest.config.js", "prettier.config.js"],
   },
