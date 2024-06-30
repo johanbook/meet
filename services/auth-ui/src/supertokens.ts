@@ -50,7 +50,7 @@ export async function initializeSuperTokens(
         useShadowDom: false,
       }),
       EmailVerification.init({
-        mode: process.env.NODE_ENV === "production" ? "REQUIRED" : "OPTIONAL",
+        mode: "OPTIONAL",
       }),
       Session.init(),
     ],
