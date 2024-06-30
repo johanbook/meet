@@ -8,7 +8,7 @@ export function getLogLevel(): string {
   return level.toLowerCase();
 }
 
-export function createPinoLoggerOptions(name: string): pino.pino.LoggerOptions {
+export function createPinoLoggerOptions(name: string) {
   let transport: pino.pino.LoggerOptions["transport"] | undefined;
 
   if (process.env.NODE_ENV !== "production") {
@@ -27,7 +27,7 @@ export function createPinoLoggerOptions(name: string): pino.pino.LoggerOptions {
   return {
     formatters: {
       // Log level as string as most log viewers can parse not natively
-      level: (label) => ({ level: label }),
+      level: (label: string) => ({ level: label }),
     },
     level,
     mixin: () => {
