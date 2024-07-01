@@ -47,6 +47,7 @@ export class GetConversationListHandler
       ChatConversationDetails,
       matchingConversations,
       (conversation) => ({
+        id: conversation.id,
         imageUrl:
           conversation.photo &&
           this.photoService.getUrl(
