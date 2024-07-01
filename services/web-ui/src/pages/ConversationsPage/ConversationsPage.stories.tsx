@@ -2,7 +2,7 @@ import type { Meta } from "@storybook/react";
 
 import { ConnectionDetails } from "src/api";
 
-import { ConnectionsPageComponent } from "./ConnectionsPage.component";
+import { ConversationsPageComponent } from "./ConversationsPage.component";
 
 const MATCHES_DATA: ConnectionDetails[] = [
   {
@@ -29,5 +29,5 @@ export default {
 } as Meta;
 
 export const Default = {
-  render: () => <ConnectionsPageComponent data={MATCHES_DATA} />,
+  render: () => <ConversationsPageComponent data={MATCHES_DATA} />,
 };
