@@ -11,15 +11,15 @@ import {
 
 import { ChatConversationDetails } from "src/api";
 
-export interface ConnectionListItemProps {
+export interface ConversationListItemProps {
   data: ChatConversationDetails;
   divider?: boolean;
 }
 
-export function ConnectionListItem({
+export function ConversationListItem({
   data,
   divider,
-}: ConnectionListItemProps): React.ReactElement {
+}: ConversationListItemProps): React.ReactElement {
   return (
     <ListItem divider={divider}>
       <ListItemButton component={Link} to={`/chat/${data.id}`}>

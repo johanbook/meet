@@ -4,7 +4,7 @@ import { List } from "@mui/material";
 
 import { ChatConversationDetails } from "src/api";
 
-import { ConnectionListItem } from "./components/ConnectionListItem";
+import { ConversationListItem } from "./components/ConversationListItem";
 
 export interface ConversationsPageComponentProps {
   data: ChatConversationDetails[];
@@ -17,7 +17,7 @@ export function ConversationsPageComponent({
     <>
       <List>
         {data.map((conversation, index) => (
-          <ConnectionListItem
+          <ConversationListItem
             divider={index < data.length - 1}
             key={conversation.id}
             data={conversation}
