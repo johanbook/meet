@@ -2,7 +2,7 @@ import React from "react";
 
 import { List, ListItem, Skeleton } from "@mui/material";
 
-export function ConnectionsPageSkeleton(): React.ReactElement {
+export function ConversationsPageSkeleton(): React.ReactElement {
   return (
     <>
       <List>

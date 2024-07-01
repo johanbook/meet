@@ -17,12 +17,12 @@ import { ChatMessageList } from "./components/ChatMessageList";
 import { ChatTextField } from "./components/ChatTextField";
 
 export function ChatPageContainer(): ReactElement {
-  const { id } = useParams();
+  const { id = "" } = useParams();
   const { t } = useTranslation("chat");
 
   const { error, data, isLoading, refetch } = useQuery({
     queryKey: ["chat", id],
-    queryFn: () => chatsApi.getChats({ profileId: Number.parseInt(id || "") }),
+    queryFn: () => chatsApi.getChats({ conversationId: id }),
   });
 
   useHandleNotification({

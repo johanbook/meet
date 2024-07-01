@@ -4,13 +4,13 @@ import { Typography } from "@mui/material";
 
 import { useTranslation } from "src/core/i18n";
 
-export interface ConnectionsPageNavProps {
+export interface ConversationsPageNavProps {
   children: ReactNode;
 }
 
-export function ConnectionsPageNav({
+export function ConversationsPageNav({
   children,
-}: ConnectionsPageNavProps): React.ReactElement {
+}: ConversationsPageNavProps): React.ReactElement {
   const { t } = useTranslation("connections");
 
   return (
