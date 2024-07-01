@@ -19,7 +19,7 @@ export function ConversationsPageComponent({
         {data.map((conversation, index) => (
           <ConnectionListItem
             divider={index < data.length - 1}
-            key={conversation.name}
+            key={conversation.id}
             data={conversation}
           />
         ))}

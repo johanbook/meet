@@ -7,7 +7,7 @@ import { NavigationTrackingProvider } from "src/core/tracking/NavigationTracking
 import { BlogPostListPage } from "src/pages/BlogPostListPage";
 import { BlogPostPage } from "src/pages/BlogPostPage";
 import { ChatPage } from "src/pages/ChatPage";
-import { ConnectionsPage } from "src/pages/ConnectionsPage";
+import { ConversationsPage } from "src/pages/ConversationsPage";
 import { CreateOrganizationPage } from "src/pages/CreateOrganizationPage";
 import { CurrentOrganizationPage } from "src/pages/CurrentOrganizationPage";
 import { CurrentProfilePage } from "src/pages/CurrentProfilePage";
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/chat",
-        element: <ConnectionsPage />,
+        element: <ConversationsPage />,
       },
       {
         path: "/chat/:id",

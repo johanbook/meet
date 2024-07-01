@@ -1,25 +1,25 @@
 import type { Meta } from "@storybook/react";
 
-import { ConnectionDetails } from "src/api";
+import { ChatConversationDetails } from "src/api";
 
 import { ConversationsPageComponent } from "./ConversationsPage.component";
 
-const MATCHES_DATA: ConnectionDetails[] = [
+const MATCHES_DATA: ChatConversationDetails[] = [
   {
+    id: "1",
     name: "John",
-    profileId: 1,
     lastMessage: "hi",
   },
 
   {
+    id: "2",
     name: "Eric",
-    profileId: 2,
     lastMessage: "hi",
   },
 
   {
+    id: "3",
     name: "Dalene",
-    profileId: 3,
     lastMessage: "hi",
   },
 ];

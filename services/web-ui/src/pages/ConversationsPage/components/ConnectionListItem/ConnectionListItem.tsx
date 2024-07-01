@@ -9,10 +9,10 @@ import {
   ListItemText,
 } from "@mui/material";
 
-import { ConnectionDetails } from "src/api";
+import { ChatConversationDetails } from "src/api";
 
 export interface ConnectionListItemProps {
-  data: ConnectionDetails;
+  data: ChatConversationDetails;
   divider?: boolean;
 }
 
@@ -22,7 +22,7 @@ export function ConnectionListItem({
 }: ConnectionListItemProps): React.ReactElement {
   return (
     <ListItem divider={divider}>
-      <ListItemButton component={Link} to={`/chat/${data.profileId}`}>
+      <ListItemButton component={Link} to={`/chat/${data.id}`}>
         <ListItemAvatar>
           <Avatar src={data.imageUrl} />
         </ListItemAvatar>
