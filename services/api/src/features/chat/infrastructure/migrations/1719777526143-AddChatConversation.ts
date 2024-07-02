@@ -12,10 +12,10 @@ export class AddChatConversation1719777526143 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "chat_message" ADD "conversationId" uuid NOT NULL`);
         await queryRunner.query(`ALTER TABLE "chat_message" DROP CONSTRAINT "FK_a2be22c99b34156574f4e02d0a0"`);
         await queryRunner.query(`ALTER TABLE "chat_message" ALTER COLUMN "senderId" SET NOT NULL`);
-        await queryRunner.query(`ALTER TABLE "chat_conversation_member" ADD CONSTRAINT "FK_39828751da8c4d3e3c1845757cb" FOREIGN KEY ("conversationId") REFERENCES "chat_conversation"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
-        await queryRunner.query(`ALTER TABLE "chat_conversation" ADD CONSTRAINT "FK_17cc04a00b041824b3554dfe895" FOREIGN KEY ("organizationId") REFERENCES "organization"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
-        await queryRunner.query(`ALTER TABLE "chat_message" ADD CONSTRAINT "FK_71d77a16df3f16e830d645f31f6" FOREIGN KEY ("conversationId") REFERENCES "chat_conversation"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
-        await queryRunner.query(`ALTER TABLE "chat_message" ADD CONSTRAINT "FK_a2be22c99b34156574f4e02d0a0" FOREIGN KEY ("senderId") REFERENCES "profile"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "chat_conversation_member" ADD CONSTRAINT "FK_39828751da8c4d3e3c1845757cb" FOREIGN KEY ("conversationId") REFERENCES "chat_conversation"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "chat_conversation" ADD CONSTRAINT "FK_17cc04a00b041824b3554dfe895" FOREIGN KEY ("organizationId") REFERENCES "organization"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "chat_message" ADD CONSTRAINT "FK_71d77a16df3f16e830d645f31f6" FOREIGN KEY ("conversationId") REFERENCES "chat_conversation"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "chat_message" ADD CONSTRAINT "FK_a2be22c99b34156574f4e02d0a0" FOREIGN KEY ("senderId") REFERENCES "profile"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

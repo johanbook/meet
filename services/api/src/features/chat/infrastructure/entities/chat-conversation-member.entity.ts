@@ -7,10 +7,12 @@ import { ChatConversation } from "./chat-conversation.entity";
 
 @Entity()
 export class ChatConversationMember extends BaseEntity {
-  @ManyToOne(() => ChatConversation, (conversation) => conversation.members)
+  @ManyToOne(() => ChatConversation, (conversation) => conversation.members, {
+    onDelete: "CASCADE",
+  })
   conversation!: ChatConversation;
 
-  @OneToOne(() => Profile)
+  @OneToOne(() => Profile, { onDelete: "CASCADE" })
   profile!: Profile;
 
   @Column()
