@@ -22,7 +22,7 @@ export class ChatConversation extends BaseEntity {
   @Column({ type: "varchar", length: 256, default: "" })
   name!: string;
 
-  @ManyToOne(() => Organization)
+  @ManyToOne(() => Organization, { onDelete: "CASCADE" })
   organization!: Organization;
 
   @Column()
