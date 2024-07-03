@@ -9,7 +9,7 @@
     "lint": "tsc && eslint 'src/**/*.{js,jsx,ts,tsx}' --max-warnings 0",
     "lint:ci": "npm run lint",
     "release": "standard-version",
-    "start:dev": "vite",
+    "start:dev": "vite --host --port 80",
     "start:storybook": "storybook dev -p 6006",
     "test": "jest src  --ci --coverage",
     "test:ci": "npm run test"

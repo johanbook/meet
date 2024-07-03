@@ -14,7 +14,7 @@ export function ErrorView(props: ErrorViewProps): ReactElement {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        height: "100vh",
+        paddingTop: "10px",
       }}
     >
       <Box>
