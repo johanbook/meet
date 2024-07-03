@@ -30,4 +30,7 @@ export class ChatConversation extends BaseEntity {
 
   @OneToOne(() => ChatConversationPhoto, (photo) => photo.conversation)
   photo?: ChatConversationPhoto;
+
+  @Column()
+  photoId!: string;
 }
