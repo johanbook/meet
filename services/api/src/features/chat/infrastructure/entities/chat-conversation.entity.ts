@@ -1,4 +1,11 @@
-import { Column, Entity, ManyToOne, OneToMany, OneToOne } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+} from "typeorm";
 
 import { BaseEntity } from "src/core/database";
 import { Organization } from "src/core/organizations";
@@ -29,5 +36,9 @@ export class ChatConversation extends BaseEntity {
   organizationId!: number;
 
   @OneToOne(() => ChatConversationPhoto, (photo) => photo.conversation)
+  @JoinColumn()
   photo?: ChatConversationPhoto;
+
+  @Column()
+  photoId?: string;
 }

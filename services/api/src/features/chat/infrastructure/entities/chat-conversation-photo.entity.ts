@@ -1,4 +1,4 @@
-import { Entity, OneToOne } from "typeorm";
+import { Column, Entity, OneToOne } from "typeorm";
 
 import { BasePhoto } from "src/core/photos";
 
@@ -10,4 +10,7 @@ export class ChatConversationPhoto extends BasePhoto {
     onDelete: "CASCADE",
   })
   conversation!: ChatConversation;
+
+  @Column()
+  conversationId!: string;
 }
