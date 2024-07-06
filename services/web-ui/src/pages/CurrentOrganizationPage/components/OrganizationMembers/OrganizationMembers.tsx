@@ -54,7 +54,7 @@ export function OrganizationMembers(): ReactElement {
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-        <Typography sx={{ flexGrow: 1, paddingTop: 2 }} variant="h5">
+        <Typography sx={{ flexGrow: 1, paddingTop: 2 }} variant="h6">
           {t("members.header")}
         </Typography>
 
