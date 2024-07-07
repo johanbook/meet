@@ -66,7 +66,7 @@ export function OrganizationSettings({
 
   return (
     <>
-      <Typography sx={{ pt: 2 }} variant="h6">
+      <Typography sx={{ pt: 3, pb: 1 }} variant="h6">
         {t("settings.header")}
       </Typography>
 
