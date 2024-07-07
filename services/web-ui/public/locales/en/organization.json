@@ -1,4 +1,5 @@
 {
+  "created-at": "Created at: {{date}}",
   "header": "Group",
   "links": {
     "back": "Back"

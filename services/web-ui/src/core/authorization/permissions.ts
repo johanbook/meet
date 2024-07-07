@@ -6,6 +6,7 @@ export const Permissions = {
     Edit: [Role.Admin],
   },
   Organization: {
+    Edit: [Role.Admin],
     Leave: [Role.Admin, Role.Member],
     ViewRole: [Role.Admin],
   },
