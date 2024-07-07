@@ -11,6 +11,9 @@
     "placeholder": "Beskriv dig i ord"
   },
   "header": "Profil",
+  "links": {
+    "blog": "Blog"
+  },
   "save": "Spara",
   "update": {
     "error": "Något gick fel när din profil skulle uppdateras",

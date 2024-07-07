@@ -4,7 +4,6 @@ import { Avatar, Typography } from "@mui/material";
 
 import { ProfileDetails } from "src/api";
 import { Center } from "src/components/ui/Center";
-import { useTranslation } from "src/core/i18n";
 
 export interface ProfilePageComponentProps {
   profile: ProfileDetails;
@@ -13,19 +12,21 @@ export interface ProfilePageComponentProps {
 export function ProfilePageComponent({
   profile,
 }: ProfilePageComponentProps): ReactElement {
-  const { t } = useTranslation("profile");
-
   return (
     <>
       <Center>
         <Avatar src={profile.photo?.url} sx={{ height: 150, width: 150 }} />
       </Center>
 
-      <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
-        {t("description.title")}
-      </Typography>
+      <Center>
+        <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
+          {profile.name}
+        </Typography>
+      </Center>
 
-      <Typography>{profile.description}</Typography>
+      <Center>
+        <Typography>{profile.description}</Typography>
+      </Center>
     </>
   );
 }

@@ -11,6 +11,9 @@
     "placeholder": "Describe yourself in a few words"
   },
   "header": "Profile",
+  "links": {
+    "blog": "Blog"
+  },
   "save": "Save",
   "update": {
     "error": "There was an error when trying to update your profile",
