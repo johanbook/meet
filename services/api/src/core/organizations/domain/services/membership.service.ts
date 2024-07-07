@@ -40,7 +40,7 @@ export class MembershipService {
 
     if (!membership) {
       throw new NotFoundException(
-        "Unable to find membership to current organization. Please contact support",
+        "Unable to find membership to current organization",
       );
     }
 
