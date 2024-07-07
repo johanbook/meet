@@ -42,5 +42,14 @@
       "text": "您在这里可以编辑此成员"
     }
   },
-  "name": "名称: {{name}}"
+  "settings": {
+    "header": "设置",
+    "description": "在这里您可以更改您群组的设置。",
+    "name": "名称",
+    "save": {
+      "button": "保存",
+      "error": "更新群组时发生错误",
+      "success": "群组已更新"
+    }
+  }
 }

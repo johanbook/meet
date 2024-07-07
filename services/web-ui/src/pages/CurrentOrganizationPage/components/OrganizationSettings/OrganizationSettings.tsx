@@ -1,12 +1,20 @@
-import { ReactElement } from "react";
+import { ReactElement, SyntheticEvent } from "react";
 
 import { Box } from "@mui/material";
 
-import { CurrentOrganizationDetails } from "src/api";
+import { CurrentOrganizationDetails, UpdateOrganizationCommand } from "src/api";
+import { organizationsApi } from "src/apis";
 import { Button, TextField, Typography } from "src/components/ui";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { Permissions, useAuthorization } from "src/core/authorization";
+import { useForm } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
+import {
+  CacheKeysConstants,
+  useMutation,
+  useQueryClient,
+} from "src/core/query";
+import { useSnackbar } from "src/core/snackbar";
 
 interface OrganizationSettingsProps {
   data: CurrentOrganizationDetails;
@@ -17,6 +25,17 @@ export function OrganizationSettings({
 }: OrganizationSettingsProps): ReactElement {
   const { t } = useTranslation("organization");
   const authorization = useAuthorization();
+
+  const snackbar = useSnackbar();
+
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (updateOrganizationCommand: UpdateOrganizationCommand) =>
+      organizationsApi.updateCurrentOrganization({ updateOrganizationCommand }),
+  });
+
+  const form = useForm<UpdateOrganizationCommand>({ name: data.name });
 
   if (authorization.error) {
     return <ErrorMessage error={authorization.error} />;
@@ -29,29 +48,47 @@ export function OrganizationSettings({
     return <></>;
   }
 
+  async function handleSubmit(event: SyntheticEvent): Promise<void> {
+    event.preventDefault();
+
+    const { data } = form.validate();
+
+    await mutation.mutateAsync(data, {
+      onError: () => snackbar.error(t("settings.save.error")),
+      onSuccess: () => {
+        snackbar.success(t("settings.save.success"));
+        queryClient.invalidateQueries({
+          queryKey: [CacheKeysConstants.CurrentOrganization],
+        });
+      },
+    });
+  }
+
   return (
     <>
       <Typography sx={{ pt: 2 }} variant="h6">
-        Settings
+        {t("settings.header")}
       </Typography>
 
-      <Typography color="textSecondary">
-        Here you can change settings of your group.
-      </Typography>
+      <Typography color="textSecondary">{t("settings.description")}</Typography>
 
       <TextField
-        disabled
+        disabled={mutation.isPending}
         fullWidth
-        label={t("name")}
-        /* eslint-disable-next-line @typescript-eslint/no-empty-function */
-        onChange={() => {}}
+        label={t("settings.name")}
+        inputProps={{ maxLength: 128 }}
+        onChange={(name) => form.setValue({ name })}
         sx={{ mt: 2 }}
-        value={data.name}
+        value={form.state.name.value}
       />
 
       <Box sx={{ pt: 2, display: "flex" }}>
-        <Button disabled variant="contained">
-          Save
+        <Button
+          disabled={form.state.name.value === data.name}
+          onClick={handleSubmit}
+          variant="contained"
+        >
+          {t("settings.save.button")}
         </Button>
       </Box>
     </>

@@ -42,5 +42,14 @@
       "text": "Here you can edit this member"
     }
   },
-  "name": "Name"
+  "settings": {
+    "header": "Settings",
+    "description": "Here you can change settings of your group.",
+    "name": "Name",
+    "save": {
+      "button": "Save",
+      "error": "An error occured when updating the group",
+      "success": "The group has been updated"
+    }
+  }
 }
