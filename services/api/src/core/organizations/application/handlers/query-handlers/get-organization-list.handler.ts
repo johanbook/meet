@@ -24,6 +24,11 @@ export class GetOrganizationListHandler
       await this.currentProfileService.fetchCurrentProfileId();
 
     const memberships = await this.organizationMemberships.find({
+      order: {
+        organization: {
+          name: "ASC",
+        },
+      },
       relations: {
         organization: true,
       },
