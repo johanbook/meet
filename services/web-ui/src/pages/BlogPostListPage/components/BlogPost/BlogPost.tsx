@@ -1,4 +1,5 @@
 import { ReactElement, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { ModeCommentOutlined } from "@mui/icons-material";
 import {
@@ -41,11 +42,21 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
   return (
     <Card key={post.id} sx={{ marginBottom: 2, padding: 2 }} variant="outlined">
       <Box sx={{ alignItems: "center", display: "flex", paddingBottom: 2 }}>
-        <Avatar imgProps={{ loading: "lazy" }} src={post.profile.imageUrl} />
+        <Link to={`/profile/${post.profile.id}`}>
+          <Avatar imgProps={{ loading: "lazy" }} src={post.profile.imageUrl} />
+        </Link>
 
         <Box sx={{ flexGrow: 1, paddingLeft: 1 }}>
           <Typography>
-            <b>{post.profile.name}</b> {t("published")}
+            <b>
+              <Link
+                to={`/profile/${post.profile.id}`}
+                style={{ color: "inherit", textDecoration: "none" }}
+              >
+                {post.profile.name}
+              </Link>
+            </b>{" "}
+            {t("published")}
           </Typography>
           <Typography variant="subtitle2">
             {timeSince(post.createdAt)}
