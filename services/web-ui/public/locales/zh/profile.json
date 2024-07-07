@@ -11,6 +11,9 @@
     "placeholder": "简单描述一下自己"
   },
   "header": "个人资料",
+  "links": {
+    "blog": "博客"
+  },
   "save": "保存",
   "update": {
     "error": "尝试更新您的个人资料时出错",

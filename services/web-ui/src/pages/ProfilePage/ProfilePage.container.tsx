@@ -8,7 +8,7 @@ import { CacheKeysConstants, useQuery } from "src/core/query";
 import { ErrorView } from "src/views/ErrorView";
 
 import { ProfilePageComponent } from "./ProfilePage.component";
-import { ProfilePageHeader } from "./ProfilePage.header";
+import { ProfilePageNav } from "./ProfilePage.nav";
 import { ProfilePageSkeleton } from "./ProfilePage.skeleton";
 
 export function ProfilePageContainer(): ReactElement {
@@ -21,37 +21,31 @@ export function ProfilePageContainer(): ReactElement {
 
   if (error) {
     return (
-      <>
-        <ProfilePageHeader />
+      <ProfilePageNav>
         <ErrorView error={error} />
-      </>
+      </ProfilePageNav>
     );
   }
 
   if (isPending) {
     return (
-      <>
-        <ProfilePageHeader />
+      <ProfilePageNav>
         <ProfilePageSkeleton />
-      </>
+      </ProfilePageNav>
     );
   }
 
   if (!data) {
     return (
-      <>
-        <ProfilePageHeader />
-
+      <ProfilePageNav>
         <Typography>Nothing found</Typography>
-      </>
+      </ProfilePageNav>
     );
   }
 
   return (
-    <>
-      <ProfilePageHeader />
-
+    <ProfilePageNav>
       <ProfilePageComponent profile={data} />
-    </>
+    </ProfilePageNav>
   );
 }
