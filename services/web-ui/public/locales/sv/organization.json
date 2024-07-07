@@ -42,5 +42,14 @@
       "text": "Här kan du redigera denna medlemmen"
     }
   },
-  "name": "Namn"
+  "settings": {
+    "header": "Inställningar",
+    "description": "Här kan du ändra inställningarna för din grupp",
+    "name": "Namn",
+    "save": {
+      "button": "Spara",
+      "error": "Ett fel inträffade när gruppens inställningar skulle uppdateras",
+      "success": "Gruppens inställningar har uppdaterats"
+    }
+  }
 }
