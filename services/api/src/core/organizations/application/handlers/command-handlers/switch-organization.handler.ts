@@ -30,7 +30,7 @@ export class SwitchOrganizationHandler
       throw new UnauthorizedException();
     }
 
-    this.currentOrganizationService.switchCurrentOrganization(
+    await this.currentOrganizationService.switchCurrentOrganization(
       command.organizationId,
     );
   }

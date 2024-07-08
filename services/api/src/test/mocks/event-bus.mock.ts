@@ -6,5 +6,5 @@ class EventBusMock {
 }
 
 export function createEventBusMock(): EventBus {
-  return new EventBusMock() as any;
+  return new EventBusMock() as unknown as EventBus;
 }

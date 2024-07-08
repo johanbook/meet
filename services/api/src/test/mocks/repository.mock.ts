@@ -55,5 +55,5 @@ class MockRepository<T extends ObjectLiteral> {
 export function createMockRepository<T extends ObjectLiteral>(
   data?: T[],
 ): Repository<T> {
-  return new MockRepository(data) as any;
+  return new MockRepository(data) as unknown as Repository<T>;
 }
