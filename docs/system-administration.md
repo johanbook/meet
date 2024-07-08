@@ -24,7 +24,9 @@ By default, the console contains:
 - [Minio admin panel](https://min.io/) for administering system object storage
 - [pgAdmin](https://www.pgadmin.org/) for administering system databases
 - [Traefik dashboard](https://doc.traefik.io/traefik/) to inspect routing
-- [Supertokens admin panel](supertokens.com/) for user administration
+- [Supertokens admin panel](supertokens.com/) for user administration. Note that
+  is must be enabled first as documented
+  [here](./enabling-user-management-dashboard.md).
 
 The console also contains link to:
 
