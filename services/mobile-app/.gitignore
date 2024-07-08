@@ -1,0 +1,8 @@
+.gradle
+gradle
+node_modules
+
+*.aab
+*.apk
+*.apk.idsig
+android.keystore
