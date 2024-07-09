@@ -57,9 +57,11 @@ export function CurrentProfileDetails({
         <CurrentProfileAvatar src={profile.photo?.url} />
       </Center>
 
-      <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
-        {t("description.title")}
-      </Typography>
+      <Center>
+        <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
+          {profile.name}
+        </Typography>
+      </Center>
 
       <form>
         <TextField
