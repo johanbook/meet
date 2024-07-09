@@ -1,6 +1,6 @@
 {
   "short_name": "Meet",
-  "name": "Meet people",
+  "name": "Meet",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#c86496",
   "background_color": "#ffffff"
 }
