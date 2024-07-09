@@ -1,12 +1,12 @@
 {
   "packageId": "meet.app",
   "host": "app.meetly.site",
-  "name": "Meet people",
+  "name": "Meet",
   "launcherName": "Meet",
   "display": "standalone",
   "themeColor": "#000000",
-  "navigationColor": "#000000",
-  "navigationColorDark": "#000000",
+  "navigationColor": "#FFFFFF",
+  "navigationColorDark": "#272727",
   "navigationDividerColor": "#000000",
   "navigationDividerColorDark": "#000000",
   "backgroundColor": "#FFFFFF",
@@ -18,8 +18,8 @@
     "path": "/home/book/personal/meet/services/mobile-app/android.keystore",
     "alias": "android"
   },
-  "appVersionName": "1.0.2",
-  "appVersionCode": 5,
+  "appVersionName": "1.0.3",
+  "appVersionCode": 6,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://app.meetly.site/manifest.json",
@@ -37,5 +37,5 @@
   "fingerprints": [],
   "additionalTrustedOrigins": [],
   "retainedBundles": [],
-  "appVersion": "1.0.2"
+  "appVersion": "1.0.3"
 }
