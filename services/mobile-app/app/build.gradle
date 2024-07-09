@@ -23,7 +23,7 @@ plugins {
 def twaManifest = [
     applicationId: 'meet.app',
     hostName: 'app.meetly.site', // The domain being opened in the TWA.
-    launchUrl: '/', // The start path for the TWA. Must be relative to the domain.
+    launchUrl: '/?utm_source=trusted-web-activity', // The start path for the TWA. Must be relative to the domain.
     name: 'Meet', // The application name.
     launcherName: 'Meet', // The name shown on the Android Launcher.
     themeColor: '#000000', // The color used for the status bar.
@@ -55,8 +55,8 @@ android {
         applicationId "meet.app"
         minSdkVersion 19
         targetSdkVersion 33
-        versionCode 6
-        versionName "1.0.3"
+        versionCode 7
+        versionName "1.0.5"
 
         // The name for the application
         resValue "string", "appName", twaManifest.name

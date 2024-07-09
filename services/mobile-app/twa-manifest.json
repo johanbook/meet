@@ -11,15 +11,15 @@
   "navigationDividerColorDark": "#000000",
   "backgroundColor": "#FFFFFF",
   "enableNotifications": true,
-  "startUrl": "/",
+  "startUrl": "/?utm_source=trusted-web-activity",
   "iconUrl": "https://app.meetly.site/android-chrome-512x512.png",
   "splashScreenFadeOutDuration": 300,
   "signingKey": {
     "path": "/home/book/personal/meet/services/mobile-app/android.keystore",
     "alias": "android"
   },
-  "appVersionName": "1.0.3",
-  "appVersionCode": 6,
+  "appVersionName": "1.0.5",
+  "appVersionCode": 7,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://app.meetly.site/manifest.json",
@@ -37,5 +37,5 @@
   "fingerprints": [],
   "additionalTrustedOrigins": [],
   "retainedBundles": [],
-  "appVersion": "1.0.3"
+  "appVersion": "1.0.5"
 }
