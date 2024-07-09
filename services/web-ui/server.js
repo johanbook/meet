@@ -7,6 +7,7 @@ const fastify = Fastify({ logger: true });
 
 fastify.register(require("@fastify/static"), {
   root: path.join(__dirname, "build"),
+  serveDotFiles: true,
   wildcard: false,
 });
 
