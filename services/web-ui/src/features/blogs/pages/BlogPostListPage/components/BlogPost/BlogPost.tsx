@@ -43,7 +43,7 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
       key={post.id}
       sx={{ mb: 2, py: 2, borderTop: 1, borderColor: "divider" }}
     >
-      <Box sx={{ alignItems: "center", display: "flex", pb: 2, pl: 1 }}>
+      <Box sx={{ alignItems: "center", display: "flex", pl: 2 }}>
         <Link to={`/profile/${post.profile.id}`}>
           <Avatar imgProps={{ loading: "lazy" }} src={post.profile.imageUrl} />
         </Link>

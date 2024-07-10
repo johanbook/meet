@@ -10,6 +10,7 @@ fastify.register(require("@fastify/static"), {
   root: path.join(__dirname, "build"),
   prefix: PREFIX,
   prefixAvoidTrailingSlash: true,
+  serveDotFiles: true,
   wildcard: true,
 });
 
