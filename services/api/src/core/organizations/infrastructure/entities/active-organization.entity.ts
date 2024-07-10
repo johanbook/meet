@@ -7,15 +7,15 @@ import { Organization } from "./organization.entity";
 
 @Entity()
 export class ActiveOrganization extends BaseEntity {
-  @Column()
-  organizationId!: number;
-
-  @ManyToOne(() => Organization)
+  @ManyToOne(() => Organization, { onDelete: "SET NULL" })
   organization!: Organization;
 
   @Column()
-  profileId!: number;
+  organizationId!: number;
 
-  @OneToOne(() => Profile)
+  @OneToOne(() => Profile, { onDelete: "CASCADE" })
   profile!: Profile;
+
+  @Column()
+  profileId!: number;
 }

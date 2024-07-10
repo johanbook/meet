@@ -21,17 +21,21 @@ export class OrganizationMembership {
   @CreateDateColumn()
   created!: Date;
 
-  @Column()
-  organizationId!: number;
-
-  @ManyToOne(() => Organization, (organization) => organization.memberships)
+  @ManyToOne(() => Organization, (organization) => organization.memberships, {
+    onDelete: "CASCADE",
+  })
   organization!: Organization;
 
   @Column()
-  profileId!: number;
+  organizationId!: number;
 
-  @ManyToOne(() => Profile, (profile) => profile.organizationMemberships)
+  @ManyToOne(() => Profile, (profile) => profile.organizationMemberships, {
+    onDelete: "CASCADE",
+  })
   profile!: Profile;
+
+  @Column()
+  profileId!: number;
 
   @Column({
     type: "enum",

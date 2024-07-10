@@ -16,7 +16,7 @@ export class BlogPostReaction extends BaseEntity {
   @Column()
   blogPostId!: string;
 
-  @ManyToOne(() => Profile)
+  @ManyToOne(() => Profile, { onDelete: "CASCADE" })
   profile!: Profile;
 
   @Column()

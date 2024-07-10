@@ -19,7 +19,7 @@ export class Settings {
   @Column("boolean")
   darkmode!: boolean;
 
-  @OneToOne(() => Profile)
+  @OneToOne(() => Profile, { onDelete: "CASCADE" })
   profile!: Profile;
 
   @Column()

@@ -18,7 +18,7 @@ export class BlogPostComment extends BaseEntity {
   @Column({ type: "varchar", length: 2048, default: "" })
   content!: string;
 
-  @ManyToOne(() => Profile)
+  @ManyToOne(() => Profile, { onDelete: "CASCADE" })
   profile!: Profile;
 
   @Column()

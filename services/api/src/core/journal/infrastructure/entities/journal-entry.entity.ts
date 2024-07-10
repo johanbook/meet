@@ -9,7 +9,7 @@ export class JournalEntry extends BaseEntity {
   @Column("text")
   commandName!: string;
 
-  @ManyToOne(() => Organization)
+  @ManyToOne(() => Organization, { onDelete: "CASCADE" })
   organization!: Organization;
 
   @Column()
@@ -18,7 +18,7 @@ export class JournalEntry extends BaseEntity {
   @Column("json")
   payload!: unknown;
 
-  @ManyToOne(() => Profile)
+  @ManyToOne(() => Profile, { onDelete: "CASCADE" })
   profile!: Profile;
 
   @Column()

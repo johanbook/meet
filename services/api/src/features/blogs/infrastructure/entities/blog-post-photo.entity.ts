@@ -14,8 +14,11 @@ export class BlogPostPhoto extends BasePhoto {
   blogPost!: BlogPost;
 
   @Column()
-  profileId!: number;
+  blogPostId!: string;
 
-  @ManyToOne(() => Profile)
+  @ManyToOne(() => Profile, { onDelete: "CASCADE" })
   profile!: Profile;
+
+  @Column()
+  profileId!: number;
 }
