@@ -9,6 +9,16 @@
       "new-organization": "Skapa ny grupp"
     }
   },
+  "danger-zone": {
+    "description": "Detta är åtgärder som inte kan ångras",
+    "header": "Farozon",
+    "delete-account": {
+      "button": "Ta bort konto",
+      "description": "Detta kommer att ta bort ditt konto och all dess tillhörande data. Det kan inte ångras.",
+      "error": "Ett fel uppstod vid borttagning av ditt konto. Vänligen kontakta supporten.",
+      "title": "Ta bort ditt konto"
+    }
+  },
   "darkmode": "Mörkerläge",
   "header": "Inställningar"
 }

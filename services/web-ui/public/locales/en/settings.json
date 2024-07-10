@@ -1,12 +1,22 @@
 {
   "advanced": {
-    "header": "Advanded settings",
+    "header": "Advanced settings",
     "links": {
       "create-organization": "Create new group",
       "current-organization": "Manage current group",
       "journal": "Journal",
       "list-organizations": "See available groups",
       "new-organization": "Create new group"
+    }
+  },
+  "danger-zone": {
+    "description": "These are actions that cannot be undone",
+    "header": "Danger zone",
+    "delete-account": {
+      "button": "Delete account",
+      "description": "This will delete your account and all its associated data. It cannot be undone.",
+      "error": "There was an error when deleting your account. Please contact support.",
+      "title": "Delete your account"
     }
   },
   "darkmode": "Darkmode",
