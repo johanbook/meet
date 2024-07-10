@@ -23,6 +23,7 @@ import {
   useQueryClient,
 } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
+import { useIsMobile } from "src/hooks/useIsMobile";
 
 interface MenuContentProps {
   currentOrganizationId: number;
@@ -129,6 +130,12 @@ function AppBarContent(): ReactElement {
 }
 
 export function AppBar(): ReactElement {
+  const isMobile = useIsMobile();
+
+  if (isMobile) {
+    return <></>;
+  }
+
   return (
     <MuiAppBar
       color="inherit"

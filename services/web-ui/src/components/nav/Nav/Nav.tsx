@@ -52,7 +52,7 @@ export function Nav(): ReactElement {
           height: "100%",
         }}
       >
-        <Toolbar />
+        {!isMobile && <Toolbar />}
 
         <Container
           disableGutters
