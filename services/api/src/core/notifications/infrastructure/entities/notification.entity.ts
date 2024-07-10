@@ -12,13 +12,13 @@ export class Notification extends BaseEntity {
   @Column({ type: "varchar", length: 2048 })
   message!: string;
 
-  @ManyToOne(() => Organization)
+  @ManyToOne(() => Organization, { onDelete: "CASCADE" })
   organization!: Organization;
 
   @Column()
   organizationId!: number;
 
-  @ManyToOne(() => Profile)
+  @ManyToOne(() => Profile, { onDelete: "CASCADE" })
   profile!: Profile;
 
   @Column()

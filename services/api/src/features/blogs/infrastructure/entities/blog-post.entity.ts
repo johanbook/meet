@@ -18,7 +18,7 @@ export class BlogPost extends BaseEntity {
   })
   comments!: BlogPostComment[];
 
-  @ManyToOne(() => Organization)
+  @ManyToOne(() => Organization, { onDelete: "CASCADE" })
   organization!: Organization;
 
   @Column()
@@ -32,7 +32,7 @@ export class BlogPost extends BaseEntity {
   )
   photos!: BlogPostPhoto[];
 
-  @ManyToOne(() => Profile)
+  @ManyToOne(() => Profile, { onDelete: "CASCADE" })
   profile!: Profile;
 
   @Column()

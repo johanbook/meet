@@ -6,9 +6,11 @@ import { Profile } from "./profile.entity";
 
 @Entity()
 export class ProfilePhoto extends BasePhoto {
+  @OneToOne(() => Profile, (profile) => profile.profilePhoto, {
+    onDelete: "CASCADE",
+  })
+  profile!: Profile;
+
   @Column()
   profileId!: number;
-
-  @OneToOne(() => Profile, (profile) => profile.profilePhoto)
-  profile!: Profile;
 }
