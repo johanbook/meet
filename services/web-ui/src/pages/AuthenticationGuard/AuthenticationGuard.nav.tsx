@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Box } from "@mui/material";
+
 export interface AuthenticationGuardNavProps {
   children: React.ReactNode;
 }
@@ -7,5 +9,5 @@ export interface AuthenticationGuardNavProps {
 export function AuthenticationGuardNav({
   children,
 }: AuthenticationGuardNavProps): React.ReactElement {
-  return <>{children}</>;
+  return <Box sx={{ pt: 3 }}>{children}</Box>;
 }

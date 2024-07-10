@@ -21,7 +21,7 @@ export class AddMonkeys1682844159027 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
-      `CREATE TABLE "monkey" ("id" SERIAL NOT NULL, "created" TIMESTAMP NOT NULL DEFAULT now(),  "bananas" integer )`
+      `CREATE TABLE "monkey" ("id" SERIAL NOT NULL, "created" TIMESTAMP NOT NULL DEFAULT now(),  "bananas" integer )`,
     );
   }
 

@@ -36,4 +36,4 @@ It is possible for a profile to leave an organization if:
 
 An organization can be deleted at **any time** by its admins. When doing so, all
 associated is completely deleted. All members are informed about the action and
-then removed from the organization. 
+then removed from the organization.

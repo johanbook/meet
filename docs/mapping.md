@@ -20,11 +20,14 @@ import { GetCurrentMonkeyQuery } from "../../application/contracts/queries/get-c
 @Controller("monkies")
 @ApiTags("monkies")
 export class MonkeyController {
-  constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
+  constructor(
+    private commandBus: CommandBus,
+    private queryBus: QueryBus,
+  ) {}
 
   @Get()
   async getCurrentMonkey(
-    @Query() query: GetCurrentMonkeyQuery
+    @Query() query: GetCurrentMonkeyQuery,
   ): Promise<MonkeyDetails> {
     return await this.queryBus.execute(query);
   }

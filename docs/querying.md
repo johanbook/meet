@@ -36,7 +36,7 @@ export class GetMonkeyHandler
   constructor(
     @InjectRepository(Monkey)
     private readonly monkies: Repository<Monkey>,
-    private readonly queryService: QueryService<MonkeyEntry>
+    private readonly queryService: QueryService<MonkeyEntry>,
   ) {}
 
   async execute(query: GetMonkiesQuery) {

@@ -21,7 +21,7 @@ export default class ClassificationsSeed implements Seeder {
   public async run(dataSouce: DataSource): Promise<void> {
     await loadAllClassificationsInFolder(
       dataSouce,
-      path.join(__dirname, "../classifications")
+      path.join(__dirname, "../classifications"),
     );
   }
 }
