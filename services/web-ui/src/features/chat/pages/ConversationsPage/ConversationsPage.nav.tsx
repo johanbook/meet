@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { useTranslation } from "src/core/i18n";
 
@@ -14,12 +14,10 @@ export function ConversationsPageNav({
   const { t } = useTranslation("connections");
 
   return (
-    <>
-      <Typography sx={{ paddingTop: 2 }} variant="h5">
-        {t("header")}
-      </Typography>
+    <Box sx={{ pt: 3, px: 3 }}>
+      <Typography variant="h5">{t("header")}</Typography>
 
       {children}
-    </>
+    </Box>
   );
 }

@@ -16,7 +16,7 @@ export function BlogPostPageComponent({
 }: BlogPostPageComponentProps): ReactElement {
   return (
     <>
-      <Box sx={{ paddingBottom: 2, paddingTop: 2 }}>
+      <Box sx={{ py: 2, px: 2 }}>
         <BlogPostForm />
       </Box>
 

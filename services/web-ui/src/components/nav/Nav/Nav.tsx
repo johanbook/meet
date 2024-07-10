@@ -49,9 +49,6 @@ export function Nav(): ReactElement {
           display: "flex",
           flexDirection: "column",
           marginLeft: isMobile ? undefined : `${DRAWER_WIDTH}px`,
-          paddingLeft: 3,
-          paddingRight: 3,
-          paddingTop: 1,
           height: "100%",
         }}
       >

@@ -2,7 +2,7 @@ import { ReactElement, ReactNode } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
 
 import { ArrowBackIosNew } from "@mui/icons-material";
-import { Link as MuiLink, Typography } from "@mui/material";
+import { Box, Link as MuiLink, Typography } from "@mui/material";
 
 interface NavLayoutProps {
   children: ReactNode;
@@ -18,7 +18,7 @@ export function NavLayout({
   to,
 }: NavLayoutProps): ReactElement {
   return (
-    <>
+    <Box sx={{ pt: 1, px: 3 }}>
       <MuiLink
         component={ReactRouterLink}
         sx={{
@@ -41,6 +41,6 @@ export function NavLayout({
       )}
 
       {children}
-    </>
+    </Box>
   );
 }

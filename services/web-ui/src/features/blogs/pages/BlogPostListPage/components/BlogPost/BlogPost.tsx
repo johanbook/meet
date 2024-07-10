@@ -6,7 +6,6 @@ import {
   Avatar,
   Box,
   Button,
-  Card,
   CardActions,
   CardContent,
   Collapse,
@@ -40,8 +39,11 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
   const lastReaction = firstReactions.pop();
 
   return (
-    <Card key={post.id} sx={{ marginBottom: 2, padding: 2 }} variant="outlined">
-      <Box sx={{ alignItems: "center", display: "flex", paddingBottom: 2 }}>
+    <Box
+      key={post.id}
+      sx={{ mb: 2, py: 2, borderTop: 1, borderColor: "divider" }}
+    >
+      <Box sx={{ alignItems: "center", display: "flex", pb: 2, pl: 1 }}>
         <Link to={`/profile/${post.profile.id}`}>
           <Avatar imgProps={{ loading: "lazy" }} src={post.profile.imageUrl} />
         </Link>
@@ -132,6 +134,6 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
 
         <BlogPostCommentForm blogPostId={post.id} />
       </Collapse>
-    </Card>
+    </Box>
   );
 }
