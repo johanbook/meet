@@ -40,7 +40,8 @@ export function SettingsPageContainer(): ReactElement {
   });
 
   const deleteAccountMutation = useMutation({
-    onError: () => snackbar.error(t("danger-zone.delete-account.error")),
+    onError: () => snackbar.success(t("danger-zone.delete-account.success")),
+    onSuccess: () => snackbar.error(t("danger-zone.delete-account.error")),
     mutationFn: () => profileApi.deleteCurrentProfile(),
   });
 
@@ -74,7 +75,10 @@ export function SettingsPageContainer(): ReactElement {
   function handleClickDelete() {
     openDialog(ConfirmationDialog, {
       description: t("danger-zone.delete-account.description"),
-      onConfirm: () => deleteAccountMutation.mutate(),
+      onConfirm: async (onClose) => {
+        await deleteAccountMutation.mutateAsync();
+        onClose();
+      },
       title: t("danger-zone.delete-account.title"),
     });
   }
