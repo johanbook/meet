@@ -53,8 +53,6 @@ export function Carousel({ images }: CarouselProps): ReactElement {
               display: "flex",
               justifyContent: "center",
               height: "100%",
-              marginLeft: 1,
-              marginRight: 1,
               width: "100%",
             }}
           >

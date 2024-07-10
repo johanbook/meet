@@ -27,8 +27,6 @@ export function BlogPostPhotos({ photos }: BlogPostPhotosProps): ReactElement {
           display: "flex",
           justifyContent: "center",
           height: "100%",
-          marginLeft: 1,
-          marginRight: 1,
         })}
       >
         <img

@@ -9,5 +9,5 @@ interface CurrentProfilePageNavProps {
 export function CurrentProfilePageNav({
   children,
 }: CurrentProfilePageNavProps): ReactElement {
-  return <Box sx={{ pt: 2 }}>{children}</Box>;
+  return <Box sx={{ pt: 3, px: 3 }}>{children}</Box>;
 }
