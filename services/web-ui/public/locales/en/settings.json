@@ -9,6 +9,16 @@
       "new-organization": "Create new group"
     }
   },
+  "danger-zone": {
+    "description": "These are actions that cannot be undone",
+    "header": "Danger zone",
+    "delete-account": {
+      "button": "Delete account",
+      "description": "This will delete your account and all its associated data. It cannot be undone.",
+      "error": "There was an error when deleting your account. Please contact support.",
+      "title": "Delete your account"
+    }
+  },
   "darkmode": "Darkmode",
   "header": "Settings"
 }
