@@ -70,9 +70,9 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
         )}
       </Box>
 
-      <CardContent>
+      <Box sx={{ px: 2, pt: 2 }}>
         <Typography>{post.content}</Typography>
-      </CardContent>
+      </Box>
 
       <BlogPostPhotos photos={post.photos} />
 
