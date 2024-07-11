@@ -13,40 +13,41 @@ where a user can store resources they wish other users cannot access.
 Personal organizations cannot be removed or leaved. This is to avoid leaving
 profiles in a state without being associated to any organizations.
 
-## Creating an organization
+## Creating organizations
 
-Any profile can by default create new organizations. Things to consider:
+Any profile can by default create new organizations.
 
-- Per organization subscription
+If the system is to be introduced into a SaaS, it is recommended require a
+subscription per organization.
 
-## Removing a member
+## Removing member from an organization
 
 An organization admin can remove a member (but not their self). If that member
 has this organization as active, their active organization is changed to their
 personal one.
 
-## Leaving an organization
+## Leaving organizations
 
 It is possible for a profile to leave an organization if:
 
 - They are not the last member of that organization
 - They are not the last admin of that organization
 
-## Deleting an organization
+## Deleting organizations
 
 An organization can be deleted at **any time** by its admins. When doing so, all
-associated is completely deleted. All members are informed about the action and
-then removed from the organization.
+associated data is completely deleted. All members are informed about the action
+and then removed from the organization.
 
-By default, when an organization is deleted, all its associated journal entries
-are also removed.
+By default, when an organization is deleted, all its associated
+[journal entries](./journal.md) are also removed.
 
-## Deleting a profile
+## Deleting profiles
 
 When profiles are deleted, all their associated data is removed as well. In
 order to keep the data it is recommended that profiles are instead
 disabled/soft-deleted. This works as long as there is no regulation requiring
 users to be able to delete their data.
 
-By default, when a profile is deleted, all its associated journal entries are
-also removed.
+By default, when a profile is deleted, all its associated
+[journal entries](./journal.md) are also removed.

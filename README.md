@@ -22,7 +22,7 @@ The software includes builtin opinionated frameworks for the following:
 - [Database migrations](./docs/migrations.md)
 - [Filtering, sorting and pagination when querying data](./docs/querying.md)
 - [Internationalization and localization](./docs/i18n.md)
-- [Journaling](./docs/journaling.md)
+- [Journal](./docs/journal.md)
 - [Logging](./docs/logging.md)
 - [Notifications](./docs/notifications.md)
 - [Organizations and profiles](./docs/organizations-and-profiles.md)
