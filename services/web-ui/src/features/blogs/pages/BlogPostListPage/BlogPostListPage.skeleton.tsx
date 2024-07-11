@@ -21,7 +21,9 @@ export function BlogPostListPageSkeleton(): ReactElement {
             <Skeleton />
           </Box>
 
-          <Skeleton height={140} />
+          <Box sx={{ py: 2 }}>
+            <Skeleton height={300} variant="rectangular" />
+          </Box>
         </Box>
       ))}
     </>
