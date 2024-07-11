@@ -71,7 +71,9 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
       </Box>
 
       <Box sx={{ px: 2, pt: 2 }}>
-        <Typography>{post.content}</Typography>
+        <Typography sx={{ overflowWrap: "anywhere", whiteSpace: "pre-wrap" }}>
+          {post.content}
+        </Typography>
       </Box>
 
       <BlogPostPhotos photos={post.photos} />
