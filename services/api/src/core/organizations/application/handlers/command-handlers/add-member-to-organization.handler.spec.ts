@@ -64,5 +64,20 @@ describe(AddMemberToOrganizationHandler.name, () => {
 
       expect(organizations.save).toHaveBeenCalledTimes(1);
     });
+
+    it("should throw if personal organization", async () => {
+      (
+        currentOrganizationService.fetchCurrentOrganization as any
+      ).mockReturnValue({ personal: true });
+
+      const command = map(AddMemberToOrganizationCommand, {
+        profileId: 1,
+      });
+
+      await expect(commandHandler.execute(command)).rejects.toHaveProperty(
+        "message",
+        "Cannot invite member to personal organization",
+      );
+    });
   });
 });

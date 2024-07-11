@@ -3,11 +3,11 @@ import { CurrentOrganizationService } from "../../domain/services/current-organi
 /* eslint-disable unicorn/consistent-function-scoping */
 
 class CurrentOrganizationMock {
-  fetchCurrentOrganization = jest.fn(() => ({ personal: true }));
+  fetchCurrentOrganization = jest.fn(() => ({ personal: false }));
 
   fetchCurrentOrganizationId = jest.fn();
 }
 
 export function createCurrentOrganizationServiceMock(): CurrentOrganizationService {
-  return new CurrentOrganizationMock() as any;
+  return new CurrentOrganizationMock() as unknown as CurrentOrganizationService;
 }

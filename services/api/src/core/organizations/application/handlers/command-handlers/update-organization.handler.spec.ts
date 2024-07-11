@@ -43,7 +43,7 @@ describe(UpdateOrganizationHandler.name, () => {
 
       expect(organizations.save).toHaveBeenCalledWith({
         name: "my-name",
-        personal: true,
+        personal: false,
       });
     });
   });

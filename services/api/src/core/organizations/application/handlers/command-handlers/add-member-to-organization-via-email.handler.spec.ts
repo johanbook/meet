@@ -22,6 +22,8 @@ describe(AddMemberToOrganizationViaEmailHandler.name, () => {
   let profiles: Repository<Profile>;
   let userIdService: UserIdService;
 
+  const email = "example@com";
+
   beforeEach(() => {
     eventBus = createEventBusMock();
     organizations = createMockRepository<Organization>([
@@ -47,9 +49,9 @@ describe(AddMemberToOrganizationViaEmailHandler.name, () => {
   });
 
   describe("can add member", () => {
-    it("should save throw if profile does not exist", async () => {
+    it("should throw if profile does not exist", async () => {
       const command = map(AddMemberToOrganizationViaEmailCommand, {
-        email: "example@com",
+        email,
       });
 
       await expect(commandHandler.execute(command)).rejects.toHaveProperty(
@@ -64,12 +66,27 @@ describe(AddMemberToOrganizationViaEmailHandler.name, () => {
       (userIdService.fetchUserIdByEmail as any).mockReturnValue("my-user-id");
 
       const command = map(AddMemberToOrganizationViaEmailCommand, {
-        email: "example@com",
+        email,
       });
 
       await commandHandler.execute(command);
 
       expect(organizations.save).toHaveBeenCalledTimes(1);
+    });
+
+    it("should throw if personal organization", async () => {
+      (
+        currentOrganizationService.fetchCurrentOrganization as any
+      ).mockReturnValue({ personal: true });
+
+      const command = map(AddMemberToOrganizationViaEmailCommand, {
+        email,
+      });
+
+      await expect(commandHandler.execute(command)).rejects.toHaveProperty(
+        "message",
+        "Cannot invite member to personal organization",
+      );
     });
   });
 });
