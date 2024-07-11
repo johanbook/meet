@@ -82,7 +82,7 @@ export function BlogPost({
 
       <BlogPostPhotos photos={post.photos} />
 
-      <CardActions disableSpacing>
+      <Box sx={{ px: 1, pt: 1 }}>
         <BlogPostLikeButton
           blogPostId={post.id}
           reactionId={post.reactions.currentProfileReactionId}
@@ -91,10 +91,10 @@ export function BlogPost({
         <IconButton aria-label="comment" onClick={() => setShowComments(true)}>
           <ModeCommentOutlined />
         </IconButton>
-      </CardActions>
+      </Box>
 
       {post.reactions.count > 0 && (
-        <CardContent sx={{ py: 0 }}>
+        <Box sx={{ px: 2, pt: 1 }}>
           <Typography variant="subtitle2">
             {t("reactions.count", {
               count: post.reactions.count,
@@ -102,18 +102,18 @@ export function BlogPost({
               last: lastReaction,
             })}
           </Typography>
-        </CardContent>
+        </Box>
       )}
 
       {post.comments.length > 0 && !alwaysShowComments && (
-        <CardActions disableSpacing>
+        <Box sx={{ px: 1 }}>
           <Button onClick={() => setShowComments(!showComments)}>
             {t(
               showComments ? "actions.hide-comments" : "actions.view-comments",
               { count: post.comments.length }
             )}
           </Button>
-        </CardActions>
+        </Box>
       )}
 
       <Collapse in={showComments}>
@@ -122,7 +122,7 @@ export function BlogPost({
             <ListItem key={comment.id} style={{ alignItems: "start" }}>
               <Avatar src={comment.profile.imageUrl} />
 
-              <Box sx={{ paddingLeft: 1 }}>
+              <Box sx={{ pl: 1 }}>
                 <Box sx={{ alignItems: "center", display: "flex" }}>
                   <Typography>
                     <b>{comment.profile.name}</b>
