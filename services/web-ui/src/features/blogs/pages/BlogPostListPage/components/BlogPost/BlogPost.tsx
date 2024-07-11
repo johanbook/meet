@@ -128,7 +128,11 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
                   </Typography>
                 </Box>
 
-                <Typography>{comment.content}</Typography>
+                <Typography
+                  sx={{ overflowWrap: "anywhere", whiteSpace: "pre-wrap" }}
+                >
+                  {comment.content}
+                </Typography>
               </Box>
             </ListItem>
           ))}
