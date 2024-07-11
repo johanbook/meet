@@ -34,7 +34,7 @@ export function OrganizationListPageContainer(): ReactElement {
   if (error) {
     return (
       <OrganizationListPageNav>
-        <ErrorView error={error} />
+        <ErrorView />
       </OrganizationListPageNav>
     );
   }
@@ -50,7 +50,7 @@ export function OrganizationListPageContainer(): ReactElement {
   if (!data || data.length === 0) {
     return (
       <OrganizationListPageNav>
-        <ErrorView error={t("organization-list.error")} />
+        <ErrorView message={t("organization-list.error") ||""} />
       </OrganizationListPageNav>
     );
   }

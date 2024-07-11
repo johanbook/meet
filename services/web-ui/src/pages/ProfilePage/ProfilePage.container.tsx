@@ -22,7 +22,7 @@ export function ProfilePageContainer(): ReactElement {
   if (error) {
     return (
       <ProfilePageNav>
-        <ErrorView error={error} />
+        <ErrorView />
       </ProfilePageNav>
     );
   }

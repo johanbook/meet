@@ -18,7 +18,7 @@ export function CurrentProfilePageContainer(): ReactElement {
   if (error) {
     return (
       <CurrentProfilePageNav>
-        <ErrorView error={error} />
+        <ErrorView />
       </CurrentProfilePageNav>
     );
   }
@@ -34,7 +34,7 @@ export function CurrentProfilePageContainer(): ReactElement {
   if (!data) {
     return (
       <CurrentProfilePageNav>
-        <ErrorView error="Unable to fetch profile" />
+        <ErrorView message="Unable to fetch profile" />
       </CurrentProfilePageNav>
     );
   }

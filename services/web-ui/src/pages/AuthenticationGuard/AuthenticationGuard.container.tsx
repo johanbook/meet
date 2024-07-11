@@ -32,10 +32,12 @@ export function AuthenticationGuardContainer({
   }
 
   if (error) {
-    const message = `Unable to verify if logged in. Try refreshing the page.`;
     return (
       <AuthenticationGuardNav>
-        <ErrorView error={error} message={message} />
+        <ErrorView
+          description="We cannot verify your credentials right now. Try waiting a bit and refreshing the page."
+          message="Unable to verify login"
+        />
       </AuthenticationGuardNav>
     );
   }

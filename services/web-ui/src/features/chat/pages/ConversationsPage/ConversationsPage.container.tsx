@@ -22,7 +22,7 @@ export function ConversationsPageContainer(): ReactElement {
   if (error) {
     return (
       <ConversationsPageNav>
-        <ErrorView error={error} />
+        <ErrorView message="Unable to get chats" />
       </ConversationsPageNav>
     );
   }
