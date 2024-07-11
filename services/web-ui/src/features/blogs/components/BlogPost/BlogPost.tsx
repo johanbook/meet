@@ -6,8 +6,6 @@ import {
   Avatar,
   Box,
   Button,
-  CardActions,
-  CardContent,
   Collapse,
   IconButton,
   List,
