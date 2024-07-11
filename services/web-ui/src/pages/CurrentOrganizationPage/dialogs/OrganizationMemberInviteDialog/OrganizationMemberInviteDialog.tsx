@@ -73,6 +73,7 @@ export function OrganizationMemberInviteDialog(): ReactElement {
 
           <Button
             disabled={!form.isValid}
+            loading={mutation.isPending}
             onClick={() => handleSubmit(closeDialog)}
             sx={{ whiteSpace: "nowrap" }}
             type="submit"
