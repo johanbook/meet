@@ -50,6 +50,10 @@ export function BlogPostListPageContainer(): ReactElement {
   if (isPending) {
     return (
       <BlogPostListPageNav>
+        <Box sx={{ py: 2, px: 2 }}>
+          <BlogPostForm />
+        </Box>
+
         <BlogPostListPageSkeleton />
       </BlogPostListPageNav>
     );
