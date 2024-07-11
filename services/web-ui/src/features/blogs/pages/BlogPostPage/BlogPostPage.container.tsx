@@ -8,9 +8,9 @@ import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 
+import { BlogPost } from "../../components/BlogPost";
 import { BlogPostPageNav } from "./BlogPostPage.nav";
 import { BlogPostPageSkeleton } from "./BlogPostPage.skeleton";
-import { BlogPost } from "./components/BlogPost";
 
 export function BlogPostPageContainer(): ReactElement {
   const { t } = useTranslation("blog");
@@ -47,7 +47,7 @@ export function BlogPostPageContainer(): ReactElement {
 
   return (
     <BlogPostPageNav>
-      <BlogPost post={data} />
+      <BlogPost alwaysShowComments post={data} />
     </BlogPostPageNav>
   );
 }

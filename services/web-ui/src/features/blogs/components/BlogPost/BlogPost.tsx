@@ -26,11 +26,15 @@ import { BlogPostMenu } from "../BlogPostMenu";
 import { BlogPostPhotos } from "../BlogPostPhotos/BlogPostPhotos";
 
 interface BlogPostProps {
+  alwaysShowComments?: boolean;
   post: BlogPostDetails;
 }
 
-export function BlogPost({ post }: BlogPostProps): ReactElement {
-  const [showComments, setShowComments] = useState(false);
+export function BlogPost({
+  alwaysShowComments = false,
+  post,
+}: BlogPostProps): ReactElement {
+  const [showComments, setShowComments] = useState(alwaysShowComments);
   const { t } = useTranslation("blog");
 
   const authorization = useAuthorization();
@@ -101,7 +105,7 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
         </CardContent>
       )}
 
-      {post.comments.length > 0 && (
+      {post.comments.length > 0 && !alwaysShowComments && (
         <CardActions disableSpacing>
           <Button onClick={() => setShowComments(!showComments)}>
             {t(
