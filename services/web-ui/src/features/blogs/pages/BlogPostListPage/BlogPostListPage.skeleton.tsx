@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 
 import { Box, Card, Skeleton } from "@mui/material";
 
-import { BlogPostForm } from "./components/BlogPostForm";
+import { BlogPostForm } from "../../components/BlogPostForm";
 
 export function BlogPostListPageSkeleton(): ReactElement {
   const skeletons = [100, 200, 110, 170, 50, 90];

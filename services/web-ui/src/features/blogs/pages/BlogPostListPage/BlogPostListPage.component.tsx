@@ -4,8 +4,8 @@ import { Box } from "@mui/material";
 
 import { BlogPostDetails } from "src/api";
 
-import { BlogPost } from "./components/BlogPost";
-import { BlogPostForm } from "./components/BlogPostForm";
+import { BlogPost } from "../../components/BlogPost";
+import { BlogPostForm } from "../../components/BlogPostForm";
 
 interface BlogPostPageComponentProps {
   data: BlogPostDetails[][];

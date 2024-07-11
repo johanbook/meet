@@ -8,10 +8,10 @@ import { useTranslation } from "src/core/i18n";
 import { InteractionObserver } from "src/core/infinite-scroll";
 import { CacheKeysConstants, useInfiniteQuery } from "src/core/query";
 
+import { BlogPostForm } from "../../components/BlogPostForm";
 import { BlogPostPageComponent } from "./BlogPostListPage.component";
-import { BlogPostListPageHeader } from "./BlogPostListPage.header";
+import { BlogPostListPageNav } from "./BlogPostListPage.nav";
 import { BlogPostListPageSkeleton } from "./BlogPostListPage.skeleton";
-import { BlogPostForm } from "./components/BlogPostForm";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -38,43 +38,37 @@ export function BlogPostListPageContainer(): ReactElement {
 
   if (error) {
     return (
-      <>
-        <BlogPostListPageHeader />
+      <BlogPostListPageNav>
         <ErrorMessage error={error} />
-      </>
+      </BlogPostListPageNav>
     );
   }
 
   if (isPending) {
     return (
-      <>
-        <BlogPostListPageHeader />
+      <BlogPostListPageNav>
         <BlogPostListPageSkeleton />
-      </>
+      </BlogPostListPageNav>
     );
   }
 
   if (!data || data.pages[0].length === 0) {
     return (
-      <>
-        <BlogPostListPageHeader />
-
+      <BlogPostListPageNav>
         <Box sx={{ py: 2, px: 2 }}>
           <BlogPostForm />
         </Box>
 
         <Typography sx={{ px: 2 }}>{t("no-posts")}</Typography>
-      </>
+      </BlogPostListPageNav>
     );
   }
 
   return (
-    <>
-      <BlogPostListPageHeader />
-
+    <BlogPostListPageNav>
       <BlogPostPageComponent data={data.pages} />
 
       {hasNextPage && <InteractionObserver onObserve={fetchNextPage} />}
-    </>
+    </BlogPostListPageNav>
   );
 }
