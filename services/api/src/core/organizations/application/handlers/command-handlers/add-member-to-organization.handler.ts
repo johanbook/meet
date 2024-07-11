@@ -1,4 +1,8 @@
-import { ConflictException, NotFoundException } from "@nestjs/common";
+import {
+  ConflictException,
+  ForbiddenException,
+  NotFoundException,
+} from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
@@ -21,8 +25,14 @@ export class AddMemberToOrganizationHandler
   ) {}
 
   async execute(command: AddMemberToOrganizationCommand) {
-    const currentOrganizationId =
-      await this.currentOrganizationService.fetchCurrentOrganizationId();
+    const currentOrganization =
+      await this.currentOrganizationService.fetchCurrentOrganization();
+
+    if (currentOrganization.personal) {
+      throw new ForbiddenException(
+        "Cannot invite member to personal organization",
+      );
+    }
 
     const profileExists = await this.profiles.exist({
       where: { id: command.profileId },
@@ -34,7 +44,7 @@ export class AddMemberToOrganizationHandler
 
     const isAlreadyMember = await this.organizationService.checkIfMember(
       command.profileId,
-      currentOrganizationId,
+      currentOrganization.id,
     );
 
     if (isAlreadyMember) {
@@ -42,7 +52,7 @@ export class AddMemberToOrganizationHandler
     }
 
     await this.organizationService.addMember(
-      currentOrganizationId,
+      currentOrganization.id,
       command.profileId,
     );
   }
