@@ -8,8 +8,8 @@ interface IUseMetaDataProps {
 
 export function useMetaData({ title }: IUseMetaDataProps) {
   useEffect(() => {
-    if (title) {
-      document.title = `${title} | ${config.APP.NAME}`;
-    }
+    document.title = title
+      ? `${title} | ${config.APP.NAME}`
+      : (document.title = `${config.APP.NAME}`);
   }, [title]);
 }
