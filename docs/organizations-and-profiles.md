@@ -1,8 +1,8 @@
-# Organization
+# Organizations and profiles
 
-The system comes with built-in systems for profiles and organizations
-(workspaces). Below the default implementation is outlined. This is not set in
-stone and can be changed.
+The system comes with built-in systems for organizations (workspaces) and
+profiles. Below the default implementation is outlined. This is not set in stone
+and can be changed.
 
 ## Personal organizations
 
@@ -37,3 +37,16 @@ It is possible for a profile to leave an organization if:
 An organization can be deleted at **any time** by its admins. When doing so, all
 associated is completely deleted. All members are informed about the action and
 then removed from the organization.
+
+By default, when an organization is deleted, all its associated journal entries
+are also removed.
+
+## Deleting a profile
+
+When profiles are deleted, all their associated data is removed as well. In
+order to keep the data it is recommended that profiles are instead
+disabled/soft-deleted. This works as long as there is no regulation requiring
+users to be able to delete their data.
+
+By default, when a profile is deleted, all its associated journal entries are
+also removed.
