@@ -71,7 +71,9 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
       </Box>
 
       <Box sx={{ px: 2, pt: 2 }}>
-        <Typography>{post.content}</Typography>
+        <Typography sx={{ overflowWrap: "anywhere", whiteSpace: "pre-wrap" }}>
+          {post.content}
+        </Typography>
       </Box>
 
       <BlogPostPhotos photos={post.photos} />
@@ -126,7 +128,11 @@ export function BlogPost({ post }: BlogPostProps): ReactElement {
                   </Typography>
                 </Box>
 
-                <Typography>{comment.content}</Typography>
+                <Typography
+                  sx={{ overflowWrap: "anywhere", whiteSpace: "pre-wrap" }}
+                >
+                  {comment.content}
+                </Typography>
               </Box>
             </ListItem>
           ))}

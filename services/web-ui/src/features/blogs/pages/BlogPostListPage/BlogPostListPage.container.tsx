@@ -59,11 +59,11 @@ export function BlogPostListPageContainer(): ReactElement {
       <>
         <BlogPostListPageHeader />
 
-        <Box sx={{ paddingBottom: 2, paddingTop: 2 }}>
+        <Box sx={{ py: 2, px: 2 }}>
           <BlogPostForm />
         </Box>
 
-        <Typography>{t("no-posts")}</Typography>
+        <Typography sx={{ px: 2 }}>{t("no-posts")}</Typography>
       </>
     );
   }

@@ -59,7 +59,7 @@ export function BlogPostCommentForm({
   }
 
   return (
-    <Box>
+    <Box sx={{ px: 2 }}>
       <form onSubmit={handleSubmit}>
         <TextField
           disabled={mutation.isPending}

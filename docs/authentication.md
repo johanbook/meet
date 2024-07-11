@@ -26,9 +26,9 @@ export class MonkeyService {
 
   async getMonkeyEmail(): Promise<void> {
     const userId = this.userIdService.getUserId();
-    const email = await this.userIdService.fetchUserEmailsByUserIds([userId]);
+    const emails = await this.userIdService.fetchUserEmailsByUserIds([userId]);
 
-    doStuff(email);
+    doStuff(emails);
   }
 }
 ```
