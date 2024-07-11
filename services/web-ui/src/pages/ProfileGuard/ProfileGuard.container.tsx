@@ -1,15 +1,15 @@
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 
 import { profileApi } from "src/apis";
-import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { useQuery } from "src/core/query";
+import { ErrorView } from "src/views/ErrorView";
 
 import { ProfileCreationPage } from "../ProfileCreationPage";
 import { ProfileGuardNav } from "./ProfileGuard.nav";
 import { ProfileGuardSkeleton } from "./ProfileGuard.skeleton";
 
-export interface ProfileGuardContainerProps {
-  children: React.ReactNode;
+interface ProfileGuardContainerProps {
+  children: ReactNode;
 }
 
 export function ProfileGuardContainer({
@@ -21,10 +21,12 @@ export function ProfileGuardContainer({
   });
 
   if (error) {
-    const message = `Unable to verify if profile exists. Try refreshing page.`;
     return (
       <ProfileGuardNav>
-        <ErrorMessage error={error} message={message} />
+        <ErrorView
+          message="Unable to verify profile"
+          description="We cannot verify your profile right now. Try waiting a bit and refreshing the page."
+        />
       </ProfileGuardNav>
     );
   }
