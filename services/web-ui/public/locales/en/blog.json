@@ -22,6 +22,7 @@
   "comments": {
     "placeholder": "Leave a comment"
   },
+  "error": "Unable to fetch blog posts",
   "form": {
     "placeholder": "Perhaps say something about your day"
   },

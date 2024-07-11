@@ -3,11 +3,11 @@ import { ReactElement } from "react";
 import { Box, Typography } from "@mui/material";
 
 import { blogsApi } from "src/apis";
-import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { useTranslation } from "src/core/i18n";
 import { InteractionObserver } from "src/core/infinite-scroll";
 import { CacheKeysConstants, useInfiniteQuery } from "src/core/query";
 import { useMetaData } from "src/hooks/useMetaData";
+import { ErrorView } from "src/views/ErrorView";
 
 import { BlogPostForm } from "../../components/BlogPostForm";
 import { BlogPostPageComponent } from "./BlogPostListPage.component";
@@ -42,7 +42,7 @@ export function BlogPostListPageContainer(): ReactElement {
   if (error) {
     return (
       <BlogPostListPageNav>
-        <ErrorMessage error={error} />
+        <ErrorView message={t("error")} />
       </BlogPostListPageNav>
     );
   }

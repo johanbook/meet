@@ -5,12 +5,12 @@ import { Box, Typography } from "@mui/material";
 
 interface ErrorViewProps {
   description?: string;
-  message?: string;
+  message?: string | null;
 }
 
 export function ErrorView({
   description,
-  message="Un unexpected error occured",
+  message = "Un unexpected error occured",
 }: ErrorViewProps): ReactElement {
   return (
     <Box

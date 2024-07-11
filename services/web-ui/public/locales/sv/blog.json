@@ -22,6 +22,7 @@
   "comments": {
     "placeholder": "Lämna en kommentar"
   },
+  "error": "Kunde inte hämta blogposter",
   "form": {
     "placeholder": "Säg något om din dag"
   },
