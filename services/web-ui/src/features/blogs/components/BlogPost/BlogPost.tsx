@@ -41,10 +41,7 @@ export function BlogPost({
   const lastReaction = firstReactions.pop();
 
   return (
-    <Box
-      key={post.id}
-      sx={{ mb: 2, py: 2, borderTop: 1, borderColor: "divider" }}
-    >
+    <Box key={post.id} sx={{ py: 2, borderTop: 1, borderColor: "divider" }}>
       <Box sx={{ alignItems: "center", display: "flex", pl: 2 }}>
         <Link to={`/profile/${post.profile.id}`}>
           <Avatar imgProps={{ loading: "lazy" }} src={post.profile.imageUrl} />
