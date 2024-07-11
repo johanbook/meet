@@ -7,12 +7,15 @@ import { blogsApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
+import { useMetaData } from "src/hooks/useMetaData";
 
 import { BlogPost } from "../../components/BlogPost";
 import { BlogPostPageNav } from "./BlogPostPage.nav";
 import { BlogPostPageSkeleton } from "./BlogPostPage.skeleton";
 
 export function BlogPostPageContainer(): ReactElement {
+  useMetaData({ title: "Post" });
+
   const { t } = useTranslation("blog");
   const { id = "" } = useParams();
 

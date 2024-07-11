@@ -7,6 +7,7 @@ import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { useTranslation } from "src/core/i18n";
 import { InteractionObserver } from "src/core/infinite-scroll";
 import { CacheKeysConstants, useInfiniteQuery } from "src/core/query";
+import { useMetaData } from "src/hooks/useMetaData";
 
 import { BlogPostForm } from "../../components/BlogPostForm";
 import { BlogPostPageComponent } from "./BlogPostListPage.component";
@@ -16,6 +17,8 @@ import { BlogPostListPageSkeleton } from "./BlogPostListPage.skeleton";
 const ITEMS_PER_PAGE = 10;
 
 export function BlogPostListPageContainer(): ReactElement {
+  useMetaData({ title: "" });
+
   const { t } = useTranslation("blog");
 
   const { error, data, isPending, fetchNextPage, hasNextPage } =
