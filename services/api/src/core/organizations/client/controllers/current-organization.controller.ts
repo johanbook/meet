@@ -15,6 +15,7 @@ import { RequiresOrganizationPermissions } from "src/core/authorization";
 
 import { AddMemberToOrganizationViaEmailCommand } from "../../application/contracts/commands/add-member-to-organization-via-email.command";
 import { AddMemberToOrganizationCommand } from "../../application/contracts/commands/add-member-to-organization.command";
+import { DeleteCurrentOrganizationCommand } from "../../application/contracts/commands/delete-current-organization.command";
 import { LeaveCurrentOrganizationCommand } from "../../application/contracts/commands/leave-current-organization.command";
 import { RemoveMemberFromCurrentOrganizationCommand } from "../../application/contracts/commands/remove-member-from-current-organization.command";
 import { UpdateMemberRoleCommand } from "../../application/contracts/commands/update-member-role.command";
@@ -38,6 +39,16 @@ export class CurrentOrganizationController {
     @Query() query: GetOrganizationQuery,
   ): Promise<CurrentOrganizationDetails> {
     return await this.queryBus.execute(query);
+  }
+
+  @Delete()
+  @RequiresOrganizationPermissions(
+    organizationPermissions.CurrentOrganization.Delete,
+  )
+  async deleteCurrentOrganization(
+    @Query() command: DeleteCurrentOrganizationCommand,
+  ): Promise<null> {
+    return await this.commandBus.execute(command);
   }
 
   @Delete("/leave")

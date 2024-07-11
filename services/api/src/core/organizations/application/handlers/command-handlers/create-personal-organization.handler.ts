@@ -1,4 +1,4 @@
-import { UnauthorizedException } from "@nestjs/common";
+import { ForbiddenException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
 import { OrganizationService } from "src/core/organizations/domain/services/organization.service";
@@ -25,9 +25,7 @@ export class CreatePersonalOrganizationHandler
       );
 
     if (personalOrganizationExists) {
-      throw new UnauthorizedException(
-        "Personal organization does already exist",
-      );
+      throw new ForbiddenException("Personal organization does already exist");
     }
 
     return await this.organizationService.createOrganization({
