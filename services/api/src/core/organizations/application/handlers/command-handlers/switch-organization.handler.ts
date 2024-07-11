@@ -1,4 +1,4 @@
-import { UnauthorizedException } from "@nestjs/common";
+import { ForbiddenException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
 import { CurrentOrganizationService } from "src/core/organizations/domain/services/current-organization.service";
@@ -27,7 +27,7 @@ export class SwitchOrganizationHandler
     );
 
     if (!hasAccess) {
-      throw new UnauthorizedException();
+      throw new ForbiddenException();
     }
 
     await this.currentOrganizationService.switchCurrentOrganization(

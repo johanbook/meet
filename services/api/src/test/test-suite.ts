@@ -35,13 +35,18 @@ export class TestSuite {
   constructor() {
     this.eventBus = createEventBusMock();
 
-    this.activeOrganizations = createMockRepository<ActiveOrganization>();
+    this.activeOrganizations = createMockRepository<ActiveOrganization>([
+      {
+        organizationId: "my-organization-id",
+        profileId: "my-profile-id",
+      } as unknown as ActiveOrganization,
+    ]);
     this.memberships = createMockRepository<OrganizationMembership>();
     this.organizations = createMockRepository<Organization>([
-      { id: "my-organization-id" } as any,
+      { id: "my-organization-id" } as unknown as Organization,
     ]);
     this.profiles = createMockRepository<Profile>([
-      { id: "my-profile-id" } as any,
+      { id: "my-profile-id" } as unknown as Profile,
     ]);
 
     const userIdService = createUserIdServiceMock();

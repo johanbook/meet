@@ -15,6 +15,8 @@ class MockRepository<T extends ObjectLiteral> {
     }
 
     this.data.splice(index, 1);
+
+    return { affected: 1 };
   });
 
   exist = jest.fn((element: T) =>

@@ -1,25 +1,28 @@
+import { ForbiddenException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
 import { CurrentOrganizationService } from "src/core/organizations/domain/services/current-organization.service";
 import { OrganizationService } from "src/core/organizations/domain/services/organization.service";
 
-import { UpdateOrganizationCommand } from "../../contracts/commands/update-organization.command";
+import { DeleteCurrentOrganizationCommand } from "../../contracts/commands/delete-current-organization.command";
 
-@CommandHandler(UpdateOrganizationCommand)
-export class UpdateOrganizationHandler
-  implements ICommandHandler<UpdateOrganizationCommand, void>
+@CommandHandler(DeleteCurrentOrganizationCommand)
+export class DeleteCurrentOrganizationHandler
+  implements ICommandHandler<DeleteCurrentOrganizationCommand, void>
 {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     private readonly organizationService: OrganizationService,
   ) {}
 
-  async execute(command: UpdateOrganizationCommand) {
+  async execute() {
     const currentOrganization =
       await this.currentOrganizationService.fetchCurrentOrganization();
 
-    currentOrganization.name = command.name;
+    if (currentOrganization.personal) {
+      throw new ForbiddenException("Cannot delete personal organization");
+    }
 
-    await this.organizationService.updateOrganization(currentOrganization);
+    await this.organizationService.deleteOrganization(currentOrganization.id);
   }
 }

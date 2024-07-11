@@ -1,4 +1,4 @@
-import { NotFoundException, UnauthorizedException } from "@nestjs/common";
+import { ForbiddenException, NotFoundException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
@@ -39,7 +39,7 @@ export class UpdateMemberRoleHandler
       await this.currentProfileSerivce.fetchCurrentProfileId();
 
     if (membership.profileId === currentProfileId) {
-      throw new UnauthorizedException("Not allowed to update own role");
+      throw new ForbiddenException("Not allowed to update own role");
     }
 
     membership.role = command.role;

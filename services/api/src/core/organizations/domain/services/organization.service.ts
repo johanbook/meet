@@ -10,6 +10,7 @@ import { OrganizationMembership } from "../../infrastructure/entities/organizati
 import { Organization } from "../../infrastructure/entities/organization.entity";
 import { MemberAddedToOrganizationEvent } from "../events/member-added-to-organization.event";
 import { OrganizationCreatedEvent } from "../events/organization-created.event";
+import { OrganizationDeletedEvent } from "../events/organization-deleted.event";
 import { MembershipService } from "./membership.service";
 
 interface CreateOrganizationProps {
@@ -89,6 +90,20 @@ export class OrganizationService {
     this.eventBus.publish(event);
 
     return createdOrganization.id;
+  }
+
+  async deleteOrganization(organizationId: number): Promise<void> {
+    const { affected } = await this.organizations.delete(organizationId);
+
+    if (affected === 0) {
+      return;
+    }
+
+    const event = map(OrganizationDeletedEvent, {
+      id: organizationId,
+    });
+
+    this.eventBus.publish(event);
   }
 
   async checkIfPersonalOrganizationExists(profileId: number): Promise<boolean> {
