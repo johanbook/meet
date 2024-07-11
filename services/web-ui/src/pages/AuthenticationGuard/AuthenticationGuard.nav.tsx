@@ -9,5 +9,5 @@ export interface AuthenticationGuardNavProps {
 export function AuthenticationGuardNav({
   children,
 }: AuthenticationGuardNavProps): React.ReactElement {
-  return <Box sx={{ pt: 3 }}>{children}</Box>;
+  return <Box sx={{ p: 3, height: "100vh" }}>{children}</Box>;
 }

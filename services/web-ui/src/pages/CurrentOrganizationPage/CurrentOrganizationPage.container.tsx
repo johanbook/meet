@@ -24,7 +24,7 @@ export function CurrentOrganizationPageContainer(): ReactElement {
   if (error) {
     return (
       <CurrentOrganizationPageNav>
-        <ErrorView error={error} />
+        <ErrorView  />
       </CurrentOrganizationPageNav>
     );
   }
@@ -40,7 +40,7 @@ export function CurrentOrganizationPageContainer(): ReactElement {
   if (!data) {
     return (
       <CurrentOrganizationPageNav>
-        <ErrorView error="Organization not found" />
+        <ErrorView message="Organization not found" />
       </CurrentOrganizationPageNav>
     );
   }

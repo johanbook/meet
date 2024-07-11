@@ -49,7 +49,7 @@ export function SettingsPageContainer(): ReactElement {
     return (
       <>
         <SettingsPageHeader />
-        <ErrorView error={error} />
+        <ErrorView />
       </>
     );
   }
@@ -67,7 +67,7 @@ export function SettingsPageContainer(): ReactElement {
     return (
       <>
         <SettingsPageHeader />
-        <ErrorView error="Settings not found" />
+        <ErrorView message="Settings not found" />
       </>
     );
   }

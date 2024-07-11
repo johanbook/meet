@@ -45,7 +45,7 @@ export function ChatPageContainer(): ReactElement {
   if (error) {
     return (
       <ChatPageNav>
-        <ErrorView error={error} />
+        <ErrorView />
       </ChatPageNav>
     );
   }

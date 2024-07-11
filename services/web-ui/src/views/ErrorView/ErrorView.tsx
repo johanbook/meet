@@ -1,24 +1,38 @@
 import { ReactElement } from "react";
 
-import { Box } from "@mui/material";
+import { HeartBroken } from "@mui/icons-material";
+import { Box, Typography } from "@mui/material";
 
-import { ErrorMessage } from "src/components/ui/ErrorMessage";
-import { ErrorMessageProps } from "src/components/ui/ErrorMessage/ErrorMessage";
+interface ErrorViewProps {
+  description?: string;
+  message?: string;
+}
 
-export interface ErrorViewProps extends ErrorMessageProps {}
-
-export function ErrorView(props: ErrorViewProps): ReactElement {
+export function ErrorView({
+  description,
+  message="Un unexpected error occured",
+}: ErrorViewProps): ReactElement {
   return (
     <Box
       sx={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        paddingTop: "10px",
+        height: "100%",
       }}
     >
-      <Box>
-        <ErrorMessage {...props} />
+      <Box
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      >
+        <HeartBroken color="error" sx={{ fontSize: 60, mb: 2 }} />
+
+        <Typography gutterBottom variant="h5">
+          {message}
+        </Typography>
+
+        {description && (
+          <Typography color="textSecondary">{description}</Typography>
+        )}
       </Box>
     </Box>
   );
