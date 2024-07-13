@@ -38,7 +38,7 @@ export class CreateChatHandler
     const conversation = new ChatConversation();
     conversation.organizationId = currentOrganizationId;
 
-    const profileIds = [...command.profileIds, currentProfileId];
+    const profileIds = [currentProfileId, ...command.profileIds];
 
     conversation.members = profileIds.map((profileId) => {
       const member = new ChatConversationMember();
