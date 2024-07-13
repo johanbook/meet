@@ -3,5 +3,6 @@
     "button": "Create",
     "error": "There was an error when creating the chat",
     "success": "Chat created"
-  }
+  },
+  "header": "Start a new chat"
 }
