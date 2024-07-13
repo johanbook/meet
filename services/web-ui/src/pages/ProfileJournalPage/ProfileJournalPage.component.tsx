@@ -10,13 +10,13 @@ const columns: Column<JournalEntryDetails>[] = [
     field: "commandName",
     headerName: "Action",
     valueGetter: (params) => format(params.value || ""),
-    width: 400,
+    width: 300,
   },
   {
     field: "createdAt",
     headerName: "Date",
     valueGetter: (params) => params.value.toLocaleString(),
-    width: 400,
+    width: 200,
   },
 ];
 
@@ -32,7 +32,7 @@ export function ProfileJournalPageComponent({
   return (
     <Table
       columns={columns}
-      height="60vh"
+      height="55vh"
       initialState={{
         sorting: {
           sortModel: [{ field: "created", sort: "desc" }],

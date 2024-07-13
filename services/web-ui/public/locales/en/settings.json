@@ -1,4 +1,5 @@
 {
+  "description": "These are the permanent settings you can change. More settings will be added here in the future.",
   "danger-zone": {
     "description": "These are actions that cannot be undone",
     "header": "Danger zone",
