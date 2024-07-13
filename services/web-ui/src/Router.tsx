@@ -8,6 +8,7 @@ import { BlogPostListPage } from "src/features/blogs/pages/BlogPostListPage";
 import { BlogPostPage } from "src/features/blogs/pages/BlogPostPage";
 import { ChatListPage } from "src/features/chat/pages/ChatListPage";
 import { ChatPage } from "src/features/chat/pages/ChatPage";
+import { CreateChatPage } from "src/features/chat/pages/CreateChatPage";
 import { CreateOrganizationPage } from "src/pages/CreateOrganizationPage";
 import { CurrentOrganizationPage } from "src/pages/CurrentOrganizationPage";
 import { CurrentProfilePage } from "src/pages/CurrentProfilePage";
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "/chat",
         element: <ChatListPage />,
+      },
+      {
+        path: "/chat/create",
+        element: <CreateChatPage />,
       },
       {
         path: "/chat/:id",

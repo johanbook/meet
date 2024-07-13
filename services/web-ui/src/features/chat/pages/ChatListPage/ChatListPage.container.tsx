@@ -15,7 +15,7 @@ export function ChatListPageContainer(): ReactElement {
   const { t } = useTranslation("connections");
 
   const { error, data, isPending } = useQuery({
-    queryKey: ["chat-conversations"],
+    queryKey: ["chats"],
     queryFn: () => chatsApi.getConversations(),
   });
 
