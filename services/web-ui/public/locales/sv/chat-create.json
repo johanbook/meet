@@ -3,5 +3,6 @@
     "button": "Skapa chat",
     "error": "Något gick fel när din chat skulle skapas",
     "success": "Chat skapad"
-  }
+  },
+  "header": "Start a new chat"
 }

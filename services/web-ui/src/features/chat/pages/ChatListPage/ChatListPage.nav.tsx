@@ -1,6 +1,8 @@
 import { ReactElement, ReactNode } from "react";
+import { Link } from "react-router-dom";
 
-import { Box, Typography } from "@mui/material";
+import { Edit } from "@mui/icons-material";
+import { Box, Fab, Typography } from "@mui/material";
 
 import { useTranslation } from "src/core/i18n";
 
@@ -16,6 +18,15 @@ export function ChatListPageNav({
   return (
     <Box sx={{ pt: 3, px: 3 }}>
       <Typography variant="h5">{t("header")}</Typography>
+
+      <Fab
+        component={Link}
+        color="primary"
+        sx={{ position: "absolute", bottom: 70, right: 10 }}
+        to="/chat/create"
+      >
+        <Edit />
+      </Fab>
 
       {children}
     </Box>

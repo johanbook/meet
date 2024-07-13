@@ -1,6 +1,7 @@
 import { ReactElement, ReactNode } from "react";
 
-import { Box } from "@mui/material";
+import { NavLayout } from "src/components/layout";
+import { useTranslation } from "src/core/i18n";
 
 interface CreateChatPageNavProps {
   children: ReactNode;
@@ -9,5 +10,11 @@ interface CreateChatPageNavProps {
 export function CreateChatPageNav({
   children,
 }: CreateChatPageNavProps): ReactElement {
-  return <Box sx={{ p: 2 }}>{children}</Box>;
+  const { t } = useTranslation("chat-create");
+
+  return (
+    <NavLayout header={t("header")} linkText="Back" to="/chat">
+      {children}
+    </NavLayout>
+  );
 }
