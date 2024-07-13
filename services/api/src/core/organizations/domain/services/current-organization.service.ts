@@ -22,6 +22,14 @@ export class CurrentOrganizationService {
     private readonly organizations: Repository<Organization>,
   ) {}
 
+  async checkIfMembersInCurrentOrganization(
+    profileIds: number[],
+  ): Promise<boolean> {
+    const members = await this.fetchCurrentOrganizationMemberIds();
+
+    return profileIds.every((profileId) => members.includes(profileId));
+  }
+
   async fetchCurrentMembership(): Promise<OrganizationMembership> {
     const organizationId = await this.fetchCurrentOrganizationId();
 
