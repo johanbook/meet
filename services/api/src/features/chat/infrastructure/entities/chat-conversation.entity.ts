@@ -39,6 +39,6 @@ export class ChatConversation extends BaseEntity {
   @JoinColumn()
   photo?: ChatConversationPhoto;
 
-  @Column()
+  @Column({ nullable: true })
   photoId?: string;
 }
