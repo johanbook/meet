@@ -6,6 +6,10 @@ export function createChatMessageMock(
   return {
     id: 1,
     message: "my-message",
+    profile: {
+      id: 1,
+      name: "Johan Doe"
+    },
     read: true,
     sentByCurrentUser: false,
     ...message,
