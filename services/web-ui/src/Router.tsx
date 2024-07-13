@@ -9,6 +9,7 @@ import { BlogPostPage } from "src/features/blogs/pages/BlogPostPage";
 import { ChatListPage } from "src/features/chat/pages/ChatListPage";
 import { ChatPage } from "src/features/chat/pages/ChatPage";
 import { CreateChatPage } from "src/features/chat/pages/CreateChatPage";
+import { SettingsPage } from "src/features/settings/pages/SettingsPage";
 import { CreateOrganizationPage } from "src/pages/CreateOrganizationPage";
 import { CurrentOrganizationPage } from "src/pages/CurrentOrganizationPage";
 import { CurrentProfilePage } from "src/pages/CurrentProfilePage";
@@ -18,8 +19,9 @@ import { OrganizationListPage } from "src/pages/OrganizationListPage";
 import { ProfileGuard } from "src/pages/ProfileGuard";
 import { ProfileJournalPage } from "src/pages/ProfileJournalPage";
 import { ProfilePage } from "src/pages/ProfilePage";
-import { SettingsPage } from "src/pages/SettingsPage";
 import { LoadingView } from "src/views/LoadingView";
+
+import { AppearancePage } from "./features/settings/pages/AppearancePage";
 
 const router = createBrowserRouter([
   {
@@ -77,7 +79,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile/appearence",
-        element: <SettingsPage />,
+        element: <AppearancePage />,
       },
       {
         path: "/profile/journal",
