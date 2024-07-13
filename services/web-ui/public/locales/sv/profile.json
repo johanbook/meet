@@ -12,7 +12,14 @@
   },
   "header": "Profil",
   "links": {
-    "blog": "Blog"
+    "appearence": "Utseende",
+    "blog": "Blog",
+    "create-organization": "Skapa ny grupp",
+    "current-organization": "Nuvarande grupp",
+    "journal": "Journal",
+    "list-organizations": "Grupper",
+    "log-out": "Logga ut",
+    "settings": "Inställningar"
   },
   "save": "Spara",
   "update": {

@@ -2,7 +2,6 @@ import { ReactElement } from "react";
 
 import { profileApi } from "src/apis";
 import { CacheKeysConstants, useQuery } from "src/core/query";
-import { SettingsPage } from "src/pages/SettingsPage";
 import { ErrorView } from "src/views/ErrorView";
 
 import { CurrentProfilePageNav } from "./CurrentProfilePage.nav";
@@ -42,7 +41,6 @@ export function CurrentProfilePageContainer(): ReactElement {
   return (
     <CurrentProfilePageNav>
       <CurrentProfileDetails profile={data} />
-      <SettingsPage />
     </CurrentProfilePageNav>
   );
 }
