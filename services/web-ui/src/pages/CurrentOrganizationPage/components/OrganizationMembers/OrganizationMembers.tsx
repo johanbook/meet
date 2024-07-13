@@ -68,6 +68,7 @@ export function OrganizationMembers(): ReactElement {
       <List>
         {data.map((member) => (
           <ListItem
+            disablePadding
             key={member.profileId}
             secondaryAction={<OrganizationMemberMenu member={member} />}
           >
