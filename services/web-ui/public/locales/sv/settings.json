@@ -1,4 +1,5 @@
 {
+  "description": "Här kan du ändra dina permanenta inställningar. Detta kommer att komma mer här allteftersom.",
   "danger-zone": {
     "description": "Detta är åtgärder som inte kan ångras",
     "header": "Farozon",

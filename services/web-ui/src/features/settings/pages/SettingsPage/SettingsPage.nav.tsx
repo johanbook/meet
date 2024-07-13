@@ -1,5 +1,7 @@
 import { ReactElement, ReactNode } from "react";
 
+import { Typography } from "@mui/material";
+
 import { NavLayout } from "src/components/layout";
 import { useTranslation } from "src/core/i18n";
 
@@ -14,6 +16,8 @@ export function SettingsPageNav({
 
   return (
     <NavLayout header={t("header")} linkText="Back" to="/profile">
+      <Typography color="textSecondary">{t("description")}</Typography>
+
       {children}
     </NavLayout>
   );
