@@ -39,6 +39,7 @@ export class PostChatMessageHandler
     }
 
     const chatMessage = new ChatMessage();
+    chatMessage.conversation = chatConversation;
     chatMessage.message = command.message;
     chatMessage.senderId = currentProfileId;
 
