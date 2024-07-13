@@ -11,10 +11,12 @@ export interface NotFoundNavProps {
 
 export function NotFoundNav({ children }: NotFoundNavProps): ReactElement {
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", height: "100vh" }}>
       <AppBar />
-      <Box component="main" sx={{ flexGrow: 1, padding: 3, paddingTop: 1 }}>
-        <Toolbar />
+      <Box
+        component="main"
+        sx={{ flexGrow: 1, padding: 3, paddingTop: 1, height: "100%" }}
+      >
         {children}
         <Toolbar />
       </Box>
