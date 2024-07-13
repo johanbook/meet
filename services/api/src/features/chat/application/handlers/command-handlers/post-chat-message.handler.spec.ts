@@ -1,43 +1,47 @@
 import { Repository } from "typeorm";
 
-import { UserIdService } from "src/core/authentication";
 import { map } from "src/core/mapper";
-import { Profile } from "src/core/profiles";
-import { createMockRepository } from "src/test/mocks/repository.mock";
-import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
+import { TestSuite } from "src/test";
+import { createMockRepository } from "src/test/mocks";
 
 import { ChatMessageService } from "../../../domain/services/chat-message.service";
+import { ChatConversation } from "../../../infrastructure/entities/chat-conversation.entity";
+import { ChatMessage } from "../../../infrastructure/entities/chat-message.entity";
 import { PostChatMessageCommand } from "../../contracts/commands/post-chat-message.command";
 import { PostChatMessageHandler } from "./post-chat-message.handler";
 
 describe(PostChatMessageHandler.name, () => {
+  let chatConversations: Repository<ChatConversation>;
+  let chatMessages: Repository<ChatMessage>;
+
   let chatMessageService: ChatMessageService;
-  let profiles: Repository<Profile>;
-  let userIdService: UserIdService;
-
-  let mockProfile: Profile;
-
   let commandHandler: PostChatMessageHandler;
+  let testSuite: TestSuite;
 
   beforeEach(() => {
-    chatMessageService = { saveChatMessage: jest.fn() } as any;
+    testSuite = new TestSuite();
 
-    mockProfile = new Profile();
-    mockProfile.id = 1;
+    chatConversations = createMockRepository<ChatConversation>();
+    chatMessages = createMockRepository<ChatMessage>();
 
-    profiles = createMockRepository<Profile>([mockProfile]);
-    userIdService = createUserIdServiceMock();
+    chatMessageService = new ChatMessageService(
+      testSuite.eventBus,
+      chatMessages,
+    );
 
     commandHandler = new PostChatMessageHandler(
+      chatConversations,
       chatMessageService,
-      profiles,
-      userIdService,
+      testSuite.currentProfileService,
     );
   });
 
   describe("execute", () => {
     it("should post new chat message", async () => {
+      chatConversations.save({} as unknown as ChatConversation);
+
       const chatMessage = {
+        chatConversationId: "my-conversation-id",
         message: "my-message",
         profileId: 2,
       };
@@ -46,10 +50,24 @@ describe(PostChatMessageHandler.name, () => {
 
       await commandHandler.execute(command);
 
-      expect(chatMessageService.saveChatMessage).toHaveBeenCalledWith({
-        message: command.message,
-        senderId: mockProfile.id,
-      });
+      const storedMessages = await chatMessages.find();
+      expect(storedMessages).toHaveLength(1);
+      expect(storedMessages[0].message).toBe(command.message);
+    });
+
+    it("should throw if conversation not found", async () => {
+      const chatMessage = {
+        chatConversationId: "my-conversation-id",
+        message: "my-message",
+        profileId: 2,
+      };
+
+      const command = map(PostChatMessageCommand, chatMessage);
+
+      await expect(commandHandler.execute(command)).rejects.toHaveProperty(
+        "message",
+        "Conversation not found",
+      );
     });
   });
 });

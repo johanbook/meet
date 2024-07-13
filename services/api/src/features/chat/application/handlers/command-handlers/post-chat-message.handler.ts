@@ -3,10 +3,10 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { UserIdService } from "src/core/authentication";
-import { Profile } from "src/core/profiles";
+import { CurrentProfileService } from "src/core/profiles";
 
 import { ChatMessageService } from "../../../domain/services/chat-message.service";
+import { ChatConversation } from "../../../infrastructure/entities/chat-conversation.entity";
 import { ChatMessage } from "../../../infrastructure/entities/chat-message.entity";
 import { PostChatMessageCommand } from "../../contracts/commands/post-chat-message.command";
 
@@ -15,27 +15,32 @@ export class PostChatMessageHandler
   implements ICommandHandler<PostChatMessageCommand, void>
 {
   constructor(
+    @InjectRepository(ChatConversation)
+    private readonly chatConversations: Repository<ChatConversation>,
     private readonly chatMessageService: ChatMessageService,
-    @InjectRepository(Profile)
-    private readonly profiles: Repository<Profile>,
-    private readonly userIdService: UserIdService,
+    private readonly currentProfileService: CurrentProfileService,
   ) {}
 
   async execute(command: PostChatMessageCommand) {
-    const userId = this.userIdService.getUserId();
+    const currentProfileId =
+      await this.currentProfileService.fetchCurrentProfileId();
 
-    const currentProfile = await this.profiles.findOne({
-      where: { userId },
+    const chatConversation = await this.chatConversations.findOne({
+      where: {
+        id: command.chatConversationId,
+        members: {
+          profileId: currentProfileId,
+        },
+      },
     });
 
-    if (!currentProfile) {
-      throw new NotFoundException();
+    if (!chatConversation) {
+      throw new NotFoundException("Conversation not found");
     }
 
     const chatMessage = new ChatMessage();
     chatMessage.message = command.message;
-    // chatMessage.receiverId = command.profileId;
-    chatMessage.senderId = currentProfile.id;
+    chatMessage.senderId = currentProfileId;
 
     await this.chatMessageService.saveChatMessage(chatMessage);
   }
