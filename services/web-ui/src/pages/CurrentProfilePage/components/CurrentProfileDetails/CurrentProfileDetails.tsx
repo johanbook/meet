@@ -37,7 +37,7 @@ const NavItem = ({
   to,
 }: {
   Icon: FC;
-  text: string;
+  text: string | null;
   to: string;
 }) => (
   <ListItem disablePadding>
@@ -106,12 +106,28 @@ export function CurrentProfileDetails({
       </Center>
 
       <List sx={{ pt: 3 }}>
-        <NavItem Icon={Palette} text="Appearence" to="/profile/appearence" />
-        <NavItem Icon={Group} text="Current group" to="/group" />
-        <NavItem Icon={Groups} text="Groups" to="/group/list" />
-        <NavItem Icon={Book} text="Journal" to="/profile/journal" />
-        <NavItem Icon={Settings} text="Settings" to="/profile/settings" />
-        <NavItem Icon={Logout} text="Log out" to="/logout" />
+        <NavItem
+          Icon={Palette}
+          text={t("links.appearence")}
+          to="/profile/appearence"
+        />
+        <NavItem
+          Icon={Group}
+          text={t("links.current-organization")}
+          to="/group"
+        />
+        <NavItem
+          Icon={Groups}
+          text={t("links.list-organizations")}
+          to="/group/list"
+        />
+        <NavItem Icon={Book} text={t("links.journal")} to="/profile/journal" />
+        <NavItem
+          Icon={Settings}
+          text={t("links.settings")}
+          to="/profile/settings"
+        />
+        <NavItem Icon={Logout} text={t("links.log-out")} to="/logout" />
       </List>
 
       <form style={{ display: "none" }}>

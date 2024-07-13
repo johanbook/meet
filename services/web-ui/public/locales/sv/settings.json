@@ -1,14 +1,4 @@
 {
-  "advanced": {
-    "header": "Avancerade inställningar",
-    "links": {
-      "create-organization": "Skapa ny grupp",
-      "current-organization": "Hantera nuvarande grupp",
-      "journal": "Journal",
-      "list-organizations": "Se dina grupper",
-      "new-organization": "Skapa ny grupp"
-    }
-  },
   "danger-zone": {
     "description": "Detta är åtgärder som inte kan ångras",
     "header": "Farozon",

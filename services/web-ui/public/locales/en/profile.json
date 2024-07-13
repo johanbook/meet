@@ -12,7 +12,15 @@
   },
   "header": "Profile",
   "links": {
-    "blog": "Blog"
+    "appearence": "Appearence",
+    "blog": "Blog",
+    "create-organization": "Create new group",
+    "current-organization": "Current group",
+    "journal": "Journal",
+    "list-organizations": "Groups",
+    "log-out": "Log out",
+    "new-organization": "Create new group",
+    "settings": "Settings"
   },
   "save": "Save",
   "update": {

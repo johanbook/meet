@@ -1,14 +1,4 @@
 {
-  "advanced": {
-    "header": "高级设置",
-    "links": {
-      "create-organization": "创建新的组织",
-      "current-organization": "管理当前组织",
-      "journal": "日志",
-      "list-organizations": "查看可用组织",
-      "new-organization": "创建新的组织"
-    }
-  },
   "darkmode": "深色模式",
   "header": "设置"
 }

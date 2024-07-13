@@ -76,6 +76,10 @@ const router = createBrowserRouter([
         element: <CurrentProfilePage />,
       },
       {
+        path: "/profile/appearence",
+        element: <SettingsPage />,
+      },
+      {
         path: "/profile/journal",
         element: <ProfileJournalPage />,
       },
@@ -86,10 +90,6 @@ const router = createBrowserRouter([
       {
         path: "/profile/:id",
         element: <ProfilePage />,
-      },
-      {
-        path: "/settings",
-        element: <SettingsPage />,
       },
     ],
   },

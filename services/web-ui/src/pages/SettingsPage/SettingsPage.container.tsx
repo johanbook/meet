@@ -4,14 +4,7 @@ import { Box, FormControlLabel, FormGroup } from "@mui/material";
 
 import { SettingsDetails } from "src/api";
 import { profileApi, settingsApi } from "src/apis";
-import {
-  Button,
-  ConfirmationDialog,
-  Link,
-  List,
-  ListItem,
-  Typography,
-} from "src/components/ui";
+import { Button, ConfirmationDialog, Typography } from "src/components/ui";
 import { Switch } from "src/components/ui";
 import { useDialog } from "src/core/dialog";
 import { useTranslation } from "src/core/i18n";
@@ -20,7 +13,7 @@ import { CacheKeysConstants, useQuery } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 import { ErrorView } from "src/views/ErrorView";
 
-import { SettingsPageHeader } from "./SettingsPage.header";
+import { SettingsPageNav } from "./SettingsPage.nav";
 import { SettingsPageSkeleton } from "./SettingsPage.skeleton";
 
 export function SettingsPageContainer(): ReactElement {
@@ -47,28 +40,25 @@ export function SettingsPageContainer(): ReactElement {
 
   if (error) {
     return (
-      <>
-        <SettingsPageHeader />
+      <SettingsPageNav>
         <ErrorView />
-      </>
+      </SettingsPageNav>
     );
   }
 
   if (isPending) {
     return (
-      <>
-        <SettingsPageHeader />
+      <SettingsPageNav>
         <SettingsPageSkeleton />
-      </>
+      </SettingsPageNav>
     );
   }
 
   if (!data) {
     return (
-      <>
-        <SettingsPageHeader />
+      <SettingsPageNav>
         <ErrorView message="Settings not found" />
-      </>
+      </SettingsPageNav>
     );
   }
 
@@ -100,67 +90,46 @@ export function SettingsPageContainer(): ReactElement {
         flexDirection: "column",
       }}
     >
-      <SettingsPageHeader />
+      <SettingsPageNav>
+        <Box sx={{ flexGrow: 1 }}>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  onChange={(value) =>
+                    handleChange({
+                      ...data,
+                      darkmode: value,
+                    })
+                  }
+                  value={data.darkmode}
+                />
+              }
+              disabled={isPending || mutation.isPending}
+              label={t("darkmode")}
+            />
+          </FormGroup>
+        </Box>
 
-      <Box sx={{ flexGrow: 1 }}>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch
-                onChange={(value) =>
-                  handleChange({
-                    ...data,
-                    darkmode: value,
-                  })
-                }
-                value={data.darkmode}
-              />
-            }
-            disabled={isPending || mutation.isPending}
-            label={t("darkmode")}
-          />
-        </FormGroup>
-      </Box>
+        <Typography gutterBottom sx={{ paddingTop: 3 }} variant="h5">
+          {t("danger-zone.header")}
+        </Typography>
 
-      <Typography gutterBottom sx={{ paddingTop: 3 }} variant="h5">
-        {t("advanced.header")}
-      </Typography>
+        <Typography color="textSecondary" sx={{ pb: 2 }}>
+          {t("danger-zone.description")}
+        </Typography>
 
-      <List>
-        <ListItem>
-          <Link to="/group/list">{t("advanced.links.list-organizations")}</Link>
-        </ListItem>
-        <ListItem>
-          <Link to="/group">{t("advanced.links.current-organization")}</Link>
-        </ListItem>
-        <ListItem>
-          <Link to="/group/create">
-            {t("advanced.links.create-organization")}
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link to="/profile/journal">{t("advanced.links.journal")}</Link>
-        </ListItem>
-      </List>
-
-      <Typography gutterBottom sx={{ paddingTop: 3 }} variant="h5">
-        {t("danger-zone.header")}
-      </Typography>
-
-      <Typography color="textSecondary" sx={{ pb: 2 }}>
-        {t("danger-zone.description")}
-      </Typography>
-
-      <div>
-        <Button
-          color="error"
-          loading={deleteAccountMutation.isPending}
-          onClick={handleClickDelete}
-          variant="contained"
-        >
-          {t("danger-zone.delete-account.button")}
-        </Button>
-      </div>
+        <div>
+          <Button
+            color="error"
+            loading={deleteAccountMutation.isPending}
+            onClick={handleClickDelete}
+            variant="contained"
+          >
+            {t("danger-zone.delete-account.button")}
+          </Button>
+        </div>
+      </SettingsPageNav>
     </Box>
   );
 }
