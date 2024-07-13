@@ -6,7 +6,7 @@ describe("<ChatTextField />", () => {
   it("renders", () => {
     render(
       <ReactQueryTestProvider>
-        <ChatTextField onSentMessage={jest.fn()} receiverProfileId={1} />
+        <ChatTextField conversationId="1" onSentMessage={jest.fn()} />
       </ReactQueryTestProvider>
     );
     const textbox = screen.getByRole("textbox");
