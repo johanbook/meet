@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Typography, useTheme } from "@mui/material";
+import { Avatar, Box, Typography, useTheme } from "@mui/material";
 
 import { ChatMessageDetails } from "src/api";
 
@@ -20,6 +20,14 @@ export function ChatMessage({ message }: ChatMessageProps): React.ReactElement {
         justifyContent: message.sentByCurrentUser ? "right" : "left",
       }}
     >
+      {!message.sentByCurrentUser && (
+        <Avatar
+          imgProps={{ loading: "lazy" }}
+          src={message.profile.imageUrl}
+          sx={{ mr: 1, width: 34, height: 34, mt: 1 / 2 }}
+        />
+      )}
+
       <Typography
         component="span"
         sx={{

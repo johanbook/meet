@@ -6,14 +6,14 @@ import { ChatMessageDetails } from "src/api";
 
 import { ChatMessage } from "../ChatMessage/ChatMessage";
 
-export interface ChatMessageListProps {
+interface ChatMessageListProps {
   messages: ChatMessageDetails[];
 }
 
 export function ChatMessageList({
   messages,
 }: ChatMessageListProps): React.ReactElement {
-  // The Flex layout used to keep focus at bottom of container 
+  // The Flex layout used to keep focus at bottom of container
   // shows messages in reverse order
   const shownMessages = [...messages].reverse();
 
