@@ -69,7 +69,13 @@ export function CreateChatPageContainer(): ReactElement {
 
   const options = data
     .map((x) => ({ id: x.profileId, label: x.name, imageUrl: x.imageUrl }))
-    .filter((x) => x.id !== currentProfileQuery.data.id);
+    .filter((x) => {
+      if (x.id !== currentProfileQuery.data.id) {
+        return false;
+      }
+
+      return !members.some((member) => member.id === x.id);
+    });
 
   return (
     <CreateChatPageNav>
@@ -86,6 +92,7 @@ export function CreateChatPageContainer(): ReactElement {
             </Box>
           </Box>
         )}
+        sx={{ pt: 1 }}
         value={members}
       />
 
