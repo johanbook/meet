@@ -1,10 +1,13 @@
 import { ReactElement, useState } from "react";
+import { useNavigate } from "react-router";
 
 import { Autocomplete, TextField } from "@mui/material";
 
-import { chatsApi, organizationsApi } from "src/apis";
+import { chatsApi, organizationsApi, profileApi } from "src/apis";
 import { Button } from "src/components/ui";
-import { useMutation, useQuery } from "src/core/query";
+import { useTranslation } from "src/core/i18n";
+import { CacheKeysConstants, useMutation, useQuery } from "src/core/query";
+import { useSnackbar } from "src/core/snackbar";
 import { ErrorView } from "src/views/ErrorView";
 
 import { CreateChatPageNav } from "./CreateChatPage.nav";
@@ -16,14 +19,28 @@ interface Option {
 }
 
 export function CreateChatPageContainer(): ReactElement {
+  const navigate = useNavigate();
+  const snackbar = useSnackbar();
+  const { t } = useTranslation("chat-create");
+
   const { error, data, isPending } = useQuery({
     queryKey: ["members"],
     queryFn: () => organizationsApi.getCurrentOrganizationMembers(),
   });
 
+  const currentProfileQuery = useQuery({
+    queryKey: [CacheKeysConstants.CurrentProfile],
+    queryFn: () => profileApi.getCurrentProfile(),
+  });
+
   const [members, setMembers] = useState<Option[]>([]);
 
   const createChatMutation = useMutation({
+    onError: () => snackbar.error(t("create.error")),
+    onSuccess: () => {
+      snackbar.success(t("create.success"));
+      navigate("/chat");
+    },
     mutationFn: () =>
       chatsApi.createConversation({
         createChatCommand: {
@@ -32,7 +49,7 @@ export function CreateChatPageContainer(): ReactElement {
       }),
   });
 
-  if (error) {
+  if (error || currentProfileQuery.error) {
     return (
       <CreateChatPageNav>
         <ErrorView />
@@ -40,7 +57,7 @@ export function CreateChatPageContainer(): ReactElement {
     );
   }
 
-  if (isPending) {
+  if (isPending || currentProfileQuery.isPending) {
     return (
       <CreateChatPageNav>
         <CreateChatPageSkeleton />
@@ -48,7 +65,9 @@ export function CreateChatPageContainer(): ReactElement {
     );
   }
 
-  const options = data.map((x) => ({ id: x.profileId, label: x.name }));
+  const options = data
+    .map((x) => ({ id: x.profileId, label: x.name }))
+    .filter((x) => x.id !== currentProfileQuery.data.id);
 
   return (
     <CreateChatPageNav>
@@ -67,7 +86,7 @@ export function CreateChatPageContainer(): ReactElement {
         sx={{ mt: 2 }}
         variant="contained"
       >
-        Create
+        {t("create.button")}
       </Button>
     </CreateChatPageNav>
   );
