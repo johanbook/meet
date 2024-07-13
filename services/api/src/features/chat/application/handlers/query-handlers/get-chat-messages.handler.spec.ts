@@ -25,6 +25,7 @@ describe(GetChatMessagesHandler.name, () => {
 
     const chatMessage = new ChatMessage();
     chatMessage.conversationId = conversation.id;
+    chatMessage.sender = sendingProfile;
     chatMessage.senderId = sendingProfile.id;
 
     chatMessages = createMockRepository<ChatMessage>([chatMessage]);
@@ -35,10 +36,13 @@ describe(GetChatMessagesHandler.name, () => {
       fetchCurrentProfileId: jest.fn(() => sendingProfile.id),
     } as any;
 
+    const photoService = { getUrl: jest.fn() } as any;
+
     queryHandler = new GetChatMessagesHandler(
       chatMessages,
       currentOrganizationService,
       currentProfileService,
+      photoService,
     );
   });
 
