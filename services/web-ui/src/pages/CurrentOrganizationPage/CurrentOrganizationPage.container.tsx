@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import { Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 
 import { organizationsApi } from "src/apis";
 import { useTranslation } from "src/core/i18n";
@@ -24,7 +24,7 @@ export function CurrentOrganizationPageContainer(): ReactElement {
   if (error) {
     return (
       <CurrentOrganizationPageNav>
-        <ErrorView  />
+        <ErrorView />
       </CurrentOrganizationPageNav>
     );
   }
@@ -47,12 +47,22 @@ export function CurrentOrganizationPageContainer(): ReactElement {
 
   return (
     <CurrentOrganizationPageNav>
-      <Typography color="textSecondary">
-        {t("created-at", { date: getDate(data.created) })}
-      </Typography>
+      <Box sx={{ pt: 1, display: "flex", gap: 2, alignItems: "center" }}>
+        <Box>
+          <Avatar sx={{ width: 56, height: 56 }}>{data.name[0]}</Avatar>
+        </Box>
+        <Box>
+          <Typography variant="h5">{data.name}</Typography>
+
+          <Typography color="textSecondary">
+            {t("created-at", { date: getDate(data.created) })}
+          </Typography>
+        </Box>
+      </Box>
+
+      <OrganizationMembers />
 
       <OrganizationSettings data={data} />
-      <OrganizationMembers />
     </CurrentOrganizationPageNav>
   );
 }

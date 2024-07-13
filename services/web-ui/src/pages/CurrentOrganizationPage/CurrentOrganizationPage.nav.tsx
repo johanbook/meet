@@ -13,7 +13,7 @@ export function CurrentOrganizationPageNav({
   const { t } = useTranslation("organization");
 
   return (
-    <NavLayout header={t("header")} linkText={t("links.back")} to="/profile">
+    <NavLayout linkText={t("links.back")} to="/profile">
       {children}
     </NavLayout>
   );
