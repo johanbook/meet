@@ -82,6 +82,8 @@ export function ChatPageContainer(): ReactElement {
         display: "flex",
         flexDirection: "column",
         height: "100%",
+        px: 3,
+        pt: 1
       }}
     >
       <ChatPageNav>
