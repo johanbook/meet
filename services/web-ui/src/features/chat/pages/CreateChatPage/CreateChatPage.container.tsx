@@ -1,9 +1,10 @@
 import { ReactElement, useState } from "react";
 import { useNavigate } from "react-router";
 
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, Box, TextField } from "@mui/material";
 
 import { chatsApi, organizationsApi, profileApi } from "src/apis";
+import { ProfileAvatar } from "src/components/ProfileAvatar";
 import { Button } from "src/components/ui";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useMutation, useQuery } from "src/core/query";
@@ -15,6 +16,7 @@ import { CreateChatPageSkeleton } from "./CreateChatPage.skeleton";
 
 interface Option {
   id: number;
+  imageUrl?: string;
   label: string;
 }
 
@@ -66,7 +68,7 @@ export function CreateChatPageContainer(): ReactElement {
   }
 
   const options = data
-    .map((x) => ({ id: x.profileId, label: x.name }))
+    .map((x) => ({ id: x.profileId, label: x.name, imageUrl: x.imageUrl }))
     .filter((x) => x.id !== currentProfileQuery.data.id);
 
   return (
@@ -76,6 +78,14 @@ export function CreateChatPageContainer(): ReactElement {
         onChange={(_, newValue) => setMembers(newValue)}
         options={options}
         renderInput={(params) => <TextField label="Members" {...params} />}
+        renderOption={(props, option) => (
+          <Box {...props} component="li">
+            <ProfileAvatar name={option.label} src={option.imageUrl} />
+            <Box component="span" sx={{ pl: 2 }}>
+              {option.label}
+            </Box>
+          </Box>
+        )}
         value={members}
       />
 
