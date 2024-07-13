@@ -1,13 +1,16 @@
 import { ReactElement } from "react";
 
-import { Typography } from "@mui/material";
+import { ErrorView } from "src/views/ErrorView";
 
 import { NotFoundNav } from "./NotFoundPage.nav";
 
 export function NotFoundPage(): ReactElement {
   return (
     <NotFoundNav>
-      <Typography>The page you were looking for was not found</Typography>
+      <ErrorView
+        description="The page you were looking for was not found"
+        message="Page not found"
+      />
     </NotFoundNav>
   );
 }
