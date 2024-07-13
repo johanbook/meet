@@ -26,7 +26,9 @@ export function CreateChatPageContainer(): ReactElement {
   const createChatMutation = useMutation({
     mutationFn: () =>
       chatsApi.createConversation({
-        profileIds: members.map((member) => member.id),
+        createChatCommand: {
+          profileIds: members.map((member) => member.id),
+        },
       }),
   });
 
@@ -46,7 +48,7 @@ export function CreateChatPageContainer(): ReactElement {
     );
   }
 
-  const options = data.map((x) => ({ id: x.id, label: x.name }));
+  const options = data.map((x) => ({ id: x.profileId, label: x.name }));
 
   return (
     <CreateChatPageNav>

@@ -22,7 +22,7 @@ export class ChatsController {
   }
 
   @Post()
-  async createConversation(@Query() command: CreateChatCommand): Promise<void> {
+  async createConversation(@Body() command: CreateChatCommand): Promise<void> {
     return await this.commandBus.execute(command);
   }
 
