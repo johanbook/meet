@@ -1,4 +1,4 @@
-import { NotFoundException } from "@nestjs/common";
+import { BadRequestException, NotFoundException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
 import { CurrentOrganizationService } from "src/core/organizations";
@@ -34,6 +34,10 @@ export class CreateChatHandler
 
     const currentProfileId =
       await this.currentProfileService.fetchCurrentProfileId();
+
+    if (command.profileIds.includes(currentProfileId)) {
+      throw new BadRequestException("Cannot add current profile twice to chat");
+    }
 
     const conversation = new ChatConversation();
     conversation.organizationId = currentOrganizationId;
