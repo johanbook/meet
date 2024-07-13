@@ -1,16 +1,16 @@
-import React, { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 import { Box, Typography } from "@mui/material";
 
 import { useTranslation } from "src/core/i18n";
 
-export interface ConversationsPageNavProps {
+export interface ChatListPageNavProps {
   children: ReactNode;
 }
 
-export function ConversationsPageNav({
+export function ChatListPageNav({
   children,
-}: ConversationsPageNavProps): React.ReactElement {
+}: ChatListPageNavProps): ReactElement {
   const { t } = useTranslation("connections");
 
   return (

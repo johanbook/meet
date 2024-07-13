@@ -7,11 +7,11 @@ import { useTranslation } from "src/core/i18n";
 import { useQuery } from "src/core/query";
 import { ErrorView } from "src/views/ErrorView";
 
-import { ConversationsPageComponent } from "./ConversationsPage.component";
-import { ConversationsPageNav } from "./ConversationsPage.nav";
-import { ConversationsPageSkeleton } from "./ConversationsPage.skeleton";
+import { ChatListPageComponent } from "./ChatListPage.component";
+import { ChatListPageNav } from "./ChatListPage.nav";
+import { ChatListPageSkeleton } from "./ChatListPage.skeleton";
 
-export function ConversationsPageContainer(): ReactElement {
+export function ChatListPageContainer(): ReactElement {
   const { t } = useTranslation("connections");
 
   const { error, data, isPending } = useQuery({
@@ -21,33 +21,33 @@ export function ConversationsPageContainer(): ReactElement {
 
   if (error) {
     return (
-      <ConversationsPageNav>
+      <ChatListPageNav>
         <ErrorView message="Unable to get chats" />
-      </ConversationsPageNav>
+      </ChatListPageNav>
     );
   }
 
   if (isPending) {
     return (
-      <ConversationsPageNav>
-        <ConversationsPageSkeleton />
-      </ConversationsPageNav>
+      <ChatListPageNav>
+        <ChatListPageSkeleton />
+      </ChatListPageNav>
     );
   }
 
   if (!data || data.length === 0) {
     return (
-      <ConversationsPageNav>
+      <ChatListPageNav>
         <Typography sx={{ paddingTop: 1 }} gutterBottom>
           {t("no-connections")}
         </Typography>
-      </ConversationsPageNav>
+      </ChatListPageNav>
     );
   }
 
   return (
-    <ConversationsPageNav>
-      <ConversationsPageComponent data={data} />
-    </ConversationsPageNav>
+    <ChatListPageNav>
+      <ChatListPageComponent data={data} />
+    </ChatListPageNav>
   );
 }

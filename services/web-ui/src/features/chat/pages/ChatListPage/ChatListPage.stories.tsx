@@ -2,7 +2,7 @@ import type { Meta } from "@storybook/react";
 
 import { ChatConversationDetails } from "src/api";
 
-import { ConversationsPageComponent } from "./ConversationsPage.component";
+import { ChatListPageComponent } from "./ChatListPage.component";
 
 const MATCHES_DATA: ChatConversationDetails[] = [
   {
@@ -25,9 +25,9 @@ const MATCHES_DATA: ChatConversationDetails[] = [
 ];
 
 export default {
-  title: "Pages/Conversations/Views",
+  title: "Pages/Chats/Views",
 } as Meta;
 
 export const Default = {
-  render: () => <ConversationsPageComponent data={MATCHES_DATA} />,
+  render: () => <ChatListPageComponent data={MATCHES_DATA} />,
 };

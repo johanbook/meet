@@ -6,8 +6,8 @@ import { GlobalDialogProvider } from "src/core/dialog";
 import { NavigationTrackingProvider } from "src/core/tracking/NavigationTrackingProvider";
 import { BlogPostListPage } from "src/features/blogs/pages/BlogPostListPage";
 import { BlogPostPage } from "src/features/blogs/pages/BlogPostPage";
-import { ConversationsPage } from "src/features/chat/pages/ConversationsPage";
-import { ChatPage } from "src/pages/ChatPage";
+import { ChatListPage } from "src/features/chat/pages/ChatListPage";
+import { ChatPage } from "src/features/chat/pages/ChatPage";
 import { CreateOrganizationPage } from "src/pages/CreateOrganizationPage";
 import { CurrentOrganizationPage } from "src/pages/CurrentOrganizationPage";
 import { CurrentProfilePage } from "src/pages/CurrentProfilePage";
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/chat",
-        element: <ConversationsPage />,
+        element: <ChatListPage />,
       },
       {
         path: "/chat/:id",
