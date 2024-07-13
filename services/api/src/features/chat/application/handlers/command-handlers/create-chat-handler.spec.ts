@@ -61,5 +61,16 @@ describe(CreateChatHandler.name, () => {
         "Profile not found in current organization",
       );
     });
+
+    it("should throw if trying to add current profile twice", async () => {
+      const command = map(CreateChatCommand, {
+        profileIds: ["my-profile-id" as unknown as number],
+      });
+
+      await expect(commandHandler.execute(command)).rejects.toHaveProperty(
+        "message",
+        "Cannot add current profile twice to chat",
+      );
+    });
   });
 });

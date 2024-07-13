@@ -14,6 +14,7 @@ import { CurrentProfileService, Profile } from "src/core/profiles";
 
 import {
   DEFAULT_MOCK_ORGANIZATION_ID,
+  DEFAULT_MOCK_PROFILE_ID,
   createEventBusMock,
   createMockRepository,
   createUserIdServiceMock,
@@ -38,16 +39,21 @@ export class TestSuite {
 
     this.activeOrganizations = createMockRepository<ActiveOrganization>([
       {
-        organizationId: DEFAULT_MOCK_ORGANIZATION_ID,
-        profileId: "my-profile-id",
+        organizationId: DEFAULT_MOCK_PROFILE_ID,
+        profileId: DEFAULT_MOCK_PROFILE_ID,
       } as unknown as ActiveOrganization,
     ]);
-    this.memberships = createMockRepository<OrganizationMembership>();
+    this.memberships = createMockRepository<OrganizationMembership>([
+      {
+        organizationId: DEFAULT_MOCK_ORGANIZATION_ID,
+        profileId: DEFAULT_MOCK_PROFILE_ID,
+      } as unknown as OrganizationMembership,
+    ]);
     this.organizations = createMockRepository<Organization>([
       { id: DEFAULT_MOCK_ORGANIZATION_ID } as unknown as Organization,
     ]);
     this.profiles = createMockRepository<Profile>([
-      { id: "my-profile-id" } as unknown as Profile,
+      { id: DEFAULT_MOCK_PROFILE_ID } as unknown as Profile,
     ]);
 
     const userIdService = createUserIdServiceMock();
