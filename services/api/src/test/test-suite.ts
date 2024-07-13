@@ -13,6 +13,7 @@ import { OrganizationMembership } from "src/core/organizations/infrastructure/en
 import { CurrentProfileService, Profile } from "src/core/profiles";
 
 import {
+  DEFAULT_MOCK_ORGANIZATION_ID,
   createEventBusMock,
   createMockRepository,
   createUserIdServiceMock,
@@ -37,13 +38,13 @@ export class TestSuite {
 
     this.activeOrganizations = createMockRepository<ActiveOrganization>([
       {
-        organizationId: "my-organization-id",
+        organizationId: DEFAULT_MOCK_ORGANIZATION_ID,
         profileId: "my-profile-id",
       } as unknown as ActiveOrganization,
     ]);
     this.memberships = createMockRepository<OrganizationMembership>();
     this.organizations = createMockRepository<Organization>([
-      { id: "my-organization-id" } as unknown as Organization,
+      { id: DEFAULT_MOCK_ORGANIZATION_ID } as unknown as Organization,
     ]);
     this.profiles = createMockRepository<Profile>([
       { id: "my-profile-id" } as unknown as Profile,
@@ -77,5 +78,20 @@ export class TestSuite {
       this.membershipService,
       this.organizations,
     );
+  }
+
+  public async createProfile() {
+    const { id: profileId } = await this.profiles.save(
+      {} as unknown as Profile,
+    );
+
+    return { profileId };
+  }
+
+  public async addProfileToCurrentOrganization(profileId: number) {
+    await this.memberships.save({
+      organizationId: DEFAULT_MOCK_ORGANIZATION_ID,
+      profileId,
+    } as unknown as OrganizationMembership);
   }
 }

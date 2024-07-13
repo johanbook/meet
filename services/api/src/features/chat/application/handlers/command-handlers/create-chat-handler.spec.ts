@@ -35,12 +35,20 @@ describe(CreateChatHandler.name, () => {
 
   describe("execute", () => {
     it("should save new conversation", async () => {
-      const command = map(CreateChatCommand, { profileIds: [] });
+      const { profileId } = await testSuite.createProfile();
+      testSuite.addProfileToCurrentOrganization(profileId);
+
+      const command = map(CreateChatCommand, { profileIds: [profileId] });
 
       await commandHandler.execute(command);
 
       const savedConversations = await chatConversations.find();
       expect(savedConversations).toHaveLength(1);
+
+      const conversation = savedConversations[0];
+      expect(conversation.members).toHaveLength(2);
+      expect(conversation.members[0].profileId).toBe("my-profile-id");
+      expect(conversation.members[1].profileId).toBe(profileId);
     });
 
     it("should throw if profiles not part of organization", async () => {
