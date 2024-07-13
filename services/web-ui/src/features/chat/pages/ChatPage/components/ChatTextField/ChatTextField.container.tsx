@@ -7,14 +7,14 @@ import { useSnackbar } from "src/core/snackbar";
 
 import { ChatTextFieldComponent } from "./ChatTextField.component";
 
-export interface ChatTextFieldContainerProps {
+interface ChatTextFieldContainerProps {
+  conversationId: string;
   onSentMessage: () => void;
-  receiverProfileId: number;
 }
 
 export function ChatTextFieldContainer({
+  conversationId,
   onSentMessage,
-  receiverProfileId,
 }: ChatTextFieldContainerProps): ReactElement {
   const snackbar = useSnackbar();
 
@@ -31,7 +31,7 @@ export function ChatTextFieldContainer({
 
     setValue("");
 
-    await mutation.mutateAsync({ message, profileId: receiverProfileId });
+    await mutation.mutateAsync({ chatConversationId: conversationId, message });
 
     onSentMessage();
   }

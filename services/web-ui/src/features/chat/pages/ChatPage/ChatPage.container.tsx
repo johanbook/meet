@@ -22,7 +22,7 @@ export function ChatPageContainer(): ReactElement {
 
   const { error, data, isLoading, refetch } = useQuery({
     queryKey: ["chat", id],
-    queryFn: () => chatsApi.getChats({ conversationId: id }),
+    queryFn: () => chatsApi.getChatMessages({ conversationId: id }),
   });
 
   useHandleNotification({
@@ -39,8 +39,6 @@ export function ChatPageContainer(): ReactElement {
       </ChatPageNav>
     );
   }
-
-  const receiverProfileId = Number.parseInt(id);
 
   if (error) {
     return (
@@ -72,10 +70,7 @@ export function ChatPageContainer(): ReactElement {
             <Typography color="textSecondary">{t("no-messages")}</Typography>
           </Box>
 
-          <ChatTextField
-            onSentMessage={refetch}
-            receiverProfileId={receiverProfileId}
-          />
+          <ChatTextField conversationId={id} onSentMessage={refetch} />
         </ChatPageNav>
       </Box>
     );
@@ -94,10 +89,7 @@ export function ChatPageContainer(): ReactElement {
           <ChatMessageList messages={data} />
         </Box>
 
-        <ChatTextField
-          onSentMessage={refetch}
-          receiverProfileId={receiverProfileId}
-        />
+        <ChatTextField conversationId={id} onSentMessage={refetch} />
       </ChatPageNav>
     </Box>
   );

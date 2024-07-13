@@ -24,7 +24,10 @@ export function CreateChatPageContainer(): ReactElement {
   const [members, setMembers] = useState<Option[]>([]);
 
   const createChatMutation = useMutation({
-    mutationFn: () => chatsApi.getConversations(),
+    mutationFn: () =>
+      chatsApi.createConversation({
+        profileIds: members.map((member) => member.id),
+      }),
   });
 
   if (error) {
