@@ -80,6 +80,10 @@ const router = createBrowserRouter([
         element: <ProfileJournalPage />,
       },
       {
+        path: "/profile/settings",
+        element: <SettingsPage />,
+      },
+      {
         path: "/profile/:id",
         element: <ProfilePage />,
       },

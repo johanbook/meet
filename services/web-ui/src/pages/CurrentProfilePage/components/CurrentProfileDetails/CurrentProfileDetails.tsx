@@ -1,6 +1,25 @@
-import { ReactElement, SyntheticEvent, useState } from "react";
+import { FC, ReactElement, SyntheticEvent, useState } from "react";
+import { Link } from "react-router-dom";
 
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Book,
+  Group,
+  Groups,
+  Logout,
+  Palette,
+  Settings,
+} from "@mui/icons-material";
+import {
+  Box,
+  Button,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 import { ProfileDetails, UpdateProfileCommand } from "src/api";
 import { profileApi } from "src/apis";
@@ -12,7 +31,26 @@ import { useSnackbar } from "src/core/snackbar";
 
 import { CurrentProfileAvatar } from "../CurrentProfileAvatar";
 
-export interface CurrentProfileDetailsProps {
+const NavItem = ({
+  Icon,
+  text,
+  to,
+}: {
+  Icon: FC;
+  text: string;
+  to: string;
+}) => (
+  <ListItem disablePadding>
+    <ListItemButton component={Link} to={to}>
+      <ListItemIcon>
+        <Icon />
+      </ListItemIcon>
+      <ListItemText primary={text} />
+    </ListItemButton>
+  </ListItem>
+);
+
+interface CurrentProfileDetailsProps {
   profile: ProfileDetails;
 }
 
@@ -58,12 +96,25 @@ export function CurrentProfileDetails({
       </Center>
 
       <Center>
-        <Typography gutterBottom sx={{ paddingTop: 2 }} variant="h5">
+        <Typography sx={{ pt: 3 }} variant="h5">
           {profile.name}
         </Typography>
       </Center>
 
-      <form>
+      <Center>
+        <Typography gutterBottom>{profile.description}</Typography>
+      </Center>
+
+      <List sx={{ pt: 3 }}>
+        <NavItem Icon={Palette} text="Appearence" to="/profile/appearence" />
+        <NavItem Icon={Group} text="Current group" to="/group" />
+        <NavItem Icon={Groups} text="Groups" to="/group/list" />
+        <NavItem Icon={Book} text="Journal" to="/profile/journal" />
+        <NavItem Icon={Settings} text="Settings" to="/profile/settings" />
+        <NavItem Icon={Logout} text="Log out" to="/logout" />
+      </List>
+
+      <form style={{ display: "none" }}>
         <TextField
           fullWidth
           disabled={mutation.isPending}
