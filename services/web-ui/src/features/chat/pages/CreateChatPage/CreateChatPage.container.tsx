@@ -70,7 +70,7 @@ export function CreateChatPageContainer(): ReactElement {
   const options = data
     .map((x) => ({ id: x.profileId, label: x.name, imageUrl: x.imageUrl }))
     .filter((x) => {
-      if (x.id !== currentProfileQuery.data.id) {
+      if (x.id === currentProfileQuery.data.id) {
         return false;
       }
 
