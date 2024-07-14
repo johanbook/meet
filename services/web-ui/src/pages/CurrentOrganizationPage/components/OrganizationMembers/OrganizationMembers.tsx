@@ -2,7 +2,6 @@ import { ReactElement } from "react";
 import { Link } from "react-router-dom";
 
 import {
-  Avatar,
   Box,
   List,
   ListItem,
@@ -14,6 +13,7 @@ import {
 } from "@mui/material";
 
 import { organizationsApi } from "src/apis";
+import { ProfileAvatar } from "src/components/ProfileAvatar";
 import { Button } from "src/components/ui";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { Permissions, useAuthorization } from "src/core/authorization";
@@ -77,7 +77,7 @@ export function OrganizationMembers(): ReactElement {
               to={`/profile/${member.profileId}`}
             >
               <ListItemAvatar>
-                <Avatar src={member.imageUrl} />
+                <ProfileAvatar name={member.name} src={member.imageUrl} />
               </ListItemAvatar>
               <ListItemText
                 primary={
