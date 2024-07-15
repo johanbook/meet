@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import {
-  Avatar,
   ListItem,
   ListItemAvatar,
   ListItemButton,
@@ -10,23 +9,33 @@ import {
 } from "@mui/material";
 
 import { ChatConversationDetails } from "src/api";
+import { ProfileAvatar } from "src/components/ProfileAvatar";
 
-export interface ConversationListItemProps {
+interface ConversationListItemProps {
   data: ChatConversationDetails;
-  divider?: boolean;
 }
 
 export function ConversationListItem({
   data,
-  divider,
 }: ConversationListItemProps): React.ReactElement {
+  let imageUrl = data.imageUrl;
+  let name = data.name;
+
+  if (!name) {
+    name = data.profiles.map((profile) => profile.name).join(", ");
+  }
+
+  if (!imageUrl) {
+    imageUrl = data.profiles[0].imageUrl;
+  }
+
   return (
-    <ListItem divider={divider}>
+    <ListItem disablePadding>
       <ListItemButton component={Link} to={`/chat/${data.id}`}>
         <ListItemAvatar>
-          <Avatar src={data.imageUrl} />
+          <ProfileAvatar name={name} src={imageUrl} />
         </ListItemAvatar>
-        <ListItemText primary={data.name} secondary={data.lastMessage} />
+        <ListItemText primary={name} secondary={data.lastMessage} />
       </ListItemButton>
     </ListItem>
   );
