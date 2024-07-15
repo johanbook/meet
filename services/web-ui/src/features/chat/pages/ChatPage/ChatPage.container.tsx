@@ -51,48 +51,34 @@ export function ChatPageContainer(): ReactElement {
   if (isLoading) {
     return (
       <ChatPageNav>
-        <ChatPageSkeleton />
+        <Box sx={{ flexGrow: 1 }}>
+          <ChatPageSkeleton />
+        </Box>
+
+        <ChatTextField conversationId={id} onSentMessage={refetch} />
       </ChatPageNav>
     );
   }
 
   if (!data || data.length === 0) {
     return (
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-        }}
-      >
-        <ChatPageNav>
-          <Box sx={{ flexGrow: 1 }}>
-            <Typography color="textSecondary">{t("no-messages")}</Typography>
-          </Box>
-
-          <ChatTextField conversationId={id} onSentMessage={refetch} />
-        </ChatPageNav>
-      </Box>
-    );
-  }
-
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        px: 3,
-        pt: 1
-      }}
-    >
       <ChatPageNav>
         <Box sx={{ flexGrow: 1 }}>
-          <ChatMessageList messages={data} />
+          <Typography color="textSecondary">{t("no-messages")}</Typography>
         </Box>
 
         <ChatTextField conversationId={id} onSentMessage={refetch} />
       </ChatPageNav>
-    </Box>
+    );
+  }
+
+  return (
+    <ChatPageNav>
+      <Box sx={{ flexGrow: 1 }}>
+        <ChatMessageList messages={data} />
+      </Box>
+
+      <ChatTextField conversationId={id} onSentMessage={refetch} />
+    </ChatPageNav>
   );
 }

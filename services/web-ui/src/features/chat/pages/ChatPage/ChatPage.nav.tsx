@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
 
 import { ArrowBackIosNew } from "@mui/icons-material";
-import { Link as MuiLink, Typography } from "@mui/material";
+import { Box, Link as MuiLink, Typography } from "@mui/material";
 
 import { useTranslation } from "src/core/i18n";
 
@@ -16,7 +16,15 @@ export function ChatPageNav({
   const { t } = useTranslation("chat");
 
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        px: 3,
+        pt: 1,
+      }}
+    >
       <MuiLink
         component={ReactRouterLink}
         sx={{
@@ -36,6 +44,6 @@ export function ChatPageNav({
       </Typography>
 
       {children}
-    </>
+    </Box>
   );
 }
