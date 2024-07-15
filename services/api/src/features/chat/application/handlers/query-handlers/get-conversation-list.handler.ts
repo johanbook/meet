@@ -2,13 +2,15 @@ import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { In, Repository } from "typeorm";
 
-import { mapArray } from "src/core/mapper";
+import { map, mapArray } from "src/core/mapper";
 import { CurrentOrganizationService } from "src/core/organizations";
 import { PhotoService } from "src/core/photos";
 import { CurrentProfileService, Profile } from "src/core/profiles";
+import { sortByField } from "src/utils/sorting.helper";
 
 import { ChatConversation } from "../../../infrastructure/entities/chat-conversation.entity";
 import { ChatConversationDetails } from "../../contracts/dtos/chat-conversation.dto";
+import { ChatMessageProfileDetails } from "../../contracts/dtos/chat-message-profile.dto";
 import { GetConversationListQuery } from "../../contracts/queries/get-conversation-list.query";
 
 @QueryHandler(GetConversationListQuery)
@@ -87,40 +89,43 @@ export class GetConversationListHandler
       profileLookup[profile.id] = profile;
     }
 
+    const getProfilePhoto = (id: number) => {
+      const photo = profileLookup[id].profilePhoto;
+      if (photo) {
+        return this.photoService.getUrl(photo, "profile-photo");
+      }
+    };
+
     return mapArray(
       ChatConversationDetails,
       matchingConversations,
       (conversation) => {
-        const members = conversation.members.filter(
-          (member) => member.profileId !== currentProfileId,
-        );
-
         const lastMesage = conversation.messages[0];
 
-        let imageUrl: string | undefined;
-
-        if (conversation.photo) {
-          imageUrl = this.photoService.getUrl(
-            conversation.photo,
-            "chat-conversation-photo",
-          );
-        }
-
-        if (members.length === 1) {
-          const profile = profileLookup[members[0].profileId];
-          imageUrl =
-            profile.profilePhoto &&
-            this.photoService.getUrl(profile.profilePhoto, "profile-photo");
-        }
-
         return {
+          createdAt: conversation.createdAt,
           id: conversation.id,
-          imageUrl,
+          imageUrl:
+            conversation.photo &&
+            this.photoService.getUrl(
+              conversation.photo,
+              "chat-conversation-photo",
+            ),
           lastMessage: lastMesage ? lastMesage.message : undefined,
           lastMessageSent: lastMesage ? lastMesage.created : undefined,
-          name:
-            conversation.name ||
-            members.map((x) => profileLookup[x.profileId].name).join(", "),
+          name: conversation.name,
+          profiles: sortByField(
+            conversation.members
+              .filter((member) => member.profileId != currentProfileId)
+              .map((member) =>
+                map(ChatMessageProfileDetails, {
+                  id: member.profileId,
+                  imageUrl: getProfilePhoto(member.profileId),
+                  name: profileLookup[member.profileId].name,
+                }),
+              ),
+            (member) => member.name,
+          ),
         };
       },
     );

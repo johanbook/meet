@@ -15,12 +15,8 @@ export function ChatListPageComponent({
 }: ChatListPageComponentProps): ReactElement {
   return (
     <List>
-      {data.map((conversation, index) => (
-        <ConversationListItem
-          divider={index < data.length - 1}
-          key={conversation.id}
-          data={conversation}
-        />
+      {data.map((conversation) => (
+        <ConversationListItem key={conversation.id} data={conversation} />
       ))}
     </List>
   );
