@@ -32,7 +32,7 @@ export class GetConversationListHandler
     const currentOrganizationId =
       await this.currentOrganizationService.fetchCurrentOrganizationId();
 
-    const matchingConversations = await this.conversations.find({
+    const _matchingConversations = await this.conversations.find({
       order: {
         messages: {
           created: "DESC",
@@ -44,12 +44,22 @@ export class GetConversationListHandler
         photo: true,
       },
       where: {
-        members: {
-          profileId: currentProfileId,
-        },
         organizationId: currentOrganizationId,
       },
     });
+
+    // TODO: Clean this up
+    // Using `member.profileId: currentProfileId` in `where` clause will only include
+    // the member matching that condition
+    const matchingConversations = _matchingConversations.filter(
+      (conversation) => {
+        const profileIds = conversation.members.map(
+          (member) => member.profileId,
+        );
+
+        return profileIds.includes(currentProfileId);
+      },
+    );
 
     const profileIdSet = new Set<number>();
 
@@ -81,6 +91,10 @@ export class GetConversationListHandler
       ChatConversationDetails,
       matchingConversations,
       (conversation) => {
+        const members = conversation.members.filter(
+          (member) => member.profileId !== currentProfileId,
+        );
+
         const lastMesage = conversation.messages[0];
 
         let imageUrl: string | undefined;
@@ -92,8 +106,8 @@ export class GetConversationListHandler
           );
         }
 
-        if (conversation.members.length === 1) {
-          const profile = profileLookup[conversation.members[0].profileId];
+        if (members.length === 1) {
+          const profile = profileLookup[members[0].profileId];
           imageUrl =
             profile.profilePhoto &&
             this.photoService.getUrl(profile.profilePhoto, "profile-photo");
@@ -106,9 +120,7 @@ export class GetConversationListHandler
           lastMessageSent: lastMesage ? lastMesage.created : undefined,
           name:
             conversation.name ||
-            conversation.members
-              .map((x) => profileLookup[x.profileId].name)
-              .join(", "),
+            members.map((x) => profileLookup[x.profileId].name).join(", "),
         };
       },
     );
