@@ -96,7 +96,7 @@ export class GetConversationListHandler
       }
     };
 
-    return mapArray(
+    const result = mapArray(
       ChatConversationDetails,
       matchingConversations,
       (conversation) => {
@@ -128,6 +128,13 @@ export class GetConversationListHandler
           ),
         };
       },
+    );
+
+    return sortByField(
+      result,
+      (conversation) =>
+        new Date(conversation.lastMessageSent || conversation.createdAt),
+      "desc",
     );
   }
 }
