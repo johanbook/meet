@@ -37,6 +37,9 @@ export class GetChatMessagesHandler
           profilePhoto: true,
         },
       },
+      order: {
+        created: "ASC",
+      },
       where: {
         conversation: {
           id: query.conversationId,
