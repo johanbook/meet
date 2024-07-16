@@ -1,7 +1,7 @@
-import React, { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
 
-import { ArrowBackIosNew } from "@mui/icons-material";
+import { ArrowBack } from "@mui/icons-material";
 import { Box, IconButton } from "@mui/material";
 
 import { Nav } from "src/components/nav";
@@ -10,18 +10,16 @@ interface ChatPageNavProps {
   children: ReactNode;
 }
 
-export function ChatPageNav({
-  children,
-}: ChatPageNavProps): React.ReactElement {
+export function ChatPageNav({ children }: ChatPageNavProps): ReactElement {
   const appBarContent = (
     <IconButton
       component={ReactRouterLink}
       sx={{
-        pr: 2,
+        mr: 2,
       }}
       to="/chat"
     >
-      <ArrowBackIosNew sx={{ paddingRight: 1 / 2 }} />
+      <ArrowBack />
     </IconButton>
   );
 
