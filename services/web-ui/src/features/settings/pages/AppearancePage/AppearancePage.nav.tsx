@@ -31,6 +31,7 @@ export function AppearancePageNav({
       <Typography variant="h5">{t("header")}</Typography>
     </>
   );
+
   return (
     <Nav appBarContent={appBarContent}>
       <Box sx={{ pt: 1, px: 3 }}>{children}</Box>

@@ -32,7 +32,7 @@ export function ProfileJournalPageComponent({
   return (
     <Table
       columns={columns}
-      height="55vh"
+      height="65vh"
       initialState={{
         sorting: {
           sortModel: [{ field: "created", sort: "desc" }],
