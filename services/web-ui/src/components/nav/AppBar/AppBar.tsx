@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 
 import { ErrorOutline, KeyboardArrowDown } from "@mui/icons-material";
 import {
@@ -128,15 +128,24 @@ function AppBarContent(): ReactElement {
   );
 }
 
-export function AppBar(): ReactElement {
+interface AppBarProps {
+  appBarContent?: ReactNode;
+}
+
+export function AppBar({ appBarContent }: AppBarProps): ReactElement {
   return (
     <MuiAppBar
       color="inherit"
       position="fixed"
       sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
     >
-      <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
-        <AppBarContent />
+      <Toolbar
+        sx={{
+          display: "flex",
+          justifyContent: appBarContent ? undefined : "center",
+        }}
+      >
+        {appBarContent || <AppBarContent />}
       </Toolbar>
     </MuiAppBar>
   );

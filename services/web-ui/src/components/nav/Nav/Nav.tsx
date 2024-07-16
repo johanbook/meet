@@ -1,5 +1,4 @@
-import { ReactElement } from "react";
-import { Outlet } from "react-router-dom";
+import { ReactElement, ReactNode } from "react";
 
 import { Box, Container, List, Toolbar } from "@mui/material";
 
@@ -12,9 +11,12 @@ import { BottomNavigation } from "../BottomNavigation";
 import { NavLinkListItem } from "../NavLinkListItem";
 import { desktopNav } from "../nav.items";
 
-export interface NavProps {}
+interface NavProps {
+  appBarContent?: ReactNode;
+  children: ReactNode;
+}
 
-export function Nav(): ReactElement {
+export function Nav({ appBarContent, children }: NavProps): ReactElement {
   const isMobile = useIsMobile();
 
   return (
@@ -41,7 +43,7 @@ export function Nav(): ReactElement {
         </Box>
       </Drawer>
 
-      <AppBar />
+      <AppBar appBarContent={appBarContent} />
 
       <Box
         component="main"
@@ -61,7 +63,7 @@ export function Nav(): ReactElement {
             flexGrow: 1,
           }}
         >
-          <Outlet />
+          {children}
         </Container>
 
         <Toolbar />
