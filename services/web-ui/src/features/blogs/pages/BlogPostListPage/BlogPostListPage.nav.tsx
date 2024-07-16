@@ -1,5 +1,7 @@
 import { ReactElement, ReactNode } from "react";
 
+import { Nav } from "src/components/nav";
+
 interface BlogPostListPageNavProps {
   children: ReactNode;
 }
@@ -7,5 +9,5 @@ interface BlogPostListPageNavProps {
 export function BlogPostListPageNav({
   children,
 }: BlogPostListPageNavProps): ReactElement {
-  return <>{children}</>;
+  return <Nav>{children}</Nav>;
 }

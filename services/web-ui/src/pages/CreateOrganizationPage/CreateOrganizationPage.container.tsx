@@ -6,6 +6,7 @@ import { Box } from "@mui/material";
 import { CreateOrganizationCommand } from "src/api";
 import { organizationsApi } from "src/apis";
 import { NavLayout } from "src/components/layout";
+import { Nav } from "src/components/nav";
 import { Button, TextField, Typography } from "src/components/ui";
 import { useForm, validators } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
@@ -61,38 +62,40 @@ export function CreateOrganizationPageContainer(): ReactElement {
   }
 
   return (
-    <NavLayout header={t("header")} linkText={t("links.back")} to="/profile">
-      <Typography color="textSecondary" sx={{ paddingBottom: 3 }}>
-        {t("description")}
-      </Typography>
+    <Nav>
+      <NavLayout header={t("header")} linkText={t("links.back")} to="/profile">
+        <Typography color="textSecondary" sx={{ paddingBottom: 3 }}>
+          {t("description")}
+        </Typography>
 
-      <form onSubmit={handleSubmit}>
-        <TextField
-          error={form.state.name.error || ""}
-          fullWidth
-          label={t("fields.name.label")}
-          onBlur={() => form.validate()}
-          onChange={(name) => form.setValue({ name })}
-          required
-          sx={{ marginBottom: 2 }}
-          value={form.state.name.value}
-        />
+        <form onSubmit={handleSubmit}>
+          <TextField
+            error={form.state.name.error || ""}
+            fullWidth
+            label={t("fields.name.label")}
+            onBlur={() => form.validate()}
+            onChange={(name) => form.setValue({ name })}
+            required
+            sx={{ marginBottom: 2 }}
+            value={form.state.name.value}
+          />
 
-        <Box sx={{ gap: 1, display: "flex", justifyContent: "flex-end" }}>
-          <Button onClick={handleCancel} variant="outlined">
-            {t("actions.cancel.button")}
-          </Button>
+          <Box sx={{ gap: 1, display: "flex", justifyContent: "flex-end" }}>
+            <Button onClick={handleCancel} variant="outlined">
+              {t("actions.cancel.button")}
+            </Button>
 
-          <Button
-            disabled={!form.isValid}
-            loading={mutation.isPending}
-            type="submit"
-            variant="contained"
-          >
-            {t("actions.submit.button")}
-          </Button>
-        </Box>
-      </form>
-    </NavLayout>
+            <Button
+              disabled={!form.isValid}
+              loading={mutation.isPending}
+              type="submit"
+              variant="contained"
+            >
+              {t("actions.submit.button")}
+            </Button>
+          </Box>
+        </form>
+      </NavLayout>
+    </Nav>
   );
 }

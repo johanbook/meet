@@ -1,7 +1,6 @@
 import { ReactElement, Suspense } from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import { Nav } from "src/components/nav";
 import { GlobalDialogProvider } from "src/core/dialog";
 import { NavigationTrackingProvider } from "src/core/tracking/NavigationTrackingProvider";
 import { BlogPostListPage } from "src/features/blogs/pages/BlogPostListPage";
@@ -30,7 +29,7 @@ const router = createBrowserRouter([
       <Suspense fallback={<LoadingView />}>
         <NavigationTrackingProvider>
           <GlobalDialogProvider>
-            <Nav />
+            <Outlet />
           </GlobalDialogProvider>
         </NavigationTrackingProvider>
       </Suspense>

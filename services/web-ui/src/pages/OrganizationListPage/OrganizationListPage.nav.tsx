@@ -3,6 +3,7 @@ import React, { ReactNode } from "react";
 import { Typography } from "@mui/material";
 
 import { NavLayout } from "src/components/layout";
+import { Nav } from "src/components/nav";
 import { useTranslation } from "src/core/i18n";
 
 interface OrganizationListPageNavProps {
@@ -15,10 +16,12 @@ export function OrganizationListPageNav({
   const { t } = useTranslation("organization-list");
 
   return (
-    <NavLayout header={t("header")} linkText={t("links.back")} to="/profile">
-      <Typography color="textSecondary">{t("description")}</Typography>
+    <Nav>
+      <NavLayout header={t("header")} linkText={t("links.back")} to="/profile">
+        <Typography color="textSecondary">{t("description")}</Typography>
 
-      {children}
-    </NavLayout>
+        {children}
+      </NavLayout>
+    </Nav>
   );
 }
