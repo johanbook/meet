@@ -5,6 +5,7 @@ import { Edit } from "@mui/icons-material";
 import { Box, Fab, Typography } from "@mui/material";
 
 import { Nav } from "src/components/nav";
+import { CurrentOrganizationAvatar } from "src/components/nav/AppBar/CurrentOrganizationAvatar";
 import { useTranslation } from "src/core/i18n";
 
 interface ChatListPageNavProps {
@@ -16,11 +17,18 @@ export function ChatListPageNav({
 }: ChatListPageNavProps): ReactElement {
   const { t } = useTranslation("connections");
 
-  return (
-    <Nav>
-      <Box sx={{ pt: 3, px: 3 }}>
-        <Typography variant="h5">{t("header")}</Typography>
+  const appBarContent = (
+    <>
+      <CurrentOrganizationAvatar />
+      <Typography sx={{ pl: 2 }} variant="h5">
+        {t("header")}
+      </Typography>
+    </>
+  );
 
+  return (
+    <Nav appBarContent={appBarContent}>
+      <Box sx={{ pt: 3, px: 3 }}>
         <Fab
           component={Link}
           color="primary"
