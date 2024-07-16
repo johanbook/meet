@@ -2,6 +2,10 @@ html,
 body {
   height: 100%;
 
+  /* Disable pull to refresh 
+   * as it does not work well in Trusted Web Activities */
+  overscroll-behavior-y: contain;
+
   /* Disable zoom on mobile devices 
    * See https://stackoverflow.com/questions/4472891/how-can-i-disable-zoom-on-a-mobile-web-page */
   touch-action: pan-x pan-y;
