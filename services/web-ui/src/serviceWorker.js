@@ -27,7 +27,7 @@ workbox.routing.registerRoute(
 
 // Images
 workbox.routing.registerRoute(
-  /s3\./,
+  /https?:\/\/s3\./,
   new workbox.strategies.CacheFirst({
     cacheName: "images-cache",
     plugins: [
