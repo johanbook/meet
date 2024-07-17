@@ -1,4 +1,4 @@
-import { ReactElement, Suspense } from "react";
+import { ReactElement } from "react";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { GlobalDialogProvider } from "src/core/dialog";
@@ -18,7 +18,6 @@ import { OrganizationListPage } from "src/pages/OrganizationListPage";
 import { ProfileGuard } from "src/pages/ProfileGuard";
 import { ProfileJournalPage } from "src/pages/ProfileJournalPage";
 import { ProfilePage } from "src/pages/ProfilePage";
-import { LoadingView } from "src/views/LoadingView";
 
 import { AppearancePage } from "./features/settings/pages/AppearancePage";
 
@@ -26,13 +25,11 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Suspense fallback={<LoadingView />}>
-        <NavigationTrackingProvider>
-          <GlobalDialogProvider>
-            <Outlet />
-          </GlobalDialogProvider>
-        </NavigationTrackingProvider>
-      </Suspense>
+      <NavigationTrackingProvider>
+        <GlobalDialogProvider>
+          <Outlet />
+        </GlobalDialogProvider>
+      </NavigationTrackingProvider>
     ),
     errorElement: <NotFoundPage />,
     children: [
