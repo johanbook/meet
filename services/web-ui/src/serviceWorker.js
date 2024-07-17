@@ -11,6 +11,20 @@ workbox.setConfig({
 
 // workbox.precaching.precacheAndRoute(self.__WB_MANIFEST);
 
+// Assets
+workbox.routing.registerRoute(
+  new RegExp(".(css|html|js)$"),
+  new workbox.strategies.NetworkFirst({
+    cacheName: "assets-cache",
+    plugins: [
+      new workbox.expiration.ExpirationPlugin({
+        maxEntries: 50, // Limit number of images cached
+        maxAgeSeconds: 1 * 24 * 60 * 60, // 1 day
+      }),
+    ],
+  })
+);
+
 // Images
 workbox.routing.registerRoute(
   new RegExp("s3."),
@@ -19,7 +33,7 @@ workbox.routing.registerRoute(
     plugins: [
       new workbox.expiration.ExpirationPlugin({
         maxEntries: 50, // Limit number of images cached
-        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
       }),
     ],
   })
