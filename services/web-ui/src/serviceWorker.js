@@ -5,15 +5,15 @@ importScripts(
 );
 
 // This must come before any other workbox.* methods.
-workbox.setConfig({
-  debug: true,
-});
+// workbox.setConfig({
+//   debug: true,
+// });
 
 // workbox.precaching.precacheAndRoute(self.__WB_MANIFEST);
 
 // Assets
 workbox.routing.registerRoute(
-  new RegExp(".(css|html|js)$"),
+  /\.(css|html|js)$/,
   new workbox.strategies.NetworkFirst({
     cacheName: "assets-cache",
     plugins: [
@@ -27,7 +27,7 @@ workbox.routing.registerRoute(
 
 // Images
 workbox.routing.registerRoute(
-  new RegExp("s3."),
+  /s3\./,
   new workbox.strategies.CacheFirst({
     cacheName: "images-cache",
     plugins: [
