@@ -14,7 +14,7 @@ workbox.setConfig({
 // Images
 workbox.routing.registerRoute(
   new RegExp("s3."),
-  workbox.strategies.cacheFirst({
+  new workbox.strategies.CacheFirst({
     cacheName: "images-cache",
     plugins: [
       new workbox.expiration.ExpirationPlugin({
