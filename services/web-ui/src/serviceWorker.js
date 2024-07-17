@@ -15,10 +15,10 @@ importScripts(
 workbox.routing.registerRoute(
   /\.(css|html|js)$/,
   new workbox.strategies.NetworkFirst({
-    cacheName: "assets-cache",
+    cacheName: "assets",
     plugins: [
       new workbox.expiration.ExpirationPlugin({
-        maxEntries: 50, // Limit number of images cached
+        maxEntries: 50,
         maxAgeSeconds: 1 * 24 * 60 * 60, // 1 day
       }),
     ],
@@ -27,12 +27,12 @@ workbox.routing.registerRoute(
 
 // Images
 workbox.routing.registerRoute(
-  /s3\./,
+  /https?:\/\/s3\.app\.meetly\.site/,
   new workbox.strategies.CacheFirst({
-    cacheName: "images-cache",
+    cacheName: "images",
     plugins: [
       new workbox.expiration.ExpirationPlugin({
-        maxEntries: 50, // Limit number of images cached
+        maxEntries: 50,
         maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
       }),
     ],
