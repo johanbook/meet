@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "homepage": "https://johanbook.com/",
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && npm run build:service-worker",
+    "build:service-worker": "npx workbox-cli generateSW workbox-config.js",
     "build:storybook": "storybook build",
     "format": "prettier --write '{scripts,src}/**/*.{js,jsx,ts,tsx}'",
     "lint": "tsc && eslint 'src/**/*.{js,jsx,ts,tsx}' --max-warnings 0",
@@ -97,6 +98,7 @@
     "standard-version": "9.5.0",
     "storybook": "^7.0.11",
     "storybook-addon-react-router-v6": "^1.0.2",
-    "webpack": "^5.82.1"
+    "webpack": "^5.82.1",
+    "workbox-cli": "^7.1.0"
   }
 }
