@@ -11,6 +11,20 @@ importScripts(
 
 // workbox.precaching.precacheAndRoute(self.__WB_MANIFEST);
 
+// index.html
+workbox.routing.registerRoute(
+  /https?:\/\/app\.meetly\.site\/$/,
+  new workbox.strategies.NetworkFirst({
+    cacheName: "initial",
+    plugins: [
+      new workbox.expiration.ExpirationPlugin({
+        maxEntries: 1,
+        maxAgeSeconds: 1 * 24 * 60 * 60, // 1 day
+      }),
+    ],
+  })
+);
+
 // Assets
 workbox.routing.registerRoute(
   /\.(css|html|js)$/,
