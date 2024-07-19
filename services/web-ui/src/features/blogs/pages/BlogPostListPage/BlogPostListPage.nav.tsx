@@ -25,7 +25,8 @@ export function BlogPostListPageNav({
           fontFamily: "sans-serif",
           fontWeight: 600,
           ml: 3,
-          textShadow: "1px 1px 1px white",
+          textShadow: `1px 1px 1px ${theme.palette.text.primary}`,
+          userSelect: "none",
         })}
         variant="h5"
       >
