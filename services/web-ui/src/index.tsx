@@ -7,6 +7,7 @@ import { registerWebVitalsReporter } from "src/core/web-vitals";
 
 import { App } from "./App";
 import { config } from "./config";
+import { registerServiceWorker } from "./registerServiceWorker";
 
 registerI18n();
 registerExceptionLogger();
@@ -27,5 +28,5 @@ if (config.MONITORING.REPORT_WEB_VITALS) {
 }
 
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
+  registerServiceWorker();
 }
