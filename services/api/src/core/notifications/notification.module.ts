@@ -14,6 +14,7 @@ import { SaveNotificationSubscriptionHandler } from "./application/handlers/comm
 import { GetNotificationListHandler } from "./application/handlers/query-handlers/get-notification-list.handler";
 import { NotificationsController } from "./client/controllers/notifications.controller";
 import { NotificationGateway } from "./client/gateways/notification.gateway";
+import { NotificationWebPushGateway } from "./client/gateways/notification.web-push.gateway";
 import { NotificationSubscriptionService } from "./domain/services/notification-subscription.service";
 import { NotificationService } from "./domain/services/notification.service";
 import { Notification } from "./infrastructure/entities/notification.entity";
@@ -35,6 +36,7 @@ import { Notification } from "./infrastructure/entities/notification.entity";
     GetNotificationListHandler,
     NotificationService,
     NotificationSubscriptionService,
+    NotificationWebPushGateway,
     SaveNotificationSubscriptionHandler,
   ],
 })

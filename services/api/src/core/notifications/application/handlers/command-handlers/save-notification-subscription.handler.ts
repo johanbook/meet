@@ -1,4 +1,5 @@
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
+import { PushSubscription } from "web-push";
 
 import { NotificationSubscriptionService } from "src/core/notifications/domain/services/notification-subscription.service";
 import { CurrentProfileService } from "src/core/profiles";
@@ -18,9 +19,17 @@ export class SaveNotificationSubscriptionHandler
     const currentProfileId =
       await this.currentProfileService.fetchCurrentProfileId();
 
+    const subscription: PushSubscription = {
+      endpoint: command.endpoint || "",
+      keys: {
+        auth: command.keys?.p256dh || "",
+        p256dh: command.keys?.p256dh || "",
+      },
+    };
+
     this.notificationSubscriptionService.saveSubscription(
       currentProfileId,
-      command,
+      subscription,
     );
   }
 }
