@@ -20,10 +20,10 @@ export async function registerServiceWorker() {
     });
   }
 
-  const body = subscription.toJSON();
+  const saveNotificationSubscriptionCommand = subscription.toJSON();
 
-  await fetch("/subscription", {
-    method: "POST",
-    body: JSON.stringify(body),
+  await notificationsApi.saveSubscription({
+    // @ts-expect-error // TODO: Fix this type
+    saveNotificationSubscriptionCommand,
   });
 }
