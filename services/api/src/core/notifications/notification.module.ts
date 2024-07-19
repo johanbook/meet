@@ -10,9 +10,11 @@ import { ProfileModule } from "src/core/profiles/profile.module";
 
 import { AuthenticationModule } from "../authentication/authentication.module";
 import { QueryModule } from "../query/query.module";
+import { SaveNotificationSubscriptionHandler } from "./application/handlers/command-handlers/save-notification-subscription.handler";
 import { GetNotificationListHandler } from "./application/handlers/query-handlers/get-notification-list.handler";
 import { NotificationsController } from "./client/controllers/notifications.controller";
 import { NotificationGateway } from "./client/gateways/notification.gateway";
+import { NotificationSubscriptionService } from "./domain/services/notification-subscription.service";
 import { NotificationService } from "./domain/services/notification.service";
 import { Notification } from "./infrastructure/entities/notification.entity";
 
@@ -32,6 +34,8 @@ import { Notification } from "./infrastructure/entities/notification.entity";
     NotificationGateway,
     GetNotificationListHandler,
     NotificationService,
+    NotificationSubscriptionService,
+    SaveNotificationSubscriptionHandler,
   ],
 })
 export class NotificationModule {}
