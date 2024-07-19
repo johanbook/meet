@@ -7,6 +7,8 @@ import {
   useScrollTrigger,
 } from "@mui/material";
 
+import { useIsMobile } from "src/hooks/useIsMobile";
+
 import { CurrentOrganizationAvatar } from "./CurrentOrganizationAvatar";
 
 interface AppBarProps {
@@ -14,10 +16,14 @@ interface AppBarProps {
 }
 
 export function AppBar({ appBarContent }: AppBarProps): ReactElement {
+  const isMobile = useIsMobile();
   const trigger = useScrollTrigger();
 
+  // Always show app bar on desktop
+  const showAppBar = !isMobile || !trigger;
+
   return (
-    <Slide appear={false} direction="down" in={!trigger}>
+    <Slide appear={false} direction="down" in={showAppBar}>
       <MuiAppBar
         color="inherit"
         position="fixed"
