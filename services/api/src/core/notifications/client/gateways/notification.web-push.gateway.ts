@@ -5,7 +5,7 @@ import { getRequiredStringConfig } from "src/utils/config.helper";
 export class NotificationWebPushGateway {
   constructor() {
     setVapidDetails(
-      "email@example.com",
+      getRequiredStringConfig("EMAIL"),
       getRequiredStringConfig("VAPID_PUBLIC_KEY"),
       getRequiredStringConfig("VAPID_PRIVATE_KEY"),
     );
