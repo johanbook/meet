@@ -1,3 +1,5 @@
+import { notificationsApi } from "./apis";
+
 const SERVICE_WORKER_PATH = "service-worker.js";
 
 export async function registerServiceWorker() {
@@ -10,9 +12,11 @@ export async function registerServiceWorker() {
   if (!subscription) {
     await Notification.requestPermission();
 
+    const vapid = await notificationsApi.getVapid();
+
     subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey: "asad",
+      applicationServerKey: vapid.key,
     });
   }
 
