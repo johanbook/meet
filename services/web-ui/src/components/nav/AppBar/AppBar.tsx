@@ -1,6 +1,11 @@
 import { ReactElement, ReactNode } from "react";
 
-import { AppBar as MuiAppBar, Toolbar } from "@mui/material";
+import {
+  AppBar as MuiAppBar,
+  Slide,
+  Toolbar,
+  useScrollTrigger,
+} from "@mui/material";
 
 import { CurrentOrganizationAvatar } from "./CurrentOrganizationAvatar";
 
@@ -9,19 +14,23 @@ interface AppBarProps {
 }
 
 export function AppBar({ appBarContent }: AppBarProps): ReactElement {
+  const trigger = useScrollTrigger();
+
   return (
-    <MuiAppBar
-      color="inherit"
-      position="fixed"
-      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
-    >
-      <Toolbar
-        sx={{
-          display: "flex",
-        }}
+    <Slide appear={false} direction="down" in={!trigger}>
+      <MuiAppBar
+        color="inherit"
+        position="fixed"
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
-        {appBarContent || <CurrentOrganizationAvatar />}
-      </Toolbar>
-    </MuiAppBar>
+        <Toolbar
+          sx={{
+            display: "flex",
+          }}
+        >
+          {appBarContent || <CurrentOrganizationAvatar />}
+        </Toolbar>
+      </MuiAppBar>
+    </Slide>
   );
 }
