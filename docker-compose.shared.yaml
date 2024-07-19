@@ -48,6 +48,8 @@ services:
       SMTP_PORT: "$SMTP_PORT"
       SMTP_USERNAME: "$SMTP_USERNAME"
       UI_DOMAIN: "$PROTOCOL://$DOMAIN"
+      VAPID_PUBLIC_KEY: "$VAPID_PUBLIC_KEY"
+      VAPID_PRIVATE_KEY: "$VAPID_PRIVATE_KEY"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=Host(`$DOMAIN`)&&PathPrefix(`/api`)"
