@@ -7,6 +7,7 @@ import {
 } from "typeorm";
 
 import { OrganizationMembership } from "./organization-membership.entity";
+import { OrganizationPermission } from "./organization-permission.entity";
 
 @Entity()
 export class Organization {
@@ -28,6 +29,13 @@ export class Organization {
 
   @Column({ type: "varchar", length: 128 })
   name!: string;
+
+  @OneToMany(
+    () => OrganizationPermission,
+    (permission) => permission.organization,
+    { cascade: true },
+  )
+  permissions!: OrganizationPermission[];
 
   @Column()
   personal!: boolean;
