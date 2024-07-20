@@ -8,7 +8,7 @@ import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { useTranslation } from "src/core/i18n";
 import { NotificationEventsConstants } from "src/core/notifications";
 import { useHandleNotification } from "src/core/notifications";
-import { useQuery } from "src/core/query";
+import { CacheKeysConstants, useQuery, useQueryClient } from "src/core/query";
 import { ErrorView } from "src/views/ErrorView";
 
 import { ChatPageNav } from "./ChatPage.nav";
@@ -25,10 +25,19 @@ export function ChatPageContainer(): ReactElement {
     queryFn: () => chatsApi.getChatMessages({ conversationId: id }),
   });
 
+  const queryClient = useQueryClient();
+
+  function handleRefresh(): void {
+    refetch();
+    queryClient.invalidateQueries({
+      queryKey: [CacheKeysConstants.Chats],
+    });
+  }
+
   useHandleNotification({
     /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     onCondition: (event: any) => String(event.data.senderId) === id,
-    onNotification: () => refetch(),
+    onNotification: handleRefresh,
     type: NotificationEventsConstants.NewChatMessage,
   });
 
@@ -55,7 +64,7 @@ export function ChatPageContainer(): ReactElement {
           <ChatPageSkeleton />
         </Box>
 
-        <ChatTextField conversationId={id} onSentMessage={refetch} />
+        <ChatTextField conversationId={id} onSentMessage={handleRefresh} />
       </ChatPageNav>
     );
   }
@@ -67,7 +76,7 @@ export function ChatPageContainer(): ReactElement {
           <Typography color="textSecondary">{t("no-messages")}</Typography>
         </Box>
 
-        <ChatTextField conversationId={id} onSentMessage={refetch} />
+        <ChatTextField conversationId={id} onSentMessage={handleRefresh} />
       </ChatPageNav>
     );
   }
@@ -78,7 +87,7 @@ export function ChatPageContainer(): ReactElement {
         <ChatMessageList messages={data} />
       </Box>
 
-      <ChatTextField conversationId={id} onSentMessage={refetch} />
+      <ChatTextField conversationId={id} onSentMessage={handleRefresh} />
     </ChatPageNav>
   );
 }
