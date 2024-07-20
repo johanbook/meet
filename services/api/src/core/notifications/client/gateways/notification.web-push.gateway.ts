@@ -23,7 +23,7 @@ export class NotificationWebPushGateway {
     notification: INotification,
   ): Promise<boolean> {
     const pushSubscription =
-      this.notificationSubscriptionService.getSubscription(profileId);
+      await this.notificationSubscriptionService.getSubscription(profileId);
 
     if (!pushSubscription) {
       return false;

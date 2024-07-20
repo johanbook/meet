@@ -17,6 +17,7 @@ import { NotificationGateway } from "./client/gateways/notification.gateway";
 import { NotificationWebPushGateway } from "./client/gateways/notification.web-push.gateway";
 import { NotificationSubscriptionService } from "./domain/services/notification-subscription.service";
 import { NotificationService } from "./domain/services/notification.service";
+import { NotificationSubscription } from "./infrastructure/entities/notification-subscription.entity";
 import { Notification } from "./infrastructure/entities/notification.entity";
 
 @Module({
@@ -29,7 +30,12 @@ import { Notification } from "./infrastructure/entities/notification.entity";
     CqrsModule,
     EmailModule,
     QueryModule,
-    TypeOrmModule.forFeature([Notification, OrganizationMembership, Profile]),
+    TypeOrmModule.forFeature([
+      Notification,
+      NotificationSubscription,
+      OrganizationMembership,
+      Profile,
+    ]),
   ],
   providers: [
     NotificationGateway,
