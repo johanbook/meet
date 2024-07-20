@@ -1,20 +1,20 @@
 import { ReactElement, ReactNode } from "react";
 import { Link } from "react-router-dom";
 
-import { DashboardOutlined } from "@mui/icons-material";
+import { ViewDayOutlined } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
 
 import { Nav } from "src/components/nav";
 import { CurrentOrganizationAvatar } from "src/components/nav/AppBar/CurrentOrganizationAvatar";
 import { config } from "src/config";
 
-interface BlogPostListPageNavProps {
+interface BlogPhotoListPageNavProps {
   children: ReactNode;
 }
 
-export function BlogPostListPageNav({
+export function BlogPhotoListPageNav({
   children,
-}: BlogPostListPageNavProps): ReactElement {
+}: BlogPhotoListPageNavProps): ReactElement {
   const appBarContent = (
     <>
       <CurrentOrganizationAvatar />
@@ -37,8 +37,8 @@ export function BlogPostListPageNav({
 
       <Box sx={{ flexGrow: 1 }} />
 
-      <IconButton component={Link} to="/blog/photos">
-        <DashboardOutlined />
+      <IconButton component={Link} to="/">
+        <ViewDayOutlined />
       </IconButton>
     </>
   );
