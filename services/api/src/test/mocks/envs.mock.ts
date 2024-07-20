@@ -1,4 +1,6 @@
 export function createDummyEnvs(): void {
+  process.env["EMAIL"] = "hi@example.com";
+
   process.env["S3_ACCESS_KEY"] = "my-s3-access-key";
   process.env["S3_ENDPOINT"] = "my-s3-endpoint";
   process.env["S3_PUBLIC_ENDPOINT"] = "my-s3-public-endpoint";
@@ -14,4 +16,10 @@ export function createDummyEnvs(): void {
   process.env["SMTP_USERNAME"] = "my-smtp-username";
 
   process.env["UI_DOMAIN"] = "localhost";
+
+  // Only used for testing
+  process.env["VAPID_PRIVATE_KEY"] =
+    "0j9YQ7OrRkhVtnV1CV-A7MH7G3aAwKULxPAIpSPyhXc";
+  process.env["VAPID_PUBLIC_KEY"] =
+    "BLUZR-sJ_JYCTJ-5mq9_B-0eRTrGVtIKgWIo21eIzhQXMoGvtDlAUQHOjugrTOx-85TSR1c5IIR5y1j4FxV4gGA";
 }
