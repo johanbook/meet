@@ -33,11 +33,11 @@ function Group({ data }: GroupProps): ReactElement {
     <>
       {Object.entries(groupedData).map(([date, entries]) => (
         <Fragment key={date}>
-          <Typography sx={{ px: 2, pt: 2 }} variant="body1">
+          <Typography sx={{ px: 1, pt: 2, pb: 1 }} variant="body1">
             <b>{date}</b>
           </Typography>
 
-          <ImageList cols={3} gap={8} variant="masonry">
+          <ImageList cols={3} gap={8} sx={{ m: 0 }} variant="masonry">
             {entries.map((item) => (
               <ImageListItem key={item.id}>
                 <img src={item.url} loading="lazy" />
