@@ -7,7 +7,12 @@ import { chatsApi, organizationsApi, profileApi } from "src/apis";
 import { ProfileAvatar } from "src/components/ProfileAvatar";
 import { Button } from "src/components/ui";
 import { useTranslation } from "src/core/i18n";
-import { CacheKeysConstants, useMutation, useQuery } from "src/core/query";
+import {
+  CacheKeysConstants,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 import { ErrorView } from "src/views/ErrorView";
 
@@ -25,6 +30,8 @@ export function CreateChatPageContainer(): ReactElement {
   const snackbar = useSnackbar();
   const { t } = useTranslation("chat-create");
 
+  const queryClient = useQueryClient();
+
   const { error, data, isPending } = useQuery({
     queryKey: ["members"],
     queryFn: () => organizationsApi.getCurrentOrganizationMembers(),
@@ -40,6 +47,7 @@ export function CreateChatPageContainer(): ReactElement {
   const createChatMutation = useMutation({
     onError: () => snackbar.error(t("create.error")),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [CacheKeysConstants.Chats] });
       snackbar.success(t("create.success"));
       navigate("/chat");
     },
