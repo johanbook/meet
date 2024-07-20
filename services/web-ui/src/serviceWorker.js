@@ -56,9 +56,13 @@ workbox.routing.registerRoute(
 self.addEventListener("push", (event) => {
   const payload = event.data.json();
 
+  const message = payload.message || "Notification";
+  const description = payload.description || "";
+
   event.waitUntil(
-    self.registration.showNotification("Notification", {
-      body: JSON.stringify(payload),
+    self.registration.showNotification(message, {
+      body: description,
+      icon: "android-chrome-192x192.png",
     })
   );
 });
