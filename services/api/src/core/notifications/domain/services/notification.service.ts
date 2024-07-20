@@ -10,6 +10,7 @@ import { Profile } from "src/core/profiles";
 import { getRequiredStringConfig } from "src/utils/config.helper";
 
 import { NotificationGateway } from "../../client/gateways/notification.gateway";
+import { NotificationWebPushGateway } from "../../client/gateways/notification.web-push.gateway";
 import { Notification } from "../../infrastructure/entities/notification.entity";
 import { INotification } from "../../types";
 
@@ -24,6 +25,7 @@ export class NotificationService {
     @InjectRepository(Notification)
     private readonly notifications: Repository<Notification>,
     private readonly notificationGateway: NotificationGateway,
+    private readonly notificationWebPushGateway: NotificationWebPushGateway,
     @InjectRepository(OrganizationMembership)
     private readonly organizationMemberships: Repository<OrganizationMembership>,
     @InjectRepository(Profile)
@@ -61,6 +63,10 @@ export class NotificationService {
     });
     await this.notifications.save(newNotifications);
 
+    // TODO: Do not send web push if web socket succeded
+    const profileIds = memberships.map((membership) => membership.profile.id);
+    await this.notificationWebPushGateway.sendWebPush(profileIds, notification);
+
     const userIds = memberships.map((membership) => membership.profile.userId);
     await this.notifyUsers(userIds, notification);
   }
@@ -71,6 +77,9 @@ export class NotificationService {
       select: ["userId"],
       where: { id: In(profileIds) },
     });
+
+    // TODO: Do not send web push if web socket succeded
+    await this.notificationWebPushGateway.sendWebPush(profileIds, notification);
 
     const ids = profiles.map((profile) => profile.userId);
 
