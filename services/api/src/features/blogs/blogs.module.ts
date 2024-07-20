@@ -19,6 +19,7 @@ import { DeleteBlogPostHandler } from "./application/handlers/command-handlers/d
 import { UpdateBlogPostHandler } from "./application/handlers/command-handlers/update-blog-post-handler";
 import { NotifyOrganizationOnPostedBlogPostCommentHandler } from "./application/handlers/event-handlers/notify-organization-on-posted-blog-post-comment.handler";
 import { NotifyOrganizationOnPostedBlogPostHandler } from "./application/handlers/event-handlers/notify-organization-on-posted-blog-post.handler";
+import { GetBlogPhotoListHandler } from "./application/handlers/query-handlers/get-blog-photo-list.handler";
 import { GetBlogPostListHandler } from "./application/handlers/query-handlers/get-blog-post-list.handler";
 import { GetBlogPostHandler } from "./application/handlers/query-handlers/get-blog-post.handler";
 import { BlogCommentsController } from "./client/controllers/blog-comments.controller";
@@ -62,6 +63,7 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
     DeleteBlogPostReactionHandler,
     GetBlogPostHandler,
     GetBlogPostListHandler,
+    GetBlogPhotoListHandler,
     NotifyOrganizationOnPostedBlogPostHandler,
     NotifyOrganizationOnPostedBlogPostCommentHandler,
     UpdateBlogPostHandler,
