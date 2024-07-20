@@ -4,6 +4,7 @@ import { sendNotification, setVapidDetails } from "web-push";
 import { getRequiredStringConfig } from "src/utils/config.helper";
 
 import { NotificationSubscriptionService } from "../../domain/services/notification-subscription.service";
+import { INotification } from "../../types";
 
 @Injectable()
 export class NotificationWebPushGateway {
@@ -17,7 +18,7 @@ export class NotificationWebPushGateway {
     );
   }
 
-  public async sendWebPush(profileId: number, payload: string) {
+  public async sendWebPush(profileId: number, notification: INotification) {
     const pushSubscription =
       this.notificationSubscriptionService.getSubscription(profileId);
 
@@ -25,6 +26,6 @@ export class NotificationWebPushGateway {
       return;
     }
 
-    await sendNotification(pushSubscription, payload);
+    await sendNotification(pushSubscription, JSON.stringify(notification));
   }
 }
