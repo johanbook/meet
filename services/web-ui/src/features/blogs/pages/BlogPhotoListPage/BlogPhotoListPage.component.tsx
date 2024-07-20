@@ -33,7 +33,7 @@ function Group({ data }: GroupProps): ReactElement {
     <>
       {Object.entries(groupedData).map(([date, entries]) => (
         <Fragment key={date}>
-          <Typography sx={{ px: 1, pt: 2, pb: 1 }} variant="body1">
+          <Typography sx={{ px: 1, pt: 3, pb: 1 }} variant="body1">
             <b>{date}</b>
           </Typography>
 
