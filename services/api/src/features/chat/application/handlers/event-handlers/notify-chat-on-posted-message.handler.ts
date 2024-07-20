@@ -14,7 +14,7 @@ import { ChatMessageSentEvent } from "../../../domain/events/chat-message-sent.e
 import { ChatConversation } from "../../../infrastructure/entities/chat-conversation.entity";
 
 @EventsHandler(ChatMessageSentEvent)
-export class NotifyReceiverOnPostedChatMessageHandler
+export class NotifyChatOnPostedMessageHandler
   implements IEventHandler<ChatMessageSentEvent>
 {
   constructor(
@@ -45,6 +45,9 @@ export class NotifyReceiverOnPostedChatMessageHandler
           profileId: true,
         },
       },
+      relations: {
+        members: true,
+      },
       where: {
         id: event.conversationId,
       },
@@ -54,7 +57,9 @@ export class NotifyReceiverOnPostedChatMessageHandler
       throw new NotFoundException("Conversation not found");
     }
 
-    const receivers = conversation.members.map((member) => member.profileId);
+    const receivers = conversation.members
+      .map((member) => member.profileId)
+      .filter((profileId) => profileId !== event.senderId);
 
     const notification: INotification = {
       data: { senderId: event.senderId },

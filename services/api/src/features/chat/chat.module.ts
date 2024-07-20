@@ -11,7 +11,7 @@ import { ProfileModule } from "src/core/profiles/profile.module";
 
 import { CreateChatHandler } from "./application/handlers/command-handlers/create-chat-handler";
 import { PostChatMessageHandler } from "./application/handlers/command-handlers/post-chat-message.handler";
-import { NotifyReceiverOnPostedChatMessageHandler } from "./application/handlers/event-handlers/notify-receiver-on-posted-message.handler";
+import { NotifyChatOnPostedMessageHandler } from "./application/handlers/event-handlers/notify-chat-on-posted-message.handler";
 import { GetChatMessagesHandler } from "./application/handlers/query-handlers/get-chat-messages.handler";
 import { GetConversationListHandler } from "./application/handlers/query-handlers/get-conversation-list.handler";
 import { ChatsController } from "./client/controllers/chats.controller";
@@ -37,7 +37,7 @@ import { ChatMessage } from "./infrastructure/entities/chat-message.entity";
     CreateChatHandler,
     GetChatMessagesHandler,
     GetConversationListHandler,
-    NotifyReceiverOnPostedChatMessageHandler,
+    NotifyChatOnPostedMessageHandler,
     PostChatMessageHandler,
   ],
 })
