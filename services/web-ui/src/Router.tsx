@@ -3,11 +3,13 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { GlobalDialogProvider } from "src/core/dialog";
 import { NavigationTrackingProvider } from "src/core/tracking/NavigationTrackingProvider";
+import { BlogPhotoListPage } from "src/features/blogs/pages/BlogPhotoListPage";
 import { BlogPostListPage } from "src/features/blogs/pages/BlogPostListPage";
 import { BlogPostPage } from "src/features/blogs/pages/BlogPostPage";
 import { ChatListPage } from "src/features/chat/pages/ChatListPage";
 import { ChatPage } from "src/features/chat/pages/ChatPage";
 import { CreateChatPage } from "src/features/chat/pages/CreateChatPage";
+import { AppearancePage } from "src/features/settings/pages/AppearancePage";
 import { SettingsPage } from "src/features/settings/pages/SettingsPage";
 import { CreateOrganizationPage } from "src/pages/CreateOrganizationPage";
 import { CurrentOrganizationPage } from "src/pages/CurrentOrganizationPage";
@@ -18,8 +20,6 @@ import { OrganizationListPage } from "src/pages/OrganizationListPage";
 import { ProfileGuard } from "src/pages/ProfileGuard";
 import { ProfileJournalPage } from "src/pages/ProfileJournalPage";
 import { ProfilePage } from "src/pages/ProfilePage";
-
-import { AppearancePage } from "./features/settings/pages/AppearancePage";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +36,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <BlogPostListPage />,
+      },
+      {
+        path: "/blog/photos",
+        element: <BlogPhotoListPage />,
       },
       {
         path: "/blog/:id",
