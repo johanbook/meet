@@ -1,6 +1,7 @@
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { blogsApi } from "src/apis";
 import { InteractionObserver } from "src/core/infinite-scroll";
@@ -14,6 +15,8 @@ import { BlogPhotoListPageSkeleton } from "./BlogPhotoListPage.skeleton";
 const ITEMS_PER_PAGE = 10;
 
 export function BlogPhotoListPageContainer(): ReactElement {
+  const { t } = useTranslation("blog-photos");
+
   const { error, data, isPending, fetchNextPage, hasNextPage } =
     useInfiniteQuery({
       queryKey: [CacheKeysConstants.BlogPhotoList],
@@ -35,7 +38,7 @@ export function BlogPhotoListPageContainer(): ReactElement {
   if (error) {
     return (
       <BlogPhotoListPageNav>
-        <ErrorView message="Unable to fetch photos" />
+        <ErrorView message={t("error")} />
       </BlogPhotoListPageNav>
     );
   }
@@ -51,7 +54,9 @@ export function BlogPhotoListPageContainer(): ReactElement {
   if (!data || data.pages[0].length === 0) {
     return (
       <BlogPhotoListPageNav>
-        <Typography>No photos to display</Typography>
+        <Box sx={{ p: 2 }}>
+          <Typography>{t("no-photos")}</Typography>
+        </Box>
       </BlogPhotoListPageNav>
     );
   }
