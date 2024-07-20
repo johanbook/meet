@@ -27,7 +27,7 @@ export class SaveNotificationSubscriptionHandler
       },
     };
 
-    this.notificationSubscriptionService.saveSubscription(
+    await this.notificationSubscriptionService.saveSubscription(
       currentProfileId,
       subscription,
     );

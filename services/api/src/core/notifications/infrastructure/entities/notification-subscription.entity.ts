@@ -12,5 +12,5 @@ export class NotificationSubscription extends BaseEntity {
   profileId!: number;
 
   @Column("json")
-  subsection!: object;
+  subscription!: object;
 }
