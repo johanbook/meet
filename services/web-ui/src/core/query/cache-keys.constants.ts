@@ -1,5 +1,6 @@
 export enum CacheKeysConstants {
   BlogPosts = "blogPosts",
+  Chats = "chats",
   CurrentOrganization = "CurrentOrganization",
   CurrentOrganizationMembers = "CurrentOrganizationMembers",
   CurrentProfile = "currentProfile",
