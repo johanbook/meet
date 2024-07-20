@@ -1,3 +1,4 @@
+import { Type } from "class-transformer";
 import {
   IsNumber,
   IsOptional,
@@ -18,5 +19,6 @@ export class SaveNotificationSubscriptionCommand {
   expirationTime?: number | null;
 
   @ValidateNested()
+  @Type(() => NotificationSubscriptionKeysDetails)
   keys?: NotificationSubscriptionKeysDetails;
 }
