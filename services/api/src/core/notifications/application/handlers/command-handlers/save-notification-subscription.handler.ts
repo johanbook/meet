@@ -22,7 +22,7 @@ export class SaveNotificationSubscriptionHandler
     const subscription: PushSubscription = {
       endpoint: command.endpoint || "",
       keys: {
-        auth: command.keys?.p256dh || "",
+        auth: command.keys?.auth || "",
         p256dh: command.keys?.p256dh || "",
       },
     };
