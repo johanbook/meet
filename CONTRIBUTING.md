@@ -15,6 +15,9 @@ Create a `.env` file like so and replace the required fields:
 
 ```sh
 cp .env.example .env
+
+# Generate VAPI keys
+./services/api/scripts/generate-vapi-keys >> .env
 ```
 
 ### Development
