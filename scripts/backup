@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Backup Postgres
+sudo docker exec db pg_dumpall -U postgres >db.backup.sql
+scp db.backup USER@MACHINE:/backup
+rm db.backup.sql
+
+# Backup Minio
+tar -czvf minio.backup.tar.gz .data/minio
+scp minio.backup.tar.gz USER@MACHINE:/backup
+rm minio.backup.tar.gz
