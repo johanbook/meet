@@ -27,7 +27,7 @@ workbox.routing.registerRoute(
 
 // Assets
 workbox.routing.registerRoute(
-  /\.(css|html|js)$/,
+  /\.(css|html|js|json)$/,
   new workbox.strategies.NetworkFirst({
     cacheName: "assets",
     plugins: [
