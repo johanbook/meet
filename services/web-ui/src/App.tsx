@@ -14,17 +14,17 @@ import { QUERY_CLIENT } from "./queryQlient";
 
 export function App(): ReactElement {
   return (
-    <Suspense fallback={<LoadingView />}>
-      <QueryClientProvider client={QUERY_CLIENT}>
-        <ThemeProvider>
+    <QueryClientProvider client={QUERY_CLIENT}>
+      <ThemeProvider>
+        <Suspense fallback={<LoadingView />}>
           <AuthenticationGuard>
             <NotificationProvider>
               <Router />
               <SnackbarProvider dense />
             </NotificationProvider>
           </AuthenticationGuard>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </Suspense>
+        </Suspense>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
