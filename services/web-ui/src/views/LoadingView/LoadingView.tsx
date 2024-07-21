@@ -1,6 +1,8 @@
 import { ReactElement } from "react";
 
-import { Box, CircularProgress } from "@mui/material";
+import { Favorite } from "@mui/icons-material";
+import { Box } from "@mui/material";
+import { motion } from "framer-motion";
 
 export function LoadingView(): ReactElement {
   return (
@@ -12,7 +14,15 @@ export function LoadingView(): ReactElement {
         height: "100vh",
       }}
     >
-      <CircularProgress />
+      <Favorite
+        animate={{
+          scale: [1, 1.5, 1],
+        }}
+        color="primary"
+        component={motion.svg}
+        sx={{ fontSize: 60, mb: 2 }}
+        transition={{ repeat: Number.POSITIVE_INFINITY }}
+      />
     </Box>
   );
 }
