@@ -1,12 +1,16 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 
 import { ErrorOutline } from "@mui/icons-material";
 import {
   Avatar,
+  Box,
   ButtonBase,
   CircularProgress,
+  Divider,
+  Drawer,
   MenuItem,
   Skeleton,
+  Typography,
 } from "@mui/material";
 
 import { OrganizationDetails, SwitchOrganizationCommand } from "src/api";
@@ -21,6 +25,7 @@ import {
   useQueryClient,
 } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
+import { useIsMobile } from "src/hooks/useIsMobile";
 
 interface MenuContentProps {
   currentOrganizationId: number;
@@ -64,15 +69,31 @@ function MenuContent({ currentOrganizationId }: MenuContentProps) {
     );
   }
 
+  const filteredOrganizations = query.data.filter(
+    (organization) => organization.id !== currentOrganizationId
+  );
+
   return (
     <>
-      {query.data.map((organization) => (
+      {filteredOrganizations.map((organization) => (
         <MenuItem
+          sx={{ maxWidth: "65vw" }}
           key={organization.id}
           onClick={() => handleClick(organization)}
           selected={organization.id === currentOrganizationId}
         >
-          {organization.name}
+          <Avatar sx={{ height: 30, width: 30, mr: 2 }}>
+            {organization.name[0]}
+          </Avatar>
+          <Typography
+            sx={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {organization.name}
+          </Typography>
         </MenuItem>
       ))}
     </>
@@ -80,6 +101,10 @@ function MenuContent({ currentOrganizationId }: MenuContentProps) {
 }
 
 export function CurrentOrganizationAvatar(): ReactElement {
+  const isMobile = useIsMobile();
+
+  const [drawerIsOpen, setIsDrawerOpen] = useState(false);
+
   const query = useQuery({
     queryKey: [CacheKeysConstants.CurrentOrganization],
     queryFn: () => organizationsApi.getCurrentOrganization(),
@@ -91,6 +116,46 @@ export function CurrentOrganizationAvatar(): ReactElement {
 
   if (query.error) {
     return <ErrorOutline color="error" sx={{ height: 30, width: 30 }} />;
+  }
+
+  if (isMobile) {
+    return (
+      <>
+        <ButtonBase onClick={() => setIsDrawerOpen(true)}>
+          <Avatar sx={{ height: 30, width: 30 }}>{query.data.name[0]}</Avatar>
+        </ButtonBase>
+
+        <Drawer
+          onClose={() => setIsDrawerOpen(false)}
+          open={drawerIsOpen}
+          sx={{ zIndex: (theme) => theme.zIndex.drawer + 2 }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              p: 2,
+              gap: 2,
+              width: "65vw",
+            }}
+          >
+            <Avatar sx={{ height: 30, width: 30 }}>{query.data.name[0]}</Avatar>
+            <Typography
+              sx={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+              }}
+              variant="h6"
+            >
+              {query.data.name}
+            </Typography>
+          </Box>
+          <Divider sx={{ mb: 1 }} />
+          <MenuContent currentOrganizationId={query.data.id} />
+        </Drawer>
+      </>
+    );
   }
 
   return (
