@@ -6,6 +6,7 @@ import { useDialog } from "src/core/dialog";
 import { useTranslation } from "src/core/i18n";
 import { useMutation } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
+import { registerServiceWorker } from "src/registerServiceWorker";
 
 import { SettingsPageNav } from "./SettingsPage.nav";
 
@@ -15,9 +16,18 @@ export function SettingsPageContainer(): ReactElement {
   const snackbar = useSnackbar();
 
   const deleteAccountMutation = useMutation({
-    onError: () => snackbar.success(t("danger-zone.delete-account.success")),
-    onSuccess: () => snackbar.error(t("danger-zone.delete-account.error")),
+    onError: () => snackbar.error(t("danger-zone.delete-account.error")),
+    onSuccess: () => snackbar.success(t("danger-zone.delete-account.success")),
     mutationFn: () => profileApi.deleteCurrentProfile(),
+  });
+
+  const enableNotificationsMutation = useMutation({
+    onError: () => snackbar.error(t("notifications.enable.error")),
+    onSuccess: () => snackbar.success(t("notifications.enable.success")),
+    mutationFn: async () => {
+      await Notification.requestPermission();
+      await registerServiceWorker();
+    },
   });
 
   function handleClickDelete() {
@@ -33,6 +43,23 @@ export function SettingsPageContainer(): ReactElement {
 
   return (
     <SettingsPageNav>
+      <Typography gutterBottom variant="h6">
+        {t("notifications.header")}
+      </Typography>
+
+      <Typography color="textSecondary" sx={{ pb: 2 }}>
+        {t("notifications.enable.description")}
+      </Typography>
+
+      <Button
+        color="inherit"
+        loading={enableNotificationsMutation.isPending}
+        onClick={() => enableNotificationsMutation.mutate()}
+        variant="outlined"
+      >
+        {t("notifications.enable.button")}
+      </Button>
+
       <Typography gutterBottom sx={{ paddingTop: 3 }} variant="h6">
         {t("danger-zone.header")}
       </Typography>
@@ -41,16 +68,14 @@ export function SettingsPageContainer(): ReactElement {
         {t("danger-zone.description")}
       </Typography>
 
-      <div>
-        <Button
-          color="error"
-          loading={deleteAccountMutation.isPending}
-          onClick={handleClickDelete}
-          variant="contained"
-        >
-          {t("danger-zone.delete-account.button")}
-        </Button>
-      </div>
+      <Button
+        color="error"
+        loading={deleteAccountMutation.isPending}
+        onClick={handleClickDelete}
+        variant="contained"
+      >
+        {t("danger-zone.delete-account.button")}
+      </Button>
     </SettingsPageNav>
   );
 }

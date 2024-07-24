@@ -1,5 +1,4 @@
 {
-  "description": "These are the permanent settings you can change. More settings will be added here in the future.",
   "danger-zone": {
     "description": "These are actions that cannot be undone",
     "header": "Danger zone",
@@ -12,5 +11,14 @@
     }
   },
   "darkmode": "Darkmode",
-  "header": "Settings"
+  "header": "Settings",
+  "notifications": {
+    "header": "Notifications",
+    "enable": {
+      "description": "Enable push notifications for this device",
+      "button": "Enable",
+      "error": "Failed to enable push notifications",
+      "success": "Enabled push notifications"
+    }
+  }
 }

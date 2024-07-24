@@ -1,5 +1,4 @@
 {
-  "description": "Här kan du ändra dina permanenta inställningar. Detta kommer att komma mer här allteftersom.",
   "danger-zone": {
     "description": "Detta är åtgärder som inte kan ångras",
     "header": "Farozon",
@@ -12,5 +11,14 @@
     }
   },
   "darkmode": "Mörkerläge",
-  "header": "Inställningar"
+  "header": "Inställningar",
+  "notifications": {
+    "header": "Push-notiser",
+    "enable": {
+      "description": "Aktivera push-notiser på denna enhet",
+      "button": "Aktivera",
+      "error": "Ett fel uppstod vid aktivering av notiser",
+      "success": "Notiser har aktiverats"
+    }
+  }
 }

@@ -34,11 +34,7 @@ export function SettingsPageNav({
 
   return (
     <Nav appBarContent={appBarContent}>
-      <Box sx={{ pt: 1, px: 3 }}>
-        <Typography color="textSecondary">{t("description")}</Typography>
-
-        {children}
-      </Box>
+      <Box sx={{ pt: 1, px: 3 }}>{children}</Box>
     </Nav>
   );
 }
