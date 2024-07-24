@@ -1,4 +1,5 @@
 import { ReactElement, useState } from "react";
+import { useNavigate } from "react-router";
 
 import { ErrorOutline } from "@mui/icons-material";
 import {
@@ -102,6 +103,7 @@ function MenuContent({ currentOrganizationId }: MenuContentProps) {
 
 export function CurrentOrganizationAvatar(): ReactElement {
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
 
   const [drawerIsOpen, setIsDrawerOpen] = useState(false);
 
@@ -131,7 +133,9 @@ export function CurrentOrganizationAvatar(): ReactElement {
           sx={{ zIndex: (theme) => theme.zIndex.drawer + 2 }}
         >
           <Box
+            onClick={() => navigate("/group")}
             sx={{
+              cursor: "pointer",
               display: "flex",
               alignItems: "center",
               p: 2,
