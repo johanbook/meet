@@ -87,7 +87,16 @@ a new release, run the following commands:
 
 ```sh
 npm run release
-git push --follow-tags origin main
+git checkout -b vX.Y.Z
+```
+
+Commit and push the files `package.json`, `package-lock.json` and `CHANGELOG.md`
+and merge it to `main`. Then pull this changes in and run the following on the
+main branch:
+
+```sh
+git tag vX.Y.Z
+git push origin vX.Y.Z
 ```
 
 ## Style guide
