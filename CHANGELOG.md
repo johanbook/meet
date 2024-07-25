@@ -4,6 +4,85 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+## [2.1.0](https://github.com/johanbook/meet/compare/v2.0.0...v2.1.0) (2024-07-25)
+
+### Features
+
+- **api:** add endpoint to get image list
+  ([#908](https://github.com/johanbook/meet/issues/908))
+  ([068c324](https://github.com/johanbook/meet/commit/068c3249251a2871be1be225762432dc6fd94ba7))
+- **api:** add organization permission entity
+  ([#911](https://github.com/johanbook/meet/issues/911))
+  ([eef7a6c](https://github.com/johanbook/meet/commit/eef7a6c79d927031afca669f6312d71515e3a1ff))
+- **api:** add vapid endpoint
+  ([#896](https://github.com/johanbook/meet/issues/896))
+  ([e126a0d](https://github.com/johanbook/meet/commit/e126a0dd61c38c6fdfbb9876b48ba97079573447))
+- **api:** enable web push notifications
+  ([#902](https://github.com/johanbook/meet/issues/902))
+  ([7ba7bfc](https://github.com/johanbook/meet/commit/7ba7bfc006dff2eae250d968db8faa12dae6e1ff))
+- **web-ui:** add button to enable notifcations
+  ([#924](https://github.com/johanbook/meet/issues/924))
+  ([63b9f50](https://github.com/johanbook/meet/commit/63b9f50925437986e1d83fbfb4ab8e44953aae25))
+- **web-ui:** add page for blog post photos
+  ([#909](https://github.com/johanbook/meet/issues/909))
+  ([0466036](https://github.com/johanbook/meet/commit/0466036d9343a468219b68c80c398195b6600f72))
+- **web-ui:** add skeleton to photos page
+  ([#913](https://github.com/johanbook/meet/issues/913))
+  ([6f7e614](https://github.com/johanbook/meet/commit/6f7e614957795d3a338a93db14b30dc70394224e))
+- **web-ui:** improve loading screen
+  ([#920](https://github.com/johanbook/meet/issues/920))
+  ([a2b7e62](https://github.com/johanbook/meet/commit/a2b7e62d3baee70611bac6f2e1016911765d3178))
+- **web-ui:** make current organization avatar link to page
+  ([#925](https://github.com/johanbook/meet/issues/925))
+  ([d6a962a](https://github.com/johanbook/meet/commit/d6a962ac277ee3ed00fc6034a61f5fc60b5ca8d8))
+- **web-ui:** show web push notifications
+  ([#900](https://github.com/johanbook/meet/issues/900))
+  ([f32dd7e](https://github.com/johanbook/meet/commit/f32dd7eb7751bdb685b3a11ab015cec5038a5197))
+- **web-ui:** update style of appbar for new chat page
+  ([#906](https://github.com/johanbook/meet/issues/906))
+  ([702f300](https://github.com/johanbook/meet/commit/702f300bf3b276d869caf68e26b34ef117e5baee))
+- **web-ui:** use drawer to show organization list menu on mobile
+  ([#922](https://github.com/johanbook/meet/issues/922))
+  ([8230773](https://github.com/johanbook/meet/commit/8230773f41899231b06a5eaf1fb303d78ba9684e))
+
+### Bug Fixes
+
+- **api:** fix incorrect type when saving subscription
+  ([#898](https://github.com/johanbook/meet/issues/898))
+  ([fe34736](https://github.com/johanbook/meet/commit/fe3473607b2d61f282cf52048b2921da44f3ef2e))
+- **api:** fix notifications on sent chat messages
+  ([#903](https://github.com/johanbook/meet/issues/903))
+  ([5aecbde](https://github.com/johanbook/meet/commit/5aecbde252afbf53b6fd1c0f8bf9950303b6aba7))
+- **api:** fix typo in subscription serialization
+  ([#899](https://github.com/johanbook/meet/issues/899))
+  ([d18862b](https://github.com/johanbook/meet/commit/d18862bc6f50d84b1cbeb5edec42d41207b2cf42))
+- **auth-ui:** use manifest from main app
+  ([#917](https://github.com/johanbook/meet/issues/917))
+  ([6f90c6a](https://github.com/johanbook/meet/commit/6f90c6a514715bd75282903bc4f944aab7ae7b30))
+- **web-ui:** disallow selecting app bar header text
+  ([#889](https://github.com/johanbook/meet/issues/889))
+  ([c7c67b9](https://github.com/johanbook/meet/commit/c7c67b9ffeed528b8218e4c495a553111261c368))
+- **web-ui:** fix cache issue when creating new chat
+  ([#907](https://github.com/johanbook/meet/issues/907))
+  ([d44eba3](https://github.com/johanbook/meet/commit/d44eba3f30f79bc0f78afd8b0bc76c79806eeda3))
+- **web-ui:** fix incorrect import path for apple icon
+  ([#918](https://github.com/johanbook/meet/issues/918))
+  ([b041329](https://github.com/johanbook/meet/commit/b041329d82f1846f08edb75997a90b2b26eb1db0))
+- **web-ui:** fix typo ([#914](https://github.com/johanbook/meet/issues/914))
+  ([9524886](https://github.com/johanbook/meet/commit/9524886007fcb8df99c86215ee9d4892a4c8325d))
+- **web-ui:** invalidate conversation cache on new messages
+  ([#905](https://github.com/johanbook/meet/issues/905))
+  ([bcb988c](https://github.com/johanbook/meet/commit/bcb988cd71bdfcefd3ad1c945b91f94ec9c0961b))
+- **web-ui:** minor styling fixes for photos list page
+  ([#912](https://github.com/johanbook/meet/issues/912))
+  ([f131ec5](https://github.com/johanbook/meet/commit/f131ec5ae124d532a2036e6462b892788a114d73))
+- **web-ui:** update locale
+  ([#923](https://github.com/johanbook/meet/issues/923))
+  ([6e43d30](https://github.com/johanbook/meet/commit/6e43d306b88c6d2044ab6332a1482b52291ba0b1))
+- **web-ui:** use same theme for loading screen
+  ([#921](https://github.com/johanbook/meet/issues/921))
+  ([2f18586](https://github.com/johanbook/meet/commit/2f18586ec7c27469ce06856135f78c93344f7d91))
+
 ## [2.0.0](https://github.com/johanbook/meet/compare/v1.0.0...v2.0.0) (2024-07-19)
 
 ### Features
