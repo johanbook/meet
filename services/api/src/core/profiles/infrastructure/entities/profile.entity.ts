@@ -1,5 +1,6 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   Index,
   JoinColumn,
@@ -7,6 +8,7 @@ import {
   OneToOne,
   Point,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 
 import { OrganizationMembership } from "src/core/organizations/infrastructure/entities/organization-membership.entity";
@@ -43,4 +45,14 @@ export class Profile {
   @Index({ unique: true })
   @Column({ length: 128 })
   userId!: string;
+
+  @CreateDateColumn({
+    type: "timestamp without time zone",
+  })
+  createdAt!: Date;
+
+  @UpdateDateColumn({
+    type: "timestamp without time zone",
+  })
+  updatedAt!: Date;
 }
