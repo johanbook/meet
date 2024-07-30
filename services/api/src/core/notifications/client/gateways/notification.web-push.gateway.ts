@@ -40,10 +40,18 @@ export class NotificationWebPushGateway {
 
       return result.statusCode < 400;
     } catch (error) {
-      this.logger.error("Unable to send push notification", {
-        error,
-        notification,
-      });
+      this.logger.error(
+        "Unable to send push notification. This notification subscription will be removed",
+        {
+          error,
+          notification,
+        },
+      );
+
+      await this.notificationSubscriptionService.deleteSubscription(
+        pushSubscription.id,
+      );
+
       return false;
     }
   }
