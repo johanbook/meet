@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { sendNotification, setVapidDetails } from "web-push";
 
+import { Logger } from "src/core/logging";
 import { getRequiredStringConfig } from "src/utils/config.helper";
 
 import { NotificationSubscriptionService } from "../../domain/services/notification-subscription.service";
@@ -8,6 +9,8 @@ import { INotification } from "../../types";
 
 @Injectable()
 export class NotificationWebPushGateway {
+  private logger = new Logger(NotificationWebPushGateway.name);
+
   constructor(
     private readonly notificationSubscriptionService: NotificationSubscriptionService,
   ) {
@@ -29,12 +32,20 @@ export class NotificationWebPushGateway {
       return false;
     }
 
-    const result = await sendNotification(
-      pushSubscription,
-      JSON.stringify(notification),
-    );
+    try {
+      const result = await sendNotification(
+        pushSubscription,
+        JSON.stringify(notification),
+      );
 
-    return result.statusCode < 400;
+      return result.statusCode < 400;
+    } catch (error) {
+      this.logger.error("Unable to send push notification", {
+        error,
+        notification,
+      });
+      return false;
+    }
   }
 
   public async sendWebPush(
