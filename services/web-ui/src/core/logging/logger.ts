@@ -95,4 +95,8 @@ export function registerExceptionLogger(): void {
     const error = event.error;
     logger.error(event.message, { stackTrace: error.stack });
   });
+
+  window.addEventListener("unhandledrejection", (event) => {
+    logger.error("There was an unhandled rejection", { reason: event.reason });
+  });
 }
