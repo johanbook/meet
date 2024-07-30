@@ -4,6 +4,7 @@ import { profileApi } from "src/apis";
 import { Button, ConfirmationDialog, Typography } from "src/components/ui";
 import { useDialog } from "src/core/dialog";
 import { useTranslation } from "src/core/i18n";
+import { useLogger } from "src/core/logging";
 import { useMutation } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 import { registerServiceWorker } from "src/registerServiceWorker";
@@ -11,12 +12,16 @@ import { registerServiceWorker } from "src/registerServiceWorker";
 import { SettingsPageNav } from "./SettingsPage.nav";
 
 export function SettingsPageContainer(): ReactElement {
+  const logger = useLogger(SettingsPageNav.name);
   const { t } = useTranslation("settings");
   const { openDialog } = useDialog();
   const snackbar = useSnackbar();
 
   const deleteAccountMutation = useMutation({
-    onError: () => snackbar.error(t("danger-zone.delete-account.error")),
+    onError: (error) => {
+      logger.error("Failed to enable notifications", { error });
+      snackbar.error(t("danger-zone.delete-account.error"));
+    },
     onSuccess: () => snackbar.success(t("danger-zone.delete-account.success")),
     mutationFn: () => profileApi.deleteCurrentProfile(),
   });
