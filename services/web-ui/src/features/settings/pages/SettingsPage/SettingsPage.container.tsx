@@ -19,7 +19,7 @@ export function SettingsPageContainer(): ReactElement {
 
   const deleteAccountMutation = useMutation({
     onError: (error) => {
-      logger.error("Failed to enable notifications", { error });
+      logger.error("Failed to delete account", { error });
       snackbar.error(t("danger-zone.delete-account.error"));
     },
     onSuccess: () => snackbar.success(t("danger-zone.delete-account.success")),
@@ -27,7 +27,10 @@ export function SettingsPageContainer(): ReactElement {
   });
 
   const enableNotificationsMutation = useMutation({
-    onError: () => snackbar.error(t("notifications.enable.error")),
+    onError: (error) => {
+      logger.error("Failed to enable notifications", { error });
+      snackbar.error(t("notifications.enable.error"));
+    },
     onSuccess: () => snackbar.success(t("notifications.enable.success")),
     mutationFn: async () => {
       await Notification.requestPermission();
