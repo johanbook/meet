@@ -12,7 +12,7 @@ import { registerServiceWorker } from "src/registerServiceWorker";
 import { SettingsPageNav } from "./SettingsPage.nav";
 
 export function SettingsPageContainer(): ReactElement {
-  const logger = useLogger(SettingsPageNav.name);
+  const logger = useLogger(SettingsPageContainer.name);
   const { t } = useTranslation("settings");
   const { openDialog } = useDialog();
   const snackbar = useSnackbar();
