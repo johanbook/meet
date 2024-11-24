@@ -21,7 +21,7 @@ export function CreateChatPageNav({
       <IconButton component={ReactRouterLink} to="/chat">
         <ArrowBack />
 
-        <Typography sx={{ pl: 3 }} variant="h5">
+        <Typography color="textPrimary" sx={{ pl: 3 }} variant="h5">
           {t("header")}
         </Typography>
       </IconButton>
