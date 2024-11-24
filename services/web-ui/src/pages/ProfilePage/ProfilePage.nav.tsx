@@ -1,10 +1,10 @@
 import { ReactElement } from "react";
+import { Link as ReactRouterLink } from "react-router-dom";
 
-import { Box } from "@mui/material";
+import { ArrowBack } from "@mui/icons-material";
+import { Box, IconButton } from "@mui/material";
 
-import { NavLayout } from "src/components/layout";
 import { Nav } from "src/components/nav";
-import { useTranslation } from "src/core/i18n";
 
 interface ProfilePageNavProps {
   children: ReactElement;
@@ -13,13 +13,18 @@ interface ProfilePageNavProps {
 export function ProfilePageNav({
   children,
 }: ProfilePageNavProps): ReactElement {
-  const { t } = useTranslation("profile");
+
+  const appBarContent = (
+    <>
+      <IconButton component={ReactRouterLink} to="/">
+        <ArrowBack />
+      </IconButton>
+    </>
+  );
 
   return (
-    <Nav>
-      <NavLayout linkText={t("links.blog")} to="/">
-        <Box sx={{ pt: 1 }}>{children}</Box>
-      </NavLayout>
+    <Nav appBarContent={appBarContent}>
+      <Box sx={{ pt: 1 }}>{children}</Box>
     </Nav>
   );
 }
