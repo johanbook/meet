@@ -52,7 +52,7 @@ export function OrganizationSettings({
     return <></>;
   }
 
-  async function handleDelete(event: SyntheticEvent): Promise<void> {
+  async function handleSubmit(event: SyntheticEvent): Promise<void> {
     event.preventDefault();
 
     const { data } = form.validate();
@@ -68,7 +68,7 @@ export function OrganizationSettings({
     });
   }
 
-  async function handleSubmit(event: SyntheticEvent): Promise<void> {
+  async function handleDelete(event: SyntheticEvent): Promise<void> {
     event.preventDefault();
 
     await deleteMutation.mutateAsync(undefined, {
