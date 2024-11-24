@@ -1,4 +1,5 @@
 import { Fragment, ReactElement } from "react";
+import { useNavigate } from "react-router";
 
 import { ImageList, ImageListItem, Typography } from "@mui/material";
 
@@ -28,6 +29,7 @@ interface GroupProps {
 
 function Group({ data }: GroupProps): ReactElement {
   const groupedData = groupDataByDate(data);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -40,7 +42,11 @@ function Group({ data }: GroupProps): ReactElement {
           <ImageList cols={3} gap={8} sx={{ m: 0 }} variant="masonry">
             {entries.map((item) => (
               <ImageListItem key={item.id}>
-                <img src={item.url} loading="lazy" />
+                <img
+                  src={item.url}
+                  loading="lazy"
+                  onClick={() => navigate(`/blog/${item.blogId}`)}
+                />
               </ImageListItem>
             ))}
           </ImageList>
