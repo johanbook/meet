@@ -106,6 +106,19 @@ export class OrganizationService {
     this.eventBus.publish(event);
   }
 
+  async getPersonalOrganization(
+    profileId: number,
+  ): Promise<Organization | null> {
+    return await this.organizations.findOne({
+      where: {
+        memberships: {
+          profileId,
+        },
+        personal: true,
+      },
+    });
+  }
+
   async checkIfPersonalOrganizationExists(profileId: number): Promise<boolean> {
     return await this.organizations.exist({
       where: {
