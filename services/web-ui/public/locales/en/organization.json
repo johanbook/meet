@@ -44,6 +44,10 @@
   },
   "settings": {
     "header": "Settings",
+    "delete": {
+      "header": "Delete group",
+      "button": "Delete"
+    },
     "description": "Here you can change settings of your group.",
     "name": "Name",
     "save": {
