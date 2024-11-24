@@ -47,6 +47,7 @@ export class GetBlogPhotoListHandler
     });
 
     return mapArray(BlogPhotoDetails, foundPhotos, (photo) => ({
+      blogId: photo.blogPostId,
       createdAt: photo.createdAt,
       id: photo.id,
       url: this.photoService.getUrl(photo, "blog-post-photo"),
