@@ -1,8 +1,10 @@
 import { ReactElement, ReactNode } from "react";
+import { Link as ReactRouterLink } from "react-router-dom";
 
-import { NavLayout } from "src/components/layout";
+import { ArrowBack } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
+
 import { Nav } from "src/components/nav";
-import { useTranslation } from "src/core/i18n";
 
 interface BlogPostPageNavProps {
   children: ReactNode;
@@ -11,13 +13,19 @@ interface BlogPostPageNavProps {
 export function BlogPostPageNav({
   children,
 }: BlogPostPageNavProps): ReactElement {
-  const { t } = useTranslation("blog");
-
-  return (
-    <Nav>
-      <NavLayout linkText={t("links.back")} to="/">
-        {children}
-      </NavLayout>
-    </Nav>
+  const appBarContent = (
+    <>
+      <IconButton
+        component={ReactRouterLink}
+        sx={{
+          mr: 2,
+        }}
+        to="/"
+      >
+        <ArrowBack />
+      </IconButton>
+    </>
   );
+
+  return <Nav appBarContent={appBarContent}>{children}</Nav>;
 }
