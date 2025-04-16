@@ -1,6 +1,6 @@
 # Journal
 
-The software system comes with a built-in journal system, meaning all actions
+The software system comes with a built-in journal system (audit log), meaning all actions
 taken by a user are stored in a journal which is persisted in the database.
 
 ## Guide
