@@ -1,7 +1,7 @@
 {
   "name": "web-ui",
   "version": "0.0.0",
-  "homepage": "https://johanbook.com/",
+  "homepage": "https://meetly.site/",
   "scripts": {
     "build": "vite build && npm run build:service-worker",
     "build:service-worker": "workbox injectManifest workbox-config.js",
