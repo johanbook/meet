@@ -1,0 +1,11 @@
+#!/bin/bash
+
+for file in find src/api/**/*.ts; do
+    if [[ -f $file ]]; then
+        ## Linux
+        # sed -i '1s/^/\/\/ @ts-nocheck\n/' "$file"
+
+        ## MacOS
+        sed -i '' '1s/^/\/\/ @ts-nocheck\n/' "$file"
+    fi
+done
