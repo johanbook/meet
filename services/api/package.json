@@ -44,15 +44,15 @@
     "nestjs-minio-client": "^2.2.0",
     "nodemailer": "^6.9.13",
     "pg": "8.14.1",
-    "pino": "^8.21.0",
+    "pino": "9.6.0",
     "reflect-metadata": "0.2.2",
     "rxjs": "7.8.2",
-    "ts-node": "^10.0.0",
+    "ts-node": "10.9.2",
     "typeorm": "0.3.22",
     "typeorm-extension": "3.7.1",
     "typescript": "5.8.3",
-    "uuid": "^9.0.0",
-    "web-push": "^3.6.7"
+    "uuid": "11.1.0",
+    "web-push": "3.6.7"
   },
   "devDependencies": {
     "@nestjs/cli": "11.0.6",
