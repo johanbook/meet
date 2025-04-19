@@ -12,7 +12,10 @@ import { GetConversationListQuery } from "../../application/contracts/queries/ge
 @Controller("chats")
 @ApiTags("chats")
 export class ChatsController {
-  constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
+  constructor(
+    private commandBus: CommandBus,
+    private queryBus: QueryBus,
+  ) {}
 
   @Get()
   async getConversations(

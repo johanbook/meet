@@ -29,7 +29,10 @@ import { organizationPermissions } from "../../organization.permissions";
 @Controller("organizations/current")
 @ApiTags("organizations")
 export class CurrentOrganizationController {
-  constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
+  constructor(
+    private commandBus: CommandBus,
+    private queryBus: QueryBus,
+  ) {}
 
   @Get()
   @RequiresOrganizationPermissions(

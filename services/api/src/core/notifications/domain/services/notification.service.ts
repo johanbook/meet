@@ -111,9 +111,8 @@ export class NotificationService {
   ): Promise<void> {
     this.logger.debug("Notifying users via email", { userIds });
 
-    const targetEmails = await this.userIdService.fetchUserEmailsByUserIds(
-      userIds,
-    );
+    const targetEmails =
+      await this.userIdService.fetchUserEmailsByUserIds(userIds);
 
     await this.emailService.sendEmail({
       receivers: targetEmails,
