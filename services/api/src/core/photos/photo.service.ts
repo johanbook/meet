@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { Constructor } from "@nestjs/cqrs";
-import Jimp from "jimp";
+import { Jimp } from "jimp";
 
 import {
   BucketName,
@@ -12,7 +12,7 @@ import { BasePhoto } from "./photo.entity";
 
 interface ResizeOptions {
   height?: number;
-  width?: number;
+  width: number;
 }
 
 @Injectable()
@@ -24,9 +24,7 @@ export class PhotoService {
 
     const { width, height } = options;
 
-    return jimp
-      .resize(width || Jimp.AUTO, height || Jimp.AUTO)
-      .getBufferAsync(Jimp.MIME_PNG);
+    return jimp.resize({ w: width, h: height }).getBuffer("image/png");
   }
 
   getUrl<T extends BasePhoto>(photo: T, bucketName: BucketName): string {
