@@ -61,7 +61,7 @@ services:
     restart: "unless-stopped"
 
   console:
-    image: ghcr.io/benphelps/homepage:latest
+    image: ghcr.io/gethomepage/homepage:latest
     container_name: console
     environment:
       HOMEPAGE_VAR_DOMAIN: "$DOMAIN"
