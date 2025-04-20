@@ -1,7 +1,7 @@
 - Monitoring:
     - Grafana:
         description: Logging
-        href: http://grafana.console.{{HOMEPAGE_VAR_DOMAIN}}/
+        href: https://johanbook.grafana.net/
         icon: grafana
 
 - Routing:
