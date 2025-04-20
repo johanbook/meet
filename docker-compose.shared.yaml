@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   traefik:
     image: "traefik:v2.10"
@@ -64,7 +62,7 @@ services:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: console
     environment:
-      HOMEPAGE_ALLOWED_HOSTS: "$DOMAIN"
+      HOMEPAGE_ALLOWED_HOSTS: "console.$DOMAIN"
       HOMEPAGE_VAR_DOMAIN: "$DOMAIN"
     labels:
       - "traefik.enable=true"
