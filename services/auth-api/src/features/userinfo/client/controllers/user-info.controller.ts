@@ -18,6 +18,7 @@ import { UserDetails } from "../../application/contracts/dtos/user.dto";
 import { GetUserInfoByEmailQuery } from "../../application/contracts/queries/get-user-info-by-email.query";
 import { GetUserInfoListByEmailQuery } from "../../application/contracts/queries/get-user-info-list-by-email.query";
 import { GetUserInfoListByIdQuery } from "../../application/contracts/queries/get-user-info-list-by-id.query";
+import { getUser, listUsersByAccountInfo } from "supertokens-node";
 
 @Controller("userinfo")
 @ApiTags("userinfo")
@@ -27,10 +28,11 @@ export class UserInfoController {
   async getUserInfoListByEmail(
     @Body() body: GetUserInfoListByEmailQuery,
   ): Promise<Record<string, UserDetails>> {
-    const result: Record<string, EmailPassword.User> = {};
+    const result: Record<string, { email: string }> = {};
 
     for (const email of body.emails) {
-      result[email] = await EmailPassword.getUserByEmail("public", email);
+      const users = await listUsersByAccountInfo("public", { email });
+      result[email] = { email: users[0].emails[0] };
     }
 
     return result;
@@ -41,10 +43,11 @@ export class UserInfoController {
   async getUserInfoListByUserId(
     @Body() body: GetUserInfoListByIdQuery,
   ): Promise<Record<string, UserDetails>> {
-    const result: Record<string, EmailPassword.User> = {};
+    const result: Record<string, { email: string }> = {};
 
     for (const userId of body.userIds) {
-      result[userId] = await EmailPassword.getUserById(userId);
+      const { emails } = await getUser(userId);
+      result[userId] = { email: emails[0] };
     }
 
     return result;
@@ -54,13 +57,15 @@ export class UserInfoController {
   async getUserInfoByEmail(
     @Query() query: GetUserInfoByEmailQuery,
   ): Promise<UserDetails> {
-    const result = await EmailPassword.getUserByEmail("public", query.email);
+    const users = await listUsersByAccountInfo("public", {
+      email: query.email,
+    });
 
-    if (!result) {
+    if (users.length === 0) {
       throw new NotFoundException("User not found");
     }
 
-    return result;
+    return { email: users[0].emails[0] };
   }
 
   @Put("/email")
@@ -69,7 +74,7 @@ export class UserInfoController {
     @Session({ sessionRequired: true }) session: ISession,
   ) {
     await EmailPassword.updateEmailOrPassword({
-      userId: session.getUserId(),
+      recipeUserId: session.getRecipeUserId(),
       email: body.email,
     });
   }

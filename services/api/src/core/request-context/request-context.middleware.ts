@@ -33,7 +33,6 @@ export class RequestContextMiddleware implements NestModule {
           next: () => void,
         ) => {
           const correlationId = req.headers["x-correlation-id"];
-          let userEmail: string | undefined;
           let userId: string | undefined;
 
           if (typeof correlationId != "string") {
@@ -51,14 +50,8 @@ export class RequestContextMiddleware implements NestModule {
             userId = headerUserId;
           }
 
-          const headerUserEmail = req.headers["x-email"];
-          if (typeof headerUserEmail === "string") {
-            userEmail = headerUserEmail;
-          }
-
           const store: IRequestContext = {
             correlationId,
-            userEmail,
             userId,
           };
 
