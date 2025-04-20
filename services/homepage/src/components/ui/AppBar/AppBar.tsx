@@ -16,19 +16,37 @@ export function AppBar(): React.ReactElement {
 
   return (
     <MuiAppBar
-      color="inherit"
+      color="transparent"
       position="fixed"
-      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      sx={{ border: "none", zIndex: (theme) => theme.zIndex.drawer + 1 }}
       variant="outlined"
     >
       <Toolbar sx={{ display: "flex", justifyContent: "left" }}>
-        <Box sx={{ flexGrow: 1 }}>
-          <Typography color="primary" variant="h6">
-            {CONFIG.APP.NAME}
-          </Typography>
-        </Box>
+        <Typography
+          color="primary"
+          sx={(theme) => ({
+            background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+            backgroundClip: "text",
+            color: "transparent",
+            fontWeight: 600,
+            fontFamily: "sans-serif",
+            textShadow: `1px 1px 1px white`,
+            userSelect: "none",
+          })}
+          variant="h5"
+        >
+          {CONFIG.APP.NAME}
+        </Typography>
 
-        <Button component="a" href={CONFIG.URLS.APP} variant="text">
+        <Box sx={{ flexGrow: 1 }}></Box>
+
+        <Button
+          component="a"
+          color="primary"
+          href={CONFIG.URLS.APP}
+          sx={{ borderColor: "white", color: "white" }}
+          variant="outlined"
+        >
           {t("nav.login")}
         </Button>
       </Toolbar>
