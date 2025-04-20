@@ -2,7 +2,8 @@ import React from "react";
 
 import { Box, Button, Typography } from "@mui/material";
 
-import BackgroundImage from "src/assets/images/background.png";
+import BackgroundImage2048px from "src/assets/images/background_2048px.png";
+import BackgroundImage1024px from "src/assets/images/background_1024px.png";
 import { Center } from "src/components/ui/Center";
 import { CONFIG } from "src/config";
 import { useTranslation } from "src/core/i18n";
@@ -21,7 +22,8 @@ export function LandingPageComponent(): React.ReactElement {
     >
       <img
         alt=""
-        src={BackgroundImage}
+        src={BackgroundImage1024px}
+        srcSet={`${BackgroundImage2048px} 2x`}
         style={{
           objectFit: "cover",
           position: "absolute",
