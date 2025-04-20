@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 
 import { registerI18n } from "src/core/i18n";
 import { ThemeProvider } from "src/core/theme";
@@ -9,13 +9,16 @@ import { reportWebVitals } from "./utils/reportWebVitals";
 
 registerI18n();
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(
+  document.querySelector("#root") as HTMLElement,
+);
+
+root.render(
   <React.StrictMode>
     <ThemeProvider>
       <App />
     </ThemeProvider>
-  </React.StrictMode>,
-  document.querySelector("#root") as HTMLElement
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
