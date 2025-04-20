@@ -34,7 +34,7 @@ export function LandingPageComponent(): React.ReactElement {
       />
 
       <Box>
-        <Typography color="white" gutterBottom variant="h3">
+        <Typography color="white" gutterBottom sx={{ mb: 3 }} variant="h3">
           {t("landingpage.hero.text")}
         </Typography>
 
@@ -42,6 +42,11 @@ export function LandingPageComponent(): React.ReactElement {
           <Button
             component="a"
             href={CONFIG.URLS.SIGNUP_UP}
+            size="large"
+            sx={({ palette }) => ({
+              backgroundImage: `linear-gradient(to left, ${palette.primary.light}, ${palette.secondary.main})`,
+              fontWeight: 600,
+            })}
             variant="contained"
           >
             {t("landingpage.hero.signup")}
