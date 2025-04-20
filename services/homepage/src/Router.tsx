@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 
 import Nav from "src/components/ui/Nav";
@@ -24,10 +24,12 @@ const router = createHashRouter([
   },
 ]);
 
-export default function App(): React.ReactElement {
+const Router: FC = () => {
   return (
     <Nav>
-      <RouterProvider router={router} />{" "}
+      <RouterProvider router={router} />
     </Nav>
   );
-}
+};
+
+export default Router;
