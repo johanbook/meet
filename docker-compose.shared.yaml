@@ -128,7 +128,7 @@ services:
       - ".data/pgadmin:/var/lib/pgadmin:rw"
 
   supertokens:
-    image: "registry.supertokens.io/supertokens/supertokens-postgresql:8.0"
+    image: "registry.supertokens.io/supertokens/supertokens-postgresql:9.0"
     container_name: "supertokens"
     environment:
       POSTGRESQL_CONNECTION_URI: "postgresql://$POSTGRES_USERNAME:$POSTGRES_PASSWORD@db:5432/"
