@@ -25,3 +25,4 @@
     - User management:
         description: Admin interface
         href: http://{{HOMEPAGE_VAR_DOMAIN}}/auth/api/dashboard
+        icon: https://supertokens.com/favicon.ico
