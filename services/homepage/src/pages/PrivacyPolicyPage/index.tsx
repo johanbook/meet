@@ -1,23 +1,30 @@
+import { Card, Typography } from "@mui/material";
 import { ReactElement } from "react";
-
-import { PrivacyPolicyPageNav } from "./PrivacyPolicyPage.nav";
 
 export function PrivacyPolicyPage(): ReactElement {
   return (
-    <PrivacyPolicyPageNav>
-      <p>Version 1.0, Updated 2024-07-10</p>
+    <Card
+      sx={{ p: 4, maxHeight: "80vh", overflowY: "auto" }}
+      variant="outlined"
+    >
+      <Typography variant="caption">Version 1.0. Updated 2024-07-10</Typography>
 
-      <h2>Introduction</h2>
-      <p>
+      <Typography gutterBottom sx={{ mt: 3 }} variant="h5">
+        Introduction
+      </Typography>
+
+      <Typography gutterBottom sx={{ mb: 3 }}>
         Welcome to Meetly (the {'"App"'}). We respect your privacy and are
         committed to protecting the personal information you share with us. This
         Privacy Policy explains how we collect, use, disclose, and safeguard
         your information when you use our App.
-      </p>
+      </Typography>
 
-      <h2>Information We Collect</h2>
+      <Typography gutterBottom variant="h5">
+        Information We Collect
+      </Typography>
 
-      <p>
+      <Typography gutterBottom sx={{ mb: 3 }}>
         Since our App operates entirely on-premises and no data is shared with
         third parties, the information we collect is limited to what is
         necessary for the App to function properly. <br />
@@ -27,36 +34,44 @@ export function PrivacyPolicyPage(): ReactElement {
         Usage Data: We do not collect usage data for tracking purposes. Any data
         related to your usage of the App remains within the on-premises
         environment and is not shared externally.
-      </p>
+      </Typography>
 
-      <h2>How We Use Your Information</h2>
+      <Typography gutterBottom variant="h5">
+        How We Use Your Information
+      </Typography>
 
-      <p>
+      <Typography gutterBottom sx={{ mb: 3 }}>
         We use the information we collect to: Provide, operate, and maintain our
         App.
-      </p>
+      </Typography>
 
-      <h2>Data Storage and Security</h2>
+      <Typography gutterBottom variant="h5">
+        Data Storage and Security
+      </Typography>
 
-      <p>
+      <Typography gutterBottom sx={{ mb: 3 }}>
         All data is stored on-premises and is not transmitted to any external
         servers or third parties. We implement appropriate technical and
         organizational measures to ensure a level of security appropriate to the
         risk, including: Encryption of data in transit and at rest. Regular
         security audits and updates. Access controls to ensure that only
         authorized personnel have access to your personal information.
-      </p>
+      </Typography>
 
-      <h2>Data Sharing</h2>
+      <Typography gutterBottom variant="h5">
+        Data Sharing
+      </Typography>
 
-      <p>
+      <Typography gutterBottom sx={{ mb: 3 }}>
         We do not share your personal information with any third parties. All
         data remains within our secure, on-premises environment.
-      </p>
+      </Typography>
 
-      <h2>Your Data Protection Rights</h2>
+      <Typography gutterBottom variant="h5">
+        Your Data Protection Rights
+      </Typography>
 
-      <p>
+      <Typography gutterBottom sx={{ mb: 3 }}>
         Depending on your location, you may have the following rights regarding
         your personal information:
         <ul>
@@ -90,14 +105,17 @@ export function PrivacyPolicyPage(): ReactElement {
         If you make a request, we have one month to respond to you. If you would
         like to exercise any of these rights, please contact us at our contact
         information provided below.
-      </p>
+      </Typography>
 
-      <h2> Changes to This Privacy Policy</h2>
+      <Typography gutterBottom variant="h5">
+        {" "}
+        Changes to This Privacy Policy
+      </Typography>
 
-      <p>
+      <Typography gutterBottom sx={{ mb: 3 }}>
         We may update our Privacy Policy from time to time. We will notify you
         of any changes by posting the new Privacy Policy on this page.
-      </p>
-    </PrivacyPolicyPageNav>
+      </Typography>
+    </Card>
   );
 }

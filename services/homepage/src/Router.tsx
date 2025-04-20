@@ -4,13 +4,12 @@ import { RouterProvider, createHashRouter } from "react-router-dom";
 import Nav from "src/components/ui/Nav";
 
 import { LandingPage } from "./pages/LandingPage";
-import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
-import { PrivacyPolicyPage } from "./pages/PrivacyPolicyPage/PrivacyPolicyPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
+import { PrivacyPolicyPage } from "./pages/PrivacyPolicyPage";
 
 const router = createHashRouter([
   {
     path: "/",
-    element: <Nav />,
     errorElement: <NotFoundPage />,
     children: [
       {
@@ -26,5 +25,9 @@ const router = createHashRouter([
 ]);
 
 export default function App(): React.ReactElement {
-  return <RouterProvider router={router} />;
+  return (
+    <Nav>
+      <RouterProvider router={router} />{" "}
+    </Nav>
+  );
 }

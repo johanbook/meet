@@ -1,6 +1,6 @@
 import { render, screen } from "src/test";
 
-import { PrivacyPolicyPage } from "./PrivacyPolicyPage";
+import { PrivacyPolicyPage } from ".";
 
 describe("<PrivacyPolicyPage />", () => {
   it("renders", () => {
