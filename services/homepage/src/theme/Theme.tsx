@@ -2,7 +2,7 @@ import React from "react";
 
 import { ThemeProvider } from "@mui/material/styles";
 
-import { createTheme } from "./theme";
+import { createTheme } from "./createTheme";
 
 interface ThemeWrapperProps {
   children: React.ReactNode;
