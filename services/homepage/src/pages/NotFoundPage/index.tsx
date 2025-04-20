@@ -8,7 +8,7 @@ export function NotFoundPage(): React.ReactElement {
   const { t } = useTranslation();
 
   return (
-    <Typography sx={{ color: "white" }} variant="h4">
+    <Typography sx={{ color: "white", textAlign: "center" }} variant="h4">
       {t("page-not-found.text")}
     </Typography>
   );

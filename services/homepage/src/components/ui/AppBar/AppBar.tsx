@@ -24,14 +24,16 @@ export function AppBar(): React.ReactElement {
       <Toolbar sx={{ display: "flex", justifyContent: "left" }}>
         <Typography
           color="primary"
+          component="a"
+          href="/"
           sx={(theme) => ({
             background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
             backgroundClip: "text",
             color: "transparent",
             fontWeight: 600,
             fontFamily: "sans-serif",
+            textDecoration: "none",
             textShadow: `1px 1px 1px white`,
-            userSelect: "none",
           })}
           variant="h5"
         >

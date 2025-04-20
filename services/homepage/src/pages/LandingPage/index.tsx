@@ -16,6 +16,7 @@ export function LandingPage(): React.ReactElement {
         gutterBottom
         sx={{
           mb: 4,
+          textAlign: "center",
           textShadow: `1px 1px 1px black`,
         }}
         variant="h3"
