@@ -20,11 +20,11 @@ export async function initializeSuperTokens(
       websiteDomain: config.UI_DOMAIN,
     },
     getRedirectionURL: async (context) => {
-      if (context.action == "SUCCESS") {
-        return "";
+      if (context.action === "SUCCESS") {
+        return context.redirectToPath;
       }
 
-      return undefined;
+      return "/";
     },
     languageTranslations: {
       translationFunc: (key) => {
