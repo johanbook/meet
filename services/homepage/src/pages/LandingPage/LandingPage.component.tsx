@@ -34,7 +34,7 @@ export function LandingPageComponent(): React.ReactElement {
       />
 
       <Box>
-        <Typography color="primary" gutterBottom variant="h3">
+        <Typography color="white" gutterBottom variant="h3">
           {t("landingpage.hero.text")}
         </Typography>
 
