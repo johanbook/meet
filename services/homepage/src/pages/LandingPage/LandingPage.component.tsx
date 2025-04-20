@@ -34,7 +34,15 @@ export function LandingPageComponent(): React.ReactElement {
       />
 
       <Box>
-        <Typography color="white" gutterBottom sx={{ mb: 3 }} variant="h3">
+        <Typography
+          color="white"
+          gutterBottom
+          sx={{
+            mb: 4,
+            textShadow: `1px 1px 1px black`,
+          }}
+          variant="h3"
+        >
           {t("landingpage.hero.text")}
         </Typography>
 
