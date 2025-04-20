@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Link, Typography } from "@mui/material";
 
 import { Center } from "src/components/ui/Center";
 import { CONFIG } from "src/config";
@@ -38,6 +38,28 @@ export function LandingPage(): React.ReactElement {
           {t("landingpage.hero.signup")}
         </Button>
       </Center>
+
+      <Typography
+        sx={{
+          fontWeight: 200,
+          color: "white",
+          position: "absolute",
+          bottom: 0,
+          right: 0,
+          p: 2,
+          zIndex: 10,
+        }}
+      >
+        Made by{" "}
+        <Link
+          href="https://johanbook.com"
+          rel="noopener"
+          sx={{ fontWeight: 500 }}
+          target="_blank"
+        >
+          Johan Book
+        </Link>
+      </Typography>
     </Box>
   );
 }
