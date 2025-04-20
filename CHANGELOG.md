@@ -1,8 +1,55 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See
-[standard-version](https://github.com/conventional-changelog/standard-version)
-for commit guidelines.
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [2.2.0](https://github.com/johanbook/meet/compare/v2.1.0...v2.2.0) (2025-04-20)
+
+
+### Features
+
+* **api:** include blog id on photos ([#973](https://github.com/johanbook/meet/issues/973)) ([3a6bb5c](https://github.com/johanbook/meet/commit/3a6bb5c09ea0a121b772a5e1d5918888411c31c1))
+* **web-ui:** add link to page to create organization ([#968](https://github.com/johanbook/meet/issues/968)) ([0d5e278](https://github.com/johanbook/meet/commit/0d5e278a8cabc53224608fe0d3261d8839e01f0d))
+* **web-ui:** allow clicking blog photo ([#974](https://github.com/johanbook/meet/issues/974)) ([1149cc6](https://github.com/johanbook/meet/commit/1149cc6a1da9e61fa7124c9b5b3b9e5381266759))
+* **web-ui:** allow deleting current organization ([#970](https://github.com/johanbook/meet/issues/970)) ([3e9a640](https://github.com/johanbook/meet/commit/3e9a64089dd8f2e24c2266ce23397ed9f4f1204c))
+* **web-ui:** move nav button to header ([#969](https://github.com/johanbook/meet/issues/969)) ([5eb28a2](https://github.com/johanbook/meet/commit/5eb28a24c60c257a063c15d9226fb4f2ef14b71a))
+* **web-ui:** use new navigation on profile page ([#975](https://github.com/johanbook/meet/issues/975)) ([4c08ff5](https://github.com/johanbook/meet/commit/4c08ff5e9e8155fb5f9e52cd000818757e080b49))
+
+
+### Bug Fixes
+
+* **api:** add missing provider ([#972](https://github.com/johanbook/meet/issues/972)) ([4930888](https://github.com/johanbook/meet/commit/493088870baaefa0569f0f8dfffe1ca7e8281817))
+* **api:** handle failing to send push notification ([#930](https://github.com/johanbook/meet/issues/930)) ([8b618d8](https://github.com/johanbook/meet/commit/8b618d8801adc9673970758816286a47c2357ed7))
+* services/api/Dockerfile to reduce vulnerabilities ([#965](https://github.com/johanbook/meet/issues/965)) ([fee371a](https://github.com/johanbook/meet/commit/fee371aa23ceec9c7e435723f9424cbd8cbee953))
+* services/api/package.json & services/api/package-lock.json to reduce vulnerabilities ([#937](https://github.com/johanbook/meet/issues/937)) ([97c51f2](https://github.com/johanbook/meet/commit/97c51f2b1614dc54545894e11e471f6041430055))
+* services/api/package.json & services/api/package-lock.json to reduce vulnerabilities ([#957](https://github.com/johanbook/meet/issues/957)) ([e6c1032](https://github.com/johanbook/meet/commit/e6c1032dbcec4e88b65d947c188477ff5427c9d5))
+* services/api/package.json & services/api/package-lock.json to reduce vulnerabilities ([#985](https://github.com/johanbook/meet/issues/985)) ([64039da](https://github.com/johanbook/meet/commit/64039dadcf95de4429e60ddc0527678e60b3c2a2))
+* services/auth-api/Dockerfile to reduce vulnerabilities ([#967](https://github.com/johanbook/meet/issues/967)) ([e777ea9](https://github.com/johanbook/meet/commit/e777ea96fbf2f96d784de7b08179143ed65eeb5b))
+* services/auth-api/Dockerfile to reduce vulnerabilities ([#999](https://github.com/johanbook/meet/issues/999)) ([785b485](https://github.com/johanbook/meet/commit/785b485668173cf9e38e05c681776c0c5f39a39d))
+* services/auth-api/package.json & services/auth-api/package-lock.json to reduce vulnerabilities ([#1012](https://github.com/johanbook/meet/issues/1012)) ([091c02e](https://github.com/johanbook/meet/commit/091c02e839ae2b3120a6982947126faff8a2130a))
+* services/auth-ui/Dockerfile to reduce vulnerabilities ([#1002](https://github.com/johanbook/meet/issues/1002)) ([25e13af](https://github.com/johanbook/meet/commit/25e13afdc9552dabe0a866f2a1ec87fda961ce62))
+* services/auth-ui/Dockerfile to reduce vulnerabilities ([#964](https://github.com/johanbook/meet/issues/964)) ([0615fc1](https://github.com/johanbook/meet/commit/0615fc16462cf92dcb3fa4c7fd1207ee1a2a5a28))
+* services/auth-ui/Dockerfile to reduce vulnerabilities ([#988](https://github.com/johanbook/meet/issues/988)) ([2486de7](https://github.com/johanbook/meet/commit/2486de7b587fd1f83e75b5b8463191394f2d7535))
+* services/homepage/package.json & services/homepage/package-lock.json to reduce vulnerabilities ([#1007](https://github.com/johanbook/meet/issues/1007)) ([199c852](https://github.com/johanbook/meet/commit/199c852d08c1298ceb5f3838ef77d91a4c80278f))
+* services/homepage/package.json & services/homepage/package-lock.json to reduce vulnerabilities ([#1013](https://github.com/johanbook/meet/issues/1013)) ([3752f40](https://github.com/johanbook/meet/commit/3752f40fec0b2d19b1d27b16b5a87c746f14aaf2))
+* services/homepage/package.json & services/homepage/package-lock.json to reduce vulnerabilities ([#949](https://github.com/johanbook/meet/issues/949)) ([039d521](https://github.com/johanbook/meet/commit/039d5210a4b532d6bac51beb3456b17fa8835556))
+* services/tracking/Dockerfile to reduce vulnerabilities ([#1003](https://github.com/johanbook/meet/issues/1003)) ([40169ba](https://github.com/johanbook/meet/commit/40169ba47bc1f366971e3c04b29299be99a393cf))
+* services/tracking/Dockerfile to reduce vulnerabilities ([#963](https://github.com/johanbook/meet/issues/963)) ([c90ddf4](https://github.com/johanbook/meet/commit/c90ddf486e81607756e134950995929eb4b5194f))
+* services/tracking/Dockerfile to reduce vulnerabilities ([#990](https://github.com/johanbook/meet/issues/990)) ([57c667d](https://github.com/johanbook/meet/commit/57c667d1ee3af538fa3143ecbac951058495cf78))
+* services/tracking/package.json & services/tracking/package-lock.json to reduce vulnerabilities ([#1011](https://github.com/johanbook/meet/issues/1011)) ([306c0b3](https://github.com/johanbook/meet/commit/306c0b385dd277be6343b494b46ee630a33a8d18))
+* services/tracking/package.json & services/tracking/package-lock.json to reduce vulnerabilities ([#958](https://github.com/johanbook/meet/issues/958)) ([ec52f7d](https://github.com/johanbook/meet/commit/ec52f7d560b581bb039cd296a83ee86c939e0ae5))
+* services/web-ui/Dockerfile to reduce vulnerabilities ([#966](https://github.com/johanbook/meet/issues/966)) ([4daa9b1](https://github.com/johanbook/meet/commit/4daa9b13031d46050a9059f85240d4c81a3578be))
+* services/web-ui/package.json & services/web-ui/package-lock.json to reduce vulnerabilities ([#1021](https://github.com/johanbook/meet/issues/1021)) ([e4435ec](https://github.com/johanbook/meet/commit/e4435ecc48a4e99d99b20f99afa29d578aec5750))
+* services/web-ui/package.json & services/web-ui/package-lock.json to reduce vulnerabilities ([#948](https://github.com/johanbook/meet/issues/948)) ([1686a75](https://github.com/johanbook/meet/commit/1686a7500a5061267d78e4e8af13a02ee84e1665))
+* upgrade @nestjs/common from 10.3.9 to 10.4.15 ([#1018](https://github.com/johanbook/meet/issues/1018)) ([5e8b76c](https://github.com/johanbook/meet/commit/5e8b76c5a05befa091515a7dfe2241077e7f23a3))
+* upgrade @nestjs/platform-socket.io from 10.3.9 to 10.4.15 ([#1020](https://github.com/johanbook/meet/issues/1020)) ([8471ef6](https://github.com/johanbook/meet/commit/8471ef6b60ffc6bd8235ff391def05b08b73b066))
+* upgrade jimp from 0.22.10 to 0.22.12 ([#856](https://github.com/johanbook/meet/issues/856)) ([11ac98e](https://github.com/johanbook/meet/commit/11ac98e9defe410cb299f6e5d7c97387f3d4e491))
+* upgrade typeorm from 0.3.20 to 0.3.21 ([#1017](https://github.com/johanbook/meet/issues/1017)) ([9a9f5ef](https://github.com/johanbook/meet/commit/9a9f5efbfd6f27debb7213782cd579cc2d0eafcf))
+* upgrade typescript from 5.5.2 to 5.8.2 ([#1016](https://github.com/johanbook/meet/issues/1016)) ([166bbf5](https://github.com/johanbook/meet/commit/166bbf5232984653913b1e0ba72b2bb92800afde))
+* **web-ui:** add missing translation ([#976](https://github.com/johanbook/meet/issues/976)) ([5264f3a](https://github.com/johanbook/meet/commit/5264f3a4ef19eb82a59088e444255e95e59381a2))
+* **web-ui:** fix typo ([#938](https://github.com/johanbook/meet/issues/938)) ([071054b](https://github.com/johanbook/meet/commit/071054b66896b61d96147e7395f732774651f0d6))
+* **web-ui:** fix typo ([#971](https://github.com/johanbook/meet/issues/971)) ([b607a03](https://github.com/johanbook/meet/commit/b607a038ea5b4013f785af35a86e280d39093ae4))
+* **web-ui:** handle notification click ([#929](https://github.com/johanbook/meet/issues/929)) ([00fecbf](https://github.com/johanbook/meet/commit/00fecbfc83037785c68071ffac5847e121c37bae))
+* **web-ui:** include error when failing to enable notification ([#934](https://github.com/johanbook/meet/issues/934)) ([17e2416](https://github.com/johanbook/meet/commit/17e2416375a7f799a7d239ae7fe38379817ec864))
 
 ## [2.1.0](https://github.com/johanbook/meet/compare/v2.0.0...v2.1.0) (2024-07-25)
 
