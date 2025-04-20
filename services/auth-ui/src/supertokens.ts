@@ -43,6 +43,7 @@ export async function initializeSuperTokens(
         return translation === key ? "" : translation;
       },
     },
+    privacyPolicyLink: `https://${config.UI_DOMAIN}#privacy`,
     recipeList: [
       EmailPassword.init(),
       EmailVerification.init({
