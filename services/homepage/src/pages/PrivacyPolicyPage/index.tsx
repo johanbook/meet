@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 export function PrivacyPolicyPage(): ReactElement {
   return (
     <Card
-      sx={{ p: 4, maxHeight: "80vh", overflowY: "auto" }}
+      sx={{ p: 4, maxHeight: "85vh", overflowY: "auto" }}
       variant="outlined"
     >
       <Typography variant="caption">Version 1.0. Updated 2024-07-10</Typography>
