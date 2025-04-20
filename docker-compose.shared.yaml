@@ -64,6 +64,7 @@ services:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: console
     environment:
+      HOMEPAGE_ALLOWED_HOSTS: "$DOMAIN"
       HOMEPAGE_VAR_DOMAIN: "$DOMAIN"
     labels:
       - "traefik.enable=true"
