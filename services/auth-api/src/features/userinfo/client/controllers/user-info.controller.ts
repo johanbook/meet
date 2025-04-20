@@ -18,7 +18,7 @@ import { UserDetails } from "../../application/contracts/dtos/user.dto";
 import { GetUserInfoByEmailQuery } from "../../application/contracts/queries/get-user-info-by-email.query";
 import { GetUserInfoListByEmailQuery } from "../../application/contracts/queries/get-user-info-list-by-email.query";
 import { GetUserInfoListByIdQuery } from "../../application/contracts/queries/get-user-info-list-by-id.query";
-import { User, getUser, listUsersByAccountInfo } from "supertokens-node";
+import { getUser, listUsersByAccountInfo } from "supertokens-node";
 
 @Controller("userinfo")
 @ApiTags("userinfo")
