@@ -30,7 +30,7 @@ export class UserInfoController {
     const result: Record<string, EmailPassword.User> = {};
 
     for (const email of body.emails) {
-      result[email] = await EmailPassword.getUserByEmail(email);
+      result[email] = await EmailPassword.getUserByEmail("public", email);
     }
 
     return result;
@@ -54,7 +54,7 @@ export class UserInfoController {
   async getUserInfoByEmail(
     @Query() query: GetUserInfoByEmailQuery,
   ): Promise<UserDetails> {
-    const result = await EmailPassword.getUserByEmail(query.email);
+    const result = await EmailPassword.getUserByEmail("public", query.email);
 
     if (!result) {
       throw new NotFoundException("User not found");
