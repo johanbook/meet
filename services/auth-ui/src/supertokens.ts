@@ -7,7 +7,7 @@ import Session from "supertokens-auth-react/recipe/session";
 import { fetchConfig } from "./config";
 
 export async function initializeSuperTokens(
-  callback: () => void
+  callback: () => void,
 ): Promise<void> {
   const config = await fetchConfig();
 
@@ -19,6 +19,13 @@ export async function initializeSuperTokens(
       websiteBasePath: "/login",
       websiteDomain: config.UI_DOMAIN,
     },
+    getRedirectionURL: async (context) => {
+      if (context.action === "SUCCESS") {
+        return context.redirectToPath;
+      }
+
+      return "/";
+    },
     languageTranslations: {
       translationFunc: (key) => {
         const translation = i18next.t(key);
@@ -27,17 +34,6 @@ export async function initializeSuperTokens(
     },
     recipeList: [
       EmailPassword.init({
-        getRedirectionURL: async (context) => {
-          if (context.action !== "SUCCESS") {
-            return;
-          }
-
-          if (context.redirectToPath !== undefined) {
-            return context.redirectToPath;
-          }
-
-          return "/";
-        },
         style: `
               [data-supertokens~=container] {
                   --palette-primary: 200, 100, 150;
@@ -47,13 +43,13 @@ export async function initializeSuperTokens(
                 display: none;
               }
             `,
-        useShadowDom: false,
       }),
       EmailVerification.init({
         mode: process.env.NODE_ENV === "production" ? "REQUIRED" : "OPTIONAL",
       }),
       Session.init(),
     ],
+    useShadowDom: false,
   });
 
   // These are used to trigger a re-rendering since the SDK can't detect the change otherwise.

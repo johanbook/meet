@@ -6,7 +6,7 @@
   "scripts": {
     "build": "react-scripts build",
     "format": "prettier --write '{scripts,src}/**/*.{js,jsx,ts,tsx}'",
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}' --max-warnings 0",
+    "lint": "tsc && eslint 'src/**/*.{js,jsx,ts,tsx}' --max-warnings 0",
     "lint:ci": "npm run lint",
     "prestart:dev": "./scripts/create-envs build/__env.json",
     "start:dev": "react-scripts start",
