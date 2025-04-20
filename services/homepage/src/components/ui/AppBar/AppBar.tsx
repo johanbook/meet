@@ -19,6 +19,7 @@ export function AppBar(): React.ReactElement {
       color="inherit"
       position="fixed"
       sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      variant="outlined"
     >
       <Toolbar sx={{ display: "flex", justifyContent: "left" }}>
         <Box sx={{ flexGrow: 1 }}>
