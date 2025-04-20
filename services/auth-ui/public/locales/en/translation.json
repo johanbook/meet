@@ -1,84 +1,93 @@
 {
-  "AUTH_PAGE_DIVIDER_OR": "or translation",
-  "AUTH_PAGE_HEADER_TITLE_SIGN_IN_AND_UP": "Sign Up / Sign In",
+  "AUTH_PAGE_HEADER_TITLE_SIGN_IN_AND_UP": "Registrera dig / Logga in",
+  "AUTH_PAGE_HEADER_TITLE_SIGN_IN": "Logga in",
+  "AUTH_PAGE_HEADER_TITLE_SIGN_UP": "Registrera dig",
+  "AUTH_PAGE_HEADER_TITLE_SIGN_IN_UP_TO_APP": " för att fortsätta till ",
 
-  "AUTH_PAGE_FOOTER_START": "By continuing, you agree to our ",
-  "AUTH_PAGE_FOOTER_TOS": "Terms of Service",
-  "AUTH_PAGE_FOOTER_AND": " and ",
-  "AUTH_PAGE_FOOTER_PP": "Privacy Policy",
+  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_IN_START": "Inte registrerad än?",
+  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_IN_SIGN_UP_LINK": "Registrera dig",
+  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_IN_END": "",
+
+  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_UP_START": "Har du redan ett konto?",
+  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_UP_SIGN_IN_LINK": "Logga in",
+  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_UP_END": "",
+
+  "AUTH_PAGE_FOOTER_START": "Genom att fortsätta godkänner du våra ",
+  "AUTH_PAGE_FOOTER_TOS": "Användarvillkor",
+  "AUTH_PAGE_FOOTER_AND": " och ",
+  "AUTH_PAGE_FOOTER_PP": "Integritetspolicy",
   "AUTH_PAGE_FOOTER_END": "",
 
-  "THIRD_PARTY_PROVIDER_DEFAULT_BTN_START": "Continue with ",
-  "THIRD_PARTY_PROVIDER_DEFAULT_BTN_END": "",
+  "DIVIDER_OR": "eller",
 
-  "THIRD_PARTY_ERROR_NO_EMAIL": "Could not retrieve email. Please try a different method.",
-  "BRANDING_POWERED_BY_START": "Powered by ",
+  "BRANDING_POWERED_BY_START": "Drivs av ",
   "BRANDING_POWERED_BY_END": "",
-  "SOMETHING_WENT_WRONG_ERROR": "Something went wrong. Please try again.",
-  "EMAIL_VERIFICATION_RESEND_SUCCESS": "Email resent",
-  "EMAIL_VERIFICATION_SEND_TITLE": "Verify your email address",
+  "SOMETHING_WENT_WRONG_ERROR": "Något gick fel. Försök igen.",
+  "SOMETHING_WENT_WRONG_ERROR_RELOAD": "Något gick fel. Försök igen senare eller ladda om sidan.",
+
+  "EMAIL_PASSWORD_EMAIL_LABEL": "E-post",
+  "EMAIL_PASSWORD_EMAIL_PLACEHOLDER": "E-postadress",
+
+  "EMAIL_PASSWORD_PASSWORD_LABEL": "Lösenord",
+  "EMAIL_PASSWORD_PASSWORD_PLACEHOLDER": "Lösenord",
+
+  "EMAIL_PASSWORD_SIGN_IN_FORGOT_PW_LINK": "Glömt lösenordet?",
+  "EMAIL_PASSWORD_SIGN_IN_SUBMIT_BTN": "LOGGA IN",
+  "EMAIL_PASSWORD_SIGN_IN_WRONG_CREDENTIALS_ERROR": "Fel kombination av e-post och lösenord",
+
+  "EMAIL_PASSWORD_SIGN_UP_SUBMIT_BTN": "REGISTRERA",
+
+  "EMAIL_PASSWORD_EMAIL_ALREADY_EXISTS": "Denna e-postadress finns redan. Logga in istället",
+
+  "EMAIL_PASSWORD_RESET_HEADER_TITLE": "Återställ ditt lösenord",
+  "EMAIL_PASSWORD_RESET_HEADER_SUBTITLE": "Vi skickar dig ett e-postmeddelande för att återställa lösenordet",
+  "EMAIL_PASSWORD_RESET_SEND_FALLBACK_EMAIL": "ditt konto",
+  "EMAIL_PASSWORD_RESET_SEND_BEFORE_EMAIL": "Ett e-postmeddelande för att återställa lösenordet har skickats till ",
+  "EMAIL_PASSWORD_RESET_SEND_AFTER_EMAIL": ", om det finns i vårt system.",
+  "EMAIL_PASSWORD_RESET_RESEND_LINK": "Skicka igen eller ändra e-post",
+  "EMAIL_PASSWORD_RESET_SEND_BTN": "Skicka e-post",
+  "EMAIL_PASSWORD_RESET_SIGN_IN_LINK": "Logga in",
+
+  "EMAIL_PASSWORD_RESET_SUBMIT_PW_SUCCESS_HEADER_TITLE": "Klart!",
+  "EMAIL_PASSWORD_RESET_SUBMIT_PW_SUCCESS_DESC": "Ditt lösenord har uppdaterats",
+  "EMAIL_PASSWORD_RESET_SUBMIT_PW_SUCCESS_SIGN_IN_BTN": "LOGGA IN",
+
+  "EMAIL_PASSWORD_NEW_PASSWORD_LABEL": "Nytt lösenord",
+  "EMAIL_PASSWORD_NEW_PASSWORD_PLACEHOLDER": "Nytt lösenord",
+  "EMAIL_PASSWORD_CONFIRM_PASSWORD_LABEL": "Bekräfta lösenord",
+  "EMAIL_PASSWORD_CONFIRM_PASSWORD_PLACEHOLDER": "Bekräfta ditt lösenord",
+
+  "EMAIL_PASSWORD_RESET_SUBMIT_PW_HEADER_TITLE": "Ändra ditt lösenord",
+  "EMAIL_PASSWORD_RESET_SUBMIT_PW_HEADER_SUBTITLE": "Ange ett nytt lösenord nedan för att ändra ditt lösenord",
+  "EMAIL_PASSWORD_RESET_SUBMIT_PW_CHANGE_PW_BTN": "ÄNDRA LÖSENORD",
+  "EMAIL_PASSWORD_RESET_PASSWORD_INVALID_TOKEN_ERROR": "Ogiltig återställningslänk för lösenord",
+
+  "ERROR_EMAIL_NON_STRING": "E-post måste vara en textsträng",
+  "ERROR_EMAIL_INVALID": "Ogiltig e-postadress",
+
+  "ERROR_PASSWORD_NON_STRING": "Lösenord måste vara en textsträng",
+  "ERROR_PASSWORD_TOO_SHORT": "Lösenordet måste innehålla minst 8 tecken, inklusive en siffra",
+  "ERROR_PASSWORD_TOO_LONG": "Lösenordet får vara högst 100 tecken långt",
+  "ERROR_PASSWORD_NO_ALPHA": "Lösenordet måste innehålla minst en bokstav",
+  "ERROR_PASSWORD_NO_NUM": "Lösenordet måste innehålla minst en siffra",
+  "ERROR_CONFIRM_PASSWORD_NO_MATCH": "Bekräftelselösenordet matchar inte",
+
+  "ERROR_NON_OPTIONAL": "Fältet är obligatoriskt",
+
+  "EMAIL_VERIFICATION_RESEND_SUCCESS": "E-post skickades igen",
+  "EMAIL_VERIFICATION_SEND_TITLE": "Verifiera din e-post!",
   "EMAIL_VERIFICATION_SEND_DESC_START": "",
-  "EMAIL_VERIFICATION_SEND_DESC_STRONG": "Please click on the link",
-  "EMAIL_VERIFICATION_SEND_DESC_END": " in the email we just sent you to confirm your email address.",
-  "EMAIL_VERIFICATION_RESEND_BTN": "Resend Email",
-  "EMAIL_VERIFICATION_LOGOUT": "Logout ",
-  "EMAIL_VERIFICATION_SUCCESS": "Email verification successful!",
-  "EMAIL_VERIFICATION_CONTINUE_BTN": "CONTINUE",
-  "EMAIL_VERIFICATION_CONTINUE_LINK": "Continue",
-  "EMAIL_VERIFICATION_EXPIRED": "The email verification link has expired",
-  "EMAIL_VERIFICATION_ERROR_TITLE": "Something went wrong",
-  "EMAIL_VERIFICATION_ERROR_DESC": "We encountered an unexpected error. Please contact support for assistance",
-
-  "EMAIL_PASSWORD_EMAIL_LABEL": "Email",
-  "EMAIL_PASSWORD_EMAIL_PLACEHOLDER": "Email address",
-  "EMAIL_PASSWORD_PASSWORD_LABEL": "Password",
-  "EMAIL_PASSWORD_PASSWORD_PLACEHOLDER": "Password",
-
-  "AUTH_PAGE_HEADER_TITLE_SIGN_IN": "Sign In",
-  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_UP_START": "Not registered yet?",
-  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_UP_SIGN_IN_LINK": "Sign Up",
-  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_UP_END": "",
-  "EMAIL_PASSWORD_SIGN_IN_FORGOT_PW_LINK": "Forgot password?",
-  "EMAIL_PASSWORD_SIGN_IN_SUBMIT_BTN": "SIGN IN",
-  "EMAIL_PASSWORD_SIGN_IN_WRONG_CREDENTIALS_ERROR": "Incorrect email and password combination",
-
-  "AUTH_PAGE_HEADER_TITLE_SIGN_UP": "Sign Up",
-  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_IN_START": "Already have an account?",
-  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_IN_SIGN_UP_LINK": "Sign In",
-  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_IN_END": "",
-  "EMAIL_PASSWORD_SIGN_UP_SUBMIT_BTN": "SIGN UP",
-
-  "EMAIL_PASSWORD_EMAIL_ALREADY_EXISTS": "This email already exists. Please sign in instead",
-
-  "EMAIL_PASSWORD_RESET_HEADER_TITLE": "Reset your password",
-  "EMAIL_PASSWORD_RESET_HEADER_SUBTITLE": "We will send you an email to reset your password",
-  "EMAIL_PASSWORD_RESET_SEND_SUCCESS": "Please check your email for the password recovery link. ",
-  "EMAIL_PASSWORD_RESET_RESEND_LINK": "Resend",
-  "EMAIL_PASSWORD_RESET_SEND_BTN": "Email me",
-
-  "EMAIL_PASSWORD_RESET_SUBMIT_PW_SUCCESS_HEADER_TITLE": "Success!",
-  "EMAIL_PASSWORD_RESET_SUBMIT_PW_SUCCESS_DESC": "Your password has been updated successfully",
-  "EMAIL_PASSWORD_RESET_SUBMIT_PW_SUCCESS_SIGN_IN_BTN": "SIGN IN",
-
-  "EMAIL_PASSWORD_NEW_PASSWORD_LABEL": "New password",
-  "EMAIL_PASSWORD_NEW_PASSWORD_PLACEHOLDER": "New password",
-  "EMAIL_PASSWORD_CONFIRM_PASSWORD_LABEL": "Confirm password",
-  "EMAIL_PASSWORD_CONFIRM_PASSWORD_PLACEHOLDER": "Confirm your password",
-
-  "EMAIL_PASSWORD_RESET_SUBMIT_PW_HEADER_TITLE": "Change your password",
-  "EMAIL_PASSWORD_RESET_SUBMIT_PW_HEADER_SUBTITLE": "Enter a new password below to change your password",
-  "EMAIL_PASSWORD_RESET_SUBMIT_PW_CHANGE_PW_BTN": "CHANGE PASSWORD",
-  "EMAIL_PASSWORD_RESET_PASSWORD_INVALID_TOKEN_ERROR": "Invalid password reset token",
-
-  "ERROR_EMAIL_NON_STRING": "Email must be of type string",
-  "ERROR_EMAIL_INVALID": "Email is invalid",
-
-  "ERROR_PASSWORD_NON_STRING": "Password must be of type string",
-  "ERROR_PASSWORD_TOO_SHORT": "Password must contain at least 8 characters, including a number",
-  "ERROR_PASSWORD_TOO_LONG": "Password's length must be lesser than 100 characters",
-  "ERROR_PASSWORD_NO_ALPHA": "Password must contain at least one alphabet",
-  "ERROR_PASSWORD_NO_NUM": "Password must contain at least one number",
-  "ERROR_CONFIRM_PASSWORD_NO_MATCH": "Confirmation password doesn't match",
-
-  "ERROR_NON_OPTIONAL": "Field is not optional"
+  "EMAIL_VERIFICATION_SEND_DESC_STRONG": "Klicka på länken",
+  "EMAIL_VERIFICATION_SEND_DESC_END": " i e-postmeddelandet vi precis skickade till dig för att bekräfta din e-postadress.",
+  "EMAIL_VERIFICATION_RESEND_BTN": "Skicka e-post igen",
+  "EMAIL_VERIFICATION_LOGOUT": "Logga ut ",
+  "EMAIL_VERIFICATION_SUCCESS": "E-post verifierades!",
+  "EMAIL_VERIFICATION_CONTINUE_BTN": "FORTSÄTT",
+  "EMAIL_VERIFICATION_CONTINUE_LINK": "Fortsätt",
+  "EMAIL_VERIFICATION_EXPIRED": "Verifieringslänken har gått ut",
+  "EMAIL_VERIFICATION_ERROR_TITLE": "Något gick fel",
+  "EMAIL_VERIFICATION_ERROR_DESC": "Ett oväntat fel uppstod. Kontakta supporten för hjälp",
+  "EMAIL_VERIFICATION_LINK_CLICKED_HEADER": "Verifiera din e-postadress",
+  "EMAIL_VERIFICATION_LINK_CLICKED_DESC": "Klicka på knappen nedan för att verifiera din e-postadress",
+  "EMAIL_VERIFICATION_LINK_CLICKED_CONTINUE_BUTTON": "FORTSÄTT"
 }
