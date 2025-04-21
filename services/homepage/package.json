@@ -8,7 +8,7 @@
     "lint": "tsc && eslint 'src/**/*.{js,jsx,ts,tsx}' --max-warnings 0",
     "lint:ci": "npm run lint",
     "start:dev": "vite",
-    "test": "jest src  --ci --coverage",
+    "test": "jest src  --ci",
     "test:ci": "npm run test"
   },
   "browserslist": {
