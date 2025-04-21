@@ -5,6 +5,7 @@
   "launcherName": "Meet",
   "display": "standalone",
   "themeColor": "#000000",
+  "themeColorDark": "#000000",
   "navigationColor": "#FFFFFF",
   "navigationColorDark": "#272727",
   "navigationDividerColor": "#000000",
@@ -18,8 +19,8 @@
     "path": "/home/book/personal/meet/services/mobile-app/android.keystore",
     "alias": "android"
   },
-  "appVersionName": "1.0.5",
-  "appVersionCode": 7,
+  "appVersionName": "1.1",
+  "appVersionCode": 8,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://app.meetly.site/manifest.json",
@@ -37,5 +38,5 @@
   "fingerprints": [],
   "additionalTrustedOrigins": [],
   "retainedBundles": [],
-  "appVersion": "1.0.5"
+  "appVersion": "1.1"
 }
