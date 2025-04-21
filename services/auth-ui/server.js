@@ -7,7 +7,7 @@ const PREFIX = "/login";
 const fastify = Fastify({ logger: true });
 
 fastify.register(require("@fastify/static"), {
-  root: path.join(__dirname, "build"),
+  root: path.join(__dirname, "dist"),
   prefix: PREFIX,
   prefixAvoidTrailingSlash: true,
   serveDotFiles: true,
@@ -25,5 +25,5 @@ fastify.listen(
   },
   (err, address) => {
     if (err) throw err;
-  }
+  },
 );
