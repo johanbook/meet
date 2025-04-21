@@ -8,11 +8,12 @@
 ![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/tracking.yaml?label=Tracking%20Build)
 ![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/web-ui.yaml?label=Web%20UI%20Build)
 
-**meet** is a self-hosted social platform for tight communities-knit, such as
-your family or a small group of friends. It gives you full control over your
-data and your privacy, without the need for third-party services.
+**meet** is a self-hosted social platform for small communities, such as your
+family or a group of friends. It gives you full control over your data and your
+privacy, without the need for third-party services. See the app in action
+[here](meetly.site).
 
-Meet is built to quickly be able to pivot to other use cases, such as case
+Meet is built to be able to quickly pivot to other use cases, such as case
 management or resource management. Its strength in its modular design (see
 listed features below) and robust logging and journaling.
 
