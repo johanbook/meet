@@ -1,7 +1,8 @@
 import React, { ReactNode } from "react";
 
-import BackgroundImage2048px from "src/assets/images/background_2048px.png";
+import BackgroundImage512px from "src/assets/images/background_512px.png";
 import BackgroundImage1024px from "src/assets/images/background_1024px.png";
+import BackgroundImage2048px from "src/assets/images/background_2048px.png";
 import { Box, Container, Toolbar } from "@mui/material";
 
 import { AppBar } from "../AppBar";
@@ -45,8 +46,7 @@ export default function Nav({
           >
             <img
               alt=""
-              src={BackgroundImage1024px}
-              srcSet={`${BackgroundImage2048px} 2x`}
+              srcSet={`${BackgroundImage512px} 512w ${BackgroundImage1024px} 1024w ${BackgroundImage2048px} 2048w`}
               style={{
                 objectFit: "cover",
                 position: "absolute",
