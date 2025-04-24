@@ -11,11 +11,11 @@
 **meet** is a self-hosted social platform for small communities, such as your
 family or a group of friends. It gives you full control over your data and your
 privacy, without the need for third-party services. See the app in action
-[here](meetly.site).
+[here](https://meetly.site).
 
 Meet is built to be able to quickly pivot to other use cases, such as case
 management or resource management. Its strength in its modular design (see
-listed features below) and robust logging and journaling.
+listed features below), robust logging and journaling.
 
 To run the project locally, see the [contribution guide](./CONTRIBUTING.md).
 
