@@ -46,7 +46,7 @@ export default function Nav({
           >
             <img
               alt=""
-              srcSet={`${BackgroundImage512px} 512w ${BackgroundImage1024px} 1024w ${BackgroundImage2048px} 2048w`}
+              srcSet={`${BackgroundImage512px} 512w, ${BackgroundImage1024px} 1024w, ${BackgroundImage2048px} 2048w`}
               style={{
                 objectFit: "cover",
                 position: "absolute",
