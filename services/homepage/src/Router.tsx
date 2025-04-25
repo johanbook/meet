@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { RouterProvider, createHashRouter } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router";
 
 import Nav from "src/components/ui/Nav";
 
