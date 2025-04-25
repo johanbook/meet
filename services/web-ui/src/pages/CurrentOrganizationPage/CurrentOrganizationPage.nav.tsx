@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from "react";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink } from "react-router";
 
 import { ArrowBack } from "@mui/icons-material";
 import { Box, IconButton } from "@mui/material";
@@ -10,9 +10,9 @@ interface CurrentOrganizationPageNavProps {
   children: ReactNode;
 }
 
-export function CurrentOrganizationPageNav({
-  children,
-}: CurrentOrganizationPageNavProps): ReactElement {
+export function CurrentOrganizationPageNav(
+  { children }: CurrentOrganizationPageNavProps
+): ReactElement {
   const appBarContent = (
     <>
       <IconButton

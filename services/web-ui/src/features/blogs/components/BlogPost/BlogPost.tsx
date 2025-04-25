@@ -1,5 +1,5 @@
 import { ReactElement, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import { ModeCommentOutlined } from "@mui/icons-material";
 import {
@@ -28,10 +28,9 @@ interface BlogPostProps {
   post: BlogPostDetails;
 }
 
-export function BlogPost({
-  alwaysShowComments = false,
-  post,
-}: BlogPostProps): ReactElement {
+export function BlogPost(
+  { alwaysShowComments = false, post }: BlogPostProps
+): ReactElement {
   const [showComments, setShowComments] = useState(alwaysShowComments);
   const { t } = useTranslation("blog");
 

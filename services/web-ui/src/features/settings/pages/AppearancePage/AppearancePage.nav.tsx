@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from "react";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink } from "react-router";
 
 import { ArrowBack } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
@@ -11,9 +11,9 @@ interface AppearancePageNavProps {
   children: ReactNode;
 }
 
-export function AppearancePageNav({
-  children,
-}: AppearancePageNavProps): ReactElement {
+export function AppearancePageNav(
+  { children }: AppearancePageNavProps
+): ReactElement {
   const { t } = useTranslation("settings");
 
   const appBarContent = (

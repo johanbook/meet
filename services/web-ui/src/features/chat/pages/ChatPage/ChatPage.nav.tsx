@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from "react";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink } from "react-router";
 
 import { ArrowBack } from "@mui/icons-material";
 import { Box, IconButton } from "@mui/material";

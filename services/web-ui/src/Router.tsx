@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router";
 
 import { GlobalDialogProvider } from "src/core/dialog";
 import { NavigationTrackingProvider } from "src/core/tracking/NavigationTrackingProvider";

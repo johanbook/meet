@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from "react";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink } from "react-router";
 
 import { ArrowBack } from "@mui/icons-material";
 import { Box, Grid, IconButton, Typography } from "@mui/material";
@@ -19,11 +19,9 @@ interface ProfileJournalPageNavProps {
   values: DateRange;
 }
 
-export function ProfileJournalPageNav({
-  children,
-  onDateChange,
-  values,
-}: ProfileJournalPageNavProps): ReactElement {
+export function ProfileJournalPageNav(
+  { children, onDateChange, values }: ProfileJournalPageNavProps
+): ReactElement {
   const { t } = useTranslation("journal");
 
   const appBarContent = (
