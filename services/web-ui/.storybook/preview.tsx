@@ -1,13 +1,11 @@
 import { ReactElement } from "react";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import type { Preview } from "@storybook/react";
-import { withRouter } from "storybook-addon-react-router-v6";
 
 import { ThemeProvider } from "../src/core/theme";
 
 export const decorators = [
-  withRouter,
   (Story: ReactElement) => {
     return (
       <ThemeProvider>
