@@ -1,6 +1,5 @@
 import { ReactElement, SyntheticEvent } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink, useNavigate } from "react-router";
 
 import { ArrowBack } from "@mui/icons-material";
 import { Box, IconButton } from "@mui/material";

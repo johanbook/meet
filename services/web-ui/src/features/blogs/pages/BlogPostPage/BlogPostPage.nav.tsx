@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from "react";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink } from "react-router";
 
 import { ArrowBack } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
@@ -10,9 +10,9 @@ interface BlogPostPageNavProps {
   children: ReactNode;
 }
 
-export function BlogPostPageNav({
-  children,
-}: BlogPostPageNavProps): ReactElement {
+export function BlogPostPageNav(
+  { children }: BlogPostPageNavProps
+): ReactElement {
   const appBarContent = (
     <>
       <IconButton

@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import { ViewDayOutlined } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
@@ -12,9 +12,9 @@ interface BlogPhotoListPageNavProps {
   children: ReactNode;
 }
 
-export function BlogPhotoListPageNav({
-  children,
-}: BlogPhotoListPageNavProps): ReactElement {
+export function BlogPhotoListPageNav(
+  { children }: BlogPhotoListPageNavProps
+): ReactElement {
   const appBarContent = (
     <>
       <CurrentOrganizationAvatar />

@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from "react";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink } from "react-router";
 
 import { ArrowBack } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
@@ -11,9 +11,9 @@ interface CreateChatPageNavProps {
   children: ReactNode;
 }
 
-export function CreateChatPageNav({
-  children,
-}: CreateChatPageNavProps): ReactElement {
+export function CreateChatPageNav(
+  { children }: CreateChatPageNavProps
+): ReactElement {
   const { t } = useTranslation("chat-create");
 
   const appBarContent = (
