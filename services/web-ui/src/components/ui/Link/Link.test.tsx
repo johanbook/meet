@@ -1,4 +1,4 @@
-import { TestRouter, render, screen } from "src/test";
+import { TestRouter, describe, expect, it, render, screen } from "src/test";
 
 import { Link } from ".";
 
@@ -7,7 +7,7 @@ describe("<Link />", () => {
     render(
       <TestRouter>
         <Link to="/" />
-      </TestRouter>
+      </TestRouter>,
     );
     const link = screen.getByRole("link");
     expect(link).toBeInTheDocument();

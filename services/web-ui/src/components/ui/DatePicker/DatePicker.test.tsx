@@ -1,9 +1,9 @@
-import { render } from "src/test";
+import { describe, it, render, vi } from "src/test";
 
 import { DatePicker } from ".";
 
 describe("<DatePicker />", () => {
   it("renders", () => {
-    render(<DatePicker label="Date" onChange={jest.fn()} value={new Date()} />);
+    render(<DatePicker label="Date" onChange={vi.fn()} value={new Date()} />);
   });
 });

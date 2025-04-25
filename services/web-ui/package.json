@@ -11,7 +11,7 @@
     "lint:ci": "npm run lint",
     "start:dev": "vite --host --port 80",
     "start:storybook": "storybook dev -p 6006",
-    "test": "jest src  --ci --coverage",
+    "test": "vitest src",
     "test:ci": "npm run test"
   },
   "browserslist": {
@@ -68,7 +68,6 @@
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
     "@trivago/prettier-plugin-sort-imports": "5.2.2",
-    "@types/jest": "^27.5.2",
     "@types/lodash": "^4.14.191",
     "@types/node": "22.14.1",
     "@types/react": "^18.2.36",
@@ -83,12 +82,11 @@
     "eslint-plugin-sonarjs": "0.18.0",
     "eslint-plugin-storybook": "^0.6.12",
     "eslint-plugin-unicorn": "46.0.0",
-    "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
     "prettier": "3.5.3",
     "prop-types": "^15.8.1",
     "storybook": "8.6.12",
-    "ts-jest": "29.3.2",
+    "vitest": "3.1.1",
     "workbox-cli": "^7.1.0"
   }
 }

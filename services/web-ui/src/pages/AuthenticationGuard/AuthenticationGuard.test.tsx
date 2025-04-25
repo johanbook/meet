@@ -1,4 +1,11 @@
-import { ReactQueryTestProvider, render, screen } from "src/test";
+import {
+  ReactQueryTestProvider,
+  describe,
+  expect,
+  it,
+  render,
+  screen,
+} from "src/test";
 
 import { AuthenticationGuard } from ".";
 
@@ -9,7 +16,7 @@ describe.skip("<AuthenticationGuard />", () => {
         <AuthenticationGuard>
           <p>my-text</p>
         </AuthenticationGuard>
-      </ReactQueryTestProvider>
+      </ReactQueryTestProvider>,
     );
 
     const message = await screen.findByText(/Welcome/);

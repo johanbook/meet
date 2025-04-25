@@ -1,4 +1,4 @@
-import { render, screen } from "src/test";
+import { describe, expect, it, render, screen } from "src/test";
 
 import { Menu } from ".";
 
@@ -9,7 +9,7 @@ describe("<Menu />", () => {
         Button={({ onClick }) => <button onClick={onClick}> Button</button>}
       >
         my-content
-      </Menu>
+      </Menu>,
     );
 
     const button = screen.getByRole("button");
