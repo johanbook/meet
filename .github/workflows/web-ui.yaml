@@ -10,48 +10,11 @@ on:
       - "services/web-ui/**"
 
 jobs:
-  generate-swagger:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./services/web-ui
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Install NodeJS
-        uses: actions/setup-node@v3
-        with:
-          node-version: 22
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
-
-      - name: Install NodeJS dependencies
-        run: npm ci --legacy-peer-deps -D --ignore-scripts
-
-      - name: Download OpenAPI specification
-        uses: dawidd6/action-download-artifact@v9
-        with:
-          name: openapi-schema
-          path: ./services/web-ui/
-          workflow: api.yaml
-
-      - name: Generate Swagger stubs
-        run: ./scripts/generate-swagger
-
-      - name: Upload Swagger stubs
-        uses: actions/upload-artifact@v4
-        with:
-          name: openapi-server
-          path: ./services/web-ui/src/api
-          if-no-files-found: error
-
   lint:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./services/web-ui
-    needs: ["generate-swagger"]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
