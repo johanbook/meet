@@ -1,4 +1,11 @@
-import { ReactQueryTestProvider, render, screen } from "src/test";
+import {
+  ReactQueryTestProvider,
+  describe,
+  expect,
+  it,
+  render,
+  screen,
+} from "src/test";
 
 import { ProfileGuard } from ".";
 
@@ -9,7 +16,7 @@ describe.skip("<ProfileGuard />", () => {
         <ProfileGuard>
           <p>my-text</p>
         </ProfileGuard>
-      </ReactQueryTestProvider>
+      </ReactQueryTestProvider>,
     );
 
     const message = await screen.findByText(/Welcome/);

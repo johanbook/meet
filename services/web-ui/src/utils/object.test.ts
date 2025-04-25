@@ -1,3 +1,5 @@
+import { describe, expect, it } from "src/test";
+
 import { groupBy } from "./object";
 
 describe(groupBy.name, () => {

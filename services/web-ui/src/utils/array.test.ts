@@ -1,14 +1,16 @@
+import { describe, expect, it } from "src/test";
+
 import * as array from "./array";
 
 describe("accumulate", () => {
   it("works", () => {
     const initialArray = ["a", "b", "c"];
-    const accumlated = array.accumulate(
+    const accumulated = array.accumulate(
       initialArray,
-      (element: string, previous = "") => previous + element
+      (element: string, previous = "") => previous + element,
     );
 
-    expect(accumlated).toStrictEqual(["a", "ab", "abc"]);
+    expect(accumulated).toStrictEqual(["a", "ab", "abc"]);
   });
 });
 

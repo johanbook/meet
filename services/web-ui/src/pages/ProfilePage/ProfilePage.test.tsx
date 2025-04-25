@@ -1,4 +1,12 @@
-import { ReactQueryTestProvider, TestRouter, render, screen } from "src/test";
+import {
+  ReactQueryTestProvider,
+  TestRouter,
+  describe,
+  expect,
+  it,
+  render,
+  screen,
+} from "src/test";
 
 import { ProfilePage } from ".";
 
@@ -9,7 +17,7 @@ describe.skip("<ProfilePage />", () => {
         <TestRouter>
           <ProfilePage />
         </TestRouter>
-      </ReactQueryTestProvider>
+      </ReactQueryTestProvider>,
     );
 
     const message = await screen.findByText(/Welcome/);
