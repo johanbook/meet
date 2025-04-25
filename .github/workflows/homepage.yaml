@@ -43,7 +43,7 @@ jobs:
     defaults:
       run:
         working-directory: ./services/homepage
-    needs: ["test"]
+    needs: ["lint"]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
