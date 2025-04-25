@@ -9,7 +9,6 @@
 /coverage
 
 # production
-src/api
 /build
 openapi.json
 
