@@ -40,7 +40,7 @@ export function CreateOrganizationPageContainer(): ReactElement {
     navigate("/profile");
   }
 
-  async function handleSubmit(event: SyntheticEvent): Promise {
+  async function handleSubmit(event: SyntheticEvent): Promise<void> {
     event.preventDefault();
     const { data, isValid } = form.validate();
 
