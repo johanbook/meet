@@ -23,9 +23,8 @@ import { SettingsModule } from "src/features/settings/settings.module";
 
 @Module({
   imports: [
+    // Core module
     AuthenticationModule,
-    BlogsModule,
-    ChatModule,
     ClassificationsModule,
     ErrorHandlingModule,
     HealthChecksModule,
@@ -37,8 +36,12 @@ import { SettingsModule } from "src/features/settings/settings.module";
     MinioModule.register({ ...minioOptions, isGlobal: true }),
     OrganizationModule,
     ProfileModule,
-    SettingsModule,
     TypeOrmModule.forRoot({ ...dataSourceOptions, autoLoadEntities: true }),
+
+    // Feature modules
+    BlogsModule,
+    ChatModule,
+    SettingsModule,
   ],
   providers: [
     {
