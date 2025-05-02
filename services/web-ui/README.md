@@ -1,4 +1,4 @@
-# Contributing
+# web-ui
 
 The document outlines the development process of the **web-ui**
 project.
@@ -13,7 +13,7 @@ In order to run the development server, the Nodejs runtime together with the NPM
 package manager are required. For Linux-based systems, these can be conveniently
 handled using [NVM](https://github.com/nvm-sh/nvm).
 
-Install all dependencies and Git hooks by running
+Install all dependencies by running
 
 ```sh
 npm i -D
