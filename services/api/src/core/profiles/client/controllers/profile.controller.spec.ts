@@ -1,40 +1,32 @@
-import { CqrsModule } from "@nestjs/cqrs";
 import { Test, TestingModule } from "@nestjs/testing";
-import { getRepositoryToken } from "@nestjs/typeorm";
+import { QueryBus } from "@nestjs/cqrs";
 
 import { GetProfileQuery } from "../../application/contracts/queries/get-profile.query";
-import { ProfilePhoto } from "../../infrastructure/entities/profile-photo.entity";
-import { Profile } from "../../infrastructure/entities/profile.entity";
 import { ProfileController } from "./profile.controller";
 
-describe.skip(ProfileController.name, () => {
+describe(ProfileController.name, () => {
   let appController!: ProfileController;
 
+  let queryBus: QueryBus;
   beforeEach(async () => {
+    const mockQueryBus = { execute: jest.fn().mockResolvedValue({ id: "1" }) };
+
     const app: TestingModule = await Test.createTestingModule({
-      imports: [CqrsModule],
       controllers: [ProfileController],
-      providers: [
-        {
-          provide: getRepositoryToken(Profile),
-          useValue: jest.fn(),
-        },
-        {
-          provide: getRepositoryToken(ProfilePhoto),
-          useValue: jest.fn(),
-        },
-      ],
+      providers: [{ provide: QueryBus, useValue: mockQueryBus }],
     }).compile();
 
     appController = app.get<ProfileController>(ProfileController);
+    queryBus = app.get<QueryBus>(QueryBus);
   });
 
-  describe("getCurrentProfile", () => {
-    it("should return profile id", async () => {
-      const currentProfile = await appController.getProfile(
-        new GetProfileQuery(),
-      );
-      expect(currentProfile.id).toBe("1");
+  describe("getProfile", () => {
+    it("should execute query and return profile details", async () => {
+      const query = new GetProfileQuery();
+      const result = await appController.getProfile(query);
+
+      expect(queryBus.execute).toHaveBeenCalledWith(query);
+      expect(result).toEqual({ id: "1" });
     });
   });
 });
