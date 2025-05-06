@@ -6,10 +6,6 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "npm"
-    directories: ["/*"]
+    directories: ["/", "/services/*"]
     schedule:
       interval: "daily"
