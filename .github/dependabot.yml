@@ -9,3 +9,10 @@ updates:
     directories: ["/", "/services/*"]
     schedule:
       interval: "daily"
+  - package-ecosystem: "docker"
+    directories: ["/services/*"]
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "github-actions"
+    schedule:
+      interval: "daily"
