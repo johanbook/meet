@@ -1,5 +1,5 @@
 import { readdirSync } from "node:fs";
-import * as path from "node:path";
+import path from "node:path";
 import { DataSource } from "typeorm";
 
 import { MigrationError } from "src/core/error-handling";
