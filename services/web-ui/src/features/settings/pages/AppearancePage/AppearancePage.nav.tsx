@@ -11,9 +11,9 @@ interface AppearancePageNavProps {
   children: ReactNode;
 }
 
-export function AppearancePageNav(
-  { children }: AppearancePageNavProps
-): ReactElement {
+export function AppearancePageNav({
+  children,
+}: AppearancePageNavProps): ReactElement {
   const { t } = useTranslation("settings");
 
   const appBarContent = (

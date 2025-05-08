@@ -7,7 +7,7 @@ export function useDialog() {
 
   if (!props) {
     throw new Error(
-      "Coult not find global dialog context. Make sure provider is registered as parent."
+      "Coult not find global dialog context. Make sure provider is registered as parent.",
     );
   }
 

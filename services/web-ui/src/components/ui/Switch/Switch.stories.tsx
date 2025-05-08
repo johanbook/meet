@@ -14,4 +14,3 @@ export const Default: Story = {
     onChange: () => alert("I was clicked"),
   },
 };
-

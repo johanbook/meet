@@ -18,7 +18,7 @@ interface Handler {
 
 interface RegisterHandlerProps<
   T extends NotificationEventsConstants,
-  V extends INotification & { type: T }
+  V extends INotification & { type: T },
 > {
   onCondition?: (notification: V) => boolean;
   type: T;
@@ -49,13 +49,13 @@ export class NotificationEventHandler {
     });
 
     this.socket.on(eventName, (notification: INotification) =>
-      this.handle(notification)
+      this.handle(notification),
     );
   }
 
   public registerHandler<
     T extends NotificationEventsConstants,
-    V extends INotification & { type: T }
+    V extends INotification & { type: T },
   >({ onCondition, handler, type }: RegisterHandlerProps<T, V>): string {
     const id = uuid();
 
@@ -71,7 +71,7 @@ export class NotificationEventHandler {
 
   public unregisterHandler(
     type: NotificationEventsConstants,
-    id: string
+    id: string,
   ): void {
     delete this.handlers[type][id];
   }

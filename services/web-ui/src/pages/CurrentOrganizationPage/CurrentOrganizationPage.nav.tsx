@@ -10,9 +10,9 @@ interface CurrentOrganizationPageNavProps {
   children: ReactNode;
 }
 
-export function CurrentOrganizationPageNav(
-  { children }: CurrentOrganizationPageNavProps
-): ReactElement {
+export function CurrentOrganizationPageNav({
+  children,
+}: CurrentOrganizationPageNavProps): ReactElement {
   const appBarContent = (
     <>
       <IconButton

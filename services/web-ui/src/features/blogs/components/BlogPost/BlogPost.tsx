@@ -28,9 +28,10 @@ interface BlogPostProps {
   post: BlogPostDetails;
 }
 
-export function BlogPost(
-  { alwaysShowComments = false, post }: BlogPostProps
-): ReactElement {
+export function BlogPost({
+  alwaysShowComments = false,
+  post,
+}: BlogPostProps): ReactElement {
   const [showComments, setShowComments] = useState(alwaysShowComments);
   const { t } = useTranslation("blog");
 
@@ -104,7 +105,7 @@ export function BlogPost(
           <Button onClick={() => setShowComments(!showComments)}>
             {t(
               showComments ? "actions.hide-comments" : "actions.view-comments",
-              { count: post.comments.length }
+              { count: post.comments.length },
             )}
           </Button>
         </Box>

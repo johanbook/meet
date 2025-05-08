@@ -41,7 +41,7 @@ export function OrganizationMemberUpdateDialog({
           });
           onSuccess();
         },
-      }
+      },
     );
   }
 

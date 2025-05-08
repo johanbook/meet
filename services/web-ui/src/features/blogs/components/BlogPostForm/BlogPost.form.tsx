@@ -45,7 +45,7 @@ export function BlogPostForm(): ReactElement {
     {
       // TODO: Enable when there is proper image serialization
       // localStorageKey: "create-blog-post-form",
-    }
+    },
   );
 
   function handleRemovePhoto(photoToDelete: Blob): void {

@@ -13,13 +13,13 @@ registerI18n();
 registerExceptionLogger();
 
 const root = ReactDOM.createRoot(
-  document.querySelector("#root") as HTMLElement
+  document.querySelector("#root") as HTMLElement,
 );
 
 root.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 if (config.MONITORING.REPORT_WEB_VITALS) {

@@ -18,9 +18,11 @@ interface OrganizationJournalPageNavProps {
   values: DateRange;
 }
 
-export function OrganizationJournalPageNav(
-  { children, onDateChange, values }: OrganizationJournalPageNavProps
-): ReactElement {
+export function OrganizationJournalPageNav({
+  children,
+  onDateChange,
+  values,
+}: OrganizationJournalPageNavProps): ReactElement {
   const { t } = useTranslation("journal");
 
   return (

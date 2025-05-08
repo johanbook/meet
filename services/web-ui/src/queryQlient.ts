@@ -7,8 +7,8 @@ const logger = new Logger(QueryClient.name);
 export const QUERY_CLIENT = new QueryClient({
   defaultOptions: {
     mutations: {
-      onError: (err) => {
-        const error = err as Error;
+      onError: (orignalError) => {
+        const error = orignalError as Error;
         logger.error("Failed to execute mutation", {
           error: {
             message: error.message,

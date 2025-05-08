@@ -10,9 +10,9 @@ interface ProfilePageNavProps {
   children: ReactElement;
 }
 
-export function ProfilePageNav(
-  { children }: ProfilePageNavProps
-): ReactElement {
+export function ProfilePageNav({
+  children,
+}: ProfilePageNavProps): ReactElement {
   const appBarContent = (
     <>
       <IconButton component={ReactRouterLink} to="/">

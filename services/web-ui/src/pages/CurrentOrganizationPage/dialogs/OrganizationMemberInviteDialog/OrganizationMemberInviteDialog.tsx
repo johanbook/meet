@@ -23,7 +23,7 @@ export function OrganizationMemberInviteDialog(): ReactElement {
 
   const mutation = useMutation({
     mutationFn: (
-      addMemberToOrganizationViaEmailCommand: AddMemberToOrganizationViaEmailCommand
+      addMemberToOrganizationViaEmailCommand: AddMemberToOrganizationViaEmailCommand,
     ) =>
       organizationsApi.addMemberToOrganizationViaEmail({
         addMemberToOrganizationViaEmailCommand,
@@ -34,7 +34,7 @@ export function OrganizationMemberInviteDialog(): ReactElement {
     { email: "" },
     {
       email: validators.required(),
-    }
+    },
   );
 
   if (authorization.error || authorization.isLoading) {

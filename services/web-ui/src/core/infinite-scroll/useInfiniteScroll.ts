@@ -16,7 +16,7 @@ export function useInfiniteScroll({ onObserve }: UseInfiniteScrollProps) {
           onObserve();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (current) {

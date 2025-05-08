@@ -11,9 +11,10 @@ interface BottomNavigationListItemProps {
   item: NavItem;
 }
 
-function BottomNavigationListItem(
-  { fractionalWidth, item }: BottomNavigationListItemProps
-): ReactElement {
+function BottomNavigationListItem({
+  fractionalWidth,
+  item,
+}: BottomNavigationListItemProps): ReactElement {
   const location = useLocation();
   const regexp = new RegExp(item.isActive || item.url);
   const match = regexp.test(location.pathname);

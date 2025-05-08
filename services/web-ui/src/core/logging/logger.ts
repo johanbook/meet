@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable sonarjs/no-identical-functions */
-
 type LogLevel = "debug" | "error" | "fatal" | "info" | "trace" | "warn";
 
 interface LogProps {

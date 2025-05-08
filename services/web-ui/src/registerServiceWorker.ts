@@ -3,9 +3,8 @@ import { notificationsApi } from "./apis";
 const SERVICE_WORKER_PATH = "service-worker.js";
 
 export async function registerServiceWorker() {
-  const registration = await navigator.serviceWorker.register(
-    SERVICE_WORKER_PATH
-  );
+  const registration =
+    await navigator.serviceWorker.register(SERVICE_WORKER_PATH);
 
   let subscription = await registration.pushManager.getSubscription();
 

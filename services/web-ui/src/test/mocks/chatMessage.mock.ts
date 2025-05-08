@@ -1,14 +1,14 @@
 import { ChatMessageDetails } from "src/api";
 
 export function createChatMessageMock(
-  message?: Partial<ChatMessageDetails>
+  message?: Partial<ChatMessageDetails>,
 ): ChatMessageDetails {
   return {
     id: 1,
     message: "my-message",
     profile: {
       id: 1,
-      name: "Johan Doe"
+      name: "Johan Doe",
     },
     read: true,
     sentByCurrentUser: false,
@@ -21,7 +21,7 @@ export function createChatMessagesMock(length: number): ChatMessageDetails[] {
 
   for (let index = 0; index < length; index++) {
     messages.push(
-      createChatMessageMock({ id: index, message: `message-${index + 1}` })
+      createChatMessageMock({ id: index, message: `message-${index + 1}` }),
     );
   }
 

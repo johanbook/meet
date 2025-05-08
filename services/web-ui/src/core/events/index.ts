@@ -1,6 +1,5 @@
 export abstract class BaseEvent {}
 
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 type Constructor<T> = new (...props: any) => T;
 
 export function dispatchEvent<T extends BaseEvent>(event: T) {
@@ -12,7 +11,7 @@ export function dispatchEvent<T extends BaseEvent>(event: T) {
 
 export function addEventListener<T extends BaseEvent>(
   event: Constructor<T>,
-  onEvent: (event: T) => void
+  onEvent: (event: T) => void,
 ): void {
   document.addEventListener(event.name, (event) => {
     const customEvent = event as CustomEvent<T>;
