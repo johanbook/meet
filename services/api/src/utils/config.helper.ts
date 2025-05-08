@@ -1,8 +1,6 @@
 import { ConfigurationError } from "src/core/error-handling";
 import { Logger } from "src/core/logging";
 
-/* eslint-disable sonarjs/no-duplicate-string */
-
 const logger = new Logger("ConfigHelper");
 
 function readEnv(key: string): string | undefined {

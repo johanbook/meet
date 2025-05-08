@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/consistent-function-scoping */
 import { EventBus } from "@nestjs/cqrs";
 
 class EventBusMock {

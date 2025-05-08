@@ -1,5 +1,5 @@
 import * as dotenv from "dotenv";
-import { join } from "node:path";
+import path from "node:path";
 import { DataSourceOptions } from "typeorm";
 import { SeederOptions } from "typeorm-extension";
 
@@ -37,13 +37,15 @@ export const dataSourceOptions: DataSourceOptions & SeederOptions = {
   logging,
   logger: new TypeOrmLogger(),
   entities: [
-    join(__dirname, "../../{core,features}/**/{entities,views}/*.{ts,js}"),
+    path.join(__dirname, "../../{core,features}/**/{entities,views}/*.{ts,js}"),
   ],
   subscribers: [],
   migrations: [
     // Note that glob should be on both `ts` and `js` to work in both dev and production
-    join(__dirname, "../../{core,features}/**/migrations/*.{ts,js}"),
+    path.join(__dirname, "../../{core,features}/**/migrations/*.{ts,js}"),
   ],
-  factories: [join(__dirname, "/../../{core,features}/**/factories/*.{ts,js}")],
-  seeds: [join(__dirname, "/../../{core,features}/**/seeds/*.{ts,js}")],
+  factories: [
+    path.join(__dirname, "/../../{core,features}/**/factories/*.{ts,js}"),
+  ],
+  seeds: [path.join(__dirname, "/../../{core,features}/**/seeds/*.{ts,js}")],
 };

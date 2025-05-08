@@ -1,7 +1,5 @@
 import { sortByField } from "./sorting.helper";
 
-/* eslint-disable sonarjs/no-duplicate-string */
-
 describe(sortByField.name, () => {
   it("sorts array without mutating orginal", () => {
     const originalArray = [{ name: "B" }, { name: "C" }, { name: "A" }];

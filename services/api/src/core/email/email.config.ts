@@ -6,8 +6,6 @@ import {
   getRequiredStringConfig,
 } from "src/utils/config.helper";
 
-/* eslint-disable unicorn/prefer-module */
-
 dotenv.config();
 
 export const emailConfig: SMTPTransport.Options = {

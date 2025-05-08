@@ -12,8 +12,7 @@ export function createOpenApiDocument(app: INestApplication): OpenAPIObject {
   if (!APP_VERSION) {
     logger.fatal("Unable to read app version");
 
-    /** Make sure app deoes not start with incorrect configs */
-    /* eslint-disable-next-line unicorn/no-process-exit */
+    /** Make sure app does not start with incorrect configs */
     process.exit(1);
   }
 

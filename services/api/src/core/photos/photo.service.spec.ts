@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import path from "node:path";
 
 import { PhotoService } from "./photo.service";
 
@@ -15,7 +15,7 @@ describe(PhotoService.name, () => {
   describe("resize", () => {
     it("should resize the image buffer", async () => {
       const buffer = readFileSync(
-        join(__dirname, "../../test/assets/images/dog.jpg"),
+        path.join(__dirname, "../../test/assets/images/dog.jpg"),
       );
 
       expect(buffer.byteLength).toBe(39_291);
