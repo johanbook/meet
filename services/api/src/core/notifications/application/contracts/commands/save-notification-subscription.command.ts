@@ -7,8 +7,11 @@ import {
   ValidateNested,
 } from "class-validator";
 
+import { NoJournal } from "src/core/journal";
+
 import { NotificationSubscriptionKeysDetails } from "../dtos/notification-subscription-keys.dto";
 
+@NoJournal()
 export class SaveNotificationSubscriptionCommand {
   @IsUrl()
   @IsString()
