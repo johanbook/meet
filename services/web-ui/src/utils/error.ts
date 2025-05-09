@@ -1,6 +1,6 @@
 import { ResponseError } from "src/api";
 
-function reponseErrorToMessage(error: ResponseError): string | undefined {
+function responseErrorToMessage(error: ResponseError): string | undefined {
   const response = error.response;
 
   if (response.errorMessage) {
@@ -16,7 +16,7 @@ function reponseErrorToMessage(error: ResponseError): string | undefined {
 
 export function errorToMessage(error: unknown): string | undefined {
   if (error instanceof ResponseError) {
-    return reponseErrorToMessage(error);
+    return responseErrorToMessage(error);
   }
 
   if (error instanceof Error) {

@@ -2,9 +2,9 @@ import React from "react";
 
 import Typography from "@mui/material/Typography";
 
-import { errorToMessage } from "src/utils/error.utils";
+import { errorToMessage } from "src/utils/error";
 
-const DEFAULT_ERROR_MESSAGE = "An unexpected error occured";
+const DEFAULT_ERROR_MESSAGE = "An unexpected error occurred";
 
 export interface ErrorMessageProps {
   error?: unknown;
