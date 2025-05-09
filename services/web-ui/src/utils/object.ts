@@ -1,6 +1,6 @@
 export function groupBy<T extends object>(
   array: T[],
-  getKey: (value: T) => number | string
+  getKey: (value: T) => number | string,
 ): Record<string, T[]> {
   const groups: Record<string, T[]> = {};
 

@@ -6,7 +6,7 @@ import { ImageList, ImageListItem, Typography } from "@mui/material";
 import { BlogPhotoDetails } from "src/api";
 
 function groupDataByDate(
-  data: BlogPhotoDetails[]
+  data: BlogPhotoDetails[],
 ): Record<string, BlogPhotoDetails[]> {
   const result: Record<string, BlogPhotoDetails[]> = {};
 

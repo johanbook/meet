@@ -19,9 +19,11 @@ interface ProfileJournalPageNavProps {
   values: DateRange;
 }
 
-export function ProfileJournalPageNav(
-  { children, onDateChange, values }: ProfileJournalPageNavProps
-): ReactElement {
+export function ProfileJournalPageNav({
+  children,
+  onDateChange,
+  values,
+}: ProfileJournalPageNavProps): ReactElement {
   const { t } = useTranslation("journal");
 
   const appBarContent = (

@@ -12,9 +12,9 @@ interface BlogPhotoListPageNavProps {
   children: ReactNode;
 }
 
-export function BlogPhotoListPageNav(
-  { children }: BlogPhotoListPageNavProps
-): ReactElement {
+export function BlogPhotoListPageNav({
+  children,
+}: BlogPhotoListPageNavProps): ReactElement {
   const appBarContent = (
     <>
       <CurrentOrganizationAvatar />

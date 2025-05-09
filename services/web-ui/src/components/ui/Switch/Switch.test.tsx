@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, render, screen } from "src/test";
+import { describe, expect, it, render, screen, vi } from "src/test";
 
 import { Switch } from ".";
 

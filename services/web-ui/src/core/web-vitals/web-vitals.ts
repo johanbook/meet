@@ -1,7 +1,7 @@
 export function registerWebVitalsReporter(
   onReport?: (entry: unknown) => void,
 ): void {
-  if (onReport && onReport instanceof Function) {
+  if (onReport && typeof onReport === "function") {
     import("web-vitals").then(({ onCLS, onFCP, onINP, onLCP }) => {
       onCLS(onReport);
       onFCP(onReport);

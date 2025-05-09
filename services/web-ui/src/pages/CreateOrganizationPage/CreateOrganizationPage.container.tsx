@@ -32,7 +32,7 @@ export function CreateOrganizationPageContainer(): ReactElement {
       name: "",
     },
     { name: validators.required() },
-    { localStorageKey: "create-organization" }
+    { localStorageKey: "create-organization" },
   );
 
   function handleCancel(): void {

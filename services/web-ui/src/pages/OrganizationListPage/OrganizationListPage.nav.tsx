@@ -11,9 +11,9 @@ interface OrganizationListPageNavProps {
   children: ReactNode;
 }
 
-export function OrganizationListPageNav(
-  { children }: OrganizationListPageNavProps
-): ReactElement {
+export function OrganizationListPageNav({
+  children,
+}: OrganizationListPageNavProps): ReactElement {
   const { t } = useTranslation("organization-list");
 
   const appBarContent = (

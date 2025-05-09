@@ -10,9 +10,9 @@ interface BlogPostPageNavProps {
   children: ReactNode;
 }
 
-export function BlogPostPageNav(
-  { children }: BlogPostPageNavProps
-): ReactElement {
+export function BlogPostPageNav({
+  children,
+}: BlogPostPageNavProps): ReactElement {
   const appBarContent = (
     <>
       <IconButton

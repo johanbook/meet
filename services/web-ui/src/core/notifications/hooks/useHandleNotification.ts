@@ -6,7 +6,7 @@ import { INotification } from "../types";
 
 interface UseHandleNotificationProps<
   T extends NotificationEventsConstants,
-  V extends INotification & { type: T }
+  V extends INotification & { type: T },
 > {
   onCondition?: (notification: V) => boolean;
   onNotification: (notification: V) => void;
@@ -15,7 +15,7 @@ interface UseHandleNotificationProps<
 
 export function useHandleNotification<
   T extends NotificationEventsConstants,
-  V extends INotification & { type: T }
+  V extends INotification & { type: T },
 >({
   onCondition,
   onNotification,
@@ -26,7 +26,7 @@ export function useHandleNotification<
   useEffect(() => {
     if (!notificationHandler) {
       throw new Error(
-        "Unable to register notification handler. Make sure the NotificationProvider is correctly setup."
+        "Unable to register notification handler. Make sure the NotificationProvider is correctly setup.",
       );
     }
 

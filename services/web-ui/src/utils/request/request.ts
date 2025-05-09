@@ -1,6 +1,6 @@
 export async function request(
   url: string,
-  args?: RequestInit
+  args?: RequestInit,
 ): Promise<unknown> {
   const resp = await fetch(url, args);
 

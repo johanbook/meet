@@ -11,9 +11,12 @@ interface NavLayoutProps {
   to: string;
 }
 
-export function NavLayout(
-  { children, header, linkText, to }: NavLayoutProps
-): ReactElement {
+export function NavLayout({
+  children,
+  header,
+  linkText,
+  to,
+}: NavLayoutProps): ReactElement {
   return (
     <Box sx={{ pt: 1, px: 3 }}>
       <MuiLink

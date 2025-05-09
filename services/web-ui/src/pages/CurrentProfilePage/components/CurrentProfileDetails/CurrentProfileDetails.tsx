@@ -83,7 +83,7 @@ export function CurrentProfileDetails({
             queryKey: [CacheKeysConstants.CurrentProfile],
           });
         },
-      }
+      },
     );
   }
 

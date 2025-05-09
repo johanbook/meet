@@ -13,6 +13,6 @@ export const Default: Story = {
   args: {
     description: "This will show an alert message",
     onConfirm: () => alert("Hi"),
-    title: "Confirm showing alert"
+    title: "Confirm showing alert",
   },
 };

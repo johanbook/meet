@@ -1,7 +1,5 @@
-/* eslint-disable unicorn/no-abusive-eslint-disable */
-/* eslint-disable */
 importScripts(
-  "https://storage.googleapis.com/workbox-cdn/releases/7.1.0/workbox-sw.js"
+  "https://storage.googleapis.com/workbox-cdn/releases/7.1.0/workbox-sw.js",
 );
 
 // This must come before any other workbox.* methods.
@@ -22,7 +20,7 @@ workbox.routing.registerRoute(
         maxAgeSeconds: 1 * 24 * 60 * 60, // 1 day
       }),
     ],
-  })
+  }),
 );
 
 // Assets
@@ -36,7 +34,7 @@ workbox.routing.registerRoute(
         maxAgeSeconds: 1 * 24 * 60 * 60, // 1 day
       }),
     ],
-  })
+  }),
 );
 
 // Images
@@ -50,7 +48,7 @@ workbox.routing.registerRoute(
         maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
       }),
     ],
-  })
+  }),
 );
 
 self.addEventListener("push", (event) => {
@@ -63,13 +61,11 @@ self.addEventListener("push", (event) => {
     self.registration.showNotification(message, {
       body: description,
       icon: "android-chrome-192x192.png",
-    })
+    }),
   );
 });
 
 self.addEventListener("notificationclick", function (event) {
   event.notification.close();
-  event.waitUntil(
-    self.clients.openWindow(window.location.origin)
-  );
+  event.waitUntil(self.clients.openWindow(window.location.origin));
 });

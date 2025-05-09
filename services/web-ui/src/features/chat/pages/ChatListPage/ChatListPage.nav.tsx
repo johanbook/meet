@@ -12,9 +12,9 @@ interface ChatListPageNavProps {
   children: ReactNode;
 }
 
-export function ChatListPageNav(
-  { children }: ChatListPageNavProps
-): ReactElement {
+export function ChatListPageNav({
+  children,
+}: ChatListPageNavProps): ReactElement {
   const { t } = useTranslation("connections");
 
   const appBarContent = (

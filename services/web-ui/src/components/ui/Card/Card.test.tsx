@@ -1,4 +1,4 @@
-import { render, screen, it, describe, expect } from "src/test";
+import { describe, expect, it, render, screen } from "src/test";
 
 import { Card } from ".";
 

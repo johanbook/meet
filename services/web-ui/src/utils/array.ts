@@ -1,37 +1,34 @@
 /** Accumulates an array */
 export function accumulate<T, R>(
-  arr: T[],
-  accumulator: (el: T, prev?: R) => R
+  array: T[],
+  accumulator: (element: T, previous?: R) => R,
 ): R[] {
-  const newArr: R[] = [];
+  const newArray: R[] = [];
 
   let previousResult: R | undefined;
 
-  for (const element of arr) {
+  for (const element of array) {
     const newResult = accumulator(element, previousResult);
-    newArr.push(newResult);
+    newArray.push(newResult);
     previousResult = newResult;
   }
 
-  return newArr;
-}
-
-/** Splits array and return last element and remaining arry separately */
-export function getLastAndRemainder<T>(arr: T[]): [T | undefined, T[]] {
-  const newArr = [...arr];
-  const last = newArr.pop();
-  return [last, newArr];
+  return newArray;
 }
 
 /** Truncates an array to a max length. Can add an optional last element */
-export function truncate<T>(arr: T[], maxLength: number, lastElement?: T): T[] {
-  if (arr.length < maxLength) {
-    return arr;
+export function truncate<T>(
+  array: T[],
+  maxLength: number,
+  lastElement?: T,
+): T[] {
+  if (array.length < maxLength) {
+    return array;
   }
 
   if (lastElement) {
-    return [...arr.slice(0, maxLength - 1), lastElement];
+    return [...array.slice(0, maxLength - 1), lastElement];
   }
 
-  return arr.slice(0, maxLength);
+  return array.slice(0, maxLength);
 }

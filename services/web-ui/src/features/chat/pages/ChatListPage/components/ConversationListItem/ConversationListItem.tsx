@@ -15,9 +15,9 @@ interface ConversationListItemProps {
   data: ChatConversationDetails;
 }
 
-export function ConversationListItem(
-  { data }: ConversationListItemProps
-): React.ReactElement {
+export function ConversationListItem({
+  data,
+}: ConversationListItemProps): React.ReactElement {
   let imageUrl = data.imageUrl;
   let name = data.name;
 

@@ -11,9 +11,9 @@ interface CreateChatPageNavProps {
   children: ReactNode;
 }
 
-export function CreateChatPageNav(
-  { children }: CreateChatPageNavProps
-): ReactElement {
+export function CreateChatPageNav({
+  children,
+}: CreateChatPageNavProps): ReactElement {
   const { t } = useTranslation("chat-create");
 
   const appBarContent = (
