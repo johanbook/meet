@@ -10,16 +10,15 @@ import reportWebVitals from "./utils/reportWebVitals";
 registerI18n();
 
 const root = ReactDOM.createRoot(
-  document.querySelector("#root") as HTMLElement
+  document.querySelector("#root") as HTMLElement,
 );
 
 root.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 if (CONFIG.MONITORING.REPORT_WEB_VITALS) {
-  /* eslint-disable-next-line no-console */
   reportWebVitals(console.log);
 }
