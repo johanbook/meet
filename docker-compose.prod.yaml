@@ -104,12 +104,12 @@ services:
 
   watchtower:
     logging: *logging
-    image: containrrr/watchtower
+    image: getwud/wud
     container_name: watchtower
-    command:
-      - "--cleanup"
-      - "--schedule"
-      - "0 0 * * * *"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.watchtower.rule=Host(`watchtower.console.$DOMAIN`)"
+      - "traefik.http.routers.watchtower.entrypoints=web"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
