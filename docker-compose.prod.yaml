@@ -33,10 +33,6 @@ services:
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=webinsecure"
       - "--certificatesresolvers.letsencrypt.acme.email=$EMAIL"
       - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
-
-      # Adds correlation id
-      - "--tracing.jaeger.samplingparam=0"
-      - "--tracing.jaeger.tracecontextheadername=x-correlation-id"
     ports:
       - "80:80"
       - "443:443"
