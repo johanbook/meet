@@ -8,16 +8,15 @@ interface MenuProps extends Omit<MuiMenuProps, "open"> {
 }
 
 export function Menu({ Button, children, ...props }: MenuProps): ReactElement {
-  const [anchorEl, setAnchorEl] = useState<Element | undefined>();
-  const open = Boolean(anchorEl);
+  const [anchorElement, setAnchorElement] = useState<Element | undefined>();
+  const open = Boolean(anchorElement);
 
   function handleClick(event: React.SyntheticEvent) {
-    setAnchorEl(event.currentTarget);
+    setAnchorElement(event.currentTarget);
   }
 
   function handleClose() {
-    /* eslint-disable-next-line unicorn/no-useless-undefined */
-    setAnchorEl(undefined);
+    setAnchorElement(undefined);
   }
 
   return (
@@ -25,7 +24,7 @@ export function Menu({ Button, children, ...props }: MenuProps): ReactElement {
       <Button onClick={handleClick} />
 
       <MuiMenu
-        anchorEl={anchorEl}
+        anchorEl={anchorElement}
         open={open}
         onClose={handleClose}
         onClick={handleClose}
