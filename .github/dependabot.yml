@@ -15,7 +15,12 @@ updates:
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "github-actions"
+  - package-ecosystem: "docker-compose"
     directory: "/"
     schedule:
       interval: "daily"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
