@@ -4,11 +4,15 @@
         href: https://johanbook.grafana.net/
         icon: grafana
 
-- Routing:
+- Infrastructure:
     - Traefik dashboard:
         description: Edge router
         href: http://traefik.console.{{HOMEPAGE_VAR_DOMAIN}}/
         icon: traefik
+    - Watchtower:
+        description: Container updater
+        href: http://watchtower.console.{{HOMEPAGE_VAR_DOMAIN}}/
+        icon: whats-up-docker
 
 - Storage:
     - pgAdmin:
