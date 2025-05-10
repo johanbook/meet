@@ -106,6 +106,8 @@ services:
     logging: *logging
     image: getwud/wud
     container_name: watchtower
+    environment:
+      WUD_TRIGGER_DOCKER_DOCKER_PRUNE: true
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.watchtower.rule=Host(`watchtower.console.$DOMAIN`)"
