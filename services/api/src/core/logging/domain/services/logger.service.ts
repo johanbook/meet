@@ -37,7 +37,7 @@ export function createPinoLoggerOptions(name: string) {
         return {};
       }
 
-      return { correlationId: store.correlationId, userId: store.userId };
+      return { userId: store.userId };
     },
     name,
     transport,

@@ -1,10 +1,4 @@
-import {
-  Inject,
-  MiddlewareConsumer,
-  Module,
-  NestModule,
-  UnauthorizedException,
-} from "@nestjs/common";
+import { Inject, MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
 import { FastifyRequest, FastifyReply } from "fastify";
 import { AsyncLocalStorage } from "node:async_hooks";
 
@@ -17,8 +11,6 @@ import { IRequestContext } from "./request-context.interface";
   imports: [AlsModule],
 })
 export class RequestContextMiddleware implements NestModule {
-  private logger = new Logger(RequestContextMiddleware.name);
-
   constructor(
     @Inject(REQUEST_CONTEXT_KEY)
     private readonly als: AsyncLocalStorage<IRequestContext>,
@@ -32,18 +24,7 @@ export class RequestContextMiddleware implements NestModule {
           _: FastifyReply["raw"],
           next: () => void,
         ) => {
-          const correlationId = req.headers["x-correlation-id"];
           let userId: string | undefined;
-
-          if (typeof correlationId != "string") {
-            this.logger.error(
-              "Failed parsing correlation ID. This indicates an error in the reverse proxy.",
-            );
-
-            throw new UnauthorizedException(
-              "Unable to parse correlation ID from request",
-            );
-          }
 
           const headerUserId = req.headers["x-user-id"];
           if (typeof headerUserId === "string") {
@@ -51,7 +32,6 @@ export class RequestContextMiddleware implements NestModule {
           }
 
           const store: IRequestContext = {
-            correlationId,
             userId,
           };
 
