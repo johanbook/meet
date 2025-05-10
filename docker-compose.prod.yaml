@@ -108,8 +108,8 @@ services:
     container_name: watchtower
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.pgadmin.rule=Host(`wud.console.$DOMAIN`)"
-      - "traefik.http.routers.pgadmin.entrypoints=web"
+      - "traefik.http.routers.watchtower.rule=Host(`watchtower.console.$DOMAIN`)"
+      - "traefik.http.routers.watchtower.entrypoints=web"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
