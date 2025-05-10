@@ -2,6 +2,12 @@ importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/7.1.0/workbox-sw.js",
 );
 
+// This must come before any other workbox.* methods.
+// workbox.setConfig({
+//   debug: true,
+// });
+// workbox.precaching.precacheAndRoute(self.__WB_MANIFEST);
+
 // index.html
 workbox.routing.registerRoute(
   /https?:\/\/app\.meetly\.site\/$/,
