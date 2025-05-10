@@ -1,7 +1,6 @@
 import { Card, CardContent, Container, Typography } from "@mui/material";
 import type { Meta, StoryObj } from "@storybook/react";
 
-/* eslint-disable no-console */
 import { SwipeableList } from ".";
 
 export default {

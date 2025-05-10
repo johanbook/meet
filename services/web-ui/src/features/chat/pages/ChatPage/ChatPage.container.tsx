@@ -35,7 +35,6 @@ export function ChatPageContainer(): ReactElement {
   }
 
   useHandleNotification({
-    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     onCondition: (event: any) => String(event.data.senderId) === id,
     onNotification: handleRefresh,
     type: NotificationEventsConstants.NewChatMessage,

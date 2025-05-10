@@ -2,8 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Button } from ".";
 
-/* eslint-disable sonarjs/no-duplicate-string */
-
 export default {
   title: "Core/Button",
   component: Button,

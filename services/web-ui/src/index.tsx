@@ -23,7 +23,6 @@ root.render(
 );
 
 if (config.MONITORING.REPORT_WEB_VITALS) {
-  /* eslint-disable-next-line no-console */
   registerWebVitalsReporter(console.log);
 }
 
