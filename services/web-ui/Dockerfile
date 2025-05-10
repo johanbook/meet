@@ -3,6 +3,8 @@
 ################################
 FROM node:24.0.1-alpine as builder
 
+ARG VITE_SENTRY_DSN
+
 WORKDIR /app
 
 COPY . .
