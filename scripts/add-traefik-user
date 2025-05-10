@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Ensure file exists
+mkdir -p config/traefik 
+
+read -p "Enter username: " USERNAME
+read -s -p "Enter password: " PASSWORD
+echo
+
+# Generate hashed credentials using htpasswd (bcrypt)
+HASHED_CREDENTIAL=$(htpasswd -nbB "$USERNAME" "$PASSWORD")
+
+echo $HASHED_CREDENTIAL >> config/traefik/userslist
