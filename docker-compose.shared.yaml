@@ -18,14 +18,18 @@ services:
 
     labels:
       - "traefik.enable=true"
+      - "traefik.http.middlewares.basicauth.basicauth.usersfile=/etc/traefik/usersfile"
+
       - "traefik.http.routers.edge-router.entrypoints=web"
       - "traefik.http.routers.edge-router.rule=Host(`traefik.console.$DOMAIN`)"
+      - "traefik.http.routers.edge-router.middlewares=basicauth"
       - "traefik.http.services.edge-router.loadbalancer.server.port=8080"
     ports:
       - 80:80
     restart: "unless-stopped"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "$PWD/config/traefik:/etc/traefik"
 
   api:
     container_name: "api"
@@ -68,6 +72,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.console.rule=Host(`console.$DOMAIN`)"
       - "traefik.http.routers.console.entrypoints=web"
+      - "traefik.http.routers.console.middlewares=basicauth"
     volumes:
       - "$PWD/config/console/:/app/config"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
@@ -123,6 +128,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.pgadmin.rule=Host(`pgadmin.console.$DOMAIN`)"
       - "traefik.http.routers.pgadmin.entrypoints=web"
+      - "traefik.http.routers.pgadmin.middlewares=basicauth"
     volumes:
       - ".data/pgadmin:/var/lib/pgadmin:rw"
 
@@ -157,6 +163,7 @@ services:
       - "traefik.http.routers.minio.entrypoints=web"
       - "traefik.http.routers.minio.rule=Host(`minio.console.$DOMAIN`)"
       - "traefik.http.routers.minio.service=minio"
+      - "traefik.http.routers.minio.middlewares=basicauth"
       - "traefik.http.services.minio.loadbalancer.server.port=9001"
 
       - "traefik.http.routers.s3.entrypoints=web"

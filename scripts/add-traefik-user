@@ -10,4 +10,4 @@ echo
 # Generate hashed credentials using htpasswd (bcrypt)
 HASHED_CREDENTIAL=$(htpasswd -nbB "$USERNAME" "$PASSWORD")
 
-echo $HASHED_CREDENTIAL >> config/traefik/userslist
+echo $HASHED_CREDENTIAL >> config/traefik/usersfile
