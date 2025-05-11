@@ -29,7 +29,7 @@ services:
     restart: "unless-stopped"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "$PWD/config/traefik/usersfile:/etc/traefik/usersfile"
+      - "$PWD/config/traefik:/etc/traefik"
 
   api:
     container_name: "api"
