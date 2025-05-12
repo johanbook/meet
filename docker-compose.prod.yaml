@@ -108,6 +108,7 @@ services:
     container_name: watchtower
     environment:
       WUD_TRIGGER_DOCKER_DOCKER_PRUNE: true
+      WUD_WATCHER_LOCAL_WATCHBYDEFAULT: false
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.watchtower.rule=Host(`watchtower.console.$DOMAIN`)"
