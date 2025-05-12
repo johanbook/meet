@@ -1,7 +1,9 @@
 import { EventBus } from "@nestjs/cqrs";
 
+import { vi } from "..";
+
 class EventBusMock {
-  publish = jest.fn();
+  publish = vi.fn();
 }
 
 export function createEventBusMock(): EventBus {

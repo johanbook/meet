@@ -1,4 +1,4 @@
-import { parse, Options as CsvParserOptions } from "csv-parse/sync";
+import { Options as CsvParserOptions, parse } from "csv-parse/sync";
 import { readFileSync } from "node:fs";
 
 export function parseCsv<T = unknown>(

@@ -1,5 +1,7 @@
-import { Test, TestingModule } from "@nestjs/testing";
 import { QueryBus } from "@nestjs/cqrs";
+import { Test, TestingModule } from "@nestjs/testing";
+
+import { beforeEach, describe, expect, it, vi } from "src/test";
 
 import { GetProfileQuery } from "../../application/contracts/queries/get-profile.query";
 import { ProfileController } from "./profile.controller";
@@ -9,7 +11,7 @@ describe(ProfileController.name, () => {
 
   let queryBus: QueryBus;
   beforeEach(async () => {
-    const mockQueryBus = { execute: jest.fn().mockResolvedValue({ id: "1" }) };
+    const mockQueryBus = { execute: vi.fn().mockResolvedValue({ id: "1" }) };
 
     const app: TestingModule = await Test.createTestingModule({
       controllers: [ProfileController],

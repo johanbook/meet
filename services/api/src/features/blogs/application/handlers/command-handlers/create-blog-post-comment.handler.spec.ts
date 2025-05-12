@@ -3,6 +3,7 @@ import { Repository } from "typeorm";
 
 import { map } from "src/core/mapper";
 import { createCurrentOrganizationServiceMock } from "src/core/organizations/test";
+import { beforeEach, describe, expect, it, vi } from "src/test";
 import { createEventBusMock, createMockRepository } from "src/test/mocks";
 
 import { BlogPostService } from "../../../domain/services/blog-post.service";
@@ -23,7 +24,7 @@ describe(CreateBlogPostCommentHandler.name, () => {
     const currentOrganizationService = createCurrentOrganizationServiceMock();
 
     const currentProfileService = {
-      fetchCurrentProfileId: jest.fn(() => "my-profile-id"),
+      fetchCurrentProfileId: vi.fn(() => "my-profile-id"),
     } as any;
 
     blogPostService = new BlogPostService(blogPosts, eventBus);

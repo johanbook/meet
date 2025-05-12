@@ -1,5 +1,6 @@
 import { UserIdService } from "src/core/authentication";
 
+import { vi } from "..";
 import { DEFAULT_MOCK_USERID } from "./constants";
 
 /* eslint-disable unicorn/consistent-function-scoping */
@@ -13,7 +14,7 @@ class UserIdServiceMock {
     }
   }
 
-  getUserId = jest.fn(() => this.userId);
+  getUserId = vi.fn(() => this.userId);
 }
 
 export function createUserIdServiceMock(userId?: number): UserIdService {

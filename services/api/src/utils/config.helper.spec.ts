@@ -1,9 +1,11 @@
+import { ConfigurationError } from "src/core/error-handling";
+import { describe, expect, it } from "src/test";
+
 import {
+  getRequiredBooleanConfig,
   getRequiredIntConfig,
   getRequiredStringConfig,
-  getRequiredBooleanConfig,
 } from "./config.helper";
-import { ConfigurationError } from "src/core/error-handling";
 
 const TEST_KEY = "my-test-key";
 

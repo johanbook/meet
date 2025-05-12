@@ -1,6 +1,8 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 
+import { beforeEach, describe, expect, it } from "src/test";
+
 import { PhotoService } from "./photo.service";
 
 /* eslint-disable unicorn/prefer-module */

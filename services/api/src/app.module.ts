@@ -23,7 +23,7 @@ import { SettingsModule } from "src/features/settings/settings.module";
 
 @Module({
   imports: [
-    // Core module
+    // Core modules
     AuthenticationModule,
     ClassificationsModule,
     ErrorHandlingModule,

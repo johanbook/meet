@@ -2,6 +2,7 @@ import { Repository } from "typeorm";
 
 import { map } from "src/core/mapper";
 import { BlogPostComment } from "src/features/blogs/infrastructure/entities/blog-post-comment.entity";
+import { beforeEach, describe, expect, it, vi } from "src/test";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 
 import { DeleteBlogPostCommentCommand } from "../../contracts/commands/delete-blog-post-comment.command";
@@ -18,7 +19,7 @@ describe(DeleteBlogPostCommentHandler.name, () => {
     blogPostComments = createMockRepository<BlogPostComment>();
 
     commandHandler = new DeleteBlogPostCommentHandler(
-      { authorizeOwnerOrAdmin: jest.fn() } as any,
+      { authorizeOwnerOrAdmin: vi.fn() } as any,
       blogPostComments,
     );
   });

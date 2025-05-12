@@ -4,6 +4,7 @@ import { Repository } from "typeorm";
 import { UserIdService } from "src/core/authentication";
 import { map } from "src/core/mapper";
 import { Profile } from "src/core/profiles";
+import { beforeEach, describe, expect, it, vi } from "src/test";
 import { createEventBusMock, createMockRepository } from "src/test/mocks";
 
 import { CurrentOrganizationService } from "../../../domain/services/current-organization.service";
@@ -33,11 +34,11 @@ describe(AddMemberToOrganizationViaEmailHandler.name, () => {
 
     currentOrganizationService = createCurrentOrganizationServiceMock();
 
-    userIdService = { fetchUserIdByEmail: jest.fn() } as any;
+    userIdService = { fetchUserIdByEmail: vi.fn() } as any;
 
     organizationService = new OrganizationService(
       eventBus,
-      { checkIfMember: jest.fn(() => false) } as any,
+      { checkIfMember: vi.fn(() => false) } as any,
       organizations,
     );
     commandHandler = new AddMemberToOrganizationViaEmailHandler(
