@@ -106,10 +106,14 @@ services:
     logging: *logging
     image: getwud/wud
     container_name: watchtower
+    environment:
+      WUD_TRIGGER_DOCKER_DOCKER_PRUNE: true
+      WUD_WATCHER_LOCAL_WATCHBYDEFAULT: false
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.watchtower.rule=Host(`watchtower.console.$DOMAIN`)"
       - "traefik.http.routers.watchtower.entrypoints=web"
+      - "traefik.http.routers.watchtower.middlewares=basicauth"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 

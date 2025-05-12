@@ -18,14 +18,18 @@ services:
 
     labels:
       - "traefik.enable=true"
+      - "traefik.http.middlewares.basicauth.basicauth.usersfile=/etc/traefik/usersfile"
+
       - "traefik.http.routers.edge-router.entrypoints=web"
       - "traefik.http.routers.edge-router.rule=Host(`traefik.console.$DOMAIN`)"
+      - "traefik.http.routers.edge-router.middlewares=basicauth"
       - "traefik.http.services.edge-router.loadbalancer.server.port=8080"
     ports:
       - 80:80
     restart: "unless-stopped"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "$PWD/config/traefik:/etc/traefik"
 
   api:
     container_name: "api"
@@ -56,6 +60,9 @@ services:
       - "traefik.http.routers.api.middlewares=auth"
       - "traefik.http.routers.api-healthcheck.rule=Host(`$DOMAIN`)&&PathPrefix(`/api/health`)"
       - "traefik.http.routers.api-healthcheck.entrypoints=web"
+
+      - "wud.watch=true"
+      - "wud.watch.digest=true"
     restart: "unless-stopped"
 
   console:
@@ -68,6 +75,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.console.rule=Host(`console.$DOMAIN`)"
       - "traefik.http.routers.console.entrypoints=web"
+      - "traefik.http.routers.console.middlewares=basicauth"
     volumes:
       - "$PWD/config/console/:/app/config"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
@@ -80,6 +88,9 @@ services:
       - "traefik.http.routers.auth-api.entrypoints=web"
       - "traefik.http.middlewares.auth.forwardauth.address=http://auth-api/authenticate"
       - "traefik.http.middlewares.auth.forwardauth.authResponseHeaders=x-user-id"
+
+      - "wud.watch=true"
+      - "wud.watch.digest=true"
     environment:
       API_URL: "$PROTOCOL://$DOMAIN"
       UI_URL: "$PROTOCOL://$DOMAIN"
@@ -92,6 +103,9 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.auth-ui.rule=Host(`$DOMAIN`)&&PathPrefix(`/login`)"
       - "traefik.http.routers.auth-ui.entrypoints=web"
+
+      - "wud.watch=true"
+      - "wud.watch.digest=true"
     environment:
       API_URL: "$PROTOCOL://$DOMAIN"
       UI_URL: "$PROTOCOL://$DOMAIN"
@@ -104,8 +118,6 @@ services:
     environment:
       POSTGRES_PASSWORD: "$POSTGRES_PASSWORD"
       POSTGRES_USERNAME: "$POSTGRES_USERNAME"
-    labels:
-      - "com.centurylinklabs.watchtower.enable=false"
     ports:
       - "5432:5432"
     volumes:
@@ -123,6 +135,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.pgadmin.rule=Host(`pgadmin.console.$DOMAIN`)"
       - "traefik.http.routers.pgadmin.entrypoints=web"
+      - "traefik.http.routers.pgadmin.middlewares=basicauth"
     volumes:
       - ".data/pgadmin:/var/lib/pgadmin:rw"
 
@@ -139,6 +152,9 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.web-ui.rule=Host(`$DOMAIN`)&&!PathPrefix(`/api`)"
       - "traefik.http.routers.web-ui.entrypoints=web"
+
+      - "wud.watch=true"
+      - "wud.watch.digest=true"
     restart: "unless-stopped"
 
   minio:
@@ -157,6 +173,7 @@ services:
       - "traefik.http.routers.minio.entrypoints=web"
       - "traefik.http.routers.minio.rule=Host(`minio.console.$DOMAIN`)"
       - "traefik.http.routers.minio.service=minio"
+      - "traefik.http.routers.minio.middlewares=basicauth"
       - "traefik.http.services.minio.loadbalancer.server.port=9001"
 
       - "traefik.http.routers.s3.entrypoints=web"
@@ -175,4 +192,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.tracking.rule=Host(`$DOMAIN`)&&(PathPrefix(`/tracking`))"
       - "traefik.http.routers.tracking.entrypoints=web"
+
+      - "wud.watch=true"
+      - "wud.watch.digest=true"
     restart: "unless-stopped"
