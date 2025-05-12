@@ -67,7 +67,7 @@
     "@types/uuid": "10.0.0",
     "@types/web-push": "3.6.4",
     "eslint": "9.26.0",
-    "eslint-config-prettier": "10.1.2",
+    "eslint-config-prettier": "10.1.5",
     "eslint-plugin-prettier": "5.2.6",
     "eslint-plugin-sonarjs": "3.0.2",
     "eslint-plugin-unicorn": "59.0.1",
