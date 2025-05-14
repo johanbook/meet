@@ -1,9 +1,9 @@
 import {
-  CreateDateColumn,
   Column,
+  CreateDateColumn,
   Entity,
-  PrimaryGeneratedColumn,
   ManyToOne,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 
 import { Profile } from "src/core/profiles/infrastructure/entities/profile.entity";
