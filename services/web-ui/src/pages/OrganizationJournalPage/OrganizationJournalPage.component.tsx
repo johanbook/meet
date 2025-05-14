@@ -10,13 +10,13 @@ const columns: Column<JournalEntryDetails>[] = [
   {
     field: "commandName",
     headerName: "Action",
-    valueGetter: ({ value }) => format(value || ""),
+    valueGetter: (value) => format(value || ""),
     width: 400,
   },
   {
     field: "createdAt",
     headerName: "Date",
-    valueGetter: ({ value }) => value.toLocaleString(),
+    valueGetter: (value: string) => value.toLocaleString(),
     width: 400,
   },
   {

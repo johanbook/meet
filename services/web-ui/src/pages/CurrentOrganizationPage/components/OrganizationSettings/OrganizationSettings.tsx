@@ -35,6 +35,10 @@ export function OrganizationSettings({
       organizationsApi.updateCurrentOrganization({ updateOrganizationCommand }),
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: () => organizationsApi.deleteCurrentOrganization(),
+  });
+
   const form = useForm<UpdateOrganizationCommand>({ name: data.name });
 
   if (authorization.error) {
@@ -54,6 +58,20 @@ export function OrganizationSettings({
     const { data } = form.validate();
 
     await mutation.mutateAsync(data, {
+      onError: () => snackbar.error(t("settings.save.error")),
+      onSuccess: () => {
+        snackbar.success(t("settings.save.success"));
+        queryClient.invalidateQueries({
+          queryKey: [CacheKeysConstants.CurrentOrganization],
+        });
+      },
+    });
+  }
+
+  async function handleDelete(event: SyntheticEvent): Promise<void> {
+    event.preventDefault();
+
+    await deleteMutation.mutateAsync(undefined, {
       onError: () => snackbar.error(t("settings.save.error")),
       onSuccess: () => {
         snackbar.success(t("settings.save.success"));
@@ -91,6 +109,19 @@ export function OrganizationSettings({
           {t("settings.save.button")}
         </Button>
       </Box>
+
+      <Typography sx={{ pt: 3, pb: 1 }} variant="h6">
+        {t("settings.delete.header")}
+      </Typography>
+
+      <Button
+        color="error"
+        disabled={deleteMutation.isPending}
+        onClick={handleDelete}
+        variant="contained"
+      >
+        {t("settings.delete.button")}
+      </Button>
     </>
   );
 }

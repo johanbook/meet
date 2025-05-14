@@ -16,7 +16,7 @@ export function UploadIconButton({
   onChange,
 }: UploadIconButtonProps): React.ReactElement {
   async function handleChange(
-    event: ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLInputElement>,
   ): Promise<void> {
     const fileList = event.target.files;
 

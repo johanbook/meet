@@ -45,7 +45,7 @@ export function BlogPostMenu({ id }: BlogPostMenuProps): ReactElement {
             queryKey: [CacheKeysConstants.BlogPosts],
           });
         },
-      }
+      },
     );
   }
 

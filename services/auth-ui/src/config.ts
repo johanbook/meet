@@ -4,7 +4,7 @@ export interface Config {
 }
 
 export async function fetchConfig(): Promise<Config> {
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV !== "production") {
     return {
       API_DOMAIN: process.env.API_URL || `http://localhost`,
       UI_DOMAIN: process.env.UI_URL || `http://localhost`,

@@ -33,7 +33,7 @@ export function OrganizationJournalPageNav({
         </Typography>
 
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid size={{ xs: 6 }}>
             <DatePicker
               fullWidth
               label="From"
@@ -42,7 +42,7 @@ export function OrganizationJournalPageNav({
             />
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid size={{ xs: 6 }}>
             <DatePicker
               fullWidth
               label="To"

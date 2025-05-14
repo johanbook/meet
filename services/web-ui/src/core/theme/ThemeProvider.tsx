@@ -20,7 +20,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     queryFn: () => settingsApi.getCurrentSettings(),
   });
   const theme = createTheme(
-    data?.darkmode ?? Boolean(localStorage.getItem(DARKMODE_CACHE_KEY))
+    data?.darkmode ?? Boolean(localStorage.getItem(DARKMODE_CACHE_KEY)),
   );
 
   useEffect(() => {

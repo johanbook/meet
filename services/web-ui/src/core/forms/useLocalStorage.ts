@@ -10,7 +10,7 @@ type UseLocalStorageResult<T> = [value: T, setValue: (value: T) => void];
 export function useLocalStorage<T>(
   key: string | undefined,
   initialValue: T,
-  options: UseLocalStorageProps<T> = {}
+  options: UseLocalStorageProps<T> = {},
 ): UseLocalStorageResult<T> {
   key = key && `useLocalStorage::${key}`;
 

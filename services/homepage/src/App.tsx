@@ -1,23 +1,17 @@
-import React from "react";
+import { FC } from "react";
 
 import CssBaseline from "@mui/material/CssBaseline";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { SnackbarProvider } from "notistack";
 
-import "./App.css";
 import Router from "./Router";
 import Theme from "./theme/Theme";
 
-const queryClient = new QueryClient();
-
-export default function App(): React.ReactElement {
+const App: FC = () => {
   return (
-    <QueryClientProvider client={queryClient}>
+    <Theme>
       <CssBaseline />
-      <Theme>
-        <Router />
-        <SnackbarProvider dense />
-      </Theme>
-    </QueryClientProvider>
+      <Router />
+    </Theme>
   );
-}
+};
+
+export default App;

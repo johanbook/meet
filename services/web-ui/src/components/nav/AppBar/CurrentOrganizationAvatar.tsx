@@ -66,12 +66,12 @@ function MenuContent({ currentOrganizationId }: MenuContentProps) {
           queryClient.resetQueries();
           snackbar.success(t("actions.activate.success"));
         },
-      }
+      },
     );
   }
 
   const filteredOrganizations = query.data.filter(
-    (organization) => organization.id !== currentOrganizationId
+    (organization) => organization.id !== currentOrganizationId,
   );
 
   return (

@@ -1,11 +1,11 @@
 import { ReactElement, SyntheticEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link as ReactRouterLink, useNavigate } from "react-router";
 
-import { Box } from "@mui/material";
+import { ArrowBack } from "@mui/icons-material";
+import { Box, IconButton } from "@mui/material";
 
 import { CreateOrganizationCommand } from "src/api";
 import { organizationsApi } from "src/apis";
-import { NavLayout } from "src/components/layout";
 import { Nav } from "src/components/nav";
 import { Button, TextField, Typography } from "src/components/ui";
 import { useForm, validators } from "src/core/forms";
@@ -32,7 +32,7 @@ export function CreateOrganizationPageContainer(): ReactElement {
       name: "",
     },
     { name: validators.required() },
-    { localStorageKey: "create-organization" }
+    { localStorageKey: "create-organization" },
   );
 
   function handleCancel(): void {
@@ -61,9 +61,27 @@ export function CreateOrganizationPageContainer(): ReactElement {
     });
   }
 
+  const appBarContent = (
+    <>
+      <IconButton
+        component={ReactRouterLink}
+        sx={{
+          mr: 2,
+        }}
+        to="/profile"
+      >
+        <ArrowBack />
+
+        <Typography color="textPrimary" sx={{ pl: 3 }} variant="h5">
+          {t("header")}
+        </Typography>
+      </IconButton>
+    </>
+  );
+
   return (
-    <Nav>
-      <NavLayout header={t("header")} linkText={t("links.back")} to="/profile">
+    <Nav appBarContent={appBarContent}>
+      <Box sx={{ px: 2, pt: 2 }}>
         <Typography color="textSecondary" sx={{ paddingBottom: 3 }}>
           {t("description")}
         </Typography>
@@ -95,7 +113,7 @@ export function CreateOrganizationPageContainer(): ReactElement {
             </Button>
           </Box>
         </form>
-      </NavLayout>
+      </Box>
     </Nav>
   );
 }

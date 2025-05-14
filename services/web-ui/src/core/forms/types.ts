@@ -18,7 +18,7 @@ export type Validator<T> = (
     form: Form<T>;
     name: keyof T;
     t: TFunction;
-  }
+  },
 ) => ValidationResult;
 
 export type Validators<T> = Record<keyof T, Validator<T>>;

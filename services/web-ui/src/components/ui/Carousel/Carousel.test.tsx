@@ -1,4 +1,4 @@
-import { render, screen } from "src/test";
+import { describe, expect, it, render, screen } from "src/test";
 
 import { Carousel } from ".";
 import { CarouselImage } from "./Carousel";

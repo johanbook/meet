@@ -10,62 +10,19 @@ on:
       - "services/web-ui/**"
 
 jobs:
-  generate-swagger:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./services/web-ui
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Install NodeJS
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
-
-      - name: Install NodeJS dependencies
-        run: npm ci --legacy-peer-deps -D --ignore-scripts
-
-      - name: Download OpenAPI specification
-        uses: dawidd6/action-download-artifact@v3.0.0
-        with:
-          name: openapi-schema
-          path: ./services/web-ui/
-          workflow: api.yaml
-
-      - name: Generate Swagger stubs
-        run: ./scripts/generate-swagger
-
-      - name: Upload Swagger stubs
-        uses: actions/upload-artifact@v3.1.3
-        with:
-          name: openapi-server
-          path: ./services/web-ui/src/api
-          if-no-files-found: error
-
   lint:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./services/web-ui
-    needs: ["generate-swagger"]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Download Swagger stubs
-        uses: actions/download-artifact@v3
-        with:
-          name: openapi-server
-          path: ./services/web-ui/src/api/
+        uses: actions/checkout@v4
 
       - name: Install NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
           cache: "npm"
           cache-dependency-path: "**/package-lock.json"
 
@@ -82,18 +39,12 @@ jobs:
     needs: ["lint"]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Download Swagger stubs
-        uses: actions/download-artifact@v3
-        with:
-          name: openapi-server
-          path: ./services/web-ui/src/api/
+        uses: actions/checkout@v4
 
       - name: Install NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
           cache: "npm"
           cache-dependency-path: "**/package-lock.json"
 
@@ -104,7 +55,7 @@ jobs:
         run: npm run test:ci
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
         with:
           flags: web-ui
 
@@ -120,23 +71,18 @@ jobs:
     needs: ["test"]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Download Swagger stubs
-        uses: actions/download-artifact@v3
-        with:
-          name: openapi-server
-          path: ./services/web-ui/src/api/
 
       - name: Login to ghcr.io
-        uses: docker/login-action@v1
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build . --file Dockerfile --tag $TAG
+        run: docker build . --file Dockerfile --tag $TAG --build-arg VITE_SENTRY_DSN=${{ secrets.WEB_UI_SENTRY_DSN }}
 
       - name: Push Docker image to ghcr.io
         run: docker push $TAG

@@ -10,7 +10,7 @@ class MockRepository<T extends ObjectLiteral> {
   delete = jest.fn((id: string | number) => {
     const index = this.data.findIndex((item) => item.id === id);
 
-    if (index < 0) {
+    if (index === -1) {
       throw new Error("Item not found");
     }
 
@@ -45,7 +45,7 @@ class MockRepository<T extends ObjectLiteral> {
 
     const index = this.data.findIndex((item) => item.id === element.id);
 
-    if (index < 0) {
+    if (index === -1) {
       throw new Error("Item not found");
     }
 

@@ -50,7 +50,7 @@ export function OrganizationListPageContainer(): ReactElement {
   if (!data || data.length === 0) {
     return (
       <OrganizationListPageNav>
-        <ErrorView message={t("organization-list.error") ||""} />
+        <ErrorView message={t("organization-list.error") || ""} />
       </OrganizationListPageNav>
     );
   }
@@ -65,7 +65,7 @@ export function OrganizationListPageContainer(): ReactElement {
           navigate("/");
           snackbar.success(t("actions.activate.success"));
         },
-      }
+      },
     );
   }
 

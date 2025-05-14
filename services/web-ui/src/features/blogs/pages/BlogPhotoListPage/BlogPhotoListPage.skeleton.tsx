@@ -2,14 +2,14 @@ import { ReactElement } from "react";
 
 import { Box, Skeleton } from "@mui/material";
 
-const getNumElement = (num: number) => {
-  const arr: number[] = [];
+const getNumberArray = (length: number): number[] => {
+  const array: number[] = [];
 
-  for (let x = 0; x < num; x++) {
-    arr.push(x);
+  for (let x = 0; x < length; x++) {
+    array.push(x);
   }
 
-  return arr;
+  return array;
 };
 
 export function BlogPhotoListPageSkeleton(): ReactElement {
@@ -22,7 +22,7 @@ export function BlogPhotoListPageSkeleton(): ReactElement {
           <Skeleton />
 
           <Box sx={{ display: "flex", gap: 1, pt: 1 }}>
-            {getNumElement(photo).map((v) => (
+            {getNumberArray(photo).map((v) => (
               <Skeleton
                 key={index + "" + v}
                 sx={{ height: 100, width: 100 }}

@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from "react";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink } from "react-router";
 
 import { ArrowBack } from "@mui/icons-material";
 import { Box, Grid, IconButton, Typography } from "@mui/material";
@@ -50,7 +50,7 @@ export function ProfileJournalPageNav({
         </Typography>
 
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid size={{ xs: 6 }}>
             <DatePicker
               fullWidth
               label="From"
@@ -59,7 +59,7 @@ export function ProfileJournalPageNav({
             />
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid size={{ xs: 6 }}>
             <DatePicker
               fullWidth
               label="To"

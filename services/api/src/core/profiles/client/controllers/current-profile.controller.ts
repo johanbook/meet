@@ -24,7 +24,10 @@ import { GetCurrentProfileQuery } from "../../application/contracts/queries/get-
 @Controller("profile/current")
 @ApiTags("profile")
 export class CurrentProfileController {
-  constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
+  constructor(
+    private commandBus: CommandBus,
+    private queryBus: QueryBus,
+  ) {}
 
   @Get()
   async getCurrentProfile(

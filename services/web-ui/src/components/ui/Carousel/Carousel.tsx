@@ -23,11 +23,11 @@ export function Carousel({ images }: CarouselProps): ReactElement {
   const maxSteps = images.length;
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setActiveStep((previousActiveStep) => previousActiveStep + 1);
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setActiveStep((previousActiveStep) => previousActiveStep - 1);
   };
 
   const handleStepChange = (step: number) => {

@@ -1,8 +1,8 @@
 import { ReactElement, ReactNode } from "react";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink } from "react-router";
 
-import { ArrowBack } from "@mui/icons-material";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Add, ArrowBack } from "@mui/icons-material";
+import { Box, Fab, IconButton, Typography } from "@mui/material";
 
 import { Nav } from "src/components/nav";
 import { useTranslation } from "src/core/i18n";
@@ -36,6 +36,15 @@ export function OrganizationListPageNav({
     <Nav appBarContent={appBarContent}>
       <Box sx={{ pt: 1, px: 3 }}>
         <Typography color="textSecondary">{t("description")}</Typography>
+
+        <Fab
+          component={ReactRouterLink}
+          color="primary"
+          sx={{ position: "absolute", bottom: 70, right: 10 }}
+          to="/group/create"
+        >
+          <Add />
+        </Fab>
 
         {children}
       </Box>

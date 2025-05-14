@@ -1,7 +1,9 @@
 ################################
 # Build assets
 ################################
-FROM node:20.13.0-alpine as builder
+FROM node:24.0.1-alpine as builder
+
+ARG VITE_SENTRY_DSN
 
 WORKDIR /app
 
@@ -13,7 +15,7 @@ RUN npm run build
 ################################
 # Create server
 ################################
-FROM node:20.13.0-alpine
+FROM node:24.0.1-alpine
 
 WORKDIR /app
 

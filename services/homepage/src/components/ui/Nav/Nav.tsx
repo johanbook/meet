@@ -1,11 +1,17 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { ReactNode } from "react";
 
+import BackgroundImage512px from "src/assets/images/background_512px.png";
+import BackgroundImage1024px from "src/assets/images/background_1024px.png";
+import BackgroundImage2048px from "src/assets/images/background_2048px.png";
 import { Box, Container, Toolbar } from "@mui/material";
 
 import { AppBar } from "../AppBar";
 
-export default function Nav(): React.ReactElement {
+export default function Nav({
+  children,
+}: {
+  children: ReactNode;
+}): React.ReactElement {
   return (
     <Box sx={{ height: "100vh", minHeight: "100%" }}>
       <AppBar />
@@ -30,7 +36,30 @@ export default function Nav(): React.ReactElement {
             flexGrow: 1,
           }}
         >
-          <Outlet />
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "100%",
+            }}
+          >
+            <img
+              alt=""
+              srcSet={`${BackgroundImage512px} 512w, ${BackgroundImage1024px} 1024w, ${BackgroundImage2048px} 2048w`}
+              style={{
+                objectFit: "cover",
+                position: "absolute",
+                left: 0,
+                top: 0,
+                zIndex: -5,
+                width: "100%",
+                height: "100%",
+              }}
+            />
+
+            {children}
+          </Box>
         </Container>
 
         <Toolbar />

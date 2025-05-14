@@ -1,4 +1,9 @@
-import { getRequiredIntConfig, getRequiredStringConfig } from "./config.helper";
+import {
+  getRequiredIntConfig,
+  getRequiredStringConfig,
+  getRequiredBooleanConfig,
+} from "./config.helper";
+import { ConfigurationError } from "src/core/error-handling";
 
 const TEST_KEY = "my-test-key";
 
@@ -21,6 +26,28 @@ describe(getRequiredIntConfig.name, () => {
     process.env[TEST_KEY] = "my-string";
 
     expect(() => getRequiredIntConfig(TEST_KEY)).toThrow();
+  });
+});
+
+describe(getRequiredBooleanConfig.name, () => {
+  it("returns default value if missing", () => {
+    delete process.env[TEST_KEY];
+    expect(getRequiredBooleanConfig(TEST_KEY, true)).toBe(true);
+    expect(getRequiredBooleanConfig(TEST_KEY, false)).toBe(false);
+  });
+
+  it("throws if missing and no default", () => {
+    delete process.env[TEST_KEY];
+    expect(() => getRequiredBooleanConfig(TEST_KEY)).toThrow(
+      ConfigurationError,
+    );
+  });
+
+  it("throws if env var present", () => {
+    process.env[TEST_KEY] = "true";
+    expect(() => getRequiredBooleanConfig(TEST_KEY)).toThrow(
+      ConfigurationError,
+    );
   });
 });
 

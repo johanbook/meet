@@ -1,3 +1,5 @@
+import { describe, expect, it } from "src/test";
+
 import * as string from "./string";
 
 describe("removePrefix", () => {

@@ -1,5 +1,5 @@
 import { FC, ReactElement, SyntheticEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import {
   Book,
@@ -83,7 +83,7 @@ export function CurrentProfileDetails({
             queryKey: [CacheKeysConstants.CurrentProfile],
           });
         },
-      }
+      },
     );
   }
 

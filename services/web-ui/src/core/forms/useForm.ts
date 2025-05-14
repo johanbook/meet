@@ -11,7 +11,7 @@ interface UseFormProps {
 export function useForm<T>(
   initialValue: T,
   validators?: Validators<T>,
-  options?: UseFormProps
+  options?: UseFormProps,
 ) {
   const [form, setForm] = useLocalStorage<Form<T>>(
     options?.localStorageKey,
@@ -19,14 +19,14 @@ export function useForm<T>(
     {
       deserializer: (value) => toForm<T>(JSON.parse(value)),
       serializer: (value) => JSON.stringify(getValue(value)),
-    }
+    },
   );
 
   const { t } = useTranslation("core");
 
   function checkIfValid() {
     return Object.values<FormValue<T[keyof T]>>(form).every(
-      (value) => !value.error
+      (value) => !value.error,
     );
   }
 

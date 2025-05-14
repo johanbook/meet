@@ -27,13 +27,13 @@ export function BlogPostLikeButton({
   const [scope, animate] = useAnimate();
   const createMutation = useMutation({
     mutationFn: (
-      createBlogPostReactionCommand: CreateBlogPostReactionCommand
+      createBlogPostReactionCommand: CreateBlogPostReactionCommand,
     ) => blogsApi.createBlogPostReaction({ createBlogPostReactionCommand }),
   });
 
   const deleteMutation = useMutation({
     mutationFn: (
-      deleteBlogPostReactionCommand: DeleteBlogPostReactionRequest
+      deleteBlogPostReactionCommand: DeleteBlogPostReactionRequest,
     ) => blogsApi.deleteBlogPostReaction(deleteBlogPostReactionCommand),
   });
 
@@ -49,7 +49,7 @@ export function BlogPostLikeButton({
               queryKey: [CacheKeysConstants.BlogPosts],
             });
           },
-        }
+        },
       );
       return;
     }
@@ -64,7 +64,7 @@ export function BlogPostLikeButton({
             queryKey: [CacheKeysConstants.BlogPosts],
           });
         },
-      }
+      },
     );
   }
 

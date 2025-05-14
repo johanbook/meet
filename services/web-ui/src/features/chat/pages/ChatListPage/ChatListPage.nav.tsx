@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import { Edit } from "@mui/icons-material";
 import { Box, Fab, Typography } from "@mui/material";

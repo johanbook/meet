@@ -1,5 +1,5 @@
 import { ReactElement, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import { ModeCommentOutlined } from "@mui/icons-material";
 import {
@@ -105,7 +105,7 @@ export function BlogPost({
           <Button onClick={() => setShowComments(!showComments)}>
             {t(
               showComments ? "actions.hide-comments" : "actions.view-comments",
-              { count: post.comments.length }
+              { count: post.comments.length },
             )}
           </Button>
         </Box>

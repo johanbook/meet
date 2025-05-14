@@ -10,7 +10,10 @@ import { GetOrganizationListQuery } from "../../application/contracts/queries/ge
 @Controller("organizations")
 @ApiTags("organizations")
 export class OrganizationsController {
-  constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
+  constructor(
+    private commandBus: CommandBus,
+    private queryBus: QueryBus,
+  ) {}
 
   @Get()
   async getOrganizations(

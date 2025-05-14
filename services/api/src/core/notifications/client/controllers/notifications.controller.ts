@@ -21,7 +21,10 @@ import { GetNotificationListQuery } from "../../application/contracts/queries/ge
 @Controller("notifications")
 @ApiTags("notifications")
 export class NotificationsController {
-  constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
+  constructor(
+    private commandBus: CommandBus,
+    private queryBus: QueryBus,
+  ) {}
 
   @Get()
   async getNotifactions(

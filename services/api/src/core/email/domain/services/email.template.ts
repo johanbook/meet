@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import path from "node:path";
 
 /* eslint-disable unicorn/prefer-module */
 
@@ -15,7 +15,7 @@ export function createEmail({
   url,
 }: CreateEmailProps): string {
   const template = readFileSync(
-    join(__dirname, "./email.template.html"),
+    path.join(__dirname, "./email.template.html"),
   ).toString();
 
   return template

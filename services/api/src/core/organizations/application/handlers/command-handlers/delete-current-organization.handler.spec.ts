@@ -12,6 +12,7 @@ describe(DeleteCurrentOrganizationHandler.name, () => {
 
     commandHandler = new DeleteCurrentOrganizationHandler(
       testSuite.currentOrganizationService,
+      testSuite.currentProfileService,
       testSuite.organizationService,
     );
   });

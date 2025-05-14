@@ -3,7 +3,7 @@ import {
   LinkProps,
   Link as ReactRouterLink,
   useSearchParams,
-} from "react-router-dom";
+} from "react-router";
 
 import { Link as MuiLink } from "@mui/material";
 

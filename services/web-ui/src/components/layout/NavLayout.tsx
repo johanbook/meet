@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from "react";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink } from "react-router";
 
 import { ArrowBackIosNew } from "@mui/icons-material";
 import { Box, Link as MuiLink, Typography } from "@mui/material";

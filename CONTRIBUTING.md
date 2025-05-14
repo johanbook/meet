@@ -19,6 +19,9 @@ cp .env.example .env
 # Generate VAPI keys needed for web push notifications
 cd services/api
 ./scripts/generate-vapi-keys >> <YOUR-ENV>
+
+# Generate user that can access the admin portal
+./scripts/add-traefik-user
 ```
 
 ### Development
@@ -81,23 +84,9 @@ for how it should be used.
 
 ## Release procedure
 
-This project uses [semver](https://semver.org/), handled by the NPM package
-[standard-version](https://www.npmjs.com/package/standard-version). For creating
-a new release, run the following commands:
-
-```sh
-npm run release
-git checkout -b vX.Y.Z
-```
-
-Commit and push the files `package.json`, `package-lock.json` and `CHANGELOG.md`
-and merge it to `main`. Then pull this changes in and run the following on the
-main branch:
-
-```sh
-git tag vX.Y.Z
-git push origin vX.Y.Z
-```
+This project uses [semver](https://semver.org/) together with handled by the NPM
+package [release-please](https://github.com/googleapis/release-please) for
+handling versioning and releases.
 
 ## Style guide
 

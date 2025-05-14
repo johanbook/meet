@@ -8,7 +8,7 @@ import { Organization } from "./organization.entity";
 @Entity()
 export class ActiveOrganization extends BaseEntity {
   @ManyToOne(() => Organization, { onDelete: "SET NULL" })
-  organization!: Organization;
+  organization?: Organization;
 
   @Column()
   organizationId!: number;

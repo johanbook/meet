@@ -6,7 +6,6 @@ import { animated } from "@react-spring/web";
 import { useQueue } from "src/hooks/useQueue";
 import { useSwipe } from "src/hooks/useSwipe";
 
-/* eslint-disable-next-line @typescript-eslint/no-empty-function */
 const NOOP = () => {};
 
 export interface SwipeableListItemProps<T> {

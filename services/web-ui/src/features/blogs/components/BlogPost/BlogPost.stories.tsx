@@ -52,7 +52,7 @@ const BLOG_POST: BlogPostDetails = {
   reactions: {
     count: 0,
     currentProfileReactionId: undefined,
-    names: []
+    names: [],
   },
 };
 

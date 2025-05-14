@@ -9,7 +9,10 @@ import { GetSettingsQuery } from "../../application/contracts/queries/get-settin
 @Controller("settings")
 @ApiTags("settings")
 export class SettingsController {
-  constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
+  constructor(
+    private commandBus: CommandBus,
+    private queryBus: QueryBus,
+  ) {}
 
   @Get()
   async getCurrentSettings(

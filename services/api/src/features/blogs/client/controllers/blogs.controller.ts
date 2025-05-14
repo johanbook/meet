@@ -24,7 +24,10 @@ import { GetBlogPostQuery } from "../../application/contracts/queries/get-blog-p
 @Controller("blogs")
 @ApiTags("blogs")
 export class BlogsController {
-  constructor(private commandBus: CommandBus, private queryBus: QueryBus) {}
+  constructor(
+    private commandBus: CommandBus,
+    private queryBus: QueryBus,
+  ) {}
 
   @Get()
   async getBlogPosts(

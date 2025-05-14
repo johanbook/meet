@@ -19,7 +19,7 @@ export function NotificationProvider({
 
   const notificationHandler = useState(() => {
     return new NotificationEventHandler(({ message }) =>
-      snackbar.info(message)
+      snackbar.info(message),
     );
   })[0];
 

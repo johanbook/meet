@@ -30,7 +30,7 @@ export function CurrentProfileAvatar({
   const snackbar = useSnackbar();
 
   async function handleUpload(
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ): Promise<void> {
     event.preventDefault();
 

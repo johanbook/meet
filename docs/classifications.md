@@ -1,8 +1,13 @@
 # Classifications
 
-The software system includes a builtin system for handling classifications which
-support for internationalization. Classifications are seeded into the system on
-startup. See examples in the code for how this is performed.
+**Classifications** are predefined options shown in UI elements such as
+dropdowns. For example, they may be used to classify a user’s gender (e.g., male
+or female).
+
+The software system includes a built-in framework for handling classifications,
+with full support for internationalization. These classifications are seeded
+into the system during startup. Refer to the code examples for how to perform
+this operation.
 
 ## Properties
 

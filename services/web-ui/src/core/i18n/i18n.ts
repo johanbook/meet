@@ -13,7 +13,7 @@ export function registerI18n() {
     .use(initReactI18next)
     .init({
       fallbackLng: "en",
-      debug: true,
+      debug: process.env.NODE_ENV === "development",
       interpolation: {
         // Not needed for react as it escapes by default
         escapeValue: false,

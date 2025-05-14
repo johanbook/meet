@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable sonarjs/no-identical-functions */
-
 type LogLevel = "debug" | "error" | "fatal" | "info" | "trace" | "warn";
 
 interface LogProps {
@@ -94,5 +91,9 @@ export function registerExceptionLogger(): void {
   window.addEventListener("error", (event) => {
     const error = event.error;
     logger.error(event.message, { stackTrace: error.stack });
+  });
+
+  window.addEventListener("unhandledrejection", (event) => {
+    logger.error("There was an unhandled rejection", { reason: event.reason });
   });
 }

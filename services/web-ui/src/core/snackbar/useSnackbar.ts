@@ -2,7 +2,6 @@ import { Grow } from "@mui/material";
 import { VariantType, enqueueSnackbar } from "notistack";
 
 import { Logger } from "src/core/logging";
-
 import { useIsMobile } from "src/hooks/useIsMobile";
 
 const logger = new Logger("Snackbar");

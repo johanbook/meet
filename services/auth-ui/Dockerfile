@@ -1,7 +1,7 @@
 ################################
 # Build assets
 ################################
-FROM node:20.13.0-alpine as builder
+FROM node:24.0.1-alpine as builder
 
 WORKDIR /app
 
@@ -13,13 +13,13 @@ RUN npm run build
 ################################
 # Create server
 ################################
-FROM node:20.13.0-alpine
+FROM node:24.0.1-alpine
 
 WORKDIR /app
 
 ENV PORT=80
 
-COPY --from=builder /app/build ./build
+COPY --from=builder /app/dist ./dist
 COPY scripts/ ./scripts
 COPY server.js .
 
