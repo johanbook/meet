@@ -25,7 +25,7 @@
     "@nestjs/cqrs": "11.0.3",
     "@nestjs/platform-express": "11.0.20",
     "@nestjs/platform-fastify": "11.1.0",
-    "@nestjs/swagger": "11.1.4",
+    "@nestjs/swagger": "11.2.0",
     "reflect-metadata": "0.2.2",
     "rxjs": "7.8.2",
     "supertokens-node": "22.1.0"
