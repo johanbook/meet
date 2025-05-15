@@ -6,7 +6,7 @@ FROM node:24.0.1-alpine as builder
 WORKDIR /app
 
 COPY . .
-RUN npm ci -D --legacy-peer-deps
+RUN npm ci -D
 RUN npm run build
 
 
@@ -23,7 +23,7 @@ ENV NODE_ENV=production
 COPY package.json package-lock.json ./
 COPY scripts/ ./scripts
 COPY --from=builder /app/dist ./dist
-RUN npm ci --legacy-peer-deps
+RUN npm ci
 
 USER node
 
