@@ -15,8 +15,8 @@ only for system operators and developers.
 
 To access the console for a given environment, navigate to `console.DOMAIN`
 where `DOMAIN` is the URL where the environment is deployed. Note that
-credentials are required to access the console which are configured during the
-initial system setup.
+credentials are required to access the console which are configured by running
+`./scripts/add-traefik-user`.
 
 By default, the console contains:
 

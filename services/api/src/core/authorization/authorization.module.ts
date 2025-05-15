@@ -1,4 +1,4 @@
-import { forwardRef, Module } from "@nestjs/common";
+import { Module, forwardRef } from "@nestjs/common";
 
 import { OrganizationModule } from "src/core/organizations/organization.module";
 import { ProfileModule } from "src/core/profiles/profile.module";

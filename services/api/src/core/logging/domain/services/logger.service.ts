@@ -1,5 +1,5 @@
-import { LoggerService } from "@nestjs/common";
 import * as pino from "pino";
+import { LoggerService } from "@nestjs/common";
 
 import { REQUEST_CONTEXT_ALS } from "src/core/request-context";
 
