@@ -1,8 +1,8 @@
 import {
+  DynamicModule,
   MiddlewareConsumer,
   Module,
   NestModule,
-  DynamicModule,
 } from "@nestjs/common";
 
 import {

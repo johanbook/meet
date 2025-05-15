@@ -1,5 +1,6 @@
 module.exports = {
-  importOrder: ["^(?!src|\\.)", "^src", "^\\."],
+  importOrder: ["^(?!src|\\.)", "^src", "^\\.", "test"],
+  importOrderParserPlugins: ["typescript", "decorators-legacy"],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
   importOrderGroupNamespaceSpecifiers: true,
