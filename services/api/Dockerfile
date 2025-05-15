@@ -1,19 +1,19 @@
 ################################
 # Build assets
 ################################
-FROM node:23.11.0-alpine as builder
+FROM node:24.0.1-alpine as builder
 
 WORKDIR /app
 
 COPY . .
-RUN npm ci -D --legacy-peer-deps
+RUN npm ci -D
 RUN npm run build
 
 
 ################################
 # Create server
 ################################
-FROM node:23.11.0-alpine
+FROM node:24.0.1-alpine
 
 WORKDIR /app
 
@@ -23,7 +23,7 @@ ENV NODE_ENV=production
 COPY package.json package-lock.json ./
 COPY scripts/ ./scripts
 COPY --from=builder /app/dist ./dist
-RUN npm ci --legacy-peer-deps
+RUN npm ci
 
 USER node
 
