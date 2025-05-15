@@ -9,8 +9,8 @@ import { SwaggerModule } from "@nestjs/swagger";
 
 import {
   Logger,
-  createPinoLoggerOptions,
   LoggingInterceptor,
+  createPinoLoggerOptions,
 } from "src/core/logging";
 import { createOpenApiDocument } from "src/core/openapi";
 

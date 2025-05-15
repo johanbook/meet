@@ -1,4 +1,4 @@
-import { registerDecorator, ValidationOptions } from "class-validator";
+import { ValidationOptions, registerDecorator } from "class-validator";
 
 export function DateNotInTheFuture(validationOptions?: ValidationOptions) {
   const targetDate = new Date();
