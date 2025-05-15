@@ -5,7 +5,7 @@ import {
   NestModule,
   UnauthorizedException,
 } from "@nestjs/common";
-import { FastifyRequest, FastifyReply } from "fastify";
+import { FastifyReply, FastifyRequest } from "fastify";
 import { AsyncLocalStorage } from "node:async_hooks";
 
 import { Logger } from "src/core/logging";
