@@ -1,6 +1,6 @@
 import {
-  CreateDateColumn,
   Column,
+  CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   Unique,
