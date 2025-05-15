@@ -34,8 +34,8 @@ describe(UpdateBlogPostHandler.name, () => {
     });
 
     it("should save changes to blog post", async () => {
-      const initalPost = new BlogPost();
-      const { id } = await blogPosts.save(initalPost);
+      const initialPost = new BlogPost();
+      const { id } = await blogPosts.save(initialPost);
 
       const command = map(UpdateBlogPostCommand, {
         content: newContent,
