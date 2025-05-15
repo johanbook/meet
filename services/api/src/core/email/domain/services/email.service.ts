@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { createTransport, Transporter } from "nodemailer";
+import { Transporter, createTransport } from "nodemailer";
 
 import { Logger } from "src/core/logging";
 

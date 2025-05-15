@@ -1,4 +1,4 @@
-import { createParamDecorator, ExecutionContext } from "@nestjs/common";
+import { ExecutionContext, createParamDecorator } from "@nestjs/common";
 import { FastifyReply } from "fastify";
 import { Error as STError } from "supertokens-node";
 import { VerifySessionOptions } from "supertokens-node/recipe/session";

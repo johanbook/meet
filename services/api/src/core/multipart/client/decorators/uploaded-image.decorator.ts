@@ -1,7 +1,7 @@
 import {
   BadRequestException,
-  createParamDecorator,
   ExecutionContext,
+  createParamDecorator,
 } from "@nestjs/common";
 
 export const UploadedImage = createParamDecorator(

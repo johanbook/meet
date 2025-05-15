@@ -1,5 +1,5 @@
-import { Test, TestingModule } from "@nestjs/testing";
 import { QueryBus } from "@nestjs/cqrs";
+import { Test, TestingModule } from "@nestjs/testing";
 
 import { GetProfileQuery } from "../../application/contracts/queries/get-profile.query";
 import { ProfileController } from "./profile.controller";

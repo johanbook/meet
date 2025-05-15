@@ -1,4 +1,4 @@
-import { IsArray, ArrayMinSize } from "class-validator";
+import { ArrayMinSize, IsArray } from "class-validator";
 
 import { UniqueArrayElements } from "src/core/validation/custom-validators/array-elements-are-unique.validator";
 
