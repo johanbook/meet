@@ -13,7 +13,7 @@ class MockRepository<T extends ObjectLiteral> {
     const index = this.data.findIndex((item) => item.id === id);
 
     if (index === -1) {
-      throw new Error("Item not found");
+      throw new Error(`Cannot find item with id '${id}' to delete`);
     }
 
     this.data.splice(index, 1);
@@ -36,7 +36,7 @@ class MockRepository<T extends ObjectLiteral> {
   });
 
   save = vi.fn((element: T) => {
-    if (!("id" in element)) {
+    if (!element.id) {
       const item = { id: this.currentId, ...element };
 
       this.currentId++;
@@ -48,7 +48,7 @@ class MockRepository<T extends ObjectLiteral> {
     const index = this.data.findIndex((item) => item.id === element.id);
 
     if (index === -1) {
-      throw new Error("Item not found");
+      throw new Error(`Cannot find item with id '${element.id}' to update`);
     }
 
     this.data[index] = { ...this.data[index], ...element };
