@@ -37,7 +37,7 @@ class MockRepository<T extends ObjectLiteral> {
 
   save = vi.fn((element: T) => {
     if (!element.id) {
-      const item = {  ...element, id: this.currentId };
+      const item = { ...element, id: this.currentId };
 
       this.currentId++;
       this.data.push(item);
