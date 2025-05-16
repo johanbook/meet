@@ -48,7 +48,7 @@
     "reflect-metadata": "0.2.2",
     "rxjs": "7.8.2",
     "ts-node": "10.9.2",
-    "typeorm": "0.3.23",
+    "typeorm": "0.3.24",
     "typeorm-extension": "3.7.1",
     "typescript": "5.8.3",
     "uuid": "11.1.0",
