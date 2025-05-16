@@ -2,7 +2,10 @@ name: auth-ui
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - "main"
+    paths:
+      - "services/auth-ui/**"
   pull_request:
     branches:
       - "main"
