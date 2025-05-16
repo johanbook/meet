@@ -2,7 +2,10 @@ name: tracking
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - "main"
+    paths:
+      - "services/tracking/**"
   pull_request:
     branches:
       - "main"

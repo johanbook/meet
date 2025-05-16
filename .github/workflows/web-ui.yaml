@@ -2,7 +2,10 @@ name: web-ui
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - "main"
+    paths:
+      - "services/web-ui/**"
   pull_request:
     branches:
       - "main"
