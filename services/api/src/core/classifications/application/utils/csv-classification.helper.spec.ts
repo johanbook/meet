@@ -1,3 +1,5 @@
+import { describe, expect, it } from "src/test";
+
 import { getCategoryAndLocaleFromPath } from "./csv-classification.helper";
 
 describe(getCategoryAndLocaleFromPath.name, () => {

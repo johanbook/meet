@@ -1,4 +1,5 @@
 import { ConfigurationError } from "src/core/error-handling";
+import { describe, expect, it } from "src/test";
 
 import {
   getRequiredBooleanConfig,

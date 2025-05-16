@@ -1,11 +1,13 @@
+import { vi } from "src/test";
+
 import { CurrentOrganizationService } from "../../domain/services/current-organization.service";
 
 /* eslint-disable unicorn/consistent-function-scoping */
 
 class CurrentOrganizationMock {
-  fetchCurrentOrganization = jest.fn(() => ({ personal: false }));
+  fetchCurrentOrganization = vi.fn(() => ({ personal: false }));
 
-  fetchCurrentOrganizationId = jest.fn();
+  fetchCurrentOrganizationId = vi.fn();
 }
 
 export function createCurrentOrganizationServiceMock(): CurrentOrganizationService {

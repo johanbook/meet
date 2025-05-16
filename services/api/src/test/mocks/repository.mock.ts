@@ -1,5 +1,7 @@
 import { ObjectLiteral, Repository } from "typeorm";
 
+import { vi } from "..";
+
 /* eslint-disable unicorn/consistent-function-scoping */
 
 class MockRepository<T extends ObjectLiteral> {
@@ -7,11 +9,11 @@ class MockRepository<T extends ObjectLiteral> {
 
   constructor(private data: T[] = []) {}
 
-  delete = jest.fn((id: string | number) => {
+  delete = vi.fn((id: string | number) => {
     const index = this.data.findIndex((item) => item.id === id);
 
     if (index === -1) {
-      throw new Error("Item not found");
+      throw new Error(`Cannot find item with id '${id}' to delete`);
     }
 
     this.data.splice(index, 1);
@@ -19,23 +21,23 @@ class MockRepository<T extends ObjectLiteral> {
     return { affected: 1 };
   });
 
-  exist = jest.fn((element: T) =>
+  exist = vi.fn((element: T) =>
     this.data.find((item) => item.id === element.where.id),
   );
 
-  find = jest.fn(() => this.data);
+  find = vi.fn(() => this.data);
 
-  findAll = jest.fn(() => this.data);
+  findAll = vi.fn(() => this.data);
 
-  findOne = jest.fn(() => this.data[0]);
+  findOne = vi.fn(() => this.data[0]);
 
-  remove = jest.fn((element: T) => {
+  remove = vi.fn((element: T) => {
     this.delete(element.id);
   });
 
-  save = jest.fn((element: T) => {
-    if (!("id" in element)) {
-      const item = { id: this.currentId, ...element };
+  save = vi.fn((element: T) => {
+    if (!element.id) {
+      const item = { ...element, id: this.currentId };
 
       this.currentId++;
       this.data.push(item);
@@ -46,7 +48,7 @@ class MockRepository<T extends ObjectLiteral> {
     const index = this.data.findIndex((item) => item.id === element.id);
 
     if (index === -1) {
-      throw new Error("Item not found");
+      throw new Error(`Cannot find item with id '${element.id}' to update`);
     }
 
     this.data[index] = { ...this.data[index], ...element };

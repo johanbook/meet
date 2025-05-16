@@ -2,6 +2,7 @@ import { EventBus } from "@nestjs/cqrs";
 import { Repository } from "typeorm";
 
 import { Profile } from "src/core/profiles";
+import { beforeEach, describe, expect, it } from "src/test";
 import { createEventBusMock, createMockRepository } from "src/test/mocks";
 
 import { OrganizationService } from "../../../domain/services/organization.service";

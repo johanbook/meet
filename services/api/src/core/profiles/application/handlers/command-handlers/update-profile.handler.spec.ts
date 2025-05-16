@@ -3,6 +3,7 @@ import { Repository } from "typeorm";
 import { UserIdService } from "src/core/authentication";
 import { map } from "src/core/mapper";
 import { ProfileService } from "src/core/profiles/domain/services/profile.service";
+import { Mock, beforeEach, describe, expect, it, vi } from "src/test";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
 
@@ -22,7 +23,7 @@ describe(UpdateProfileHandler.name, () => {
 
     profileService = new ProfileService(
       // TODO: Use proper EventBus mock
-      { publish: jest.fn() } as any,
+      { publish: vi.fn() } as any,
       profiles,
     );
     commandHandler = new UpdateProfileHandler(
@@ -57,7 +58,7 @@ describe(UpdateProfileHandler.name, () => {
         userId: "my-user-id",
       };
 
-      const findOneFn = profiles.findOne as unknown as jest.Mock;
+      const findOneFn = profiles.findOne as unknown as Mock;
       findOneFn.mockImplementation(() => profile);
 
       const command = map(UpdateProfileCommand, {

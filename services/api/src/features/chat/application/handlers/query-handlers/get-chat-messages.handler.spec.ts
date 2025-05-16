@@ -3,6 +3,7 @@ import { Repository } from "typeorm";
 import { map } from "src/core/mapper";
 import { createCurrentOrganizationServiceMock } from "src/core/organizations/test";
 import { Profile } from "src/core/profiles";
+import { beforeEach, describe, expect, it, vi } from "src/test";
 import { createMockRepository } from "src/test/mocks";
 
 import { ChatConversation } from "../../../infrastructure/entities/chat-conversation.entity";
@@ -33,10 +34,10 @@ describe(GetChatMessagesHandler.name, () => {
     const currentOrganizationService = createCurrentOrganizationServiceMock();
 
     const currentProfileService = {
-      fetchCurrentProfileId: jest.fn(() => sendingProfile.id),
+      fetchCurrentProfileId: vi.fn(() => sendingProfile.id),
     } as any;
 
-    const photoService = { getUrl: jest.fn() } as any;
+    const photoService = { getUrl: vi.fn() } as any;
 
     queryHandler = new GetChatMessagesHandler(
       chatMessages,

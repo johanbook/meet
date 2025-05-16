@@ -2,6 +2,7 @@ import { Repository } from "typeorm";
 
 import { map } from "src/core/mapper";
 import { BlogPostReaction } from "src/features/blogs/infrastructure/entities/blog-post-reaction.entity";
+import { beforeEach, describe, expect, it, vi } from "src/test";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 
 import { DeleteBlogPostReactionCommand } from "../../contracts/commands/delete-blog-post-reaction.command";
@@ -15,7 +16,7 @@ describe(DeleteBlogPostReactionHandler.name, () => {
     blogPostReactions = createMockRepository<BlogPostReaction>();
 
     commandHandler = new DeleteBlogPostReactionHandler(
-      { authorizeOwnerOrAdmin: jest.fn() } as any,
+      { authorizeOwnerOrAdmin: vi.fn() } as any,
       blogPostReactions,
     );
   });

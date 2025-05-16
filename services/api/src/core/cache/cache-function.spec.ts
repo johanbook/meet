@@ -1,8 +1,10 @@
+import { describe, expect, it, vi } from "src/test";
+
 import { cacheFn } from "./cache-function";
 
 describe(cacheFn.name, () => {
   it("caches same value ", async () => {
-    const fn = jest.fn(async (value: number) => value);
+    const fn = vi.fn(async (value: number) => value);
 
     const cachedFn = cacheFn(fn, { ttlMs: 10_000 });
 
@@ -13,7 +15,7 @@ describe(cacheFn.name, () => {
   });
 
   it("updates value", async () => {
-    const fn = jest.fn(async (value: number) => value);
+    const fn = vi.fn(async (value: number) => value);
 
     const cachedFn = cacheFn(fn, { ttlMs: 10_000 });
 
