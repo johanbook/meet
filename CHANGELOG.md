@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+## [2.3.1](https://github.com/johanbook/meet/compare/v2.3.0...v2.3.1) (2025-05-17)
+
+
+### Bug Fixes
+
+* **api:** avoid storing notification subscription updates in journal ([#1181](https://github.com/johanbook/meet/issues/1181)) ([cc18b8f](https://github.com/johanbook/meet/commit/cc18b8f1103537d20104e6c59aae1d5d9a5571bf))
+* **web-ui:** fix typos in translations ([#1183](https://github.com/johanbook/meet/issues/1183)) ([10e62ca](https://github.com/johanbook/meet/commit/10e62caf8696147d7e5079b2774da9052e922084))
+
 ## [2.3.0](https://github.com/johanbook/meet/compare/v2.2.0...v2.3.0) (2025-04-25)
 
 
