@@ -50,7 +50,7 @@
     "eslint-plugin-sonarjs": "3.0.2",
     "eslint-plugin-unicorn": "59.0.1",
     "jest": "29.7.0",
-    "pino": "9.6.0",
+    "pino": "9.7.0",
     "pino-pretty": "13.0.0",
     "prettier": "3.5.3",
     "source-map-support": "0.5.21",
