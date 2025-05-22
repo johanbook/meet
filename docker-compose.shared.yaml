@@ -181,13 +181,3 @@ services:
     restart: "unless-stopped"
     volumes:
       - ".data/mino:/data:rw"
-
-  tracking:
-    container_name: "tracking"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.tracking.rule=Host(`$DOMAIN`)&&(PathPrefix(`/tracking`))"
-      - "traefik.http.routers.tracking.entrypoints=web"
-
-      - "com.centurylinklabs.watchtower.enable=true"
-    restart: "unless-stopped"

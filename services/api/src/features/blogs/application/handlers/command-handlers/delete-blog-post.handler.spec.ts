@@ -1,6 +1,7 @@
 import { Repository } from "typeorm";
 
 import { map } from "src/core/mapper";
+import { beforeEach, describe, expect, it, vi } from "src/test";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 
 import { BlogPost } from "../../../infrastructure/entities/blog-post.entity";
@@ -17,10 +18,10 @@ describe(DeleteBlogPostHandler.name, () => {
     blogPosts = createMockRepository<BlogPost>();
 
     commandHandler = new DeleteBlogPostHandler(
-      { authorizeOwnerOrAdmin: jest.fn() } as any,
+      { authorizeOwnerOrAdmin: vi.fn() } as any,
       blogPosts,
       {
-        removePhoto: jest.fn(),
+        removePhoto: vi.fn(),
       } as any,
     );
   });

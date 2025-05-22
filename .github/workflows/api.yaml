@@ -2,7 +2,10 @@ name: api
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - "main"
+    paths:
+      - "services/api/**"
   pull_request:
     branches:
       - "main"
@@ -27,7 +30,7 @@ jobs:
           cache-dependency-path: "**/package-lock.json"
 
       - name: Install NodeJS dependencies
-        run: npm ci --legacy-peer-deps -D --ignore-scripts
+        run: npm ci -D --ignore-scripts
 
       - name: Run linting
         run: npm run lint:ci
@@ -50,7 +53,7 @@ jobs:
           cache-dependency-path: "**/package-lock.json"
 
       - name: Install NodeJS dependencies
-        run: npm ci --legacy-peer-deps -D --ignore-scripts
+        run: npm ci -D --ignore-scripts
 
       - name: Run tests
         run: npm run test:ci

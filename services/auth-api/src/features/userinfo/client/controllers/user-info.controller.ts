@@ -8,6 +8,7 @@ import {
   Query,
 } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
+import { getUser, listUsersByAccountInfo } from "supertokens-node";
 import EmailPassword from "supertokens-node/recipe/emailpassword";
 
 import { Session } from "src/core/supertokens/session.decorator";
@@ -18,7 +19,6 @@ import { UserDetails } from "../../application/contracts/dtos/user.dto";
 import { GetUserInfoByEmailQuery } from "../../application/contracts/queries/get-user-info-by-email.query";
 import { GetUserInfoListByEmailQuery } from "../../application/contracts/queries/get-user-info-list-by-email.query";
 import { GetUserInfoListByIdQuery } from "../../application/contracts/queries/get-user-info-list-by-id.query";
-import { getUser, listUsersByAccountInfo } from "supertokens-node";
 
 @Controller("userinfo")
 @ApiTags("userinfo")

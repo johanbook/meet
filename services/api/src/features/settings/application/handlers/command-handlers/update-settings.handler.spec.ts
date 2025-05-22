@@ -3,6 +3,7 @@ import { Repository } from "typeorm";
 import { map } from "src/core/mapper";
 import { CurrentSettingsService } from "src/features/settings/domain/services/current-settings.service";
 import { Settings } from "src/features/settings/infrastructure/entities/settings.entity";
+import { Mock, beforeEach, describe, expect, it, vi } from "src/test";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 
 import { UpdateSettingsCommand } from "../../contracts/commands/update-settings.comamnd";
@@ -17,7 +18,7 @@ describe(UpdateSettingsHandler.name, () => {
     settings = createMockRepository<Settings>();
 
     const currentProfileService = {
-      fetchCurrentProfileId: jest.fn(() => 1),
+      fetchCurrentProfileId: vi.fn(() => 1),
     } as any;
 
     currentSettingsService = new CurrentSettingsService(
@@ -42,7 +43,7 @@ describe(UpdateSettingsHandler.name, () => {
     });
 
     it("should save changes to profile", async () => {
-      const findOneFn = settings.findOne as unknown as jest.Mock;
+      const findOneFn = settings.findOne as unknown as Mock;
       findOneFn.mockImplementation(() => ({ darkmode: false }));
 
       const command = map(UpdateSettingsCommand, {

@@ -2,6 +2,7 @@ import { Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
 import { map } from "src/core/mapper";
+import { beforeEach, describe, expect, it, vi } from "src/test";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 import { createUserIdServiceMock } from "src/test/mocks/user-id.service.mock";
 
@@ -18,7 +19,7 @@ describe(CreateProfileHandler.name, () => {
 
   beforeEach(() => {
     mockRepository = createMockRepository<Profile>();
-    profileService = { createProfile: jest.fn() } as any;
+    profileService = { createProfile: vi.fn() } as any;
     userIdService = createUserIdServiceMock();
 
     commandHandler = new CreateProfileHandler(

@@ -1,3 +1,5 @@
+import { describe, expect, it } from "src/test";
+
 import { stringifyAndRedactBinary } from "./string.helper";
 
 describe(stringifyAndRedactBinary.name, () => {

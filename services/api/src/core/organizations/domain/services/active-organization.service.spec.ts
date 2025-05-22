@@ -1,6 +1,7 @@
 import { Repository } from "typeorm";
 
 import { CurrentProfileService } from "src/core/profiles";
+import { beforeEach, describe, expect, it, vi } from "src/test";
 import { createMockRepository } from "src/test/mocks";
 
 import { ActiveOrganization } from "../../infrastructure/entities/active-organization.entity";
@@ -19,7 +20,7 @@ describe(ActiveOrganizationService.name, () => {
       } as any,
     ]);
     currentProfileService = {
-      fetchCurrentProfileId: jest.fn(() => "my-profile-id"),
+      fetchCurrentProfileId: vi.fn(() => "my-profile-id"),
     } as any;
 
     activeOrganizationService = new ActiveOrganizationService(

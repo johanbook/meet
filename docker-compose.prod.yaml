@@ -95,13 +95,6 @@ services:
       file: "./docker-compose.shared.yaml"
       service: "supertokens"
 
-  tracking:
-    logging: *logging
-    extends:
-      file: "./docker-compose.shared.yaml"
-      service: "tracking"
-    image: ghcr.io/johanbook/meet/tracking:latest
-
   watchtower:
     logging: *logging
     image: containrrr/watchtower

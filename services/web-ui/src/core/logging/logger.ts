@@ -39,8 +39,6 @@ export class Logger {
     if (process.env.NODE_ENV === "development") {
       this.consoleLog(logProps);
     }
-
-    this.httpLog(logProps);
   }
 
   private consoleLog({ level, ...props }: LogProps): void {
@@ -70,18 +68,6 @@ export class Logger {
         throw new Error(`Unknown logging level ${level}`);
       }
     }
-  }
-
-  private async httpLog({ msg, props, level }: LogProps): Promise<void> {
-    const body = { events: [{ level, msg, props }] };
-
-    await fetch("/tracking/log", {
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-    });
   }
 }
 

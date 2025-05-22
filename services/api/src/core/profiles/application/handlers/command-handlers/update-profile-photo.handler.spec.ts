@@ -4,6 +4,7 @@ import { Repository } from "typeorm";
 import { UserIdService } from "src/core/authentication";
 import { map } from "src/core/mapper";
 import { ProfileService } from "src/core/profiles/domain/services/profile.service";
+import { beforeEach, describe, expect, it, vi } from "src/test";
 import {
   createEventBusMock,
   createMockRepository,
@@ -27,8 +28,8 @@ describe(UpdateProfilePhotoHandler.name, () => {
     userIdService = createUserIdServiceMock();
 
     const photoService = {
-      resize: jest.fn(),
-      uploadPhoto: jest.fn(() => ({})),
+      resize: vi.fn(),
+      uploadPhoto: vi.fn(() => ({})),
     } as any;
 
     profileService = new ProfileService(eventBus, profiles);

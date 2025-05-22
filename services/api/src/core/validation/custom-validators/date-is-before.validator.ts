@@ -1,4 +1,4 @@
-import { registerDecorator, ValidationOptions } from "class-validator";
+import { ValidationOptions, registerDecorator } from "class-validator";
 
 interface DateIsBeforeProps {
   years?: number;

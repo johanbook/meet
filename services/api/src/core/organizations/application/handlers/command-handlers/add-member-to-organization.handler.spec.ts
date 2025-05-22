@@ -3,6 +3,7 @@ import { Repository } from "typeorm";
 
 import { map } from "src/core/mapper";
 import { Profile } from "src/core/profiles";
+import { beforeEach, describe, expect, it, vi } from "src/test";
 import { createEventBusMock, createMockRepository } from "src/test/mocks";
 
 import { CurrentOrganizationService } from "../../../domain/services/current-organization.service";
@@ -31,7 +32,7 @@ describe(AddMemberToOrganizationHandler.name, () => {
 
     organizationService = new OrganizationService(
       eventBus,
-      { checkIfMember: jest.fn(() => false) } as any,
+      { checkIfMember: vi.fn(() => false) } as any,
       organizations,
     );
     commandHandler = new AddMemberToOrganizationHandler(

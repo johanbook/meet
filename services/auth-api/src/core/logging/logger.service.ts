@@ -1,5 +1,5 @@
-import { LoggerService } from "@nestjs/common";
 import * as pino from "pino";
+import { LoggerService } from "@nestjs/common";
 
 export function getLogLevel(): string {
   const level = process.env.LOG_LEVEL || "info";

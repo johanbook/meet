@@ -1,5 +1,7 @@
 import { Length } from "class-validator";
 
+import { describe, expect, it } from "src/test";
+
 import { map, mapAndValidate } from "./mapper";
 
 describe(map.name, () => {

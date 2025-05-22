@@ -4,6 +4,7 @@ import { OrganizationRole } from "src/core/authorization";
 import { map } from "src/core/mapper";
 import { CurrentOrganizationService } from "src/core/organizations/domain/services/current-organization.service";
 import { createCurrentOrganizationServiceMock } from "src/core/organizations/test";
+import { beforeEach, describe, expect, it, vi } from "src/test";
 import { createMockRepository } from "src/test/mocks";
 
 import { OrganizationMembership } from "../../../infrastructure/entities/organization-membership.entity";
@@ -21,7 +22,7 @@ describe(UpdateMemberRoleHandler.name, () => {
 
     commandHandler = new UpdateMemberRoleHandler(
       currentOrganizationService,
-      { fetchCurrentProfileId: jest.fn(() => 1) } as any,
+      { fetchCurrentProfileId: vi.fn(() => 1) } as any,
       memberships,
     );
   });

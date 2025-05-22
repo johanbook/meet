@@ -2,7 +2,10 @@ name: homepage
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - "main"
+    paths:
+      - "services/homepage/**"
   pull_request:
     branches:
       - "main"

@@ -1,5 +1,6 @@
 import { Repository } from "typeorm";
 
+import { beforeEach, describe, expect, it, vi } from "src/test";
 import { createMockRepository } from "src/test/mocks";
 
 import { OrganizationMembership } from "../../../infrastructure/entities/organization-membership.entity";
@@ -20,10 +21,10 @@ describe(GetOrganizationMembersHandler.name, () => {
     ] as any);
 
     const currentOrganizationService = {
-      fetchCurrentOrganizationId: jest.fn(),
+      fetchCurrentOrganizationId: vi.fn(),
     } as any;
 
-    const photosService = { getUrl: jest.fn() } as any;
+    const photosService = { getUrl: vi.fn() } as any;
 
     queryHandler = new GetOrganizationMembersHandler(
       currentOrganizationService,

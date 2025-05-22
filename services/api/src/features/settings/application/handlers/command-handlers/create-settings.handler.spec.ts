@@ -2,6 +2,7 @@ import { Repository } from "typeorm";
 
 import { CurrentSettingsService } from "src/features/settings/domain/services/current-settings.service";
 import { Settings } from "src/features/settings/infrastructure/entities/settings.entity";
+import { beforeEach, describe, expect, it, vi } from "src/test";
 import { createMockRepository } from "src/test/mocks/repository.mock";
 
 import { CreateSettingsHandler } from "./create-settings.handler";
@@ -15,7 +16,7 @@ describe(CreateSettingsHandler.name, () => {
     settings = createMockRepository<Settings>();
 
     const currentProfileService = {
-      fetchCurrentProfileId: jest.fn(() => 1),
+      fetchCurrentProfileId: vi.fn(() => 1),
     } as any;
 
     currentSettingsService = new CurrentSettingsService(
