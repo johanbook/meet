@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { PushSubscription } from "web-push";
@@ -12,9 +12,24 @@ export class NotificationSubscriptionService {
     private readonly notificationSubscriptions: Repository<NotificationSubscription>,
   ) {}
 
+  async deleteSubscription(id: string): Promise<void> {
+    const notificationSubscription =
+      await this.notificationSubscriptions.findOne({
+        where: {
+          id,
+        },
+      });
+
+    if (!notificationSubscription) {
+      throw new NotFoundException("Push subscription not found");
+    }
+
+    await this.notificationSubscriptions.remove(notificationSubscription);
+  }
+
   async getSubscription(
     profileId: number,
-  ): Promise<PushSubscription | undefined> {
+  ): Promise<NotificationSubscription | undefined> {
     const notificationSubscription =
       await this.notificationSubscriptions.findOne({
         where: { profileId },
@@ -24,7 +39,7 @@ export class NotificationSubscriptionService {
       return;
     }
 
-    return notificationSubscription.subscription as unknown as PushSubscription;
+    return notificationSubscription;
   }
 
   async saveSubscription(profileId: number, subscription: PushSubscription) {
