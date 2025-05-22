@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { PushSubscription, sendNotification, setVapidDetails } from "web-push";
+import { sendNotification, setVapidDetails } from "web-push";
 
 import { Logger } from "src/core/logging";
 import { getRequiredStringConfig } from "src/utils/config.helper";
@@ -34,7 +34,7 @@ export class NotificationWebPushGateway {
 
     try {
       const result = await sendNotification(
-        pushSubscription.subscription as unknown as PushSubscription,
+        pushSubscription.subscription,
         JSON.stringify(notification),
       );
 
