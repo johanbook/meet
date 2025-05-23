@@ -34,5 +34,7 @@
       "sizes": "360x800",
       "type": "/image/png"
     }
-  ]
+  ],
+  "prefer_related_applications": false,
+  "related_applications": []
 }
