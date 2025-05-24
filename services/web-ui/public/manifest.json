@@ -24,7 +24,7 @@
   "launch_handler": {
     "client_mode": ["auto"]
   },
-  "startUrl": "/?utm_source=pwa",
+  "start_url": "/?utm_source=pwa",
   "display": "standalone",
   "theme_color": "#c86496",
   "background_color": "#ffffff",
