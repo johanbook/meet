@@ -1,1 +1,38 @@
-{"short_name":"Meet","name":"Meet","icons":[{"src":"favicon.ico","sizes":"64x64 32x32 24x24 16x16","type":"image/x-icon"},{"src":"android-chrome-192x192.png","sizes":"192x192","type":"image/png"},{"src":"android-chrome-512x512.png","sizes":"512x512","type":"image/png"}],"start_url":"/?utm_source=trusted-web-activity","display":"standalone","theme_color":"#c86496","background_color":"#ffffff"}
+{
+  "id": "app.meetly.site",
+  "short_name": "Meet",
+  "name": "Meet",
+  "description": "A social platform to connect with friends and family",
+  "categories": ["social"],
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "launch_handler": { "client_mode": ["auto"] },
+  "start_url": "/?utm_source=trusted-web-activity",
+  "display": "standalone",
+  "theme_color": "#c86496",
+  "background_color": "#ffffff",
+  "screenshots": [
+    {
+      "src": "https://github.com/johanbook/meet/blob/main/images/screenshots/mobile1.png?raw=true",
+      "sizes": "360x800",
+      "type": "/image/png"
+    }
+  ],
+  "prefer_related_applications": false,
+  "related_applications": []
+}
