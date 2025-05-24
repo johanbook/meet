@@ -1,5 +1,5 @@
 {
-  "id": "app.meetly.site",
+  "packageId": "meet.app",
   "short_name": "Meet",
   "name": "Meet",
   "description": "A social platform to connect with friends and family",
@@ -24,7 +24,7 @@
   "launch_handler": {
     "client_mode": ["auto"]
   },
-  "start_url": ".",
+  "startUrl": "/?utm_source=pwa",
   "display": "standalone",
   "theme_color": "#c86496",
   "background_color": "#ffffff",
