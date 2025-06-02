@@ -9,7 +9,7 @@
     "lint": "tsc && eslint 'src/**/*.{js,jsx,ts,tsx}' --max-warnings 0",
     "lint:ci": "npm run lint",
     "prestart:dev": "./scripts/create-envs dist/__env.json",
-    "start:dev": "vite",
+    "start:dev": "vite --host --port 80",
     "test": "vitest src",
     "test:ci": "npm run test"
   },
