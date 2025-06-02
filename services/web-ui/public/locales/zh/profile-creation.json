@@ -8,10 +8,6 @@
   "date-of-birth": {
     "label": "日期"
   },
-  "description": {
-    "label": "描述",
-    "placeholder": "也许是一些关于你自己的事情"
-  },
   "name": {
     "label": "姓名",
     "placeholder": "您的姓名"
