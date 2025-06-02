@@ -4,10 +4,10 @@ export interface Config {
 }
 
 export async function fetchConfig(): Promise<Config> {
-  if (process.env.NODE_ENV !== "production") {
+  if (import.meta.env.DEV) {
     return {
-      API_DOMAIN: process.env.API_URL || `http://localhost`,
-      UI_DOMAIN: process.env.UI_URL || `http://localhost`,
+      API_DOMAIN: "http://localhost",
+      UI_DOMAIN: "http://localhost",
     };
   }
 

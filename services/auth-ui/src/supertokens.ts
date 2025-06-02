@@ -47,7 +47,7 @@ export async function initializeSuperTokens(
     recipeList: [
       EmailPassword.init(),
       EmailVerification.init({
-        mode: process.env.NODE_ENV === "production" ? "REQUIRED" : "OPTIONAL",
+        mode: import.meta.env.PROD ? "REQUIRED" : "OPTIONAL",
       }),
       Session.init(),
     ],
