@@ -36,6 +36,9 @@ export function ProfileCreationPageComponent({
     await onCreateProfile();
   };
 
+  const maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() - 18);
+
   return (
     <ProfileCreationPageNav>
       <VerticalCenter>
@@ -88,6 +91,7 @@ export function ProfileCreationPageComponent({
             <DatePicker
               fullWidth
               label={t("date-of-birth.label")}
+              maxDate={maxDate}
               onChange={(date) => setForm({ ...form, dateOfBirth: date })}
               value={form.dateOfBirth}
             />
