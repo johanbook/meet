@@ -8,10 +8,6 @@
   "date-of-birth": {
     "label": "Datum"
   },
-  "description": {
-    "label": "Beskrivning",
-    "placeholder": "Kanske något om dig själv"
-  },
   "name": {
     "label": "Namn",
     "placeholder": "Ditt namn"

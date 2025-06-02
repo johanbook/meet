@@ -108,29 +108,8 @@ export function ProfileCreationPageComponent({
               value={form.dateOfBirth}
             />
 
-            <TextField
-              fullWidth
-              label={t("description.label")}
-              multiline
-              name="description"
-              onChange={(event) =>
-                setForm({ ...form, description: event.target.value })
-              }
-              placeholder={t("description.placeholder")}
-              required
-              rows={4}
-              size="medium"
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  backgroundColor: "rgba(255,255,255,0.3)",
-                },
-              }}
-              value={form.description}
-              variant="outlined"
-            />
-
             <Button
-              disabled={!form.name || !form.description}
+              disabled={!form.name}
               fullWidth
               size="large"
               type="submit"

@@ -8,10 +8,6 @@
   "date-of-birth": {
     "label": "Date"
   },
-  "description": {
-    "label": "Description",
-    "placeholder": "Perhaps something about yourself"
-  },
   "name": {
     "label": "Name",
     "placeholder": "Your name"
