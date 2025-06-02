@@ -11,7 +11,8 @@
 **meet** is a self-hosted social platform for small communities, such as your
 family or a group of friends. It gives you full control over your data and your
 privacy, without the need for third-party services. See the app in action
-[here](https://meetly.site).
+[here](https://meetly.site) or download from Google Play
+[here](https://play.google.com/store/apps/details?id=meet.app).
 
 Meet is built to be able to quickly pivot to other use cases, such as case
 management or resource management. Its strength in its modular design (see
