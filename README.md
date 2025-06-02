@@ -5,7 +5,6 @@
 ![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/api.yaml?label=API%20Build)
 ![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/auth-api.yaml?label=Auth%20API%20Build)
 ![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/auth-ui.yaml?label=Auth%20UI%20Build)
-![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/tracking.yaml?label=Tracking%20Build)
 ![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/web-ui.yaml?label=Web%20UI%20Build)
 
 **meet** is a self-hosted social platform for small communities, such as your
