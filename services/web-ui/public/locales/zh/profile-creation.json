@@ -6,31 +6,15 @@
     }
   },
   "date-of-birth": {
-    "continue": "继续",
-    "description": "输入您的出生日期",
-    "header": "输入出生日期",
-    "label": "日期",
-    "min-age": "您必须至少有{{minAge}}岁才能继续"
+    "label": "日期"
   },
   "description": {
-    "continue": "完成",
-    "description": "输入关于您自己的简短描述",
-    "header": "输入您自己的描述",
     "label": "描述",
     "placeholder": "可能是关于您自己的一些事情"
   },
   "name": {
-    "continue": "继续",
-    "description": "输入您的名字。这是您在平台上的引用名。",
-    "header": "输入您的名字",
     "label": "名字",
     "placeholder": "您的名字"
-  },
-  "steps": {
-    "date-of-birth": "出生日期",
-    "description": "描述",
-    "name": "名字",
-    "welcome": "欢迎"
   },
   "welcome": {
     "continue": "创建个人资料",

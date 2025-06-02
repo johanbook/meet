@@ -6,31 +6,15 @@
     }
   },
   "date-of-birth": {
-    "continue": "Continue",
-    "description": "Enter your date of birth",
-    "header": "Enter date of birth",
-    "label": "Date",
-    "min-age": "You must be at least {{minAge}} years old to continue"
+    "label": "Date"
   },
   "description": {
-    "continue": "Finish",
-    "description": "Enter a short description of yourself",
-    "header": "Enter a description of yourself",
     "label": "Description",
     "placeholder": "Perhaps something about yourself"
   },
   "name": {
-    "continue": "Continue",
-    "description": "Enter your first name. This is the name you will be referenced by on the platform.",
-    "header": "Enter your name",
     "label": "Name",
     "placeholder": "Your name"
-  },
-  "steps": {
-    "date-of-birth": "Date of birth",
-    "description": "Description",
-    "name": "Name",
-    "welcome": "Welcome"
   },
   "welcome": {
     "continue": "Create a profile",
