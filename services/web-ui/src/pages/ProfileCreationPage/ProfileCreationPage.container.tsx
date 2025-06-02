@@ -27,14 +27,27 @@ export function ProfileCreationPageContainer({
     onSuccess: () => snackbar.success(t("actions.create.success")),
   });
 
+  const photoMutation = useMutation({
+    mutationFn: (photo: Blob) =>
+      profileApi.updateCurrentProfilePhoto({ photo }),
+    onError: () => snackbar.error(t("actions.update-photo.error")),
+    onSuccess: () => snackbar.success(t("actions.update-photo.success")),
+  });
+
   const [form, setForm] = useState<CreateProfileCommand>({
     dateOfBirth: getDateYearsAgo(14),
     name: "",
     description: "",
   });
 
+  const [photo, setPhoto] = useState<File>();
+
   async function handleSubmit(): Promise<void> {
     await mutation.mutateAsync(form as CreateProfileCommand);
+
+    if (photo) {
+      await photoMutation.mutateAsync(photo);
+    }
 
     if (onProfileCreated) {
       onProfileCreated();
@@ -46,6 +59,7 @@ export function ProfileCreationPageContainer({
       form={form}
       onCreateProfile={handleSubmit}
       setForm={setForm}
+      setPhoto={setPhoto}
     />
   );
 }

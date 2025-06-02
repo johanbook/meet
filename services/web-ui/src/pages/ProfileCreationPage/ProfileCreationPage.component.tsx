@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Box,
@@ -16,6 +16,7 @@ import { useTranslation } from "src/core/i18n";
 import { getDateYearsAgo } from "src/utils/time";
 
 import { ProfileCreationPageNav } from "./ProfileCreationPage.nav";
+import { ProfileCreationAvatar } from "./components/ProfileCreationAvatar/ProfileCreationAvatar";
 
 const MIN_AGE = 14;
 
@@ -23,20 +24,32 @@ export interface ProfileCreationPageComponentProps {
   form: CreateProfileCommand;
   onCreateProfile: () => Promise<void>;
   setForm: (value: CreateProfileCommand) => void;
+  setPhoto: (photo: File) => void;
 }
 
 export function ProfileCreationPageComponent({
   form,
   onCreateProfile,
   setForm,
+  setPhoto,
 }: ProfileCreationPageComponentProps): React.ReactElement {
   const { t } = useTranslation("profile-creation");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [photoPreview, setPhotoPreview] = useState<string>();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     await onCreateProfile();
+  };
+
+  const handlePhotoChange = (photo: File) => {
+    setPhoto(photo);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPhotoPreview(reader.result as string);
+    };
+    reader.readAsDataURL(photo);
   };
 
   return (
@@ -80,6 +93,13 @@ export function ProfileCreationPageComponent({
           </Typography>
 
           <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <ProfileCreationAvatar
+                onChange={handlePhotoChange}
+                src={photoPreview}
+              />
+            </Box>
+
             <TextField
               autoComplete="given-name"
               fullWidth
