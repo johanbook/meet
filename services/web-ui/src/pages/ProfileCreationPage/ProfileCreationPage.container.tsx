@@ -5,6 +5,7 @@ import { profileApi } from "src/apis";
 import { useTranslation } from "src/core/i18n";
 import { useMutation } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
+import { getDateYearsAgo } from "src/utils/time";
 
 import { ProfileCreationPageComponent } from "./ProfileCreationPage.component";
 
@@ -27,7 +28,7 @@ export function ProfileCreationPageContainer({
   });
 
   const [form, setForm] = useState<CreateProfileCommand>({
-    dateOfBirth: new Date(),
+    dateOfBirth: getDateYearsAgo(14),
     name: "",
     description: "",
   });
