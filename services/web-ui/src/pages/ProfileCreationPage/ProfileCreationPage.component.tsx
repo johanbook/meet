@@ -16,6 +16,8 @@ import { useTranslation } from "src/core/i18n";
 
 import { ProfileCreationPageNav } from "./ProfileCreationPage.nav";
 
+const MIN_AGE = 14;
+
 export interface ProfileCreationPageComponentProps {
   form: CreateProfileCommand;
   onCreateProfile: () => Promise<void>;
@@ -37,7 +39,7 @@ export function ProfileCreationPageComponent({
   };
 
   const maxDate = new Date();
-  maxDate.setFullYear(maxDate.getFullYear() - 18);
+  maxDate.setFullYear(maxDate.getFullYear() - MIN_AGE);
 
   return (
     <ProfileCreationPageNav>
