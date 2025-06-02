@@ -111,7 +111,6 @@ export function ProfileCreationPageComponent({
             />
 
             <TextField
-              color="success"
               fullWidth
               label={t("description.label")}
               multiline
