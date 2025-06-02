@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Container } from "@mui/material";
+import { Container } from "@mui/material";
 
 export interface ProfileCreationPageNavProps {
   children: React.ReactNode;
@@ -9,9 +9,5 @@ export interface ProfileCreationPageNavProps {
 export function ProfileCreationPageNav({
   children,
 }: ProfileCreationPageNavProps): React.ReactElement {
-  return (
-    <Box sx={{ padding: 2, paddingTop: 4 }}>
-      <Container maxWidth="md">{children}</Container>
-    </Box>
-  );
+  return <Container maxWidth="md">{children}</Container>;
 }
