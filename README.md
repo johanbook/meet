@@ -5,13 +5,13 @@
 ![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/api.yaml?label=API%20Build)
 ![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/auth-api.yaml?label=Auth%20API%20Build)
 ![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/auth-ui.yaml?label=Auth%20UI%20Build)
-![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/tracking.yaml?label=Tracking%20Build)
 ![](https://img.shields.io/github/actions/workflow/status/johanbook/meet/web-ui.yaml?label=Web%20UI%20Build)
 
 **meet** is a self-hosted social platform for small communities, such as your
 family or a group of friends. It gives you full control over your data and your
-privacy, without the need for third-party services. See the app in action
-[here](https://meetly.site).
+privacy, without the need for third-party services. See the app in action on
+[meetly.site](https://meetly.site) or download it from
+[Google Play](https://play.google.com/store/apps/details?id=meet.app).
 
 Meet is built to be able to quickly pivot to other use cases, such as case
 management or resource management. Its strength in its modular design (see
