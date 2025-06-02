@@ -1,8 +1,8 @@
 {
   "actions": {
     "create": {
-      "error": "Något gick fel när din profil skulle skapas. Försök igen senare.",
-      "success": "Grattis! Din profil har nu skapats"
+      "error": "Något gick fel när vi försökte skapa din profil. Försök igen senare.",
+      "success": "Grattis! Din profil har skapats!"
     }
   },
   "date-of-birth": {
@@ -18,7 +18,7 @@
   },
   "welcome": {
     "continue": "Skapa en profil",
-    "description": "Meet är en platform för att dela ditt liv med andra. Det första vi ska göra för att komma igång är att skapa en profil för dig.",
+    "description": "Gå med för att ansluta med dina vänner och familj",
     "header": "Välkommen till Meet"
   }
 }

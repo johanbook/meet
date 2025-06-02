@@ -53,21 +53,28 @@ export function ProfileCreationPageComponent({
           }}
         >
           <Typography
-            variant="h5"
+            align="center"
             component="h1"
             color="primary"
-            align="center"
             gutterBottom
-            sx={{ mb: 4 }}
+            sx={{
+              color: "white",
+              mb: 4,
+              textShadow: `1px 1px 1px black`,
+            }}
+            variant="h3"
           >
             {t("welcome.header")}
           </Typography>
 
           <Typography
-            variant="body1"
             align="center"
             color="text.secondary"
-            sx={{ mb: 4 }}
+            sx={({ palette }) => ({
+              color: "white",
+              mb: 4,
+              textShadow: `1px 1px 1px ${palette.primary.main}`,
+            })}
           >
             {t("welcome.description")}
           </Typography>
@@ -83,9 +90,14 @@ export function ProfileCreationPageComponent({
               }
               placeholder={t("name.placeholder")}
               required
+              size="medium"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: "rgba(255,255,255,0.3)",
+                },
+              }}
               value={form.name}
               variant="outlined"
-              size="medium"
             />
 
             <DatePicker
@@ -97,6 +109,7 @@ export function ProfileCreationPageComponent({
             />
 
             <TextField
+              color="success"
               fullWidth
               label={t("description.label")}
               multiline
@@ -107,19 +120,27 @@ export function ProfileCreationPageComponent({
               placeholder={t("description.placeholder")}
               required
               rows={4}
+              size="medium"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: "rgba(255,255,255,0.3)",
+                },
+              }}
               value={form.description}
               variant="outlined"
-              size="medium"
             />
 
             <Button
-              color="primary"
               disabled={!form.name || !form.description}
               fullWidth
               size="large"
               type="submit"
-              variant="contained"
-              sx={{ mt: 2 }}
+              sx={() => ({
+                background: "white",
+                fontWeight: 600,
+                mt: 2,
+              })}
+              variant="outlined"
             >
               {t("welcome.continue")}
             </Button>
