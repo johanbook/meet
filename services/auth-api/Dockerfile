@@ -1,7 +1,7 @@
 ################################
 # Build server
 ################################
-FROM node:24.0.2-alpine as builder
+FROM node:24.1.0-alpine as builder
 
 WORKDIR /app
 
@@ -13,7 +13,7 @@ RUN npm run build
 ################################
 # Create Docker image
 ################################
-FROM node:24.0.2-alpine
+FROM node:24.1.0-alpine
 
 WORKDIR /app
 
