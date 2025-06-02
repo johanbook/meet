@@ -1,16 +1,22 @@
 import React from "react";
 
-import { Fade, Step, StepLabel, Stepper } from "@mui/material";
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 
 import { CreateProfileCommand } from "src/api";
-import { Center } from "src/components/ui/Center";
+import { DatePicker } from "src/components/ui/DatePicker";
+import { VerticalCenter } from "src/components/ui/VerticalCenter";
 import { useTranslation } from "src/core/i18n";
 
 import { ProfileCreationPageNav } from "./ProfileCreationPage.nav";
-import { DateOfBirthForm } from "./components/DateOfBirth.form";
-import { DescriptionForm } from "./components/Description.form";
-import { NameForm } from "./components/Name.form";
-import { WelcomeForm } from "./components/Welcome.form";
+
+const MIN_AGE = 14;
 
 export interface ProfileCreationPageComponentProps {
   form: CreateProfileCommand;
@@ -24,66 +30,125 @@ export function ProfileCreationPageComponent({
   setForm,
 }: ProfileCreationPageComponentProps): React.ReactElement {
   const { t } = useTranslation("profile-creation");
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const [step, setStep] = React.useState(0);
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    await onCreateProfile();
+  };
+
+  const maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() - MIN_AGE);
 
   return (
     <ProfileCreationPageNav>
-      <Center>
-        <Stepper activeStep={step} sx={{ marginBottom: 3 }}>
-          <Step>
-            <StepLabel>{t("steps.welcome")}</StepLabel>
-          </Step>
+      <VerticalCenter>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{
+            width: "100%",
+            maxWidth: isMobile ? "100%" : "600px",
+            px: isMobile ? 2 : 4,
+            py: 3,
+          }}
+        >
+          <Typography
+            align="center"
+            component="h1"
+            color="primary"
+            gutterBottom
+            sx={{
+              color: "white",
+              mb: 4,
+              textShadow: `1px 1px 1px black`,
+            }}
+            variant="h3"
+          >
+            {t("welcome.header")}
+          </Typography>
 
-          <Step>
-            <StepLabel>{t("steps.name")}</StepLabel>
-          </Step>
+          <Typography
+            align="center"
+            color="text.secondary"
+            sx={({ palette }) => ({
+              color: "white",
+              mb: 4,
+              textShadow: `1px 1px 1px ${palette.primary.main}`,
+            })}
+          >
+            {t("welcome.description")}
+          </Typography>
 
-          <Step>
-            <StepLabel>{t("steps.date-of-birth")}</StepLabel>
-          </Step>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+            <TextField
+              autoComplete="given-name"
+              fullWidth
+              label={t("name.label")}
+              name="name"
+              onChange={(event) =>
+                setForm({ ...form, name: event.target.value })
+              }
+              placeholder={t("name.placeholder")}
+              required
+              size="medium"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: "rgba(255,255,255,0.3)",
+                },
+              }}
+              value={form.name}
+              variant="outlined"
+            />
 
-          <Step>
-            <StepLabel>{t("steps.description")}</StepLabel>
-          </Step>
-        </Stepper>
-      </Center>
+            <DatePicker
+              fullWidth
+              label={t("date-of-birth.label")}
+              maxDate={maxDate}
+              onChange={(date) => setForm({ ...form, dateOfBirth: date })}
+              value={form.dateOfBirth}
+            />
 
-      <Fade in={step === 3} mountOnEnter timeout={2000} unmountOnExit>
-        <div>
-          <DescriptionForm
-            onChange={(description) => setForm({ ...form, description })}
-            onNext={() => onCreateProfile()}
-            value={form.description}
-          />
-        </div>
-      </Fade>
+            <TextField
+              color="success"
+              fullWidth
+              label={t("description.label")}
+              multiline
+              name="description"
+              onChange={(event) =>
+                setForm({ ...form, description: event.target.value })
+              }
+              placeholder={t("description.placeholder")}
+              required
+              rows={4}
+              size="medium"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: "rgba(255,255,255,0.3)",
+                },
+              }}
+              value={form.description}
+              variant="outlined"
+            />
 
-      <Fade in={step === 2} mountOnEnter timeout={2000} unmountOnExit>
-        <div>
-          <DateOfBirthForm
-            onChange={(dateOfBirth) => setForm({ ...form, dateOfBirth })}
-            onNext={() => setStep(3)}
-            value={form.dateOfBirth}
-          />
-        </div>
-      </Fade>
-
-      <Fade in={step === 1} timeout={2000} unmountOnExit>
-        <div>
-          <NameForm
-            onChange={(name) => setForm({ ...form, name })}
-            onNext={() => setStep(2)}
-            value={form.name}
-          />
-        </div>
-      </Fade>
-
-      <Fade in={step === 0} timeout={2000} unmountOnExit>
-        <div>
-          <WelcomeForm onNext={() => setStep(1)} />
-        </div>
-      </Fade>
+            <Button
+              disabled={!form.name || !form.description}
+              fullWidth
+              size="large"
+              type="submit"
+              sx={() => ({
+                background: "white",
+                fontWeight: 600,
+                mt: 2,
+              })}
+              variant="outlined"
+            >
+              {t("welcome.continue")}
+            </Button>
+          </Box>
+        </Box>
+      </VerticalCenter>
     </ProfileCreationPageNav>
   );
 }

@@ -9,6 +9,8 @@ import dayjs, { Dayjs } from "dayjs";
 export interface DatePickerProps {
   fullWidth?: boolean;
   label: string;
+  maxDate?: Date;
+  minDate?: Date;
   onChange: (date: Date) => void;
   sx?: SxProps;
   value: Date;
@@ -17,6 +19,8 @@ export interface DatePickerProps {
 export function DatePicker({
   fullWidth,
   label,
+  maxDate,
+  minDate,
   onChange,
   value,
   ...props
@@ -25,6 +29,8 @@ export function DatePicker({
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <MuiDatePicker
         label={label}
+        maxDate={maxDate ? dayjs(maxDate) : undefined}
+        minDate={minDate ? dayjs(minDate) : undefined}
         onChange={(newValue: Dayjs | null) => {
           if (newValue) {
             onChange(newValue.toDate());
