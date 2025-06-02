@@ -13,6 +13,7 @@ import { CreateProfileCommand } from "src/api";
 import { DatePicker } from "src/components/ui/DatePicker";
 import { VerticalCenter } from "src/components/ui/VerticalCenter";
 import { useTranslation } from "src/core/i18n";
+import { getDateYearsAgo } from "src/utils/time";
 
 import { ProfileCreationPageNav } from "./ProfileCreationPage.nav";
 
@@ -37,9 +38,6 @@ export function ProfileCreationPageComponent({
     event.preventDefault();
     await onCreateProfile();
   };
-
-  const maxDate = new Date();
-  maxDate.setFullYear(maxDate.getFullYear() - MIN_AGE);
 
   return (
     <ProfileCreationPageNav>
@@ -105,7 +103,7 @@ export function ProfileCreationPageComponent({
             <DatePicker
               fullWidth
               label={t("date-of-birth.label")}
-              maxDate={maxDate}
+              maxDate={getDateYearsAgo(MIN_AGE)}
               onChange={(date) => setForm({ ...form, dateOfBirth: date })}
               value={form.dateOfBirth}
             />
