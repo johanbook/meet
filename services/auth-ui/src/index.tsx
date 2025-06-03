@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
+import { CssBaseline } from "@mui/material";
+
 import { registerI18n } from "src/core/i18n";
 import { ThemeProvider } from "src/core/theme";
 
@@ -16,6 +18,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider>
+      <CssBaseline />
       <App />
     </ThemeProvider>
   </React.StrictMode>,
