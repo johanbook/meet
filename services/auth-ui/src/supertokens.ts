@@ -10,6 +10,9 @@ const style = `
   [data-supertokens~=container] {
       --palette-primary: 200, 100, 150;
       --palette-primaryBorder: 200, 100, 150;
+      box-shadow: none;
+      height: 100vh;
+      display: flex;
   }
 
   [data-supertokens~=superTokensBranding] {
