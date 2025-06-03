@@ -19,8 +19,8 @@
     "path": "/home/book/personal/meet/services/mobile-app/android.keystore",
     "alias": "android"
   },
-  "appVersionName": "1.0.2",
-  "appVersionCode": 11,
+  "appVersionName": "1.0.3",
+  "appVersionCode": 13,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://app.meetly.site/manifest.json",
@@ -33,10 +33,10 @@
   "isChromeOSOnly": false,
   "isMetaQuest": false,
   "fullScopeUrl": "https://app.meetly.site/",
-  "minSdkVersion": 36,
+  "minSdkVersion": 34,
   "orientation": "default",
   "fingerprints": [],
   "additionalTrustedOrigins": [],
   "retainedBundles": [],
-  "appVersion": "1.0.2"
+  "appVersion": "1.0.3"
 }

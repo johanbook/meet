@@ -1,5 +1,5 @@
 {
-  "id": "app.meetly.site",
+  "packageId": "meet.app",
   "short_name": "Meet",
   "name": "Meet",
   "description": "A social platform to connect with friends and family",
