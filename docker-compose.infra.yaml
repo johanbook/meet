@@ -1,0 +1,30 @@
+services:
+  traefik:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "traefik"
+
+  console:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "console"
+
+  db:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "db"
+
+  pgadmin:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "pgadmin"
+
+  minio:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "minio"
+
+  supertokens:
+    extends:
+      file: "./docker-compose.shared.yaml"
+      service: "supertokens"
