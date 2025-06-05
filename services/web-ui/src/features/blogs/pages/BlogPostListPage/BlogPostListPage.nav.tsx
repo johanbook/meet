@@ -1,8 +1,8 @@
 import { ReactElement, ReactNode } from "react";
 import { Link } from "react-router";
 
-import { DashboardOutlined } from "@mui/icons-material";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Add, DashboardOutlined } from "@mui/icons-material";
+import { Box, Button, IconButton, Typography } from "@mui/material";
 
 import { Nav } from "src/components/nav";
 import { CurrentOrganizationAvatar } from "src/components/nav/AppBar/CurrentOrganizationAvatar";
@@ -43,5 +43,27 @@ export function BlogPostListPageNav({
     </>
   );
 
-  return <Nav appBarContent={appBarContent}>{children}</Nav>;
+  return (
+    <Nav appBarContent={appBarContent}>
+      <Box sx={{ px: 2, py: 2 }}>
+        <Button
+          component={Link}
+          fullWidth
+          startIcon={<Add />}
+          sx={{
+            background: (theme) =>
+              `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+            borderRadius: 2,
+            color: "white",
+            p: 3,
+          }}
+          to="/blog/create"
+          variant="outlined"
+        >
+          Create New Post
+        </Button>
+      </Box>
+      {children}
+    </Nav>
+  );
 }
