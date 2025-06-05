@@ -1,4 +1,5 @@
 import { Column, Entity, ManyToOne } from "typeorm";
+import { PushSubscription } from "web-push";
 
 import { BaseEntity } from "src/core/database";
 import { Profile } from "src/core/profiles";
@@ -12,5 +13,5 @@ export class NotificationSubscription extends BaseEntity {
   profileId!: number;
 
   @Column("json")
-  subscription!: object;
+  subscription!: PushSubscription;
 }
