@@ -6,6 +6,7 @@ import { NavigationTrackingProvider } from "src/core/tracking/NavigationTracking
 import { BlogPhotoListPage } from "src/features/blogs/pages/BlogPhotoListPage";
 import { BlogPostListPage } from "src/features/blogs/pages/BlogPostListPage";
 import { BlogPostPage } from "src/features/blogs/pages/BlogPostPage";
+import { CreateBlogPostPage } from "src/features/blogs/pages/CreateBlogPostPage";
 import { ChatListPage } from "src/features/chat/pages/ChatListPage";
 import { ChatPage } from "src/features/chat/pages/ChatPage";
 import { CreateChatPage } from "src/features/chat/pages/CreateChatPage";
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <BlogPostListPage />,
+      },
+      {
+        path: "/blog/create",
+        element: <CreateBlogPostPage />,
       },
       {
         path: "/blog/photos",
