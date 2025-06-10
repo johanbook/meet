@@ -1,0 +1,10 @@
+---
+description: Enforces specific rules for React components.
+globs: **/*.{tsx,jsx}
+alwaysApply: true
+---
+- Each component must reside in its own folder named after the component, e.g., [ComponentName].
+- Inside each component folder, the main component file must be named index.tsx.
+- Each component folder must have a test file named [ComponentName].test.tsx.
+- Components that are specific to pages or views and are not core should be placed inside the corresponding Views components folder.
+- Core components (i.e., general-purpose components that can be used across views, such as inputs, accordions, etc.) should be placed under src/components/ui.

@@ -1,0 +1,9 @@
+---
+description: Guidelines for UI and styling, focusing on Tailwind CSS
+globs: **/*.{ts,tsx,js,jsx}
+alwaysApply: true
+---
+- Utilize Material UI `sx` prop to the extend possible for styling components.
+- Ensure UI is responsive and accessible.
+- Prioritize accessibility: use semantic HTML, proper ARIA attributes, and ensure sufficient color contrast in utility classes. Use tools like axe or Lighthouse for audits.
+- Follow a consistent pattern for spacing, colors, and typography whenever possible, avoiding magic numbers.
