@@ -4,10 +4,8 @@ import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { useAnimate } from "framer-motion";
 
-import {
-  CreateBlogPostCommentReactionCommand,
-  DeleteBlogPostCommentReactionRequest,
-} from "src/api";
+import { CreateBlogPostCommentReactionCommand } from "src/api";
+import type { DeleteBlogPostCommentReactionRequest } from "src/api/apis/BlogsApi";
 import { blogsApi } from "src/apis";
 import {
   CacheKeysConstants,
