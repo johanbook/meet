@@ -60,7 +60,7 @@
     "@nestjs/testing": "11.1.2",
     "@swc/core": "1.11.29",
     "@trivago/prettier-plugin-sort-imports": "5.2.2",
-    "@types/express": "5.0.2",
+    "@types/express": "5.0.3",
     "@types/node": "22.15.30",
     "@types/nodemailer": "6.4.17",
     "@types/uuid": "10.0.0",
