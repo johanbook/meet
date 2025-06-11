@@ -7,6 +7,7 @@ import { beforeEach, describe, expect, it, vi } from "src/test";
 import { createEventBusMock, createMockRepository } from "src/test/mocks";
 
 import { BlogPostService } from "../../../domain/services/blog-post.service";
+import { BlogPostComment } from "../../../infrastructure/entities/blog-post-comment.entity";
 import { BlogPost } from "../../../infrastructure/entities/blog-post.entity";
 import { CreateBlogPostCommentCommand } from "../../contracts/commands/create-blog-post-comment.command";
 import { CreateBlogPostCommentHandler } from "./create-blog-post-comment.handler";
@@ -19,6 +20,7 @@ describe(CreateBlogPostCommentHandler.name, () => {
 
   beforeEach(() => {
     blogPosts = createMockRepository<BlogPost>();
+    const blogPostComments = createMockRepository<BlogPostComment>();
     eventBus = createEventBusMock();
 
     const currentOrganizationService = createCurrentOrganizationServiceMock();
@@ -27,7 +29,11 @@ describe(CreateBlogPostCommentHandler.name, () => {
       fetchCurrentProfileId: vi.fn(() => "my-profile-id"),
     } as any;
 
-    blogPostService = new BlogPostService(blogPosts, eventBus);
+    blogPostService = new BlogPostService(
+      blogPosts,
+      blogPostComments,
+      eventBus,
+    );
 
     commandHandler = new CreateBlogPostCommentHandler(
       blogPosts,

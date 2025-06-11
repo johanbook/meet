@@ -1,8 +1,9 @@
-import { Column, Entity, ManyToOne } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 
 import { BaseEntity } from "src/core/database";
 import { Profile } from "src/core/profiles";
 
+import { BlogPostCommentReaction } from "./blog-post-comment-reaction.entity";
 import { BlogPost } from "./blog-post.entity";
 
 @Entity()
@@ -23,4 +24,13 @@ export class BlogPostComment extends BaseEntity {
 
   @Column()
   profileId!: number;
+
+  @OneToMany(
+    () => BlogPostCommentReaction,
+    (reaction) => reaction.blogPostComment,
+    {
+      cascade: true,
+    },
+  )
+  reactions!: BlogPostCommentReaction[];
 }

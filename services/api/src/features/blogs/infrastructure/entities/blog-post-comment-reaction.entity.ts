@@ -3,18 +3,18 @@ import { Column, Entity, ManyToOne, Unique } from "typeorm";
 import { BaseEntity } from "src/core/database";
 import { Profile } from "src/core/profiles";
 
-import { BlogPost } from "./blog-post.entity";
+import { BlogPostComment } from "./blog-post-comment.entity";
 
 @Entity()
-@Unique(["blogPostId", "profileId"])
-export class BlogPostReaction extends BaseEntity {
-  @ManyToOne(() => BlogPost, (blogPost) => blogPost.reactions, {
+@Unique(["blogPostCommentId", "profileId"])
+export class BlogPostCommentReaction extends BaseEntity {
+  @ManyToOne(() => BlogPostComment, (comment) => comment.reactions, {
     onDelete: "CASCADE",
   })
-  blogPost!: BlogPost;
+  blogPostComment!: BlogPostComment;
 
   @Column()
-  blogPostId!: string;
+  blogPostCommentId!: string;
 
   @ManyToOne(() => Profile, { onDelete: "CASCADE" })
   profile!: Profile;
