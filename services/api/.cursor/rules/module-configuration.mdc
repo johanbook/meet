@@ -1,0 +1,17 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Module Configuration
+
+- Add new entities to `TypeOrmModule.forFeature([...entities])` array.
+- Add new controllers to the `controllers` array.
+- Add new handlers to the `providers` array.
+- Import required modules in the `imports` array.
+- Order imports alphabetically within each category (core, application, infrastructure).
+- Use `@Module()` decorator with proper configuration object.
+- Export services that need to be used by other modules.
+- Keep modules focused on a single business domain.
+- Import only necessary dependencies to avoid circular dependencies.
+- Use barrel exports (`index.ts`) for cleaner imports between modules.
