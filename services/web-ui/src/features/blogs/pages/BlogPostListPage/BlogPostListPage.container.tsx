@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 import { blogsApi } from "src/apis";
 import { useTranslation } from "src/core/i18n";
@@ -9,7 +9,6 @@ import { CacheKeysConstants, useInfiniteQuery } from "src/core/query";
 import { useMetaData } from "src/hooks/useMetaData";
 import { ErrorView } from "src/views/ErrorView";
 
-import { BlogPostForm } from "../../components/BlogPostForm";
 import { BlogPostPageComponent } from "./BlogPostListPage.component";
 import { BlogPostListPageNav } from "./BlogPostListPage.nav";
 import { BlogPostListPageSkeleton } from "./BlogPostListPage.skeleton";
@@ -50,10 +49,6 @@ export function BlogPostListPageContainer(): ReactElement {
   if (isPending) {
     return (
       <BlogPostListPageNav>
-        <Box sx={{ py: 2, px: 2 }}>
-          <BlogPostForm />
-        </Box>
-
         <BlogPostListPageSkeleton />
       </BlogPostListPageNav>
     );
@@ -62,10 +57,6 @@ export function BlogPostListPageContainer(): ReactElement {
   if (!data || data.pages[0].length === 0) {
     return (
       <BlogPostListPageNav>
-        <Box sx={{ py: 2, px: 2 }}>
-          <BlogPostForm />
-        </Box>
-
         <Typography sx={{ px: 2 }}>{t("no-posts")}</Typography>
       </BlogPostListPageNav>
     );
@@ -74,7 +65,6 @@ export function BlogPostListPageContainer(): ReactElement {
   return (
     <BlogPostListPageNav>
       <BlogPostPageComponent data={data.pages} />
-
       {hasNextPage && <InteractionObserver onObserve={fetchNextPage} />}
     </BlogPostListPageNav>
   );
