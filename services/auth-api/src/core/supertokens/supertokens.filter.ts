@@ -1,11 +1,12 @@
 import { ArgumentsHost, Catch, ExceptionFilter } from "@nestjs/common";
-import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
+import { ErrorHandler } from "@nestjs/common/interfaces";
+import { NextFunction, Request, Response } from "express";
 import { Error as STError } from "supertokens-node";
 import { errorHandler } from "supertokens-node/framework/fastify";
 
 @Catch(STError)
 export class SupertokensExceptionFilter implements ExceptionFilter {
-  handler: ErrorRequestHandler;
+  handler: ErrorHandler;
 
   constructor() {
     this.handler = errorHandler;
