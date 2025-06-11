@@ -5,10 +5,12 @@ import { Repository } from "typeorm";
 
 import { map } from "src/core/mapper";
 
+import { BlogPostCommentReaction } from "../../infrastructure/entities/blog-post-comment-reaction.entity";
 import { BlogPostComment } from "../../infrastructure/entities/blog-post-comment.entity";
 import { BlogPostReaction } from "../../infrastructure/entities/blog-post-reaction.entity";
 import { BlogPost } from "../../infrastructure/entities/blog-post.entity";
 import { BlogPostCommentCreatedEvent } from "../events/blog-post-comment-created.event";
+import { BlogPostCommentReactionCreatedEvent } from "../events/blog-post-comment-reaction-created.event";
 import { BlogPostCreatedEvent } from "../events/blog-post-created.event";
 import { BlogPostReactionCreatedEvent } from "../events/blog-post-reaction-created.event";
 
@@ -17,6 +19,8 @@ export class BlogPostService {
   constructor(
     @InjectRepository(BlogPost)
     private readonly blogPosts: Repository<BlogPost>,
+    @InjectRepository(BlogPostComment)
+    private readonly blogPostComments: Repository<BlogPostComment>,
     private readonly eventBus: EventBus,
   ) {}
 
@@ -69,6 +73,24 @@ export class BlogPostService {
       organizationId: blogPost.organizationId,
       profileId: blogPostReaction.profileId,
       reactionId: blogPostReaction.id,
+    });
+
+    this.eventBus.publish(event);
+  }
+
+  async addReactionToBlogPostComment(
+    blogPostCommentReaction: BlogPostCommentReaction,
+    blogPostComment: BlogPostComment,
+  ): Promise<void> {
+    blogPostComment.reactions.push(blogPostCommentReaction);
+
+    await this.blogPostComments.save(blogPostComment);
+
+    const event = map(BlogPostCommentReactionCreatedEvent, {
+      blogPostCommentId: blogPostComment.id,
+      organizationId: blogPostComment.blogPost.organizationId,
+      profileId: blogPostCommentReaction.profileId,
+      reactionId: blogPostCommentReaction.id,
     });
 
     this.eventBus.publish(event);
