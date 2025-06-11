@@ -5,8 +5,10 @@ import { Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
 import { Logger } from "src/core/logging";
+import { PhotoService } from "src/core/photos";
 
 import { ProfileService } from "../../../domain/services/profile.service";
+import { ProfilePhoto } from "../../../infrastructure/entities/profile-photo.entity";
 import { Profile } from "../../../infrastructure/entities/profile.entity";
 import { CreateProfileCommand } from "../../contracts/commands/create-profile.command";
 
@@ -17,6 +19,7 @@ export class CreateProfileHandler
   private logger = new Logger(CreateProfileHandler.name);
 
   constructor(
+    private readonly photoService: PhotoService,
     private readonly profileService: ProfileService,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
@@ -48,6 +51,24 @@ export class CreateProfileHandler
       command.recentLocation?.lon || 0
     }` as any;
     profile.userId = userId;
+
+    // Handle photo upload if provided
+    if (command.photo) {
+      const resizedPhoto = await this.photoService.resize(
+        command.photo as Buffer,
+        {
+          width: 200,
+        },
+      );
+
+      const photo = await this.photoService.uploadPhoto(
+        ProfilePhoto,
+        "profile-photo",
+        resizedPhoto,
+      );
+
+      profile.profilePhoto = photo;
+    }
 
     await this.profileService.createProfile(profile);
   }
