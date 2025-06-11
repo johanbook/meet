@@ -27,14 +27,12 @@ models/CreateBlogPostCommentReactionCommand.ts
 models/CreateBlogPostReactionCommand.ts
 models/CreateChatCommand.ts
 models/CreateOrganizationCommand.ts
-models/CreateProfileCommand.ts
 models/CurrentOrganizationDetails.ts
 models/DeleteBlogPostCommand.ts
 models/HealthCheckDetails.ts
 models/JournalDetails.ts
 models/JournalEntryDetails.ts
 models/JournalProfileDetails.ts
-models/Location.ts
 models/NotificationDetails.ts
 models/NotificationMetaDetails.ts
 models/NotificationMetaDetailsWs.ts

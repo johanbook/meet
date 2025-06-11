@@ -51,6 +51,7 @@ export class CurrentProfileController {
   }
 
   @Post()
+  @Multipart()
   async createCurrentProfile(
     @Body() command: CreateProfileCommand,
   ): Promise<null> {

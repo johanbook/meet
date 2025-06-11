@@ -16,13 +16,13 @@
 
 import * as runtime from '../runtime';
 import type {
-  CreateProfileCommand,
+  Location,
   ProfileDetails,
   UpdateProfileCommand,
 } from '../models/index';
 import {
-    CreateProfileCommandFromJSON,
-    CreateProfileCommandToJSON,
+    LocationFromJSON,
+    LocationToJSON,
     ProfileDetailsFromJSON,
     ProfileDetailsToJSON,
     UpdateProfileCommandFromJSON,
@@ -30,7 +30,11 @@ import {
 } from '../models/index';
 
 export interface CreateCurrentProfileRequest {
-    createProfileCommand: CreateProfileCommand;
+    dateOfBirth: Date;
+    description: string;
+    name: string;
+    photo?: Blob;
+    recentLocation?: Location;
 }
 
 export interface GetProfileRequest {
@@ -81,22 +85,64 @@ export class ProfileApi extends runtime.BaseAPI {
     /**
      */
     async createCurrentProfileRaw(requestParameters: CreateCurrentProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.createProfileCommand === null || requestParameters.createProfileCommand === undefined) {
-            throw new runtime.RequiredError('createProfileCommand','Required parameter requestParameters.createProfileCommand was null or undefined when calling createCurrentProfile.');
+        if (requestParameters.dateOfBirth === null || requestParameters.dateOfBirth === undefined) {
+            throw new runtime.RequiredError('dateOfBirth','Required parameter requestParameters.dateOfBirth was null or undefined when calling createCurrentProfile.');
+        }
+
+        if (requestParameters.description === null || requestParameters.description === undefined) {
+            throw new runtime.RequiredError('description','Required parameter requestParameters.description was null or undefined when calling createCurrentProfile.');
+        }
+
+        if (requestParameters.name === null || requestParameters.name === undefined) {
+            throw new runtime.RequiredError('name','Required parameter requestParameters.name was null or undefined when calling createCurrentProfile.');
         }
 
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        headerParameters['Content-Type'] = 'application/json';
+        const consumes: runtime.Consume[] = [
+            { contentType: 'multipart/form-data' },
+        ];
+        // @ts-ignore: canConsumeForm may be unused
+        const canConsumeForm = runtime.canConsumeForm(consumes);
+
+        let formParams: { append(param: string, value: any): any };
+        let useForm = false;
+        // use FormData to transmit files using content-type "multipart/form-data"
+        useForm = canConsumeForm;
+        if (useForm) {
+            formParams = new FormData();
+        } else {
+            formParams = new URLSearchParams();
+        }
+
+        if (requestParameters.photo !== undefined) {
+            formParams.append('photo', requestParameters.photo as any);
+        }
+
+        if (requestParameters.dateOfBirth !== undefined) {
+            formParams.append('dateOfBirth', requestParameters.dateOfBirth as any);
+        }
+
+        if (requestParameters.description !== undefined) {
+            formParams.append('description', requestParameters.description as any);
+        }
+
+        if (requestParameters.name !== undefined) {
+            formParams.append('name', requestParameters.name as any);
+        }
+
+        if (requestParameters.recentLocation !== undefined) {
+            formParams.append('recentLocation', new Blob([JSON.stringify(LocationToJSON(requestParameters.recentLocation))], { type: "application/json", }));
+                    }
 
         const response = await this.request({
             path: `/api/profile/current`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateProfileCommandToJSON(requestParameters.createProfileCommand),
+            body: formParams,
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
