@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+## [2.6.0](https://github.com/johanbook/meet/compare/v2.5.0...v2.6.0) (2025-06-13)
+
+
+### Features
+
+* **homepage:** use new icon ([#1383](https://github.com/johanbook/meet/issues/1383)) ([465712a](https://github.com/johanbook/meet/commit/465712a62f4375627bb965c4f8d933613cf39a0d))
+* **web-ui:** update logo ([#1390](https://github.com/johanbook/meet/issues/1390)) ([d007829](https://github.com/johanbook/meet/commit/d007829fc84174b93fc5e80ec6b807ef8b4f9d97))
+
+
+### Bug Fixes
+
+* **homepage:** fix typo ([#1385](https://github.com/johanbook/meet/issues/1385)) ([607c0d1](https://github.com/johanbook/meet/commit/607c0d135c85c298d14ec0f8c0b9ede49ee47962))
+* **mobile-app:** add fingerprints in twa manifest ([#1388](https://github.com/johanbook/meet/issues/1388)) ([10e3b56](https://github.com/johanbook/meet/commit/10e3b56551da3ee5f76858e964806a97fbe0a693))
+* **web-ui:** add missing Chinese translations ([#1392](https://github.com/johanbook/meet/issues/1392)) ([2c51a22](https://github.com/johanbook/meet/commit/2c51a221bde059cbf2dee4622b15e508a6ee0c17))
+
 ## [2.5.0](https://github.com/johanbook/meet/compare/v2.4.0...v2.5.0) (2025-06-11)
 
 

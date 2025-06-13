@@ -1,6 +1,6 @@
 {
   "name": "meet",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "**meet** is an app for meeting other people.",
   "scripts": {
     "prepare": "husky install"
