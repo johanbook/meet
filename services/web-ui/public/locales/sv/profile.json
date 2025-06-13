@@ -12,7 +12,7 @@
   },
   "header": "Profil",
   "links": {
-    "appearence": "Utseende",
+    "appearance": "Utseende",
     "blog": "Blog",
     "create-organization": "Skapa ny grupp",
     "current-organization": "Nuvarande grupp",
