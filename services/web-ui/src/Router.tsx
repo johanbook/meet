@@ -78,7 +78,7 @@ const router = createBrowserRouter([
         element: <CurrentProfilePage />,
       },
       {
-        path: "/profile/appearence",
+        path: "/profile/appearance",
         element: <AppearancePage />,
       },
       {
