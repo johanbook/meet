@@ -1,0 +1,17 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Service Patterns
+
+- Services should be decorated with `@Injectable()`.
+- Use constructor injection for dependencies.
+- Inject all required repositories in the service constructor.
+- Follow the pattern: `async methodName(entity: Entity, parentEntity: ParentEntity): Promise<void>`.
+- Use `map()` from `src/core/mapper` to create domain events.
+- Always publish events after successful database operations.
+- Keep services focused on domain logic, not presentation concerns.
+- Use meaningful method names that describe the business operation.
+- Handle cascading operations within service methods.
+- Ensure transactional consistency across related entity operations.

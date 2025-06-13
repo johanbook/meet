@@ -1,0 +1,18 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Event Patterns
+
+- Domain events should have readonly public properties.
+- Include relevant IDs: `entityId`, `organizationId`, `profileId`.
+- Use descriptive event names: `{Entity}{Action}Event` (e.g., `BlogPostCommentReactionCreatedEvent`).
+- Publish events after successful database operations, not before.
+- Use `map()` from `src/core/mapper` to create event instances.
+- Events should be immutable data structures.
+- Include timestamp information for event ordering.
+- Keep events focused on state changes, not process flows.
+- Use event handlers for side effects like notifications.
+- Ensure events contain all necessary data for handlers.
+- Follow the past-tense naming convention for events (Created, Updated, Deleted).

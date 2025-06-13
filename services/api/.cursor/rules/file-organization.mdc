@@ -1,0 +1,20 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# File Organization & Naming
+
+- Command handlers: `src/features/{feature}/application/handlers/command-handlers/{action}-{entity}.handler.ts`
+- Query handlers: `src/features/{feature}/application/handlers/query-handlers/{action}-{entity}.handler.ts`
+- Commands: `src/features/{feature}/application/contracts/commands/{action}-{entity}.command.ts`
+- Queries: `src/features/{feature}/application/contracts/queries/{action}-{entity}.query.ts`
+- DTOs: `src/features/{feature}/application/contracts/dtos/{entity}.dto.ts`
+- Entities: `src/features/{feature}/infrastructure/entities/{entity}.entity.ts`
+- Services: `src/features/{feature}/domain/services/{entity}.service.ts`
+- Controllers: `src/features/{feature}/client/controllers/{entity}s.controller.ts`
+- Events: `src/features/{feature}/domain/events/{entity}-{action}.event.ts`
+- Use kebab-case for file names and directories.
+- Use PascalCase for class names and interfaces.
+- Use camelCase for method and property names.
+- Group related functionality within feature directories.

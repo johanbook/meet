@@ -1,0 +1,17 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# CQRS & Command/Query Patterns
+
+- Use `@CommandHandler(CommandClass)` decorator for command handlers.
+- Use `@QueryHandler(QueryClass)` decorator for query handlers.
+- Command handlers should implement `ICommandHandler<TCommand, TResult>`.
+- Query handlers should implement `IQueryHandler<TQuery, TResult>`.
+- Commands should use validation decorators (`@IsUUID()`, `@Length()`).
+- Use `@InjectRepository(Entity)` to inject TypeORM repositories.
+- Publish domain events using `EventBus` after successful operations.
+- Commands should be immutable with readonly properties.
+- Separate read and write operations clearly between queries and commands.
+- Keep command handlers focused on a single responsibility.

@@ -1,0 +1,19 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# API Controller Patterns
+
+- Use `@Controller("path")` and `@ApiTags("tag")` decorators.
+- Use `@Post()` for create operations, `@Delete()` for delete operations.
+- Use `@Body()` for command data, `@Query()` for delete commands.
+- Return `Promise<null>` for command operations.
+- Use `CommandBus.execute(command)` to execute commands.
+- Use `QueryBus.execute(query)` to execute queries.
+- Apply proper HTTP method semantics (GET, POST, PUT, DELETE).
+- Use meaningful endpoint paths that reflect the resource hierarchy.
+- Implement proper input validation using DTOs and decorators.
+- Keep controllers thin - delegate business logic to handlers.
+- Use consistent response formats across all endpoints.
+- Apply authorization guards as needed.

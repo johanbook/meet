@@ -1,0 +1,21 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Testing Patterns
+
+- Test files should be named `{handler-name}.spec.ts` in the same directory as the handler.
+- Use `describe(HandlerName.name, () => {})` for test suites.
+- Use `beforeEach()` to set up test dependencies.
+- Use `createMockRepository<Entity>()` for repository mocking.
+- Use `createEventBusMock()` for EventBus mocking.
+- Use `createCurrentOrganizationServiceMock()` for organization service mocking.
+- Use `map(CommandClass, { property: value })` to create command instances.
+- Test both error cases (entity not found) and success cases.
+- Use `expect().rejects.toHaveProperty("message", "Expected error message")` for error testing.
+- Verify entity operations: `expect(entity.collection).toHaveLength(expectedCount)`.
+- Verify entity properties: `expect(createdEntity.property).toBe(expectedValue)`.
+- Mock external dependencies and focus on unit testing business logic.
+- Use descriptive test names that explain the expected behavior.
+- Arrange-Act-Assert pattern for test structure.
