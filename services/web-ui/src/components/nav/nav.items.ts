@@ -1,11 +1,11 @@
-import { AccountCircle, Chat, Feed } from "@mui/icons-material";
+import { AccountCircle, Chat, Home } from "@mui/icons-material";
 
 import { DesktopNav, MobileNav } from "./types";
 
 export const desktopNav: DesktopNav = {
   top: [
     {
-      Icon: Feed,
+      Icon: Home,
       isActive: /^(\/$|\/blog)/,
       name: "navigation.blog",
       url: "/",
@@ -28,7 +28,7 @@ export const desktopNav: DesktopNav = {
 export const mobileNav: MobileNav = {
   bottom: [
     {
-      Icon: Feed,
+      Icon: Home,
       isActive: /^(\/$|\/blog)/,
       name: "navigation.blog",
       url: "/",
