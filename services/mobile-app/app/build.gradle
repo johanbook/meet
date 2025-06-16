@@ -57,8 +57,8 @@ android {
         applicationId "meet.app"
         minSdkVersion 34
         targetSdkVersion 35
-        versionCode 13
-        versionName "1.0.3"
+        versionCode 17
+        versionName "1.0.6"
 
         // The name for the application
         resValue "string", "appName", twaManifest.name
@@ -208,6 +208,6 @@ repositories {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     
-        implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.6.1'
+        implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.6.2'
     
 }

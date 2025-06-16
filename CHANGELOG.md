@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+## [2.5.0](https://github.com/johanbook/meet/compare/v2.4.0...v2.5.0) (2025-06-11)
+
+
+### Features
+
+* **api:** support blog post comment reactions ([#1376](https://github.com/johanbook/meet/issues/1376)) ([666294f](https://github.com/johanbook/meet/commit/666294f23d36683c777485cfe4587afe607a2cb8))
+* **auth-ui:** improve styling ([#1357](https://github.com/johanbook/meet/issues/1357)) ([bb6fe11](https://github.com/johanbook/meet/commit/bb6fe11c9c9029a0d647e829d56a1eada67c5723))
+* **web-ui:** add blog post comment reaction button ([#1377](https://github.com/johanbook/meet/issues/1377)) ([37fa182](https://github.com/johanbook/meet/commit/37fa182b40739a9523c7cf0c8e26f6672999e518))
+* **web-ui:** remove description from signup ([#1353](https://github.com/johanbook/meet/issues/1353)) ([fd167db](https://github.com/johanbook/meet/commit/fd167db9345e78f43cf642a9739c98249be3e414))
+* **web-ui:** remove multi step profile creation ([#1349](https://github.com/johanbook/meet/issues/1349)) ([0702791](https://github.com/johanbook/meet/commit/0702791964f57f172051e098de344aa393b12ebc))
+* **web-ui:** update favicon ([#1351](https://github.com/johanbook/meet/issues/1351)) ([b418be9](https://github.com/johanbook/meet/commit/b418be99a18feff4843ad7f3c9c2594473368d98))
+
+
+### Bug Fixes
+
+* **auth-ui:** respect darkmode ([#1355](https://github.com/johanbook/meet/issues/1355)) ([9f13bab](https://github.com/johanbook/meet/commit/9f13bab5fac1eaf4990a4ae00459ea1b6cafef9f))
+* **web-ui:** fix styling regression in profile creation ([#1352](https://github.com/johanbook/meet/issues/1352)) ([c69e12d](https://github.com/johanbook/meet/commit/c69e12d3656f9e3039c6b5c67bf6f1c666acd855))
+
 ## [2.4.0](https://github.com/johanbook/meet/compare/v2.3.0...v2.4.0) (2025-05-24)
 
 

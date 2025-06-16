@@ -10,6 +10,7 @@ import { CurrentProfileService } from "src/core/profiles";
 import { BlogPost } from "src/features/blogs/infrastructure/entities/blog-post.entity";
 import { sortByField } from "src/utils/sorting.helper";
 
+import { BlogPostCommentReactionDetails } from "../../contracts/dtos/blog-post-comment-reactions.dto";
 import { BlogPostCommentDetails } from "../../contracts/dtos/blog-post-comment.dto";
 import { BlogPostDetails } from "../../contracts/dtos/blog-post-detail.dto";
 import { BlogPostPhotoDetails } from "../../contracts/dtos/blog-post-photo.dto";
@@ -41,6 +42,9 @@ export class GetBlogPostHandler
         comments: {
           profile: {
             profilePhoto: true,
+          },
+          reactions: {
+            profile: true,
           },
         },
         photos: true,
@@ -78,6 +82,13 @@ export class GetBlogPostHandler
                 "profile-photo",
               ),
             name: comment.profile.name,
+          }),
+          reactions: map(BlogPostCommentReactionDetails, {
+            count: comment.reactions.length,
+            currentProfileReactionId: comment.reactions.find(
+              (reaction) => reaction.profileId === currentProfileId,
+            )?.id,
+            names: comment.reactions.map((reaction) => reaction.profile.name),
           }),
         }),
       ),

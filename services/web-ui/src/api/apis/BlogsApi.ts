@@ -19,6 +19,7 @@ import type {
   BlogPhotoDetails,
   BlogPostDetails,
   CreateBlogPostCommentCommand,
+  CreateBlogPostCommentReactionCommand,
   CreateBlogPostReactionCommand,
   DeleteBlogPostCommand,
   UpdateBlogPostCommand,
@@ -30,6 +31,8 @@ import {
     BlogPostDetailsToJSON,
     CreateBlogPostCommentCommandFromJSON,
     CreateBlogPostCommentCommandToJSON,
+    CreateBlogPostCommentReactionCommandFromJSON,
+    CreateBlogPostCommentReactionCommandToJSON,
     CreateBlogPostReactionCommandFromJSON,
     CreateBlogPostReactionCommandToJSON,
     DeleteBlogPostCommandFromJSON,
@@ -48,12 +51,20 @@ export interface CreateBlogPostCommentRequest {
     createBlogPostCommentCommand: CreateBlogPostCommentCommand;
 }
 
+export interface CreateBlogPostCommentReactionRequest {
+    createBlogPostCommentReactionCommand: CreateBlogPostCommentReactionCommand;
+}
+
 export interface CreateBlogPostReactionRequest {
     createBlogPostReactionCommand: CreateBlogPostReactionCommand;
 }
 
 export interface DeleteBlogPostCommentRequest {
     id: string;
+}
+
+export interface DeleteBlogPostCommentReactionRequest {
+    reactionId: string;
 }
 
 export interface DeleteBlogPostReactionRequest {
@@ -177,6 +188,36 @@ export class BlogsApi extends runtime.BaseAPI {
 
     /**
      */
+    async createBlogPostCommentReactionRaw(requestParameters: CreateBlogPostCommentReactionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.createBlogPostCommentReactionCommand === null || requestParameters.createBlogPostCommentReactionCommand === undefined) {
+            throw new runtime.RequiredError('createBlogPostCommentReactionCommand','Required parameter requestParameters.createBlogPostCommentReactionCommand was null or undefined when calling createBlogPostCommentReaction.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/api/blogs/comments/reactions`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CreateBlogPostCommentReactionCommandToJSON(requestParameters.createBlogPostCommentReactionCommand),
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async createBlogPostCommentReaction(requestParameters: CreateBlogPostCommentReactionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.createBlogPostCommentReactionRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     */
     async createBlogPostReactionRaw(requestParameters: CreateBlogPostReactionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.createBlogPostReactionCommand === null || requestParameters.createBlogPostReactionCommand === undefined) {
             throw new runtime.RequiredError('createBlogPostReactionCommand','Required parameter requestParameters.createBlogPostReactionCommand was null or undefined when calling createBlogPostReaction.');
@@ -234,6 +275,37 @@ export class BlogsApi extends runtime.BaseAPI {
      */
     async deleteBlogPostComment(requestParameters: DeleteBlogPostCommentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
         await this.deleteBlogPostCommentRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     */
+    async deleteBlogPostCommentReactionRaw(requestParameters: DeleteBlogPostCommentReactionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.reactionId === null || requestParameters.reactionId === undefined) {
+            throw new runtime.RequiredError('reactionId','Required parameter requestParameters.reactionId was null or undefined when calling deleteBlogPostCommentReaction.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.reactionId !== undefined) {
+            queryParameters['reactionId'] = requestParameters.reactionId;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/blogs/comments/reactions`,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async deleteBlogPostCommentReaction(requestParameters: DeleteBlogPostCommentReactionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.deleteBlogPostCommentReactionRaw(requestParameters, initOverrides);
     }
 
     /**

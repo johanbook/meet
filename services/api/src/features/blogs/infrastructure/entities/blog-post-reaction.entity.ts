@@ -8,7 +8,7 @@ import { BlogPost } from "./blog-post.entity";
 @Entity()
 @Unique(["blogPostId", "profileId"])
 export class BlogPostReaction extends BaseEntity {
-  @ManyToOne(() => BlogPost, (blogPost) => blogPost.comments, {
+  @ManyToOne(() => BlogPost, (blogPost) => blogPost.reactions, {
     onDelete: "CASCADE",
   })
   blogPost!: BlogPost;

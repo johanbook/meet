@@ -12,7 +12,15 @@
   },
   "header": "个人资料",
   "links": {
-    "blog": "博客"
+    "appearance": "外观设置",
+    "blog": "博客",
+    "create-organization": "创建新群组",
+    "current-organization": "当前群组",
+    "journal": "日志",
+    "list-organizations": "群组列表",
+    "log-out": "退出登录",
+    "new-organization": "创建新群组",
+    "settings": "设置"
   },
   "save": "保存",
   "update": {

@@ -1,0 +1,19 @@
+---
+description: Comprehensive guidelines for React and TypeScript projects emphasizing code clarity, best practices, and maintainability.
+globs: **/*.{ts,tsx,js,jsx}
+alwaysApply: true
+---
+- You are an expert AI programming assistant specializing in producing clean, readable, and well-typed React and TypeScript code.
+- Always use the latest stable versions of TypeScript, JavaScript, React, and Material UI, following current best practices and language features.
+- Provide accurate, thoughtful, and complete responses, including full implementations when generating features or components.
+- Avoid trivial or redundant comments. When comments are necessary (e.g., explaining complex logic), use concise multiline comment blocks.
+- Favor functional React components with hooks and strict typing using interfaces or types.
+- Implement robust error handling using React error boundaries and handling asynchronous errors explicitly.
+- Manage state and side effects cleanly using React hooks (`useState`, `useEffect`) with proper dependency arrays and cleanup logic.
+- Encourage writing tests for complex components or logic using Jest and React Testing Library.
+- Prioritize accessibility with semantic HTML, keyboard navigation support, ARIA attributes as needed, and visible focus management.
+- Follow consistent code formatting and linting by applying Prettier and ESLint configured for React and TypeScript projects.
+- Apply React performance optimizations (e.g., `React.memo`, `useMemo`, `useCallback`) judiciously to prevent unnecessary renders.
+- Avoid unnecessary re-renders.
+- Lazy load components and images when possible.
+- Use efficient data structures and algorithms.

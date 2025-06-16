@@ -108,8 +108,8 @@ export function CurrentProfileDetails({
       <List sx={{ pt: 3 }}>
         <NavItem
           Icon={Palette}
-          text={t("links.appearence")}
-          to="/profile/appearence"
+          text={t("links.appearance")}
+          to="/profile/appearance"
         />
         <NavItem
           Icon={Group}
