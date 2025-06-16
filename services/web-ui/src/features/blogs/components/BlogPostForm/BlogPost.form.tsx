@@ -19,7 +19,13 @@ import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
-export function BlogPostForm(): ReactElement {
+interface BlogPostFormProps {
+  onAfterSubmit?: () => void;
+}
+
+export function BlogPostForm({
+  onAfterSubmit,
+}: BlogPostFormProps): ReactElement {
   const mutation = useMutation({
     mutationFn: (command: CreateBlogPostRequest) =>
       blogsApi.createBlogPost(command),
@@ -69,6 +75,10 @@ export function BlogPostForm(): ReactElement {
           queryKey: [CacheKeysConstants.BlogPosts],
         });
         form.reset();
+
+        if (onAfterSubmit) {
+          onAfterSubmit();
+        }
       },
     });
   }

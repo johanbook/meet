@@ -1,4 +1,4 @@
-import { AccountCircle, Chat, Home } from "@mui/icons-material";
+import { AccountCircle, AddCircle, Chat, Home } from "@mui/icons-material";
 
 import { DesktopNav, MobileNav } from "./types";
 
@@ -34,9 +34,9 @@ export const mobileNav: MobileNav = {
       url: "/",
     },
     {
-      Icon: Chat,
-      name: "navigation.chat",
-      url: "/chat",
+      Icon: AddCircle,
+      name: "navigation.blog",
+      url: "/blog/create",
     },
     {
       Icon: AccountCircle,
