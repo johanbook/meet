@@ -35,12 +35,25 @@ function BottomNavigationListItem({
 }
 
 export function BottomNavigation(): ReactElement {
+  const fractionalWidth = 1 / mobileNav.bottom.length;
+
   return (
-    <AppBar position="fixed" sx={{ top: "auto", bottom: 0, left: 0, right: 0 }}>
+    <AppBar
+      position="fixed"
+      sx={{
+        top: "auto",
+        bottom: 0,
+        left: 0,
+        right: 0,
+
+        // This looks better on mobile as there will be navigation buttons below
+        boxShadow: "none",
+      }}
+    >
       <Toolbar>
         {mobileNav.bottom.map((item) => (
           <BottomNavigationListItem
-            fractionalWidth={1 / mobileNav.bottom.length}
+            fractionalWidth={fractionalWidth}
             key={item.url}
             item={item}
           />
