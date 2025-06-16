@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { Link as RouterLink, useLocation } from "react-router";
 
-import { Box, Button, Paper } from "@mui/material";
+import { AppBar, Button, Toolbar } from "@mui/material";
 
 import { mobileNav } from "../nav.items";
 import { NavItem } from "../types";
@@ -36,18 +36,8 @@ function BottomNavigationListItem({
 
 export function BottomNavigation(): ReactElement {
   return (
-    <Paper
-      component="footer"
-      elevation={3}
-      sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          padding: 1,
-          height: 56,
-        }}
-      >
+    <AppBar position="fixed" sx={{ top: "auto", bottom: 0, left: 0, right: 0 }}>
+      <Toolbar>
         {mobileNav.bottom.map((item) => (
           <BottomNavigationListItem
             fractionalWidth={1 / mobileNav.bottom.length}
@@ -55,7 +45,7 @@ export function BottomNavigation(): ReactElement {
             item={item}
           />
         ))}
-      </Box>
-    </Paper>
+      </Toolbar>
+    </AppBar>
   );
 }
