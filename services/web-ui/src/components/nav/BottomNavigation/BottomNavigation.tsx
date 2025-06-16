@@ -39,6 +39,7 @@ export function BottomNavigation(): ReactElement {
 
   return (
     <AppBar
+      component="nav"
       position="fixed"
       sx={{
         top: "auto",
