@@ -1,7 +1,8 @@
 {
   "actions": {
     "create": {
-      "error": "Something went wrong when trying to create the blog post"
+      "error": "Something went wrong when trying to create the blog post",
+      "success": "Your post was published!"
     },
     "create-comment": {
       "error": "Something went wrong when trying to post the comment"
