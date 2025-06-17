@@ -3,11 +3,13 @@ import { useParams } from "react-router";
 
 import { Typography } from "@mui/material";
 
+import { ResponseError } from "src/api";
 import { blogsApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 import { useMetaData } from "src/hooks/useMetaData";
+import { ErrorView } from "src/views/ErrorView";
 
 import { BlogPost } from "../../components/BlogPost";
 import { BlogPostPageNav } from "./BlogPostPage.nav";
@@ -25,6 +27,17 @@ export function BlogPostPageContainer(): ReactElement {
   });
 
   if (error) {
+    if (error instanceof ResponseError && error.response.status === 404) {
+      return (
+        <BlogPostPageNav>
+          <ErrorView
+            message="Post not found"
+            description="Make sure you are in the right group"
+          />
+        </BlogPostPageNav>
+      );
+    }
+
     return (
       <BlogPostPageNav>
         <ErrorMessage error={error} />
