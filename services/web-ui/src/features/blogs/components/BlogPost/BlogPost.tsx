@@ -120,12 +120,21 @@ export function BlogPost({
 
             return (
               <ListItem key={comment.id} style={{ alignItems: "start" }}>
-                <Avatar src={comment.profile.imageUrl} />
+                <Link to={`/profile/${comment.profile.id}`}>
+                  <Avatar src={comment.profile.imageUrl} />
+                </Link>
 
                 <Box sx={{ pl: 1, flexGrow: 1 }}>
                   <Box sx={{ alignItems: "center", display: "flex" }}>
                     <Typography>
-                      <b>{comment.profile.name}</b>
+                      <b>
+                        <Link
+                          to={`/profile/${comment.profile.id}`}
+                          style={{ color: "inherit", textDecoration: "none" }}
+                        >
+                          {comment.profile.name}
+                        </Link>
+                      </b>
                     </Typography>
                     <Typography sx={{ paddingLeft: 1 / 2 }} variant="subtitle2">
                       {timeSince(comment.createdAt)}
