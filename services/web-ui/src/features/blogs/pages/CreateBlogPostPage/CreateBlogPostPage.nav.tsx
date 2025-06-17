@@ -2,9 +2,10 @@ import { ReactElement, ReactNode } from "react";
 import { Link } from "react-router";
 
 import { ArrowBack } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 
 import { Nav } from "src/components/nav";
+import { useTranslation } from "src/core/i18n";
 
 interface CreateBlogPostPageNavProps {
   children: ReactNode;
@@ -13,6 +14,8 @@ interface CreateBlogPostPageNavProps {
 export function CreateBlogPostPageNav({
   children,
 }: CreateBlogPostPageNavProps): ReactElement {
+  const { t } = useTranslation("blog-creation");
+
   const appBarContent = (
     <>
       <IconButton
@@ -24,6 +27,8 @@ export function CreateBlogPostPageNav({
       >
         <ArrowBack />
       </IconButton>
+
+      <Typography variant="h5">{t("header")}</Typography>
     </>
   );
 

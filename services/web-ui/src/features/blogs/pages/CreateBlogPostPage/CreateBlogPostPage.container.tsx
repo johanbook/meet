@@ -12,7 +12,7 @@ import { CreateBlogPostPageNav } from "./CreateBlogPostPage.nav";
 export function CreateBlogPostPageContainer(): ReactElement {
   const navigate = useNavigate();
   const snackbar = useSnackbar();
-  const { t } = useTranslation("blog");
+  const { t } = useTranslation("blog-creation");
 
   const handleSubmit = () => {
     snackbar.success(t("actions.create.success"));

@@ -1,0 +1,15 @@
+{
+  "actions": {
+    "create": {
+      "error": "Något gick fel när blogposten skulle skapas",
+      "success": "Ditt inlägg har blivit postat"
+    }
+  },
+  "form": {
+    "placeholder": "Säg något om din dag"
+  },
+  "header": "Skapa ett nytt inlägg",
+  "links": {
+    "back": "Tillbaka"
+  }
+}
