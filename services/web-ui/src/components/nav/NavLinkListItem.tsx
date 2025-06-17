@@ -19,8 +19,7 @@ export interface NavLinkListItemProps {
 
 export function NavLinkListItem({ item }: NavLinkListItemProps): ReactElement {
   const location = useLocation();
-  const regexp = new RegExp(item.isActive || item.url);
-  const match = regexp.test(location.pathname);
+  const isActive = item.checkIfActive(location.pathname);
 
   const { t } = useTranslation("core");
 
@@ -28,14 +27,14 @@ export function NavLinkListItem({ item }: NavLinkListItemProps): ReactElement {
     <ListItem>
       <ListItemButton component={RouterLink} to={item.url}>
         <ListItemIcon>
-          <item.Icon color={match ? "secondary" : undefined} />
+          <item.Icon color={isActive ? "secondary" : undefined} />
         </ListItemIcon>
 
         <ListItemText
           primary={t(item.name)}
           primaryTypographyProps={{
             sx: {
-              fontWeight: match ? 600 : 400,
+              fontWeight: isActive ? 600 : 400,
             },
           }}
         />
