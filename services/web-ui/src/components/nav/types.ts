@@ -2,7 +2,7 @@ import { SvgIconComponent } from "@mui/icons-material";
 
 export interface NavItem {
   Icon: SvgIconComponent;
-  isActive?: RegExp;
+  checkIfActive: (path: string) => boolean;
   name: string;
   url: string;
 }

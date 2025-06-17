@@ -16,8 +16,7 @@ function BottomNavigationListItem({
   item,
 }: BottomNavigationListItemProps): ReactElement {
   const location = useLocation();
-  const regexp = new RegExp(item.isActive || item.url);
-  const match = regexp.test(location.pathname);
+  const isActive = item.checkIfActive(location.pathname);
 
   return (
     <Button
@@ -27,7 +26,7 @@ function BottomNavigationListItem({
     >
       <item.Icon
         sx={{
-          color: match ? "primary.main" : "action.active",
+          color: isActive ? "primary.main" : "action.active",
         }}
       />
     </Button>
