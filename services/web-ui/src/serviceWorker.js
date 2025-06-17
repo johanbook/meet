@@ -55,16 +55,29 @@ self.addEventListener("push", (event) => {
 
   const message = payload.message || "Notification";
   const description = payload.description || "";
+  const path = payload.resourcePath || "/";
 
   event.waitUntil(
     self.registration.showNotification(message, {
       body: description,
       icon: "android-chrome-192x192.png",
+      data: {
+        url: "https://app.meetly.site" + path,
+      },
     }),
   );
 });
 
-self.addEventListener("notificationclick", function (event) {
+self.addEventListener("notificationclick", (event) => {
   event.notification.close();
-  event.waitUntil(self.clients.openWindow(window.location.origin));
+
+  const url = event.notification.data.url;
+
+  event.waitUntil(
+    clients.matchAll({ type: "window", includeUncontrolled: true }).then(() => {
+      if (clients.openWindow) {
+        clients.openWindow(url);
+      }
+    }),
+  );
 });
