@@ -1,13 +1,7 @@
 import { ReactElement, SyntheticEvent } from "react";
 
 import { Close, InsertPhoto, Send } from "@mui/icons-material";
-import {
-  Box,
-  CircularProgress,
-  IconButton,
-  InputAdornment,
-  TextField,
-} from "@mui/material";
+import { Box, Button, IconButton, TextField } from "@mui/material";
 
 import { CreateBlogPostRequest } from "src/api";
 import { blogsApi } from "src/apis";
@@ -18,6 +12,8 @@ import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
+
+import { BlobPhotos } from "./BlobPhotos";
 
 interface BlogPostFormProps {
   onAfterSubmit?: () => void;
@@ -86,49 +82,19 @@ export function BlogPostForm({
   return (
     <Box>
       <form onSubmit={handleSubmit}>
-        <TextField
-          disabled={mutation.isPending}
-          fullWidth
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                {mutation.isPending ? (
-                  <CircularProgress />
-                ) : (
-                  <IconButton
-                    color="primary"
-                    disabled={!form.state.content.value}
-                    type="submit"
-                  >
-                    <Send />
-                  </IconButton>
-                )}
-              </InputAdornment>
-            ),
-            startAdornment: (
-              <InputAdornment position="start">
-                <UploadIconButton
-                  accept="image/*"
-                  multiple
-                  onChange={(photos) =>
-                    form.setValue({
-                      photos: [...(form.state.photos.value || []), ...photos],
-                    })
-                  }
-                >
-                  <InsertPhoto />
-                </UploadIconButton>
-              </InputAdornment>
-            ),
-          }}
-          multiline
-          onChange={(event) => form.setValue({ content: event.target.value })}
-          placeholder={t("form.placeholder") || ""}
-          rows={4}
-          value={form.state.content.value}
-        />
+        <UploadIconButton
+          accept="image/*"
+          multiple
+          onChange={(photos) =>
+            form.setValue({
+              photos: [...(form.state.photos.value || []), ...photos],
+            })
+          }
+        >
+          <InsertPhoto />
+        </UploadIconButton>
 
-        <Box sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
+        <Box sx={{ display: "none", gap: 2, alignItems: "flex-start" }}>
           {form.state.photos.value?.map((photo, index) => (
             <Box key={index} sx={{ position: "relative" }}>
               <Photo
@@ -159,6 +125,32 @@ export function BlogPostForm({
             </Box>
           ))}
         </Box>
+
+        <Box>
+          <BlobPhotos srcs={form.state.photos.value || []} />
+        </Box>
+
+        <TextField
+          disabled={mutation.isPending}
+          fullWidth
+          multiline
+          onChange={(event) => form.setValue({ content: event.target.value })}
+          placeholder={t("form.placeholder") || ""}
+          rows={4}
+          value={form.state.content.value}
+        />
+
+        <Button
+          color="primary"
+          disabled={!form.state.content.value}
+          loading={mutation.isPending}
+          sx={{ mt: 4 }}
+          type="submit"
+          variant="contained"
+        >
+          <Send sx={{ mr: 2 }} />
+          Submit
+        </Button>
       </form>
     </Box>
   );

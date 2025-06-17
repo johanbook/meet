@@ -21,7 +21,7 @@ export function CreateBlogPostPageContainer(): ReactElement {
 
   return (
     <CreateBlogPostPageNav>
-      <Box sx={{ py: 2, px: 2 }}>
+      <Box sx={{ py: 2 }}>
         <BlogPostForm onAfterSubmit={handleSubmit} />
       </Box>
     </CreateBlogPostPageNav>
