@@ -65,7 +65,9 @@ export class UserInfoController {
       throw new NotFoundException("User not found");
     }
 
-    return { email: users[0].emails[0] };
+    const user = users[0];
+
+    return { email: user.emails[0], id: user.id };
   }
 
   @Put("/email")
