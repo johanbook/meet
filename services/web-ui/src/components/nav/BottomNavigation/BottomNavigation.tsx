@@ -39,6 +39,7 @@ export function BottomNavigation(): ReactElement {
 
   return (
     <AppBar
+      color="inherit"
       component="nav"
       position="fixed"
       sx={{
@@ -49,6 +50,7 @@ export function BottomNavigation(): ReactElement {
 
         // This looks better on mobile as there will be navigation buttons below
         boxShadow: "none",
+        borderTop: (theme) => `1px solid ${theme.palette.divider}`,
       }}
     >
       <Toolbar>
