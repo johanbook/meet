@@ -13,7 +13,7 @@ export function CurrentProfilePageNav({
 }: CurrentProfilePageNavProps): ReactElement {
   return (
     <Nav>
-      <Box sx={{ pt: 6, px: 3, mb: 3, height: "100%" }}>{children}</Box>{" "}
+      <Box sx={{ pt: 6, px: 3, mb: 3, height: "100%" }}>{children}</Box>
     </Nav>
   );
 }
