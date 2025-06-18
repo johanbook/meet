@@ -2,6 +2,12 @@ import { ReactElement } from "react";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router";
 
 import { GlobalDialogProvider } from "src/core/dialog";
+import {
+  CurrentProfilePage,
+  ProfileGuard,
+  ProfileJournalPage,
+  ProfilePage,
+} from "src/core/profiles";
 import { NavigationTrackingProvider } from "src/core/tracking/NavigationTrackingProvider";
 import { BlogPhotoListPage } from "src/features/blogs/pages/BlogPhotoListPage";
 import { BlogPostListPage } from "src/features/blogs/pages/BlogPostListPage";
@@ -14,13 +20,9 @@ import { AppearancePage } from "src/features/settings/pages/AppearancePage";
 import { SettingsPage } from "src/features/settings/pages/SettingsPage";
 import { CreateOrganizationPage } from "src/pages/CreateOrganizationPage";
 import { CurrentOrganizationPage } from "src/pages/CurrentOrganizationPage";
-import { CurrentProfilePage } from "src/pages/CurrentProfilePage";
 import { NotFoundPage } from "src/pages/NotFoundPage";
 import { OrganizationJournalPage } from "src/pages/OrganizationJournalPage";
 import { OrganizationListPage } from "src/pages/OrganizationListPage";
-import { ProfileGuard } from "src/pages/ProfileGuard";
-import { ProfileJournalPage } from "src/pages/ProfileJournalPage";
-import { ProfilePage } from "src/pages/ProfilePage";
 
 const router = createBrowserRouter([
   {
