@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { NotFoundPage } from ".";
+import { NotFoundView } from ".";
 
 export default {
-  title: "Pages/Not found",
-  component: NotFoundPage,
+  title: "Views/Not found",
+  component: NotFoundView,
 } as Meta;
 
-type Story = StoryObj<typeof NotFoundPage>;
+type Story = StoryObj<typeof NotFoundView>;
 
 export const Default: Story = {
   args: {},

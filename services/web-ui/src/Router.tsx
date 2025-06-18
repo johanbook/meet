@@ -24,7 +24,7 @@ import { ChatPage } from "src/features/chat/pages/ChatPage";
 import { CreateChatPage } from "src/features/chat/pages/CreateChatPage";
 import { AppearancePage } from "src/features/settings/pages/AppearancePage";
 import { SettingsPage } from "src/features/settings/pages/SettingsPage";
-import { NotFoundPage } from "src/pages/NotFoundPage";
+import { NotFoundView } from "src/views/NotFoundView";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
         </GlobalDialogProvider>
       </NavigationTrackingProvider>
     ),
-    errorElement: <NotFoundPage />,
+    errorElement: <NotFoundView />,
     children: [
       {
         index: true,
