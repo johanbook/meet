@@ -2,9 +2,9 @@ import { ReactElement } from "react";
 
 import { ErrorView } from "src/views/ErrorView";
 
-import { NotFoundNav } from "./NotFoundPage.nav";
+import { NotFoundNav } from "./NotFoundView.nav";
 
-export function NotFoundPage(): ReactElement {
+export function NotFoundView(): ReactElement {
   return (
     <NotFoundNav>
       <ErrorView
