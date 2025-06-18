@@ -3,6 +3,12 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router";
 
 import { GlobalDialogProvider } from "src/core/dialog";
 import {
+  CreateOrganizationPage,
+  CurrentOrganizationPage,
+  OrganizationJournalPage,
+  OrganizationListPage,
+} from "src/core/organizations";
+import {
   CurrentProfilePage,
   ProfileGuard,
   ProfileJournalPage,
@@ -18,11 +24,7 @@ import { ChatPage } from "src/features/chat/pages/ChatPage";
 import { CreateChatPage } from "src/features/chat/pages/CreateChatPage";
 import { AppearancePage } from "src/features/settings/pages/AppearancePage";
 import { SettingsPage } from "src/features/settings/pages/SettingsPage";
-import { CreateOrganizationPage } from "src/pages/CreateOrganizationPage";
-import { CurrentOrganizationPage } from "src/pages/CurrentOrganizationPage";
 import { NotFoundPage } from "src/pages/NotFoundPage";
-import { OrganizationJournalPage } from "src/pages/OrganizationJournalPage";
-import { OrganizationListPage } from "src/pages/OrganizationListPage";
 
 const router = createBrowserRouter([
   {
