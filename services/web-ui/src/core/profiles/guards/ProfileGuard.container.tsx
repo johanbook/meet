@@ -4,7 +4,7 @@ import { profileApi } from "src/apis";
 import { useQuery } from "src/core/query";
 import { ErrorView } from "src/views/ErrorView";
 
-import { ProfileCreationPage } from "../ProfileCreationPage";
+import { ProfileCreationPage } from "../pages/ProfileCreationPage";
 import { ProfileGuardNav } from "./ProfileGuard.nav";
 import { ProfileGuardSkeleton } from "./ProfileGuard.skeleton";
 
