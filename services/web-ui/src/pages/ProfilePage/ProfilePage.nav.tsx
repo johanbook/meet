@@ -23,7 +23,7 @@ export function ProfilePageNav({
 
   return (
     <Nav appBarContent={appBarContent}>
-      <Box sx={{ pt: 1 }}>{children}</Box>
+      <Box sx={{ pt: 4 }}>{children}</Box>
     </Nav>
   );
 }
