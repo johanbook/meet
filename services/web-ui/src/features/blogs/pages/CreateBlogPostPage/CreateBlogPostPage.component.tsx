@@ -19,13 +19,13 @@ import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
-interface BlogPostFormProps {
+interface CreateBlogPostPageComponentProps {
   onAfterSubmit?: () => void;
 }
 
-export function BlogPostForm({
+export function CreateBlogPostPageComponent({
   onAfterSubmit,
-}: BlogPostFormProps): ReactElement {
+}: CreateBlogPostPageComponentProps): ReactElement {
   const mutation = useMutation({
     mutationFn: (command: CreateBlogPostRequest) =>
       blogsApi.createBlogPost(command),

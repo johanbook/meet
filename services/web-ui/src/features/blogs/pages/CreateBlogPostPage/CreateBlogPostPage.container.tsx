@@ -6,7 +6,7 @@ import { Box } from "@mui/material";
 import { useTranslation } from "src/core/i18n";
 import { useSnackbar } from "src/core/snackbar";
 
-import { BlogPostForm } from "../../components/BlogPostForm";
+import { CreateBlogPostPageComponent } from "./CreateBlogPostPage.component";
 import { CreateBlogPostPageNav } from "./CreateBlogPostPage.nav";
 
 export function CreateBlogPostPageContainer(): ReactElement {
@@ -22,7 +22,7 @@ export function CreateBlogPostPageContainer(): ReactElement {
   return (
     <CreateBlogPostPageNav>
       <Box sx={{ py: 2, px: 2 }}>
-        <BlogPostForm onAfterSubmit={handleSubmit} />
+        <CreateBlogPostPageComponent onAfterSubmit={handleSubmit} />
       </Box>
     </CreateBlogPostPageNav>
   );
