@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 
 import { organizationsApi } from "src/apis";
-import { ProfileAvatar } from "src/components/ProfileAvatar";
+import { ProfileAvatar } from "src/components/ui";
 import { Button } from "src/components/ui";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { Permissions, useAuthorization } from "src/core/authorization";

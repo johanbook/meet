@@ -9,7 +9,14 @@ export interface ProfileAvatarProps {
 
 export function ProfileAvatar({ name, src }: ProfileAvatarProps): ReactElement {
   if (src) {
-    return <Avatar imgProps={{ loading: "lazy" }} src={src} />;
+    return (
+      <Avatar
+        slotProps={{
+          img: { loading: "lazy" },
+        }}
+        src={src}
+      />
+    );
   }
 
   if (name) {
