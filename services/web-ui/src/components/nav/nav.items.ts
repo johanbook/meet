@@ -1,11 +1,16 @@
-import { AccountCircle, AddCircle, Chat, Home } from "@mui/icons-material";
+import {
+  AccountCircle,
+  AddCircleOutlineRounded,
+  Chat,
+  HomeRounded,
+} from "@mui/icons-material";
 
 import { DesktopNav, MobileNav } from "./types";
 
 export const desktopNav: DesktopNav = {
   top: [
     {
-      Icon: Home,
+      Icon: HomeRounded,
       checkIfActive: (path) => path === "/" || path.startsWith("/blog"),
       name: "navigation.blog",
       url: "/",
@@ -31,7 +36,7 @@ export const desktopNav: DesktopNav = {
 export const mobileNav: MobileNav = {
   bottom: [
     {
-      Icon: Home,
+      Icon: HomeRounded,
       checkIfActive: (path) => {
         if (path === "/blog/create") {
           return false;
@@ -43,7 +48,7 @@ export const mobileNav: MobileNav = {
       url: "/",
     },
     {
-      Icon: AddCircle,
+      Icon: AddCircleOutlineRounded,
       checkIfActive: (path) => path === "/blog/create",
       name: "navigation.blog",
       url: "/blog/create",
