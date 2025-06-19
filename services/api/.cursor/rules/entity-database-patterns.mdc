@@ -1,0 +1,17 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Entity & Database Patterns
+
+- All entities must extend `BaseEntity` from `src/core/database`.
+- Use `@Entity()` decorator for TypeORM entities.
+- Use `@Unique()` decorator for composite unique constraints (e.g., `@Unique(["parentId", "profileId"])`).
+- Establish proper relationships using `@ManyToOne`, `@OneToMany` decorators.
+- Use `cascade: true` for OneToMany relationships when child entities should be auto-managed.
+- Use `onDelete: "CASCADE"` for foreign key relationships when parent deletion should cascade.
+- Column types should be explicitly defined (e.g., `{ type: "varchar", length: 8 }`).
+- Import related entities in the correct order to avoid circular dependencies.
+- Use meaningful entity names that reflect the business domain.
+- Always include foreign key columns alongside relationship decorators.

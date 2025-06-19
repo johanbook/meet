@@ -1,0 +1,17 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Error Handling
+
+- Use `NotFoundException` for entity not found scenarios.
+- Use `AuthorizationService.authorizeOwnerOrAdmin()` for authorization checks.
+- Throw specific error messages that match the entity type (e.g., "Blog post comment not found").
+- Use appropriate HTTP status codes through NestJS exceptions.
+- Handle validation errors at the command/query level using class-validator.
+- Implement proper error logging for debugging purposes.
+- Return consistent error response formats across all endpoints.
+- Use custom exceptions for domain-specific error cases.
+- Validate input data before processing business logic.
+- Handle database constraint violations gracefully.
