@@ -1,9 +1,10 @@
 import { ReactElement, useState } from "react";
 
-import { Button, MenuItem, Select, Typography } from "@mui/material";
+import { Button, MenuItem, Typography } from "@mui/material";
 
 import { OrganizationMemberDetails, UpdateMemberRoleCommand } from "src/api";
 import { organizationsApi } from "src/apis";
+import { Select } from "src/components/ui";
 import { Dialog } from "src/components/ui/Dialog";
 import { Role } from "src/core/authorization";
 import { GlobalDialogProps } from "src/core/dialog/dialog.context";
@@ -68,7 +69,7 @@ export function OrganizationMemberUpdateDialog({
         <Select
           fullWidth
           label="Role"
-          onChange={(event) => setRole(event.target.value as Role)}
+          onChange={(role) => setRole(role as Role)}
           value={role}
         >
           {Object.entries(Role).map(([name, value]) => (
