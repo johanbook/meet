@@ -7,3 +7,4 @@ export { ProfileAvatar } from "./ProfileAvatar";
 export { Switch } from "./Switch";
 export { Table } from "./Table";
 export { TextField } from "./TextField";
+export { Select } from "./Select";

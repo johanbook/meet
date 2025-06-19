@@ -26,6 +26,7 @@ function BottomNavigationListItem({
     >
       <item.Icon
         sx={{
+          fontSize: 28,
           color: isActive ? "primary.main" : "action.active",
         }}
       />
