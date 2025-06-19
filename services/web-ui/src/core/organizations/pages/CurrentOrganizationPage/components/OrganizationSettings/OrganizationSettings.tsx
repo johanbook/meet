@@ -94,7 +94,7 @@ export function OrganizationSettings({
         disabled={mutation.isPending}
         fullWidth
         label={t("settings.name")}
-        inputProps={{ maxLength: 128 }}
+        maxLength={128}
         onChange={(name) => form.setValue({ name })}
         sx={{ mt: 2 }}
         value={form.state.name.value}
