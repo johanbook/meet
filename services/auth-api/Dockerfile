@@ -22,6 +22,9 @@ ENV PORT=80
 COPY package.json package-lock.json ./
 COPY --from=builder /app/dist ./dist
 RUN npm ci
+RUN chown -R node:node /app
+
+USER node
 
 ENTRYPOINT [ "npm" ]
 CMD [  "run", "start:prod" ]
