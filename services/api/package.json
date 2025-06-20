@@ -22,6 +22,7 @@
     "test:cov": "vitest src --coverage"
   },
   "dependencies": {
+    "@fastify/helmet": "13.0.1",
     "@fastify/multipart": "9.0.3",
     "@fastify/static": "8.2.0",
     "@nestjs/common": "11.1.2",
