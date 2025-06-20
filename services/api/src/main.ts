@@ -37,7 +37,9 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
   app.useGlobalInterceptors(new LoggingInterceptor());
 
-  await app.register(fastifyHelmet);
+  await app.register(fastifyHelmet, {
+    contentSecurityPolicy: { reportOnly: true },
+  });
 
   await app.register(fastifyMultipart, {
     attachFieldsToBody: "keyValues",

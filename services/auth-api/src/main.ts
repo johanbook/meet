@@ -1,3 +1,4 @@
+import fastifyHelmet from "@fastify/helmet";
 import { NestFactory } from "@nestjs/core";
 import {
   FastifyAdapter,
@@ -34,6 +35,10 @@ async function bootstrap() {
 
   const document = createOpenApiDocument(app);
   SwaggerModule.setup("/auth/api/docs", app, document);
+
+  await app.register(fastifyHelmet, {
+    contentSecurityPolicy: { reportOnly: true },
+  });
 
   await app.listen(PORT, "0.0.0.0");
 }
