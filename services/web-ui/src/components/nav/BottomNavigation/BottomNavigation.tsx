@@ -26,8 +26,6 @@ export function BottomNavigation(): ReactElement {
         bottom: 0,
         left: 0,
         right: 0,
-
-        // This looks better on mobile as there will be navigation buttons below
         borderTop: (theme) => `1px solid ${theme.palette.divider}`,
       }}
     >
