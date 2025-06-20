@@ -64,6 +64,11 @@ const COMMENT: BlogPostCommentDetails = {
     id: 2,
     name: "John Doe",
   },
+  reactions: {
+    count: 0,
+    currentProfileReactionId: undefined,
+    names: [],
+  },
 };
 
 export const Default: Story = {

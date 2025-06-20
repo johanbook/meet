@@ -19,6 +19,7 @@ import { useTranslation } from "src/core/i18n";
 import { timeSince } from "src/utils/time";
 
 import { BlogPostCommentForm } from "../BlogPostCommentForm/BlogPostComment.form";
+import { BlogPostCommentLikeButton } from "../BlogPostCommentLikeButton";
 import { BlogPostLikeButton } from "../BlogPostLikeButton/BlogPostLikeButton";
 import { BlogPostMenu } from "../BlogPostMenu";
 import { BlogPostPhotos } from "../BlogPostPhotos/BlogPostPhotos";
@@ -113,28 +114,59 @@ export function BlogPost({
 
       <Collapse in={showComments}>
         <List>
-          {post.comments.map((comment) => (
-            <ListItem key={comment.id} style={{ alignItems: "start" }}>
-              <Avatar src={comment.profile.imageUrl} />
+          {post.comments.map((comment) => {
+            const firstCommentReactions = [...comment.reactions.names];
+            const lastCommentReaction = firstCommentReactions.pop();
 
-              <Box sx={{ pl: 1 }}>
-                <Box sx={{ alignItems: "center", display: "flex" }}>
-                  <Typography>
-                    <b>{comment.profile.name}</b>
+            return (
+              <ListItem key={comment.id} style={{ alignItems: "start" }}>
+                <Link to={`/profile/${comment.profile.id}`}>
+                  <Avatar src={comment.profile.imageUrl} />
+                </Link>
+
+                <Box sx={{ pl: 1, flexGrow: 1 }}>
+                  <Box sx={{ alignItems: "center", display: "flex" }}>
+                    <Typography>
+                      <b>
+                        <Link
+                          to={`/profile/${comment.profile.id}`}
+                          style={{ color: "inherit", textDecoration: "none" }}
+                        >
+                          {comment.profile.name}
+                        </Link>
+                      </b>
+                    </Typography>
+                    <Typography sx={{ paddingLeft: 1 / 2 }} variant="subtitle2">
+                      {timeSince(comment.createdAt)}
+                    </Typography>
+                  </Box>
+
+                  <Typography
+                    sx={{ overflowWrap: "anywhere", whiteSpace: "pre-wrap" }}
+                  >
+                    {comment.content}
                   </Typography>
-                  <Typography sx={{ paddingLeft: 1 / 2 }} variant="subtitle2">
-                    {timeSince(comment.createdAt)}
-                  </Typography>
+
+                  <Box sx={{ alignItems: "center", display: "flex", mt: 0.5 }}>
+                    <BlogPostCommentLikeButton
+                      blogPostCommentId={comment.id}
+                      reactionId={comment.reactions.currentProfileReactionId}
+                    />
+
+                    {comment.reactions.count > 0 && (
+                      <Typography variant="caption" sx={{ ml: 1 }}>
+                        {t("reactions.count", {
+                          count: comment.reactions.count,
+                          first: firstCommentReactions.join(", "),
+                          last: lastCommentReaction,
+                        })}
+                      </Typography>
+                    )}
+                  </Box>
                 </Box>
-
-                <Typography
-                  sx={{ overflowWrap: "anywhere", whiteSpace: "pre-wrap" }}
-                >
-                  {comment.content}
-                </Typography>
-              </Box>
-            </ListItem>
-          ))}
+              </ListItem>
+            );
+          })}
         </List>
 
         <BlogPostCommentForm blogPostId={post.id} />

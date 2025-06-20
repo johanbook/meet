@@ -1,0 +1,17 @@
+---
+description: Specific guidelines for TypeScript usage, including strict typing and interface usage.
+globs: **/*.{ts}
+alwaysApply: true
+---
+# TypeScript Usage Rules
+
+- Utilize TypeScript's features to ensure type safety.
+- Prefer interfaces over types when defining object shapes.
+- Use generics to create reusable components and functions.
+- Enforce strict typing and avoid 'any' type as much as possible.
+- Use proper type annotations for function parameters and return types.
+- Leverage union types and type guards for better type safety.
+- Use `readonly` modifier for immutable properties.
+- Prefer type assertions over type casting when necessary.
+- Use utility types (Partial, Pick, Omit) for better type manipulation.
+- Implement proper null/undefined handling with strict null checks.

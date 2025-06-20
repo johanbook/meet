@@ -1,8 +1,5 @@
 {
   "actions": {
-    "create": {
-      "error": "Something went wrong when trying to create the blog post"
-    },
     "create-comment": {
       "error": "Something went wrong when trying to post the comment"
     },
@@ -23,9 +20,6 @@
     "placeholder": "Leave a comment"
   },
   "error": "Unable to fetch blog posts",
-  "form": {
-    "placeholder": "Perhaps say something about your day"
-  },
   "links": {
     "back": "Back"
   },

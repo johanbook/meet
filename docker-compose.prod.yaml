@@ -91,18 +91,12 @@ services:
       file: "./docker-compose.shared.yaml"
       service: "supertokens"
 
-  tracking:
-    logging: *logging
-    extends:
-      file: "./docker-compose.shared.yaml"
-      service: "tracking"
-    image: ghcr.io/johanbook/meet/tracking:latest
-
   watchtower:
     logging: *logging
     image: containrrr/watchtower
     container_name: watchtower
     command:
+      - "--label-enable"
       - "--cleanup"
       - "--schedule"
       - "0 0 * * * *"

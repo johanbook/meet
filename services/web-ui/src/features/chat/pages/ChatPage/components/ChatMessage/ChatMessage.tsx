@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 import { Avatar, Box, Typography, useTheme } from "@mui/material";
 
@@ -21,11 +22,13 @@ export function ChatMessage({ message }: ChatMessageProps): React.ReactElement {
       }}
     >
       {!message.sentByCurrentUser && (
-        <Avatar
-          imgProps={{ loading: "lazy" }}
-          src={message.profile.imageUrl}
-          sx={{ mr: 1, width: 34, height: 34, mt: 1 / 2 }}
-        />
+        <Link to={`/profile/${message.profile.id}`}>
+          <Avatar
+            imgProps={{ loading: "lazy" }}
+            src={message.profile.imageUrl}
+            sx={{ mr: 1, width: 34, height: 34, mt: 1 / 2 }}
+          />
+        </Link>
       )}
 
       <Typography

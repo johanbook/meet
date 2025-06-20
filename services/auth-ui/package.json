@@ -9,7 +9,7 @@
     "lint": "tsc && eslint 'src/**/*.{js,jsx,ts,tsx}' --max-warnings 0",
     "lint:ci": "npm run lint",
     "prestart:dev": "./scripts/create-envs dist/__env.json",
-    "start:dev": "vite",
+    "start:dev": "vite --host --port 80",
     "test": "vitest src",
     "test:ci": "npm run test"
   },
@@ -30,25 +30,25 @@
     "web-vitals": "2.1.4"
   },
   "devDependencies": {
-    "@eslint/js": "9.26.0",
+    "@eslint/js": "9.27.0",
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
     "@trivago/prettier-plugin-sort-imports": "5.2.2",
-    "@types/jest": "27.4.1",
-    "@types/node": "22.14.1",
+    "@types/jest": "29.5.14",
+    "@types/node": "24.0.3",
     "@types/react": "18.2.37",
     "@types/react-dom": "18.2.13",
-    "eslint": "9.26.0",
-    "eslint-config-prettier": "10.1.2",
-    "eslint-plugin-prettier": "5.2.6",
+    "eslint": "9.29.0",
+    "eslint-config-prettier": "10.1.5",
+    "eslint-plugin-prettier": "5.4.1",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-sonarjs": "3.0.2",
     "eslint-plugin-unicorn": "59.0.1",
     "jsdom": "26.1.0",
     "prettier": "3.5.3",
-    "typescript-eslint": "8.32.0",
-    "vitest": "3.1.1"
+    "typescript-eslint": "8.32.1",
+    "vitest": "3.2.2"
   }
 }

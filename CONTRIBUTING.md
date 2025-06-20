@@ -19,6 +19,9 @@ cp .env.example .env
 # Generate VAPI keys needed for web push notifications
 cd services/api
 ./scripts/generate-vapi-keys >> <YOUR-ENV>
+
+# Generate user that can access the admin portal
+./scripts/add-traefik-user
 ```
 
 ### Development

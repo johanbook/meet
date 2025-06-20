@@ -14,6 +14,12 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import type { BlogPostCommentReactionDetails } from './BlogPostCommentReactionDetails';
+import {
+    BlogPostCommentReactionDetailsFromJSON,
+    BlogPostCommentReactionDetailsFromJSONTyped,
+    BlogPostCommentReactionDetailsToJSON,
+} from './BlogPostCommentReactionDetails';
 import type { BlogPostProfileDetails } from './BlogPostProfileDetails';
 import {
     BlogPostProfileDetailsFromJSON,
@@ -51,6 +57,12 @@ export interface BlogPostCommentDetails {
      * @memberof BlogPostCommentDetails
      */
     profile: BlogPostProfileDetails;
+    /**
+     * 
+     * @type {BlogPostCommentReactionDetails}
+     * @memberof BlogPostCommentDetails
+     */
+    reactions: BlogPostCommentReactionDetails;
 }
 
 /**
@@ -62,6 +74,7 @@ export function instanceOfBlogPostCommentDetails(value: object): boolean {
     isInstance = isInstance && "content" in value;
     isInstance = isInstance && "createdAt" in value;
     isInstance = isInstance && "profile" in value;
+    isInstance = isInstance && "reactions" in value;
 
     return isInstance;
 }
@@ -80,6 +93,7 @@ export function BlogPostCommentDetailsFromJSONTyped(json: any, ignoreDiscriminat
         'content': json['content'],
         'createdAt': json['createdAt'],
         'profile': BlogPostProfileDetailsFromJSON(json['profile']),
+        'reactions': BlogPostCommentReactionDetailsFromJSON(json['reactions']),
     };
 }
 
@@ -96,6 +110,7 @@ export function BlogPostCommentDetailsToJSON(value?: BlogPostCommentDetails | nu
         'content': value.content,
         'createdAt': value.createdAt,
         'profile': BlogPostProfileDetailsToJSON(value.profile),
+        'reactions': BlogPostCommentReactionDetailsToJSON(value.reactions),
     };
 }
 

@@ -1,6 +1,9 @@
 {
+  "packageId": "meet.app",
   "short_name": "Meet",
   "name": "Meet",
+  "description": "A social platform to connect with friends and family",
+  "categories": ["social"],
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +21,20 @@
       "type": "image/png"
     }
   ],
-  "start_url": ".",
+  "launch_handler": {
+    "client_mode": ["auto"]
+  },
+  "start_url": "/?utm_source=pwa",
   "display": "standalone",
   "theme_color": "#c86496",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "screenshots": [
+    {
+      "src": "https://github.com/johanbook/meet/blob/main/images/screenshots/mobile1.png?raw=true",
+      "sizes": "360x800",
+      "type": "/image/png"
+    }
+  ],
+  "prefer_related_applications": false,
+  "related_applications": []
 }

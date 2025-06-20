@@ -13,6 +13,7 @@ models/AddMemberToOrganizationCommand.ts
 models/AddMemberToOrganizationViaEmailCommand.ts
 models/BlogPhotoDetails.ts
 models/BlogPostCommentDetails.ts
+models/BlogPostCommentReactionDetails.ts
 models/BlogPostDetails.ts
 models/BlogPostPhotoDetails.ts
 models/BlogPostProfileDetails.ts
@@ -22,6 +23,7 @@ models/ChatMessageDetails.ts
 models/ChatMessageProfileDetails.ts
 models/ClassificationDetails.ts
 models/CreateBlogPostCommentCommand.ts
+models/CreateBlogPostCommentReactionCommand.ts
 models/CreateBlogPostReactionCommand.ts
 models/CreateChatCommand.ts
 models/CreateOrganizationCommand.ts

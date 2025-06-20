@@ -16,3 +16,7 @@ export function timeSince(time: string): string {
 export function getDateDaysAgo(days: number): Date {
   return dayjs().subtract(days, "day").toDate();
 }
+
+export function getDateYearsAgo(years: number): Date {
+  return dayjs().subtract(years, "year").toDate();
+}

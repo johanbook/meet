@@ -51,14 +51,14 @@ def twaManifest = [
 ]
 
 android {
-    compileSdkVersion 35
+    compileSdkVersion 36
     namespace "meet.app"
     defaultConfig {
         applicationId "meet.app"
-        minSdkVersion 19
+        minSdkVersion 34
         targetSdkVersion 35
-        versionCode 8
-        versionName "1.1"
+        versionCode 17
+        versionName "1.0.6"
 
         // The name for the application
         resValue "string", "appName", twaManifest.name
@@ -69,6 +69,8 @@ android {
         // The URL that will be used when launching the TWA from the Android Launcher
         def launchUrl = "https://" + twaManifest.hostName + twaManifest.launchUrl
         resValue "string", "launchUrl", launchUrl
+
+        
 
         
             // The URL the Web Manifest for the Progressive Web App that the TWA points to. This
@@ -145,6 +147,8 @@ android {
 
         resValue "bool", "enableSiteSettingsShortcut", twaManifest.enableSiteSettingsShortcut
         resValue "string", "orientation", twaManifest.orientation
+
+        
     }
     buildTypes {
         release {
@@ -204,6 +208,6 @@ repositories {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     
-        implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.5.0'
+        implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.6.2'
     
 }

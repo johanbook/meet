@@ -1,7 +1,7 @@
 ################################
 # Build server
 ################################
-FROM node:24.0.1-alpine as builder
+FROM node:24.2.0-alpine as builder
 
 WORKDIR /app
 
@@ -13,16 +13,19 @@ RUN npm run build
 ################################
 # Create Docker image
 ################################
-FROM node:24.0.1-alpine
+FROM node:24.2.0-alpine
 
 WORKDIR /app
 
 ENV PORT=80
 
 COPY package.json package-lock.json ./
+COPY scripts/ ./scripts
 COPY --from=builder /app/dist ./dist
 RUN npm ci
 
-ENTRYPOINT [ "npm" ]
-CMD [  "run", "start:prod" ]
+USER node
+
+ENTRYPOINT [ "sh" ]
+CMD [   "scripts/start" ]
 EXPOSE 80

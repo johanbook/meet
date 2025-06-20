@@ -1,3 +1,5 @@
+import { beforeEach, describe, it, vi } from "src/test";
+
 import { HealthCheckService } from "./health-check.service";
 
 describe(HealthCheckService.name, () => {
@@ -6,9 +8,9 @@ describe(HealthCheckService.name, () => {
   beforeEach(() => {
     healthCheckService = new HealthCheckService({
       createQueryRunner: () => ({
-        connect: jest.fn(),
-        query: jest.fn(),
-        release: jest.fn(),
+        connect: vi.fn(),
+        query: vi.fn(),
+        release: vi.fn(),
       }),
     } as any);
   });

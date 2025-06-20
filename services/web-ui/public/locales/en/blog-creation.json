@@ -1,0 +1,15 @@
+{
+  "actions": {
+    "create": {
+      "error": "Something went wrong when trying to create the blog post",
+      "success": "Your post was published!"
+    }
+  },
+  "form": {
+    "placeholder": "Perhaps say something about your day"
+  },
+  "header": "Create a new post",
+  "links": {
+    "back": "Back"
+  }
+}

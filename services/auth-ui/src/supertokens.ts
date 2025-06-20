@@ -10,6 +10,9 @@ const style = `
   [data-supertokens~=container] {
       --palette-primary: 200, 100, 150;
       --palette-primaryBorder: 200, 100, 150;
+      box-shadow: none;
+      height: 100vh;
+      display: flex;
   }
 
   [data-supertokens~=superTokensBranding] {
@@ -47,7 +50,7 @@ export async function initializeSuperTokens(
     recipeList: [
       EmailPassword.init(),
       EmailVerification.init({
-        mode: process.env.NODE_ENV === "production" ? "REQUIRED" : "OPTIONAL",
+        mode: import.meta.env.PROD ? "REQUIRED" : "OPTIONAL",
       }),
       Session.init(),
     ],

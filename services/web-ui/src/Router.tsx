@@ -2,24 +2,29 @@ import { ReactElement } from "react";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router";
 
 import { GlobalDialogProvider } from "src/core/dialog";
+import {
+  CreateOrganizationPage,
+  CurrentOrganizationPage,
+  OrganizationJournalPage,
+  OrganizationListPage,
+} from "src/core/organizations";
+import {
+  CurrentProfilePage,
+  ProfileGuard,
+  ProfileJournalPage,
+  ProfilePage,
+} from "src/core/profiles";
 import { NavigationTrackingProvider } from "src/core/tracking/NavigationTrackingProvider";
 import { BlogPhotoListPage } from "src/features/blogs/pages/BlogPhotoListPage";
 import { BlogPostListPage } from "src/features/blogs/pages/BlogPostListPage";
 import { BlogPostPage } from "src/features/blogs/pages/BlogPostPage";
+import { CreateBlogPostPage } from "src/features/blogs/pages/CreateBlogPostPage";
 import { ChatListPage } from "src/features/chat/pages/ChatListPage";
 import { ChatPage } from "src/features/chat/pages/ChatPage";
 import { CreateChatPage } from "src/features/chat/pages/CreateChatPage";
 import { AppearancePage } from "src/features/settings/pages/AppearancePage";
 import { SettingsPage } from "src/features/settings/pages/SettingsPage";
-import { CreateOrganizationPage } from "src/pages/CreateOrganizationPage";
-import { CurrentOrganizationPage } from "src/pages/CurrentOrganizationPage";
-import { CurrentProfilePage } from "src/pages/CurrentProfilePage";
-import { NotFoundPage } from "src/pages/NotFoundPage";
-import { OrganizationJournalPage } from "src/pages/OrganizationJournalPage";
-import { OrganizationListPage } from "src/pages/OrganizationListPage";
-import { ProfileGuard } from "src/pages/ProfileGuard";
-import { ProfileJournalPage } from "src/pages/ProfileJournalPage";
-import { ProfilePage } from "src/pages/ProfilePage";
+import { NotFoundView } from "src/views/NotFoundView";
 
 const router = createBrowserRouter([
   {
@@ -31,11 +36,15 @@ const router = createBrowserRouter([
         </GlobalDialogProvider>
       </NavigationTrackingProvider>
     ),
-    errorElement: <NotFoundPage />,
+    errorElement: <NotFoundView />,
     children: [
       {
         index: true,
         element: <BlogPostListPage />,
+      },
+      {
+        path: "/blog/create",
+        element: <CreateBlogPostPage />,
       },
       {
         path: "/blog/photos",
@@ -78,7 +87,7 @@ const router = createBrowserRouter([
         element: <CurrentProfilePage />,
       },
       {
-        path: "/profile/appearence",
+        path: "/profile/appearance",
         element: <AppearancePage />,
       },
       {

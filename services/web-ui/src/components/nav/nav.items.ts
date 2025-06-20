@@ -1,17 +1,23 @@
-import { AccountCircle, Chat, Feed } from "@mui/icons-material";
+import {
+  AccountCircle,
+  AddCircleOutlineRounded,
+  Chat,
+  HomeRounded,
+} from "@mui/icons-material";
 
 import { DesktopNav, MobileNav } from "./types";
 
 export const desktopNav: DesktopNav = {
   top: [
     {
-      Icon: Feed,
-      isActive: /^(\/$|\/blog)/,
+      Icon: HomeRounded,
+      checkIfActive: (path) => path === "/" || path.startsWith("/blog"),
       name: "navigation.blog",
       url: "/",
     },
     {
       Icon: Chat,
+      checkIfActive: (path) => path.startsWith("/chat"),
       name: "navigation.chat",
       url: "/chat",
     },
@@ -19,6 +25,8 @@ export const desktopNav: DesktopNav = {
   bottom: [
     {
       Icon: AccountCircle,
+      checkIfActive: (path) =>
+        path.startsWith("/profile") || path.startsWith("/group"),
       name: "navigation.profile",
       url: "/profile",
     },
@@ -28,18 +36,27 @@ export const desktopNav: DesktopNav = {
 export const mobileNav: MobileNav = {
   bottom: [
     {
-      Icon: Feed,
-      isActive: /^(\/$|\/blog)/,
+      Icon: HomeRounded,
+      checkIfActive: (path) => {
+        if (path === "/blog/create") {
+          return false;
+        }
+
+        return path === "/" || path.startsWith("/blog");
+      },
       name: "navigation.blog",
       url: "/",
     },
     {
-      Icon: Chat,
-      name: "navigation.chat",
-      url: "/chat",
+      Icon: AddCircleOutlineRounded,
+      checkIfActive: (path) => path === "/blog/create",
+      name: "navigation.blog",
+      url: "/blog/create",
     },
     {
       Icon: AccountCircle,
+      checkIfActive: (path) =>
+        path.startsWith("/profile") || path.startsWith("/group"),
       name: "navigation.profile",
       url: "/profile",
     },

@@ -1,40 +1,20 @@
 {
   "actions": {
     "create": {
-      "error": "尝试创建您的个人资料时出错。请稍后再试。",
+      "error": "创建个人资料时出错。请稍后再试。",
       "success": "恭喜！您的个人资料已创建！"
     }
   },
   "date-of-birth": {
-    "continue": "继续",
-    "description": "输入您的出生日期",
-    "header": "输入出生日期",
-    "label": "日期",
-    "min-age": "您必须至少有{{minAge}}岁才能继续"
-  },
-  "description": {
-    "continue": "完成",
-    "description": "输入关于您自己的简短描述",
-    "header": "输入您自己的描述",
-    "label": "描述",
-    "placeholder": "可能是关于您自己的一些事情"
+    "label": "日期"
   },
   "name": {
-    "continue": "继续",
-    "description": "输入您的名字。这是您在平台上的引用名。",
-    "header": "输入您的名字",
-    "label": "名字",
-    "placeholder": "您的名字"
-  },
-  "steps": {
-    "date-of-birth": "出生日期",
-    "description": "描述",
-    "name": "名字",
-    "welcome": "欢迎"
+    "label": "姓名",
+    "placeholder": "您的姓名"
   },
   "welcome": {
     "continue": "创建个人资料",
-    "description": "Meet是一个为了连接他人而构建的社交平台。",
-    "header": "欢迎来到Meet"
+    "description": "加入我们，与您的朋友和家人联系",
+    "header": "欢迎来到 Meet"
   }
 }

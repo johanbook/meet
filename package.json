@@ -1,6 +1,6 @@
 {
   "name": "meet",
-  "version": "2.3.0",
+  "version": "2.5.0",
   "description": "**meet** is an app for meeting other people.",
   "scripts": {
     "prepare": "husky install"
@@ -17,9 +17,10 @@
   },
   "homepage": "https://github.com/johanbook/meet#readme",
   "devDependencies": {
-    "@commitlint/cli": "19.8.0",
-    "@commitlint/config-conventional": "19.8.0",
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
     "husky": "9.1.7",
+    "lint-staged": "16.1.2",
     "prettier": "3.5.3"
   }
 }

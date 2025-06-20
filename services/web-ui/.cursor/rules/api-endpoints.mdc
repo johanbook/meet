@@ -1,0 +1,7 @@
+---
+description: Guidelines API endpoints
+globs: **/*.{ts,tsx,js,jsx}
+alwaysApply: true
+---
+- API endpoints are found in `src/api` and are auto generated so do not touch these
+- Do not generate any API endpoints on your own

@@ -1,8 +1,5 @@
 {
   "actions": {
-    "create": {
-      "error": "Något gick fel när blogposten skulle skapas"
-    },
     "create-comment": {
       "error": "Något gick fel när kommentaren skulle postas"
     },
@@ -23,9 +20,6 @@
     "placeholder": "Lämna en kommentar"
   },
   "error": "Kunde inte hämta blogposter",
-  "form": {
-    "placeholder": "Säg något om din dag"
-  },
   "links": {
     "back": "Tillbaka"
   },

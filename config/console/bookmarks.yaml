@@ -1,7 +1,3 @@
 - OpenAPI specifications:
     - API:
         - href: http://{{HOMEPAGE_VAR_DOMAIN}}/api/docs
-    - Auth:
-        - href: http://{{HOMEPAGE_VAR_DOMAIN}}/login/docs
-    - Tracking:
-        - href: http://{{HOMEPAGE_VAR_DOMAIN}}/tracking/docs
