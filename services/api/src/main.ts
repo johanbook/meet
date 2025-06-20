@@ -1,3 +1,4 @@
+import fastifyHelmet from "@fastify/helmet";
 import fastifyMultipart, { MultipartFile } from "@fastify/multipart";
 import { ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
@@ -36,7 +37,9 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
   app.useGlobalInterceptors(new LoggingInterceptor());
 
-  app.register(fastifyMultipart, {
+  await app.register(fastifyHelmet);
+
+  await app.register(fastifyMultipart, {
     attachFieldsToBody: "keyValues",
     limits: {
       fileSize: 30 * 1000 * 1000,
