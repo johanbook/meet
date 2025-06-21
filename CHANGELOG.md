@@ -4,6 +4,43 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+## [2.6.0](https://github.com/johanbook/meet/compare/v2.5.0...v2.6.0) (2025-06-21)
+
+
+### Features
+
+* **api:** add helmet middleware ([#1447](https://github.com/johanbook/meet/issues/1447)) ([952a626](https://github.com/johanbook/meet/commit/952a62648e668ccf04c17b53149d0eb94a86f77a))
+* **auth-api:** add helmet ([#1449](https://github.com/johanbook/meet/issues/1449)) ([00b3747](https://github.com/johanbook/meet/commit/00b3747a7c4202baef3f5fd0f76daa3c48705284))
+* **homepage:** use new icon ([#1383](https://github.com/johanbook/meet/issues/1383)) ([465712a](https://github.com/johanbook/meet/commit/465712a62f4375627bb965c4f8d933613cf39a0d))
+* **web-ui:** chat message avatar links to profile ([#1430](https://github.com/johanbook/meet/issues/1430)) ([cfc4913](https://github.com/johanbook/meet/commit/cfc4913d711bd33aebfffe4fbf6b229e520e14a6))
+* **web-ui:** improve accessibility of bottom nav on mobile ([#1419](https://github.com/johanbook/meet/issues/1419)) ([d69ff21](https://github.com/johanbook/meet/commit/d69ff21e7b7d5be5360c6c1e0293f71e35c35ca9))
+* **web-ui:** improve buttom nav elevation on mobile ([#1418](https://github.com/johanbook/meet/issues/1418)) ([0569529](https://github.com/johanbook/meet/commit/05695297255d77b399713e1d2a1cd1d0fcfd7c8f))
+* **web-ui:** improve create blog page ([#1428](https://github.com/johanbook/meet/issues/1428)) ([1e2bc40](https://github.com/johanbook/meet/commit/1e2bc401001cb25a87fad881e897c9a26fe73e06))
+* **web-ui:** improve design of mobile nav ([#1416](https://github.com/johanbook/meet/issues/1416)) ([ebf0f76](https://github.com/johanbook/meet/commit/ebf0f767826b2db9dc8d7f33e8a8158aaa517813))
+* **web-ui:** improve screen for blog not found ([#1424](https://github.com/johanbook/meet/issues/1424)) ([c742153](https://github.com/johanbook/meet/commit/c74215332324c493330c8fd53c8ced41e47abca2))
+* **web-ui:** link blog post comment avatar to profile ([#1425](https://github.com/johanbook/meet/issues/1425)) ([bf8df1a](https://github.com/johanbook/meet/commit/bf8df1a313ff91c4b4864b7927d67c08b0c90154))
+* **web-ui:** remove blog post button ([#1427](https://github.com/johanbook/meet/issues/1427)) ([af93c81](https://github.com/johanbook/meet/commit/af93c814a7c806521a1a3c3cea2e726c0fc1e833))
+* **web-ui:** update blog icon ([#1417](https://github.com/johanbook/meet/issues/1417)) ([dcf4275](https://github.com/johanbook/meet/commit/dcf427563f965856b4d3923d7fb8f4d495abf78f))
+* **web-ui:** update logo ([#1390](https://github.com/johanbook/meet/issues/1390)) ([d007829](https://github.com/johanbook/meet/commit/d007829fc84174b93fc5e80ec6b807ef8b4f9d97))
+* **web-ui:** update mobile nav icon size and nav background ([#1444](https://github.com/johanbook/meet/issues/1444)) ([31f24da](https://github.com/johanbook/meet/commit/31f24dae45829a99e7ec726ef719588722b7d896))
+* **web-ui:** use separate page for creating blog posts ([#1360](https://github.com/johanbook/meet/issues/1360)) ([846d9c2](https://github.com/johanbook/meet/commit/846d9c28613c7e45939ef5c13a3b8d9ecbc8f8e5))
+
+
+### Bug Fixes
+
+* **auth-api:** fix email lookup regression ([#1422](https://github.com/johanbook/meet/issues/1422)) ([d954989](https://github.com/johanbook/meet/commit/d954989b6049df877626666f1ec44f9c4240466a))
+* **auth-api:** fix version issue ([#1450](https://github.com/johanbook/meet/issues/1450)) ([0f7b652](https://github.com/johanbook/meet/commit/0f7b652fdad1be5352130a595f3f930ad512eb99))
+* **auth-api:** run service as node user ([#1446](https://github.com/johanbook/meet/issues/1446)) ([f3648e5](https://github.com/johanbook/meet/commit/f3648e56cbb95baf84689eda9a0d91f413e8f03a))
+* **homepage:** fix typo ([#1385](https://github.com/johanbook/meet/issues/1385)) ([607c0d1](https://github.com/johanbook/meet/commit/607c0d135c85c298d14ec0f8c0b9ede49ee47962))
+* **mobile-app:** add fingerprints in twa manifest ([#1388](https://github.com/johanbook/meet/issues/1388)) ([10e3b56](https://github.com/johanbook/meet/commit/10e3b56551da3ee5f76858e964806a97fbe0a693))
+* **web-ui:** add missing Chinese translations ([#1392](https://github.com/johanbook/meet/issues/1392)) ([2c51a22](https://github.com/johanbook/meet/commit/2c51a221bde059cbf2dee4622b15e508a6ee0c17))
+* **web-ui:** avoid subscribing to notifications when opening app ([#1451](https://github.com/johanbook/meet/issues/1451)) ([aef5501](https://github.com/johanbook/meet/commit/aef5501dc37151f8908bbc4b48e538c39d17e163))
+* **web-ui:** fix color regression in mobile light theme ([#1421](https://github.com/johanbook/meet/issues/1421)) ([2df3da8](https://github.com/johanbook/meet/commit/2df3da87e8b0c607d7dc424c80fc073909a3a362))
+* **web-ui:** fix padding ([#1431](https://github.com/johanbook/meet/issues/1431)) ([7a4b934](https://github.com/johanbook/meet/commit/7a4b93435890ee06cc87052b9e0ec1a3887149c5))
+* **web-ui:** improve loading state ([#1423](https://github.com/johanbook/meet/issues/1423)) ([73ec930](https://github.com/johanbook/meet/commit/73ec930cd7b86b5f3d27aeedf6164e8d34d36ce0))
+* **web-ui:** only higlight correct item in nav ([#1426](https://github.com/johanbook/meet/issues/1426)) ([8d7f432](https://github.com/johanbook/meet/commit/8d7f432d5e9fb887ae907d9ec97bda711843fd3d))
+* **web-ui:** properly close notifications when clicked ([#1420](https://github.com/johanbook/meet/issues/1420)) ([27e6d1f](https://github.com/johanbook/meet/commit/27e6d1f0e344c1a16d4aa109e55dfab7ef11d33d))
+
 ## [2.5.0](https://github.com/johanbook/meet/compare/v2.4.0...v2.5.0) (2025-06-11)
 
 
