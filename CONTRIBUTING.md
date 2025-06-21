@@ -29,6 +29,7 @@ cd services/api
 To use a development build, run
 
 ```sh
+./scripts/enable-dev-mode
 docker-compose -f docker-compose.dev.yaml up --build
 ```
 

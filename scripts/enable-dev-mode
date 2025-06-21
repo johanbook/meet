@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# These permissions are needed for
+# running the application in dev-mode
+chmod 777 services/api
+chmod 777 services/auth-api
+
+echo "Enabled dev mode"
