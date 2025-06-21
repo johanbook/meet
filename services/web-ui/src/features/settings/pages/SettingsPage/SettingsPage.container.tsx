@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import { profileApi } from "src/apis";
+import { notificationsApi, profileApi } from "src/apis";
 import { Button, ConfirmationDialog, Typography } from "src/components/ui";
 import { useDialog } from "src/core/dialog";
 import { useTranslation } from "src/core/i18n";
@@ -10,6 +10,23 @@ import { useSnackbar } from "src/core/snackbar";
 import { registerServiceWorker } from "src/registerServiceWorker";
 
 import { SettingsPageNav } from "./SettingsPage.nav";
+
+const enablePermissions = async () => {
+  await Notification.requestPermission();
+
+  const vapid = await notificationsApi.getVapid();
+
+  const registration = await navigator.serviceWorker.getRegistration();
+
+  if (!registration) {
+    throw new Error("Unable to get service worker registration");
+  }
+
+  await registration.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: vapid.key,
+  });
+};
 
 export function SettingsPageContainer(): ReactElement {
   const logger = useLogger(SettingsPageContainer.name);
@@ -33,7 +50,7 @@ export function SettingsPageContainer(): ReactElement {
     },
     onSuccess: () => snackbar.success(t("notifications.enable.success")),
     mutationFn: async () => {
-      await Notification.requestPermission();
+      await enablePermissions();
       await registerServiceWorker();
     },
   });
