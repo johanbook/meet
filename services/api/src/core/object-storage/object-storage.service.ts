@@ -68,4 +68,20 @@ export class ObjectStorageService {
   getUrl(bucketName: BucketName, objectId: string): string {
     return `${minioOptions.publicEndpoint}/${bucketName}/${objectId}`;
   }
+
+  async listObjectIds(bucketName: BucketName): Promise<string[]> {
+    const client = this.minioService.client;
+    const objectIds: string[] = [];
+    const stream = client.listObjectsV2(bucketName, "", true);
+
+    return new Promise((resolve, reject) => {
+      stream.on("data", (object) => {
+        if (object && object.name) {
+          objectIds.push(object.name);
+        }
+      });
+      stream.on("end", () => resolve(objectIds));
+      stream.on("error", (error) => reject(error));
+    });
+  }
 }

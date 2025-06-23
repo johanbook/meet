@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
+import { ScheduleModule } from "@nestjs/schedule";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AuthorizationModule } from "src/core/authorization/authorization.module";
@@ -28,6 +29,7 @@ import { BlogCommentReactionsController } from "./client/controllers/blog-commen
 import { BlogCommentsController } from "./client/controllers/blog-comments.controller";
 import { BlogReactionsController } from "./client/controllers/blog-reactions.controller";
 import { BlogsController } from "./client/controllers/blogs.controller";
+import { CleanupOrphanedBlogPhotosJob } from "./client/jobs/cleanup-orphaned-blog-photos.job";
 import { BlogPostService } from "./domain/services/blog-post.service";
 import { BlogPostCommentReaction } from "./infrastructure/entities/blog-post-comment-reaction.entity";
 import { BlogPostComment } from "./infrastructure/entities/blog-post-comment.entity";
@@ -52,6 +54,7 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
       BlogPostReaction,
       Profile,
     ]),
+    ScheduleModule.forRoot(),
   ],
   controllers: [
     BlogsController,
@@ -75,6 +78,7 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
     NotifyOrganizationOnPostedBlogPostHandler,
     NotifyOrganizationOnPostedBlogPostCommentHandler,
     UpdateBlogPostHandler,
+    CleanupOrphanedBlogPhotosJob,
   ],
 })
 export class BlogsModule {}
