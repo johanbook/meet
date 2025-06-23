@@ -90,7 +90,6 @@ export function CreateBlogPostPageComponent({
       onSubmit={handleSubmit}
       sx={{ display: "flex", flexDirection: "column", gap: 3 }}
     >
-      {/* Section 1: Photo Upload */}
       <Box>
         <Typography variant="h6" sx={{ mb: 1 }}>
           {t("sections.photos")}
@@ -148,7 +147,6 @@ export function CreateBlogPostPageComponent({
         </Box>
       </Box>
 
-      {/* Section 2: Description/Content */}
       <Box>
         <Typography variant="h6" sx={{ mb: 1 }}>
           {t("sections.description")}
@@ -165,7 +163,6 @@ export function CreateBlogPostPageComponent({
         />
       </Box>
 
-      {/* Section 3: Submit Button */}
       <Box
         sx={{
           display: "flex",
