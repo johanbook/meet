@@ -13,9 +13,9 @@ export class CleanupOrphanedBlogPhotosJob {
   private readonly logger = new Logger(CleanupOrphanedBlogPhotosJob.name);
 
   constructor(
-    private readonly objectStorageService: ObjectStorageService,
     @InjectRepository(BlogPostPhoto)
     private readonly blogPostPhotoRepo: Repository<BlogPostPhoto>,
+    private readonly objectStorageService: ObjectStorageService,
   ) {}
 
   private async deleteOrphanedPhoto(
@@ -33,7 +33,7 @@ export class CleanupOrphanedBlogPhotosJob {
 
   @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
   async handleCleanup(): Promise<void> {
-    this.logger.log("Starting orphaned blog photo cleanup job...");
+    this.logger.log("Starting job");
 
     const minioObjectIds = await this.objectStorageService.listObjectIds(
       BUCKET_NAMES.BLOG_POST_PHOTO,

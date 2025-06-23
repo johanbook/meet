@@ -5,6 +5,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AuthorizationModule } from "src/core/authorization/authorization.module";
 import { NotificationModule } from "src/core/notifications/notification.module";
+import { ObjectStorageModule } from "src/core/object-storage/object-storage.module";
 import { OrganizationModule } from "src/core/organizations/organization.module";
 import { PhotosModule } from "src/core/photos/photos.module";
 import { Profile } from "src/core/profiles";
@@ -41,8 +42,9 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
   imports: [
     AuthorizationModule,
     CqrsModule,
-    OrganizationModule,
     NotificationModule,
+    ObjectStorageModule,
+    OrganizationModule,
     PhotosModule,
     ProfileModule,
     QueryModule,
