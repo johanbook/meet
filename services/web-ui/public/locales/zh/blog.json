@@ -1,8 +1,5 @@
 {
   "actions": {
-    "create": {
-      "error": "尝试创建博客文章时出错"
-    },
     "create-comment": {
       "error": "尝试发布评论时出错"
     },
@@ -21,9 +18,6 @@
   },
   "comments": {
     "placeholder": "留下评论"
-  },
-  "form": {
-    "placeholder": "或许说说你的一天"
   },
   "links": {
     "back": "返回"

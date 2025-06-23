@@ -2,7 +2,8 @@
   "actions": {
     "create": {
       "error": "Something went wrong when trying to create the blog post",
-      "success": "Your post was published!"
+      "success": "Your post was published!",
+      "submit": "Publish Post"
     }
   },
   "form": {
@@ -11,5 +12,11 @@
   "header": "Create a new post",
   "links": {
     "back": "Back"
+  },
+  "sections": {
+    "photos": "Upload Photos",
+    "photoAlt": "Uploaded photo preview",
+    "removePhoto": "Remove photo",
+    "description": "Description"
   }
 }

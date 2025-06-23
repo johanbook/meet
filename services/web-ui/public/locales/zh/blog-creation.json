@@ -1,0 +1,22 @@
+{
+  "actions": {
+    "create": {
+      "error": "发布博客文章时出错",
+      "success": "你的文章已发布！",
+      "submit": "发布文章"
+    }
+  },
+  "form": {
+    "placeholder": "可以写点今天发生的事"
+  },
+  "header": "创建新文章",
+  "links": {
+    "back": "返回"
+  },
+  "sections": {
+    "photos": "上传照片",
+    "photoAlt": "已上传照片预览",
+    "removePhoto": "移除照片",
+    "description": "内容描述"
+  }
+}
