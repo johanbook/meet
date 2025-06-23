@@ -1,8 +1,9 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { Cron, CronExpression } from "@nestjs/schedule";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { Logger } from "src/core/logging";
 import { ObjectStorageService } from "src/core/object-storage";
 import { BUCKET_NAMES } from "src/core/object-storage/buckets.config";
 
