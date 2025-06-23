@@ -2,7 +2,8 @@
   "actions": {
     "create": {
       "error": "Något gick fel när blogposten skulle skapas",
-      "success": "Ditt inlägg har blivit postat"
+      "success": "Ditt inlägg har blivit postat",
+      "submit": "Publicera inlägg"
     }
   },
   "form": {
@@ -11,5 +12,11 @@
   "header": "Skapa ett nytt inlägg",
   "links": {
     "back": "Tillbaka"
+  },
+  "sections": {
+    "photos": "Ladda upp foton",
+    "photoAlt": "Uppladdad fotoförhandsvisning",
+    "removePhoto": "Ta bort foto",
+    "description": "Beskrivning"
   }
 }

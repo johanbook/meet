@@ -3,10 +3,11 @@ import { ReactElement, SyntheticEvent } from "react";
 import { Close, InsertPhoto, Send } from "@mui/icons-material";
 import {
   Box,
+  Button,
   CircularProgress,
   IconButton,
-  InputAdornment,
   TextField,
+  Typography,
 } from "@mui/material";
 
 import { CreateBlogPostRequest } from "src/api";
@@ -84,55 +85,41 @@ export function CreateBlogPostPageComponent({
   }
 
   return (
-    <Box>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          disabled={mutation.isPending}
-          fullWidth
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                {mutation.isPending ? (
-                  <CircularProgress />
-                ) : (
-                  <IconButton
-                    color="primary"
-                    disabled={!form.state.content.value}
-                    type="submit"
-                  >
-                    <Send />
-                  </IconButton>
-                )}
-              </InputAdornment>
-            ),
-            startAdornment: (
-              <InputAdornment position="start">
-                <UploadIconButton
-                  accept="image/*"
-                  multiple
-                  onChange={(photos) =>
-                    form.setValue({
-                      photos: [...(form.state.photos.value || []), ...photos],
-                    })
-                  }
-                >
-                  <InsertPhoto />
-                </UploadIconButton>
-              </InputAdornment>
-            ),
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{ display: "flex", flexDirection: "column", gap: 3 }}
+    >
+      {/* Section 1: Photo Upload */}
+      <Box>
+        <Typography variant="h6" sx={{ mb: 1 }}>
+          {t("sections.photos")}
+        </Typography>
+        <Box sx={{ mb: 2 }}>
+          <UploadIconButton
+            accept="image/*"
+            multiple
+            onChange={(photos) =>
+              form.setValue({
+                photos: [...(form.state.photos.value || []), ...photos],
+              })
+            }
+          >
+            <InsertPhoto />
+          </UploadIconButton>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            gap: 2,
+            alignItems: "flex-start",
+            flexWrap: "wrap",
           }}
-          multiline
-          onChange={(event) => form.setValue({ content: event.target.value })}
-          placeholder={t("form.placeholder") || ""}
-          rows={4}
-          value={form.state.content.value}
-        />
-
-        <Box sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
+        >
           {form.state.photos.value?.map((photo, index) => (
             <Box key={index} sx={{ position: "relative" }}>
               <Photo
-                alt=""
+                alt={t("sections.photoAlt") || ""}
                 src={photo}
                 style={{
                   border: "1px solid rgb(200,200,200)",
@@ -142,8 +129,8 @@ export function CreateBlogPostPageComponent({
                   width: 100,
                 }}
               />
-
               <IconButton
+                aria-label={t("sections.removePhoto")}
                 onClick={() => handleRemovePhoto(photo)}
                 sx={{
                   bgcolor: "background.paper",
@@ -159,7 +146,46 @@ export function CreateBlogPostPageComponent({
             </Box>
           ))}
         </Box>
-      </form>
+      </Box>
+
+      {/* Section 2: Description/Content */}
+      <Box>
+        <Typography variant="h6" sx={{ mb: 1 }}>
+          {t("sections.description")}
+        </Typography>
+        <TextField
+          disabled={mutation.isPending}
+          fullWidth
+          multiline
+          minRows={4}
+          onChange={(event) => form.setValue({ content: event.target.value })}
+          placeholder={t("form.placeholder") || ""}
+          value={form.state.content.value}
+          InputProps={{}}
+        />
+      </Box>
+
+      {/* Section 3: Submit Button */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "center",
+          gap: 2,
+        }}
+      >
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          disabled={mutation.isPending || !form.state.content.value}
+          startIcon={
+            mutation.isPending ? <CircularProgress size={20} /> : <Send />
+          }
+        >
+          {t("actions.create.submit")}
+        </Button>
+      </Box>
     </Box>
   );
 }

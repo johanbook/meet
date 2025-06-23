@@ -1,7 +1,8 @@
 {
   "actions": {
     "create": {
-      "error": "尝试创建博客文章时出错"
+      "error": "尝试创建博客文章时出错",
+      "submit": "发布文章"
     },
     "create-comment": {
       "error": "尝试发布评论时出错"
@@ -36,5 +37,11 @@
   "reactions": {
     "count_one": "{{last}} 喜欢这个",
     "count_other": "{{first}} 和 {{last}} 都喜欢这个"
+  },
+  "sections": {
+    "photos": "上传照片",
+    "photoAlt": "已上传照片预览",
+    "removePhoto": "移除照片",
+    "description": "描述"
   }
 }
