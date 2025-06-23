@@ -18,6 +18,19 @@ export class CleanupOrphanedBlogPhotosJob {
     private readonly blogPostPhotoRepo: Repository<BlogPostPhoto>,
   ) {}
 
+  private async deleteOrphanedPhoto(
+    id: string,
+    callback: () => void,
+  ): Promise<void> {
+    try {
+      await this.objectStorageService.delete(BUCKET_NAMES.BLOG_POST_PHOTO, id);
+
+      callback();
+    } catch (error) {
+      this.logger.error("Failed to delete orphaned photo", { id, error });
+    }
+  }
+
   @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
   async handleCleanup(): Promise<void> {
     this.logger.log("Starting orphaned blog photo cleanup job...");
@@ -33,20 +46,20 @@ export class CleanupOrphanedBlogPhotosJob {
 
     const orphaned = minioObjectIds.filter((id) => !pgObjectIds.has(id));
 
+    if (orphaned.length === 0) {
+      return this.logger.log("Found no orphaned photos to delete");
+    }
+
+    this.logger.log("Starting to delete orphaned photos", {
+      photosToBeDeleted: orphaned.length,
+    });
+
     let deletedCount = 0;
 
-    for (const id of orphaned) {
-      try {
-        await this.objectStorageService.delete(
-          BUCKET_NAMES.BLOG_POST_PHOTO,
-          id,
-        );
+    await Promise.all(
+      orphaned.map((id) => this.deleteOrphanedPhoto(id, () => deletedCount++)),
+    );
 
-        deletedCount++;
-      } catch (error) {
-        this.logger.error("Failed to delete orphaned photo", { id, error });
-      }
-    }
     this.logger.log("Cleaned up orphaned photos", { deletedCount });
   }
 }

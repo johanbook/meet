@@ -74,14 +74,12 @@ export class ObjectStorageService {
     const objectIds: string[] = [];
     const stream = client.listObjectsV2(bucketName, "", true);
 
-    return new Promise((resolve, reject) => {
-      stream.on("data", (object) => {
-        if (object && object.name) {
-          objectIds.push(object.name);
-        }
-      });
-      stream.on("end", () => resolve(objectIds));
-      stream.on("error", (error) => reject(error));
-    });
+    for await (const object of stream) {
+      if (object && object.name) {
+        objectIds.push(object.name);
+      }
+    }
+
+    return objectIds;
   }
 }

@@ -64,6 +64,7 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
   ],
   providers: [
     BlogPostService,
+    CleanupOrphanedBlogPhotosJob,
     CreateBlogPostHandler,
     CreateBlogPostCommentHandler,
     CreateBlogPostCommentReactionHandler,
@@ -78,7 +79,6 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
     NotifyOrganizationOnPostedBlogPostHandler,
     NotifyOrganizationOnPostedBlogPostCommentHandler,
     UpdateBlogPostHandler,
-    CleanupOrphanedBlogPhotosJob,
   ],
 })
 export class BlogsModule {}
