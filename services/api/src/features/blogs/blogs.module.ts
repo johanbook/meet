@@ -1,9 +1,11 @@
 import { Module } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
+import { ScheduleModule } from "@nestjs/schedule";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AuthorizationModule } from "src/core/authorization/authorization.module";
 import { NotificationModule } from "src/core/notifications/notification.module";
+import { ObjectStorageModule } from "src/core/object-storage/object-storage.module";
 import { OrganizationModule } from "src/core/organizations/organization.module";
 import { PhotosModule } from "src/core/photos/photos.module";
 import { Profile } from "src/core/profiles";
@@ -28,6 +30,7 @@ import { BlogCommentReactionsController } from "./client/controllers/blog-commen
 import { BlogCommentsController } from "./client/controllers/blog-comments.controller";
 import { BlogReactionsController } from "./client/controllers/blog-reactions.controller";
 import { BlogsController } from "./client/controllers/blogs.controller";
+import { CleanupOrphanedBlogPhotosJob } from "./client/jobs/cleanup-orphaned-blog-photos.job";
 import { BlogPostService } from "./domain/services/blog-post.service";
 import { BlogPostCommentReaction } from "./infrastructure/entities/blog-post-comment-reaction.entity";
 import { BlogPostComment } from "./infrastructure/entities/blog-post-comment.entity";
@@ -39,8 +42,9 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
   imports: [
     AuthorizationModule,
     CqrsModule,
-    OrganizationModule,
     NotificationModule,
+    ObjectStorageModule,
+    OrganizationModule,
     PhotosModule,
     ProfileModule,
     QueryModule,
@@ -52,6 +56,7 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
       BlogPostReaction,
       Profile,
     ]),
+    ScheduleModule.forRoot(),
   ],
   controllers: [
     BlogsController,
@@ -61,6 +66,7 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
   ],
   providers: [
     BlogPostService,
+    CleanupOrphanedBlogPhotosJob,
     CreateBlogPostHandler,
     CreateBlogPostCommentHandler,
     CreateBlogPostCommentReactionHandler,
