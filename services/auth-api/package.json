@@ -32,7 +32,7 @@
     "supertokens-node": "22.1.0"
   },
   "devDependencies": {
-    "@eslint/js": "9.27.0",
+    "@eslint/js": "9.29.0",
     "@fastify/http-proxy": "11.1.2",
     "@nestjs/cli": "11.0.7",
     "@nestjs/schematics": "11.0.5",
