@@ -167,7 +167,6 @@ services:
       - "traefik.http.routers.minio.entrypoints=web"
       - "traefik.http.routers.minio.rule=Host(`minio.console.$DOMAIN`)"
       - "traefik.http.routers.minio.service=minio"
-      - "traefik.http.routers.minio.middlewares=basicauth"
       - "traefik.http.services.minio.loadbalancer.server.port=9001"
 
       - "traefik.http.routers.s3.entrypoints=web"
