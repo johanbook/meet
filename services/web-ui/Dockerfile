@@ -15,16 +15,7 @@ RUN npm run build
 ################################
 # Create server
 ################################
-FROM node:24.2.0-alpine
+FROM nginx:1.27.5
 
-WORKDIR /app
-
-ENV PORT=80
-
-COPY --from=builder /app/dist ./build
-COPY server.js .
-RUN npm i fastify @fastify/static
-
-ENTRYPOINT [ "node" ]
-CMD [  "server.js" ]
-EXPOSE 80
+COPY --from=builder /app/dist /etc/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
