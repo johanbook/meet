@@ -17,5 +17,5 @@ RUN npm run build
 ################################
 FROM nginx:1.27.5
 
-COPY --from=builder /app/dist /etc/nginx/html
+COPY --from=builder /app/dist /etc/nginx/html/login
 COPY nginx.conf /etc/nginx/conf.d/default.conf
