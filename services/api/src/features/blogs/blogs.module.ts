@@ -1,6 +1,5 @@
 import { Module } from "@nestjs/common";
 import { CqrsModule } from "@nestjs/cqrs";
-import { ScheduleModule } from "@nestjs/schedule";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AuthorizationModule } from "src/core/authorization/authorization.module";
@@ -56,7 +55,6 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
       BlogPostReaction,
       Profile,
     ]),
-    ScheduleModule.forRoot(),
   ],
   controllers: [
     BlogsController,
