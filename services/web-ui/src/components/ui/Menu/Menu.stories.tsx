@@ -1,7 +1,7 @@
 import { SyntheticEvent } from "react";
 
 import { ListItemText, MenuItem } from "@mui/material";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Menu } from ".";
 

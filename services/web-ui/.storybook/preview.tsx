@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import type { Preview } from "@storybook/react";
+import type { Preview } from "@storybook/react-vite";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { ThemeProvider } from "../src/core/theme";
 
