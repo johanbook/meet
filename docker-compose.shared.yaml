@@ -115,8 +115,6 @@ services:
     environment:
       POSTGRES_PASSWORD: "$POSTGRES_PASSWORD"
       POSTGRES_USERNAME: "$POSTGRES_USERNAME"
-    ports:
-      - "5432:5432"
     volumes:
       - "$PWD/config/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql"
       - ".data/postgres:/var/lib/postgresql/data:rw"
