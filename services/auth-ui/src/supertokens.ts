@@ -4,7 +4,8 @@ import EmailPassword from "supertokens-auth-react/recipe/emailpassword";
 import EmailVerification from "supertokens-auth-react/recipe/emailverification";
 import Session from "supertokens-auth-react/recipe/session";
 
-import { fetchConfig } from "./config";
+const API_DOMAIN = window.location.host;
+const UI_DOMAIN = window.location.host;
 
 const style = `
   [data-supertokens~=container] {
@@ -23,15 +24,13 @@ const style = `
 export async function initializeSuperTokens(
   callback: () => void,
 ): Promise<void> {
-  const config = await fetchConfig();
-
   SuperTokens.init({
     appInfo: {
       apiBasePath: "/auth/api",
       appName: "Login",
-      apiDomain: config.API_DOMAIN,
+      apiDomain: API_DOMAIN,
       websiteBasePath: "/login",
-      websiteDomain: config.UI_DOMAIN,
+      websiteDomain: UI_DOMAIN,
     },
     getRedirectionURL: async (context) => {
       if (context.action === "SUCCESS") {
@@ -46,7 +45,7 @@ export async function initializeSuperTokens(
         return translation === key ? "" : translation;
       },
     },
-    privacyPolicyLink: `https://${config.UI_DOMAIN}#privacy`,
+    privacyPolicyLink: `https://${UI_DOMAIN}#privacy`,
     recipeList: [
       EmailPassword.init(),
       EmailVerification.init({

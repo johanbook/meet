@@ -1,0 +1,7 @@
+FROM node:24.2.0-alpine
+
+WORKDIR /app
+COPY . .
+RUN npm ci -D --legacy-peer-deps
+
+CMD ["npm", "run", "start:dev"]

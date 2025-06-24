@@ -42,11 +42,7 @@ services:
       service: "auth-ui"
     build:
       context: "./services/auth-ui"
-    command:
-      - "run"
-      - "start:dev"
-    entrypoint:
-      - "npm"
+      dockerfile: Dockerfile.dev
     volumes:
       - "$PWD/services/auth-ui/:/app"
 

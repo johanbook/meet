@@ -103,10 +103,6 @@ services:
       - "traefik.http.routers.auth-ui.entrypoints=web"
 
       - "com.centurylinklabs.watchtower.enable=true"
-    environment:
-      API_URL: "$PROTOCOL://$DOMAIN"
-      UI_URL: "$PROTOCOL://$DOMAIN"
-      SUPERTOKENS_URL: "http://supertokens:3567"
     restart: "unless-stopped"
 
   db:

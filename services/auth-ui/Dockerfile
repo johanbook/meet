@@ -3,6 +3,8 @@
 ################################
 FROM node:24.2.0-alpine as builder
 
+ARG VITE_SENTRY_DSN
+
 WORKDIR /app
 
 COPY . .
@@ -13,18 +15,7 @@ RUN npm run build
 ################################
 # Create server
 ################################
-FROM node:24.2.0-alpine
+FROM nginx:1.27.5
 
-WORKDIR /app
-
-ENV PORT=80
-
-COPY --from=builder /app/dist ./dist
-COPY scripts/ ./scripts
-COPY server.js .
-
-RUN npm i fastify @fastify/static
-
-ENTRYPOINT [ "sh" ]
-CMD [  "scripts/entrypoint" ]
-EXPOSE 80
+COPY --from=builder /app/dist /etc/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
