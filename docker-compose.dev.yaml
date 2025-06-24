@@ -76,10 +76,6 @@ services:
       service: "web-ui"
     build:
       context: "./services/web-ui"
-    command:
-      - "run"
-      - "start:dev"
-    entrypoint:
-      - "npm"
+      dockerfile: Dockerfile.dev
     volumes:
       - "$PWD/services/web-ui/:/app"
