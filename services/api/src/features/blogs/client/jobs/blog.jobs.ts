@@ -10,8 +10,8 @@ import { BUCKET_NAMES } from "src/core/object-storage/buckets.config";
 import { BlogPostPhoto } from "../../infrastructure/entities/blog-post-photo.entity";
 
 @Injectable()
-export class CleanupOrphanedBlogPhotosJob {
-  private readonly logger = new Logger(CleanupOrphanedBlogPhotosJob.name);
+export class BlogJobs {
+  private readonly logger = new Logger(BlogJobs.name);
 
   constructor(
     @InjectRepository(BlogPostPhoto)
@@ -33,7 +33,7 @@ export class CleanupOrphanedBlogPhotosJob {
   }
 
   @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
-  async handleCleanup(): Promise<void> {
+  async deleteOrphanedPhotos(): Promise<void> {
     this.logger.log("Starting job");
 
     const minioObjectIds = await this.objectStorageService.listObjectIds(
