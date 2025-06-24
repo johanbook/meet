@@ -29,7 +29,7 @@ import { BlogCommentReactionsController } from "./client/controllers/blog-commen
 import { BlogCommentsController } from "./client/controllers/blog-comments.controller";
 import { BlogReactionsController } from "./client/controllers/blog-reactions.controller";
 import { BlogsController } from "./client/controllers/blogs.controller";
-import { CleanupOrphanedBlogPhotosJob } from "./client/jobs/cleanup-orphaned-blog-photos.job";
+import { BlogJobs } from "./client/jobs/blog.jobs";
 import { BlogPostService } from "./domain/services/blog-post.service";
 import { BlogPostCommentReaction } from "./infrastructure/entities/blog-post-comment-reaction.entity";
 import { BlogPostComment } from "./infrastructure/entities/blog-post-comment.entity";
@@ -63,8 +63,8 @@ import { BlogPost } from "./infrastructure/entities/blog-post.entity";
     BlogReactionsController,
   ],
   providers: [
+    BlogJobs,
     BlogPostService,
-    CleanupOrphanedBlogPhotosJob,
     CreateBlogPostHandler,
     CreateBlogPostCommentHandler,
     CreateBlogPostCommentReactionHandler,
