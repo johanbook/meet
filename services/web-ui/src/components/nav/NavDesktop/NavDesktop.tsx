@@ -10,6 +10,7 @@ import {
 
 import { desktopNav } from "../nav.items";
 import { NavLinkListItem } from "./NavLinkListItem";
+import { NavProfile } from "./NavProfile";
 
 interface NavDesktopProps {
   appBarContent?: ReactNode;
@@ -38,11 +39,7 @@ export function NavDesktop({
 
           <List sx={{ borderTop: "1px solid", borderColor: "divider" }}>
             {desktopNav.bottom.map((item) => (
-              <NavLinkListItem
-                disableBottomPadding
-                item={item}
-                key={item.url}
-              />
+              <NavProfile item={item} key={item.url} />
             ))}
           </List>
         </Stack>
