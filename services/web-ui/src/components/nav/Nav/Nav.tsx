@@ -29,11 +29,10 @@ export function Nav({ appBarContent, children }: NavProps): ReactElement {
             sx={{
               flexGrow: 1,
               height: "100%",
-              pt: 1,
               justifyContent: "space-between",
             }}
           >
-            <List dense sx={{ flexGrow: 1, px: 1 }}>
+            <List dense sx={{ flexGrow: 1, m: 1 }}>
               {desktopNav.top.map((item) => (
                 <NavLinkListItem item={item} key={item.url} />
               ))}
