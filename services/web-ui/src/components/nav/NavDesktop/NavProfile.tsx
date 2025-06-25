@@ -5,7 +5,6 @@ import { Link as RouterLink } from "react-router";
 import { ErrorOutline } from "@mui/icons-material";
 import {
   Avatar,
-  Box,
   ListItem,
   ListItemButton,
   ListItemIcon,
@@ -27,7 +26,7 @@ export interface NavProfileProps {
 
 const ProfileIcon = () => {
   const query = useQuery({
-    queryKey: [CacheKeysConstants.OrganizationList],
+    queryKey: [CacheKeysConstants.CurrentProfile],
     queryFn: () => profileApi.getCurrentProfile(),
   });
 
@@ -57,10 +56,9 @@ const ProfileIcon = () => {
   }
 
   return (
-    <Box
-      component="img"
+    <Avatar
       src={query.data?.photo?.url}
-      sx={{ h: AVATAR_SIZE, w: AVATAR_SIZE }}
+      sx={{ height: AVATAR_SIZE, width: AVATAR_SIZE }}
     />
   );
 };
