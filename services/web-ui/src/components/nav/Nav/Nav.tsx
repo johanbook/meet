@@ -29,19 +29,22 @@ export function Nav({ appBarContent, children }: NavProps): ReactElement {
             sx={{
               flexGrow: 1,
               height: "100%",
-              p: 1,
               justifyContent: "space-between",
             }}
           >
-            <List dense sx={{ flexGrow: 1 }}>
+            <List dense sx={{ flexGrow: 1, m: 1 }}>
               {desktopNav.top.map((item) => (
                 <NavLinkListItem item={item} key={item.url} />
               ))}
             </List>
 
-            <List>
+            <List sx={{ borderTop: "1px solid", borderColor: "divider" }}>
               {desktopNav.bottom.map((item) => (
-                <NavLinkListItem item={item} key={item.url} />
+                <NavLinkListItem
+                  disableBottomPadding
+                  item={item}
+                  key={item.url}
+                />
               ))}
             </List>
           </Stack>
