@@ -1,6 +1,6 @@
 import { ReactElement, ReactNode } from "react";
 
-import { Box, Container, List, Toolbar } from "@mui/material";
+import { Box, Container, List, Stack, Toolbar } from "@mui/material";
 
 import { AppBar } from "src/components/nav/AppBar";
 import {
@@ -25,14 +25,15 @@ export function Nav({ appBarContent, children }: NavProps): ReactElement {
     <Box sx={{ height: "100vh", minHeight: "100%" }}>
       {!isMobile && (
         <DesktopDrawer>
-          <Box
+          <Stack
             sx={{
-              display: "flex",
-              flexDirection: "column",
+              flexGrow: 1,
               height: "100%",
+              p: 1,
+              justifyContent: "space-between",
             }}
           >
-            <List sx={{ flexGrow: 1 }}>
+            <List dense sx={{ flexGrow: 1 }}>
               {desktopNav.top.map((item) => (
                 <NavLinkListItem item={item} key={item.url} />
               ))}
@@ -43,7 +44,7 @@ export function Nav({ appBarContent, children }: NavProps): ReactElement {
                 <NavLinkListItem item={item} key={item.url} />
               ))}
             </List>
-          </Box>
+          </Stack>
         </DesktopDrawer>
       )}
 

@@ -24,17 +24,24 @@ export function NavLinkListItem({ item }: NavLinkListItemProps): ReactElement {
   const { t } = useTranslation("core");
 
   return (
-    <ListItem>
-      <ListItemButton component={RouterLink} to={item.url}>
+    <ListItem disablePadding sx={{ px: 1, pb: 1 }}>
+      <ListItemButton
+        component={RouterLink}
+        to={item.url}
+        selected={isActive}
+        sx={{ borderRadius: 2 }}
+      >
         <ListItemIcon>
           <item.Icon color={isActive ? "secondary" : undefined} />
         </ListItemIcon>
 
         <ListItemText
           primary={t(item.name)}
-          primaryTypographyProps={{
-            sx: {
-              fontWeight: isActive ? 600 : 400,
+          slotProps={{
+            primary: {
+              sx: {
+                fontWeight: isActive ? 600 : 400,
+              },
             },
           }}
         />

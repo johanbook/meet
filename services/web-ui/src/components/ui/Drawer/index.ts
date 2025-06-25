@@ -1,1 +1,1 @@
-export { Drawer } from "./Drawer";
+export { DesktopDrawer } from "./DesktopDrawer";
