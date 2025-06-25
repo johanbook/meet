@@ -38,7 +38,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new LoggingInterceptor());
 
   await app.register(fastifyHelmet, {
-    contentSecurityPolicy: { reportOnly: true },
+    contentSecurityPolicy: true,
   });
 
   await app.register(fastifyMultipart, {
