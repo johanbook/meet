@@ -14,17 +14,21 @@ import { useTranslation } from "src/core/i18n";
 import { NavItem } from "./types";
 
 export interface NavLinkListItemProps {
+  disableBottomPadding?: boolean;
   item: NavItem;
 }
 
-export function NavLinkListItem({ item }: NavLinkListItemProps): ReactElement {
+export function NavLinkListItem({
+  disableBottomPadding = false,
+  item,
+}: NavLinkListItemProps): ReactElement {
   const location = useLocation();
   const isActive = item.checkIfActive(location.pathname);
 
   const { t } = useTranslation("core");
 
   return (
-    <ListItem disablePadding sx={{ px: 1, pb: 1 }}>
+    <ListItem disablePadding sx={{ px: 1, pb: disableBottomPadding ? 0 : 1 }}>
       <ListItemButton
         component={RouterLink}
         to={item.url}
@@ -32,7 +36,7 @@ export function NavLinkListItem({ item }: NavLinkListItemProps): ReactElement {
         sx={{ borderRadius: 2 }}
       >
         <ListItemIcon>
-          <item.Icon color={isActive ? "secondary" : undefined} />
+          <item.Icon color={isActive ? "primary" : undefined} />
         </ListItemIcon>
 
         <ListItemText
