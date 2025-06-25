@@ -62,7 +62,6 @@ jobs:
         with:
           flags: auth-ui
 
-
   build-and-push-docker-image:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
@@ -84,7 +83,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build . --file Dockerfile --tag $TAG
+        run:
+          docker build . --file Dockerfile --tag $TAG --build-arg
+          VITE_SENTRY_DSN=${{ secrets.WEB_UI_SENTRY_DSN }}
 
       - name: Push Docker image to ghcr.io
         run: docker push $TAG

@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
+import * as Sentry from "@sentry/react";
 import { CssBaseline } from "@mui/material";
 
 import { registerI18n } from "src/core/i18n";
@@ -8,6 +9,11 @@ import { ThemeProvider } from "src/core/theme";
 
 import { App } from "./App";
 import { reportWebVitals } from "./utils/reportWebVitals";
+
+Sentry.init({
+  dsn: import.meta.env.VITE_SENTRY_DSN,
+  sendDefaultPii: false,
+});
 
 registerI18n();
 
