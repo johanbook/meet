@@ -1,10 +1,12 @@
 import { ReactElement, ReactNode } from "react";
 
-import { Box, Container, List, Toolbar } from "@mui/material";
+import { Box, Container, List, Stack, Toolbar } from "@mui/material";
 
 import { AppBar } from "src/components/nav/AppBar";
-import { Drawer } from "src/components/ui/Drawer";
-import { DRAWER_WIDTH } from "src/components/ui/Drawer/DesktopDrawer";
+import {
+  DRAWER_WIDTH,
+  DesktopDrawer,
+} from "src/components/ui/Drawer/DesktopDrawer";
 import { useIsMobile } from "src/hooks/useIsMobile";
 
 import { BottomNavigation } from "../BottomNavigation";
@@ -21,27 +23,30 @@ export function Nav({ appBarContent, children }: NavProps): ReactElement {
 
   return (
     <Box sx={{ height: "100vh", minHeight: "100%" }}>
-      <Drawer>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            height: "100%",
-          }}
-        >
-          <List sx={{ flexGrow: 1 }}>
-            {desktopNav.top.map((item) => (
-              <NavLinkListItem item={item} key={item.url} />
-            ))}
-          </List>
+      {!isMobile && (
+        <DesktopDrawer>
+          <Stack
+            sx={{
+              flexGrow: 1,
+              height: "100%",
+              p: 1,
+              justifyContent: "space-between",
+            }}
+          >
+            <List dense sx={{ flexGrow: 1 }}>
+              {desktopNav.top.map((item) => (
+                <NavLinkListItem item={item} key={item.url} />
+              ))}
+            </List>
 
-          <List>
-            {desktopNav.bottom.map((item) => (
-              <NavLinkListItem item={item} key={item.url} />
-            ))}
-          </List>
-        </Box>
-      </Drawer>
+            <List>
+              {desktopNav.bottom.map((item) => (
+                <NavLinkListItem item={item} key={item.url} />
+              ))}
+            </List>
+          </Stack>
+        </DesktopDrawer>
+      )}
 
       <AppBar appBarContent={appBarContent} />
 
