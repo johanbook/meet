@@ -28,6 +28,7 @@ export function AppBar({ appBarContent }: AppBarProps): ReactElement {
         color="inherit"
         position="fixed"
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        variant="outlined"
       >
         <Toolbar
           sx={{
