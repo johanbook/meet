@@ -14,6 +14,11 @@ import { createOpenApiDocument } from "./core/swagger/openapi";
 
 const PORT = Number.parseInt(process.env.PORT || "3000");
 const PRODUCTION = process.env.NODE_ENV === "production";
+const UI_DOMAIN = process.env.UI_URL || `http://localhost`;
+
+const CORS_OPTIONS = {
+  origin: [UI_DOMAIN],
+};
 
 async function bootstrap() {
   const nestLogger = new Logger("NestJS");
@@ -32,6 +37,7 @@ async function bootstrap() {
   app.register(plugin);
 
   app.useGlobalFilters(new SupertokensExceptionFilter());
+  app.enableCors(CORS_OPTIONS);
 
   const document = createOpenApiDocument(app);
   SwaggerModule.setup("/auth/api/docs", app, document);
