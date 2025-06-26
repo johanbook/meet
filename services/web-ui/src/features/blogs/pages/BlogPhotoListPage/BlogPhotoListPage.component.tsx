@@ -41,11 +41,11 @@ function Group({ data }: GroupProps): ReactElement {
 
           <ImageList cols={3} gap={8} sx={{ m: 0 }} variant="masonry">
             {entries.map((item) => (
-              <ImageListItem key={item.id}>
+              <ImageListItem key={item.id} sx={{ cursor: "pointer" }}>
                 <img
-                  src={item.url}
                   loading="lazy"
                   onClick={() => navigate(`/blog/${item.blogId}`)}
+                  src={item.url}
                 />
               </ImageListItem>
             ))}
