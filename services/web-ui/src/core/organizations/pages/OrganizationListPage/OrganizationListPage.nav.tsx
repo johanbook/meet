@@ -34,7 +34,7 @@ export function OrganizationListPageNav({
 
   return (
     <Nav appBarContent={appBarContent}>
-      <Box sx={{ pt: 1, px: 3 }}>
+      <Box sx={{ pt: 2, px: 3 }}>
         <Typography color="textSecondary">{t("description")}</Typography>
 
         <Fab

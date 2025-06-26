@@ -1,7 +1,12 @@
 import { ReactElement } from "react";
 import { useNavigate } from "react-router";
 
-import { ListItemButton, ListItemText } from "@mui/material";
+import {
+  Avatar,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 
 import { OrganizationDetails, SwitchOrganizationCommand } from "src/api";
 import { organizationsApi } from "src/apis";
@@ -76,6 +81,9 @@ export function OrganizationListPageContainer(): ReactElement {
           key={organization.id}
           onClick={() => handleClick(organization)}
         >
+          <ListItemIcon>
+            <Avatar>{organization.name[0].toUpperCase()}</Avatar>
+          </ListItemIcon>
           <ListItemText
             primary={organization.name}
             secondary={getDate(organization.created)}
