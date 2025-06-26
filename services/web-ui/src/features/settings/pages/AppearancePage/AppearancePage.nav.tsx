@@ -34,7 +34,7 @@ export function AppearancePageNav({
 
   return (
     <Nav appBarContent={appBarContent}>
-      <Box sx={{ pt: 1, px: 3 }}>{children}</Box>
+      <Box sx={{ p: 3 }}>{children}</Box>
     </Nav>
   );
 }
