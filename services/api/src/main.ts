@@ -16,9 +16,15 @@ import {
 import { createOpenApiDocument } from "src/core/openapi";
 
 import { AppModule } from "./app.module";
+import { getRequiredStringConfig } from "./utils/config.helper";
 
 const PATH_PREFIX = process.env.PATH_PREFIX || "/api";
 const PORT = Number.parseInt(process.env.PORT || "3000");
+const UI_DOMAIN = getRequiredStringConfig("UI_DOMAIN");
+
+const CORS_OPTIONS = {
+  origin: [UI_DOMAIN],
+};
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -30,6 +36,7 @@ async function bootstrap() {
   );
 
   app.setGlobalPrefix(PATH_PREFIX);
+  app.enableCors(CORS_OPTIONS);
 
   const document = createOpenApiDocument(app);
   SwaggerModule.setup(`${PATH_PREFIX}/docs`, app, document);
