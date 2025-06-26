@@ -4,6 +4,7 @@ import type { Preview } from "@storybook/react-vite";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { ThemeProvider } from "../src/core/theme";
+import { worker } from "../src/test/mocks/browser";
 
 export const decorators = [
   (Story: ReactElement) => {
@@ -34,6 +35,16 @@ const preview: Preview = {
       },
     },
   },
+  loaders: [
+    async () => {
+      await worker.start({
+        onUnhandledRequest: "bypass",
+        quiet: true,
+      });
+
+      return {};
+    },
+  ],
 };
 
 export default preview;
