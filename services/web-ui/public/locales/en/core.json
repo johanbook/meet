@@ -4,7 +4,8 @@
     "confirm": "Confirm"
   },
   "navigation": {
-    "blog": "Blog",
+    "blog": "Posts",
+    "create-blog": "New post",
     "chat": "Chats",
     "profile": "Profile"
   },

@@ -4,7 +4,8 @@
     "confirm": "Bekräfta"
   },
   "navigation": {
-    "blog": "Blog",
+    "blog": "Inlägg",
+    "create-blog": "Nytt inlägg",
     "chat": "Konversationer",
     "profile": "Profil"
   },

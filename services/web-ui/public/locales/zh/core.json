@@ -4,7 +4,8 @@
     "confirm": "确认"
   },
   "navigation": {
-    "blog": "博客",
+    "blog": "帖子",
+    "create-blog": "新帖子",
     "chat": "对话",
     "profile": "个人资料"
   },

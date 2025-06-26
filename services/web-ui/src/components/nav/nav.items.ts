@@ -11,9 +11,21 @@ export const desktopNav: DesktopNav = {
   top: [
     {
       Icon: HomeRounded,
-      checkIfActive: (path) => path === "/" || path.startsWith("/blog"),
+      checkIfActive: (path) => {
+        if (path === "/blog/create") {
+          return false;
+        }
+
+        return path === "/" || path.startsWith("/blog");
+      },
       name: "navigation.blog",
       url: "/",
+    },
+    {
+      Icon: AddCircleOutlineRounded,
+      checkIfActive: (path) => path === "/blog/create",
+      name: "navigation.create-blog",
+      url: "/blog/create",
     },
     {
       Icon: Chat,
@@ -50,7 +62,7 @@ export const mobileNav: MobileNav = {
     {
       Icon: AddCircleOutlineRounded,
       checkIfActive: (path) => path === "/blog/create",
-      name: "navigation.blog",
+      name: "navigation.create-blog",
       url: "/blog/create",
     },
     {
