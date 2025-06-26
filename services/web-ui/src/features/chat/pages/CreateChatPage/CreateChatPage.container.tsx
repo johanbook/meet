@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { Autocomplete, Box, TextField } from "@mui/material";
 
 import { chatsApi, organizationsApi, profileApi } from "src/apis";
-import { ProfileAvatar } from "src/components/ui";
+import { ProfileAvatar } from "src/components/shared";
 import { Button } from "src/components/ui";
 import { useTranslation } from "src/core/i18n";
 import {

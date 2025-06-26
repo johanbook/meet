@@ -57,7 +57,7 @@ export function BlogPostListPageContainer(): ReactElement {
   if (!data || data.pages[0].length === 0) {
     return (
       <BlogPostListPageNav>
-        <Typography sx={{ px: 2 }}>{t("no-posts")}</Typography>
+        <Typography sx={{ p: 2 }}>{t("no-posts")}</Typography>
       </BlogPostListPageNav>
     );
   }

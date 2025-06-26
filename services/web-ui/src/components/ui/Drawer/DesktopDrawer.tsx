@@ -8,7 +8,7 @@ interface DrawerProps {
   children: React.ReactNode;
 }
 
-export const DRAWER_WIDTH = 300;
+export const DRAWER_WIDTH = 280;
 
 export function DesktopDrawer({ children }: DrawerProps): React.ReactElement {
   return (

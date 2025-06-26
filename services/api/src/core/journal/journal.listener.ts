@@ -4,6 +4,7 @@ import { CommandBus, ICommand } from "@nestjs/cqrs";
 
 import { Logger } from "src/core/logging";
 import { map } from "src/core/mapper";
+import { redactBinaries } from "src/utils/object.helper";
 
 import { CreateJournalEntryCommand } from "./application/contracts/commands/create-journal-entry.command";
 import { IGNORE_JOURNAL_KEY } from "./no-journal.decorator";
@@ -18,7 +19,7 @@ export class JournalLogger {
   ) {
     this.commandBus.subscribe(async (command: ICommand) => {
       const commandName = command.constructor.name;
-      const payload = command;
+      const payload = redactBinaries(command);
 
       const ignoreCommand = this.reflector.get<boolean | undefined>(
         IGNORE_JOURNAL_KEY,

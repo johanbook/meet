@@ -8,7 +8,6 @@
     "format": "prettier --write '{scripts,src}/**/*.{js,jsx,ts,tsx}'",
     "lint": "tsc && eslint 'src/**/*.{js,jsx,ts,tsx}' --max-warnings 0",
     "lint:ci": "npm run lint",
-    "prestart:dev": "./scripts/create-envs dist/__env.json",
     "start:dev": "vite --host --port 80",
     "test": "vitest src",
     "test:ci": "npm run test"
@@ -17,6 +16,7 @@
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.0",
     "@mui/material": "5.14.14",
+    "@sentry/react": "9.31.0",
     "@vitejs/plugin-react": "4.4.1",
     "i18next": "23.6.0",
     "i18next-browser-languagedetector": "7.1.0",
@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@eslint/js": "9.29.0",
+    "@testing-library/dom": "10.4.0",
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",

@@ -27,7 +27,13 @@ export function AppBar({ appBarContent }: AppBarProps): ReactElement {
       <MuiAppBar
         color="inherit"
         position="fixed"
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          borderTop: "none",
+          borderLeft: "none",
+          borderRight: "none",
+        }}
+        variant="outlined"
       >
         <Toolbar
           sx={{

@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 
 import { ChatConversationDetails } from "src/api";
-import { ProfileAvatar } from "src/components/ui";
+import { ProfileAvatar } from "src/components/shared";
 
 interface ConversationListItemProps {
   data: ChatConversationDetails;
