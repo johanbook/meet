@@ -27,8 +27,8 @@ export function useSnackbar() {
 
     enqueueSnackbar(message, {
       anchorOrigin: {
-        horizontal: "center",
-        vertical: isMobile ? "top" : "bottom",
+        horizontal: isMobile ? "center" : "right",
+        vertical: "bottom",
       },
       TransitionComponent: Grow,
       variant,
