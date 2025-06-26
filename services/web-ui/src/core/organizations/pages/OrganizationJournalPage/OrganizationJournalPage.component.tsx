@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
 import { JournalEntryDetails } from "src/api";
-import { ProfileAvatar } from "src/components/ui";
+import { ProfileAvatar } from "src/components/shared";
 import { Table } from "src/components/ui";
 import { Column } from "src/components/ui/Table";
 import { format } from "src/utils/string";
