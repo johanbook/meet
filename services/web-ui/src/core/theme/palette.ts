@@ -7,8 +7,8 @@ interface Palette {
 const PALETTES: Record<string, Palette> = {
   faded: {
     primary: "rgb(200,100,150)",
-    success: "rgb(100,150,100)",
-    error: "rgb(190,100,100)",
+    success: "rgb(120,180,130)",
+    error: "rgb(210,120,120)",
   },
   neon: {
     primary: "#00A3C0",
