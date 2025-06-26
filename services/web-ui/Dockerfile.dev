@@ -5,3 +5,4 @@ COPY . .
 RUN npm ci -D --legacy-peer-deps
 
 CMD ["npm", "run", "start:dev"]
+EXPOSE 80
