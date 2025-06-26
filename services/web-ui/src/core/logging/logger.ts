@@ -1,3 +1,5 @@
+import { captureException } from "@sentry/react";
+
 type LogLevel = "debug" | "error" | "fatal" | "info" | "trace" | "warn";
 
 interface LogProps {
@@ -8,6 +10,10 @@ interface LogProps {
 
 export class Logger {
   constructor(private readonly name: string) {}
+
+  captureException(error: unknown) {
+    captureException(error);
+  }
 
   debug(msg: string, props?: object) {
     this.log({ level: "debug", msg, props });
