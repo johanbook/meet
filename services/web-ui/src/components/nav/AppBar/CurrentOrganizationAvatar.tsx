@@ -9,6 +9,7 @@ import {
   CircularProgress,
   Divider,
   Drawer,
+  IconButton,
   MenuItem,
   Skeleton,
   Typography,
@@ -27,6 +28,8 @@ import {
 } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 import { useIsMobile } from "src/hooks/useIsMobile";
+
+const SIZE = 30;
 
 interface MenuContentProps {
   currentOrganizationId: number;
@@ -83,7 +86,7 @@ function MenuContent({ currentOrganizationId }: MenuContentProps) {
           onClick={() => handleClick(organization)}
           selected={organization.id === currentOrganizationId}
         >
-          <Avatar sx={{ height: 30, width: 30, mr: 2 }}>
+          <Avatar sx={{ height: SIZE, width: SIZE, mr: 2 }}>
             {organization.name[0]}
           </Avatar>
           <Typography
@@ -113,18 +116,20 @@ export function CurrentOrganizationAvatar(): ReactElement {
   });
 
   if (query.isPending) {
-    return <Skeleton height={30} width={30} variant="circular" />;
+    return <Skeleton height={SIZE} width={SIZE} variant="circular" />;
   }
 
   if (query.error) {
-    return <ErrorOutline color="error" sx={{ height: 30, width: 30 }} />;
+    return <ErrorOutline color="error" sx={{ height: SIZE, width: SIZE }} />;
   }
 
   if (isMobile) {
     return (
       <>
         <ButtonBase onClick={() => setIsDrawerOpen(true)}>
-          <Avatar sx={{ height: 30, width: 30 }}>{query.data.name[0]}</Avatar>
+          <Avatar sx={{ height: SIZE, width: SIZE }}>
+            {query.data.name[0]}
+          </Avatar>
         </ButtonBase>
 
         <Drawer
@@ -143,7 +148,9 @@ export function CurrentOrganizationAvatar(): ReactElement {
               width: "65vw",
             }}
           >
-            <Avatar sx={{ height: 30, width: 30 }}>{query.data.name[0]}</Avatar>
+            <Avatar sx={{ height: SIZE, width: SIZE }}>
+              {query.data.name[0]}
+            </Avatar>
             <Typography
               sx={{
                 overflow: "hidden",
@@ -169,11 +176,11 @@ export function CurrentOrganizationAvatar(): ReactElement {
         vertical: "bottom",
       }}
       Button={(props) => (
-        <ButtonBase>
-          <Avatar sx={{ height: 30, width: 30 }} {...props}>
+        <IconButton>
+          <Avatar sx={{ height: SIZE, width: SIZE }} {...props}>
             {query.data.name[0]}
           </Avatar>
-        </ButtonBase>
+        </IconButton>
       )}
     >
       <MenuContent currentOrganizationId={query.data.id} />
