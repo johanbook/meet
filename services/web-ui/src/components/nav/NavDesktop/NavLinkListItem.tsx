@@ -25,12 +25,7 @@ export function NavLinkListItem({ item }: NavLinkListItemProps): ReactElement {
 
   return (
     <ListItem disablePadding sx={{ px: 1, pb: 1 }}>
-      <ListItemButton
-        component={RouterLink}
-        to={item.url}
-        selected={isActive}
-        sx={{ borderRadius: 2 }}
-      >
+      <ListItemButton component={RouterLink} to={item.url} selected={isActive}>
         <ListItemIcon>
           <item.Icon color={isActive ? "primary" : undefined} />
         </ListItemIcon>

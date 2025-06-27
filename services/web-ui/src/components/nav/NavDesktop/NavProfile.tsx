@@ -71,12 +71,7 @@ export function NavProfile({ item }: NavProfileProps): ReactElement {
 
   return (
     <ListItem disablePadding sx={{ px: 1 }}>
-      <ListItemButton
-        component={RouterLink}
-        to={item.url}
-        selected={isActive}
-        sx={{ borderRadius: 2 }}
-      >
+      <ListItemButton component={RouterLink} to={item.url} selected={isActive}>
         <ListItemIcon>
           <ProfileIcon />
         </ListItemIcon>
