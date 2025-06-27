@@ -1,7 +1,6 @@
 import { ReactElement } from "react";
 
-import { AccountCircle } from "@mui/icons-material";
-import { Avatar, Button } from "@mui/material";
+import { Avatar, IconButton } from "@mui/material";
 
 import { profileApi } from "src/apis";
 import { useTranslation } from "src/core/i18n";
@@ -50,21 +49,10 @@ export function CurrentProfileAvatar({
     });
   }
 
-  if (src) {
-    return (
-      <Button component="label" disabled={mutation.isPending}>
-        <Avatar sx={{ height: HEIGHT, width: HEIGHT }} src={src} />
-        <input hidden accept="image/*" type="file" onChange={handleUpload} />
-      </Button>
-    );
-  }
-
   return (
-    <Button component="label" disabled={mutation.isPending}>
-      <Avatar sx={{ height: HEIGHT, width: HEIGHT }}>
-        <AccountCircle sx={{ height: HEIGHT, width: HEIGHT }} />
-      </Avatar>
+    <IconButton component="label" disabled={mutation.isPending}>
+      <Avatar sx={{ height: HEIGHT, width: HEIGHT }} src={src} />
       <input hidden accept="image/*" type="file" onChange={handleUpload} />
-    </Button>
+    </IconButton>
   );
 }
