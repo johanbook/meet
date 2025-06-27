@@ -1,12 +1,13 @@
 import { ReactElement, ReactNode } from "react";
 import { Link } from "react-router";
 
-import { Edit } from "@mui/icons-material";
-import { Box, Fab, Typography } from "@mui/material";
+import { Add } from "@mui/icons-material";
+import { Box, Fab, Typography, Zoom } from "@mui/material";
 
 import { Nav } from "src/components/nav";
 import { CurrentOrganizationAvatar } from "src/components/nav/AppBar/CurrentOrganizationAvatar";
 import { useTranslation } from "src/core/i18n";
+import { useIsMobile } from "src/hooks/useIsMobile";
 
 interface ChatListPageNavProps {
   children: ReactNode;
@@ -16,6 +17,7 @@ export function ChatListPageNav({
   children,
 }: ChatListPageNavProps): ReactElement {
   const { t } = useTranslation("connections");
+  const isMobile = useIsMobile();
 
   const appBarContent = (
     <>
@@ -28,15 +30,17 @@ export function ChatListPageNav({
 
   return (
     <Nav appBarContent={appBarContent}>
-      <Box sx={{ pt: 3, px: 3 }}>
-        <Fab
-          component={Link}
-          color="primary"
-          sx={{ position: "absolute", bottom: 70, right: 10 }}
-          to="/chat/create"
-        >
-          <Edit />
-        </Fab>
+      <Box sx={{ p: 3 }}>
+        <Zoom in>
+          <Fab
+            component={Link}
+            color="primary"
+            sx={{ position: "absolute", bottom: isMobile ? 70 : 10, right: 10 }}
+            to="/chat/create"
+          >
+            <Add />
+          </Fab>
+        </Zoom>
 
         {children}
       </Box>

@@ -2,10 +2,11 @@ import { ReactElement, ReactNode } from "react";
 import { Link as ReactRouterLink } from "react-router";
 
 import { Add, ArrowBack } from "@mui/icons-material";
-import { Box, Fab, IconButton, Typography } from "@mui/material";
+import { Box, Fab, IconButton, Typography, Zoom } from "@mui/material";
 
 import { Nav } from "src/components/nav";
 import { useTranslation } from "src/core/i18n";
+import { useIsMobile } from "src/hooks/useIsMobile";
 
 interface OrganizationListPageNavProps {
   children: ReactNode;
@@ -14,6 +15,7 @@ interface OrganizationListPageNavProps {
 export function OrganizationListPageNav({
   children,
 }: OrganizationListPageNavProps): ReactElement {
+  const isMobile = useIsMobile();
   const { t } = useTranslation("organization-list");
 
   const appBarContent = (
@@ -35,16 +37,20 @@ export function OrganizationListPageNav({
   return (
     <Nav appBarContent={appBarContent}>
       <Box sx={{ pt: 2, px: 3 }}>
-        <Typography color="textSecondary">{t("description")}</Typography>
+        <Typography color="textSecondary" gutterBottom>
+          {t("description")}
+        </Typography>
 
-        <Fab
-          component={ReactRouterLink}
-          color="primary"
-          sx={{ position: "absolute", bottom: 70, right: 10 }}
-          to="/group/create"
-        >
-          <Add />
-        </Fab>
+        <Zoom in>
+          <Fab
+            component={ReactRouterLink}
+            color="primary"
+            sx={{ position: "absolute", bottom: isMobile ? 70 : 10, right: 10 }}
+            to="/group/create"
+          >
+            <Add />
+          </Fab>
+        </Zoom>
 
         {children}
       </Box>
