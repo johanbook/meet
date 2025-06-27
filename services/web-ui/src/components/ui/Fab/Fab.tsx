@@ -19,6 +19,9 @@ export function Fab({ children, to }: FabProps): ReactElement {
         component={ReactRouterLink}
         color="primary"
         sx={{
+          // background: (theme) =>
+          //   `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.error.main} 40%, ${theme.palette.secondary.main} 100%)`,
+          borderRadius: 4,
           position: "absolute",
           // NB: We need to account for bottom navigation on mobile
           bottom: isMobile ? 70 : 10,
