@@ -41,7 +41,7 @@ const NavItem = ({
   to: string;
 }) => (
   <ListItem disablePadding>
-    <ListItemButton component={Link} to={to}>
+    <ListItemButton component={Link} sx={{ borderRadius: 2 }} to={to}>
       <ListItemIcon>
         <Icon />
       </ListItemIcon>
