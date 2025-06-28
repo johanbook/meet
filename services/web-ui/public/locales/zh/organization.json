@@ -26,9 +26,9 @@
       "remove": "从群组中删除成员"
     },
     "remove": {
-      "description": "这将从该组中删除该成员",
+      "description": "这将从群组中移除该成员。他们将无法再查看群组内容，但以后可以随时重新添加。",
       "error": "删除成员时发生错误",
-      "header": "确认从群组中删除成员",
+      "header": "移除成员？",
       "success": "该成员已从该组中删除"
     },
     "update": {
@@ -55,8 +55,8 @@
       "header": "删除群组",
       "button": "删除",
       "description": "此操作将永久删除该群组及其包含的所有数据。",
-      "confirmTitle": "确认删除",
-      "confirmDescription": "删除该群组将移除其所有数据且无法恢复。您确定要继续吗？",
+      "confirmTitle": "删除群组？",
+      "confirmDescription": "删除该群组将移除其所有数据且无法恢复。",
       "success": "群组已被删除",
       "error": "删除群组时发生错误"
     }

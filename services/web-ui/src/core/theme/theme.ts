@@ -5,6 +5,15 @@ import PALETTE from "./palette";
 export function createTheme(darkmode = false) {
   return createMuiTheme({
     components: {
+      MuiDialog: {
+        styleOverrides: {
+          paper: ({ theme }) => ({
+            borderRadius: theme.spacing(2),
+            // Dialogs smaller than this will not look good
+            minWidth: theme.spacing(40),
+          }),
+        },
+      },
       MuiDialogActions: {
         styleOverrides: {
           root: ({ theme }) => ({

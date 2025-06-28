@@ -54,6 +54,7 @@ export function OrganizationMemberUpdateDialog({
           <Button
             disabled={role === member.role}
             onClick={() => handleSave(closeDialog)}
+            variant="contained"
           >
             {t("members.update.save")}
           </Button>
@@ -62,7 +63,7 @@ export function OrganizationMemberUpdateDialog({
       title={t("members.update.header") || ""}
     >
       <form>
-        <Typography color="textSecondary" sx={{ marginBottom: 2 }}>
+        <Typography color="textSecondary" sx={{ mb: 3 }}>
           {t("members.update.text")}
         </Typography>
 

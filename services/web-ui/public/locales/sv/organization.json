@@ -26,9 +26,9 @@
       "remove": "Ta bort medlem från grupp"
     },
     "remove": {
-      "description": "Detta kommer att ta bort denna medlem från gruppen så att de inte längre kan se något av innehållet",
+      "description": "Detta kommer att ta bort denna medlem från gruppen. De kan inte längre se innehållet, men kan alltid läggas till igen senare.",
       "error": "Ett fel inträffade när medlemmens skulle tas bort",
-      "header": "Bekräfta borttagning av medlem från grupp",
+      "header": "Ta bort medlem?",
       "success": "Medlemmen har tagits bort från gruppen"
     },
     "update": {
@@ -55,8 +55,8 @@
       "header": "Ta bort grupp",
       "button": "Ta bort",
       "description": "Denna åtgärd kommer permanent att ta bort denna grupp och all data den innehåller.",
-      "confirmTitle": "Bekräfta borttagning",
-      "confirmDescription": "Att ta bort denna grupp kommer att ta bort all dess data och kan inte ångras. Är du säker på att du vill fortsätta?",
+      "confirmTitle": "Ta bort grupp?",
+      "confirmDescription": "Att ta bort denna grupp kommer att ta bort all dess data och kan inte ångras.",
       "success": "Gruppen har tagits bort",
       "error": "Ett fel inträffade när gruppen skulle tas bort"
     }
