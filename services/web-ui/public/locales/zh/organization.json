@@ -50,6 +50,15 @@
       "button": "保存",
       "error": "更新群组时发生错误",
       "success": "群组已更新"
+    },
+    "delete": {
+      "header": "删除群组",
+      "button": "删除",
+      "description": "此操作将永久删除该群组及其包含的所有数据。",
+      "confirmTitle": "确认删除",
+      "confirmDescription": "删除该群组将移除其所有数据且无法恢复。您确定要继续吗？",
+      "success": "群组已被删除",
+      "error": "删除群组时发生错误"
     }
   }
 }

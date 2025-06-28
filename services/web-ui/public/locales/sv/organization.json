@@ -50,6 +50,15 @@
       "button": "Spara",
       "error": "Ett fel inträffade när gruppens inställningar skulle uppdateras",
       "success": "Gruppens inställningar har uppdaterats"
+    },
+    "delete": {
+      "header": "Ta bort grupp",
+      "button": "Ta bort",
+      "description": "Denna åtgärd kommer permanent att ta bort denna grupp och all data den innehåller.",
+      "confirmTitle": "Bekräfta borttagning",
+      "confirmDescription": "Att ta bort denna grupp kommer att ta bort all dess data och kan inte ångras. Är du säker på att du vill fortsätta?",
+      "success": "Gruppen har tagits bort",
+      "error": "Ett fel inträffade när gruppen skulle tas bort"
     }
   }
 }
