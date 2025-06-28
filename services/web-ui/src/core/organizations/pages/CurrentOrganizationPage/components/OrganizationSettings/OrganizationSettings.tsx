@@ -7,6 +7,7 @@ import { organizationsApi } from "src/apis";
 import { Button, TextField, Typography } from "src/components/ui";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { Permissions, useAuthorization } from "src/core/authorization";
+import { useConfirmDialog } from "src/core/dialog";
 import { useForm } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
 import {
@@ -25,6 +26,8 @@ export function OrganizationSettings({
 }: OrganizationSettingsProps): ReactElement {
   const { t } = useTranslation("organization");
   const authorization = useAuthorization();
+
+  const { confirmWithDialog } = useConfirmDialog();
 
   const snackbar = useSnackbar();
 
@@ -68,13 +71,12 @@ export function OrganizationSettings({
     });
   }
 
-  async function handleDelete(event: SyntheticEvent): Promise<void> {
-    event.preventDefault();
-
+  async function handleDelete(onSuccess: () => void): Promise<void> {
     await deleteMutation.mutateAsync(undefined, {
-      onError: () => snackbar.error(t("settings.save.error")),
+      onError: () => snackbar.error(t("settings.delete.error")),
       onSuccess: () => {
-        snackbar.success(t("settings.save.success"));
+        snackbar.success(t("settings.delete.success"));
+        onSuccess();
         queryClient.invalidateQueries({
           queryKey: [CacheKeysConstants.CurrentOrganization],
         });
@@ -114,10 +116,21 @@ export function OrganizationSettings({
         {t("settings.delete.header")}
       </Typography>
 
+      <Typography color="textSecondary">
+        {t("settings.delete.description")}
+      </Typography>
+
       <Button
         color="error"
         disabled={deleteMutation.isPending}
-        onClick={handleDelete}
+        onClick={() =>
+          confirmWithDialog({
+            description: t("settings.delete.confirmDescription"),
+            onConfirm: handleDelete,
+            title: t("settings.delete.confirmTitle"),
+          })
+        }
+        sx={{ mt: 2 }}
         variant="contained"
       >
         {t("settings.delete.button")}

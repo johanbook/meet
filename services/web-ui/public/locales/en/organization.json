@@ -46,7 +46,12 @@
     "header": "Settings",
     "delete": {
       "header": "Delete group",
-      "button": "Delete"
+      "button": "Delete",
+      "description": "This action will permanently delete this group and all the data it contains.",
+      "confirmTitle": "Confirm delete",
+      "confirmDescription": "Deleting this group will remove all its data and cannot be undone. Are you sure you want to proceed?",
+      "success": "The group has been deleted",
+      "error": "An error occurred when deleting the group"
     },
     "description": "Here you can change settings of your group.",
     "name": "Name",

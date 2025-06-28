@@ -8,18 +8,20 @@ import { useSnackbar } from "src/core/snackbar";
 import { Button } from "../Button";
 import { Dialog } from "../Dialog";
 
-export interface ConfirmationDialogProps extends GlobalDialogProps {
+export interface ConfirmationDialogProps {
   description: string;
   onConfirm: (onSuccess: () => void) => void | Promise<void>;
   title: string;
 }
+
+type Props = ConfirmationDialogProps & GlobalDialogProps;
 
 export function ConfirmationDialog({
   description,
   onConfirm,
   title,
   ...props
-}: ConfirmationDialogProps): ReactElement {
+}: Props): ReactElement {
   const logger = useLogger(ConfirmationDialog.name);
   const snackbar = useSnackbar();
   const { t } = useTranslation("core");
