@@ -1,15 +1,15 @@
 {
   "actions": {
     "create": {
-      "error": "Something went wrong when trying to create the blog post",
-      "success": "Your post was published!",
-      "submit": "Publish Post"
+      "error": "Something went wrong when trying to share your moment",
+      "success": "Your moment was shared!",
+      "submit": "Share moment"
     }
   },
   "form": {
     "placeholder": "Perhaps say something about your day"
   },
-  "header": "Create a new post",
+  "header": "Share a moment",
   "links": {
     "back": "Back"
   },
