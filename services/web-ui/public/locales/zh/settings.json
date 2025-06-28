@@ -1,4 +1,24 @@
 {
   "darkmode": "深色模式",
-  "header": "设置"
+  "header": "设置",
+  "danger-zone": {
+    "description": "这些操作无法撤销",
+    "header": "危险区",
+    "delete-account": {
+      "button": "删除账户",
+      "description": "这将删除你的账户及其所有相关数据，无法恢复。",
+      "error": "删除账户时发生错误。请联系支持。",
+      "success": "账户删除成功。更改可能需要几分钟才能生效。",
+      "title": "删除你的账户？"
+    }
+  },
+  "notifications": {
+    "header": "通知",
+    "enable": {
+      "description": "为此设备启用推送通知",
+      "button": "启用",
+      "error": "启用推送通知失败",
+      "success": "推送通知已启用"
+    }
+  }
 }

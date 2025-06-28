@@ -7,7 +7,7 @@
       "description": "This will delete your account and all its associated data. It cannot be undone.",
       "error": "There was an error when deleting your account. Please contact support.",
       "success": "Account deleted successfully. Changes might take a few minutes to propagate.",
-      "title": "Delete your account"
+      "title": "Delete your account?"
     }
   },
   "darkmode": "Darkmode",

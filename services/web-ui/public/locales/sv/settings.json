@@ -7,7 +7,7 @@
       "description": "Detta kommer att ta bort ditt konto och all dess tillhörande data. Det kan inte ångras.",
       "error": "Ett fel uppstod vid borttagning av ditt konto. Vänligen kontakta supporten.",
       "success": "Kontot raderades framgångsrikt. Ändringar kan ta några minuter innan de träder i kraft.",
-      "title": "Ta bort ditt konto"
+      "title": "Ta bort ditt konto?"
     }
   },
   "darkmode": "Mörkerläge",
