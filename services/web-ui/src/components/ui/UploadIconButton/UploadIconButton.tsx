@@ -1,12 +1,13 @@
 import React, { ChangeEvent, ReactNode } from "react";
 
-import { IconButton } from "@mui/material";
+import { IconButton, SxProps } from "@mui/material";
 
 interface UploadIconButtonProps {
   accept: string;
   children: ReactNode;
   multiple?: boolean;
   onChange: (files: File[]) => Promise<void> | void;
+  sx?: SxProps;
 }
 
 export function UploadIconButton({
@@ -14,6 +15,7 @@ export function UploadIconButton({
   children,
   multiple,
   onChange,
+  ...props
 }: UploadIconButtonProps): React.ReactElement {
   async function handleChange(
     event: ChangeEvent<HTMLInputElement>,
@@ -34,7 +36,7 @@ export function UploadIconButton({
   }
 
   return (
-    <IconButton component="label">
+    <IconButton component="label" {...props}>
       {children}
       <input
         accept={accept}

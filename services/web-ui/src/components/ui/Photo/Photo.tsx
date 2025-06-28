@@ -1,10 +1,13 @@
-import { HTMLProps, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
+import { Box, SxProps } from "@mui/material";
 
 import { blobToBase64 } from "src/utils/blob";
 
-interface PhotoProps extends Omit<HTMLProps<HTMLImageElement>, "src"> {
+interface PhotoProps {
   alt: string;
   src: Blob;
+  sx?: SxProps;
 }
 
 export function Photo({ alt, src, ...props }: PhotoProps) {
@@ -18,5 +21,5 @@ export function Photo({ alt, src, ...props }: PhotoProps) {
     parseBlob();
   }, [src]);
 
-  return <img alt={alt} src={parsedSrc} {...props} />;
+  return <Box component="img" alt={alt} src={parsedSrc} {...props} />;
 }

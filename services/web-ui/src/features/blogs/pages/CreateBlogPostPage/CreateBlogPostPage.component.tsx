@@ -1,6 +1,6 @@
 import { ReactElement, SyntheticEvent } from "react";
 
-import { Close, InsertPhoto, Send } from "@mui/icons-material";
+import { Add, Close, Send } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -92,21 +92,23 @@ export function CreateBlogPostPageComponent({
     >
       <Box>
         <Typography variant="h6" sx={{ mb: 1 }}>
+          {t("sections.description")}
+        </Typography>
+        <TextField
+          disabled={mutation.isPending}
+          fullWidth
+          multiline
+          minRows={2}
+          onChange={(event) => form.setValue({ content: event.target.value })}
+          placeholder={t("form.placeholder") || ""}
+          value={form.state.content.value}
+        />
+      </Box>
+
+      <Box>
+        <Typography variant="h6" sx={{ mb: 1 }}>
           {t("sections.photos")}
         </Typography>
-        <Box sx={{ mb: 2 }}>
-          <UploadIconButton
-            accept="image/*"
-            multiple
-            onChange={(photos) =>
-              form.setValue({
-                photos: [...(form.state.photos.value || []), ...photos],
-              })
-            }
-          >
-            <InsertPhoto />
-          </UploadIconButton>
-        </Box>
         <Box
           sx={{
             display: "flex",
@@ -120,11 +122,10 @@ export function CreateBlogPostPageComponent({
               <Photo
                 alt={t("sections.photoAlt") || ""}
                 src={photo}
-                style={{
-                  border: "1px solid rgb(200,200,200)",
-                  borderRadius: 8,
-                  marginTop: 10,
-                  padding: 10,
+                sx={{
+                  border: "1px solid",
+                  borderRadius: 2,
+                  marginTop: 1,
                   width: 100,
                 }}
               />
@@ -132,7 +133,7 @@ export function CreateBlogPostPageComponent({
                 aria-label={t("sections.removePhoto")}
                 onClick={() => handleRemovePhoto(photo)}
                 sx={{
-                  bgcolor: "background.paper",
+                  backgroundColor: "background.paper",
                   border: 1,
                   padding: 0,
                   position: "absolute",
@@ -144,23 +145,27 @@ export function CreateBlogPostPageComponent({
               </IconButton>
             </Box>
           ))}
-        </Box>
-      </Box>
 
-      <Box>
-        <Typography variant="h6" sx={{ mb: 1 }}>
-          {t("sections.description")}
-        </Typography>
-        <TextField
-          disabled={mutation.isPending}
-          fullWidth
-          multiline
-          minRows={4}
-          onChange={(event) => form.setValue({ content: event.target.value })}
-          placeholder={t("form.placeholder") || ""}
-          value={form.state.content.value}
-          InputProps={{}}
-        />
+          <UploadIconButton
+            accept="image/*"
+            multiple
+            onChange={(photos) =>
+              form.setValue({
+                photos: [...(form.state.photos.value || []), ...photos],
+              })
+            }
+            sx={{
+              background: "background.paper",
+              border: "1px solid",
+              borderRadius: 2,
+              height: "100%",
+              marginTop: 1,
+              width: 100,
+            }}
+          >
+            <Add />
+          </UploadIconButton>
+        </Box>
       </Box>
 
       <Box
