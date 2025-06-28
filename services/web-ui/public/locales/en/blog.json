@@ -1,14 +1,14 @@
 {
   "actions": {
     "create-comment": {
-      "error": "Something went wrong when trying to post the comment"
+      "error": "Something went wrong when trying to post this comment"
     },
     "delete": {
       "dialog": {
-        "description": "This will permanently delete this blog post",
-        "title": "Confirm deleting blog post"
+        "description": "This will permanently delete this post. It will no longer be visible to anyone.",
+        "title": "Delete this post?"
       },
-      "error": "Something went wrong when trying to delete the blog post",
+      "error": "Something went wrong when trying to delete this post",
       "success": "The post was successfully deleted"
     },
     "hide-comments_one": "Hide {{count}} comment",
@@ -19,7 +19,7 @@
   "comments": {
     "placeholder": "Leave a comment"
   },
-  "error": "Unable to fetch blog posts",
+  "error": "Unable to fetch posts",
   "links": {
     "back": "Back"
   },

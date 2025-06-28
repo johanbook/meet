@@ -5,11 +5,11 @@
     },
     "delete": {
       "dialog": {
-        "description": "这将永久删除此博客文章",
-        "title": "确认删除博客文章"
+        "description": "这将永久删除此帖子。它将不再对任何人可见。",
+        "title": "删除此帖子？"
       },
-      "error": "尝试删除博客文章时出错",
-      "success": "博客文章已成功删除"
+      "error": "尝试删除此帖子时出错",
+      "success": "帖子已成功删除"
     },
     "hide-comments_one": "隐藏 {{count}} 条评论",
     "hide-comments_other": "隐藏 {{count}} 条评论",

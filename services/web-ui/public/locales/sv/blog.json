@@ -5,11 +5,11 @@
     },
     "delete": {
       "dialog": {
-        "description": "Detta kommer att permanent ta bort denna blogposten",
-        "title": "Bekräfta borttagning av blogpost"
+        "description": "Detta kommer att permanent ta bort detta inlägg. Det kommer inte längre vara synligt för någon.",
+        "title": "Ta bort detta inlägg?"
       },
-      "error": "Något gick fel när blogposten skulle tas bort",
-      "success": "Blogposten har tagits bort"
+      "error": "Något gick fel när inlägget skulle tas bort",
+      "success": "Inlägget har tagits bort"
     },
     "hide-comments_one": "Dölj {{count}} kommentar",
     "hide-comments_other": "Dölj {{count}} kommentarer",
