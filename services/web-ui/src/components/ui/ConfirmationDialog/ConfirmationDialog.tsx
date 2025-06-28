@@ -43,7 +43,7 @@ export function ConfirmationDialog({
                 logger.error("Error when executing handler", { error });
 
                 // TODO: Add translations
-                snackbar.error("An unexpected error occured");
+                snackbar.error("An unexpected error occurred");
               } finally {
                 setIsLoading(false);
               }

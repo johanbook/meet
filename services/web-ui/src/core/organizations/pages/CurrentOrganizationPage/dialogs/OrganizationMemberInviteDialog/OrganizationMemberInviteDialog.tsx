@@ -77,7 +77,7 @@ export function OrganizationMemberInviteDialog(): ReactElement {
             onClick={() => handleSubmit(closeDialog)}
             sx={{ whiteSpace: "nowrap" }}
             type="submit"
-            variant="outlined"
+            variant="contained"
           >
             {t("members.invite.submit.button")}
           </Button>

@@ -28,7 +28,7 @@ export function Dialog({
     <MuiDialog open={isOpen} onClose={closeDialog} {...props}>
       {title && <DialogTitle> {title} </DialogTitle>}
 
-      <DialogContent>{children}</DialogContent>
+      <DialogContent dividers>{children}</DialogContent>
 
       {Actions && (
         <DialogActions>
