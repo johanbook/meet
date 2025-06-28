@@ -5,6 +5,14 @@ import PALETTE from "./palette";
 export function createTheme(darkmode = false) {
   return createMuiTheme({
     components: {
+      MuiDialogActions: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            justifyContent: "space-between",
+            padding: theme.spacing(2),
+          }),
+        },
+      },
       MuiListItemButton: {
         styleOverrides: {
           root: ({ theme }) => ({
