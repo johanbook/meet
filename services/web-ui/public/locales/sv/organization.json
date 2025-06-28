@@ -22,7 +22,7 @@
     },
     "member-since": "Medlem sedan",
     "menu": {
-      "edit": "Redigera",
+      "edit": "Ändra roll",
       "remove": "Ta bort medlem från grupp"
     },
     "remove": {
@@ -33,13 +33,13 @@
     },
     "update": {
       "cancel": "Avbryt",
-      "header": "Redigera medlem",
+      "header": "Ändra medlems roll",
       "role": {
         "error": "Ett fel inträffade när medlemmens roll skulle uppdateras",
         "success": "Medlemmens roll har uppdaterats"
       },
       "save": "Spara",
-      "text": "Här kan du redigera denna medlemmen"
+      "text": "Du kan justera denna medlems ansvar genom att ändra deras roll."
     }
   },
   "settings": {
