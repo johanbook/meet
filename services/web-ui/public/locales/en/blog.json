@@ -5,11 +5,11 @@
     },
     "delete": {
       "dialog": {
-        "description": "This will permanently delete this post. It will no longer be visible to anyone.",
-        "title": "Delete this post?"
+        "description": "This will permanently delete this moment. It will no longer be visible to anyone.",
+        "title": "Delete this moment?"
       },
-      "error": "Something went wrong when trying to delete this post",
-      "success": "The post was successfully deleted"
+      "error": "Something went wrong when trying to delete this moment",
+      "success": "The moment was successfully deleted"
     },
     "hide-comments_one": "Hide {{count}} comment",
     "hide-comments_other": "Hide {{count}} comments",
@@ -19,14 +19,14 @@
   "comments": {
     "placeholder": "Leave a comment"
   },
-  "error": "Unable to fetch posts",
+  "error": "Unable to fetch moments",
   "links": {
     "back": "Back"
   },
   "menu": {
     "delete": "Delete"
   },
-  "no-posts": "Seems like no one has posted anything here yet. Be the first one to make a post!",
+  "no-posts": "Seems like no one has shared anything here yet. Be the first one to share a moment!",
   "published": "published",
   "reactions": {
     "count_one": "{{last}} likes this",
