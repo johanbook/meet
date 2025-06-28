@@ -19,13 +19,19 @@ export interface DialogProps extends Omit<MuiDialogProps, "open"> {
 export function Dialog({
   Actions,
   children,
+  maxWidth = "xs",
   title,
   ...props
 }: DialogProps): ReactElement {
   const { closeDialog, isOpen } = useDialog();
 
   return (
-    <MuiDialog open={isOpen} onClose={closeDialog} {...props}>
+    <MuiDialog
+      maxWidth={maxWidth}
+      open={isOpen}
+      onClose={closeDialog}
+      {...props}
+    >
       {title && <DialogTitle> {title} </DialogTitle>}
 
       <DialogContent dividers>{children}</DialogContent>

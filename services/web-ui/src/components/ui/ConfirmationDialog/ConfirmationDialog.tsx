@@ -31,7 +31,7 @@ export function ConfirmationDialog({
     <Dialog
       Actions={({ closeDialog }) => (
         <>
-          <Button disabled={isLoading} onClick={closeDialog} variant="outlined">
+          <Button disabled={isLoading} onClick={closeDialog} variant="text">
             {t("general.cancel")}
           </Button>
           <Button
