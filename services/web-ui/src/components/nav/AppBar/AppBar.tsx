@@ -26,6 +26,7 @@ export function AppBar({ appBarContent }: AppBarProps): ReactElement {
     <Slide appear={false} direction="down" in={showAppBar}>
       <MuiAppBar
         color="inherit"
+        elevation={0}
         position="fixed"
         sx={{
           zIndex: (theme) => theme.zIndex.drawer + 1,
