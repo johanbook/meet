@@ -34,6 +34,8 @@ const SnackbarContent = forwardRef<HTMLDivElement, CustomContentProps>(
 );
 SnackbarContent.displayName = "SnackbarContent";
 
+// NB: There is also a css class for this in `App.css`
+// to handle offset
 export const SnackbarProvider: FC = () => {
   return (
     <NotistackSnackbarProvider

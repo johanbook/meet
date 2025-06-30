@@ -10,3 +10,12 @@ body {
    * See https://stackoverflow.com/questions/4472891/how-can-i-disable-zoom-on-a-mobile-web-page */
   touch-action: pan-x pan-y;
 }
+
+/* This is needed for snackbars handled via
+ * Notistack to not be positioned over mobile bottom nav */
+
+@media (max-width: 850px) {
+  .notistack-SnackbarContainer {
+    bottom: 70px !important;
+  }
+}
