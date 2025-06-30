@@ -57,7 +57,7 @@
     "web-vitals": "4.2.4"
   },
   "devDependencies": {
-    "@eslint/js": "9.27.0",
+    "@eslint/js": "9.30.0",
     "@storybook/addon-docs": "9.0.12",
     "@storybook/addon-links": "9.0.12",
     "@storybook/react-vite": "9.0.12",
