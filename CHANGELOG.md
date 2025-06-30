@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+## [2.7.0](https://github.com/johanbook/meet/compare/v2.6.0...v2.7.0) (2025-06-30)
+
+
+### Features
+
+* **web-ui:** improve design of page for creating blog post ([#1522](https://github.com/johanbook/meet/issues/1522)) ([c4a4bae](https://github.com/johanbook/meet/commit/c4a4bae99141e80de22af7811d08b7a78c7602e1))
+* **web-ui:** improve style of dialog ([#1516](https://github.com/johanbook/meet/issues/1516)) ([a520a7f](https://github.com/johanbook/meet/commit/a520a7f549e71245b56f9b8722c00e3d5bf2f01e))
+* **web-ui:** rename "post" to "moment" in blog translations ([#1520](https://github.com/johanbook/meet/issues/1520)) ([a089ee4](https://github.com/johanbook/meet/commit/a089ee4ccdb6374550f24be96ff0ed3e3176cbe9))
+
+
+### Bug Fixes
+
+* **web-ui:** add missing translations in settings ([#1517](https://github.com/johanbook/meet/issues/1517)) ([746f0f3](https://github.com/johanbook/meet/commit/746f0f3201fc1aa1d6c5b6afb75e857f9de55bbc))
+* **web-ui:** confirm before deleting organization ([#1514](https://github.com/johanbook/meet/issues/1514)) ([99c740f](https://github.com/johanbook/meet/commit/99c740f63319cac2c9ea34a013b7e7a3d0c6ca2a))
+* **web-ui:** update translations for blog posts ([#1518](https://github.com/johanbook/meet/issues/1518)) ([fb997b2](https://github.com/johanbook/meet/commit/fb997b20377ebdb285010ad53d804843164c90ab))
+
 ## [2.6.0](https://github.com/johanbook/meet/compare/v2.5.0...v2.6.0) (2025-06-28)
 
 
