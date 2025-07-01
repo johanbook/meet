@@ -9,5 +9,6 @@
   "header": "组",
   "links": {
     "back": "后退"
-  }
+  },
+  "no-other-groups": "没有其他可切换的组"
 }

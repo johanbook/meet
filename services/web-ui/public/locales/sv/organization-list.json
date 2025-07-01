@@ -9,5 +9,6 @@
   "header": "Grupper",
   "links": {
     "back": "Tillbaka"
-  }
+  },
+  "no-other-groups": "Det finns inga andra grupper att byta till"
 }

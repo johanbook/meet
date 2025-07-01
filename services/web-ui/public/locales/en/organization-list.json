@@ -9,5 +9,6 @@
   "header": "Groups",
   "links": {
     "back": "Back"
-  }
+  },
+  "no-other-groups": "There are no other groups available to switch to"
 }
