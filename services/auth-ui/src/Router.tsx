@@ -1,8 +1,7 @@
 import { ReactElement } from "react";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router";
 
-import { Card, Container } from "@mui/material";
-
+import { Nav } from "./components/nav";
 import { LogIn } from "./pages/LogIn";
 import { ResetPassword } from "./pages/ResetPassword";
 import { SignUp } from "./pages/SignUp";
@@ -11,27 +10,9 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: (
-      <Container
-        disableGutters
-        maxWidth="sm"
-        sx={{
-          height: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-      >
-        <Card
-          sx={(theme) => ({
-            p: 4,
-            [theme.breakpoints.up("md")]: {
-              m: 8,
-            },
-          })}
-        >
-          <Outlet />
-        </Card>
-      </Container>
+      <Nav>
+        <Outlet />
+      </Nav>
     ),
     children: [
       {
