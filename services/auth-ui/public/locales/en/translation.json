@@ -2,6 +2,26 @@
   "fields": {
     "password": {
       "label": "Password"
+    },
+    "email": {
+      "label": "Email"
     }
+  },
+  "login": {
+    "title": "Log in",
+    "notSignedUp": "Not signed up yet?",
+    "signUpLink": "Sign up",
+    "button": "Log in"
+  },
+  "signup": {
+    "title": "Sign Up",
+    "alreadyHaveAccount": "Already have an account?",
+    "logInLink": "Log In",
+    "button": "Sign Up",
+    "acceptPrivacy": "By continuing you accept our Privacy Policy"
+  },
+  "errors": {
+    "generic": "There was an error",
+    "wrongCredentials": "Email password combination is incorrect."
   }
 }

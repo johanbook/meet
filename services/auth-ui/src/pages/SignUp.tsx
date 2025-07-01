@@ -39,7 +39,7 @@ export const SignUp: FC = () => {
       const searchParams = new URLSearchParams(window.location.search);
       window.location.href = searchParams.get("redirectToPath") || "/";
     } catch {
-      setError("There was an error");
+      setError(t("errors.generic"));
     }
   };
 
@@ -54,16 +54,17 @@ export const SignUp: FC = () => {
         alignItems: "center",
       }}
     >
-      <Typography variant="h4">Sign Up</Typography>
+      <Typography variant="h4">{t("signup.title")}</Typography>
 
       <Typography>
-        Already have an account? <Link to="/login"> Log In</Link>
+        {t("signup.alreadyHaveAccount")}{" "}
+        <Link to="/login"> {t("signup.logInLink")}</Link>
       </Typography>
 
       <TextField
         autoComplete="email"
         fullWidth
-        label="Email"
+        label={t("fields.email.label")}
         name="email"
         onChange={(value) => setEmail(value)}
         type="email"
@@ -93,11 +94,11 @@ export const SignUp: FC = () => {
         type="submit"
         variant="contained"
       >
-        Sign Up
+        {t("signup.button")}
       </Button>
 
       <Typography color="textSecondary" variant="body2">
-        By continuing you accept our Privacy Policy
+        {t("signup.acceptPrivacy")}
       </Typography>
     </Box>
   );

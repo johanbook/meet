@@ -36,7 +36,7 @@ export const LogIn: FC = () => {
       }
 
       if (response.status === "WRONG_CREDENTIALS_ERROR") {
-        setError("Email password combination is incorrect.");
+        setError(t("errors.wrongCredentials"));
         return;
       }
 
@@ -49,7 +49,7 @@ export const LogIn: FC = () => {
       const searchParams = new URLSearchParams(window.location.search);
       window.location.href = searchParams.get("redirectToPath") || "/";
     } catch {
-      setError("There was an error");
+      setError(t("errors.generic"));
     }
   };
 
@@ -64,16 +64,17 @@ export const LogIn: FC = () => {
         alignItems: "center",
       }}
     >
-      <Typography variant="h4">Log in</Typography>
+      <Typography variant="h4">{t("login.title")}</Typography>
 
       <Typography>
-        Not signed up yet? <Link to="/login/signup"> Sign up </Link>
+        {t("login.notSignedUp")}
+        <Link to="/login/signup"> {t("login.signUpLink")} </Link>
       </Typography>
 
       <TextField
         autoComplete="email"
         fullWidth
-        label="Email"
+        label={t("fields.email.label")}
         name="email"
         onChange={(value) => setEmail(value)}
         type="email"
@@ -103,7 +104,7 @@ export const LogIn: FC = () => {
         type="submit"
         variant="contained"
       >
-        Log in
+        {t("login.button")}
       </Button>
     </Box>
   );
