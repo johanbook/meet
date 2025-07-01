@@ -25,6 +25,10 @@ export const SignUp: FC = () => {
     event.preventDefault();
     setIsLoading(true);
 
+    setEmailError("");
+    setPasswordError("");
+    setError("");
+
     try {
       const response = await signUp(email, password);
 
