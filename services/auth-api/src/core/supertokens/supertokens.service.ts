@@ -57,10 +57,10 @@ export class SupertokensService {
   }
 
   private async preSigninHook(input: SigninPayload) {
-    this.logger.debug({ msg: "Attempting singin", input });
+    this.logger.debug({ msg: "Attempting sign in", input });
   }
 
   private async preSignupHook(input: SignupPayload) {
-    this.logger.debug({ msg: "Attempting singup", input });
+    this.logger.debug({ msg: "Attempting sign up", input });
   }
 }

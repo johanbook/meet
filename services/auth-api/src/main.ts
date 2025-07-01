@@ -16,14 +16,16 @@ const PORT = Number.parseInt(process.env.PORT || "3000");
 const PRODUCTION = process.env.NODE_ENV === "production";
 const UI_DOMAIN = process.env.UI_URL || `http://localhost`;
 
+// Needed for Supertokens
+const SUPERTOKENS_CSP_URL = "https://cdn.jsdelivr.net/gh/supertokens/";
+
 const CSP = {
-  "img-src": [
+  "img-src": [SUPERTOKENS_CSP_URL],
+  "script-src": [SUPERTOKENS_CSP_URL],
+  "script-src-elem": [
     // Needed for Supertokens
-    "https://cdn.jsdelivr.net/gh/supertokens/",
-  ],
-  "script-src": [
-    // Needed for Supertokens
-    "https://cdn.jsdelivr.net/gh/supertokens/",
+    "inline",
+    SUPERTOKENS_CSP_URL,
   ],
 };
 
