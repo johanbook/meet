@@ -24,7 +24,7 @@ export default tseslint.config({
     "unicorn/prevent-abbreviations": [
       "error",
       {
-        ignore: [/env/i, /props/i, /utils/i],
+        ignore: [/env/i, /params/i, /props/i, /utils/i],
       },
     ],
   },

@@ -1,0 +1,32 @@
+import { signUp } from "supertokens-auth-react/recipe/emailpassword";
+import { signIn } from "supertokens-web-js/recipe/emailpassword";
+
+export async function login(email: string, password: string) {
+  return await signIn({
+    formFields: [
+      {
+        id: "email",
+        value: email,
+      },
+      {
+        id: "password",
+        value: password,
+      },
+    ],
+  });
+}
+
+export async function doSignup(email: string, password: string) {
+  return await signUp({
+    formFields: [
+      {
+        id: "email",
+        value: email,
+      },
+      {
+        id: "password",
+        value: password,
+      },
+    ],
+  });
+}

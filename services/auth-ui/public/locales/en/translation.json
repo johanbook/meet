@@ -1,93 +1,27 @@
 {
-  "AUTH_PAGE_HEADER_TITLE_SIGN_IN_AND_UP": "Sign up / Log in",
-  "AUTH_PAGE_HEADER_TITLE_SIGN_IN": "Log in",
-  "AUTH_PAGE_HEADER_TITLE_SIGN_UP": "Sign up",
-  "AUTH_PAGE_HEADER_TITLE_SIGN_IN_UP_TO_APP": " to continue to ",
-
-  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_IN_START": "Not registered yet?",
-  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_IN_SIGN_UP_LINK": "Sign up",
-  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_IN_END": "",
-
-  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_UP_START": "Already have an account?",
-  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_UP_SIGN_IN_LINK": "Log in",
-  "AUTH_PAGE_HEADER_SUBTITLE_SIGN_UP_END": "",
-
-  "AUTH_PAGE_FOOTER_START": "By continuing you accept our ",
-  "AUTH_PAGE_FOOTER_TOS": "Terms of Service",
-  "AUTH_PAGE_FOOTER_AND": " and ",
-  "AUTH_PAGE_FOOTER_PP": "Privacy Policy",
-  "AUTH_PAGE_FOOTER_END": "",
-
-  "DIVIDER_OR": "or",
-
-  "BRANDING_POWERED_BY_START": "Powered by ",
-  "BRANDING_POWERED_BY_END": "",
-  "SOMETHING_WENT_WRONG_ERROR": "Something went wrong. Please try again.",
-  "SOMETHING_WENT_WRONG_ERROR_RELOAD": "Something went wrong. Please try again later or reload the page.",
-
-  "EMAIL_PASSWORD_EMAIL_LABEL": "Email",
-  "EMAIL_PASSWORD_EMAIL_PLACEHOLDER": "Email address",
-
-  "EMAIL_PASSWORD_PASSWORD_LABEL": "Password",
-  "EMAIL_PASSWORD_PASSWORD_PLACEHOLDER": "Password",
-
-  "EMAIL_PASSWORD_SIGN_IN_FORGOT_PW_LINK": "Forgot password?",
-  "EMAIL_PASSWORD_SIGN_IN_SUBMIT_BTN": "LOG IN",
-  "EMAIL_PASSWORD_SIGN_IN_WRONG_CREDENTIALS_ERROR": "Incorrect email and password combination",
-
-  "EMAIL_PASSWORD_SIGN_UP_SUBMIT_BTN": "SIGN UP",
-
-  "EMAIL_PASSWORD_EMAIL_ALREADY_EXISTS": "This email address already exists. Log in instead",
-
-  "EMAIL_PASSWORD_RESET_HEADER_TITLE": "Reset your password",
-  "EMAIL_PASSWORD_RESET_HEADER_SUBTITLE": "We will send you an email to reset your password",
-  "EMAIL_PASSWORD_RESET_SEND_FALLBACK_EMAIL": "your account",
-  "EMAIL_PASSWORD_RESET_SEND_BEFORE_EMAIL": "A password reset email has been sent to ",
-  "EMAIL_PASSWORD_RESET_SEND_AFTER_EMAIL": ", if it exists in our system.",
-  "EMAIL_PASSWORD_RESET_RESEND_LINK": "Resend or change email",
-  "EMAIL_PASSWORD_RESET_SEND_BTN": "Send email",
-  "EMAIL_PASSWORD_RESET_SIGN_IN_LINK": "Log in",
-
-  "EMAIL_PASSWORD_RESET_SUBMIT_PW_SUCCESS_HEADER_TITLE": "All set!",
-  "EMAIL_PASSWORD_RESET_SUBMIT_PW_SUCCESS_DESC": "Your password has been updated",
-  "EMAIL_PASSWORD_RESET_SUBMIT_PW_SUCCESS_SIGN_IN_BTN": "LOG IN",
-
-  "EMAIL_PASSWORD_NEW_PASSWORD_LABEL": "New password",
-  "EMAIL_PASSWORD_NEW_PASSWORD_PLACEHOLDER": "New password",
-  "EMAIL_PASSWORD_CONFIRM_PASSWORD_LABEL": "Confirm password",
-  "EMAIL_PASSWORD_CONFIRM_PASSWORD_PLACEHOLDER": "Confirm your password",
-
-  "EMAIL_PASSWORD_RESET_SUBMIT_PW_HEADER_TITLE": "Change your password",
-  "EMAIL_PASSWORD_RESET_SUBMIT_PW_HEADER_SUBTITLE": "Enter a new password below to change your password",
-  "EMAIL_PASSWORD_RESET_SUBMIT_PW_CHANGE_PW_BTN": "CHANGE PASSWORD",
-  "EMAIL_PASSWORD_RESET_PASSWORD_INVALID_TOKEN_ERROR": "Invalid password reset link",
-
-  "ERROR_EMAIL_NON_STRING": "Email must be a string",
-  "ERROR_EMAIL_INVALID": "Invalid email address",
-
-  "ERROR_PASSWORD_NON_STRING": "Password must be a string",
-  "ERROR_PASSWORD_TOO_SHORT": "Password must be at least 8 characters long, including a number",
-  "ERROR_PASSWORD_TOO_LONG": "Password can be at most 100 characters long",
-  "ERROR_PASSWORD_NO_ALPHA": "Password must include at least one letter",
-  "ERROR_PASSWORD_NO_NUM": "Password must include at least one number",
-  "ERROR_CONFIRM_PASSWORD_NO_MATCH": "Confirmation password does not match",
-
-  "ERROR_NON_OPTIONAL": "This field is required",
-
-  "EMAIL_VERIFICATION_RESEND_SUCCESS": "Email resent",
-  "EMAIL_VERIFICATION_SEND_TITLE": "Verify your email!",
-  "EMAIL_VERIFICATION_SEND_DESC_START": "",
-  "EMAIL_VERIFICATION_SEND_DESC_STRONG": "Click the link",
-  "EMAIL_VERIFICATION_SEND_DESC_END": " in the email we just sent you to confirm your email address.",
-  "EMAIL_VERIFICATION_RESEND_BTN": "Resend email",
-  "EMAIL_VERIFICATION_LOGOUT": "Log out ",
-  "EMAIL_VERIFICATION_SUCCESS": "Email verified!",
-  "EMAIL_VERIFICATION_CONTINUE_BTN": "CONTINUE",
-  "EMAIL_VERIFICATION_CONTINUE_LINK": "Continue",
-  "EMAIL_VERIFICATION_EXPIRED": "Verification link has expired",
-  "EMAIL_VERIFICATION_ERROR_TITLE": "Something went wrong",
-  "EMAIL_VERIFICATION_ERROR_DESC": "An unexpected error occurred. Please contact support for help",
-  "EMAIL_VERIFICATION_LINK_CLICKED_HEADER": "Verify your email address",
-  "EMAIL_VERIFICATION_LINK_CLICKED_DESC": "Click the button below to verify your email address",
-  "EMAIL_VERIFICATION_LINK_CLICKED_CONTINUE_BUTTON": "CONTINUE"
+  "fields": {
+    "password": {
+      "label": "Password"
+    },
+    "email": {
+      "label": "Email"
+    }
+  },
+  "login": {
+    "title": "Log in",
+    "notSignedUp": "Not signed up yet?",
+    "signUpLink": "Sign up",
+    "button": "Log in"
+  },
+  "signup": {
+    "title": "Sign Up",
+    "alreadyHaveAccount": "Already have an account?",
+    "logInLink": "Log In",
+    "button": "Sign Up",
+    "acceptPrivacy": "By continuing you accept our Privacy Policy"
+  },
+  "errors": {
+    "generic": "There was an error",
+    "wrongCredentials": "Email password combination is incorrect."
+  }
 }
