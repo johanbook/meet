@@ -12,7 +12,8 @@
     "title": "Logga in",
     "notSignedUp": "Inte registrerad än?",
     "signUpLink": "Registrera dig",
-    "button": "Logga in"
+    "button": "Logga in",
+    "forgotPassword": "Glömt lösenord?"
   },
 
   "errors": {
@@ -26,5 +27,14 @@
     "logInLink": "Logga in",
     "button": "Registrera dig",
     "acceptPrivacy": "Genom att fortsätta godkänner du vår Integritetspolicy"
+  },
+
+  "resetPassword": {
+    "title": "Återställ ditt lösenord",
+    "instructions": "Ange din e-postadress så skickar vi en länk för att terställa ditt lösenord.",
+    "emailSent": "Om ett konto med den e-postadressen finns har en länk för terställning skickats.",
+    "button": "Skicka terställningslänk",
+    "backToLogin": "Tillbaka till inloggning",
+    "notAllowed": "Återställning av lösenord är inte tillåten för detta konto."
   }
 }

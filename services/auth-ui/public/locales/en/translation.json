@@ -11,7 +11,8 @@
     "title": "Log in",
     "notSignedUp": "Not signed up yet?",
     "signUpLink": "Sign up",
-    "button": "Log in"
+    "button": "Log in",
+    "forgotPassword": "Forgot password?"
   },
   "signup": {
     "title": "Sign Up",
@@ -23,5 +24,13 @@
   "errors": {
     "generic": "There was an error",
     "wrongCredentials": "Email password combination is incorrect."
+  },
+  "resetPassword": {
+    "title": "Reset your password",
+    "instructions": "Enter your email address and we'll send you a link to reset your password.",
+    "emailSent": "If an account with that email exists, a password reset link has been sent.",
+    "button": "Send reset link",
+    "backToLogin": "Back to login",
+    "notAllowed": "Password reset is not allowed for this account."
   }
 }

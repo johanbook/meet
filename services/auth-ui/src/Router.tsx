@@ -4,6 +4,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router";
 import { Card, Container } from "@mui/material";
 
 import { LogIn } from "./pages/LogIn";
+import { ResetPassword } from "./pages/ResetPassword";
 import { SignUp } from "./pages/SignUp";
 
 const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       </Container>
     ),
     children: [
+      {
+        path: "reset-password",
+        element: <ResetPassword />,
+      },
       {
         path: "signup",
         element: <SignUp />,
