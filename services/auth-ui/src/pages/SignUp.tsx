@@ -12,6 +12,8 @@ import { doSignup } from "./utils";
 export const SignUp: FC = () => {
   const { t } = useTranslation();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
 
@@ -22,6 +24,7 @@ export const SignUp: FC = () => {
 
   const handleLogin = async (event: SyntheticEvent) => {
     event.preventDefault();
+    setIsLoading(true);
 
     try {
       const response = await doSignup(email, password);
@@ -45,6 +48,8 @@ export const SignUp: FC = () => {
       window.location.href = searchParams.get("redirectToPath") || "/";
     } catch {
       setError(t("errors.generic"));
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -68,6 +73,7 @@ export const SignUp: FC = () => {
 
       <TextField
         autoComplete="email"
+        disabled={isLoading}
         error={emailError}
         fullWidth
         label={t("fields.email.label")}
@@ -79,6 +85,7 @@ export const SignUp: FC = () => {
 
       <TextField
         autoComplete="current-password"
+        disabled={isLoading}
         error={passwordError}
         fullWidth
         label={t("fields.password.label")}
@@ -96,6 +103,7 @@ export const SignUp: FC = () => {
 
       <Button
         disabled={!email || !password}
+        loading={isLoading}
         fullWidth
         type="submit"
         variant="contained"

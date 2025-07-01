@@ -1,11 +1,12 @@
-import React from "react";
-import {
-  LinkProps,
-  Link as ReactRouterLink,
-  useSearchParams,
-} from "react-router";
+import React, { ReactNode } from "react";
+import { Link as ReactRouterLink, useSearchParams } from "react-router";
 
 import { Link as MuiLink } from "@mui/material";
+
+interface LinkProps {
+  children: ReactNode;
+  to: string;
+}
 
 export function Link({ to, ...props }: LinkProps): React.ReactElement {
   const searchParameters = useSearchParams()[0];
