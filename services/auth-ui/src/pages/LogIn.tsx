@@ -25,6 +25,10 @@ export const LogIn: FC = () => {
     event.preventDefault();
     setIsLoading(true);
 
+    setEmailError("");
+    setPasswordError("");
+    setError("");
+
     try {
       const response = await login(email, password);
 
