@@ -1,17 +1,17 @@
 import {
-  sendPasswordResetEmail,
-  signIn,
-  signUp,
+  sendPasswordResetEmail as superTokensSendPasswordResetEmail,
+  signIn as supertokensSignIn,
+  signUp as supertokensSignUp,
 } from "supertokens-auth-react/recipe/emailpassword";
 
-export async function resetPasswordByEmail(email: string) {
-  return await sendPasswordResetEmail({
+export async function sendPasswordResetEmail(email: string) {
+  return await superTokensSendPasswordResetEmail({
     formFields: [{ id: "email", value: email }],
   });
 }
 
 export async function login(email: string, password: string) {
-  return await signIn({
+  return await supertokensSignIn({
     formFields: [
       {
         id: "email",
@@ -25,8 +25,8 @@ export async function login(email: string, password: string) {
   });
 }
 
-export async function doSignup(email: string, password: string) {
-  return await signUp({
+export async function signUp(email: string, password: string) {
+  return await supertokensSignUp({
     formFields: [
       {
         id: "email",

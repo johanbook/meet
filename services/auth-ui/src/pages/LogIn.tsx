@@ -2,12 +2,11 @@ import { FC, SyntheticEvent, useState } from "react";
 
 import { Alert, Box, Typography } from "@mui/material";
 
+import { login } from "src/api/auth";
 import { Button } from "src/components/ui/Button";
 import { Link } from "src/components/ui/Link";
 import { TextField } from "src/components/ui/TextField";
 import { useTranslation } from "src/core/i18n";
-
-import { login } from "./utils";
 
 export const LogIn: FC = () => {
   const { t } = useTranslation();

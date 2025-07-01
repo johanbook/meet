@@ -2,12 +2,11 @@ import { FC, SyntheticEvent, useState } from "react";
 
 import { Alert, Box, Typography } from "@mui/material";
 
+import { signUp } from "src/api/auth";
 import { Button } from "src/components/ui/Button";
 import { Link } from "src/components/ui/Link";
 import { TextField } from "src/components/ui/TextField";
 import { useTranslation } from "src/core/i18n";
-
-import { doSignup } from "./utils";
 
 export const SignUp: FC = () => {
   const { t } = useTranslation();
@@ -22,12 +21,12 @@ export const SignUp: FC = () => {
 
   const [error, setError] = useState("");
 
-  const handleLogin = async (event: SyntheticEvent) => {
+  const handleSignUp = async (event: SyntheticEvent) => {
     event.preventDefault();
     setIsLoading(true);
 
     try {
-      const response = await doSignup(email, password);
+      const response = await signUp(email, password);
 
       if (response.status === "FIELD_ERROR") {
         const field = response.formFields[0];
@@ -56,7 +55,7 @@ export const SignUp: FC = () => {
   return (
     <Box
       component="form"
-      onSubmit={handleLogin}
+      onSubmit={handleSignUp}
       sx={{
         display: "flex",
         flexDirection: "column",

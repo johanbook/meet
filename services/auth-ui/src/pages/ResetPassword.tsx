@@ -2,12 +2,11 @@ import { FC, SyntheticEvent, useState } from "react";
 
 import { Alert, Box, Typography } from "@mui/material";
 
+import { sendPasswordResetEmail } from "src/api/auth";
 import { Button } from "src/components/ui/Button";
 import { Link } from "src/components/ui/Link";
 import { TextField } from "src/components/ui/TextField";
 import { useTranslation } from "src/core/i18n";
-
-import { resetPasswordByEmail } from "./utils";
 
 export const ResetPassword: FC = () => {
   const { t } = useTranslation();
@@ -18,7 +17,7 @@ export const ResetPassword: FC = () => {
   const [error, setError] = useState("");
   const [emailSent, setEmailSent] = useState(false);
 
-  const handlePasswordReset = async (event: SyntheticEvent) => {
+  const handleSendPasswordReset = async (event: SyntheticEvent) => {
     event.preventDefault();
     setIsLoading(true);
     setError("");
@@ -26,7 +25,7 @@ export const ResetPassword: FC = () => {
     setEmailSent(false);
 
     try {
-      const response = await resetPasswordByEmail(email);
+      const response = await sendPasswordResetEmail(email);
 
       if (response.status === "FIELD_ERROR") {
         const field = response.formFields[0];
@@ -53,7 +52,7 @@ export const ResetPassword: FC = () => {
   return (
     <Box
       component="form"
-      onSubmit={handlePasswordReset}
+      onSubmit={handleSendPasswordReset}
       sx={{
         display: "flex",
         flexDirection: "column",
