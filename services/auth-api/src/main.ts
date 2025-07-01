@@ -16,6 +16,13 @@ const PORT = Number.parseInt(process.env.PORT || "3000");
 const PRODUCTION = process.env.NODE_ENV === "production";
 const UI_DOMAIN = process.env.UI_URL || `http://localhost`;
 
+const CSP = {
+  "image-src": [
+    // Needed for Supertokens
+    "https://cdn.jsdelivr.net/gh/supertokens/",
+  ],
+};
+
 const CORS_OPTIONS = {
   origin: [UI_DOMAIN],
 };
@@ -43,7 +50,9 @@ async function bootstrap() {
   SwaggerModule.setup("/auth/api/docs", app, document);
 
   await app.register(fastifyHelmet, {
-    contentSecurityPolicy: { reportOnly: true },
+    contentSecurityPolicy: {
+      directives: CSP,
+    },
   });
 
   await app.listen(PORT, "0.0.0.0");
