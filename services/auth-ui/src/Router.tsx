@@ -1,30 +1,43 @@
 import { ReactElement } from "react";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router";
 
-import { EmailPasswordPreBuiltUI } from "supertokens-auth-react/recipe/emailpassword/prebuiltui";
-import { EmailVerificationPreBuiltUI } from "supertokens-auth-react/recipe/emailverification/prebuiltui";
-import { canHandleRoute, getRoutingComponent } from "supertokens-auth-react/ui";
+import { Card, Container } from "@mui/material";
 
-import { ErrorView } from "src/views/ErrorView";
+import { LogIn } from "./pages/LogIn";
+import { SignUp } from "./pages/SignUp";
 
-const SUPERTOKEN_ROUTERS = [
-  EmailPasswordPreBuiltUI,
-  EmailVerificationPreBuiltUI,
-];
+const router = createBrowserRouter([
+  {
+    path: "/login",
+    element: (
+      <Container
+        disableGutters
+        maxWidth="sm"
+        sx={{
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <Card sx={{ m: 8, p: 4 }}>
+          <Outlet />
+        </Card>
+      </Container>
+    ),
+    children: [
+      {
+        path: "signup",
+        element: <SignUp />,
+      },
+      {
+        path: "",
+        element: <LogIn />,
+      },
+    ],
+  },
+]);
 
 export function Router(): ReactElement {
-  if (!canHandleRoute(SUPERTOKEN_ROUTERS)) {
-    return (
-      <ErrorView message="An unexpected error has occurred: Unable to handle route. Please contact support." />
-    );
-  }
-
-  const component = getRoutingComponent(SUPERTOKEN_ROUTERS);
-
-  if (!component) {
-    return (
-      <ErrorView message="An unexpected error has occurred: Component not found. Please contact support." />
-    );
-  }
-
-  return component;
+  return <RouterProvider router={router} />;
 }
