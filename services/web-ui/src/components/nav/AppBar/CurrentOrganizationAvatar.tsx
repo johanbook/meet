@@ -77,6 +77,10 @@ function MenuContent({ currentOrganizationId }: MenuContentProps) {
     (organization) => organization.id !== currentOrganizationId,
   );
 
+  if (filteredOrganizations.length === 0) {
+    return <Typography sx={{ p: 2 }}>{t("no-other-groups")}</Typography>;
+  }
+
   return (
     <>
       {filteredOrganizations.map((organization) => (
@@ -133,6 +137,7 @@ export function CurrentOrganizationAvatar(): ReactElement {
         </ButtonBase>
 
         <Drawer
+          elevation={4}
           onClose={() => setIsDrawerOpen(false)}
           open={drawerIsOpen}
           sx={{ zIndex: (theme) => theme.zIndex.drawer + 2 }}
@@ -175,9 +180,9 @@ export function CurrentOrganizationAvatar(): ReactElement {
         horizontal: "right",
         vertical: "bottom",
       }}
-      Button={(props) => (
-        <IconButton>
-          <Avatar sx={{ height: SIZE, width: SIZE }} {...props}>
+      Button={({ onClick }) => (
+        <IconButton onClick={onClick}>
+          <Avatar sx={{ height: SIZE, width: SIZE }}>
             {query.data.name[0]}
           </Avatar>
         </IconButton>
