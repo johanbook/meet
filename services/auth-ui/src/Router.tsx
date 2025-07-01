@@ -21,7 +21,14 @@ const router = createBrowserRouter([
           justifyContent: "center",
         }}
       >
-        <Card sx={{ m: 8, p: 4 }}>
+        <Card
+          sx={(theme) => ({
+            p: 4,
+            [theme.breakpoints.up("md")]: {
+              m: 8,
+            },
+          })}
+        >
           <Outlet />
         </Card>
       </Container>
