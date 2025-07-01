@@ -16,6 +16,7 @@ export const LogIn: FC = () => {
   const [emailError, setEmailError] = useState("");
 
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const [error, setError] = useState("");
 
@@ -30,6 +31,10 @@ export const LogIn: FC = () => {
 
         if (field.id === "email") {
           setEmailError(field.error);
+        }
+
+        if (field.id === "password") {
+          setPasswordError(field.error);
         }
 
         return;
@@ -73,6 +78,7 @@ export const LogIn: FC = () => {
 
       <TextField
         autoComplete="email"
+        error={emailError}
         fullWidth
         label={t("fields.email.label")}
         name="email"
@@ -80,10 +86,10 @@ export const LogIn: FC = () => {
         type="email"
         value={email}
       />
-      {emailError}
 
       <TextField
         autoComplete="current-password"
+        error={passwordError}
         fullWidth
         label={t("fields.password.label")}
         name="password"
