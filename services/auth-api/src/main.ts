@@ -23,7 +23,7 @@ const CSP = {
   "img-src": [SUPERTOKENS_CSP_URL],
   "script-src": [SUPERTOKENS_CSP_URL],
   "script-src-elem": [
-    // Needed for Supertokens
+    // Needed for Supertokens. Opened https://github.com/supertokens/supertokens-node/issues/1016
     "'unsafe-inline'",
     SUPERTOKENS_CSP_URL,
   ],
