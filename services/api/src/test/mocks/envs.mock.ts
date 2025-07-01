@@ -1,3 +1,5 @@
+/* eslint-disable sonarjs/no-hardcoded-passwords */
+
 export function createDummyEnvs(): void {
   process.env["EMAIL"] = "hi@example.com";
 
