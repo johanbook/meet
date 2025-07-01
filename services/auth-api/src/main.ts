@@ -24,7 +24,7 @@ const CSP = {
   "script-src": [SUPERTOKENS_CSP_URL],
   "script-src-elem": [
     // Needed for Supertokens
-    "'inline'",
+    "'unsafe-inline'",
     SUPERTOKENS_CSP_URL,
   ],
 };
