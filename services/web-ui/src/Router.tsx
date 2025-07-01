@@ -14,7 +14,7 @@ import {
   ProfileJournalPage,
   ProfilePage,
 } from "src/core/profiles";
-import { NavigationTrackingProvider } from "src/core/tracking/NavigationTrackingProvider";
+import { NavigationHistoryProvider } from "src/core/routing/NavigationHistoryProvider";
 import { BlogPhotoListPage } from "src/features/blogs/pages/BlogPhotoListPage";
 import { BlogPostListPage } from "src/features/blogs/pages/BlogPostListPage";
 import { BlogPostPage } from "src/features/blogs/pages/BlogPostPage";
@@ -30,11 +30,11 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <NavigationTrackingProvider>
+      <NavigationHistoryProvider>
         <GlobalDialogProvider>
           <Outlet />
         </GlobalDialogProvider>
-      </NavigationTrackingProvider>
+      </NavigationHistoryProvider>
     ),
     errorElement: <NotFoundView />,
     children: [
