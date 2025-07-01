@@ -17,7 +17,11 @@ const PRODUCTION = process.env.NODE_ENV === "production";
 const UI_DOMAIN = process.env.UI_URL || `http://localhost`;
 
 const CSP = {
-  "image-src": [
+  "img-src": [
+    // Needed for Supertokens
+    "https://cdn.jsdelivr.net/gh/supertokens/",
+  ],
+  "script-src": [
     // Needed for Supertokens
     "https://cdn.jsdelivr.net/gh/supertokens/",
   ],
