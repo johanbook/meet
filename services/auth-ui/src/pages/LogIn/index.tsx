@@ -2,16 +2,12 @@ import { FC, SyntheticEvent, useEffect, useState } from "react";
 
 import { Alert, Box, Typography } from "@mui/material";
 
-import { attemptRefreshingSession, login } from "src/api/auth";
+import { login } from "src/api/auth";
 import { Button } from "src/components/ui/Button";
 import { Link } from "src/components/ui/Link";
 import { TextField } from "src/components/ui/TextField";
 import { useTranslation } from "src/core/i18n";
-
-const handleRedirect = () => {
-  const searchParams = new URLSearchParams(window.location.search);
-  window.location.href = searchParams.get("redirectToPath") || "/";
-};
+import { handleRedirect, tryRefresh } from "src/utils/auth";
 
 export const LogIn: FC = () => {
   const { t } = useTranslation();
@@ -27,14 +23,6 @@ export const LogIn: FC = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const tryRefresh = async () => {
-      const result = await attemptRefreshingSession();
-
-      if (result) {
-        handleRedirect();
-      }
-    };
-
     tryRefresh();
   }, []);
 
