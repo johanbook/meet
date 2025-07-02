@@ -7,20 +7,6 @@ import Session from "supertokens-auth-react/recipe/session";
 const API_DOMAIN = window.location.host;
 const UI_DOMAIN = window.location.host;
 
-const style = `
-  [data-supertokens~=container] {
-      --palette-primary: 200, 100, 150;
-      --palette-primaryBorder: 200, 100, 150;
-      box-shadow: none;
-      height: 100vh;
-      display: flex;
-  }
-
-  [data-supertokens~=superTokensBranding] {
-    display: none;
-  } 
-`;
-
 export async function initializeSuperTokens(
   callback: () => void,
 ): Promise<void> {
@@ -53,7 +39,6 @@ export async function initializeSuperTokens(
       }),
       Session.init(),
     ],
-    style,
     useShadowDom: false,
   });
 
