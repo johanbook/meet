@@ -1,9 +1,7 @@
 import { notificationsApi } from "./apis";
-import { Logger } from "./core/logging";
+import { logger } from "./core/logging";
 
 const SERVICE_WORKER_PATH = "service-worker.js";
-
-const logger = new Logger(registerServiceWorker.name);
 
 export async function registerServiceWorker() {
   const registration =

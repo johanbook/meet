@@ -89,3 +89,5 @@ export function registerExceptionLogger(): void {
     logger.error("There was an unhandled rejection", { reason: event.reason });
   });
 }
+
+export const logger = new Logger("App");

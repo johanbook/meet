@@ -1,2 +1,2 @@
-export { Logger } from "./logger";
+export { Logger, logger } from "./logger";
 export { useLogger } from "./useLogger";
