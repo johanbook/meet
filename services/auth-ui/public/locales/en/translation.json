@@ -32,5 +32,13 @@
     "button": "Send reset link",
     "backToLogin": "Back to login",
     "notAllowed": "Password reset is not allowed for this account."
+  },
+  "resetPasswordFromToken": {
+    "title": "Set a new password",
+    "instructions": "Enter your new password below.",
+    "success": "Your password has been reset. You can now log in with your new password.",
+    "button": "Set new password",
+    "backToLogin": "Back to login",
+    "invalidToken": "The password reset link is invalid or has expired."
   }
 }
