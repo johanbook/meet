@@ -63,11 +63,17 @@ export class NotificationService {
     });
     await this.notifications.save(newNotifications);
 
-    // TODO: Do not send web push if web socket succeded
     const profileIds = memberships.map((membership) => membership.profile.id);
-    await this.notificationWebPushGateway.sendWebPush(profileIds, notification);
+    const webPushResult = await this.notificationWebPushGateway.sendWebPush(
+      profileIds,
+      notification,
+    );
 
-    const userIds = memberships.map((membership) => membership.profile.userId);
+    // Get list of user ids where a web push wes not sent
+    const userIds = memberships
+      .filter((membership) => !webPushResult[membership.profileId])
+      .map((membership) => membership.profile.userId);
+
     await this.notifyUsers(userIds, notification);
   }
 

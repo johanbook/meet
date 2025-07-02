@@ -63,7 +63,10 @@ export class NotificationWebPushGateway {
     const result: Record<number, boolean> = {};
 
     for (const profileId of profileIds) {
-      await this.sendWebPushToProfile(profileId, notification);
+      result[profileId] = await this.sendWebPushToProfile(
+        profileId,
+        notification,
+      );
     }
 
     return result;
