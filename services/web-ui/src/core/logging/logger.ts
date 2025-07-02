@@ -47,31 +47,33 @@ export class Logger {
     }
   }
 
-  private consoleLog({ level, ...props }: LogProps): void {
+  private consoleLog({ level, msg, props }: LogProps): void {
+    const message = `${this.name}: ${msg}`;
+
     switch (level) {
       case "debug": {
-        console.debug(props);
+        console.debug(message, props);
         return;
       }
       case "error":
       case "fatal": {
-        console.error(props);
+        console.error(message, props);
         return;
       }
       case "info": {
-        console.info(props);
+        console.info(message, props);
         return;
       }
       case "trace": {
-        console.trace(props);
+        console.trace(message, props);
         return;
       }
       case "warn": {
-        console.warn(props);
+        console.warn(message, props);
         return;
       }
       default: {
-        throw new Error(`Unknown logging level ${level}`);
+        throw new Error(`Unknown logging level '${level}'`);
       }
     }
   }
