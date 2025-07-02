@@ -84,10 +84,14 @@ export class NotificationService {
       where: { id: In(profileIds) },
     });
 
-    // TODO: Do not send web push if web socket succeded
-    await this.notificationWebPushGateway.sendWebPush(profileIds, notification);
+    const webPushResult = await this.notificationWebPushGateway.sendWebPush(
+      profileIds,
+      notification,
+    );
 
-    const ids = profiles.map((profile) => profile.userId);
+    const ids = profiles
+      .filter((profile) => !webPushResult[profile.id])
+      .map((profile) => profile.userId);
 
     await this.notifyUsers(ids, notification);
   }

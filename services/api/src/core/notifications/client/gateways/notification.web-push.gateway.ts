@@ -60,15 +60,17 @@ export class NotificationWebPushGateway {
     profileIds: number[],
     notification: INotification,
   ): Promise<Record<number, boolean>> {
-    const result: Record<number, boolean> = {};
+    const result = await Promise.all(
+      profileIds.map(async (profileId) => {
+        const success = await this.sendWebPushToProfile(
+          profileId,
+          notification,
+        );
 
-    for (const profileId of profileIds) {
-      result[profileId] = await this.sendWebPushToProfile(
-        profileId,
-        notification,
-      );
-    }
+        return [profileId, success];
+      }),
+    );
 
-    return result;
+    return Object.fromEntries(result);
   }
 }
