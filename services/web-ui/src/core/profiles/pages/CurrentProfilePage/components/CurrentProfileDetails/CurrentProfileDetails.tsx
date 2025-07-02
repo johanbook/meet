@@ -50,6 +50,25 @@ const NavItem = ({
   </ListItem>
 );
 
+const ExternalNavItem = ({
+  Icon,
+  text,
+  to,
+}: {
+  Icon: FC;
+  text: string | null;
+  to: string;
+}) => (
+  <ListItem disablePadding>
+    <ListItemButton component="a" href={to}>
+      <ListItemIcon>
+        <Icon />
+      </ListItemIcon>
+      <ListItemText primary={text} />
+    </ListItemButton>
+  </ListItem>
+);
+
 interface CurrentProfileDetailsProps {
   profile: ProfileDetails;
 }
@@ -127,7 +146,7 @@ export function CurrentProfileDetails({
           text={t("links.settings")}
           to="/profile/settings"
         />
-        <NavItem Icon={Logout} text={t("links.log-out")} to="/logout" />
+        <ExternalNavItem Icon={Logout} text={t("links.log-out")} to="/logout" />
       </List>
 
       <form style={{ display: "none" }}>
