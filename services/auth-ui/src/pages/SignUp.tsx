@@ -67,12 +67,16 @@ export const SignUp: FC = () => {
         alignItems: "center",
       }}
     >
-      <Typography variant="h4">{t("signup.title")}</Typography>
+      <Box>
+        <Typography align="center" gutterBottom variant="h4">
+          {t("signup.title")}
+        </Typography>
 
-      <Typography>
-        {t("signup.alreadyHaveAccount")}{" "}
-        <Link to="/login"> {t("signup.logInLink")}</Link>
-      </Typography>
+        <Typography align="center">
+          {t("signup.alreadyHaveAccount")}{" "}
+          <Link to="/login"> {t("signup.logInLink")}</Link>
+        </Typography>
+      </Box>
 
       <TextField
         autoComplete="email"

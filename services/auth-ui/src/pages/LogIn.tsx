@@ -77,12 +77,16 @@ export const LogIn: FC = () => {
         alignItems: "center",
       }}
     >
-      <Typography variant="h4">{t("login.title")}</Typography>
+      <Box>
+        <Typography align="center" gutterBottom variant="h4">
+          {t("login.title")}
+        </Typography>
 
-      <Typography>
-        {t("login.notSignedUp")}
-        <Link to="/login/signup"> {t("login.signUpLink")} </Link>
-      </Typography>
+        <Typography align="center">
+          {t("login.notSignedUp")}
+          <Link to="/login/signup"> {t("login.signUpLink")} </Link>
+        </Typography>
+      </Box>
 
       <TextField
         autoComplete="email"
@@ -114,8 +118,6 @@ export const LogIn: FC = () => {
         </Alert>
       )}
 
-      <Link to="/login/reset-password">Forgot password?</Link>
-
       <Button
         disabled={!email || !password}
         loading={isLoading}
@@ -125,6 +127,8 @@ export const LogIn: FC = () => {
       >
         {t("login.button")}
       </Button>
+
+      <Link to="/login/reset-password">Forgot password?</Link>
     </Box>
   );
 };
