@@ -8,7 +8,7 @@ import { Link } from "src/components/ui/Link";
 import { TextField } from "src/components/ui/TextField";
 import { useTranslation } from "src/core/i18n";
 
-export const PasswordResetFromToken: FC = () => {
+export const ResetPasswordFromToken: FC = () => {
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -66,7 +66,7 @@ export const PasswordResetFromToken: FC = () => {
 
       <TextField
         autoComplete="new-password"
-        disabled={isLoading}
+        disabled={isLoading || passwordSubmitted}
         error={passwordError}
         fullWidth
         label={t("fields.password.label")}
@@ -89,7 +89,7 @@ export const PasswordResetFromToken: FC = () => {
       )}
 
       <Button
-        disabled={!password || isLoading}
+        disabled={!password || passwordSubmitted}
         loading={isLoading}
         fullWidth
         type="submit"
