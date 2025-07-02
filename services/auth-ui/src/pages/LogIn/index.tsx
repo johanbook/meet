@@ -1,12 +1,17 @@
-import { FC, SyntheticEvent, useState } from "react";
+import { FC, SyntheticEvent, useEffect, useState } from "react";
 
 import { Alert, Box, Typography } from "@mui/material";
 
-import { login } from "src/api/auth";
+import { attemptRefreshingSession, login } from "src/api/auth";
 import { Button } from "src/components/ui/Button";
 import { Link } from "src/components/ui/Link";
 import { TextField } from "src/components/ui/TextField";
 import { useTranslation } from "src/core/i18n";
+
+const handleRedirect = () => {
+  const searchParams = new URLSearchParams(window.location.search);
+  window.location.href = searchParams.get("redirectToPath") || "/";
+};
 
 export const LogIn: FC = () => {
   const { t } = useTranslation();
@@ -20,6 +25,18 @@ export const LogIn: FC = () => {
   const [passwordError, setPasswordError] = useState("");
 
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const tryRefresh = async () => {
+      const result = await attemptRefreshingSession();
+
+      if (result) {
+        handleRedirect();
+      }
+    };
+
+    tryRefresh();
+  }, []);
 
   const handleLogin = async (event: SyntheticEvent) => {
     event.preventDefault();
@@ -57,8 +74,7 @@ export const LogIn: FC = () => {
       }
 
       // Login was successful
-      const searchParams = new URLSearchParams(window.location.search);
-      window.location.href = searchParams.get("redirectToPath") || "/";
+      handleRedirect();
     } catch {
       setError(t("errors.generic"));
     } finally {

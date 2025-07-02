@@ -7,6 +7,8 @@ import {
 } from "supertokens-auth-react/recipe/emailpassword";
 import { sendVerificationEmail as supertokensSendVerificationEmail } from "supertokens-auth-react/recipe/emailverification";
 
+export { attemptRefreshingSession } from "supertokens-auth-react/recipe/session";
+
 export async function sendVerificationEmail() {
   return await supertokensSendVerificationEmail();
 }
