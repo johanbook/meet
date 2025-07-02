@@ -40,5 +40,12 @@
     "button": "设置新密码",
     "backToLogin": "返回登录",
     "invalidToken": "密码重置链接无效或已过期。"
+  },
+  "verifyEmail": {
+    "title": "验证您的邮箱",
+    "verifying": "正在验证您的邮箱...",
+    "success": "您的邮箱已验证。您现在可以登录。",
+    "error": "验证失败。该链接可能无效或已过期。",
+    "backToLogin": "返回登录"
   }
 }
