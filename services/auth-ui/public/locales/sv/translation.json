@@ -45,5 +45,13 @@
     "button": "Sätt nytt lösenord",
     "backToLogin": "Tillbaka till inloggning",
     "invalidToken": "Länken för att återställa lösenordet är ogiltig eller har gått ut."
+  },
+
+  "verifyEmail": {
+    "title": "Bekräfta din e-post",
+    "verifying": "Bekräftar din e-post...",
+    "success": "Din e-post har bekräftats. Du kan nu logga in.",
+    "error": "Bekräftelsen misslyckades. Länken kan vara ogiltig eller utgången.",
+    "backToLogin": "Tillbaka till inloggning"
   }
 }

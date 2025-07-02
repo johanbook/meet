@@ -5,9 +5,16 @@ import {
   signUp as supertokensSignUp,
   submitNewPassword as supertokensSubmitNewPassword,
 } from "supertokens-auth-react/recipe/emailpassword";
-import { sendVerificationEmail as supertokensSendVerificationEmail } from "supertokens-auth-react/recipe/emailverification";
+import {
+  sendVerificationEmail as supertokensSendVerificationEmail,
+  verifyEmail as supertokensVerifyEmail,
+} from "supertokens-auth-react/recipe/emailverification";
 
 export { attemptRefreshingSession } from "supertokens-auth-react/recipe/session";
+
+export async function verifyEmail() {
+  return await supertokensVerifyEmail();
+}
 
 export async function sendVerificationEmail() {
   return await supertokensSendVerificationEmail();

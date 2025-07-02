@@ -1,8 +1,9 @@
 import { FC, SyntheticEvent, useState } from "react";
+import { useNavigate } from "react-router";
 
 import { Alert, Box, Typography } from "@mui/material";
 
-import { signUp } from "src/api/auth";
+import { sendVerificationEmail, signUp } from "src/api/auth";
 import { Button } from "src/components/ui/Button";
 import { Link } from "src/components/ui/Link";
 import { TextField } from "src/components/ui/TextField";
@@ -11,6 +12,7 @@ import { useTranslation } from "src/core/i18n";
 export const SignUp: FC = () => {
   const { t } = useTranslation();
 
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -46,9 +48,9 @@ export const SignUp: FC = () => {
         return;
       }
 
-      // Login was successful
-      const searchParams = new URLSearchParams(window.location.search);
-      window.location.href = searchParams.get("redirectToPath") || "/";
+      await sendVerificationEmail();
+
+      navigate("/login/verify-email");
     } catch {
       setError(t("errors.generic"));
     } finally {
