@@ -83,7 +83,7 @@ services:
     container_name: "auth-api"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.auth-api.rule=Host(`$DOMAIN`)&&(PathPrefix(`/auth/api`)||PathPrefix(`/logout`))"
+      - "traefik.http.routers.auth-api.rule=Host(`$DOMAIN`)&&PathPrefix(`/auth/api`)"
       - "traefik.http.routers.auth-api.entrypoints=web"
       - "traefik.http.middlewares.auth.forwardauth.address=http://auth-api/authenticate"
       - "traefik.http.middlewares.auth.forwardauth.authResponseHeaders=x-user-id"
@@ -99,7 +99,7 @@ services:
     container_name: "auth-ui"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.auth-ui.rule=Host(`$DOMAIN`)&&PathPrefix(`/login`)"
+      - "traefik.http.routers.auth-ui.rule=Host(`$DOMAIN`)&&(PathPrefix(`/login`)||PathPrefix(`/logout`))"
       - "traefik.http.routers.auth-ui.entrypoints=web"
 
       - "com.centurylinklabs.watchtower.enable=true"
