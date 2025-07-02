@@ -17,7 +17,7 @@ export const ResetPasswordFromToken: FC = () => {
   const [error, setError] = useState("");
   const [passwordSubmitted, setPasswordSubmitted] = useState(false);
 
-  const handleSendPasswordReset = async (event: SyntheticEvent) => {
+  const handleSubmitNewPassword = async (event: SyntheticEvent) => {
     event.preventDefault();
     setIsLoading(true);
     setError("");
@@ -51,7 +51,7 @@ export const ResetPasswordFromToken: FC = () => {
   return (
     <Box
       component="form"
-      onSubmit={handleSendPasswordReset}
+      onSubmit={handleSubmitNewPassword}
       sx={{
         display: "flex",
         flexDirection: "column",
