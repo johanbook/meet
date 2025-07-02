@@ -7,6 +7,7 @@ import { Button } from "src/components/ui/Button";
 import { Link } from "src/components/ui/Link";
 import { TextField } from "src/components/ui/TextField";
 import { useTranslation } from "src/core/i18n";
+import { LoadingView } from "src/views/LoadingView";
 
 const handleRedirect = () => {
   const searchParams = new URLSearchParams(window.location.search);
@@ -16,6 +17,7 @@ const handleRedirect = () => {
 export const LogIn: FC = () => {
   const { t } = useTranslation();
 
+  const [isCheckingSession, setIsCheckingSession] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -32,6 +34,8 @@ export const LogIn: FC = () => {
 
       if (result) {
         handleRedirect();
+      } else {
+        setIsCheckingSession(false);
       }
     };
 
@@ -81,6 +85,10 @@ export const LogIn: FC = () => {
       setIsLoading(false);
     }
   };
+
+  if (isCheckingSession) {
+    return <LoadingView />;
+  }
 
   return (
     <Box
