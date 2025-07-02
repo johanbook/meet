@@ -1,13 +1,23 @@
 # Notifications
 
-The software system comes with a builtin notification system.
+The software system comes with a built-in notification system designed to inform
+users of important events. It operates across multiple channels to ensure timely
+delivery.
+
+## Overview
+
+The notification system prioritizes delivery channels in the following order:
+
+1.  **Web Push:** If the user has enabled web push notifications a push
+    notification is sent to their device. This is ideal for reaching users even
+    when they don't have the application open.
+2.  **In-App Snackbar:** If the user is actively using the application, a
+    snackbar notification is displayed directly within the UI for immediate
+    feedback.
+3.  **Email:** If neither of the above channels is available, an email is sent
+    to the user.
 
 ## Guide
-
-When a notification is created the following will happen:
-
-1. If user is currently using the app, notify them with a snackbar.
-2. Otherwise send them a mail notification.
 
 ### Backend
 
@@ -83,10 +93,12 @@ types.
 import { ReactElement } from "react";
 import { useParams } from "react-router";
 
-import { CacheKeysConstants, useQuery } from "src/core/query";
 import { chatsApi } from "src/apis";
-import { NotificationEventsConstants } from "src/core/notifications";
-import { useHandleNotification } from "src/core/notifications";
+import {
+  useHandleNotification,
+  NotificationEventsConstants,
+} from "src/core/notifications";
+import { CacheKeysConstants, useQuery } from "src/core/query";
 
 export function ChatPageContainer(): ReactElement {
   const { error, data, isLoading, refetch } = useQuery(
