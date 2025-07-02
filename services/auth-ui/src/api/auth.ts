@@ -12,6 +12,8 @@ import {
 
 export { attemptRefreshingSession } from "supertokens-auth-react/recipe/session";
 
+export { signOut as logOut } from "supertokens-auth-react/recipe/emailpassword";
+
 export async function verifyEmail() {
   return await supertokensVerifyEmail();
 }
