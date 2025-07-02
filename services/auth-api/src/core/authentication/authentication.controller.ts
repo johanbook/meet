@@ -44,27 +44,4 @@ export class AuthenticationController {
     response.header(HTTP_HEADER_USER_ID, userId);
     response.status(HttpStatus.OK).send();
   }
-
-  @Get("/logout")
-  async logout(
-    @Res({ passthrough: false }) response: FastifyReply,
-    @Session({
-      sessionRequired: false,
-    })
-    session: ISession,
-  ): Promise<void> {
-    if (!session) {
-      this.logger.trace("Failed logout due to missing session");
-
-      response.status(HttpStatus.NOT_FOUND).send();
-
-      return;
-    }
-
-    await session.revokeSession();
-
-    this.logger.trace("Logout successful");
-
-    response.status(HttpStatus.OK).send();
-  }
 }
