@@ -2,46 +2,45 @@ import { FC, SyntheticEvent, useState } from "react";
 
 import { Alert, Box, Typography } from "@mui/material";
 
-import { sendPasswordResetEmail } from "src/api/auth";
+import { submitNewPassword } from "src/api/auth";
 import { Button } from "src/components/ui/Button";
 import { Link } from "src/components/ui/Link";
 import { TextField } from "src/components/ui/TextField";
 import { useTranslation } from "src/core/i18n";
 
-export const ResetPassword: FC = () => {
+export const ResetPasswordFromToken: FC = () => {
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [error, setError] = useState("");
-  const [emailSent, setEmailSent] = useState(false);
+  const [passwordSubmitted, setPasswordSubmitted] = useState(false);
 
-  const handleSendPasswordReset = async (event: SyntheticEvent) => {
+  const handleSubmitNewPassword = async (event: SyntheticEvent) => {
     event.preventDefault();
     setIsLoading(true);
     setError("");
-    setEmailError("");
-    setEmailSent(false);
+    setPasswordError("");
 
     try {
-      const response = await sendPasswordResetEmail(email);
+      const response = await submitNewPassword(password);
 
       if (response.status === "FIELD_ERROR") {
         const field = response.formFields[0];
-        if (field.id === "email") {
-          setEmailError(field.error);
+        if (field.id === "password") {
+          setPasswordError(field.error);
         }
         return;
       }
 
-      if (response.status === "PASSWORD_RESET_NOT_ALLOWED") {
-        setError(t("resetPassword.notAllowed"));
+      if (response.status === "RESET_PASSWORD_INVALID_TOKEN_ERROR") {
+        setError(t("resetPasswordFromToken.invalidToken"));
         return;
       }
 
       // Assume success if no error status
-      setEmailSent(true);
+      setPasswordSubmitted(true);
     } catch {
       setError(t("errors.generic"));
     } finally {
@@ -52,7 +51,7 @@ export const ResetPassword: FC = () => {
   return (
     <Box
       component="form"
-      onSubmit={handleSendPasswordReset}
+      onSubmit={handleSubmitNewPassword}
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -60,21 +59,21 @@ export const ResetPassword: FC = () => {
         alignItems: "center",
       }}
     >
-      <Typography variant="h4">{t("resetPassword.title")}</Typography>
+      <Typography variant="h4">{t("resetPasswordFromToken.title")}</Typography>
       <Typography color="textSecondary" gutterBottom>
-        {t("resetPassword.instructions")}
+        {t("resetPasswordFromToken.instructions")}
       </Typography>
 
       <TextField
-        autoComplete="email"
-        disabled={isLoading}
-        error={emailError}
+        autoComplete="new-password"
+        disabled={isLoading || passwordSubmitted}
+        error={passwordError}
         fullWidth
-        label={t("fields.email.label")}
-        name="email"
-        onChange={(value) => setEmail(value)}
-        type="email"
-        value={email}
+        label={t("fields.password.label")}
+        name="password"
+        onChange={(value) => setPassword(value)}
+        type="password"
+        value={password}
       />
 
       {error && (
@@ -83,23 +82,23 @@ export const ResetPassword: FC = () => {
         </Alert>
       )}
 
-      {emailSent && (
+      {passwordSubmitted && (
         <Alert severity="success" sx={{ width: "100%" }}>
-          {t("resetPassword.emailSent")}
+          {t("resetPasswordFromToken.success")}
         </Alert>
       )}
 
       <Button
-        disabled={!email || isLoading}
+        disabled={!password || passwordSubmitted}
         loading={isLoading}
         fullWidth
         type="submit"
         variant="contained"
       >
-        {t("resetPassword.button")}
+        {t("resetPasswordFromToken.button")}
       </Button>
 
-      <Link to="/login">{t("resetPassword.backToLogin")}</Link>
+      <Link to="/login">{t("resetPasswordFromToken.backToLogin")}</Link>
     </Box>
   );
 };

@@ -3,6 +3,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router";
 
 import { Nav } from "./components/nav";
 import { LogIn } from "./pages/LogIn";
+import { NotFound } from "./pages/NotFound";
 import { ResetPassword } from "./pages/ResetPassword";
 import { SignUp } from "./pages/SignUp";
 
@@ -12,6 +13,11 @@ const router = createBrowserRouter([
     element: (
       <Nav>
         <Outlet />
+      </Nav>
+    ),
+    errorElement: (
+      <Nav>
+        <NotFound />
       </Nav>
     ),
     children: [

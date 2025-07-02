@@ -1,11 +1,28 @@
 import {
-  sendPasswordResetEmail as superTokensSendPasswordResetEmail,
+  getResetPasswordTokenFromURL as supertokensGetResetPasswordTokenFromURL,
+  sendPasswordResetEmail as supertokensSendPasswordResetEmail,
   signIn as supertokensSignIn,
   signUp as supertokensSignUp,
+  submitNewPassword as supertokensSubmitNewPassword,
 } from "supertokens-auth-react/recipe/emailpassword";
+import { sendVerificationEmail as supertokensSendVerificationEmail } from "supertokens-auth-react/recipe/emailverification";
+
+export async function sendVerificationEmail() {
+  return await supertokensSendVerificationEmail();
+}
+
+export async function submitNewPassword(newPassword: string) {
+  return await supertokensSubmitNewPassword({
+    formFields: [{ id: "password", value: newPassword }],
+  });
+}
+
+export function getResetPasswordTokenFromURL() {
+  return supertokensGetResetPasswordTokenFromURL();
+}
 
 export async function sendPasswordResetEmail(email: string) {
-  return await superTokensSendPasswordResetEmail({
+  return await supertokensSendPasswordResetEmail({
     formFields: [{ id: "email", value: email }],
   });
 }

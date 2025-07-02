@@ -36,5 +36,14 @@
     "button": "Skicka terställningslänk",
     "backToLogin": "Tillbaka till inloggning",
     "notAllowed": "Återställning av lösenord är inte tillåten för detta konto."
+  },
+
+  "resetPasswordFromToken": {
+    "title": "Ange ett nytt lösenord",
+    "instructions": "Ange ditt nya lösenord nedan.",
+    "success": "Ditt lösenord har återställts. Du kan nu logga in med ditt nya lösenord.",
+    "button": "Sätt nytt lösenord",
+    "backToLogin": "Tillbaka till inloggning",
+    "invalidToken": "Länken för att återställa lösenordet är ogiltig eller har gått ut."
   }
 }
