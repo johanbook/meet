@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router";
 
 import { Nav } from "./components/nav";
+import { AuthGuard } from "./guards";
 import { LogIn } from "./pages/LogIn";
 import { LogOut } from "./pages/LogOut";
 import { NotFound } from "./pages/NotFound";
@@ -13,9 +14,11 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: (
-      <Nav>
-        <Outlet />
-      </Nav>
+      <AuthGuard>
+        <Nav>
+          <Outlet />
+        </Nav>
+      </AuthGuard>
     ),
     errorElement: (
       <Nav>
