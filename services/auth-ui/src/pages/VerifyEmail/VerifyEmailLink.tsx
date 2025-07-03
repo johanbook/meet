@@ -12,6 +12,7 @@ import { captureException } from "@sentry/react";
 
 import { verifyEmail } from "src/api/auth";
 import { useTranslation } from "src/core/i18n";
+import { handleRedirect } from "src/utils/auth";
 
 export function VerifyEmailLink(): ReactElement {
   const { t } = useTranslation();
@@ -27,6 +28,9 @@ export function VerifyEmailLink(): ReactElement {
 
         if (result.status === "OK") {
           setStatus("success");
+
+          // Redirect back to main application
+          handleRedirect();
         } else {
           setStatus("error");
         }
