@@ -32,7 +32,6 @@ export function SendNewEmail(): ReactElement {
   return (
     <Box
       sx={{
-        mt: 8,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -42,7 +41,7 @@ export function SendNewEmail(): ReactElement {
         {t("verifyEmail.title")}
       </Typography>
 
-      <Typography align="center" sx={{ mb: 4 }}>
+      <Typography align="center" sx={{ mb: 2 }}>
         {t("verifyEmail.instructions")}
       </Typography>
 
@@ -62,7 +61,7 @@ export function SendNewEmail(): ReactElement {
         disabled={emailSent}
         loading={isLoading}
         onClick={handleSendNewEmail}
-        variant="outlined"
+        variant="text"
       >
         {t("verifyEmail.sendNewEmail")}
       </Button>
