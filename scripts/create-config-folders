@@ -5,3 +5,6 @@ mkdir -p \
 	.data/minio \
 	.data/pgadmin \
 	.data/postgres
+
+# https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html#mapped-files-and-directories
+sudo chown -R 5050:5050 .data/pgadmin
