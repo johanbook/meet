@@ -39,4 +39,7 @@ export class Organization {
 
   @Column()
   personal!: boolean;
+
+  @Column({ type: "varchar", length: 32, default: "default" })
+  theme!: string;
 }

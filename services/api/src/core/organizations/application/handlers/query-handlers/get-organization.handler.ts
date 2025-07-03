@@ -27,6 +27,7 @@ export class GetOrganizationHandler
       name: currentOrganization.name,
       permissions: currentOrganization.permissions.map((x) => x.permission),
       role: membership.role,
+      theme: currentOrganization.theme,
     });
   }
 }
