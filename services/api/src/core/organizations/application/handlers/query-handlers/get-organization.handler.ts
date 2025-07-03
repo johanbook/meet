@@ -25,6 +25,7 @@ export class GetOrganizationHandler
       created: currentOrganization.created,
       id: currentOrganization.id,
       name: currentOrganization.name,
+      permissions: currentOrganization.permissions.map((x) => x.permission),
       role: membership.role,
     });
   }
