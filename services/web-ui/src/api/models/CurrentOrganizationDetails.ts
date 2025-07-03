@@ -22,10 +22,22 @@ import { exists, mapValues } from '../runtime';
 export interface CurrentOrganizationDetails {
     /**
      * 
+     * @type {Array<string>}
+     * @memberof CurrentOrganizationDetails
+     */
+    permissions: Array<string>;
+    /**
+     * 
      * @type {string}
      * @memberof CurrentOrganizationDetails
      */
     role: CurrentOrganizationDetailsRoleEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CurrentOrganizationDetails
+     */
+    theme: string;
     /**
      * 
      * @type {string}
@@ -62,7 +74,9 @@ export type CurrentOrganizationDetailsRoleEnum = typeof CurrentOrganizationDetai
  */
 export function instanceOfCurrentOrganizationDetails(value: object): boolean {
     let isInstance = true;
+    isInstance = isInstance && "permissions" in value;
     isInstance = isInstance && "role" in value;
+    isInstance = isInstance && "theme" in value;
     isInstance = isInstance && "created" in value;
     isInstance = isInstance && "id" in value;
     isInstance = isInstance && "name" in value;
@@ -80,7 +94,9 @@ export function CurrentOrganizationDetailsFromJSONTyped(json: any, ignoreDiscrim
     }
     return {
         
+        'permissions': json['permissions'],
         'role': json['role'],
+        'theme': json['theme'],
         'created': json['created'],
         'id': json['id'],
         'name': json['name'],
@@ -96,7 +112,9 @@ export function CurrentOrganizationDetailsToJSON(value?: CurrentOrganizationDeta
     }
     return {
         
+        'permissions': value.permissions,
         'role': value.role,
+        'theme': value.theme,
         'created': value.created,
         'id': value.id,
         'name': value.name,
