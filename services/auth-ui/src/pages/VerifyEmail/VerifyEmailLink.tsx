@@ -8,6 +8,7 @@ import {
   CircularProgress,
   Typography,
 } from "@mui/material";
+import { captureException } from "@sentry/react";
 
 import { verifyEmail } from "src/api/auth";
 import { useTranslation } from "src/core/i18n";
@@ -24,12 +25,13 @@ export function VerifyEmailLink(): ReactElement {
       try {
         const result = await verifyEmail();
 
-        if (result.status == "OK") {
+        if (result.status === "OK") {
           setStatus("success");
         } else {
           setStatus("error");
         }
-      } catch {
+      } catch (error) {
+        captureException(error);
         setStatus("error");
       }
     };

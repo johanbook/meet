@@ -46,6 +46,9 @@
     "verifying": "Verifying your email...",
     "success": "Your email has been verified. You can now log in.",
     "error": "Verification failed. The link may be invalid or expired.",
-    "backToLogin": "Back to login"
+    "backToLogin": "Back to login",
+    "instructions": "To start using the app you must first confirm your email. A verification email has been sent to you. If you did not get it, press the button below.",
+    "sendError": "Failed to send verification email. Please try again later.",
+    "sendNewEmail": "Send new email"
   }
 }

@@ -1,6 +1,6 @@
 import { ReactElement, useState } from "react";
 
-import { Box, Typography } from "@mui/material";
+import { Alert, Box, Typography } from "@mui/material";
 import { captureException } from "@sentry/react";
 
 import { sendVerificationEmail } from "src/api/auth";
@@ -11,14 +11,19 @@ export function SendNewEmail(): ReactElement {
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
+  const [error, setError] = useState<string>("");
 
   const handleSendNewEmail = async () => {
     setIsLoading(true);
+    setError("");
 
     try {
       await sendVerificationEmail();
+      setEmailSent(true);
     } catch (error) {
       captureException(error);
+      setError(t("verifyEmail.sendError"));
     } finally {
       setIsLoading(false);
     }
@@ -38,17 +43,22 @@ export function SendNewEmail(): ReactElement {
       </Typography>
 
       <Typography align="center" sx={{ mb: 4 }}>
-        To start using the app you must first confirm your email. An
-        verification email has been sent to you. If you did not get it, press
-        the button below.
+        {t("verifyEmail.instructions")}
       </Typography>
 
+      {error && (
+        <Alert severity="error" sx={{ width: "100%", mb: 2 }}>
+          {error}
+        </Alert>
+      )}
+
       <Button
+        disabled={emailSent}
         loading={isLoading}
         onClick={handleSendNewEmail}
         variant="outlined"
       >
-        Send new email
+        {t("verifyEmail.sendNewEmail")}
       </Button>
     </Box>
   );
