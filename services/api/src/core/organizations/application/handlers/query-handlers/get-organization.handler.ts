@@ -26,6 +26,7 @@ export class GetOrganizationHandler
       id: currentOrganization.id,
       name: currentOrganization.name,
       role: membership.role,
+      theme: currentOrganization.theme,
     });
   }
 }
