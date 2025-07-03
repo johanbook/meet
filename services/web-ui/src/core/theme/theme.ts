@@ -2,7 +2,14 @@ import { createTheme as createMuiTheme } from "@mui/material/styles";
 
 import PALETTE from "./palette";
 
-export function createTheme(darkmode = false) {
+interface CreateThemeProps {
+  darkmode: boolean;
+  theme: string;
+}
+
+export function createTheme({ darkmode, theme }: CreateThemeProps) {
+  const palette = PALETTE[theme] || PALETTE.default;
+
   return createMuiTheme({
     components: {
       MuiDialog: {
@@ -32,14 +39,14 @@ export function createTheme(darkmode = false) {
     },
     palette: {
       error: {
-        main: PALETTE.error,
+        main: palette.error,
       },
       mode: darkmode ? "dark" : "light",
       primary: {
-        main: PALETTE.primary,
+        main: palette.primary,
       },
       success: {
-        main: PALETTE.success,
+        main: palette.success,
       },
     },
   });

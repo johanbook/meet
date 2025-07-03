@@ -5,7 +5,7 @@ interface Palette {
 }
 
 const PALETTES: Record<string, Palette> = {
-  faded: {
+  default: {
     primary: "rgb(200,100,150)",
     success: "rgb(100,150,100)",
     error: "rgb(190,100,100)",
@@ -17,4 +17,4 @@ const PALETTES: Record<string, Palette> = {
   },
 };
 
-export default PALETTES["faded"];
+export default PALETTES;
