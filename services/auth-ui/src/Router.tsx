@@ -10,6 +10,12 @@ import { ResetPassword } from "./pages/ResetPassword";
 import { SignUp } from "./pages/SignUp";
 import { VerifyEmail } from "./pages/VerifyEmail";
 
+const errorElement = (
+  <Nav>
+    <NotFound />
+  </Nav>
+);
+
 const router = createBrowserRouter([
   {
     path: "/login",
@@ -20,11 +26,7 @@ const router = createBrowserRouter([
         </Nav>
       </AuthGuard>
     ),
-    errorElement: (
-      <Nav>
-        <NotFound />
-      </Nav>
-    ),
+    errorElement,
     children: [
       {
         path: "reset-password",
@@ -35,12 +37,23 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: "verify-email",
-        element: <VerifyEmail />,
-      },
-      {
         path: "",
         element: <LogIn />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: (
+      <Nav>
+        <Outlet />
+      </Nav>
+    ),
+    errorElement,
+    children: [
+      {
+        path: "verify-email",
+        element: <VerifyEmail />,
       },
     ],
   },
