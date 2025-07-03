@@ -50,6 +50,8 @@ services:
     extends:
       file: "./docker-compose.shared.yaml"
       service: "db"
+    ports:
+      - 5432:5432
 
   minio:
     extends:
