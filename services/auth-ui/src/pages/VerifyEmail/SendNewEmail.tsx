@@ -52,6 +52,12 @@ export function SendNewEmail(): ReactElement {
         </Alert>
       )}
 
+      {emailSent && (
+        <Alert severity="success" sx={{ width: "100%", mb: 2 }}>
+          {t("verifyEmail.sendSuccess")}
+        </Alert>
+      )}
+
       <Button
         disabled={emailSent}
         loading={isLoading}
