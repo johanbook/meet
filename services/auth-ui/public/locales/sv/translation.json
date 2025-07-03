@@ -55,6 +55,7 @@
     "backToLogin": "Tillbaka till inloggning",
     "instructions": "För att börja använda appen måste du först bekräfta din e-post. Ett bekräftelsemail har skickats till dig. Om du inte fick det, tryck på knappen nedan.",
     "sendError": "Det gick inte att skicka verifieringsmailet. Vänligen försök igen senare.",
-    "sendNewEmail": "Skicka nytt mail"
+    "sendNewEmail": "Skicka nytt mail",
+    "sendSuccess": "Ett nytt verifieringsmail har skickats till dig."
   }
 }
