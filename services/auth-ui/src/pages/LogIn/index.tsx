@@ -1,4 +1,4 @@
-import { FC, SyntheticEvent, useEffect, useState } from "react";
+import { FC, SyntheticEvent, useState } from "react";
 
 import { Alert, Box, Typography } from "@mui/material";
 
@@ -7,7 +7,7 @@ import { Button } from "src/components/ui/Button";
 import { Link } from "src/components/ui/Link";
 import { TextField } from "src/components/ui/TextField";
 import { useTranslation } from "src/core/i18n";
-import { handleRedirect, tryRefresh } from "src/utils/auth";
+import { handleRedirect } from "src/utils/auth";
 
 export const LogIn: FC = () => {
   const { t } = useTranslation();
@@ -21,10 +21,6 @@ export const LogIn: FC = () => {
   const [passwordError, setPasswordError] = useState("");
 
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    tryRefresh();
-  }, []);
 
   const handleLogin = async (event: SyntheticEvent) => {
     event.preventDefault();
