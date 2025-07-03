@@ -31,6 +31,21 @@ export function AuthenticationGuardContainer({
     );
   }
 
+  if (
+    error instanceof ResponseError &&
+    error.response.status === 403 &&
+    // A claim that fails likely means failing email verification
+    error.response.errorMessage === "invalid claim"
+  ) {
+    window.location.href = `/login/verify-email?redirectToPath=${window.location.pathname}`;
+
+    return (
+      <AuthenticationGuardNav>
+        <AuthenticationGuardSkeleton />
+      </AuthenticationGuardNav>
+    );
+  }
+
   if (error) {
     return (
       <AuthenticationGuardNav>
