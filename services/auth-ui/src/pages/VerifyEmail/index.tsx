@@ -1,92 +1,16 @@
-import { ReactElement, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { ReactElement } from "react";
 
-import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import { getEmailVerificationTokenFromURL } from "src/api/auth";
 
-import { verifyEmail } from "src/api/auth";
-import { useTranslation } from "src/core/i18n";
+import { SendNewEmail } from "./SendNewEmail";
+import { VerifyEmailLink } from "./VerifyEmailLink";
 
 export function VerifyEmail(): ReactElement {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-  const [status, setStatus] = useState<"verifying" | "success" | "error">(
-    "verifying",
-  );
+  const token = getEmailVerificationTokenFromURL();
 
-  useEffect(() => {
-    const handleVerifyEmail = async () => {
-      try {
-        const result = await verifyEmail();
+  if (token) {
+    return <VerifyEmailLink />;
+  }
 
-        if (result.status == "OK") {
-          setStatus("success");
-        } else {
-          setStatus("error");
-        }
-      } catch {
-        setStatus("error");
-      }
-    };
-
-    handleVerifyEmail();
-  }, []);
-
-  return (
-    <Box
-      sx={{
-        mt: 8,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <Typography align="center" gutterBottom variant="h4">
-        {t("verifyEmail.title")}
-      </Typography>
-
-      {status === "verifying" && (
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            mt: 4,
-          }}
-        >
-          <CircularProgress sx={{ mb: 2 }} />
-          <Typography>{t("verifyEmail.verifying")}</Typography>
-        </Box>
-      )}
-
-      {status === "success" && (
-        <>
-          <Typography sx={{ mt: 4 }}>{t("verifyEmail.success")}</Typography>
-          <Button
-            sx={{ mt: 4 }}
-            variant="contained"
-            color="primary"
-            onClick={() => navigate("/login")}
-          >
-            {t("verifyEmail.backToLogin")}
-          </Button>
-        </>
-      )}
-
-      {status === "error" && (
-        <>
-          <Typography color="error" sx={{ mt: 4 }}>
-            {t("verifyEmail.error")}
-          </Typography>
-          <Button
-            sx={{ mt: 4 }}
-            variant="contained"
-            color="primary"
-            onClick={() => navigate("/login")}
-          >
-            {t("verifyEmail.backToLogin")}
-          </Button>
-        </>
-      )}
-    </Box>
-  );
+  return <SendNewEmail />;
 }

@@ -1,0 +1,10 @@
+---
+description: Describes translation
+globs: **/*.{ts,tsx,js,jsx}
+alwaysApply: true
+---
+- All user-facing strings in the UI must be referenced via translation keys using the `useTranslation` hook from `src/core/i18n`.
+- Do not hardcode any user-facing text in components. Instead, add a new key to the appropriate language files in `public/locales/[lang]/translation.json`.
+- When adding a new string, update all language files (English, Swedish, Chinese) to keep them in sync. Use clear, concise, and context-appropriate translations.
+- When updating or refactoring components, always check that translation keys are used and that the translation files are updated accordingly.
+- For any new feature or component, ensure that all text is internationalized before merging changes.
