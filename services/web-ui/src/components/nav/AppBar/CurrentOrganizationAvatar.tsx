@@ -90,7 +90,11 @@ function MenuContent({ currentOrganizationId }: MenuContentProps) {
           onClick={() => handleClick(organization)}
           selected={organization.id === currentOrganizationId}
         >
-          <OrganizationAvatar name={organization.name} size={SIZE} />
+          <OrganizationAvatar
+            name={organization.name}
+            size={SIZE}
+            src={organization.photo?.url}
+          />
           <Typography
             sx={{
               ml: 2,
