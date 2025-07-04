@@ -4,6 +4,58 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+## [2.7.0](https://github.com/johanbook/meet/compare/v2.6.0...v2.7.0) (2025-07-04)
+
+
+### Features
+
+* **api:** include organization permissions when fetching current ([#1595](https://github.com/johanbook/meet/issues/1595)) ([3efd1ed](https://github.com/johanbook/meet/commit/3efd1ed6b95776aeb951ebcac92bb18abfd0965f))
+* **api:** include photos when fetching organization list ([#1603](https://github.com/johanbook/meet/issues/1603)) ([29a13d0](https://github.com/johanbook/meet/commit/29a13d06c021734b286ab9e74752deeaace58d2c))
+* **api:** support custom themes per organization ([#1596](https://github.com/johanbook/meet/issues/1596)) ([bad46f2](https://github.com/johanbook/meet/commit/bad46f2a296d04f1e9379eea586a94d978384514))
+* **api:** support organization photo ([#1599](https://github.com/johanbook/meet/issues/1599)) ([3b0934b](https://github.com/johanbook/meet/commit/3b0934ba03ac65fb58d994b063e4bb491da9298a))
+* **auth-ui:** add custom page for password reset ([#1561](https://github.com/johanbook/meet/issues/1561)) ([dd53b9b](https://github.com/johanbook/meet/commit/dd53b9b35d8fe48be20396b49a9e16d9e70fa6ea))
+* **auth-ui:** add logout route ([#1580](https://github.com/johanbook/meet/issues/1580)) ([6997c21](https://github.com/johanbook/meet/commit/6997c21c0d6710696646ceac765631961fdf2f48))
+* **auth-ui:** fix email verification process ([#1585](https://github.com/johanbook/meet/issues/1585)) ([05ff2f0](https://github.com/johanbook/meet/commit/05ff2f0e8bf1bb02cdf77246137038d218df53c3))
+* **auth-ui:** improve styling ([#1566](https://github.com/johanbook/meet/issues/1566)) ([dda68fa](https://github.com/johanbook/meet/commit/dda68faace357532394d19209c79cd1ef59da6ba))
+* **auth-ui:** use custom ui ([#1560](https://github.com/johanbook/meet/issues/1560)) ([7e9676a](https://github.com/johanbook/meet/commit/7e9676a3ee6e29a2cf71c01c6dad8b518c967156))
+* **web-ui:** decrease elevation of mobile drawer ([#1553](https://github.com/johanbook/meet/issues/1553)) ([9286969](https://github.com/johanbook/meet/commit/9286969360e2f30479d2ecb8e03ed713a1e585fa))
+* **web-ui:** improve design of page for creating blog post ([#1522](https://github.com/johanbook/meet/issues/1522)) ([c4a4bae](https://github.com/johanbook/meet/commit/c4a4bae99141e80de22af7811d08b7a78c7602e1))
+* **web-ui:** improve snackbar style ([#1547](https://github.com/johanbook/meet/issues/1547)) ([bed2e41](https://github.com/johanbook/meet/commit/bed2e41543b523f0b9f8fed3203650919f0b3da0))
+* **web-ui:** improve style of dialog ([#1516](https://github.com/johanbook/meet/issues/1516)) ([a520a7f](https://github.com/johanbook/meet/commit/a520a7f549e71245b56f9b8722c00e3d5bf2f01e))
+* **web-ui:** make organization avatars rectangular ([#1602](https://github.com/johanbook/meet/issues/1602)) ([9b86c5f](https://github.com/johanbook/meet/commit/9b86c5f887fc2ba1e10fce69c3d5a79db71de21b))
+* **web-ui:** rename "post" to "moment" in blog translations ([#1520](https://github.com/johanbook/meet/issues/1520)) ([a089ee4](https://github.com/johanbook/meet/commit/a089ee4ccdb6374550f24be96ff0ed3e3176cbe9))
+* **web-ui:** support organization theme ([#1597](https://github.com/johanbook/meet/issues/1597)) ([4b8c2aa](https://github.com/johanbook/meet/commit/4b8c2aaba64b69a033836ef76e935cce8ee1e2f9))
+* **web-ui:** support uploading organization avatar ([#1601](https://github.com/johanbook/meet/issues/1601)) ([9dd5bd6](https://github.com/johanbook/meet/commit/9dd5bd622683cbda2162261cc10919c8905816f9))
+
+
+### Bug Fixes
+
+* **api:** add missing permission to removing member ([#1600](https://github.com/johanbook/meet/issues/1600)) ([221a0ad](https://github.com/johanbook/meet/commit/221a0ad345322e5998dc481c8e10ef82c0e256af))
+* **api:** avoid sending email if webpush already sent ([#1572](https://github.com/johanbook/meet/issues/1572)) ([74e9dd4](https://github.com/johanbook/meet/commit/74e9dd4bba6dbac40d983bbd41c65c74a994ae38))
+* **auth-ui:** add back support for verify email ([#1578](https://github.com/johanbook/meet/issues/1578)) ([f43a7bc](https://github.com/johanbook/meet/commit/f43a7bc5e949b213b5b3d77ab8043f6461e6efe1))
+* **auth-ui:** avoid redirecting to main app on email verify page ([#1592](https://github.com/johanbook/meet/issues/1592)) ([09610b5](https://github.com/johanbook/meet/commit/09610b54d8091a0a2158bbb61b83baf056a675c3))
+* **auth-ui:** avoid showing login screen while refreshing auth ([#1587](https://github.com/johanbook/meet/issues/1587)) ([9cb20e6](https://github.com/johanbook/meet/commit/9cb20e6c4860bc1c39d8c4ebb5d7cd8454eafa0a))
+* **auth-ui:** fix password reset ([#1567](https://github.com/johanbook/meet/issues/1567)) ([4c87824](https://github.com/johanbook/meet/commit/4c8782461c6cad9da0849b33342d450ce014b76c))
+* **auth-ui:** improve ui responsiveness ([#1564](https://github.com/johanbook/meet/issues/1564)) ([3ff6b33](https://github.com/johanbook/meet/commit/3ff6b33b95fd881dcc0968f4397a2fe951fec424))
+* **auth-ui:** redirect to main app when email is verified ([#1588](https://github.com/johanbook/meet/issues/1588)) ([e247f91](https://github.com/johanbook/meet/commit/e247f91c03196b1342ed79c8dc36e146090a3fab))
+* **auth-ui:** remove redundant margin ([#1593](https://github.com/johanbook/meet/issues/1593)) ([1a334a2](https://github.com/johanbook/meet/commit/1a334a28a73c512be5156d5134e9fa52dbe824dc))
+* **auth-ui:** reset previous form errors when logging in ([#1563](https://github.com/johanbook/meet/issues/1563)) ([66d48a2](https://github.com/johanbook/meet/commit/66d48a25a8dfff10bf3bb845ed2d629b846988ab))
+* **auth-ui:** show feedback when new verification email has been sent ([#1589](https://github.com/johanbook/meet/issues/1589)) ([7aaa1ec](https://github.com/johanbook/meet/commit/7aaa1ec9d9d8c16df9d0f5166dfcb3b41e9eca53))
+* **auth-ui:** try refreshing session ([#1571](https://github.com/johanbook/meet/issues/1571)) ([e745064](https://github.com/johanbook/meet/commit/e7450645bff82de4d329d38f01718d7e90b06acb))
+* **auth-ui:** update path ([#1584](https://github.com/johanbook/meet/issues/1584)) ([d808f25](https://github.com/johanbook/meet/commit/d808f2531f5cdc8e8bfe9982d6c973e3469fb69b))
+* **web-ui:** add missing translations in settings ([#1517](https://github.com/johanbook/meet/issues/1517)) ([746f0f3](https://github.com/johanbook/meet/commit/746f0f3201fc1aa1d6c5b6afb75e857f9de55bbc))
+* **web-ui:** confirm before deleting organization ([#1514](https://github.com/johanbook/meet/issues/1514)) ([99c740f](https://github.com/johanbook/meet/commit/99c740f63319cac2c9ea34a013b7e7a3d0c6ca2a))
+* **web-ui:** inclde photo in organization list ([#1604](https://github.com/johanbook/meet/issues/1604)) ([5f6d6bd](https://github.com/johanbook/meet/commit/5f6d6bd0ea0a5248ea8d8d24646b0dcd66f528fd))
+* **web-ui:** redirect to email verification on failed verification ([#1590](https://github.com/johanbook/meet/issues/1590)) ([ce0f450](https://github.com/johanbook/meet/commit/ce0f45068044d89f60c204d535762d372175da15))
+* **web-ui:** show snackbar above bottom nav on mobile ([#1550](https://github.com/johanbook/meet/issues/1550)) ([5740857](https://github.com/johanbook/meet/commit/5740857a071fbed42feec7e31476b33022d0aaf5))
+* **web-ui:** update translations for blog posts ([#1518](https://github.com/johanbook/meet/issues/1518)) ([fb997b2](https://github.com/johanbook/meet/commit/fb997b20377ebdb285010ad53d804843164c90ab))
+* **web-ui:** use external link when loading logout ([#1581](https://github.com/johanbook/meet/issues/1581)) ([faad4ae](https://github.com/johanbook/meet/commit/faad4ae5c056ad8c8fe38d32f221d9c262f76bdb))
+
+
+### Performance Improvements
+
+* **api:** send web push notifications in parallell ([#1573](https://github.com/johanbook/meet/issues/1573)) ([e8aa038](https://github.com/johanbook/meet/commit/e8aa03843427c21948c4560c08f65a4a573b1c56))
+
 ## [2.6.0](https://github.com/johanbook/meet/compare/v2.5.0...v2.6.0) (2025-06-28)
 
 
