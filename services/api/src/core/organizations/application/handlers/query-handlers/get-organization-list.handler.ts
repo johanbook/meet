@@ -2,10 +2,13 @@ import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { mapArray } from "src/core/mapper";
+import { map, mapArray } from "src/core/mapper";
+import { BUCKET_NAMES } from "src/core/object-storage/buckets.config";
+import { PhotoService } from "src/core/photos";
 import { CurrentProfileService } from "src/core/profiles";
 
 import { OrganizationMembership } from "../../../infrastructure/entities/organization-membership.entity";
+import { OrganizationPhotoDetails } from "../../contracts/dtos/organization-photo.dto";
 import { OrganizationDetails } from "../../contracts/dtos/organization.dto";
 import { GetOrganizationListQuery } from "../../contracts/queries/get-organization-list.query";
 
@@ -17,6 +20,7 @@ export class GetOrganizationListHandler
     private readonly currentProfileService: CurrentProfileService,
     @InjectRepository(OrganizationMembership)
     private readonly organizationMemberships: Repository<OrganizationMembership>,
+    private readonly photoService: PhotoService,
   ) {}
 
   async execute() {
@@ -30,7 +34,9 @@ export class GetOrganizationListHandler
         },
       },
       relations: {
-        organization: true,
+        organization: {
+          photo: true,
+        },
       },
       where: {
         profileId: currentProfileId,
@@ -41,6 +47,15 @@ export class GetOrganizationListHandler
       created: membership.created.toUTCString(),
       id: membership.organizationId,
       name: membership.organization.name,
+      photo:
+        membership.organization.photo &&
+        map(OrganizationPhotoDetails, {
+          id: membership.organization.photo.id,
+          url: this.photoService.getUrl(
+            membership.organization.photo,
+            BUCKET_NAMES.ORGANIZATION_PHOTO,
+          ),
+        }),
     }));
   }
 }
