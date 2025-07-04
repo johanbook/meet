@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 
 import { map } from "src/core/mapper";
-import { beforeEach, describe, expect, it, vi } from "src/test";
+import { beforeEach, describe, expect, it } from "src/test";
 import { createMockRepository } from "src/test/mocks";
 
 import { CurrentOrganizationService } from "../../../domain/services/current-organization.service";
@@ -21,7 +21,6 @@ describe(RemoveMemberFromCurrentOrganizationHandler.name, () => {
     currentOrganizationService = createCurrentOrganizationServiceMock();
 
     commandHandler = new RemoveMemberFromCurrentOrganizationHandler(
-      { authorizeOwnerOrAdmin: vi.fn() } as any,
       currentOrganizationService,
       memberships,
     );
