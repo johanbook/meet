@@ -8,6 +8,7 @@ export const organizationPermissions = {
       Add: [OrganizationRole.Admin],
       Read: [OrganizationRole.Admin, OrganizationRole.Member],
       UpdateRole: [OrganizationRole.Admin],
+      Remove: [OrganizationRole.Admin],
     },
     Update: [OrganizationRole.Admin],
   },

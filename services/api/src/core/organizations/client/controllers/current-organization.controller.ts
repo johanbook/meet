@@ -57,6 +57,7 @@ export class CurrentOrganizationController {
   }
 
   @Delete("/leave")
+  // No permission check needed here as anyone should be allowed to leave an organization
   async leaveCurrentOrganization(
     @Query() command: LeaveCurrentOrganizationCommand,
   ): Promise<null> {
@@ -94,6 +95,9 @@ export class CurrentOrganizationController {
   }
 
   @Delete("/members")
+  @RequiresOrganizationPermissions(
+    organizationPermissions.CurrentOrganization.Members.Remove,
+  )
   async removeMemberFromCurrentOrganization(
     @Query() command: RemoveMemberFromCurrentOrganizationCommand,
   ): Promise<null> {
