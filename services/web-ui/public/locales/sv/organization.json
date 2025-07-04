@@ -1,4 +1,10 @@
 {
+  "actions": {
+    "update-photo": {
+      "error": "Något gick fel när ditt foto skulle uppdateras",
+      "success": "Foto uppdaterat"
+    }
+  },
   "created-at": "Skapades {{date}}",
   "header": "Grupp",
   "links": {

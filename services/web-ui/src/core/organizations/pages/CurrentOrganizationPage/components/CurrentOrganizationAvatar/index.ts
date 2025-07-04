@@ -1,0 +1,1 @@
+export { CurrentOrganizationAvatar } from "./CurrentOrganizationAvatar";

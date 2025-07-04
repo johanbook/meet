@@ -1,4 +1,10 @@
 {
+  "actions": {
+    "update-photo": {
+      "error": "尝试上传新的个人资料照片时出错",
+      "success": "已更新个人资料照片"
+    }
+  },
   "created-at": "小组创建于: {{date}}",
   "header": "组",
   "links": {
