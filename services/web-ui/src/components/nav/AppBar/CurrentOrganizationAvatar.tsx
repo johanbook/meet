@@ -3,7 +3,6 @@ import { useNavigate } from "react-router";
 
 import { ErrorOutline } from "@mui/icons-material";
 import {
-  Avatar,
   Box,
   ButtonBase,
   CircularProgress,
@@ -17,6 +16,7 @@ import {
 
 import { OrganizationDetails, SwitchOrganizationCommand } from "src/api";
 import { organizationsApi } from "src/apis";
+import { OrganizationAvatar } from "src/components/shared";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { Menu } from "src/components/ui/Menu";
 import { useTranslation } from "src/core/i18n";
@@ -29,7 +29,7 @@ import {
 import { useSnackbar } from "src/core/snackbar";
 import { useIsMobile } from "src/hooks/useIsMobile";
 
-const SIZE = 30;
+const SIZE = 36;
 
 interface MenuContentProps {
   currentOrganizationId: number;
@@ -90,11 +90,10 @@ function MenuContent({ currentOrganizationId }: MenuContentProps) {
           onClick={() => handleClick(organization)}
           selected={organization.id === currentOrganizationId}
         >
-          <Avatar sx={{ height: SIZE, width: SIZE, mr: 2 }}>
-            {organization.name[0]}
-          </Avatar>
+          <OrganizationAvatar name={organization.name} size={SIZE} />
           <Typography
             sx={{
+              ml: 2,
               overflow: "hidden",
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
@@ -131,9 +130,11 @@ export function CurrentOrganizationAvatar(): ReactElement {
     return (
       <>
         <ButtonBase onClick={() => setIsDrawerOpen(true)}>
-          <Avatar sx={{ height: SIZE, width: SIZE }}>
-            {query.data.name[0]}
-          </Avatar>
+          <OrganizationAvatar
+            name={query.data.name}
+            src={query.data.photo?.url}
+            size={SIZE}
+          />
         </ButtonBase>
 
         <Drawer
@@ -153,9 +154,11 @@ export function CurrentOrganizationAvatar(): ReactElement {
               width: "65vw",
             }}
           >
-            <Avatar sx={{ height: SIZE, width: SIZE }}>
-              {query.data.name[0]}
-            </Avatar>
+            <OrganizationAvatar
+              name={query.data.name}
+              src={query.data.photo?.url}
+              size={SIZE}
+            />
             <Typography
               sx={{
                 overflow: "hidden",
@@ -182,9 +185,11 @@ export function CurrentOrganizationAvatar(): ReactElement {
       }}
       Button={({ onClick }) => (
         <IconButton onClick={onClick}>
-          <Avatar sx={{ height: SIZE, width: SIZE }}>
-            {query.data.name[0]}
-          </Avatar>
+          <OrganizationAvatar
+            name={query.data.name}
+            src={query.data.photo?.url}
+            size={SIZE}
+          />
         </IconButton>
       )}
     >

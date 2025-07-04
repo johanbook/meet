@@ -1,4 +1,10 @@
 {
+  "actions": {
+    "update-photo": {
+      "error": "There was an error when trying to upload your photo",
+      "success": "Photo updated"
+    }
+  },
   "created-at": "Created {{date}}",
   "header": "Group",
   "links": {
