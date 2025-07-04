@@ -119,7 +119,7 @@ export function CurrentOrganizationAvatar(): ReactElement {
   });
 
   if (query.isPending) {
-    return <Skeleton height={SIZE} width={SIZE} variant="circular" />;
+    return <Skeleton height={SIZE} width={SIZE} variant="rectangular" />;
   }
 
   if (query.error) {
