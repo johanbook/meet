@@ -14,6 +14,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import type { OrganizationPhotoDetails } from './OrganizationPhotoDetails';
+import {
+    OrganizationPhotoDetailsFromJSON,
+    OrganizationPhotoDetailsFromJSONTyped,
+    OrganizationPhotoDetailsToJSON,
+} from './OrganizationPhotoDetails';
+
 /**
  * 
  * @export
@@ -56,6 +63,12 @@ export interface CurrentOrganizationDetails {
      * @memberof CurrentOrganizationDetails
      */
     name: string;
+    /**
+     * 
+     * @type {OrganizationPhotoDetails}
+     * @memberof CurrentOrganizationDetails
+     */
+    photo?: OrganizationPhotoDetails;
 }
 
 
@@ -100,6 +113,7 @@ export function CurrentOrganizationDetailsFromJSONTyped(json: any, ignoreDiscrim
         'created': json['created'],
         'id': json['id'],
         'name': json['name'],
+        'photo': !exists(json, 'photo') ? undefined : OrganizationPhotoDetailsFromJSON(json['photo']),
     };
 }
 
@@ -118,6 +132,7 @@ export function CurrentOrganizationDetailsToJSON(value?: CurrentOrganizationDeta
         'created': value.created,
         'id': value.id,
         'name': value.name,
+        'photo': OrganizationPhotoDetailsToJSON(value.photo),
     };
 }
 

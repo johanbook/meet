@@ -12,6 +12,7 @@ import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 
 import { RequiresOrganizationPermissions } from "src/core/authorization";
+import { Multipart } from "src/core/multipart";
 
 import { AddMemberToOrganizationViaEmailCommand } from "../../application/contracts/commands/add-member-to-organization-via-email.command";
 import { AddMemberToOrganizationCommand } from "../../application/contracts/commands/add-member-to-organization.command";
@@ -19,6 +20,7 @@ import { DeleteCurrentOrganizationCommand } from "../../application/contracts/co
 import { LeaveCurrentOrganizationCommand } from "../../application/contracts/commands/leave-current-organization.command";
 import { RemoveMemberFromCurrentOrganizationCommand } from "../../application/contracts/commands/remove-member-from-current-organization.command";
 import { UpdateMemberRoleCommand } from "../../application/contracts/commands/update-member-role.command";
+import { UpdateOrganizationPhotoCommand } from "../../application/contracts/commands/update-organization-photo.command";
 import { UpdateOrganizationCommand } from "../../application/contracts/commands/update-organization.command";
 import { CurrentOrganizationDetails } from "../../application/contracts/dtos/current-organization.dto";
 import { OrganizationMemberDetails } from "../../application/contracts/dtos/organization-member.dto";
@@ -104,6 +106,17 @@ export class CurrentOrganizationController {
   )
   async changeMemberRole(
     @Body() command: UpdateMemberRoleCommand,
+  ): Promise<null> {
+    return await this.commandBus.execute(command);
+  }
+
+  @Put("/photo")
+  @Multipart()
+  @RequiresOrganizationPermissions(
+    organizationPermissions.CurrentOrganization.Update,
+  )
+  async updateCurrentOrganizationPhoto(
+    @Body() command: UpdateOrganizationPhotoCommand,
   ): Promise<null> {
     return await this.commandBus.execute(command);
   }

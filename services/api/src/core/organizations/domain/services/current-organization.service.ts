@@ -54,6 +54,7 @@ export class CurrentOrganizationService {
         this.organizations.findOne({
           relations: {
             permissions: true,
+            photo: true,
           },
           where: {
             id: organizationId,
