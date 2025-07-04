@@ -21,15 +21,18 @@ export function OrganizationAvatar({
         }}
         src={src}
         sx={{ width: size, height: size }}
+        variant="rounded"
       />
     );
   }
 
   if (name) {
     return (
-      <Avatar sx={{ width: size, height: size }}>{name.slice(0, 1)}</Avatar>
+      <Avatar sx={{ width: size, height: size }} variant="rounded">
+        {name.slice(0, 1)}
+      </Avatar>
     );
   }
 
-  return <Avatar sx={{ width: size, height: size }} />;
+  return <Avatar sx={{ width: size, height: size }} variant="rounded" />;
 }

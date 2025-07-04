@@ -57,13 +57,13 @@ export function CurrentOrganizationPageContainer(): ReactElement {
             <CurrentOrganizationAvatar
               name={data.name}
               src={data.photo?.url}
-              size={56}
+              size={86}
             />
           ) : (
             <OrganizationAvatar
               name={data.name}
               src={data.photo?.url}
-              size={56}
+              size={86}
             />
           )}
         </Box>
