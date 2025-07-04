@@ -42,6 +42,7 @@ models/NotificationSubscriptionKeysDetails.ts
 models/NotificationWebSocketDetails.ts
 models/OrganizationDetails.ts
 models/OrganizationMemberDetails.ts
+models/OrganizationPhotoDetails.ts
 models/PostChatMessageCommand.ts
 models/ProfileDetails.ts
 models/ProfilePhotoDetails.ts

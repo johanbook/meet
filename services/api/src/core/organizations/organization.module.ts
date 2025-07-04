@@ -18,6 +18,7 @@ import { DeleteCurrentOrganizationHandler } from "./application/handlers/command
 import { RemoveMemberFromCurrentOrganizationHandler } from "./application/handlers/command-handlers/remove-member-from-current-organization.handler";
 import { SwitchOrganizationHandler } from "./application/handlers/command-handlers/switch-organization.handler";
 import { UpdateMemberRoleHandler } from "./application/handlers/command-handlers/update-member-role.handler";
+import { UpdateOrganizationPhotoHandler } from "./application/handlers/command-handlers/update-organization-photo.handler";
 import { UpdateOrganizationHandler } from "./application/handlers/command-handlers/update-organization.handler";
 import { CreateOrganizationOnProfileCreatedHandler } from "./application/handlers/event-handlers/create-organization-on-profile-created.handler";
 import { NotifyProfileWhenAddedToOrganizationHandler } from "./application/handlers/event-handlers/notify-profile-when-added-to-organzation.handler";
@@ -73,6 +74,7 @@ import { Organization } from "./infrastructure/entities/organization.entity";
     SwitchOrganizationHandler,
     UpdateMemberRoleHandler,
     UpdateOrganizationHandler,
+    UpdateOrganizationPhotoHandler,
   ],
 })
 export class OrganizationModule {}

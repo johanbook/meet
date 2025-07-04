@@ -75,6 +75,10 @@ export interface UpdateCurrentOrganizationRequest {
     updateOrganizationCommand: UpdateOrganizationCommand;
 }
 
+export interface UpdateCurrentOrganizationPhotoRequest {
+    photo: Blob;
+}
+
 /**
  * 
  */
@@ -407,6 +411,54 @@ export class OrganizationsApi extends runtime.BaseAPI {
      */
     async updateCurrentOrganization(requestParameters: UpdateCurrentOrganizationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
         await this.updateCurrentOrganizationRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     */
+    async updateCurrentOrganizationPhotoRaw(requestParameters: UpdateCurrentOrganizationPhotoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.photo === null || requestParameters.photo === undefined) {
+            throw new runtime.RequiredError('photo','Required parameter requestParameters.photo was null or undefined when calling updateCurrentOrganizationPhoto.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const consumes: runtime.Consume[] = [
+            { contentType: 'multipart/form-data' },
+        ];
+        // @ts-ignore: canConsumeForm may be unused
+        const canConsumeForm = runtime.canConsumeForm(consumes);
+
+        let formParams: { append(param: string, value: any): any };
+        let useForm = false;
+        // use FormData to transmit files using content-type "multipart/form-data"
+        useForm = canConsumeForm;
+        if (useForm) {
+            formParams = new FormData();
+        } else {
+            formParams = new URLSearchParams();
+        }
+
+        if (requestParameters.photo !== undefined) {
+            formParams.append('photo', requestParameters.photo as any);
+        }
+
+        const response = await this.request({
+            path: `/api/organizations/current/photo`,
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: formParams,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async updateCurrentOrganizationPhoto(requestParameters: UpdateCurrentOrganizationPhotoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.updateCurrentOrganizationPhotoRaw(requestParameters, initOverrides);
     }
 
 }

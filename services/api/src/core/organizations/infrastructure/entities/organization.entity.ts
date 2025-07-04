@@ -2,12 +2,15 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
 import { OrganizationMembership } from "./organization-membership.entity";
 import { OrganizationPermission } from "./organization-permission.entity";
+import { OrganizationPhoto } from "./organization-photo.entity";
 
 @Entity()
 export class Organization {
@@ -39,6 +42,15 @@ export class Organization {
 
   @Column()
   personal!: boolean;
+
+  @Column("uuid", { nullable: true })
+  photoId?: string;
+
+  @OneToOne(() => OrganizationPhoto, (photo) => photo.organizationId, {
+    cascade: true,
+  })
+  @JoinColumn()
+  photo?: OrganizationPhoto;
 
   @Column({ type: "varchar", length: 32, default: "default" })
   theme!: string;

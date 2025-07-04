@@ -34,6 +34,7 @@ export * from './NotificationSubscriptionKeysDetails';
 export * from './NotificationWebSocketDetails';
 export * from './OrganizationDetails';
 export * from './OrganizationMemberDetails';
+export * from './OrganizationPhotoDetails';
 export * from './PostChatMessageCommand';
 export * from './ProfileDetails';
 export * from './ProfilePhotoDetails';
