@@ -9,7 +9,7 @@ export default defineConfig({
         // Incorrectly configured modules should be detected
         "**/*.module.ts",
         // Index files only contains imports/re-exports which should be caught in linting
-        "index.ts",
+        "**/index.ts",
         // Redundant to create tests for CLI tools
         "**/cli/**",
         // Redundant to create tests for factories
