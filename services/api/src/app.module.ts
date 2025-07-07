@@ -20,6 +20,7 @@ import { RequestContextModule } from "src/core/request-context/request-context.m
 import { BlogsModule } from "src/features/blogs/blogs.module";
 import { ChatModule } from "src/features/chat/chat.module";
 import { SettingsModule } from "src/features/settings/settings.module";
+import { TimeSeriesModule } from "src/features/time-series/time-series.module";
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { SettingsModule } from "src/features/settings/settings.module";
     BlogsModule,
     ChatModule,
     SettingsModule,
+    TimeSeriesModule,
   ],
   providers: [
     {
