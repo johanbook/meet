@@ -6,6 +6,10 @@ import { createMockRepository } from "src/test/mocks";
 
 import { TimeSeriesPoint } from "../../../infrastructure/entities/time-series-point.entity";
 import { TimeSeries } from "../../../infrastructure/entities/time-series.entity";
+import {
+  makeTimeSeries,
+  makeTimeSeriesPoint,
+} from "../../../test/factories/time-series.factory";
 import { UpdateTimeSeriesPointCommand } from "../../contracts/commands/update-time-series-point.command";
 import { UpdateTimeSeriesPointHandler } from "./update-time-series-point.handler";
 
@@ -15,16 +19,9 @@ describe(UpdateTimeSeriesPointHandler.name, () => {
   let commandHandler: UpdateTimeSeriesPointHandler;
 
   beforeEach(() => {
-    timeSeries = createMockRepository<TimeSeries>([
-      { id: "1", name: "my-time-series" } as unknown as TimeSeries,
-    ]);
+    timeSeries = createMockRepository<TimeSeries>([makeTimeSeries()]);
     timeSeriesPoints = createMockRepository<TimeSeriesPoint>([
-      {
-        id: "1",
-        timeSeriesId: "1",
-        value: 123,
-        description: "my-description",
-      } as unknown as TimeSeriesPoint,
+      makeTimeSeriesPoint(),
     ]);
     commandHandler = new UpdateTimeSeriesPointHandler(
       { authorizeOwnerOrAdmin: vi.fn() } as any,

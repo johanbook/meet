@@ -40,15 +40,15 @@ export class UpdateTimeSeriesPointHandler
       throw new NotFoundException("Time series point not found");
     }
 
-    if (command.value) {
+    if (command.value !== undefined) {
       point.value = command.value;
     }
 
-    if (command.description) {
+    if (command.description !== undefined) {
       point.description = command.description;
     }
 
-    if (command.label) {
+    if (command.label !== undefined) {
       point.label = command.label;
     }
 

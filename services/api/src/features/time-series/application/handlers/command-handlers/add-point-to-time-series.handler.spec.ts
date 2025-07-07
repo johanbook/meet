@@ -7,6 +7,7 @@ import { createMockRepository } from "src/test/mocks";
 
 import { TimeSeriesService } from "../../../domain/services/time-series.service";
 import { TimeSeries } from "../../../infrastructure/entities/time-series.entity";
+import { makeTimeSeries } from "../../../test/factories/time-series.factory";
 import { AddPointToTimeSeriesCommand } from "../../contracts/commands/add-point-to-time-series.command";
 import { AddPointToTimeSeriesHandler } from "./add-point-to-time-series.handler";
 
@@ -18,16 +19,7 @@ describe(AddPointToTimeSeriesHandler.name, () => {
 
   beforeEach(() => {
     testSuite = new TestSuite();
-    timeSeries = createMockRepository<TimeSeries>([
-      {
-        id: 1,
-        name: "my-time-series",
-        description: "my-description",
-        points: [],
-        profileId: "my-profile-id",
-        organizationId: "my-organization-id",
-      } as unknown as TimeSeries,
-    ]);
+    timeSeries = createMockRepository<TimeSeries>([makeTimeSeries()]);
     timeSeriesService = new TimeSeriesService(testSuite.eventBus, timeSeries);
     commandHandler = new AddPointToTimeSeriesHandler(
       { authorizeOwnerOrAdmin: vi.fn() } as any,
