@@ -50,6 +50,7 @@ services:
     extends:
       file: "./docker-compose.shared.yaml"
       service: "db"
+    # Port needed for e.g. generating database migrations in the CLI for the API
     ports:
       - 5432:5432
 
