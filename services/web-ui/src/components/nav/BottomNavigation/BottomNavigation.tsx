@@ -7,13 +7,15 @@ import {
   BottomNavigation as MuiBottomNavigation,
 } from "@mui/material";
 
-import { mobileNav } from "../nav.items";
+import { useMobileNavItems } from "../useNavItems";
 
 export function BottomNavigation(): ReactElement {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const item = mobileNav.bottom.find((item) =>
+  const mobileNav = useMobileNavItems();
+
+  const activeItem = mobileNav.bottom.find((item) =>
     item.checkIfActive(location.pathname),
   );
 
@@ -31,7 +33,7 @@ export function BottomNavigation(): ReactElement {
     >
       <MuiBottomNavigation
         onChange={(_, path) => navigate(path)}
-        value={item?.url}
+        value={activeItem?.url}
       >
         {mobileNav.bottom.map((item) => (
           <BottomNavigationAction

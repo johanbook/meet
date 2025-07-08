@@ -1,8 +1,11 @@
 import { SvgIconComponent } from "@mui/icons-material";
 
+import { OrganizationFeature } from "src/core/organizations";
+
 export interface NavItem {
   Icon: SvgIconComponent;
   checkIfActive: (path: string) => boolean;
+  requiredFeatures: OrganizationFeature[];
   name: string;
   url: string;
 }

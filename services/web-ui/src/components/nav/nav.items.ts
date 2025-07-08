@@ -6,6 +6,8 @@ import {
   HomeRounded,
 } from "@mui/icons-material";
 
+import { OrganizationFeature } from "src/core/organizations";
+
 import { DesktopNav, MobileNav } from "./types";
 
 export const desktopNav: DesktopNav = {
@@ -20,24 +22,28 @@ export const desktopNav: DesktopNav = {
         return path === "/" || path.startsWith("/blog");
       },
       name: "navigation.blog",
+      requiredFeatures: [],
       url: "/",
     },
     {
       Icon: AddCircleOutlineRounded,
       checkIfActive: (path) => path === "/blog/create",
       name: "navigation.create-blog",
+      requiredFeatures: [],
       url: "/blog/create",
     },
     {
       Icon: Chat,
       checkIfActive: (path) => path.startsWith("/chat"),
       name: "navigation.chat",
+      requiredFeatures: [],
       url: "/chat",
     },
     {
       Icon: BarChartRounded,
       checkIfActive: (path) => path.startsWith("/time-series"),
       name: "navigation.time-series",
+      requiredFeatures: [OrganizationFeature.TimeSeries],
       url: "/time-series",
     },
   ],
@@ -47,6 +53,7 @@ export const desktopNav: DesktopNav = {
       checkIfActive: (path) =>
         path.startsWith("/profile") || path.startsWith("/group"),
       name: "navigation.profile",
+      requiredFeatures: [],
       url: "/profile",
     },
   ],
@@ -64,19 +71,29 @@ export const mobileNav: MobileNav = {
         return path === "/" || path.startsWith("/blog");
       },
       name: "navigation.blog",
+      requiredFeatures: [],
       url: "/",
     },
     {
       Icon: AddCircleOutlineRounded,
       checkIfActive: (path) => path === "/blog/create",
       name: "navigation.create-blog",
+      requiredFeatures: [],
       url: "/blog/create",
+    },
+    {
+      Icon: BarChartRounded,
+      checkIfActive: (path) => path.startsWith("/time-series"),
+      name: "navigation.time-series",
+      requiredFeatures: [OrganizationFeature.TimeSeries],
+      url: "/time-series",
     },
     {
       Icon: AccountCircle,
       checkIfActive: (path) =>
         path.startsWith("/profile") || path.startsWith("/group"),
       name: "navigation.profile",
+      requiredFeatures: [],
       url: "/profile",
     },
   ],
