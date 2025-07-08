@@ -88,6 +88,7 @@ export function AddTimeSeriesPointDialog({
           </Button>
         </>
       )}
+      onClose={() => form.reset()}
       title={t("actions.create.header") || ""}
     >
       <Box
