@@ -15,9 +15,11 @@
   },
   "actions": {
     "create": {
+      "cancel": "Cancel",
+      "error": "Failed to add data point",
+      "header": "Add point",
       "submit": "Add Point",
-      "success": "Data point added successfully",
-      "error": "Failed to add data point"
+      "success": "Data point added successfully"
     }
   }
 }

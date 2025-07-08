@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
 
+import { AddRounded } from "@mui/icons-material";
 import {
   Avatar,
   Box,
@@ -13,9 +14,11 @@ import {
 } from "@mui/material";
 
 import { TimeSeriesDetails } from "src/api";
+import { Fab } from "src/components/ui/Fab";
+import { useDialog } from "src/core/dialog";
 import { timeSince } from "src/utils/time";
 
-import { AddTimeSeriesPointForm } from "../../components/AddTimeSeriesPointForm";
+import { AddTimeSeriesPointDialog } from "../../components/AddTimeSeriesPointDialog";
 
 const LABEL_COLORS: ChipProps["color"][] = ["primary", "secondary"];
 
@@ -29,6 +32,12 @@ interface TimeSeriesPageComponentProps {
 export function TimeSeriesPageComponent({
   timeSeries,
 }: TimeSeriesPageComponentProps): ReactElement {
+  const { openDialog } = useDialog();
+
+  const handleOpenForm = () => {
+    openDialog(AddTimeSeriesPointDialog, { timeSeriesId: timeSeries.id });
+  };
+
   return (
     <Box>
       <Typography variant="h6">{timeSeries.name}</Typography>
@@ -63,7 +72,9 @@ export function TimeSeriesPageComponent({
         ))}
       </List>
 
-      <AddTimeSeriesPointForm timeSeriesId={timeSeries.id} />
+      <Fab onClick={handleOpenForm}>
+        <AddRounded />
+      </Fab>
     </Box>
   );
 }
