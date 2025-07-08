@@ -22,27 +22,12 @@ import { useDialog } from "src/core/dialog";
 import { timeSince } from "src/utils/time";
 
 import { AddTimeSeriesPointDialog } from "../../components/AddTimeSeriesPointDialog";
+import { getTimeSeriesStats } from "./TimeSeriesPage.utils";
 
 const LABEL_COLORS: ChipProps["color"][] = ["primary", "secondary"];
 
 const getLabelColor = (index: number) =>
   LABEL_COLORS[index % LABEL_COLORS.length];
-
-const getTimeSeriesStats = (timeSeries: TimeSeriesDetails) => {
-  const labelTotal: Record<string, number> = {};
-
-  for (const point of timeSeries.points) {
-    const { label, value } = point;
-
-    if (label in labelTotal) {
-      labelTotal[label] += value;
-    } else {
-      labelTotal[label] = value;
-    }
-  }
-
-  return Object.entries(labelTotal);
-};
 
 interface TimeSeriesPageComponentProps {
   timeSeries: TimeSeriesDetails;
@@ -65,12 +50,12 @@ export function TimeSeriesPageComponent({
       <Typography color="textSecondary">{timeSeries.description}</Typography>
 
       <Stack direction="row" spacing={2} sx={{ mt: 2, mb: 4 }}>
-        {stats.map(([label, totalValue]) => (
+        {stats.map(({ label, value }) => (
           <Card key={label}>
             <CardContent>
-              <Typography gutterBottom>{label} (total)</Typography>
+              <Typography gutterBottom>{label} </Typography>
               <Typography align="center" variant="h4">
-                {totalValue}
+                {value}
               </Typography>
             </CardContent>
           </Card>
