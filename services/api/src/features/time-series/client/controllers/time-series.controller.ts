@@ -16,6 +16,7 @@ import { DeleteTimeSeriesPointCommand } from "../../application/contracts/comman
 import { DeleteTimeSeriesCommand } from "../../application/contracts/commands/delete-time-series.command";
 import { UpdateTimeSeriesPointCommand } from "../../application/contracts/commands/update-time-series-point.command";
 import { UpdateTimeSeriesCommand } from "../../application/contracts/commands/update-time-series.command";
+import { TimeSeriesListItem } from "../../application/contracts/dtos/time-series-list-item.dto";
 import { TimeSeriesDetails } from "../../application/contracts/dtos/time-series.dto";
 import { GetTimeSeriesListQuery } from "../../application/contracts/queries/get-time-series-list.query";
 import { GetTimeSeriesQuery } from "../../application/contracts/queries/get-time-series.query";
@@ -31,7 +32,7 @@ export class TimeSeriesController {
   @Get()
   async getTimeSeries(
     @Query() query: GetTimeSeriesListQuery,
-  ): Promise<TimeSeriesDetails[]> {
+  ): Promise<TimeSeriesListItem[]> {
     return await this.queryBus.execute(query);
   }
 

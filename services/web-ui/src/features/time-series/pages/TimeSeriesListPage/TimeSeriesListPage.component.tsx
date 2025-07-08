@@ -3,10 +3,10 @@ import { Link } from "react-router";
 
 import { List, ListItemButton, ListItemText } from "@mui/material";
 
-import { TimeSeriesDetails } from "src/api";
+import { TimeSeriesListItem } from "src/api";
 
 interface TimeSeriesListPageComponentProps {
-  timeSeries: TimeSeriesDetails[];
+  timeSeries: TimeSeriesListItem[];
 }
 
 export function TimeSeriesListPageComponent({

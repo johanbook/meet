@@ -7,12 +7,12 @@ import { CurrentOrganizationService } from "src/core/organizations";
 import { QueryService } from "src/core/query";
 import { TimeSeries } from "src/features/time-series/infrastructure/entities/time-series.entity";
 
-import { TimeSeriesDetails } from "../../contracts/dtos/time-series.dto";
+import { TimeSeriesListItem } from "../../contracts/dtos/time-series-list-item.dto";
 import { GetTimeSeriesListQuery } from "../../contracts/queries/get-time-series-list.query";
 
 @QueryHandler(GetTimeSeriesListQuery)
 export class GetTimeSeriesListHandler
-  implements IQueryHandler<GetTimeSeriesListQuery, TimeSeriesDetails[]>
+  implements IQueryHandler<GetTimeSeriesListQuery, TimeSeriesListItem[]>
 {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
@@ -39,7 +39,7 @@ export class GetTimeSeriesListHandler
       },
     });
 
-    return mapArray(TimeSeriesDetails, foundTimeSeries, (timeSeries) => ({
+    return mapArray(TimeSeriesListItem, foundTimeSeries, (timeSeries) => ({
       createdAt: timeSeries.createdAt.toISOString(),
       description: timeSeries.description,
       name: timeSeries.name,
