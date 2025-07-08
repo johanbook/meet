@@ -53,7 +53,7 @@ export class CurrentOrganizationService {
       () =>
         this.organizations.findOne({
           relations: {
-            permissions: true,
+            features: true,
             photo: true,
           },
           where: {

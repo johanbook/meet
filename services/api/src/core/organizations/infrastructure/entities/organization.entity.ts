@@ -8,8 +8,8 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 
+import { OrganizationFeature } from "./organization-feature.entity";
 import { OrganizationMembership } from "./organization-membership.entity";
-import { OrganizationPermission } from "./organization-permission.entity";
 import { OrganizationPhoto } from "./organization-photo.entity";
 
 @Entity()
@@ -23,6 +23,11 @@ export class Organization {
   @Column({ type: "varchar", length: 512, default: "" })
   description!: string;
 
+  @OneToMany(() => OrganizationFeature, (feature) => feature.organization, {
+    cascade: true,
+  })
+  features!: OrganizationFeature[];
+
   @OneToMany(
     () => OrganizationMembership,
     (membership) => membership.organization,
@@ -32,13 +37,6 @@ export class Organization {
 
   @Column({ type: "varchar", length: 128 })
   name!: string;
-
-  @OneToMany(
-    () => OrganizationPermission,
-    (permission) => permission.organization,
-    { cascade: true },
-  )
-  permissions!: OrganizationPermission[];
 
   @Column()
   personal!: boolean;

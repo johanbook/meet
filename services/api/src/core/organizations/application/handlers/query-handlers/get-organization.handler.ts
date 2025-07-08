@@ -27,9 +27,9 @@ export class GetOrganizationHandler
 
     return map(CurrentOrganizationDetails, {
       created: currentOrganization.created,
+      features: currentOrganization.features.map((x) => x.feature),
       id: currentOrganization.id,
       name: currentOrganization.name,
-      permissions: currentOrganization.permissions.map((x) => x.permission),
       photo:
         currentOrganization.photo &&
         map(OrganizationPhotoDetails, {
