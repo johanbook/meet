@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 import { timeSeriesApi } from "src/apis";
 import { useQuery } from "src/core/query";
@@ -9,6 +9,7 @@ import { ErrorView } from "src/views/ErrorView";
 
 import { TimeSeriesListPageComponent } from "./TimeSeriesListPage.component";
 import { TimeSeriesListPageNav } from "./TimeSeriesListPage.nav";
+import { TimeSeriesListPageSkeleton } from "./TimeSeriesListPage.skeleton";
 
 export function TimeSeriesListPageContainer(): ReactElement {
   const { error, data, isLoading } = useQuery({
@@ -19,7 +20,7 @@ export function TimeSeriesListPageContainer(): ReactElement {
   if (isLoading) {
     return (
       <TimeSeriesListPageNav>
-        <CircularProgress />
+        <TimeSeriesListPageSkeleton />
       </TimeSeriesListPageNav>
     );
   }
@@ -35,18 +36,14 @@ export function TimeSeriesListPageContainer(): ReactElement {
   if (!data || data.length === 0) {
     return (
       <TimeSeriesListPageNav>
-        <Box sx={{ py: 2, px: 2 }}>
-          <Typography>No time series created yet</Typography>
-        </Box>
+        <Typography>No time series created yet</Typography>
       </TimeSeriesListPageNav>
     );
   }
 
   return (
     <TimeSeriesListPageNav>
-      <Box sx={{ py: 2, px: 2 }}>
-        <TimeSeriesListPageComponent timeSeries={data || []} />
-      </Box>
+      <TimeSeriesListPageComponent timeSeries={data} />
     </TimeSeriesListPageNav>
   );
 }

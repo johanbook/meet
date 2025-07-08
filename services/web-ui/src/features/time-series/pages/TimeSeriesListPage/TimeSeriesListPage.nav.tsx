@@ -1,7 +1,7 @@
 import { ReactElement, ReactNode } from "react";
 
 import { Add } from "@mui/icons-material";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { Nav } from "src/components/nav";
 import { CurrentOrganizationAvatar } from "src/components/nav/AppBar/CurrentOrganizationAvatar";
@@ -32,7 +32,7 @@ export function TimeSeriesListPageNav({
         <Add />
       </Fab>
 
-      {children}
+      <Box sx={{ p: 2 }}>{children}</Box>
     </Nav>
   );
 }
