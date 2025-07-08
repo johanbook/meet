@@ -36,7 +36,7 @@ export function AddTimeSeriesPointDialog({
       description: "",
       label: "",
       timeSeriesId,
-      value: 0,
+      value: 1,
     },
     {
       description: validators.required(),
