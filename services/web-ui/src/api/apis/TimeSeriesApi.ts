@@ -21,6 +21,7 @@ import type {
   DeleteTimeSeriesCommand,
   DeleteTimeSeriesPointCommand,
   TimeSeriesDetails,
+  TimeSeriesListItem,
   UpdateTimeSeriesCommand,
   UpdateTimeSeriesPointCommand,
 } from '../models/index';
@@ -35,6 +36,8 @@ import {
     DeleteTimeSeriesPointCommandToJSON,
     TimeSeriesDetailsFromJSON,
     TimeSeriesDetailsToJSON,
+    TimeSeriesListItemFromJSON,
+    TimeSeriesListItemToJSON,
     UpdateTimeSeriesCommandFromJSON,
     UpdateTimeSeriesCommandToJSON,
     UpdateTimeSeriesPointCommandFromJSON,
@@ -201,7 +204,7 @@ export class TimeSeriesApi extends runtime.BaseAPI {
 
     /**
      */
-    async getTimeSeriesRaw(requestParameters: GetTimeSeriesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<TimeSeriesDetails>>> {
+    async getTimeSeriesRaw(requestParameters: GetTimeSeriesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<TimeSeriesListItem>>> {
         const queryParameters: any = {};
 
         if (requestParameters.skip !== undefined) {
@@ -221,12 +224,12 @@ export class TimeSeriesApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(TimeSeriesDetailsFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(TimeSeriesListItemFromJSON));
     }
 
     /**
      */
-    async getTimeSeries(requestParameters: GetTimeSeriesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<TimeSeriesDetails>> {
+    async getTimeSeries(requestParameters: GetTimeSeriesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<TimeSeriesListItem>> {
         const response = await this.getTimeSeriesRaw(requestParameters, initOverrides);
         return await response.value();
     }

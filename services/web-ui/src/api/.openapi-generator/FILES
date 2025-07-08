@@ -55,6 +55,8 @@ models/SaveNotificationSubscriptionCommand.ts
 models/SettingsDetails.ts
 models/SwitchOrganizationCommand.ts
 models/TimeSeriesDetails.ts
+models/TimeSeriesListItem.ts
+models/TimeSeriesPointDetails.ts
 models/UpdateBlogPostCommand.ts
 models/UpdateMemberRoleCommand.ts
 models/UpdateOrganizationCommand.ts

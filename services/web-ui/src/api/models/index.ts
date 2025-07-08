@@ -46,6 +46,8 @@ export * from './SaveNotificationSubscriptionCommand';
 export * from './SettingsDetails';
 export * from './SwitchOrganizationCommand';
 export * from './TimeSeriesDetails';
+export * from './TimeSeriesListItem';
+export * from './TimeSeriesPointDetails';
 export * from './UpdateBlogPostCommand';
 export * from './UpdateMemberRoleCommand';
 export * from './UpdateOrganizationCommand';

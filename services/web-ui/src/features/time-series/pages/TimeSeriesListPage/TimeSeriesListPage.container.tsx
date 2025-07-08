@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import { Box, CircularProgress } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 
 import { timeSeriesApi } from "src/apis";
 import { useQuery } from "src/core/query";
@@ -28,6 +28,16 @@ export function TimeSeriesListPageContainer(): ReactElement {
     return (
       <TimeSeriesListPageNav>
         <ErrorView />
+      </TimeSeriesListPageNav>
+    );
+  }
+
+  if (!data || data.length === 0) {
+    return (
+      <TimeSeriesListPageNav>
+        <Box sx={{ py: 2, px: 2 }}>
+          <Typography>No time series created yet</Typography>
+        </Box>
       </TimeSeriesListPageNav>
     );
   }

@@ -14,70 +14,56 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import type { TimeSeriesPointDetails } from './TimeSeriesPointDetails';
-import {
-    TimeSeriesPointDetailsFromJSON,
-    TimeSeriesPointDetailsFromJSONTyped,
-    TimeSeriesPointDetailsToJSON,
-} from './TimeSeriesPointDetails';
-
 /**
  * 
  * @export
- * @interface TimeSeriesDetails
+ * @interface TimeSeriesListItem
  */
-export interface TimeSeriesDetails {
+export interface TimeSeriesListItem {
     /**
      * 
      * @type {string}
-     * @memberof TimeSeriesDetails
+     * @memberof TimeSeriesListItem
      */
     id: string;
     /**
      * 
      * @type {string}
-     * @memberof TimeSeriesDetails
+     * @memberof TimeSeriesListItem
      */
     name: string;
     /**
      * 
      * @type {string}
-     * @memberof TimeSeriesDetails
+     * @memberof TimeSeriesListItem
      */
     description: string;
     /**
      * 
      * @type {string}
-     * @memberof TimeSeriesDetails
+     * @memberof TimeSeriesListItem
      */
     createdAt: string;
-    /**
-     * 
-     * @type {Array<TimeSeriesPointDetails>}
-     * @memberof TimeSeriesDetails
-     */
-    points: Array<TimeSeriesPointDetails>;
 }
 
 /**
- * Check if a given object implements the TimeSeriesDetails interface.
+ * Check if a given object implements the TimeSeriesListItem interface.
  */
-export function instanceOfTimeSeriesDetails(value: object): boolean {
+export function instanceOfTimeSeriesListItem(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "id" in value;
     isInstance = isInstance && "name" in value;
     isInstance = isInstance && "description" in value;
     isInstance = isInstance && "createdAt" in value;
-    isInstance = isInstance && "points" in value;
 
     return isInstance;
 }
 
-export function TimeSeriesDetailsFromJSON(json: any): TimeSeriesDetails {
-    return TimeSeriesDetailsFromJSONTyped(json, false);
+export function TimeSeriesListItemFromJSON(json: any): TimeSeriesListItem {
+    return TimeSeriesListItemFromJSONTyped(json, false);
 }
 
-export function TimeSeriesDetailsFromJSONTyped(json: any, ignoreDiscriminator: boolean): TimeSeriesDetails {
+export function TimeSeriesListItemFromJSONTyped(json: any, ignoreDiscriminator: boolean): TimeSeriesListItem {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -87,11 +73,10 @@ export function TimeSeriesDetailsFromJSONTyped(json: any, ignoreDiscriminator: b
         'name': json['name'],
         'description': json['description'],
         'createdAt': json['createdAt'],
-        'points': ((json['points'] as Array<any>).map(TimeSeriesPointDetailsFromJSON)),
     };
 }
 
-export function TimeSeriesDetailsToJSON(value?: TimeSeriesDetails | null): any {
+export function TimeSeriesListItemToJSON(value?: TimeSeriesListItem | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -104,7 +89,6 @@ export function TimeSeriesDetailsToJSON(value?: TimeSeriesDetails | null): any {
         'name': value.name,
         'description': value.description,
         'createdAt': value.createdAt,
-        'points': ((value.points as Array<any>).map(TimeSeriesPointDetailsToJSON)),
     };
 }
 
