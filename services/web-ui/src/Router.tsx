@@ -26,6 +26,7 @@ import { AppearancePage } from "src/features/settings/pages/AppearancePage";
 import { SettingsPage } from "src/features/settings/pages/SettingsPage";
 import { CreateTimeSeriesPage } from "src/features/time-series/pages/CreateTimeSeriesPage";
 import { TimeSeriesListPage } from "src/features/time-series/pages/TimeSeriesListPage";
+import { TimeSeriesPage } from "src/features/time-series/pages/TimeSeriesPage";
 import { NotFoundView } from "src/views/NotFoundView";
 
 const router = createBrowserRouter([
@@ -107,6 +108,10 @@ const router = createBrowserRouter([
       {
         path: "/time-series/create",
         element: <CreateTimeSeriesPage />,
+      },
+      {
+        path: "/time-series/:id",
+        element: <TimeSeriesPage />,
       },
       {
         path: "/profile/:id",
