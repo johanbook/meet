@@ -1,5 +1,7 @@
 export class TimeSeriesPointDetails {
-  id!: string;
-  value!: number;
   createdAt!: string;
+  description!: string;
+  id!: string;
+  label!: string;
+  value!: number;
 }
