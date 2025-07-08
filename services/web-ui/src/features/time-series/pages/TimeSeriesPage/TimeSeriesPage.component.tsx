@@ -64,17 +64,20 @@ export function TimeSeriesPageComponent({
       <Typography variant="h6">{timeSeries.name}</Typography>
       <Typography color="textSecondary">{timeSeries.description}</Typography>
 
-      <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+      <Stack direction="row" spacing={2} sx={{ mt: 2, mb: 4 }}>
         {stats.map(([label, totalValue]) => (
           <Card key={label}>
             <CardContent>
-              <Typography>{label} (total)</Typography>
-              <Typography variant="h5">{totalValue}</Typography>
+              <Typography gutterBottom>{label} (total)</Typography>
+              <Typography align="center" variant="h4">
+                {totalValue}
+              </Typography>
             </CardContent>
           </Card>
         ))}
       </Stack>
 
+      <Typography variant="h6">Data</Typography>
       <List>
         {timeSeries.points.map((point) => (
           <ListItem key={point.id}>
