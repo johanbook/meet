@@ -32,7 +32,7 @@ export interface CurrentOrganizationDetails {
      * @type {Array<string>}
      * @memberof CurrentOrganizationDetails
      */
-    features: Array<string>;
+    features: Array<CurrentOrganizationDetailsFeaturesEnum>;
     /**
      * 
      * @type {string}
@@ -71,6 +71,14 @@ export interface CurrentOrganizationDetails {
     photo?: OrganizationPhotoDetails;
 }
 
+
+/**
+ * @export
+ */
+export const CurrentOrganizationDetailsFeaturesEnum = {
+    TimeSeries: 'time-series'
+} as const;
+export type CurrentOrganizationDetailsFeaturesEnum = typeof CurrentOrganizationDetailsFeaturesEnum[keyof typeof CurrentOrganizationDetailsFeaturesEnum];
 
 /**
  * @export
