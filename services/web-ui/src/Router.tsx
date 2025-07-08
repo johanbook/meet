@@ -24,6 +24,8 @@ import { ChatPage } from "src/features/chat/pages/ChatPage";
 import { CreateChatPage } from "src/features/chat/pages/CreateChatPage";
 import { AppearancePage } from "src/features/settings/pages/AppearancePage";
 import { SettingsPage } from "src/features/settings/pages/SettingsPage";
+import { CreateTimeSeriesPage } from "src/features/time-series/pages/CreateTimeSeriesPage";
+import { TimeSeriesListPage } from "src/features/time-series/pages/TimeSeriesListPage";
 import { NotFoundView } from "src/views/NotFoundView";
 
 const router = createBrowserRouter([
@@ -97,6 +99,14 @@ const router = createBrowserRouter([
       {
         path: "/profile/settings",
         element: <SettingsPage />,
+      },
+      {
+        path: "/time-series",
+        element: <TimeSeriesListPage />,
+      },
+      {
+        path: "/time-series/create",
+        element: <CreateTimeSeriesPage />,
       },
       {
         path: "/profile/:id",

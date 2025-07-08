@@ -7,6 +7,7 @@ import {
   OrganizationsApi,
   ProfileApi,
   SettingsApi,
+  TimeSeriesApi,
 } from "src/api";
 import { Logger } from "src/core/logging";
 
@@ -63,3 +64,4 @@ export const notificationsApi = new NotificationsApi(config);
 export const organizationsApi = new OrganizationsApi(config);
 export const profileApi = new ProfileApi(config);
 export const settingsApi = new SettingsApi(config);
+export const timeSeriesApi = new TimeSeriesApi(config);

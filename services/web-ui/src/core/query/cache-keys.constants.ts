@@ -9,4 +9,5 @@ export enum CacheKeysConstants {
   Notifications = "notifications",
   OrganizationList = "organizationList",
   Settings = "settings",
+  TimeSeries = "timeSeries",
 }

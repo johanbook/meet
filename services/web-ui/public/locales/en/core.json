@@ -7,7 +7,8 @@
     "blog": "Moments",
     "create-blog": "Share a moment",
     "chat": "Chats",
-    "profile": "Profile"
+    "profile": "Profile",
+    "time-series": "Time Series"
   },
   "table": {
     "no-data": "No data"
