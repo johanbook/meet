@@ -7,10 +7,10 @@ framework.
 
 There are three types of resources in the system:
 
-- **Individual resources** which are owned by a single account. Examples are
-  account settings.
+- **Individual resources** which are owned by a single profile. Examples are
+  profile settings.
 - **Organizational resources** which are owned by an organization. They can also
-  be owned by both an organization and an account at the same time. Examples are
+  be owned by both an organization and a profile at the same time. Examples are
   blog posts and chat messages.
 - **System resources** that are owned by the system, for example
   [classifications](./classifications.md).
