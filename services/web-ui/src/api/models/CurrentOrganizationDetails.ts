@@ -76,6 +76,7 @@ export interface CurrentOrganizationDetails {
  * @export
  */
 export const CurrentOrganizationDetailsFeaturesEnum = {
+    Chat: 'chat',
     TimeSeries: 'time-series'
 } as const;
 export type CurrentOrganizationDetailsFeaturesEnum = typeof CurrentOrganizationDetailsFeaturesEnum[keyof typeof CurrentOrganizationDetailsFeaturesEnum];
