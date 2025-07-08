@@ -129,11 +129,7 @@ export function AddTimeSeriesPointForm({
       >
         <Button
           color="primary"
-          disabled={
-            !form.state.value.value ||
-            !form.state.label.value ||
-            !form.state.description.value
-          }
+          disabled={!form.isValid}
           loading={mutation.isPending}
           type="submit"
           variant="contained"

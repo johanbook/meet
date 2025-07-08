@@ -2,7 +2,7 @@ import { ReactElement, ReactNode } from "react";
 import { Link } from "react-router";
 
 import { ArrowBack } from "@mui/icons-material";
-import { IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 
 import { Nav } from "src/components/nav";
 import { useTranslation } from "src/core/i18n";
@@ -26,5 +26,9 @@ export function TimeSeriesPageNav({
     </>
   );
 
-  return <Nav appBarContent={appBarContent}>{children}</Nav>;
+  return (
+    <Nav appBarContent={appBarContent}>
+      <Box sx={{ p: 2 }}> {children}</Box>
+    </Nav>
+  );
 }
