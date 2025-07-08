@@ -1,6 +1,7 @@
 import {
   AccountCircle,
   AddCircleOutlineRounded,
+  BarChartRounded,
   Chat,
   HomeRounded,
 } from "@mui/icons-material";
@@ -32,6 +33,12 @@ export const desktopNav: DesktopNav = {
       checkIfActive: (path) => path.startsWith("/chat"),
       name: "navigation.chat",
       url: "/chat",
+    },
+    {
+      Icon: BarChartRounded,
+      checkIfActive: (path) => path.startsWith("/time-series"),
+      name: "navigation.time-series",
+      url: "/time-series",
     },
   ],
   bottom: [

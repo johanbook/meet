@@ -1,0 +1,20 @@
+{
+  "header": "Skapa tidsserie",
+  "form": {
+    "name": {
+      "label": "Namn",
+      "placeholder": "Ange ett namn för tidsserien"
+    },
+    "description": {
+      "label": "Beskrivning",
+      "placeholder": "Ange en beskrivning för tidsserien"
+    }
+  },
+  "actions": {
+    "create": {
+      "submit": "Skapa",
+      "success": "Tidsserien har skapats",
+      "error": "Det gick inte att skapa tidsserien"
+    }
+  }
+}

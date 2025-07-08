@@ -7,7 +7,8 @@
     "blog": "Inlägg",
     "create-blog": "Nytt inlägg",
     "chat": "Konversationer",
-    "profile": "Profil"
+    "profile": "Profil",
+    "time-series": "Tidsserier"
   },
   "table": {
     "no-data": "Ingen data"

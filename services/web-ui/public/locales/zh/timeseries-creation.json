@@ -1,0 +1,20 @@
+{
+  "header": "创建时间序列",
+  "form": {
+    "name": {
+      "label": "名称",
+      "placeholder": "输入时间序列的名称"
+    },
+    "description": {
+      "label": "描述",
+      "placeholder": "输入时间序列的描述"
+    }
+  },
+  "actions": {
+    "create": {
+      "submit": "创建",
+      "success": "时间序列创建成功",
+      "error": "创建时间序列失败"
+    }
+  }
+}

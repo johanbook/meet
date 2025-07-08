@@ -1,0 +1,20 @@
+{
+  "header": "Create Time Series",
+  "form": {
+    "name": {
+      "label": "Name",
+      "placeholder": "Enter a name for the time series"
+    },
+    "description": {
+      "label": "Description",
+      "placeholder": "Enter a description for the time series"
+    }
+  },
+  "actions": {
+    "create": {
+      "submit": "Create",
+      "success": "Time series created successfully",
+      "error": "Failed to create time series"
+    }
+  }
+}
