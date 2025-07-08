@@ -41,6 +41,11 @@ export function useForm<T>(
     setForm(newForm);
   }
 
+  /** Resets form to initial value */
+  function handleReset(): void {
+    setForm(toForm(initialValue));
+  }
+
   /** Updates form and validates changed values */
   function handleValidation(keys: (keyof T)[]): void {
     if (!validators) {
@@ -78,7 +83,7 @@ export function useForm<T>(
 
   return {
     isValid: checkIfValid(),
-    reset: () => setForm(toForm(initialValue)),
+    reset: handleReset,
     setValue: handleSetState,
     state: form,
     validate,

@@ -10,9 +10,10 @@ import {
 
 import { useDialog } from "src/core/dialog";
 
-export interface DialogProps extends Omit<MuiDialogProps, "open"> {
+export interface DialogProps extends Omit<MuiDialogProps, "onClose" | "open"> {
   Actions?: FC<{ closeDialog: () => void }>;
   children: ReactNode;
+  onClose?: () => void;
   title?: string;
 }
 
@@ -20,16 +21,26 @@ export function Dialog({
   Actions,
   children,
   maxWidth = "xs",
+  onClose,
   title,
   ...props
 }: DialogProps): ReactElement {
   const { closeDialog, isOpen } = useDialog();
 
+  const handleClose = () => {
+    closeDialog();
+
+    // For e.g. clean up such as resetting form state
+    if (onClose) {
+      onClose();
+    }
+  };
+
   return (
     <MuiDialog
       maxWidth={maxWidth}
       open={isOpen}
-      onClose={closeDialog}
+      onClose={handleClose}
       {...props}
     >
       {title && <DialogTitle> {title} </DialogTitle>}
@@ -38,7 +49,7 @@ export function Dialog({
 
       {Actions && (
         <DialogActions>
-          <Actions closeDialog={closeDialog} />
+          <Actions closeDialog={handleClose} />
         </DialogActions>
       )}
     </MuiDialog>
