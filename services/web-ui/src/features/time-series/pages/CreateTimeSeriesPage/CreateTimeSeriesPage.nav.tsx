@@ -18,7 +18,7 @@ export function CreateTimeSeriesPageNav({
 
   const appBarContent = (
     <>
-      <IconButton component={Link} sx={{ mr: 2 }} to="/timeseries">
+      <IconButton component={Link} sx={{ mr: 2 }} to="/time-series">
         <ArrowBack />
       </IconButton>
 
