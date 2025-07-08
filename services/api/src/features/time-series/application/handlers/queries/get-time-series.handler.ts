@@ -6,6 +6,7 @@ import { Repository } from "typeorm";
 import { map, mapArray } from "src/core/mapper";
 import { CurrentOrganizationService } from "src/core/organizations";
 import { TimeSeries } from "src/features/time-series/infrastructure/entities/time-series.entity";
+import { uniqify } from "src/utils/array.helper";
 
 import { TimeSeriesPointDetails } from "../../contracts/dtos/time-series-point.dto";
 import { TimeSeriesDetails } from "../../contracts/dtos/time-series.dto";
@@ -26,7 +27,14 @@ export class GetTimeSeriesHandler
       await this.currentOrganizationService.fetchCurrentOrganizationId();
 
     const timeSeries = await this.timeSeries.findOne({
-      relations: { points: true },
+      order: {
+        points: {
+          createdAt: "DESC",
+        },
+      },
+      relations: {
+        points: true,
+      },
       where: {
         id: query.id,
         organizationId: currentOrganizationId,
@@ -37,9 +45,12 @@ export class GetTimeSeriesHandler
       throw new NotFoundException("Time series not found");
     }
 
+    const labels = uniqify(timeSeries.points.map((point) => point.label));
+
     return map(TimeSeriesDetails, {
       createdAt: timeSeries.createdAt.toISOString(),
       description: timeSeries.description,
+      labels,
       name: timeSeries.name,
       id: timeSeries.id,
       points: mapArray(TimeSeriesPointDetails, timeSeries.points, (point) => ({

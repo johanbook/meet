@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 
 import { TimeSeriesDetails } from "src/api";
-import { uniqify } from "src/utils/array";
 import { timeSince } from "src/utils/time";
 
 import { AddTimeSeriesPointForm } from "../../components/AddTimeSeriesPointForm";
@@ -30,8 +29,6 @@ interface TimeSeriesPageComponentProps {
 export function TimeSeriesPageComponent({
   timeSeries,
 }: TimeSeriesPageComponentProps): ReactElement {
-  const labels = uniqify(timeSeries.points.map((point) => point.label));
-
   return (
     <Box>
       <Typography variant="h6">{timeSeries.name}</Typography>
@@ -51,7 +48,9 @@ export function TimeSeriesPageComponent({
                 >
                   <span>{point.description}</span>
                   <Chip
-                    color={getLabelColor(labels.indexOf(point.label))}
+                    color={getLabelColor(
+                      timeSeries.labels.indexOf(point.label),
+                    )}
                     label={point.label}
                     size="small"
                     variant="outlined"

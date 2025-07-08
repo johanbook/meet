@@ -53,6 +53,12 @@ export interface TimeSeriesDetails {
     createdAt: string;
     /**
      * 
+     * @type {Array<string>}
+     * @memberof TimeSeriesDetails
+     */
+    labels: Array<string>;
+    /**
+     * 
      * @type {Array<TimeSeriesPointDetails>}
      * @memberof TimeSeriesDetails
      */
@@ -68,6 +74,7 @@ export function instanceOfTimeSeriesDetails(value: object): boolean {
     isInstance = isInstance && "name" in value;
     isInstance = isInstance && "description" in value;
     isInstance = isInstance && "createdAt" in value;
+    isInstance = isInstance && "labels" in value;
     isInstance = isInstance && "points" in value;
 
     return isInstance;
@@ -87,6 +94,7 @@ export function TimeSeriesDetailsFromJSONTyped(json: any, ignoreDiscriminator: b
         'name': json['name'],
         'description': json['description'],
         'createdAt': json['createdAt'],
+        'labels': json['labels'],
         'points': ((json['points'] as Array<any>).map(TimeSeriesPointDetailsFromJSON)),
     };
 }
@@ -104,6 +112,7 @@ export function TimeSeriesDetailsToJSON(value?: TimeSeriesDetails | null): any {
         'name': value.name,
         'description': value.description,
         'createdAt': value.createdAt,
+        'labels': value.labels,
         'points': ((value.points as Array<any>).map(TimeSeriesPointDetailsToJSON)),
     };
 }
