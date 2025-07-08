@@ -25,19 +25,31 @@ export interface TimeSeriesPointDetails {
      * @type {string}
      * @memberof TimeSeriesPointDetails
      */
+    createdAt: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TimeSeriesPointDetails
+     */
+    description: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TimeSeriesPointDetails
+     */
     id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TimeSeriesPointDetails
+     */
+    label: string;
     /**
      * 
      * @type {number}
      * @memberof TimeSeriesPointDetails
      */
     value: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof TimeSeriesPointDetails
-     */
-    createdAt: string;
 }
 
 /**
@@ -45,9 +57,11 @@ export interface TimeSeriesPointDetails {
  */
 export function instanceOfTimeSeriesPointDetails(value: object): boolean {
     let isInstance = true;
-    isInstance = isInstance && "id" in value;
-    isInstance = isInstance && "value" in value;
     isInstance = isInstance && "createdAt" in value;
+    isInstance = isInstance && "description" in value;
+    isInstance = isInstance && "id" in value;
+    isInstance = isInstance && "label" in value;
+    isInstance = isInstance && "value" in value;
 
     return isInstance;
 }
@@ -62,9 +76,11 @@ export function TimeSeriesPointDetailsFromJSONTyped(json: any, ignoreDiscriminat
     }
     return {
         
-        'id': json['id'],
-        'value': json['value'],
         'createdAt': json['createdAt'],
+        'description': json['description'],
+        'id': json['id'],
+        'label': json['label'],
+        'value': json['value'],
     };
 }
 
@@ -77,9 +93,11 @@ export function TimeSeriesPointDetailsToJSON(value?: TimeSeriesPointDetails | nu
     }
     return {
         
-        'id': value.id,
-        'value': value.value,
         'createdAt': value.createdAt,
+        'description': value.description,
+        'id': value.id,
+        'label': value.label,
+        'value': value.value,
     };
 }
 

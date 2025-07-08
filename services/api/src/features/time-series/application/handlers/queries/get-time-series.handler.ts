@@ -43,9 +43,11 @@ export class GetTimeSeriesHandler
       name: timeSeries.name,
       id: timeSeries.id,
       points: mapArray(TimeSeriesPointDetails, timeSeries.points, (point) => ({
+        createdAt: point.createdAt.toISOString(),
+        description: point.description,
+        label: point.label,
         id: point.id,
         value: point.value,
-        createdAt: point.createdAt.toISOString(),
       })),
     });
   }
