@@ -17,7 +17,7 @@ export function TimeSeriesPageComponent({
   return (
     <Box>
       <Typography variant="h6">{timeSeries.name}</Typography>
-      <Typography>{timeSeries.description}</Typography>
+      <Typography color="textSecondary">{timeSeries.description}</Typography>
 
       <List>
         {timeSeries.points.map((point) => (
