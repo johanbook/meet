@@ -1,0 +1,23 @@
+{
+  "form": {
+    "value": {
+      "label": "Value",
+      "placeholder": "Enter the data point value"
+    },
+    "label": {
+      "label": "Label",
+      "placeholder": "Enter a label for this data point"
+    },
+    "description": {
+      "label": "Description",
+      "placeholder": "Enter a description for this data point"
+    }
+  },
+  "actions": {
+    "create": {
+      "submit": "Add Point",
+      "success": "Data point added successfully",
+      "error": "Failed to add data point"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "form": {
+    "value": {
+      "label": "Värde",
+      "placeholder": "Ange datapunktens värde"
+    },
+    "label": {
+      "label": "Etikett",
+      "placeholder": "Ange en etikett för denna datapunkt"
+    },
+    "description": {
+      "label": "Beskrivning",
+      "placeholder": "Ange en beskrivning för denna datapunkt"
+    }
+  },
+  "actions": {
+    "create": {
+      "submit": "Lägg till punkt",
+      "success": "Datapunkt tillagd framgångsrikt",
+      "error": "Misslyckades med att lägga till datapunkt"
+    }
+  }
+}

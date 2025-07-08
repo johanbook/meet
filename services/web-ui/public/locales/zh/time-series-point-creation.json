@@ -1,0 +1,23 @@
+{
+  "form": {
+    "value": {
+      "label": "数值",
+      "placeholder": "输入数据点的值"
+    },
+    "label": {
+      "label": "标签",
+      "placeholder": "为此数据点输入标签"
+    },
+    "description": {
+      "label": "描述",
+      "placeholder": "为此数据点输入描述"
+    }
+  },
+  "actions": {
+    "create": {
+      "submit": "添加数据点",
+      "success": "数据点添加成功",
+      "error": "添加数据点失败"
+    }
+  }
+}
