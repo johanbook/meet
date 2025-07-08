@@ -10,3 +10,4 @@ export * from './NotificationsApi';
 export * from './OrganizationsApi';
 export * from './ProfileApi';
 export * from './SettingsApi';
+export * from './TimeSeriesApi';
