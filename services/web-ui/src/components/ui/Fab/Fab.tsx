@@ -16,7 +16,7 @@ export function Fab({ children, onClick, to }: FabProps): ReactElement {
 
   const sx = {
     borderRadius: 4,
-    position: "absolute",
+    position: "fixed",
     // NB: We need to account for bottom navigation on mobile
     bottom: isMobile ? 70 : 10,
     right: 10,
