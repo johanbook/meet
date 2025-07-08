@@ -36,7 +36,7 @@ export const desktopNav: DesktopNav = {
       Icon: Chat,
       checkIfActive: (path) => path.startsWith("/chat"),
       name: "navigation.chat",
-      requiredFeatures: [],
+      requiredFeatures: [OrganizationFeature.Chat],
       url: "/chat",
     },
     {
@@ -80,6 +80,13 @@ export const mobileNav: MobileNav = {
       name: "navigation.create-blog",
       requiredFeatures: [],
       url: "/blog/create",
+    },
+    {
+      Icon: Chat,
+      checkIfActive: (path) => path.startsWith("/chat"),
+      name: "navigation.chat",
+      requiredFeatures: [OrganizationFeature.Chat],
+      url: "/chat",
     },
     {
       Icon: BarChartRounded,
