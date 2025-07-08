@@ -1,26 +1,27 @@
 import { ReactElement, SyntheticEvent } from "react";
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 import { AddPointToTimeSeriesCommand } from "src/api";
 import { timeSeriesApi } from "src/apis";
 import { Button } from "src/components/ui";
 import { TextField } from "src/components/ui";
+import { Dialog } from "src/components/ui/Dialog";
+import { GlobalDialogProps } from "src/core/dialog";
 import { useForm, validators } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
-interface AddTimeSeriesPointFormProps {
+interface AddTimeSeriesPointDialogProps extends GlobalDialogProps {
   timeSeriesId: string;
-  onAfterSubmit?: () => void;
 }
 
-export function AddTimeSeriesPointForm({
+export function AddTimeSeriesPointDialog({
+  closeDialog,
   timeSeriesId,
-  onAfterSubmit,
-}: AddTimeSeriesPointFormProps): ReactElement {
+}: AddTimeSeriesPointDialogProps): ReactElement {
   const mutation = useMutation({
     mutationFn: (addPointToTimeSeriesCommand: AddPointToTimeSeriesCommand) =>
       timeSeriesApi.addPointToTimeSeries({ addPointToTimeSeriesCommand }),
@@ -48,7 +49,11 @@ export function AddTimeSeriesPointForm({
   async function handleSubmit(event: SyntheticEvent): Promise<void> {
     event.preventDefault();
 
-    const { data } = form.validate();
+    const { data, isValid } = form.validate();
+
+    if (!isValid) {
+      return;
+    }
 
     await mutation.mutateAsync(data, {
       onError: () => {
@@ -60,57 +65,62 @@ export function AddTimeSeriesPointForm({
         });
         form.reset();
         snackbar.success(t("actions.create.success"));
-
-        if (onAfterSubmit) {
-          onAfterSubmit();
-        }
+        closeDialog();
       },
     });
   }
 
   return (
-    <Box
-      component="form"
-      onSubmit={handleSubmit}
-      sx={{ display: "flex", flexDirection: "column", gap: 3 }}
+    <Dialog
+      Actions={({ closeDialog }) => (
+        <>
+          <Button onClick={closeDialog}>{t("actions.create.cancel")}</Button>
+
+          <Button
+            color="primary"
+            disabled={!form.isValid}
+            loading={mutation.isPending}
+            onClick={handleSubmit}
+            type="submit"
+            variant="contained"
+          >
+            {t("actions.create.submit")}
+          </Button>
+        </>
+      )}
+      title={t("actions.create.header") || ""}
     >
-      <Box>
-        <Typography variant="h6" sx={{ mb: 1 }}>
-          {t("form.value.label")}
-        </Typography>
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{ display: "flex", flexDirection: "column", gap: 3 }}
+      >
         <TextField
           disabled={mutation.isPending}
           error={form.state.value.error}
           fullWidth
+          label={t("form.value.label")}
           onChange={(value) => form.setValue({ value: Number(value) })}
           placeholder={t("form.value.placeholder")}
           type="number"
           value={String(form.state.value.value)}
         />
-      </Box>
 
-      <Box>
-        <Typography variant="h6" sx={{ mb: 1 }}>
-          {t("form.label.label")}
-        </Typography>
         <TextField
           disabled={mutation.isPending}
           error={form.state.label.error}
           fullWidth
+          label={t("form.label.label")}
           onChange={(label) => form.setValue({ label })}
           placeholder={t("form.label.placeholder")}
           value={form.state.label.value}
         />
-      </Box>
 
-      <Box>
-        <Typography variant="h6" sx={{ mb: 1 }}>
-          {t("form.description.label")}
-        </Typography>
         <TextField
           disabled={mutation.isPending}
           error={form.state.description.error}
           fullWidth
+          label={t("form.description.label")}
           multiline
           minRows={2}
           onChange={(description) => form.setValue({ description })}
@@ -118,25 +128,6 @@ export function AddTimeSeriesPointForm({
           value={form.state.description.value}
         />
       </Box>
-
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-          gap: 2,
-        }}
-      >
-        <Button
-          color="primary"
-          disabled={!form.isValid}
-          loading={mutation.isPending}
-          type="submit"
-          variant="contained"
-        >
-          {t("actions.create.submit")}
-        </Button>
-      </Box>
-    </Box>
+    </Dialog>
   );
 }
