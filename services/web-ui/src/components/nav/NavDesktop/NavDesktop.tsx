@@ -8,7 +8,7 @@ import {
   DesktopDrawer,
 } from "src/components/ui/Drawer/DesktopDrawer";
 
-import { desktopNav } from "../nav.items";
+import { useDesktopNavItems } from "../useNavItems";
 import { NavLinkListItem } from "./NavLinkListItem";
 import { NavProfile } from "./NavProfile";
 
@@ -21,6 +21,8 @@ export function NavDesktop({
   appBarContent,
   children,
 }: NavDesktopProps): ReactElement {
+  const desktopNav = useDesktopNavItems();
+
   return (
     <Box sx={{ height: "100vh", minHeight: "100%" }}>
       <DesktopDrawer>
