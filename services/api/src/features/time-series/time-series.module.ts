@@ -13,6 +13,7 @@ import { DeleteTimeSeriesPointHandler } from "./application/handlers/command-han
 import { DeleteTimeSeriesHandler } from "./application/handlers/command-handlers/delete-time-series.handler";
 import { UpdateTimeSeriesPointHandler } from "./application/handlers/command-handlers/update-time-series-point.handler";
 import { UpdateTimeSeriesHandler } from "./application/handlers/command-handlers/update-time-series.handler";
+import { NotifyOrganizationOnTimeSeriesPointCreatedHandler } from "./application/handlers/event-handlers/notify-organization-on-time-series-point-created.handler";
 import { GetTimeSeriesListHandler } from "./application/handlers/queries/get-time-series-list.handler";
 import { GetTimeSeriesHandler } from "./application/handlers/queries/get-time-series.handler";
 import { TimeSeriesController } from "./client/controllers/time-series.controller";
@@ -33,13 +34,14 @@ import { TimeSeries } from "./infrastructure/entities/time-series.entity";
   providers: [
     AddPointToTimeSeriesHandler,
     CreateTimeSeriesHandler,
-    DeleteTimeSeriesPointHandler,
     DeleteTimeSeriesHandler,
-    UpdateTimeSeriesPointHandler,
-    UpdateTimeSeriesHandler,
+    DeleteTimeSeriesPointHandler,
     GetTimeSeriesHandler,
     GetTimeSeriesListHandler,
+    NotifyOrganizationOnTimeSeriesPointCreatedHandler,
     TimeSeriesService,
+    UpdateTimeSeriesPointHandler,
+    UpdateTimeSeriesHandler,
   ],
   exports: [TimeSeriesService],
 })
