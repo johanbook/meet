@@ -10,6 +10,7 @@ import {
 import { useIsMobile } from "src/hooks/useIsMobile";
 
 import { CurrentOrganizationAvatar } from "../CurrentOrganizationAvatar";
+import { Logo } from "../Logo";
 
 interface AppBarProps {
   appBarContent?: ReactNode;
@@ -41,7 +42,11 @@ export function AppBar({ appBarContent }: AppBarProps): ReactElement {
             display: "flex",
           }}
         >
-          {appBarContent || <CurrentOrganizationAvatar />}
+          {appBarContent || (
+            <>
+              <CurrentOrganizationAvatar /> <Logo />
+            </>
+          )}
         </Toolbar>
       </MuiAppBar>
     </Slide>

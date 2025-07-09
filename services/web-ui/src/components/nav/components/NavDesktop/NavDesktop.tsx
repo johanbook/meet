@@ -31,28 +31,6 @@ export const NavDesktop: FC<NavProps> = ({
 }) => {
   const desktopNav = useDesktopNavItems();
 
-  if (navBackTo) {
-    appBarContent = (
-      <>
-        <IconButton
-          component={ReactRouterLink}
-          sx={{
-            mr: 2,
-          }}
-          to={navBackTo}
-        >
-          <ArrowBack />
-        </IconButton>
-
-        {title && (
-          <Typography color="textPrimary" sx={{ pl: 3 }} variant="h5">
-            {title}
-          </Typography>
-        )}
-      </>
-    );
-  }
-
   return (
     <Box sx={{ height: "100vh", minHeight: "100%" }}>
       <DesktopDrawer>
@@ -97,6 +75,20 @@ export const NavDesktop: FC<NavProps> = ({
             flexGrow: 1,
           }}
         >
+          {navBackTo && (
+            <Box sx={{ display: "flex", alignItems: "center", p: 2 }}>
+              <IconButton component={ReactRouterLink} to={navBackTo}>
+                <ArrowBack />
+              </IconButton>
+
+              {title && (
+                <Typography color="textPrimary" sx={{ pl: 1 }} variant="h5">
+                  {title}
+                </Typography>
+              )}
+            </Box>
+          )}
+
           {children}
         </Container>
 
