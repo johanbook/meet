@@ -9,5 +9,9 @@ interface BlogPostPageNavProps {
 export function BlogPostPageNav({
   children,
 }: BlogPostPageNavProps): ReactElement {
-  return <Nav navBackTo="/">{children}</Nav>;
+  return (
+    <Nav navBackTo="/" padding="none">
+      {children}
+    </Nav>
+  );
 }

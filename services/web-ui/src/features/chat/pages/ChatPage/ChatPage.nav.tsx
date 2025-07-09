@@ -10,7 +10,7 @@ interface ChatPageNavProps {
 
 export function ChatPageNav({ children }: ChatPageNavProps): ReactElement {
   return (
-    <Nav navBackTo="/chat">
+    <Nav navBackTo="/chat" padding="none">
       <Box
         sx={{
           display: "flex",

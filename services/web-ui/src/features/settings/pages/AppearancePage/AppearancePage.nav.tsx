@@ -1,7 +1,5 @@
 import { ReactElement, ReactNode } from "react";
 
-import { Box } from "@mui/material";
-
 import { Nav } from "src/components/nav";
 import { useTranslation } from "src/core/i18n";
 
@@ -15,8 +13,8 @@ export function AppearancePageNav({
   const { t } = useTranslation("settings");
 
   return (
-    <Nav navBackTo="/profile" title={t("header")}>
-      <Box sx={{ p: 3 }}>{children}</Box>
+    <Nav navBackTo="/profile" padding="normal" title={t("header")}>
+      {children}
     </Nav>
   );
 }

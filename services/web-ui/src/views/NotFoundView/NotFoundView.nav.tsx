@@ -7,5 +7,5 @@ export interface NotFoundNavProps {
 }
 
 export function NotFoundNav({ children }: NotFoundNavProps): ReactElement {
-  return <Nav>{children}</Nav>;
+  return <Nav padding="none">{children}</Nav>;
 }

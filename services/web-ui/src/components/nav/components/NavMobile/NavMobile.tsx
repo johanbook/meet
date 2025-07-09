@@ -13,6 +13,7 @@ export const NavMobile: FC<NavProps> = ({
   appBarContent,
   children,
   navBackTo,
+  padding,
   title,
 }) => {
   if (navBackTo || title) {
@@ -54,6 +55,7 @@ export const NavMobile: FC<NavProps> = ({
           maxWidth="md"
           sx={{
             flexGrow: 1,
+            padding: padding === "normal" ? 2 : undefined,
           }}
         >
           {children}

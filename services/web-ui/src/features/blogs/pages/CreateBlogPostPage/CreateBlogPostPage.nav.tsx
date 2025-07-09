@@ -13,7 +13,7 @@ export function CreateBlogPostPageNav({
   const { t } = useTranslation("blog-creation");
 
   return (
-    <Nav navBackTo="/" title={t("header")}>
+    <Nav navBackTo="/" padding="normal" title={t("header")}>
       {children}
     </Nav>
   );
