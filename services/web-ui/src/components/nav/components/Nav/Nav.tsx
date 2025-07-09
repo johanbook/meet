@@ -1,16 +1,12 @@
-import { ReactElement, ReactNode } from "react";
+import { FC } from "react";
 
 import { useIsMobile } from "src/hooks/useIsMobile";
 
+import { NavProps } from "../../types";
 import { NavDesktop } from "../NavDesktop";
 import { NavMobile } from "../NavMobile";
 
-interface NavProps {
-  appBarContent?: ReactNode;
-  children: ReactNode;
-}
-
-export function Nav(props: NavProps): ReactElement {
+export const Nav: FC<NavProps> = (props) => {
   const isMobile = useIsMobile();
 
   if (isMobile) {
@@ -18,4 +14,4 @@ export function Nav(props: NavProps): ReactElement {
   }
 
   return <NavDesktop {...props} />;
-}
+};

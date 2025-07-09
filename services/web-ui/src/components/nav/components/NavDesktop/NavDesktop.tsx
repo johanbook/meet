@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from "react";
+import { FC } from "react";
 
 import { Box, Container, List, Stack, Toolbar } from "@mui/material";
 
@@ -8,19 +8,12 @@ import {
 } from "src/components/ui/Drawer/DesktopDrawer";
 
 import { useDesktopNavItems } from "../../hooks/useNavItems";
+import { NavProps } from "../../types";
 import { AppBar } from "../AppBar";
 import { NavLinkListItem } from "./NavLinkListItem";
 import { NavProfile } from "./NavProfile";
 
-interface NavDesktopProps {
-  appBarContent?: ReactNode;
-  children: ReactNode;
-}
-
-export function NavDesktop({
-  appBarContent,
-  children,
-}: NavDesktopProps): ReactElement {
+export const NavDesktop: FC<NavProps> = ({ appBarContent, children }) => {
   const desktopNav = useDesktopNavItems();
 
   return (
@@ -74,4 +67,4 @@ export function NavDesktop({
       </Box>
     </Box>
   );
-}
+};

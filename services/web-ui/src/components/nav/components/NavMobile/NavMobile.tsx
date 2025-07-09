@@ -1,19 +1,12 @@
-import { ReactElement, ReactNode } from "react";
+import { FC } from "react";
 
 import { Box, Container, Toolbar } from "@mui/material";
 
+import { NavProps } from "../../types";
 import { AppBar } from "../AppBar";
 import { BottomNavigation } from "../BottomNavigation";
 
-interface NavMobileProps {
-  appBarContent?: ReactNode;
-  children: ReactNode;
-}
-
-export function NavMobile({
-  appBarContent,
-  children,
-}: NavMobileProps): ReactElement {
+export const NavMobile: FC<NavProps> = ({ appBarContent, children }) => {
   return (
     <Box sx={{ height: "100vh", minHeight: "100%" }}>
       <AppBar appBarContent={appBarContent} />
@@ -44,4 +37,4 @@ export function NavMobile({
       <BottomNavigation />
     </Box>
   );
-}
+};
