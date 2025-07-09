@@ -13,7 +13,7 @@ export function CreateTimeSeriesPageNav({
   const { t } = useTranslation("timeseries-creation");
 
   return (
-    <Nav navBackTo="/time-series" title={t("header")}>
+    <Nav navBackTo="/time-series" padding="normal" title={t("header")}>
       {children}
     </Nav>
   );

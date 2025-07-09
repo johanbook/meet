@@ -27,5 +27,9 @@ export function BlogPostListPageNav({
     </>
   );
 
-  return <Nav appBarContent={appBarContent}>{children}</Nav>;
+  return (
+    <Nav appBarContent={appBarContent} padding="none">
+      {children}
+    </Nav>
+  );
 }

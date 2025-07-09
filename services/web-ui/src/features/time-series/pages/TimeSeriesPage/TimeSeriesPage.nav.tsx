@@ -1,7 +1,5 @@
 import { ReactElement, ReactNode } from "react";
 
-import { Box } from "@mui/material";
-
 import { Nav } from "src/components/nav";
 import { useTranslation } from "src/core/i18n";
 
@@ -15,8 +13,8 @@ export function TimeSeriesPageNav({
   const { t } = useTranslation("time-series");
 
   return (
-    <Nav navBackTo="/time-series" title={t("header")}>
-      <Box sx={{ p: 2 }}> {children}</Box>
+    <Nav navBackTo="/time-series" padding="normal" title={t("header")}>
+      {children}
     </Nav>
   );
 }

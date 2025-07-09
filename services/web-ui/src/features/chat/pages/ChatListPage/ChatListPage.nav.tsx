@@ -1,7 +1,6 @@
 import { ReactElement, ReactNode } from "react";
 
 import { Add } from "@mui/icons-material";
-import { Box } from "@mui/material";
 
 import { Nav } from "src/components/nav";
 import { Fab } from "src/components/ui/Fab";
@@ -17,14 +16,12 @@ export function ChatListPageNav({
   const { t } = useTranslation("connections");
 
   return (
-    <Nav title={t("header")}>
-      <Box sx={{ p: 2 }}>
-        <Fab to="/chat/create">
-          <Add />
-        </Fab>
+    <Nav padding="normal" title={t("header")}>
+      <Fab to="/chat/create">
+        <Add />
+      </Fab>
 
-        {children}
-      </Box>
+      {children}
     </Nav>
   );
 }

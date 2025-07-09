@@ -61,40 +61,38 @@ export function CreateOrganizationPageContainer(): ReactElement {
   }
 
   return (
-    <Nav navBackTo="/profile" title={t("header")}>
-      <Box sx={{ px: 2, pt: 2 }}>
-        <Typography color="textSecondary" sx={{ paddingBottom: 3 }}>
-          {t("description")}
-        </Typography>
+    <Nav navBackTo="/profile" padding="normal" title={t("header")}>
+      <Typography color="textSecondary" sx={{ paddingBottom: 3 }}>
+        {t("description")}
+      </Typography>
 
-        <form onSubmit={handleSubmit}>
-          <TextField
-            error={form.state.name.error || ""}
-            fullWidth
-            label={t("fields.name.label")}
-            onBlur={() => form.validate()}
-            onChange={(name) => form.setValue({ name })}
-            required
-            sx={{ marginBottom: 2 }}
-            value={form.state.name.value}
-          />
+      <form onSubmit={handleSubmit}>
+        <TextField
+          error={form.state.name.error || ""}
+          fullWidth
+          label={t("fields.name.label")}
+          onBlur={() => form.validate()}
+          onChange={(name) => form.setValue({ name })}
+          required
+          sx={{ marginBottom: 2 }}
+          value={form.state.name.value}
+        />
 
-          <Box sx={{ gap: 1, display: "flex", justifyContent: "flex-end" }}>
-            <Button onClick={handleCancel} variant="outlined">
-              {t("actions.cancel.button")}
-            </Button>
+        <Box sx={{ gap: 1, display: "flex", justifyContent: "flex-end" }}>
+          <Button onClick={handleCancel} variant="outlined">
+            {t("actions.cancel.button")}
+          </Button>
 
-            <Button
-              disabled={!form.isValid}
-              loading={mutation.isPending}
-              type="submit"
-              variant="contained"
-            >
-              {t("actions.submit.button")}
-            </Button>
-          </Box>
-        </form>
-      </Box>
+          <Button
+            disabled={!form.isValid}
+            loading={mutation.isPending}
+            type="submit"
+            variant="contained"
+          >
+            {t("actions.submit.button")}
+          </Button>
+        </Box>
+      </form>
     </Nav>
   );
 }

@@ -25,5 +25,6 @@ export interface NavProps {
   appBarContent?: ReactNode;
   children: ReactNode;
   navBackTo?: string;
+  padding: "none" | "normal";
   title?: string;
 }

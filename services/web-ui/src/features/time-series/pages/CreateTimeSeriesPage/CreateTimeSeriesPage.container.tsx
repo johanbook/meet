@@ -1,8 +1,6 @@
 import { ReactElement } from "react";
 import { useNavigate } from "react-router";
 
-import { Box } from "@mui/material";
-
 import { useTranslation } from "src/core/i18n";
 import { useSnackbar } from "src/core/snackbar";
 
@@ -21,9 +19,7 @@ export function CreateTimeSeriesPageContainer(): ReactElement {
 
   return (
     <CreateTimeSeriesPageNav>
-      <Box sx={{ p: 2 }}>
-        <CreateTimeSeriesPageComponent onAfterSubmit={handleSubmit} />
-      </Box>
+      <CreateTimeSeriesPageComponent onAfterSubmit={handleSubmit} />
     </CreateTimeSeriesPageNav>
   );
 }

@@ -1,6 +1,6 @@
 import { ReactElement, ReactNode } from "react";
 
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 import { Nav } from "src/components/nav";
 import { DatePicker } from "src/components/ui/DatePicker";
@@ -25,34 +25,32 @@ export function OrganizationJournalPageNav({
   const { t } = useTranslation("journal");
 
   return (
-    <Nav navBackTo="/profile" title={t("header")}>
-      <Box sx={{ pt: 1, px: 3 }}>
-        <Typography color="textSecondary" sx={{ paddingBottom: 3 }}>
-          {t("description")}
-        </Typography>
+    <Nav navBackTo="/profile" padding="normal" title={t("header")}>
+      <Typography color="textSecondary" sx={{ paddingBottom: 3 }}>
+        {t("description")}
+      </Typography>
 
-        <Grid container spacing={2}>
-          <Grid size={{ xs: 6 }}>
-            <DatePicker
-              fullWidth
-              label="From"
-              onChange={(from) => onDateChange({ ...values, from })}
-              value={values.from}
-            />
-          </Grid>
-
-          <Grid size={{ xs: 6 }}>
-            <DatePicker
-              fullWidth
-              label="To"
-              onChange={(to) => onDateChange({ ...values, to })}
-              value={values.to}
-            />
-          </Grid>
+      <Grid container spacing={2}>
+        <Grid size={{ xs: 6 }}>
+          <DatePicker
+            fullWidth
+            label="From"
+            onChange={(from) => onDateChange({ ...values, from })}
+            value={values.from}
+          />
         </Grid>
 
-        {children}
-      </Box>
+        <Grid size={{ xs: 6 }}>
+          <DatePicker
+            fullWidth
+            label="To"
+            onChange={(to) => onDateChange({ ...values, to })}
+            value={values.to}
+          />
+        </Grid>
+      </Grid>
+
+      {children}
     </Nav>
   );
 }
