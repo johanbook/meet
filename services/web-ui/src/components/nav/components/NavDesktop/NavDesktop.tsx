@@ -74,7 +74,7 @@ export const NavDesktop: FC<NavProps> = ({
           maxWidth="md"
           sx={{
             flexGrow: 1,
-            padding: padding === "normal" ? 2 : undefined,
+            padding: padding === "normal" ? 4 : undefined,
           }}
         >
           {navBackTo && (
@@ -82,7 +82,7 @@ export const NavDesktop: FC<NavProps> = ({
               sx={{
                 display: "flex",
                 alignItems: "center",
-                my: 2,
+                mb: 2,
                 gap: 2,
               }}
             >
@@ -100,11 +100,7 @@ export const NavDesktop: FC<NavProps> = ({
           )}
 
           {title && (
-            <Typography
-              color="textPrimary"
-              sx={{ mb: 2, mt: navBackTo ? undefined : 2 }}
-              variant="h4"
-            >
+            <Typography color="textPrimary" sx={{ mb: 2 }} variant="h4">
               {title}
             </Typography>
           )}
