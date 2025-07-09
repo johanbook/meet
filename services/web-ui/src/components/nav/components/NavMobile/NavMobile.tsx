@@ -7,6 +7,7 @@ import { Box, Container, IconButton, Toolbar, Typography } from "@mui/material";
 import { NavProps } from "../../types";
 import { AppBar } from "../AppBar";
 import { BottomNavigation } from "../BottomNavigation";
+import { CurrentOrganizationAvatar } from "../CurrentOrganizationAvatar";
 
 export const NavMobile: FC<NavProps> = ({
   appBarContent,
@@ -14,12 +15,16 @@ export const NavMobile: FC<NavProps> = ({
   navBackTo,
   title,
 }) => {
-  if (navBackTo) {
+  if (navBackTo || title) {
     appBarContent = (
       <>
-        <IconButton component={ReactRouterLink} to={navBackTo}>
-          <ArrowBack />
-        </IconButton>
+        {navBackTo ? (
+          <IconButton component={ReactRouterLink} to={navBackTo}>
+            <ArrowBack />
+          </IconButton>
+        ) : (
+          <CurrentOrganizationAvatar />
+        )}
 
         {title && (
           <Typography color="textPrimary" sx={{ pl: 2 }} variant="h5">
