@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 import { SvgIconComponent } from "@mui/icons-material";
 
 import { OrganizationFeature } from "src/core/organizations";
@@ -17,4 +19,9 @@ export interface DesktopNav {
 
 export interface MobileNav {
   bottom: NavItem[];
+}
+
+export interface NavProps {
+  appBarContent?: ReactNode;
+  children: ReactNode;
 }
