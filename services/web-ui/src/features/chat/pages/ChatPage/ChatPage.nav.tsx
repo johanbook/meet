@@ -1,8 +1,6 @@
 import { ReactElement, ReactNode } from "react";
-import { Link as ReactRouterLink } from "react-router";
 
-import { ArrowBack } from "@mui/icons-material";
-import { Box, IconButton } from "@mui/material";
+import { Box } from "@mui/material";
 
 import { Nav } from "src/components/nav";
 
@@ -11,20 +9,8 @@ interface ChatPageNavProps {
 }
 
 export function ChatPageNav({ children }: ChatPageNavProps): ReactElement {
-  const appBarContent = (
-    <IconButton
-      component={ReactRouterLink}
-      sx={{
-        mr: 2,
-      }}
-      to="/chat"
-    >
-      <ArrowBack />
-    </IconButton>
-  );
-
   return (
-    <Nav appBarContent={appBarContent}>
+    <Nav navBackTo="/chat">
       <Box
         sx={{
           display: "flex",

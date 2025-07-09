@@ -1,8 +1,7 @@
 import { ReactElement, SyntheticEvent } from "react";
-import { Link as ReactRouterLink, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
-import { ArrowBack } from "@mui/icons-material";
-import { Box, IconButton } from "@mui/material";
+import { Box } from "@mui/material";
 
 import { CreateOrganizationCommand } from "src/api";
 import { organizationsApi } from "src/apis";
@@ -61,26 +60,8 @@ export function CreateOrganizationPageContainer(): ReactElement {
     });
   }
 
-  const appBarContent = (
-    <>
-      <IconButton
-        component={ReactRouterLink}
-        sx={{
-          mr: 2,
-        }}
-        to="/profile"
-      >
-        <ArrowBack />
-
-        <Typography color="textPrimary" sx={{ pl: 3 }} variant="h5">
-          {t("header")}
-        </Typography>
-      </IconButton>
-    </>
-  );
-
   return (
-    <Nav appBarContent={appBarContent}>
+    <Nav navBackTo="/profile" title={t("header")}>
       <Box sx={{ px: 2, pt: 2 }}>
         <Typography color="textSecondary" sx={{ paddingBottom: 3 }}>
           {t("description")}

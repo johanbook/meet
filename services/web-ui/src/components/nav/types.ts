@@ -24,4 +24,6 @@ export interface MobileNav {
 export interface NavProps {
   appBarContent?: ReactNode;
   children: ReactNode;
+  navBackTo?: string;
+  title?: string;
 }
