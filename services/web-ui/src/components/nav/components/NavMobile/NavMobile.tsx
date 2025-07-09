@@ -17,18 +17,12 @@ export const NavMobile: FC<NavProps> = ({
   if (navBackTo) {
     appBarContent = (
       <>
-        <IconButton
-          component={ReactRouterLink}
-          sx={{
-            mr: 2,
-          }}
-          to={navBackTo}
-        >
+        <IconButton component={ReactRouterLink} to={navBackTo}>
           <ArrowBack />
         </IconButton>
 
         {title && (
-          <Typography color="textPrimary" sx={{ pl: 3 }} variant="h5">
+          <Typography color="textPrimary" sx={{ pl: 2 }} variant="h5">
             {title}
           </Typography>
         )}
