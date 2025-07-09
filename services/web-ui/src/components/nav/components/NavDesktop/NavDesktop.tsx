@@ -75,11 +75,13 @@ export const NavDesktop: FC<NavProps> = ({
             flexGrow: 1,
           }}
         >
-          {navBackTo && (
+          {(navBackTo || title) && (
             <Box sx={{ display: "flex", alignItems: "center", p: 2 }}>
-              <IconButton component={ReactRouterLink} to={navBackTo}>
-                <ArrowBack />
-              </IconButton>
+              {navBackTo && (
+                <IconButton component={ReactRouterLink} to={navBackTo}>
+                  <ArrowBack />
+                </IconButton>
+              )}
 
               {title && (
                 <Typography color="textPrimary" sx={{ pl: 1 }} variant="h5">

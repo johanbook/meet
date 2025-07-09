@@ -1,9 +1,9 @@
 import { ReactElement, ReactNode } from "react";
 
 import { Add } from "@mui/icons-material";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
-import { CurrentOrganizationAvatar, Nav } from "src/components/nav";
+import { Nav } from "src/components/nav";
 import { Fab } from "src/components/ui/Fab";
 import { useTranslation } from "src/core/i18n";
 
@@ -16,22 +16,13 @@ export function TimeSeriesListPageNav({
 }: TimeSeriesListPageNavProps): ReactElement {
   const { t } = useTranslation("timeseries");
 
-  const appBarContent = (
-    <>
-      <CurrentOrganizationAvatar />
-      <Typography sx={{ pl: 2 }} variant="h5">
-        {t("header")}
-      </Typography>
-    </>
-  );
-
   return (
-    <Nav appBarContent={appBarContent}>
+    <Nav title={t("header")}>
       <Fab to="/time-series/create">
         <Add />
       </Fab>
 
-      <Box sx={{ p: 2 }}>{children}</Box>
+      <Box sx={{ p: 2, height: "100%" }}>{children}</Box>
     </Nav>
   );
 }

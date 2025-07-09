@@ -1,9 +1,9 @@
 import { ReactElement, ReactNode } from "react";
 
 import { Add } from "@mui/icons-material";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
-import { CurrentOrganizationAvatar, Nav } from "src/components/nav";
+import { Nav } from "src/components/nav";
 import { Fab } from "src/components/ui/Fab";
 import { useTranslation } from "src/core/i18n";
 
@@ -16,18 +16,9 @@ export function ChatListPageNav({
 }: ChatListPageNavProps): ReactElement {
   const { t } = useTranslation("connections");
 
-  const appBarContent = (
-    <>
-      <CurrentOrganizationAvatar />
-      <Typography sx={{ pl: 2 }} variant="h5">
-        {t("header")}
-      </Typography>
-    </>
-  );
-
   return (
-    <Nav appBarContent={appBarContent}>
-      <Box sx={{ p: 3 }}>
+    <Nav title={t("header")}>
+      <Box sx={{ p: 2 }}>
         <Fab to="/chat/create">
           <Add />
         </Fab>
