@@ -9,7 +9,7 @@ import {
 
 import { useIsMobile } from "src/hooks/useIsMobile";
 
-import { CurrentOrganizationAvatar } from "./CurrentOrganizationAvatar";
+import { CurrentOrganizationAvatar } from "../CurrentOrganizationAvatar";
 
 interface AppBarProps {
   appBarContent?: ReactNode;

@@ -3,8 +3,7 @@ import { ReactElement, ReactNode } from "react";
 import { Add } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
 
-import { Nav } from "src/components/nav";
-import { CurrentOrganizationAvatar } from "src/components/nav/AppBar/CurrentOrganizationAvatar";
+import { CurrentOrganizationAvatar, Nav } from "src/components/nav";
 import { Fab } from "src/components/ui/Fab";
 import { useTranslation } from "src/core/i18n";
 

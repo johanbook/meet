@@ -16,7 +16,7 @@ import { profileApi } from "src/apis";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 
-import { NavItem } from "../types";
+import { NavItem } from "../../types";
 
 const AVATAR_SIZE = 40;
 

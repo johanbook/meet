@@ -2,8 +2,7 @@ import { ReactElement, ReactNode } from "react";
 
 import { Box, Container, Toolbar } from "@mui/material";
 
-import { AppBar } from "src/components/nav/AppBar";
-
+import { AppBar } from "../AppBar";
 import { BottomNavigation } from "../BottomNavigation";
 
 interface NavMobileProps {
