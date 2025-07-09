@@ -3,6 +3,7 @@ import { CqrsModule } from "@nestjs/cqrs";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AuthorizationModule } from "src/core/authorization/authorization.module";
+import { NotificationModule } from "src/core/notifications/notification.module";
 import { OrganizationModule } from "src/core/organizations/organization.module";
 import { ProfileModule } from "src/core/profiles/profile.module";
 import { QueryModule } from "src/core/query/query.module";
@@ -25,6 +26,7 @@ import { TimeSeries } from "./infrastructure/entities/time-series.entity";
   imports: [
     AuthorizationModule,
     CqrsModule,
+    NotificationModule,
     OrganizationModule,
     ProfileModule,
     QueryModule,
