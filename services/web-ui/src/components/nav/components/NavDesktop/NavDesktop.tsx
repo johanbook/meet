@@ -2,13 +2,13 @@ import { ReactElement, ReactNode } from "react";
 
 import { Box, Container, List, Stack, Toolbar } from "@mui/material";
 
-import { AppBar } from "src/components/nav/AppBar";
 import {
   DRAWER_WIDTH,
   DesktopDrawer,
 } from "src/components/ui/Drawer/DesktopDrawer";
 
-import { useDesktopNavItems } from "../useNavItems";
+import { useDesktopNavItems } from "../../hooks/useNavItems";
+import { AppBar } from "../AppBar";
 import { NavLinkListItem } from "./NavLinkListItem";
 import { NavProfile } from "./NavProfile";
 

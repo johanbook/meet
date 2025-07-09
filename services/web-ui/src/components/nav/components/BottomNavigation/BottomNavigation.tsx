@@ -7,7 +7,7 @@ import {
   BottomNavigation as MuiBottomNavigation,
 } from "@mui/material";
 
-import { useMobileNavItems } from "../useNavItems";
+import { useMobileNavItems } from "../../hooks/useNavItems";
 
 export function BottomNavigation(): ReactElement {
   const navigate = useNavigate();

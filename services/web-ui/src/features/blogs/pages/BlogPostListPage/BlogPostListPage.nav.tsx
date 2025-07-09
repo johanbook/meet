@@ -4,8 +4,7 @@ import { Link } from "react-router";
 import { DashboardOutlined } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
 
-import { Nav } from "src/components/nav";
-import { CurrentOrganizationAvatar } from "src/components/nav/AppBar/CurrentOrganizationAvatar";
+import { CurrentOrganizationAvatar, Nav } from "src/components/nav";
 import { config } from "src/config";
 
 interface BlogPostListPageNavProps {

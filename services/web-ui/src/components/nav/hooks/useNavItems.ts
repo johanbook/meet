@@ -4,8 +4,8 @@ import { organizationsApi } from "src/apis";
 import { OrganizationFeature } from "src/core/organizations";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 
-import { desktopNav, mobileNav } from "./nav.items";
-import { DesktopNav, MobileNav, NavItem } from "./types";
+import { desktopNav, mobileNav } from "../nav.items";
+import { DesktopNav, MobileNav, NavItem } from "../types";
 
 const filterByFeature = (items: NavItem[], features: OrganizationFeature[]) => {
   return items.filter((item) =>
