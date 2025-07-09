@@ -77,24 +77,32 @@ export const NavDesktop: FC<NavProps> = ({
             padding: padding === "normal" ? 2 : undefined,
           }}
         >
-          {(navBackTo || title) && (
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              {navBackTo && (
-                <IconButton
-                  component={ReactRouterLink}
-                  to={navBackTo}
-                  sx={{ mr: 1 }}
-                >
-                  <ArrowBack />
-                </IconButton>
-              )}
+          {navBackTo && (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                mb: 2,
+                gap: 2,
+              }}
+            >
+              <IconButton
+                component={ReactRouterLink}
+                size="small"
+                sx={{ border: "1px solid" }}
+                to={navBackTo}
+              >
+                <ArrowBack />
+              </IconButton>
 
-              {title && (
-                <Typography color="textPrimary" variant="h5">
-                  {title}
-                </Typography>
-              )}
+              <Typography variant="body1">Back</Typography>
             </Box>
+          )}
+
+          {title && (
+            <Typography color="textPrimary" sx={{ mb: 2 }} variant="h4">
+              {title}
+            </Typography>
           )}
 
           {children}

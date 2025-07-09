@@ -10,14 +10,12 @@ interface ChatPageNavProps {
 
 export function ChatPageNav({ children }: ChatPageNavProps): ReactElement {
   return (
-    <Nav navBackTo="/chat" padding="none">
+    <Nav navBackTo="/chat" padding="normal">
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
           height: "100%",
-          px: 3,
-          pt: 1,
         }}
       >
         {children}
