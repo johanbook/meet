@@ -5,7 +5,7 @@ import { Avatar } from "@mui/material";
 export interface OrganizationAvatarProps {
   name?: string;
   src?: string;
-  size: number;
+  size?: number;
 }
 
 export function OrganizationAvatar({
