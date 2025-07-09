@@ -1,6 +1,16 @@
 import { FC } from "react";
+import { Link as ReactRouterLink } from "react-router";
 
-import { Box, Container, List, Stack, Toolbar } from "@mui/material";
+import { ArrowBack } from "@mui/icons-material";
+import {
+  Box,
+  Container,
+  IconButton,
+  List,
+  Stack,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 
 import {
   DRAWER_WIDTH,
@@ -13,8 +23,35 @@ import { AppBar } from "../AppBar";
 import { NavLinkListItem } from "./NavLinkListItem";
 import { NavProfile } from "./NavProfile";
 
-export const NavDesktop: FC<NavProps> = ({ appBarContent, children }) => {
+export const NavDesktop: FC<NavProps> = ({
+  appBarContent,
+  children,
+  navBackTo,
+  title,
+}) => {
   const desktopNav = useDesktopNavItems();
+
+  if (navBackTo) {
+    appBarContent = (
+      <>
+        <IconButton
+          component={ReactRouterLink}
+          sx={{
+            mr: 2,
+          }}
+          to={navBackTo}
+        >
+          <ArrowBack />
+        </IconButton>
+
+        {title && (
+          <Typography color="textPrimary" sx={{ pl: 3 }} variant="h5">
+            {title}
+          </Typography>
+        )}
+      </>
+    );
+  }
 
   return (
     <Box sx={{ height: "100vh", minHeight: "100%" }}>

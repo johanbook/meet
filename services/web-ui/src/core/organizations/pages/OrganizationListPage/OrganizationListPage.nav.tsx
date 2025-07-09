@@ -1,8 +1,7 @@
 import { ReactElement, ReactNode } from "react";
-import { Link as ReactRouterLink } from "react-router";
 
-import { Add, ArrowBack } from "@mui/icons-material";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Add } from "@mui/icons-material";
+import { Box, Typography } from "@mui/material";
 
 import { Nav } from "src/components/nav";
 import { Fab } from "src/components/ui/Fab";
@@ -17,24 +16,8 @@ export function OrganizationListPageNav({
 }: OrganizationListPageNavProps): ReactElement {
   const { t } = useTranslation("organization-list");
 
-  const appBarContent = (
-    <>
-      <IconButton
-        component={ReactRouterLink}
-        sx={{
-          mr: 2,
-        }}
-        to="/profile"
-      >
-        <ArrowBack />
-      </IconButton>
-
-      <Typography variant="h5">{t("header")}</Typography>
-    </>
-  );
-
   return (
-    <Nav appBarContent={appBarContent}>
+    <Nav navBackTo="/profile" title={t("header")}>
       <Box sx={{ pt: 2, px: 3 }}>
         <Typography color="textSecondary" gutterBottom>
           {t("description")}

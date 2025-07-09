@@ -1,8 +1,6 @@
 import { ReactElement, ReactNode } from "react";
-import { Link as ReactRouterLink } from "react-router";
 
-import { ArrowBack } from "@mui/icons-material";
-import { Box, Grid, IconButton, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 
 import { Nav } from "src/components/nav";
 import { DatePicker } from "src/components/ui/DatePicker";
@@ -26,24 +24,8 @@ export function ProfileJournalPageNav({
 }: ProfileJournalPageNavProps): ReactElement {
   const { t } = useTranslation("journal");
 
-  const appBarContent = (
-    <>
-      <IconButton
-        component={ReactRouterLink}
-        sx={{
-          mr: 2,
-        }}
-        to="/profile"
-      >
-        <ArrowBack />
-      </IconButton>
-
-      <Typography variant="h5">{t("header")}</Typography>
-    </>
-  );
-
   return (
-    <Nav appBarContent={appBarContent}>
+    <Nav navBackTo="/profile" title={t("header")}>
       <Box sx={{ pt: 1, px: 3 }}>
         <Typography color="textSecondary" sx={{ paddingBottom: 3 }}>
           {t("description")}

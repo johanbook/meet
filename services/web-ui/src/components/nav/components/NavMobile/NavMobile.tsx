@@ -1,12 +1,41 @@
 import { FC } from "react";
+import { Link as ReactRouterLink } from "react-router";
 
-import { Box, Container, Toolbar } from "@mui/material";
+import { ArrowBack } from "@mui/icons-material";
+import { Box, Container, IconButton, Toolbar, Typography } from "@mui/material";
 
 import { NavProps } from "../../types";
 import { AppBar } from "../AppBar";
 import { BottomNavigation } from "../BottomNavigation";
 
-export const NavMobile: FC<NavProps> = ({ appBarContent, children }) => {
+export const NavMobile: FC<NavProps> = ({
+  appBarContent,
+  children,
+  navBackTo,
+  title,
+}) => {
+  if (navBackTo) {
+    appBarContent = (
+      <>
+        <IconButton
+          component={ReactRouterLink}
+          sx={{
+            mr: 2,
+          }}
+          to={navBackTo}
+        >
+          <ArrowBack />
+        </IconButton>
+
+        {title && (
+          <Typography color="textPrimary" sx={{ pl: 3 }} variant="h5">
+            {title}
+          </Typography>
+        )}
+      </>
+    );
+  }
+
   return (
     <Box sx={{ height: "100vh", minHeight: "100%" }}>
       <AppBar appBarContent={appBarContent} />
