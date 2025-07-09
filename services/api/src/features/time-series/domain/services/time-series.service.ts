@@ -49,6 +49,7 @@ export class TimeSeriesService {
     await this.timeSeries.save(timeSeries);
 
     const event = map(TimeSeriesPointCreatedEvent, {
+      description: timeSeriesPoint.description,
       organizationId: timeSeries.organizationId,
       profileId: timeSeriesPoint.profileId,
       timeSeriesId: timeSeries.id,
