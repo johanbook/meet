@@ -1,4 +1,4 @@
 export enum OrganizationFeatureEnum {
-  CHAT = "chat",
-  TIME_SERIES = "time-series",
+  Chat = "chat",
+  TimeSeries = "time-series",
 }

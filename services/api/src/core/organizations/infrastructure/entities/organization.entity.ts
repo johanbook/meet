@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 
+import { ThemeEnum } from "../../theme.enum";
 import { OrganizationFeature } from "./organization-feature.entity";
 import { OrganizationMembership } from "./organization-membership.entity";
 import { OrganizationPhoto } from "./organization-photo.entity";
@@ -50,6 +51,11 @@ export class Organization {
   @JoinColumn()
   photo?: OrganizationPhoto;
 
-  @Column({ type: "varchar", length: 32, default: "default" })
-  theme!: string;
+  @Column({
+    type: "varchar",
+    length: 32,
+    default: ThemeEnum.Default,
+    enum: ThemeEnum,
+  })
+  theme!: ThemeEnum;
 }
