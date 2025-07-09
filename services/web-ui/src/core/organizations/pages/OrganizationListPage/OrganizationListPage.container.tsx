@@ -1,15 +1,11 @@
 import { ReactElement } from "react";
 import { useNavigate } from "react-router";
 
-import {
-  Avatar,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
+import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 
 import { OrganizationDetails, SwitchOrganizationCommand } from "src/api";
 import { organizationsApi } from "src/apis";
+import { OrganizationAvatar } from "src/components/shared";
 import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeysConstants, useQuery } from "src/core/query";
@@ -82,7 +78,10 @@ export function OrganizationListPageContainer(): ReactElement {
           onClick={() => handleClick(organization)}
         >
           <ListItemIcon>
-            <Avatar>{organization.name[0].toUpperCase()}</Avatar>
+            <OrganizationAvatar
+              name={organization.name}
+              src={organization.photo?.url}
+            />
           </ListItemIcon>
           <ListItemText
             primary={organization.name}

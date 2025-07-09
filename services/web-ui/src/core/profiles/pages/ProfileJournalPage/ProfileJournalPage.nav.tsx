@@ -26,7 +26,7 @@ export function ProfileJournalPageNav({
 
   return (
     <Nav navBackTo="/profile" padding="normal" title={t("header")}>
-      <Typography color="textSecondary" sx={{ paddingBottom: 3 }}>
+      <Typography color="textSecondary" sx={{ pb: 4 }}>
         {t("description")}
       </Typography>
 
