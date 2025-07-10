@@ -15,7 +15,7 @@ import { BlogPhotoListPageSkeleton } from "./BlogPhotoListPage.skeleton";
 const ITEMS_PER_PAGE = 10;
 
 export function BlogPhotoListPageContainer(): ReactElement {
-  const { t } = useTranslation("blog-photos");
+  const { t } = useTranslation("blog.photos");
 
   const { error, data, isPending, fetchNextPage, hasNextPage } =
     useInfiniteQuery({

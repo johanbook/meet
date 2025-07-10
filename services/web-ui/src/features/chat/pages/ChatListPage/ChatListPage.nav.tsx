@@ -13,7 +13,7 @@ interface ChatListPageNavProps {
 export function ChatListPageNav({
   children,
 }: ChatListPageNavProps): ReactElement {
-  const { t } = useTranslation("connections");
+  const { t } = useTranslation("chat.list");
 
   return (
     <Nav padding="normal" title={t("header")}>

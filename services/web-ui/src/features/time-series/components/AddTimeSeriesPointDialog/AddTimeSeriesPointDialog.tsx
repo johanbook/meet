@@ -29,7 +29,7 @@ export function AddTimeSeriesPointDialog({
 
   const queryClient = useQueryClient();
   const snackbar = useSnackbar();
-  const { t } = useTranslation("time-series-point-creation");
+  const { t } = useTranslation("time-series-point.creation");
 
   const form = useForm<AddPointToTimeSeriesCommand>(
     {
