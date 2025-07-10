@@ -6,7 +6,7 @@ import { Box, Typography } from "@mui/material";
 import { chatsApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { useTranslation } from "src/core/i18n";
-import { NotificationEventsConstants } from "src/core/notifications";
+import { NotificationEventEnum } from "src/core/notifications";
 import { useHandleNotification } from "src/core/notifications";
 import { CacheKeysConstants, useQuery, useQueryClient } from "src/core/query";
 import { ErrorView } from "src/views/ErrorView";
@@ -37,7 +37,7 @@ export function ChatPageContainer(): ReactElement {
   useHandleNotification({
     onCondition: (event: any) => String(event.data.senderId) === id,
     onNotification: handleRefresh,
-    type: NotificationEventsConstants.NewChatMessage,
+    type: NotificationEventEnum.NewChatMessage,
   });
 
   if (!id) {

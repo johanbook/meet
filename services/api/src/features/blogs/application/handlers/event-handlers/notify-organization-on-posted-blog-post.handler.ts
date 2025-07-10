@@ -4,7 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import {
-  NotificationEventsConstants,
+  NotificationEventEnum,
   NotificationService,
 } from "src/core/notifications";
 import { INotification } from "src/core/notifications/types";
@@ -40,7 +40,7 @@ export class NotifyOrganizationOnPostedBlogPostHandler
       description: `${profile.name} posted '${event.content}' in your organization.`,
       message: `${profile.name} made a new post`,
       resourcePath: `/blog/${event.id}`,
-      type: NotificationEventsConstants.NEW_BLOG_POST,
+      type: NotificationEventEnum.NewBlogPost,
     };
 
     await this.notificationService.notifyOrganization(

@@ -4,7 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import {
-  NotificationEventsConstants,
+  NotificationEventEnum,
   NotificationService,
 } from "src/core/notifications";
 import { INotification } from "src/core/notifications/types";
@@ -41,7 +41,7 @@ export class NotifyProfileWhenAddedToOrganizationHandler
       description: `You were added to an organization in Meet`,
       message: `You were added to the organization ${organization.name}`,
       resourcePath: "/",
-      type: NotificationEventsConstants.ADDED_TO_ORGANIZATION,
+      type: NotificationEventEnum.AddedToOrganization,
     };
 
     await this.notificationService.notifyProfiles(

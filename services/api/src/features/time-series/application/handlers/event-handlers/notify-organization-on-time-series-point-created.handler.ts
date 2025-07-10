@@ -4,7 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import {
-  NotificationEventsConstants,
+  NotificationEventEnum,
   NotificationService,
 } from "src/core/notifications";
 import { INotification } from "src/core/notifications/types";
@@ -40,7 +40,7 @@ export class NotifyOrganizationOnTimeSeriesPointCreatedHandler
       description: `${profile.name} added a new data point to '${event.timeSeriesId}': ${event.description}`,
       message: `${profile.name} added a new data point`,
       resourcePath: `/time-series/${event.timeSeriesId}`,
-      type: NotificationEventsConstants.NEW_TIME_SERIES_POINT,
+      type: NotificationEventEnum.NewTimeSeriesPoint,
     };
 
     await this.notificationService.notifyOrganization(

@@ -1,6 +1,6 @@
 import { map } from "src/core/mapper";
 import {
-  NotificationEventsConstants,
+  NotificationEventEnum,
   NotificationService,
 } from "src/core/notifications";
 import { beforeEach, describe, expect, it, vi } from "src/test";
@@ -47,7 +47,7 @@ describe(NotifyOrganizationOnTimeSeriesPointCreatedHandler.name, () => {
         description: `${profile!.name} added a new data point to 'ts-1': my-description`,
         message: `${profile!.name} added a new data point`,
         resourcePath: `/time-series/ts-1`,
-        type: NotificationEventsConstants.NEW_TIME_SERIES_POINT,
+        type: NotificationEventEnum.NewTimeSeriesPoint,
       },
       [event.profileId],
     );
