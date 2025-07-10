@@ -28,7 +28,14 @@ export const NavMobile: FC<NavProps> = ({
         )}
 
         {title && (
-          <Typography color="textPrimary" sx={{ pl: 2 }} variant="h5">
+          <Typography
+            color="textPrimary"
+            sx={{
+              // Space is needed when showing back nav to separate arrow from title
+              pl: navBackTo ? 4 : 2,
+            }}
+            variant="h5"
+          >
             {title}
           </Typography>
         )}
