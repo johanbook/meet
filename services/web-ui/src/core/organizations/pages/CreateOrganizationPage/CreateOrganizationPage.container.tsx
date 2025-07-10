@@ -17,7 +17,7 @@ import {
 import { useSnackbar } from "src/core/snackbar";
 
 export function CreateOrganizationPageContainer(): ReactElement {
-  const { t } = useTranslation("create-organization");
+  const { t } = useTranslation("organization.creation");
   const mutation = useMutation({
     mutationFn: (createOrganizationCommand: CreateOrganizationCommand) =>
       organizationsApi.createOrganization({ createOrganizationCommand }),

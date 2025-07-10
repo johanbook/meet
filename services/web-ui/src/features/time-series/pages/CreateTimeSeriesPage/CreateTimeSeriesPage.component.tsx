@@ -27,7 +27,7 @@ export function CreateTimeSeriesPageComponent({
 
   const snackbar = useSnackbar();
 
-  const { t } = useTranslation("timeseries-creation");
+  const { t } = useTranslation("time-series-creation");
 
   const form = useForm<CreateTimeSeriesCommand>(
     {

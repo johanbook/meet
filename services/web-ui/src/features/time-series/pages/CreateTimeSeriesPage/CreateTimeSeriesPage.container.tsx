@@ -10,7 +10,7 @@ import { CreateTimeSeriesPageNav } from "./CreateTimeSeriesPage.nav";
 export function CreateTimeSeriesPageContainer(): ReactElement {
   const navigate = useNavigate();
   const snackbar = useSnackbar();
-  const { t } = useTranslation("timeseries-creation");
+  const { t } = useTranslation("time-series-creation");
 
   const handleSubmit = () => {
     snackbar.success(t("actions.create.success"));

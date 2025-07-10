@@ -13,7 +13,7 @@ interface TimeSeriesListPageNavProps {
 export function TimeSeriesListPageNav({
   children,
 }: TimeSeriesListPageNavProps): ReactElement {
-  const { t } = useTranslation("timeseries");
+  const { t } = useTranslation("time-series");
 
   return (
     <Nav padding="normal" title={t("header")}>
