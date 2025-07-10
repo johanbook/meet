@@ -44,7 +44,7 @@ export interface CurrentOrganizationDetails {
      * @type {string}
      * @memberof CurrentOrganizationDetails
      */
-    theme: string;
+    theme: CurrentOrganizationDetailsThemeEnum;
     /**
      * 
      * @type {string}
@@ -89,6 +89,15 @@ export const CurrentOrganizationDetailsRoleEnum = {
     Member: 'member'
 } as const;
 export type CurrentOrganizationDetailsRoleEnum = typeof CurrentOrganizationDetailsRoleEnum[keyof typeof CurrentOrganizationDetailsRoleEnum];
+
+/**
+ * @export
+ */
+export const CurrentOrganizationDetailsThemeEnum = {
+    Default: 'default',
+    Neon: 'neon'
+} as const;
+export type CurrentOrganizationDetailsThemeEnum = typeof CurrentOrganizationDetailsThemeEnum[keyof typeof CurrentOrganizationDetailsThemeEnum];
 
 
 /**

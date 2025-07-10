@@ -1,6 +1,6 @@
 import { OrganizationRole } from "src/core/authorization";
 
-import { OrganizationFeatureEnum } from "../../../features.enum";
+import { OrganizationFeatureEnum } from "../../../feature.enum";
 import { ThemeEnum } from "../../../theme.enum";
 import { OrganizationDetails } from "./organization.dto";
 

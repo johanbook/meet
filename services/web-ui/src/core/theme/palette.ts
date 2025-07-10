@@ -1,10 +1,12 @@
+import { ThemeEnum } from "./theme.enum";
+
 interface Palette {
   primary: string;
   error: string;
   success: string;
 }
 
-const PALETTES: Record<string, Palette> = {
+const PALETTES: Record<ThemeEnum, Palette> = {
   default: {
     primary: "rgb(200,100,150)",
     success: "rgb(100,150,100)",

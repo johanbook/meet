@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { OrganizationFeatureEnum } from "../../features.enum";
+import { OrganizationFeatureEnum } from "../../feature.enum";
 import { OrganizationFeature } from "../../infrastructure/entities/organization-feature.entity";
 
 @Injectable()
