@@ -12,7 +12,7 @@ export function ProfilePageNav({
   children,
 }: ProfilePageNavProps): ReactElement {
   return (
-    <Nav navBackTo="/" padding="none" title="">
+    <Nav navBackTo="/" padding="normal" title="">
       <Box sx={{ pt: 4 }}>{children}</Box>
     </Nav>
   );
