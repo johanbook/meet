@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, Unique } from "typeorm";
 
 import { BaseEntity } from "src/core/database";
 
-import { OrganizationFeatureEnum } from "../../features.enum";
+import { OrganizationFeatureEnum } from "../../organization-feature.enum";
 import { Organization } from "./organization.entity";
 
 @Entity()

@@ -1,10 +1,11 @@
 import { createTheme as createMuiTheme } from "@mui/material/styles";
 
 import PALETTE from "./palette";
+import { ThemeEnum } from "./theme.enum";
 
 interface CreateThemeProps {
   darkmode: boolean;
-  theme: string;
+  theme: ThemeEnum;
 }
 
 export function createTheme({ darkmode, theme }: CreateThemeProps) {
