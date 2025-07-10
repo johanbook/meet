@@ -77,7 +77,7 @@ export class NotificationEventHandler {
   private handle(notification: INotification): void {
     const handlers = Object.values(this.handlers[notification.type]);
 
-    this.logger.trace("Received notification", { notification });
+    this.logger.debug("Received notification", { notification });
 
     const event = new NotificationEvent(notification);
     dispatchEvent(event);

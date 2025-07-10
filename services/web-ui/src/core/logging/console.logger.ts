@@ -2,7 +2,7 @@ import { BaseLogger, LogProps } from "./base.logger";
 
 export class ConsoleLogger extends BaseLogger {
   captureException(error: unknown) {
-    this.error("", { error });
+    this.error("Captured Exception", { error });
   }
 
   log({ level, msg, props }: LogProps): void {
@@ -22,11 +22,7 @@ export class ConsoleLogger extends BaseLogger {
         console.info(message, props);
         return;
       }
-      case "trace": {
-        console.trace(message, props);
-        return;
-      }
-      case "warn": {
+      case "warning": {
         console.warn(message, props);
         return;
       }

@@ -1,4 +1,4 @@
-type LogLevel = "debug" | "error" | "fatal" | "info" | "trace" | "warn";
+type LogLevel = "debug" | "error" | "fatal" | "info" | "warning";
 
 export interface LogProps {
   level: LogLevel;
@@ -29,11 +29,7 @@ export abstract class BaseLogger {
     this.log({ level: "info", msg, props });
   }
 
-  trace(msg: string, props?: object) {
-    this.log({ level: "trace", msg, props });
-  }
-
   warn(msg: string, props?: object) {
-    this.log({ level: "warn", msg, props });
+    this.log({ level: "warning", msg, props });
   }
 }
