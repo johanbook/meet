@@ -2,8 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { OrganizationFeatureEnum } from "../../feature.enum";
 import { OrganizationFeature } from "../../infrastructure/entities/organization-feature.entity";
+import { OrganizationFeatureEnum } from "../../organization-feature.enum";
 
 @Injectable()
 export class OrganizationFeatureService {
