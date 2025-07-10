@@ -1,11 +1,11 @@
 import { useContext, useEffect } from "react";
 
-import { NotificationEventsConstants } from "../constants/notification-events.constants";
+import { NotificationEventEnum } from "../constants/notification-event.enum";
 import { NotificationContext } from "../notification.provider";
 import { INotification } from "../types";
 
 interface UseHandleNotificationProps<
-  T extends NotificationEventsConstants,
+  T extends NotificationEventEnum,
   V extends INotification & { type: T },
 > {
   onCondition?: (notification: V) => boolean;
@@ -14,7 +14,7 @@ interface UseHandleNotificationProps<
 }
 
 export function useHandleNotification<
-  T extends NotificationEventsConstants,
+  T extends NotificationEventEnum,
   V extends INotification & { type: T },
 >({
   onCondition,

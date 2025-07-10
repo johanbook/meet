@@ -60,7 +60,8 @@ export const NotificationWebSocketDetailsTypeEnum = {
     AddedToOrganization: 'added_to_organization',
     NewBlogPost: 'new_blog_post',
     NewBlogPostComment: 'new_blog_post_comment',
-    NewChatMessage: 'new_chat_message'
+    NewChatMessage: 'new_chat_message',
+    NewTimeSeriesPoint: 'new_time_series_point'
 } as const;
 export type NotificationWebSocketDetailsTypeEnum = typeof NotificationWebSocketDetailsTypeEnum[keyof typeof NotificationWebSocketDetailsTypeEnum];
 

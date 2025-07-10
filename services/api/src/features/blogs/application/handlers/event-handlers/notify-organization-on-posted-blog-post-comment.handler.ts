@@ -4,7 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import {
-  NotificationEventsConstants,
+  NotificationEventEnum,
   NotificationService,
 } from "src/core/notifications";
 import { INotification } from "src/core/notifications/types";
@@ -63,7 +63,7 @@ export class NotifyOrganizationOnPostedBlogPostCommentHandler
       description: `${profile.name} commented '${event.content}' on ${blogPost.profile.name}'s post.`,
       message: `${profile.name} commented on ${blogPost.profile.name}'s post`,
       resourcePath: `/blog/${event.blogPostId}`,
-      type: NotificationEventsConstants.NEW_BLOG_POST_COMMENT,
+      type: NotificationEventEnum.NewBlogPostComment,
     };
 
     // Notify everyone involved in post except profile that made the new comment
