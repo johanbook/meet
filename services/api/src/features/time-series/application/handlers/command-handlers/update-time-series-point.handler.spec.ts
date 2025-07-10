@@ -6,10 +6,8 @@ import { createMockRepository } from "src/test/mocks";
 
 import { TimeSeriesPoint } from "../../../infrastructure/entities/time-series-point.entity";
 import { TimeSeries } from "../../../infrastructure/entities/time-series.entity";
-import {
-  makeTimeSeries,
-  makeTimeSeriesPoint,
-} from "../../../test/factories/time-series.factory";
+import { makeTimeSeriesPoint } from "../../../test/factories/time-series-point.factory";
+import { makeTimeSeries } from "../../../test/factories/time-series.factory";
 import { UpdateTimeSeriesPointCommand } from "../../contracts/commands/update-time-series-point.command";
 import { UpdateTimeSeriesPointHandler } from "./update-time-series-point.handler";
 

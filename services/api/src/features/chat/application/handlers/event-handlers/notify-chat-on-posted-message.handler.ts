@@ -4,7 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import {
-  NotificationEventsConstants,
+  NotificationEventEnum,
   NotificationService,
 } from "src/core/notifications";
 import { INotification } from "src/core/notifications/types";
@@ -66,7 +66,7 @@ export class NotifyChatOnPostedMessageHandler
       description: `${profile.name} sent you a message in Meet`,
       message: `${profile.name} sent you a new message`,
       resourcePath: `/chat/${event.senderId}`,
-      type: NotificationEventsConstants.NEW_CHAT_MESSAGE,
+      type: NotificationEventEnum.NewChatMessage,
     };
 
     await this.notificationService.notifyProfiles(receivers, notification);

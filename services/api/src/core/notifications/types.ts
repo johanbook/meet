@@ -1,11 +1,11 @@
-import { NotificationEventsConstants } from "./constants/notification-events.constants";
+import { NotificationEventEnum } from "./notification-event.enum";
 
 export type NotificationData = Record<string, number | string>;
 
-export type INotification = {
+export interface INotification {
   description: string;
   data?: NotificationData;
   message: string;
   resourcePath: string;
-  type: NotificationEventsConstants;
-};
+  type: NotificationEventEnum;
+}

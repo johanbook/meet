@@ -5,7 +5,7 @@ import { NotificationMetaDetailsWsEventNamesEnum } from "src/api";
 import { Logger } from "src/core/logging";
 
 import { dispatchEvent } from "../events";
-import { NotificationEventsConstants } from "./constants/notification-events.constants";
+import { NotificationEventEnum } from "./constants/notification-event.enum";
 import { NotificationEvent } from "./notification.event";
 import { INotification } from "./types";
 
@@ -17,7 +17,7 @@ interface Handler {
 }
 
 interface RegisterHandlerProps<
-  T extends NotificationEventsConstants,
+  T extends NotificationEventEnum,
   V extends INotification & { type: T },
 > {
   onCondition?: (notification: V) => boolean;
@@ -30,13 +30,14 @@ export class NotificationEventHandler {
 
   private defaultHandler: (notification: INotification) => void;
   private readonly handlers: Record<
-    NotificationEventsConstants,
+    NotificationEventEnum,
     Record<string, Handler>
   > = {
-    [NotificationEventsConstants.AddedToOrganization]: {},
-    [NotificationEventsConstants.NewBlogPost]: {},
-    [NotificationEventsConstants.NewBlogPostComment]: {},
-    [NotificationEventsConstants.NewChatMessage]: {},
+    [NotificationEventEnum.AddedToOrganization]: {},
+    [NotificationEventEnum.NewBlogPost]: {},
+    [NotificationEventEnum.NewBlogPostComment]: {},
+    [NotificationEventEnum.NewChatMessage]: {},
+    [NotificationEventEnum.NewTimeSeriesPoint]: {},
   };
 
   private readonly socket: Socket;
@@ -54,7 +55,7 @@ export class NotificationEventHandler {
   }
 
   public registerHandler<
-    T extends NotificationEventsConstants,
+    T extends NotificationEventEnum,
     V extends INotification & { type: T },
   >({ onCondition, handler, type }: RegisterHandlerProps<T, V>): string {
     const id = uuid();
@@ -69,10 +70,7 @@ export class NotificationEventHandler {
     return id;
   }
 
-  public unregisterHandler(
-    type: NotificationEventsConstants,
-    id: string,
-  ): void {
+  public unregisterHandler(type: NotificationEventEnum, id: string): void {
     delete this.handlers[type][id];
   }
 

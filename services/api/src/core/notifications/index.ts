@@ -1,3 +1,3 @@
 export { INotification } from "./types";
-export { NotificationEventsConstants } from "./constants/notification-events.constants";
+export { NotificationEventEnum } from "./notification-event.enum";
 export { NotificationService } from "./domain/services/notification.service";

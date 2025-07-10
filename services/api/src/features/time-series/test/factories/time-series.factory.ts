@@ -1,5 +1,4 @@
-import { TimeSeriesPoint } from "src/features/time-series/infrastructure/entities/time-series-point.entity";
-import { TimeSeries } from "src/features/time-series/infrastructure/entities/time-series.entity";
+import { TimeSeries } from "../../infrastructure/entities/time-series.entity";
 
 export function makeTimeSeries(props: Partial<TimeSeries> = {}): TimeSeries {
   const timeSeries = new TimeSeries();
@@ -13,18 +12,4 @@ export function makeTimeSeries(props: Partial<TimeSeries> = {}): TimeSeries {
     props.organizationId || ("my-organization-id" as any);
 
   return timeSeries;
-}
-
-export function makeTimeSeriesPoint(
-  props: Partial<TimeSeriesPoint> = {},
-): TimeSeriesPoint {
-  const point = new TimeSeriesPoint();
-
-  point.id = props.id || "1";
-  point.timeSeriesId = props.timeSeriesId || "1";
-  point.value = props.value || 123;
-  point.description = props.description || "my-description";
-  point.label = props.label || "my-label";
-
-  return point;
 }

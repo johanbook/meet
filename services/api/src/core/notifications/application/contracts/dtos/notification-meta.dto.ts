@@ -1,5 +1,5 @@
-import { NotificationEventsConstants } from "src/core/notifications/constants/notification-events.constants";
-import { NotificationData } from "src/core/notifications/types";
+import { NotificationEventEnum } from "../../../notification-event.enum";
+import { NotificationData } from "../../../types";
 
 export enum NotificationEventNames {
   Notification = "notification",
@@ -10,7 +10,7 @@ export class NotificationWebSocketDetails {
   data!: NotificationData;
   message!: string;
   resourcePath!: string;
-  type!: NotificationEventsConstants;
+  type!: NotificationEventEnum;
 }
 
 export class NotificationMetaDetails {
