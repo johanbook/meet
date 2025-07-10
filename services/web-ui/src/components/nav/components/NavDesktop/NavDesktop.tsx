@@ -29,6 +29,7 @@ export const NavDesktop: FC<NavProps> = ({
   children,
   navBackTo,
   padding,
+  subtitle,
   title,
 }) => {
   const { t } = useTranslation("core");
@@ -103,8 +104,14 @@ export const NavDesktop: FC<NavProps> = ({
           )}
 
           {title && (
-            <Typography color="textPrimary" sx={{ mb: 2 }} variant="h4">
+            <Typography color="textPrimary" gutterBottom variant="h4">
               {title}
+            </Typography>
+          )}
+
+          {subtitle && (
+            <Typography color="textSecondary" gutterBottom>
+              {subtitle}
             </Typography>
           )}
 

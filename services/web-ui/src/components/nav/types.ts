@@ -27,4 +27,5 @@ export interface NavProps {
   navBackTo?: string;
   padding: "none" | "normal";
   title?: string;
+  subtitle?: string;
 }
