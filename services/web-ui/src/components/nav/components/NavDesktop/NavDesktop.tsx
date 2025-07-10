@@ -17,6 +17,7 @@ import {
   DesktopDrawer,
 } from "src/components/ui/Drawer/DesktopDrawer";
 import { useTranslation } from "src/core/i18n";
+import { useMetaData } from "src/hooks/useMetaData";
 
 import { useDesktopNavItems } from "../../hooks/useNavItems";
 import { NavProps } from "../../types";
@@ -34,6 +35,8 @@ export const NavDesktop: FC<NavProps> = ({
   const { t } = useTranslation("core");
 
   const desktopNav = useDesktopNavItems();
+
+  useMetaData({ title });
 
   return (
     <Box sx={{ height: "100vh", minHeight: "100%" }}>
