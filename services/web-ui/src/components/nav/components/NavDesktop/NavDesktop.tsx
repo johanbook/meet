@@ -16,6 +16,7 @@ import {
   DRAWER_WIDTH,
   DesktopDrawer,
 } from "src/components/ui/Drawer/DesktopDrawer";
+import { useTranslation } from "src/core/i18n";
 
 import { useDesktopNavItems } from "../../hooks/useNavItems";
 import { NavProps } from "../../types";
@@ -30,6 +31,8 @@ export const NavDesktop: FC<NavProps> = ({
   padding,
   title,
 }) => {
+  const { t } = useTranslation("core");
+
   const desktopNav = useDesktopNavItems();
 
   return (
@@ -95,7 +98,7 @@ export const NavDesktop: FC<NavProps> = ({
                 <ArrowBack />
               </IconButton>
 
-              <Typography variant="body1">Back</Typography>
+              <Typography variant="body1">{t("general.back")}</Typography>
             </Box>
           )}
 
