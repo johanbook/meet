@@ -4,6 +4,8 @@ import { Link as ReactRouterLink } from "react-router";
 import { ArrowBack } from "@mui/icons-material";
 import { Box, Container, IconButton, Toolbar, Typography } from "@mui/material";
 
+import { useMetaData } from "src/hooks/useMetaData";
+
 import { NavProps } from "../../types";
 import { AppBar } from "../AppBar";
 import { BottomNavigation } from "../BottomNavigation";
@@ -16,6 +18,8 @@ export const NavMobile: FC<NavProps> = ({
   padding,
   title,
 }) => {
+  useMetaData({ title });
+
   if (navBackTo || title) {
     appBarContent = (
       <>
