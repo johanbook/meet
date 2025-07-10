@@ -30,7 +30,7 @@ export function ProfileCreationPageComponent({
   onCreateProfile,
   setForm,
 }: ProfileCreationPageComponentProps): React.ReactElement {
-  const { t } = useTranslation("profile-creation");
+  const { t } = useTranslation("profile.creation");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 

@@ -10,7 +10,7 @@ interface CreateChatPageNavProps {
 export function CreateChatPageNav({
   children,
 }: CreateChatPageNavProps): ReactElement {
-  const { t } = useTranslation("chat-create");
+  const { t } = useTranslation("chat.create");
 
   return (
     <Nav navBackTo="/chat" padding="normal" title={t("header")}>

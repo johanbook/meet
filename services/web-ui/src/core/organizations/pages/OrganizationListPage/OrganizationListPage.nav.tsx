@@ -14,7 +14,7 @@ interface OrganizationListPageNavProps {
 export function OrganizationListPageNav({
   children,
 }: OrganizationListPageNavProps): ReactElement {
-  const { t } = useTranslation("organization-list");
+  const { t } = useTranslation("organization.list");
 
   return (
     <Nav navBackTo="/profile" padding="normal" title={t("header")}>

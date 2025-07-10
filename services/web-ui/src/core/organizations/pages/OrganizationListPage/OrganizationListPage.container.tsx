@@ -17,7 +17,7 @@ import { OrganizationListPageNav } from "./OrganizationListPage.nav";
 import { OrganizationListPageSkeleton } from "./OrganizationListPage.skeleton";
 
 export function OrganizationListPageContainer(): ReactElement {
-  const { t } = useTranslation("organization-list");
+  const { t } = useTranslation("organization.list");
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const snackbar = useSnackbar();
@@ -51,7 +51,7 @@ export function OrganizationListPageContainer(): ReactElement {
   if (!data || data.length === 0) {
     return (
       <OrganizationListPageNav>
-        <ErrorView message={t("organization-list.error") || ""} />
+        <ErrorView />
       </OrganizationListPageNav>
     );
   }

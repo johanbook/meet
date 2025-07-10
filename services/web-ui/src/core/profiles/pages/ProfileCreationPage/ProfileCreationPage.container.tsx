@@ -16,7 +16,7 @@ export interface ProfileCreationPageContainerProps {
 export function ProfileCreationPageContainer({
   onProfileCreated,
 }: ProfileCreationPageContainerProps): ReactElement {
-  const { t } = useTranslation("profile-creation");
+  const { t } = useTranslation("profile.creation");
 
   const snackbar = useSnackbar();
 

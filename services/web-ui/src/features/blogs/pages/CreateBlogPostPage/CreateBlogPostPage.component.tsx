@@ -36,7 +36,7 @@ export function CreateBlogPostPageComponent({
 
   const snackbar = useSnackbar();
 
-  const { t } = useTranslation("blog-creation");
+  const { t } = useTranslation("blog.creation");
 
   const form = useForm<CreateBlogPostRequest>(
     {
