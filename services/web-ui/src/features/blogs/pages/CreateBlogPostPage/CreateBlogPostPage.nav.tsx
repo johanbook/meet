@@ -10,7 +10,7 @@ interface CreateBlogPostPageNavProps {
 export function CreateBlogPostPageNav({
   children,
 }: CreateBlogPostPageNavProps): ReactElement {
-  const { t } = useTranslation("blog-creation");
+  const { t } = useTranslation("blog.creation");
 
   return (
     <Nav navBackTo="/" padding="normal" title={t("header")}>

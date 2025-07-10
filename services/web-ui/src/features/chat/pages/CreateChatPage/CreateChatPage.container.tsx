@@ -28,7 +28,7 @@ interface Option {
 export function CreateChatPageContainer(): ReactElement {
   const navigate = useNavigate();
   const snackbar = useSnackbar();
-  const { t } = useTranslation("chat-create");
+  const { t } = useTranslation("chat.create");
 
   const queryClient = useQueryClient();
 

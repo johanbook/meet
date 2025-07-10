@@ -10,7 +10,7 @@ interface CreateTimeSeriesPageNavProps {
 export function CreateTimeSeriesPageNav({
   children,
 }: CreateTimeSeriesPageNavProps): ReactElement {
-  const { t } = useTranslation("time-series-creation");
+  const { t } = useTranslation("time-series.creation");
 
   return (
     <Nav navBackTo="/time-series" padding="normal" title={t("header")}>

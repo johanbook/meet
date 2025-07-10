@@ -43,7 +43,7 @@ function MenuContent({ currentOrganizationId }: MenuContentProps) {
 
   const queryClient = useQueryClient();
 
-  const { t } = useTranslation("organization-list");
+  const { t } = useTranslation("organization.list");
 
   const mutation = useMutation({
     mutationFn: (switchOrganizationCommand: SwitchOrganizationCommand) =>

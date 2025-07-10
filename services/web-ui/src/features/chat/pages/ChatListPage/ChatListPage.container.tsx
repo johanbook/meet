@@ -12,7 +12,7 @@ import { ChatListPageNav } from "./ChatListPage.nav";
 import { ChatListPageSkeleton } from "./ChatListPage.skeleton";
 
 export function ChatListPageContainer(): ReactElement {
-  const { t } = useTranslation("connections");
+  const { t } = useTranslation("chat.list");
 
   const { error, data, isPending } = useQuery({
     queryKey: [CacheKeysConstants.Chats],
@@ -39,7 +39,7 @@ export function ChatListPageContainer(): ReactElement {
     return (
       <ChatListPageNav>
         <Typography sx={{ paddingTop: 1 }} gutterBottom>
-          {t("no-connections")}
+          {t("no-chats")}
         </Typography>
       </ChatListPageNav>
     );
