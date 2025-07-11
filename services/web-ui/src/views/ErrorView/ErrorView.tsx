@@ -10,7 +10,7 @@ interface ErrorViewProps {
 
 export function ErrorView({
   description,
-  message = "Un unexpected error occured",
+  message = "An unexpected error occurred",
 }: ErrorViewProps): ReactElement {
   return (
     <Box
@@ -26,13 +26,13 @@ export function ErrorView({
       >
         <HeartBroken color="error" sx={{ fontSize: 60, mb: 2 }} />
 
-        <Typography gutterBottom variant="h5">
+        <Typography align="center" gutterBottom variant="h5">
           {message}
         </Typography>
 
-        {description && (
-          <Typography color="textSecondary">{description}</Typography>
-        )}
+        <Typography align="center" color="textSecondary">
+          {description}
+        </Typography>
       </Box>
     </Box>
   );
