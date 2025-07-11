@@ -21,7 +21,7 @@ export function ChatMessageList({
     <List
       sx={{
         maxHeight: "80vh",
-        overflow: "scroll",
+        overflowY: "auto",
         display: "flex",
         flexDirection: "column-reverse",
       }}

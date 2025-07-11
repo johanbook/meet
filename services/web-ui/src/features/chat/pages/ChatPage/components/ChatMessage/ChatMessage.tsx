@@ -24,7 +24,9 @@ export function ChatMessage({ message }: ChatMessageProps): React.ReactElement {
       {!message.sentByCurrentUser && (
         <Link to={`/profile/${message.profile.id}`}>
           <Avatar
-            imgProps={{ loading: "lazy" }}
+            slotProps={{
+              img: { loading: "lazy" },
+            }}
             src={message.profile.imageUrl}
             sx={{ mr: 1, width: 34, height: 34, mt: 1 / 2 }}
           />
