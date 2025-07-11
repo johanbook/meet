@@ -4,6 +4,93 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+## [2.7.0](https://github.com/johanbook/meet/compare/v2.6.0...v2.7.0) (2025-07-11)
+
+
+### Features
+
+* **api:** add feature for chat ([#1635](https://github.com/johanbook/meet/issues/1635)) ([89df43e](https://github.com/johanbook/meet/commit/89df43e4331f39fbccfcbfad5f6b2bf74abcc027))
+* **api:** add notification handler when adding time series point ([#1647](https://github.com/johanbook/meet/issues/1647)) ([ffdb556](https://github.com/johanbook/meet/commit/ffdb5569abdff751789a735a2fe7419e60880c92))
+* **api:** add time series module ([#1605](https://github.com/johanbook/meet/issues/1605)) ([e6a7465](https://github.com/johanbook/meet/commit/e6a7465525c57575b6aac8878afb44ccafc87b88))
+* **api:** include all labels when getting time series ([#1627](https://github.com/johanbook/meet/issues/1627)) ([e85132f](https://github.com/johanbook/meet/commit/e85132f302accf6839e027de1865f62d83469151))
+* **api:** include label in time series points ([#1625](https://github.com/johanbook/meet/issues/1625)) ([004ae5b](https://github.com/johanbook/meet/commit/004ae5b506fde9ef6976eaa5c1850de1d289f3aa))
+* **api:** include organization permissions when fetching current ([#1595](https://github.com/johanbook/meet/issues/1595)) ([3efd1ed](https://github.com/johanbook/meet/commit/3efd1ed6b95776aeb951ebcac92bb18abfd0965f))
+* **api:** include photos when fetching organization list ([#1603](https://github.com/johanbook/meet/issues/1603)) ([29a13d0](https://github.com/johanbook/meet/commit/29a13d06c021734b286ab9e74752deeaace58d2c))
+* **api:** include time series points in endpoint ([#1622](https://github.com/johanbook/meet/issues/1622)) ([9912055](https://github.com/johanbook/meet/commit/991205516a08ff8525e13e2632ee0a67067be095))
+* **api:** set feature to be enum ([#1623](https://github.com/johanbook/meet/issues/1623)) ([38e78fd](https://github.com/johanbook/meet/commit/38e78fda58ae5402968e92718628db49df79a404))
+* **api:** support custom themes per organization ([#1596](https://github.com/johanbook/meet/issues/1596)) ([bad46f2](https://github.com/johanbook/meet/commit/bad46f2a296d04f1e9379eea586a94d978384514))
+* **api:** support organization photo ([#1599](https://github.com/johanbook/meet/issues/1599)) ([3b0934b](https://github.com/johanbook/meet/commit/3b0934ba03ac65fb58d994b063e4bb491da9298a))
+* **auth-ui:** add custom page for password reset ([#1561](https://github.com/johanbook/meet/issues/1561)) ([dd53b9b](https://github.com/johanbook/meet/commit/dd53b9b35d8fe48be20396b49a9e16d9e70fa6ea))
+* **auth-ui:** add logout route ([#1580](https://github.com/johanbook/meet/issues/1580)) ([6997c21](https://github.com/johanbook/meet/commit/6997c21c0d6710696646ceac765631961fdf2f48))
+* **auth-ui:** fix email verification process ([#1585](https://github.com/johanbook/meet/issues/1585)) ([05ff2f0](https://github.com/johanbook/meet/commit/05ff2f0e8bf1bb02cdf77246137038d218df53c3))
+* **auth-ui:** improve styling ([#1566](https://github.com/johanbook/meet/issues/1566)) ([dda68fa](https://github.com/johanbook/meet/commit/dda68faace357532394d19209c79cd1ef59da6ba))
+* **auth-ui:** use custom ui ([#1560](https://github.com/johanbook/meet/issues/1560)) ([7e9676a](https://github.com/johanbook/meet/commit/7e9676a3ee6e29a2cf71c01c6dad8b518c967156))
+* **web-ui:** add current month total to time series stats ([#1637](https://github.com/johanbook/meet/issues/1637)) ([bb9c5e7](https://github.com/johanbook/meet/commit/bb9c5e7aa0841b8c6bae44385c0937719b94f569))
+* **web-ui:** add page for single time series ([#1621](https://github.com/johanbook/meet/issues/1621)) ([2fd63e2](https://github.com/johanbook/meet/commit/2fd63e29f2f431479d12f0533274e902353b89e7))
+* **web-ui:** add skeleton for time series list ([#1624](https://github.com/johanbook/meet/issues/1624)) ([7a68b79](https://github.com/johanbook/meet/commit/7a68b79cd4807185f0e3ce10a36aa76652d643b8))
+* **web-ui:** add time series ([#1620](https://github.com/johanbook/meet/issues/1620)) ([2eaebfb](https://github.com/johanbook/meet/commit/2eaebfbb4029e0da1b343e19e4246d87713e93b2))
+* **web-ui:** add time series stats ([#1634](https://github.com/johanbook/meet/issues/1634)) ([c696d82](https://github.com/johanbook/meet/commit/c696d82854f13b7a66b803a3ec74fd76e72e0be2))
+* **web-ui:** decrease elevation of mobile drawer ([#1553](https://github.com/johanbook/meet/issues/1553)) ([9286969](https://github.com/johanbook/meet/commit/9286969360e2f30479d2ecb8e03ed713a1e585fa))
+* **web-ui:** improve back button on desktop nav ([#1653](https://github.com/johanbook/meet/issues/1653)) ([1e13c8e](https://github.com/johanbook/meet/commit/1e13c8ee54c08aae2c6b78b26d8992dcf7a37bd8))
+* **web-ui:** improve design of page for creating blog post ([#1522](https://github.com/johanbook/meet/issues/1522)) ([c4a4bae](https://github.com/johanbook/meet/commit/c4a4bae99141e80de22af7811d08b7a78c7602e1))
+* **web-ui:** improve desktop nav ([#1643](https://github.com/johanbook/meet/issues/1643)) ([8214dbf](https://github.com/johanbook/meet/commit/8214dbf471a9404732c5be83aac7b4a208a5f944))
+* **web-ui:** improve snackbar style ([#1547](https://github.com/johanbook/meet/issues/1547)) ([bed2e41](https://github.com/johanbook/meet/commit/bed2e41543b523f0b9f8fed3203650919f0b3da0))
+* **web-ui:** improve spacing for header on desktop nav ([#1654](https://github.com/johanbook/meet/issues/1654)) ([70b2b86](https://github.com/johanbook/meet/commit/70b2b86ae31f074cd1895a19fdbf44664f0bd07b))
+* **web-ui:** improve style of dialog ([#1516](https://github.com/johanbook/meet/issues/1516)) ([a520a7f](https://github.com/johanbook/meet/commit/a520a7f549e71245b56f9b8722c00e3d5bf2f01e))
+* **web-ui:** improve time series stats styling ([#1636](https://github.com/johanbook/meet/issues/1636)) ([0f6de54](https://github.com/johanbook/meet/commit/0f6de54669edb22d794be20434a494d1fda46180))
+* **web-ui:** make organization avatars rectangular ([#1602](https://github.com/johanbook/meet/issues/1602)) ([9b86c5f](https://github.com/johanbook/meet/commit/9b86c5f887fc2ba1e10fce69c3d5a79db71de21b))
+* **web-ui:** only show chat if feature enabled ([#1628](https://github.com/johanbook/meet/issues/1628)) ([254c883](https://github.com/johanbook/meet/commit/254c883bce5dfe05bf46a5ca916aab2615aaa1fa))
+* **web-ui:** open dialog for adding time series point ([#1630](https://github.com/johanbook/meet/issues/1630)) ([d99ad85](https://github.com/johanbook/meet/commit/d99ad85faaa2039374f6bd583c22552f18fa3f1c))
+* **web-ui:** rename "post" to "moment" in blog translations ([#1520](https://github.com/johanbook/meet/issues/1520)) ([a089ee4](https://github.com/johanbook/meet/commit/a089ee4ccdb6374550f24be96ff0ed3e3176cbe9))
+* **web-ui:** show time serie point labels ([#1626](https://github.com/johanbook/meet/issues/1626)) ([53b27e9](https://github.com/johanbook/meet/commit/53b27e9069283b11e4698180d5b266921450edd7))
+* **web-ui:** support organization theme ([#1597](https://github.com/johanbook/meet/issues/1597)) ([4b8c2aa](https://github.com/johanbook/meet/commit/4b8c2aaba64b69a033836ef76e935cce8ee1e2f9))
+* **web-ui:** support uploading organization avatar ([#1601](https://github.com/johanbook/meet/issues/1601)) ([9dd5bd6](https://github.com/johanbook/meet/commit/9dd5bd622683cbda2162261cc10919c8905816f9))
+* **web-ui:** update page title on pages ([#1661](https://github.com/johanbook/meet/issues/1661)) ([f907ce0](https://github.com/johanbook/meet/commit/f907ce0f391380c0039f0f09366dcdd153beaec3))
+
+
+### Bug Fixes
+
+* **api:** add missing module import ([#1650](https://github.com/johanbook/meet/issues/1650)) ([84a4ef4](https://github.com/johanbook/meet/commit/84a4ef466d0d3092259faba990ba411c47575a53))
+* **api:** add missing permission to removing member ([#1600](https://github.com/johanbook/meet/issues/1600)) ([221a0ad](https://github.com/johanbook/meet/commit/221a0ad345322e5998dc481c8e10ef82c0e256af))
+* **api:** avoid sending email if webpush already sent ([#1572](https://github.com/johanbook/meet/issues/1572)) ([74e9dd4](https://github.com/johanbook/meet/commit/74e9dd4bba6dbac40d983bbd41c65c74a994ae38))
+* **api:** fix module import again ([#1651](https://github.com/johanbook/meet/issues/1651)) ([6a4712d](https://github.com/johanbook/meet/commit/6a4712daaedd44b6327a29530ba970d1c5e4f4a9))
+* **auth-ui:** add back support for verify email ([#1578](https://github.com/johanbook/meet/issues/1578)) ([f43a7bc](https://github.com/johanbook/meet/commit/f43a7bc5e949b213b5b3d77ab8043f6461e6efe1))
+* **auth-ui:** avoid redirecting to main app on email verify page ([#1592](https://github.com/johanbook/meet/issues/1592)) ([09610b5](https://github.com/johanbook/meet/commit/09610b54d8091a0a2158bbb61b83baf056a675c3))
+* **auth-ui:** avoid showing login screen while refreshing auth ([#1587](https://github.com/johanbook/meet/issues/1587)) ([9cb20e6](https://github.com/johanbook/meet/commit/9cb20e6c4860bc1c39d8c4ebb5d7cd8454eafa0a))
+* **auth-ui:** fix password reset ([#1567](https://github.com/johanbook/meet/issues/1567)) ([4c87824](https://github.com/johanbook/meet/commit/4c8782461c6cad9da0849b33342d450ce014b76c))
+* **auth-ui:** improve ui responsiveness ([#1564](https://github.com/johanbook/meet/issues/1564)) ([3ff6b33](https://github.com/johanbook/meet/commit/3ff6b33b95fd881dcc0968f4397a2fe951fec424))
+* **auth-ui:** redirect to main app when email is verified ([#1588](https://github.com/johanbook/meet/issues/1588)) ([e247f91](https://github.com/johanbook/meet/commit/e247f91c03196b1342ed79c8dc36e146090a3fab))
+* **auth-ui:** remove redundant margin ([#1593](https://github.com/johanbook/meet/issues/1593)) ([1a334a2](https://github.com/johanbook/meet/commit/1a334a28a73c512be5156d5134e9fa52dbe824dc))
+* **auth-ui:** reset previous form errors when logging in ([#1563](https://github.com/johanbook/meet/issues/1563)) ([66d48a2](https://github.com/johanbook/meet/commit/66d48a25a8dfff10bf3bb845ed2d629b846988ab))
+* **auth-ui:** show feedback when new verification email has been sent ([#1589](https://github.com/johanbook/meet/issues/1589)) ([7aaa1ec](https://github.com/johanbook/meet/commit/7aaa1ec9d9d8c16df9d0f5166dfcb3b41e9eca53))
+* **auth-ui:** try refreshing session ([#1571](https://github.com/johanbook/meet/issues/1571)) ([e745064](https://github.com/johanbook/meet/commit/e7450645bff82de4d329d38f01718d7e90b06acb))
+* **auth-ui:** update path ([#1584](https://github.com/johanbook/meet/issues/1584)) ([d808f25](https://github.com/johanbook/meet/commit/d808f2531f5cdc8e8bfe9982d6c973e3469fb69b))
+* **web-ui:** add missing translations in settings ([#1517](https://github.com/johanbook/meet/issues/1517)) ([746f0f3](https://github.com/johanbook/meet/commit/746f0f3201fc1aa1d6c5b6afb75e857f9de55bbc))
+* **web-ui:** add translation for desktop nav back button ([#1658](https://github.com/johanbook/meet/issues/1658)) ([1ad812e](https://github.com/johanbook/meet/commit/1ad812eb4284eba70b4fdc6370baaa17de276afe))
+* **web-ui:** center time series nav ([#1645](https://github.com/johanbook/meet/issues/1645)) ([238efa1](https://github.com/johanbook/meet/commit/238efa18091f1cbd46c8cb1ece90ebb01f072d75))
+* **web-ui:** change default value for new time series point to 1 ([#1633](https://github.com/johanbook/meet/issues/1633)) ([e3e892d](https://github.com/johanbook/meet/commit/e3e892dfa7f6f854e37a70775ad71ae6f2d22666))
+* **web-ui:** clear dialog form on close ([#1631](https://github.com/johanbook/meet/issues/1631)) ([02be73f](https://github.com/johanbook/meet/commit/02be73fad02c0ee6c70eb1c18e0c2db6d91b7911))
+* **web-ui:** confirm before deleting organization ([#1514](https://github.com/johanbook/meet/issues/1514)) ([99c740f](https://github.com/johanbook/meet/commit/99c740f63319cac2c9ea34a013b7e7a3d0c6ca2a))
+* **web-ui:** ensure fab always has fixed position ([#1632](https://github.com/johanbook/meet/issues/1632)) ([92a5fe9](https://github.com/johanbook/meet/commit/92a5fe999330170501300e62e3fe6b6806e15e2b))
+* **web-ui:** fix incorrect url ([#1629](https://github.com/johanbook/meet/issues/1629)) ([a47ebcd](https://github.com/johanbook/meet/commit/a47ebcd981f369180a3356c7eb1beac045d5167c))
+* **web-ui:** fix mobile nav spacing ([#1659](https://github.com/johanbook/meet/issues/1659)) ([36ce9c3](https://github.com/johanbook/meet/commit/36ce9c36e18ba0ca58dc0645a3787c67fe5a0543))
+* **web-ui:** fix spacing regression in mobile nav ([#1644](https://github.com/johanbook/meet/issues/1644)) ([aa4c56b](https://github.com/johanbook/meet/commit/aa4c56bb25b28f1a47d12216424b0248356f1da9))
+* **web-ui:** fix styling regression ([#1665](https://github.com/johanbook/meet/issues/1665)) ([d190d7a](https://github.com/johanbook/meet/commit/d190d7a61275012c7d90cac45aee6e6d425a3c3c))
+* **web-ui:** fix typo in default error message ([#1666](https://github.com/johanbook/meet/issues/1666)) ([aa6a363](https://github.com/johanbook/meet/commit/aa6a363b80ebd7131c2ad58f2281eddc7acfce9b))
+* **web-ui:** hide non-featured nav items on desktop ([#1638](https://github.com/johanbook/meet/issues/1638)) ([bf2690a](https://github.com/johanbook/meet/commit/bf2690aa3e8e310038b8677608a0e87c4f649a92))
+* **web-ui:** inclde photo in organization list ([#1604](https://github.com/johanbook/meet/issues/1604)) ([5f6d6bd](https://github.com/johanbook/meet/commit/5f6d6bd0ea0a5248ea8d8d24646b0dcd66f528fd))
+* **web-ui:** increase page padding on desktop ([#1657](https://github.com/johanbook/meet/issues/1657)) ([47342aa](https://github.com/johanbook/meet/commit/47342aa9bab33ac43d1f1c0440a34a93cf174d14))
+* **web-ui:** only show chat scrollbars if needed ([#1667](https://github.com/johanbook/meet/issues/1667)) ([9d93bf2](https://github.com/johanbook/meet/commit/9d93bf2528866a55abebd9f85ec6a1fec5527687))
+* **web-ui:** redirect to email verification on failed verification ([#1590](https://github.com/johanbook/meet/issues/1590)) ([ce0f450](https://github.com/johanbook/meet/commit/ce0f45068044d89f60c204d535762d372175da15))
+* **web-ui:** show snackbar above bottom nav on mobile ([#1550](https://github.com/johanbook/meet/issues/1550)) ([5740857](https://github.com/johanbook/meet/commit/5740857a071fbed42feec7e31476b33022d0aaf5))
+* **web-ui:** update translations for blog posts ([#1518](https://github.com/johanbook/meet/issues/1518)) ([fb997b2](https://github.com/johanbook/meet/commit/fb997b20377ebdb285010ad53d804843164c90ab))
+* **web-ui:** use external link when loading logout ([#1581](https://github.com/johanbook/meet/issues/1581)) ([faad4ae](https://github.com/johanbook/meet/commit/faad4ae5c056ad8c8fe38d32f221d9c262f76bdb))
+
+
+### Performance Improvements
+
+* **api:** send web push notifications in parallell ([#1573](https://github.com/johanbook/meet/issues/1573)) ([e8aa038](https://github.com/johanbook/meet/commit/e8aa03843427c21948c4560c08f65a4a573b1c56))
+
 ## [2.6.0](https://github.com/johanbook/meet/compare/v2.5.0...v2.6.0) (2025-06-28)
 
 
