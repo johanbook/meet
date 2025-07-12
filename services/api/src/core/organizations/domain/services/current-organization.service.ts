@@ -1,8 +1,9 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { Cache } from "src/core/cache";
+import { EntityNotFoundError } from "src/core/error-handling";
 
 import { OrganizationMembership } from "../../infrastructure/entities/organization-membership.entity";
 import { Organization } from "../../infrastructure/entities/organization.entity";
@@ -43,9 +44,7 @@ export class CurrentOrganizationService {
     const organizationId = activeOrganization?.organizationId;
 
     if (!organizationId) {
-      throw new NotFoundException(
-        "Unable to find current organization. Please contact support",
-      );
+      throw new EntityNotFoundError(Organization);
     }
 
     const currentOrganization = await this.cache.getOrUpdate(
@@ -63,9 +62,7 @@ export class CurrentOrganizationService {
     );
 
     if (!currentOrganization) {
-      throw new NotFoundException(
-        "Unable to find current organization. Please contact support",
-      );
+      throw new EntityNotFoundError(Organization);
     }
 
     return currentOrganization;

@@ -1,9 +1,9 @@
-import { NotFoundException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { AuthorizationService } from "src/core/authorization";
+import { EntityNotFoundError } from "src/core/error-handling";
 
 import { BlogPostReaction } from "../../../infrastructure/entities/blog-post-reaction.entity";
 import { DeleteBlogPostReactionCommand } from "../../contracts/commands/delete-blog-post-reaction.command";
@@ -26,7 +26,7 @@ export class DeleteBlogPostReactionHandler
     });
 
     if (!blogPostReaction) {
-      throw new NotFoundException("Blog post reaction not found");
+      throw new EntityNotFoundError(BlogPostReaction);
     }
 
     await this.authorizationService.authorizeOwnerOrAdmin(blogPostReaction);
