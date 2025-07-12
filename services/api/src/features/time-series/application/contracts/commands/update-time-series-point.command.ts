@@ -1,5 +1,7 @@
 import { IsNumber, IsOptional, IsString, IsUUID } from "class-validator";
 
+import { Trim } from "src/core/validation";
+
 export class UpdateTimeSeriesPointCommand {
   @IsString()
   @IsOptional()
@@ -7,6 +9,7 @@ export class UpdateTimeSeriesPointCommand {
 
   @IsString()
   @IsOptional()
+  @Trim()
   public readonly label?: string;
 
   @IsUUID()
