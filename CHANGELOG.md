@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+## [2.7.1](https://github.com/johanbook/meet/compare/v2.7.0...v2.7.1) (2025-07-12)
+
+
+### Bug Fixes
+
+* **api:** avoid using id in time series notification ([#1671](https://github.com/johanbook/meet/issues/1671)) ([65e97ce](https://github.com/johanbook/meet/commit/65e97ce1a65e887e62f4a1eaa233df1331606728))
+* **api:** trim time series point labels ([#1668](https://github.com/johanbook/meet/issues/1668)) ([76dcdae](https://github.com/johanbook/meet/commit/76dcdae6e4e1d74bfd0472f5430881e3dd9926f9))
+
 ## [2.7.0](https://github.com/johanbook/meet/compare/v2.6.0...v2.7.0) (2025-07-11)
 
 
