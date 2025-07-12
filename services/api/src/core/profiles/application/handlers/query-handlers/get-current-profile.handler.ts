@@ -1,9 +1,9 @@
-import { NotFoundException } from "@nestjs/common";
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
+import { EntityNotFoundError } from "src/core/error-handling";
 import { map } from "src/core/mapper";
 import { PhotoService } from "src/core/photos";
 
@@ -41,7 +41,7 @@ export class GetCurrentProfileHandler
     });
 
     if (!profile) {
-      throw new NotFoundException();
+      throw new EntityNotFoundError(Profile);
     }
 
     return map(ProfileDetails, {

@@ -8,6 +8,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
+import { EntityNotFoundError } from "src/core/error-handling";
 import { CurrentOrganizationService } from "src/core/organizations/domain/services/current-organization.service";
 import { OrganizationService } from "src/core/organizations/domain/services/organization.service";
 import { Profile } from "src/core/profiles";
@@ -54,7 +55,7 @@ export class AddMemberToOrganizationViaEmailHandler
     });
 
     if (!invitedProfile) {
-      throw new NotFoundException("Profile not found");
+      throw new EntityNotFoundError(Profile);
     }
 
     const isAlreadyMember = await this.organizationService.checkIfMember(

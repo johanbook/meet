@@ -1,8 +1,8 @@
-import { NotFoundException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { EntityNotFoundError } from "src/core/error-handling";
 import { CurrentOrganizationService } from "src/core/organizations";
 import { CurrentProfileService } from "src/core/profiles";
 
@@ -41,7 +41,7 @@ export class CreateBlogPostReactionHandler
     });
 
     if (!blogPost) {
-      throw new NotFoundException("Blog post not found");
+      throw new EntityNotFoundError(BlogPost);
     }
 
     const blogPostReaction = new BlogPostReaction();

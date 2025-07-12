@@ -1,9 +1,9 @@
-import { NotFoundException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { AuthorizationService } from "src/core/authorization";
+import { EntityNotFoundError } from "src/core/error-handling";
 import { PhotoService } from "src/core/photos";
 
 import { BlogPost } from "../../../infrastructure/entities/blog-post.entity";
@@ -31,7 +31,7 @@ export class DeleteBlogPostHandler
     });
 
     if (!blogPost) {
-      throw new NotFoundException("Blog post not found");
+      throw new EntityNotFoundError(BlogPost);
     }
 
     await this.authorizationService.authorizeOwnerOrAdmin(blogPost);

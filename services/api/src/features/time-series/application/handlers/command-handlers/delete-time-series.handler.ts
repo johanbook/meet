@@ -1,9 +1,9 @@
-import { NotFoundException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { AuthorizationService } from "src/core/authorization";
+import { EntityNotFoundError } from "src/core/error-handling";
 
 import { TimeSeries } from "../../../infrastructure/entities/time-series.entity";
 import { DeleteTimeSeriesCommand } from "../../contracts/commands/delete-time-series.command";
@@ -24,7 +24,7 @@ export class DeleteTimeSeriesHandler
     });
 
     if (!timeSeries) {
-      throw new NotFoundException("Time series not found");
+      throw new EntityNotFoundError(TimeSeries);
     }
 
     await this.authorizationService.authorizeOwnerOrAdmin(timeSeries);

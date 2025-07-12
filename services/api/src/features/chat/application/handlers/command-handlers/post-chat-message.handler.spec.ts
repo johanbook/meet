@@ -67,7 +67,7 @@ describe(PostChatMessageHandler.name, () => {
 
       await expect(commandHandler.execute(command)).rejects.toHaveProperty(
         "message",
-        "Conversation not found",
+        "Chat conversation not found",
       );
     });
   });

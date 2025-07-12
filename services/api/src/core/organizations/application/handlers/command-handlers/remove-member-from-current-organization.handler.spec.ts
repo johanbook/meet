@@ -34,7 +34,7 @@ describe(RemoveMemberFromCurrentOrganizationHandler.name, () => {
 
       await expect(commandHandler.execute(command)).rejects.toHaveProperty(
         "message",
-        "Membership not found",
+        "Organization membership not found",
       );
     });
 

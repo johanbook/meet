@@ -1,9 +1,9 @@
-import { NotFoundException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { AuthorizationService } from "src/core/authorization";
+import { EntityNotFoundError } from "src/core/error-handling";
 
 import { BlogPostComment } from "../../../infrastructure/entities/blog-post-comment.entity";
 import { DeleteBlogPostCommentCommand } from "../../contracts/commands/delete-blog-post-comment.command";
@@ -26,7 +26,7 @@ export class DeleteBlogPostCommentHandler
     });
 
     if (!blogPostComment) {
-      throw new NotFoundException("Blog post comment not found");
+      throw new EntityNotFoundError(BlogPostComment);
     }
 
     await this.authorizationService.authorizeOwnerOrAdmin(blogPostComment);

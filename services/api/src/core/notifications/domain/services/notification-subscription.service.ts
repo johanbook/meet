@@ -1,7 +1,9 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { PushSubscription } from "web-push";
+
+import { EntityNotFoundError } from "src/core/error-handling";
 
 import { NotificationSubscription } from "../../infrastructure/entities/notification-subscription.entity";
 
@@ -21,7 +23,7 @@ export class NotificationSubscriptionService {
       });
 
     if (!notificationSubscription) {
-      throw new NotFoundException("Push subscription not found");
+      throw new EntityNotFoundError(NotificationSubscription);
     }
 
     await this.notificationSubscriptions.remove(notificationSubscription);
