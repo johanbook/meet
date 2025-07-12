@@ -1,8 +1,8 @@
 import { ReactElement, SyntheticEvent } from "react";
 
-import { Box } from "@mui/material";
+import { Autocomplete, Box } from "@mui/material";
 
-import { AddPointToTimeSeriesCommand } from "src/api";
+import { AddPointToTimeSeriesCommand, TimeSeriesDetails } from "src/api";
 import { timeSeriesApi } from "src/apis";
 import { Button } from "src/components/ui";
 import { TextField } from "src/components/ui";
@@ -15,12 +15,12 @@ import { CacheKeysConstants } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 interface AddTimeSeriesPointDialogProps extends GlobalDialogProps {
-  timeSeriesId: string;
+  timeSeries: TimeSeriesDetails;
 }
 
 export function AddTimeSeriesPointDialog({
   closeDialog,
-  timeSeriesId,
+  timeSeries,
 }: AddTimeSeriesPointDialogProps): ReactElement {
   const mutation = useMutation({
     mutationFn: (addPointToTimeSeriesCommand: AddPointToTimeSeriesCommand) =>
@@ -35,7 +35,7 @@ export function AddTimeSeriesPointDialog({
     {
       description: "",
       label: "",
-      timeSeriesId,
+      timeSeriesId: timeSeries.id,
       value: 1,
     },
     {
@@ -61,7 +61,7 @@ export function AddTimeSeriesPointDialog({
       },
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: [CacheKeysConstants.TimeSeries, timeSeriesId],
+          queryKey: [CacheKeysConstants.TimeSeries, timeSeries.id],
         });
         form.reset();
         snackbar.success(t("actions.create.success"));
@@ -107,13 +107,20 @@ export function AddTimeSeriesPointDialog({
           value={String(form.state.value.value)}
         />
 
-        <TextField
+        <Autocomplete
           disabled={mutation.isPending}
-          error={form.state.label.error}
           fullWidth
-          label={t("form.label.label")}
-          onChange={(label) => form.setValue({ label })}
-          placeholder={t("form.label.placeholder")}
+          options={timeSeries.labels}
+          renderInput={(params) => (
+            <TextField
+              error={form.state.label.error}
+              label={t("form.label.label")}
+              onChange={(label) => form.setValue({ label })}
+              placeholder={t("form.label.placeholder")}
+              value={form.state.label.value}
+              {...params}
+            />
+          )}
           value={form.state.label.value}
         />
 

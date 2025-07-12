@@ -39,7 +39,7 @@ export function TimeSeriesPageComponent({
   const { openDialog } = useDialog();
 
   const handleOpenForm = () => {
-    openDialog(AddTimeSeriesPointDialog, { timeSeriesId: timeSeries.id });
+    openDialog(AddTimeSeriesPointDialog, { timeSeries });
   };
 
   const stats = getTimeSeriesStats(timeSeries);
