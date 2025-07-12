@@ -1,3 +1,5 @@
+import { Repository } from "typeorm";
+
 import { map } from "src/core/mapper";
 import {
   NotificationEventEnum,
@@ -5,17 +7,23 @@ import {
 } from "src/core/notifications";
 import { beforeEach, describe, expect, it, vi } from "src/test";
 import { TestSuite } from "src/test";
+import { createMockRepository } from "src/test/mocks";
 
 import { TimeSeriesPointCreatedEvent } from "../../../domain/events/time-series-point-created.event";
+import { TimeSeries } from "../../../infrastructure/entities/time-series.entity";
+import { makeTimeSeries } from "../../../test/factories/time-series.factory";
 import { NotifyOrganizationOnTimeSeriesPointCreatedHandler } from "./notify-organization-on-time-series-point-created.handler";
 
 describe(NotifyOrganizationOnTimeSeriesPointCreatedHandler.name, () => {
   let handler: NotifyOrganizationOnTimeSeriesPointCreatedHandler;
   let notificationService: NotificationService;
   let testSuite: TestSuite;
+  let timeSeries: Repository<TimeSeries>;
 
   beforeEach(() => {
     testSuite = new TestSuite();
+
+    timeSeries = createMockRepository<TimeSeries>([makeTimeSeries()]);
 
     notificationService = {
       notifyOrganization: vi.fn(),
@@ -24,6 +32,7 @@ describe(NotifyOrganizationOnTimeSeriesPointCreatedHandler.name, () => {
     handler = new NotifyOrganizationOnTimeSeriesPointCreatedHandler(
       notificationService,
       testSuite.profiles,
+      timeSeries,
     );
   });
 
@@ -44,7 +53,7 @@ describe(NotifyOrganizationOnTimeSeriesPointCreatedHandler.name, () => {
     expect(notificationService.notifyOrganization).toHaveBeenCalledWith(
       event.organizationId,
       {
-        description: `${profile!.name} added a new data point to 'ts-1': my-description`,
+        description: `${profile!.name} added a new data point to 'my-time-series': my-description`,
         message: `${profile!.name} added a new data point`,
         resourcePath: `/time-series/ts-1`,
         type: NotificationEventEnum.NewTimeSeriesPoint,

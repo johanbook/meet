@@ -11,6 +11,7 @@ import { INotification } from "src/core/notifications/types";
 import { Profile } from "src/core/profiles";
 
 import { TimeSeriesPointCreatedEvent } from "../../../domain/events/time-series-point-created.event";
+import { TimeSeries } from "../../../infrastructure/entities/time-series.entity";
 
 @EventsHandler(TimeSeriesPointCreatedEvent)
 export class NotifyOrganizationOnTimeSeriesPointCreatedHandler
@@ -20,6 +21,8 @@ export class NotifyOrganizationOnTimeSeriesPointCreatedHandler
     private readonly notificationService: NotificationService,
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,
+    @InjectRepository(TimeSeries)
+    private readonly timeSeries: Repository<TimeSeries>,
   ) {}
 
   async handle(event: TimeSeriesPointCreatedEvent) {
@@ -36,8 +39,21 @@ export class NotifyOrganizationOnTimeSeriesPointCreatedHandler
       throw new NotFoundException("Profile not found");
     }
 
+    const timeSeries = await this.timeSeries.findOne({
+      select: {
+        name: true,
+      },
+      where: {
+        id: event.timeSeriesId,
+      },
+    });
+
+    if (!timeSeries) {
+      throw new NotFoundException("Time series not found");
+    }
+
     const notification: INotification = {
-      description: `${profile.name} added a new data point to '${event.timeSeriesId}': ${event.description}`,
+      description: `${profile.name} added a new data point to '${timeSeries.name}': ${event.description}`,
       message: `${profile.name} added a new data point`,
       resourcePath: `/time-series/${event.timeSeriesId}`,
       type: NotificationEventEnum.NewTimeSeriesPoint,
