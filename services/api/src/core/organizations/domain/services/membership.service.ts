@@ -1,7 +1,8 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { EntityNotFoundError } from "src/core/error-handling";
 import { CurrentProfileService } from "src/core/profiles";
 
 import { OrganizationMembership } from "../../infrastructure/entities/organization-membership.entity";
@@ -39,9 +40,7 @@ export class MembershipService {
     });
 
     if (!membership) {
-      throw new NotFoundException(
-        "Unable to find membership to current organization",
-      );
+      throw new EntityNotFoundError(OrganizationMembership);
     }
 
     return membership;

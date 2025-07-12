@@ -1,12 +1,9 @@
-import {
-  ConflictException,
-  ForbiddenException,
-  NotFoundException,
-} from "@nestjs/common";
+import { ConflictException, ForbiddenException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { EntityNotFoundError } from "src/core/error-handling";
 import { Profile } from "src/core/profiles";
 
 import { CurrentOrganizationService } from "../../../domain/services/current-organization.service";
@@ -39,7 +36,7 @@ export class AddMemberToOrganizationHandler
     });
 
     if (!profileExists) {
-      throw new NotFoundException("Profile not found");
+      throw new EntityNotFoundError(Profile);
     }
 
     const isAlreadyMember = await this.organizationService.checkIfMember(

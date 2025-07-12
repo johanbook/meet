@@ -1,9 +1,10 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { EventBus } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { OrganizationRole } from "src/core/authorization";
+import { EntityNotFoundError } from "src/core/error-handling";
 import { map } from "src/core/mapper";
 
 import { OrganizationMembership } from "../../infrastructure/entities/organization-membership.entity";
@@ -39,7 +40,7 @@ export class OrganizationService {
     });
 
     if (!organization) {
-      throw new NotFoundException("Organization not found");
+      throw new EntityNotFoundError(Organization);
     }
 
     const membership = await this.createMembership(

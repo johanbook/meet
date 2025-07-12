@@ -1,8 +1,8 @@
-import { NotFoundException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { EntityNotFoundError } from "src/core/error-handling";
 import { CurrentOrganizationService } from "src/core/organizations/domain/services/current-organization.service";
 
 import { OrganizationMembership } from "../../../infrastructure/entities/organization-membership.entity";
@@ -30,7 +30,7 @@ export class RemoveMemberFromCurrentOrganizationHandler
     });
 
     if (!membership) {
-      throw new NotFoundException("Membership not found");
+      throw new EntityNotFoundError(OrganizationMembership);
     }
 
     await this.memberships.remove(membership);

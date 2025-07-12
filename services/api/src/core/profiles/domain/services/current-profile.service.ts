@@ -1,9 +1,10 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { UserIdService } from "src/core/authentication";
 import { Cache } from "src/core/cache";
+import { EntityNotFoundError } from "src/core/error-handling";
 
 import { Profile } from "../../infrastructure/entities/profile.entity";
 
@@ -41,7 +42,7 @@ export class CurrentProfileService {
     const currentProfile = await this.fetchProfile(userId);
 
     if (!currentProfile) {
-      throw new NotFoundException("Current profile not found");
+      throw new EntityNotFoundError(Profile);
     }
 
     return currentProfile;

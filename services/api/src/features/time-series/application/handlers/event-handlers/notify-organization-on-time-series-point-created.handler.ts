@@ -1,8 +1,8 @@
-import { NotFoundException } from "@nestjs/common";
 import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { EntityNotFoundError } from "src/core/error-handling";
 import {
   NotificationEventEnum,
   NotificationService,
@@ -36,7 +36,7 @@ export class NotifyOrganizationOnTimeSeriesPointCreatedHandler
     });
 
     if (!profile) {
-      throw new NotFoundException("Profile not found");
+      throw new EntityNotFoundError(Profile);
     }
 
     const timeSeries = await this.timeSeries.findOne({
@@ -49,7 +49,7 @@ export class NotifyOrganizationOnTimeSeriesPointCreatedHandler
     });
 
     if (!timeSeries) {
-      throw new NotFoundException("Time series not found");
+      throw new EntityNotFoundError(TimeSeries);
     }
 
     const notification: INotification = {

@@ -1,8 +1,8 @@
-import { NotFoundException } from "@nestjs/common";
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { EntityNotFoundError } from "src/core/error-handling";
 import { map, mapArray } from "src/core/mapper";
 import { CurrentOrganizationService } from "src/core/organizations";
 import { TimeSeries } from "src/features/time-series/infrastructure/entities/time-series.entity";
@@ -42,7 +42,7 @@ export class GetTimeSeriesHandler
     });
 
     if (!timeSeries) {
-      throw new NotFoundException("Time series not found");
+      throw new EntityNotFoundError(TimeSeries);
     }
 
     const labels = uniqify(timeSeries.points.map((point) => point.label));

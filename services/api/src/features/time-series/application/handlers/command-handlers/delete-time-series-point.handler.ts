@@ -1,9 +1,9 @@
-import { NotFoundException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { AuthorizationService } from "src/core/authorization";
+import { EntityNotFoundError } from "src/core/error-handling";
 
 import { TimeSeriesPoint } from "../../../infrastructure/entities/time-series-point.entity";
 import { TimeSeries } from "../../../infrastructure/entities/time-series.entity";
@@ -27,7 +27,7 @@ export class DeleteTimeSeriesPointHandler
     });
 
     if (!timeSeries) {
-      throw new NotFoundException("Time series not found");
+      throw new EntityNotFoundError(TimeSeries);
     }
 
     await this.authorizationService.authorizeOwnerOrAdmin(timeSeries);
@@ -37,7 +37,7 @@ export class DeleteTimeSeriesPointHandler
     });
 
     if (!point) {
-      throw new NotFoundException("Time series point not found");
+      throw new EntityNotFoundError(TimeSeriesPoint);
     }
 
     await this.timeSeriesPoints.remove(point);

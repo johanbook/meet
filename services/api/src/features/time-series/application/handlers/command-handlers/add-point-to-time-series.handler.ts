@@ -1,9 +1,9 @@
-import { NotFoundException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { AuthorizationService } from "src/core/authorization";
+import { EntityNotFoundError } from "src/core/error-handling";
 import { CurrentProfileService } from "src/core/profiles";
 
 import { TimeSeriesService } from "../../../domain/services/time-series.service";
@@ -34,7 +34,7 @@ export class AddPointToTimeSeriesHandler
     });
 
     if (!timeSeries) {
-      throw new NotFoundException("Time series not found");
+      throw new EntityNotFoundError(TimeSeries);
     }
 
     await this.authorizationService.authorizeOwnerOrAdmin(timeSeries);
