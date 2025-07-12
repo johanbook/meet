@@ -48,5 +48,21 @@ describe(UpdateTimeSeriesPointHandler.name, () => {
       expect(point.description).toBe("my-updated-description");
       expect(point.label).toBe("my-updated-label");
     });
+
+    it("should trim the label when updating a point", async () => {
+      const command = map(UpdateTimeSeriesPointCommand, {
+        timeSeriesId: "1",
+        pointId: "1",
+        description: "my-point-description",
+        label: "  my-label  ",
+        value: 123,
+      });
+
+      await commandHandler.execute(command);
+
+      const [point] = await timeSeriesPoints.find();
+
+      expect(point.label).toBe("my-label");
+    });
   });
 });
