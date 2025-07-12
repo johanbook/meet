@@ -52,5 +52,21 @@ describe(AddPointToTimeSeriesHandler.name, () => {
       expect(point.label).toBe("my-label");
       expect(point.profileId).toBe("my-profile-id");
     });
+
+    it("should trim the label when adding a point", async () => {
+      const command = map(AddPointToTimeSeriesCommand, {
+        description: "my-point-description",
+        label: "  my-label  ",
+        timeSeriesId: "1",
+        value: 123,
+      });
+
+      await commandHandler.execute(command);
+
+      const [savedTimeSeries] = await timeSeries.find();
+      const [point] = savedTimeSeries.points;
+
+      expect(point.label).toBe("my-label");
+    });
   });
 });

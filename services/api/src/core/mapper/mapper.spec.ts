@@ -43,7 +43,7 @@ describe(mapAndValidate.name, () => {
       myProperty!: string;
     }
 
-    expect(
+    await expect(
       mapAndValidate(TestMyClass, {
         myProperty: "my-string",
       }),
