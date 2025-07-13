@@ -35,10 +35,10 @@ export const desktopNav: DesktopNav = {
     },
     {
       Icon: CalendarMonthRounded,
-      checkIfActive: (path) => path.startsWith("/calendar"),
-      name: "navigation.calendar",
+      checkIfActive: (path) => path.startsWith("/bookings"),
+      name: "navigation.bookings",
       requiredFeatures: [OrganizationFeature.Calendar],
-      url: "/calendar",
+      url: "/bookings",
     },
     {
       Icon: Chat,
@@ -91,10 +91,10 @@ export const mobileNav: MobileNav = {
     },
     {
       Icon: CalendarMonthRounded,
-      checkIfActive: (path) => path.startsWith("/calendar"),
-      name: "navigation.calendar",
+      checkIfActive: (path) => path.startsWith("/bookings"),
+      name: "navigation.bookings",
       requiredFeatures: [OrganizationFeature.Calendar],
-      url: "/calendar",
+      url: "/bookings",
     },
     {
       Icon: Chat,
