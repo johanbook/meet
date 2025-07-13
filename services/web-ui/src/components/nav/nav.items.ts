@@ -2,6 +2,7 @@ import {
   AccountCircle,
   AddCircleOutlineRounded,
   BarChartRounded,
+  CalendarMonthRounded,
   Chat,
   HomeRounded,
 } from "@mui/icons-material";
@@ -22,15 +23,22 @@ export const desktopNav: DesktopNav = {
         return path === "/" || path.startsWith("/blog");
       },
       name: "navigation.blog",
-      requiredFeatures: [],
+      requiredFeatures: [OrganizationFeature.Blog],
       url: "/",
     },
     {
       Icon: AddCircleOutlineRounded,
       checkIfActive: (path) => path === "/blog/create",
       name: "navigation.create-blog",
-      requiredFeatures: [],
+      requiredFeatures: [OrganizationFeature.Blog],
       url: "/blog/create",
+    },
+    {
+      Icon: CalendarMonthRounded,
+      checkIfActive: (path) => path.startsWith("/calendar"),
+      name: "navigation.calendar",
+      requiredFeatures: [OrganizationFeature.Calendar],
+      url: "/calendar",
     },
     {
       Icon: Chat,
@@ -71,15 +79,22 @@ export const mobileNav: MobileNav = {
         return path === "/" || path.startsWith("/blog");
       },
       name: "navigation.blog",
-      requiredFeatures: [],
+      requiredFeatures: [OrganizationFeature.Blog],
       url: "/",
     },
     {
       Icon: AddCircleOutlineRounded,
       checkIfActive: (path) => path === "/blog/create",
       name: "navigation.create-blog",
-      requiredFeatures: [],
+      requiredFeatures: [OrganizationFeature.Blog],
       url: "/blog/create",
+    },
+    {
+      Icon: CalendarMonthRounded,
+      checkIfActive: (path) => path.startsWith("/calendar"),
+      name: "navigation.calendar",
+      requiredFeatures: [OrganizationFeature.Calendar],
+      url: "/calendar",
     },
     {
       Icon: Chat,

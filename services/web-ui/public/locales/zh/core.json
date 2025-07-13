@@ -6,6 +6,7 @@
   },
   "navigation": {
     "blog": "帖子",
+    "calendar": "日历",
     "create-blog": "新帖子",
     "chat": "对话",
     "profile": "个人资料"
