@@ -4,15 +4,19 @@ import { Typography } from "@mui/material";
 
 import { CalendarEventDetails } from "src/api";
 
-interface CalendarPageComponentProps {
+interface BookingsPageComponentProps {
   events: CalendarEventDetails[];
 }
 
-export function CalendarPageComponent({
+export function BookingsPageComponent({
   events,
-}: CalendarPageComponentProps): ReactElement {
+}: BookingsPageComponentProps): ReactElement {
   if (events.length === 0) {
-    return <Typography>There are no calendar events here yet</Typography>;
+    return (
+      <>
+        <Typography>You have no bookings</Typography>
+      </>
+    );
   }
 
   return (

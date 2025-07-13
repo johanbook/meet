@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 
 import { Skeleton, Stack } from "@mui/material";
 
-export function CalendarPageSkeleton(): ReactElement {
+export function CreateBookingPageSkeleton(): ReactElement {
   return (
     <Stack spacing={1}>
       <Skeleton variant="text" />

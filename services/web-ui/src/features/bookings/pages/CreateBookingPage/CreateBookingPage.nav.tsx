@@ -3,17 +3,17 @@ import { ReactElement, ReactNode } from "react";
 import { Nav } from "src/components/nav";
 import { useTranslation } from "src/core/i18n";
 
-interface CalendarPageNavProps {
+interface CreateBookingPageNavProps {
   children: ReactNode;
 }
 
-export function CalendarPageNav({
+export function CreateBookingPageNav({
   children,
-}: CalendarPageNavProps): ReactElement {
+}: CreateBookingPageNavProps): ReactElement {
   const { t } = useTranslation("core");
 
   return (
-    <Nav navBackTo="/" padding="normal" title={t("navigation.calendar")}>
+    <Nav padding="normal" title={t("navigation.bookings")}>
       {children}
     </Nav>
   );
