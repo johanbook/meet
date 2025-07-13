@@ -1,5 +1,6 @@
 import {
   BlogsApi,
+  CalendarsApi,
   ChatsApi,
   Configuration,
   JournalApi,
@@ -59,6 +60,7 @@ const config = new Configuration({
 
 export const blogsApi = new BlogsApi(config);
 export const chatsApi = new ChatsApi(config);
+export const calendarApi = new CalendarsApi(config);
 export const journalApi = new JournalApi(config);
 export const notificationsApi = new NotificationsApi(config);
 export const organizationsApi = new OrganizationsApi(config);
