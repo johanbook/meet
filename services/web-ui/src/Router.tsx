@@ -19,6 +19,7 @@ import { BlogPhotoListPage } from "src/features/blogs/pages/BlogPhotoListPage";
 import { BlogPostListPage } from "src/features/blogs/pages/BlogPostListPage";
 import { BlogPostPage } from "src/features/blogs/pages/BlogPostPage";
 import { CreateBlogPostPage } from "src/features/blogs/pages/CreateBlogPostPage";
+import { CalendarPage } from "src/features/calendar/pages/CalendarPage";
 import { ChatListPage } from "src/features/chat/pages/ChatListPage";
 import { ChatPage } from "src/features/chat/pages/ChatPage";
 import { CreateChatPage } from "src/features/chat/pages/CreateChatPage";
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: "/chat/:id",
         element: <ChatPage />,
+      },
+      {
+        path: "/calendar",
+        element: <CalendarPage />,
       },
       {
         path: "/group",
