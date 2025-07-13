@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './BlogsApi';
-export * from './CalendarsApi';
+export * from './BookingsApi';
 export * from './ChatsApi';
 export * from './ClassificationsApi';
 export * from './HealthApi';

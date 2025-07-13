@@ -18,7 +18,7 @@ import { OrganizationModule } from "src/core/organizations/organization.module";
 import { ProfileModule } from "src/core/profiles/profile.module";
 import { RequestContextModule } from "src/core/request-context/request-context.module";
 import { BlogsModule } from "src/features/blogs/blogs.module";
-import { CalendarsModule } from "src/features/calendars/calendars.module";
+import { BookingsModule } from "src/features/bookings/bookings.module";
 import { ChatModule } from "src/features/chat/chat.module";
 import { SettingsModule } from "src/features/settings/settings.module";
 import { TimeSeriesModule } from "src/features/time-series/time-series.module";
@@ -42,7 +42,7 @@ import { TimeSeriesModule } from "src/features/time-series/time-series.module";
 
     // Feature modules
     BlogsModule,
-    CalendarsModule,
+    BookingsModule,
     ChatModule,
     SettingsModule,
     TimeSeriesModule,

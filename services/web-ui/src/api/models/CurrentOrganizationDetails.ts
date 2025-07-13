@@ -77,7 +77,7 @@ export interface CurrentOrganizationDetails {
  */
 export const CurrentOrganizationDetailsFeaturesEnum = {
     Blog: 'blog',
-    Calendar: 'calendar',
+    Bookings: 'bookings',
     Chat: 'chat',
     TimeSeries: 'time-series'
 } as const;

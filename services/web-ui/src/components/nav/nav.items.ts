@@ -37,7 +37,7 @@ export const desktopNav: DesktopNav = {
       Icon: CalendarMonthRounded,
       checkIfActive: (path) => path.startsWith("/bookings"),
       name: "navigation.bookings",
-      requiredFeatures: [OrganizationFeature.Calendar],
+      requiredFeatures: [OrganizationFeature.Bookings],
       url: "/bookings",
     },
     {
@@ -93,7 +93,7 @@ export const mobileNav: MobileNav = {
       Icon: CalendarMonthRounded,
       checkIfActive: (path) => path.startsWith("/bookings"),
       name: "navigation.bookings",
-      requiredFeatures: [OrganizationFeature.Calendar],
+      requiredFeatures: [OrganizationFeature.Bookings],
       url: "/bookings",
     },
     {
