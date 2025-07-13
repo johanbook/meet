@@ -53,8 +53,8 @@ export class NotifyOrganizationOnTimeSeriesPointCreatedHandler
     }
 
     const notification: INotification = {
-      description: `${profile.name} added a new data point to '${timeSeries.name}': ${event.description}`,
-      message: `${profile.name} added a new data point`,
+      description: event.description,
+      message: `${profile.name} added to ${timeSeries.name}`,
       resourcePath: `/time-series/${event.timeSeriesId}`,
       type: NotificationEventEnum.NewTimeSeriesPoint,
     };

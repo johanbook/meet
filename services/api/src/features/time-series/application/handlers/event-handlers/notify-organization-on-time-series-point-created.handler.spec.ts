@@ -53,8 +53,8 @@ describe(NotifyOrganizationOnTimeSeriesPointCreatedHandler.name, () => {
     expect(notificationService.notifyOrganization).toHaveBeenCalledWith(
       event.organizationId,
       {
-        description: `${profile!.name} added a new data point to 'my-time-series': my-description`,
-        message: `${profile!.name} added a new data point`,
+        description: "my-description",
+        message: `${profile!.name} added to my-time-series`,
         resourcePath: `/time-series/ts-1`,
         type: NotificationEventEnum.NewTimeSeriesPoint,
       },
