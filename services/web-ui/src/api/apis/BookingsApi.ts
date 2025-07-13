@@ -16,39 +16,39 @@
 
 import * as runtime from '../runtime';
 import type {
-  CalendarEventDetails,
+  BookingDetails,
 } from '../models/index';
 import {
-    CalendarEventDetailsFromJSON,
-    CalendarEventDetailsToJSON,
+    BookingDetailsFromJSON,
+    BookingDetailsToJSON,
 } from '../models/index';
 
 /**
  * 
  */
-export class CalendarsApi extends runtime.BaseAPI {
+export class BookingsApi extends runtime.BaseAPI {
 
     /**
      */
-    async getCalendarEventListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<CalendarEventDetails>>> {
+    async getBookingListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<BookingDetails>>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
-            path: `/api/calendars/events`,
+            path: `/api/bookings/events`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(CalendarEventDetailsFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(BookingDetailsFromJSON));
     }
 
     /**
      */
-    async getCalendarEventList(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<CalendarEventDetails>> {
-        const response = await this.getCalendarEventListRaw(initOverrides);
+    async getBookingList(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<BookingDetails>> {
+        const response = await this.getBookingListRaw(initOverrides);
         return await response.value();
     }
 

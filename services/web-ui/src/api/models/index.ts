@@ -11,7 +11,7 @@ export * from './BlogPostDetails';
 export * from './BlogPostPhotoDetails';
 export * from './BlogPostProfileDetails';
 export * from './BlogPostReactionDetails';
-export * from './CalendarEventDetails';
+export * from './BookingDetails';
 export * from './ChatConversationDetails';
 export * from './ChatMessageDetails';
 export * from './ChatMessageProfileDetails';

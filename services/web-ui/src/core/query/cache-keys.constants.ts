@@ -1,7 +1,7 @@
 export enum CacheKeysConstants {
   BlogPhotoList = "blogPhotoList",
   BlogPosts = "blogPosts",
-  CalendarEventList = "calendatEventList",
+  BookingList = "bookingList",
   Chats = "chats",
   CurrentOrganization = "CurrentOrganization",
   CurrentOrganizationMembers = "CurrentOrganizationMembers",

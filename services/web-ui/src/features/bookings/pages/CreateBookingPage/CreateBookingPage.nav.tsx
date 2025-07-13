@@ -13,7 +13,11 @@ export function CreateBookingPageNav({
   const { t } = useTranslation("core");
 
   return (
-    <Nav padding="normal" title={t("navigation.bookings")}>
+    <Nav
+      navBackTo="/bookings"
+      padding="normal"
+      title={t("navigation.bookings")}
+    >
       {children}
     </Nav>
   );

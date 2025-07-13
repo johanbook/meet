@@ -5,7 +5,7 @@ import { Organization } from "src/core/organizations/infrastructure/entities/org
 import { Profile } from "src/core/profiles/infrastructure/entities/profile.entity";
 
 @Entity()
-export class CalendarEvent extends BaseEntity {
+export class Booking extends BaseEntity {
   @Column({ type: "varchar", length: 2048, default: "" })
   description!: string;
 

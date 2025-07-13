@@ -1,6 +1,6 @@
 export enum OrganizationFeatureEnum {
   Blog = "blog",
-  Calendar = "calendar",
+  Bookings = "bookings",
   Chat = "chat",
   TimeSeries = "time-series",
 }

@@ -17,51 +17,51 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface CalendarEventDetails
+ * @interface BookingDetails
  */
-export interface CalendarEventDetails {
+export interface BookingDetails {
     /**
      * 
      * @type {string}
-     * @memberof CalendarEventDetails
+     * @memberof BookingDetails
      */
     id: string;
     /**
      * 
      * @type {string}
-     * @memberof CalendarEventDetails
+     * @memberof BookingDetails
      */
     description?: string;
     /**
      * 
      * @type {Date}
-     * @memberof CalendarEventDetails
+     * @memberof BookingDetails
      */
     endTime: Date;
     /**
      * 
      * @type {string}
-     * @memberof CalendarEventDetails
+     * @memberof BookingDetails
      */
     name: string;
     /**
      * 
      * @type {number}
-     * @memberof CalendarEventDetails
+     * @memberof BookingDetails
      */
     profileId: number;
     /**
      * 
      * @type {Date}
-     * @memberof CalendarEventDetails
+     * @memberof BookingDetails
      */
     startTime: Date;
 }
 
 /**
- * Check if a given object implements the CalendarEventDetails interface.
+ * Check if a given object implements the BookingDetails interface.
  */
-export function instanceOfCalendarEventDetails(value: object): boolean {
+export function instanceOfBookingDetails(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "id" in value;
     isInstance = isInstance && "endTime" in value;
@@ -72,11 +72,11 @@ export function instanceOfCalendarEventDetails(value: object): boolean {
     return isInstance;
 }
 
-export function CalendarEventDetailsFromJSON(json: any): CalendarEventDetails {
-    return CalendarEventDetailsFromJSONTyped(json, false);
+export function BookingDetailsFromJSON(json: any): BookingDetails {
+    return BookingDetailsFromJSONTyped(json, false);
 }
 
-export function CalendarEventDetailsFromJSONTyped(json: any, ignoreDiscriminator: boolean): CalendarEventDetails {
+export function BookingDetailsFromJSONTyped(json: any, ignoreDiscriminator: boolean): BookingDetails {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -91,7 +91,7 @@ export function CalendarEventDetailsFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function CalendarEventDetailsToJSON(value?: CalendarEventDetails | null): any {
+export function BookingDetailsToJSON(value?: BookingDetails | null): any {
     if (value === undefined) {
         return undefined;
     }

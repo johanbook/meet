@@ -1,4 +1,4 @@
-export class CalendarEventDetails {
+export class BookingDetails {
   id!: string;
   description?: string;
   endTime!: Date;

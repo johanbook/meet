@@ -2,10 +2,10 @@ import { ReactElement } from "react";
 
 import { Typography } from "@mui/material";
 
-import { CalendarEventDetails } from "src/api";
+import { BookingDetails } from "src/api";
 
 interface BookingsPageComponentProps {
-  events: CalendarEventDetails[];
+  events: BookingDetails[];
 }
 
 export function BookingsPageComponent({
