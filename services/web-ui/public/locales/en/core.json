@@ -6,6 +6,7 @@
   },
   "navigation": {
     "blog": "Moments",
+    "calendar": "Calendar",
     "create-blog": "Share a moment",
     "chat": "Chats",
     "profile": "Profile",
