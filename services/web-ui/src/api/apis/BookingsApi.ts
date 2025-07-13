@@ -17,16 +17,53 @@
 import * as runtime from '../runtime';
 import type {
   BookingDetails,
+  CreateBookingCommand,
 } from '../models/index';
 import {
     BookingDetailsFromJSON,
     BookingDetailsToJSON,
+    CreateBookingCommandFromJSON,
+    CreateBookingCommandToJSON,
 } from '../models/index';
+
+export interface CreateBookingRequest {
+    createBookingCommand: CreateBookingCommand;
+}
 
 /**
  * 
  */
 export class BookingsApi extends runtime.BaseAPI {
+
+    /**
+     */
+    async createBookingRaw(requestParameters: CreateBookingRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.createBookingCommand === null || requestParameters.createBookingCommand === undefined) {
+            throw new runtime.RequiredError('createBookingCommand','Required parameter requestParameters.createBookingCommand was null or undefined when calling createBooking.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/api/bookings`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CreateBookingCommandToJSON(requestParameters.createBookingCommand),
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async createBooking(requestParameters: CreateBookingRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.createBookingRaw(requestParameters, initOverrides);
+    }
 
     /**
      */
