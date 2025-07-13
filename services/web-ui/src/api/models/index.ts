@@ -19,6 +19,7 @@ export * from './ClassificationDetails';
 export * from './CreateBlogPostCommentCommand';
 export * from './CreateBlogPostCommentReactionCommand';
 export * from './CreateBlogPostReactionCommand';
+export * from './CreateBookingCommand';
 export * from './CreateChatCommand';
 export * from './CreateOrganizationCommand';
 export * from './CreateProfileCommand';

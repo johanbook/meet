@@ -29,6 +29,7 @@ models/ClassificationDetails.ts
 models/CreateBlogPostCommentCommand.ts
 models/CreateBlogPostCommentReactionCommand.ts
 models/CreateBlogPostReactionCommand.ts
+models/CreateBookingCommand.ts
 models/CreateChatCommand.ts
 models/CreateOrganizationCommand.ts
 models/CreateProfileCommand.ts
