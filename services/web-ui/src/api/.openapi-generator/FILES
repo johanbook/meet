@@ -1,4 +1,5 @@
 apis/BlogsApi.ts
+apis/CalendarsApi.ts
 apis/ChatsApi.ts
 apis/ClassificationsApi.ts
 apis/HealthApi.ts
@@ -20,6 +21,7 @@ models/BlogPostDetails.ts
 models/BlogPostPhotoDetails.ts
 models/BlogPostProfileDetails.ts
 models/BlogPostReactionDetails.ts
+models/CalendarEventDetails.ts
 models/ChatConversationDetails.ts
 models/ChatMessageDetails.ts
 models/ChatMessageProfileDetails.ts
