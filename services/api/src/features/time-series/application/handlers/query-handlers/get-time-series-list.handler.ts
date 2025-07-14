@@ -28,7 +28,7 @@ export class GetTimeSeriesListHandler
     const foundTimeSeries = await this.queryService.find(this.timeSeries, {
       default: {
         order: {
-          createdAt: "desc",
+          name: "asc",
         },
       },
       query,
