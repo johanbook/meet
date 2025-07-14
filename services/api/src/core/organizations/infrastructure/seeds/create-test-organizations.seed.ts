@@ -16,12 +16,12 @@ export default class CreateTestOrganization implements Seeder {
 
   public async run(
     _: DataSource,
-    factoryManger: SeederFactoryManager,
+    factoryManager: SeederFactoryManager,
   ): Promise<void> {
-    const activeOrganizationFactory = factoryManger.get(ActiveOrganization);
-    const featureFactory = factoryManger.get(OrganizationFeature);
-    const membershipFactory = factoryManger.get(OrganizationMembership);
-    const organizationFactory = factoryManger.get(Organization);
+    const activeOrganizationFactory = factoryManager.get(ActiveOrganization);
+    const featureFactory = factoryManager.get(OrganizationFeature);
+    const membershipFactory = factoryManager.get(OrganizationMembership);
+    const organizationFactory = factoryManager.get(Organization);
 
     const features = await Promise.all([
       featureFactory.make({ feature: OrganizationFeatureEnum.Blog }),

@@ -12,9 +12,9 @@ export default class CreateProfiles implements Seeder {
 
   public async run(
     _: DataSource,
-    factoryManger: SeederFactoryManager,
+    factoryManager: SeederFactoryManager,
   ): Promise<void> {
-    const factory = factoryManger.get(Profile);
+    const factory = factoryManager.get(Profile);
     await factory.save();
   }
 }

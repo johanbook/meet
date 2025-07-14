@@ -9,16 +9,16 @@ import { TimeSeries } from "../entities/time-series.entity";
 const NUM_POINTS = 100;
 
 @TestSeeder()
-export default class CreateTimeSeries implements Seeder {
+export default class CreateTestTimeSeries implements Seeder {
   // Ensure seeder only runs once
   track = true;
 
   public async run(
     _: DataSource,
-    factoryManger: SeederFactoryManager,
+    factoryManager: SeederFactoryManager,
   ): Promise<void> {
-    const timeSeriesFactory = factoryManger.get(TimeSeries);
-    const timeSeriesPointFactory = factoryManger.get(TimeSeriesPoint);
+    const timeSeriesFactory = factoryManager.get(TimeSeries);
+    const timeSeriesPointFactory = factoryManager.get(TimeSeriesPoint);
 
     const points: TimeSeriesPoint[] = [];
 
