@@ -6,8 +6,9 @@ export const TimeSeriesPointFactory = setSeederFactory(
   TimeSeriesPoint,
   (faker) => {
     const point = new TimeSeriesPoint();
-    point.label = faker.lorem.word();
-    point.value = faker.number.float();
+    point.description = faker.lorem.sentence();
+    point.label = faker.color.human();
+    point.value = faker.number.int({ min: -5, max: 5 });
     point.createdAt = faker.date.past();
     return point;
   },
