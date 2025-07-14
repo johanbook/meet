@@ -2,6 +2,9 @@ import { ReactElement } from "react";
 
 import { AddRounded } from "@mui/icons-material";
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Avatar,
   Box,
   Card,
@@ -49,7 +52,6 @@ export function TimeSeriesPageComponent({
 
   return (
     <Box>
-      <Typography variant="h6">{timeSeries.name}</Typography>
       <Typography color="textSecondary">{timeSeries.description}</Typography>
 
       <Stack direction="row" spacing={2} sx={{ mt: 2, mb: 4 }}>
@@ -65,45 +67,58 @@ export function TimeSeriesPageComponent({
         ))}
       </Stack>
 
-      <BarChart
-        dataset={data}
-        height={300}
-        series={timeSeries.labels.map((label) => ({
-          dataKey: label,
-          stack: "default",
-        }))}
-        xAxis={[{ dataKey: "date" }]}
-      />
+      <Accordion>
+        <AccordionSummary>
+          <Typography variant="h6">Charts</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <BarChart
+            dataset={data}
+            height={300}
+            series={timeSeries.labels.map((label) => ({
+              dataKey: label,
+              stack: "default",
+            }))}
+            xAxis={[{ dataKey: "date" }]}
+          />
+        </AccordionDetails>
+      </Accordion>
 
-      <Typography variant="h6">Data</Typography>
-      <List>
-        {timeSeries.points.map((point) => (
-          <ListItem key={point.id}>
-            <ListItemIcon>
-              <Avatar>{point.value}</Avatar>
-            </ListItemIcon>
-            <ListItemText
-              primary={
-                <Box
-                  component="span"
-                  sx={{ display: "flex", gap: 2, alignItems: "center" }}
-                >
-                  <span>{point.description}</span>
-                  <Chip
-                    color={getLabelColor(
-                      timeSeries.labels.indexOf(point.label),
-                    )}
-                    label={point.label}
-                    size="small"
-                    variant="outlined"
-                  />
-                </Box>
-              }
-              secondary={timeSince(point.createdAt)}
-            />
-          </ListItem>
-        ))}
-      </List>
+      <Accordion defaultExpanded>
+        <AccordionSummary>
+          <Typography variant="h6">Data</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <List>
+            {timeSeries.points.map((point) => (
+              <ListItem key={point.id}>
+                <ListItemIcon>
+                  <Avatar>{point.value}</Avatar>
+                </ListItemIcon>
+                <ListItemText
+                  primary={
+                    <Box
+                      component="span"
+                      sx={{ display: "flex", gap: 2, alignItems: "center" }}
+                    >
+                      <span>{point.description}</span>
+                      <Chip
+                        color={getLabelColor(
+                          timeSeries.labels.indexOf(point.label),
+                        )}
+                        label={point.label}
+                        size="small"
+                        variant="outlined"
+                      />
+                    </Box>
+                  }
+                  secondary={timeSince(point.createdAt)}
+                />
+              </ListItem>
+            ))}
+          </List>
+        </AccordionDetails>
+      </Accordion>
 
       <Fab onClick={handleOpenForm}>
         <AddRounded />

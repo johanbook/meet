@@ -35,7 +35,7 @@ export function TimeSeriesPageContainer(): ReactElement {
   }
 
   return (
-    <TimeSeriesPageNav>
+    <TimeSeriesPageNav title={data.name}>
       <TimeSeriesPageComponent timeSeries={data} />
     </TimeSeriesPageNav>
   );
