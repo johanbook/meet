@@ -15,7 +15,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { ScatterChart } from "@mui/x-charts";
+import { BarChart } from "@mui/x-charts";
 
 import { TimeSeriesDetails } from "src/api";
 import { Fab } from "src/components/ui/Fab";
@@ -23,7 +23,7 @@ import { useDialog } from "src/core/dialog";
 import { timeSince } from "src/utils/time";
 
 import { AddTimeSeriesPointDialog } from "../../components/AddTimeSeriesPointDialog";
-import { getChartData, getTimeSeriesStats } from "./TimeSeriesPage.utils";
+import { getAggregatedData, getTimeSeriesStats } from "./TimeSeriesPage.utils";
 
 const LABEL_COLORS: ChipProps["color"][] = ["primary", "secondary"];
 
@@ -44,7 +44,8 @@ export function TimeSeriesPageComponent({
   };
 
   const stats = getTimeSeriesStats(timeSeries);
-  const chartData = getChartData(timeSeries);
+
+  const data = getAggregatedData(timeSeries);
 
   return (
     <Box>
@@ -64,13 +65,14 @@ export function TimeSeriesPageComponent({
         ))}
       </Stack>
 
-      <ScatterChart
+      <BarChart
+        dataset={data}
         height={300}
-        series={Object.entries(chartData).map(([label, data]) => ({
-          label,
-          data,
+        series={timeSeries.labels.map((label) => ({
+          dataKey: label,
+          stack: "default",
         }))}
-        xAxis={[{ scaleType: "time" }]}
+        xAxis={[{ dataKey: "date" }]}
       />
 
       <Typography variant="h6">Data</Typography>
