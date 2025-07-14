@@ -53,6 +53,12 @@ export interface TimeSeriesDetails {
     createdAt: string;
     /**
      * 
+     * @type {string}
+     * @memberof TimeSeriesDetails
+     */
+    aggregation: TimeSeriesDetailsAggregationEnum;
+    /**
+     * 
      * @type {Array<string>}
      * @memberof TimeSeriesDetails
      */
@@ -65,6 +71,21 @@ export interface TimeSeriesDetails {
     points: Array<TimeSeriesPointDetails>;
 }
 
+
+/**
+ * @export
+ */
+export const TimeSeriesDetailsAggregationEnum = {
+    Hourly: 'hourly',
+    Daily: 'daily',
+    Weekly: 'weekly',
+    Monthly: 'monthly',
+    Yearly: 'yearly',
+    Total: 'total'
+} as const;
+export type TimeSeriesDetailsAggregationEnum = typeof TimeSeriesDetailsAggregationEnum[keyof typeof TimeSeriesDetailsAggregationEnum];
+
+
 /**
  * Check if a given object implements the TimeSeriesDetails interface.
  */
@@ -74,6 +95,7 @@ export function instanceOfTimeSeriesDetails(value: object): boolean {
     isInstance = isInstance && "name" in value;
     isInstance = isInstance && "description" in value;
     isInstance = isInstance && "createdAt" in value;
+    isInstance = isInstance && "aggregation" in value;
     isInstance = isInstance && "labels" in value;
     isInstance = isInstance && "points" in value;
 
@@ -94,6 +116,7 @@ export function TimeSeriesDetailsFromJSONTyped(json: any, ignoreDiscriminator: b
         'name': json['name'],
         'description': json['description'],
         'createdAt': json['createdAt'],
+        'aggregation': json['aggregation'],
         'labels': json['labels'],
         'points': ((json['points'] as Array<any>).map(TimeSeriesPointDetailsFromJSON)),
     };
@@ -112,6 +135,7 @@ export function TimeSeriesDetailsToJSON(value?: TimeSeriesDetails | null): any {
         'name': value.name,
         'description': value.description,
         'createdAt': value.createdAt,
+        'aggregation': value.aggregation,
         'labels': value.labels,
         'points': ((value.points as Array<any>).map(TimeSeriesPointDetailsToJSON)),
     };
