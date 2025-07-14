@@ -10,6 +10,9 @@ const NUM_POINTS = 100;
 
 @TestSeeder()
 export default class CreateTimeSeries implements Seeder {
+  // Ensure seeder only runs once
+  track = true;
+
   public async run(
     _: DataSource,
     factoryManger: SeederFactoryManager,
