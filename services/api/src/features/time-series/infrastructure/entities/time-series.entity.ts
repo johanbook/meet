@@ -4,10 +4,18 @@ import { BaseEntity } from "src/core/database";
 import { Organization } from "src/core/organizations";
 import { Profile } from "src/core/profiles";
 
+import { TimeSeriesAggregationEnum } from "../../time-series-aggregation.enum";
 import { TimeSeriesPoint } from "./time-series-point.entity";
 
 @Entity()
 export class TimeSeries extends BaseEntity {
+  @Column({
+    type: "enum",
+    enum: TimeSeriesAggregationEnum,
+    default: TimeSeriesAggregationEnum.Monthly,
+  })
+  aggregation!: TimeSeriesAggregationEnum;
+
   @Column({ type: "varchar", length: 2048, default: "" })
   description!: string;
 

@@ -48,6 +48,7 @@ export class GetTimeSeriesHandler
     const labels = uniqify(timeSeries.points.map((point) => point.label));
 
     return map(TimeSeriesDetails, {
+      aggregation: timeSeries.aggregation,
       createdAt: timeSeries.createdAt.toISOString(),
       description: timeSeries.description,
       labels,
