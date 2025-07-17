@@ -37,7 +37,7 @@ export class NotifyOrganizationOnPostedBlogPostHandler
     }
 
     const notification: INotification = {
-      description: `${profile.name} posted '${event.content}' in your organization.`,
+      description: event.content,
       message: `${profile.name} made a new post`,
       resourcePath: `/blog/${event.id}`,
       type: NotificationEventEnum.NewBlogPost,
