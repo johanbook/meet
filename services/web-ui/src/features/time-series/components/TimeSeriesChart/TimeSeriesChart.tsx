@@ -1,10 +1,15 @@
 import { ReactElement, useMemo } from "react";
 
-import { BarChart } from "@mui/x-charts";
+import { LineChart } from "@mui/x-charts";
 
 import { TimeSeriesDetails, TimeSeriesDetailsAggregationEnum } from "src/api";
 
 import { getAggregatedData } from "../../utils/stats.helper";
+
+const stackStrategy = {
+  area: true,
+  showMark: false,
+};
 
 interface TimeSeriesChartProps {
   timeSeries: TimeSeriesDetails;
@@ -19,15 +24,16 @@ export function TimeSeriesChart({
   );
 
   return (
-    <BarChart
+    <LineChart
       dataset={data}
       height={300}
       series={timeSeries.labels.map((label) => ({
+        ...stackStrategy,
         dataKey: label,
         label,
         stack: "default",
       }))}
-      xAxis={[{ dataKey: "date" }]}
+      xAxis={[{ dataKey: "date", scaleType: "time" }]}
     />
   );
 }

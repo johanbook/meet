@@ -92,10 +92,15 @@ export const getAggregatedData = (
     }
   }
 
+  const defaultPoints = Object.fromEntries(
+    timeSeries.labels.map((label) => [label, 0]),
+  );
+
   const entries = Object.entries(data).map(([date, data]) => ({
+    ...defaultPoints,
     ...data,
-    date,
+    date: new Date(date).valueOf(),
   }));
 
-  return entries.sort((a, b) => a.date.localeCompare(b.date));
+  return entries.sort((a, b) => (a.date < b.date ? 1 : -1));
 };
