@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { TimeSeriesDetailsAggregationEnum } from "src/api";
 
-import { getAggregationDate } from "./TimeSeriesPage.utils";
+import { getAggregationDate } from "./stats.helper";
 
 describe("getAggregationDate", () => {
   beforeEach(() => {
