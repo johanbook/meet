@@ -24,6 +24,7 @@ export function TimeSeriesChart({
       height={300}
       series={timeSeries.labels.map((label) => ({
         dataKey: label,
+        label,
         stack: "default",
       }))}
       xAxis={[{ dataKey: "date" }]}
