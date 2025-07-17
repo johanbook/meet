@@ -1,8 +1,8 @@
-import { ReactElement } from "react";
+import { ReactElement, useMemo } from "react";
 
 import { BarChart } from "@mui/x-charts";
 
-import { TimeSeriesDetails } from "src/api";
+import { TimeSeriesDetails, TimeSeriesDetailsAggregationEnum } from "src/api";
 
 import { getAggregatedData } from "../../utils/stats.helper";
 
@@ -13,7 +13,10 @@ interface TimeSeriesChartProps {
 export function TimeSeriesChart({
   timeSeries,
 }: TimeSeriesChartProps): ReactElement {
-  const data = getAggregatedData(timeSeries);
+  const data = useMemo(
+    () => getAggregatedData(timeSeries, TimeSeriesDetailsAggregationEnum.Daily),
+    [timeSeries],
+  );
 
   return (
     <BarChart

@@ -93,13 +93,16 @@ export const getChartData = (timeSeries: TimeSeriesDetails) => {
   return data;
 };
 
-export const getAggregatedData = (timeSeries: TimeSeriesDetails) => {
+export const getAggregatedData = (
+  timeSeries: TimeSeriesDetails,
+  aggregation: TimeSeriesDetailsAggregationEnum,
+) => {
   const data: Record<string, Record<string, number>> = {};
 
   for (const point of timeSeries.points) {
     const aggregatedDate = getAggregationDate(
       new Date(point.createdAt),
-      timeSeries.aggregation,
+      aggregation,
     );
 
     if (!(aggregatedDate in data)) {
