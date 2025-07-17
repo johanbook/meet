@@ -5,33 +5,21 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Avatar,
   Box,
   Card,
   CardContent,
-  Chip,
-  ChipProps,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Stack,
   Typography,
 } from "@mui/material";
-import { BarChart } from "@mui/x-charts";
 
 import { TimeSeriesDetails } from "src/api";
 import { Fab } from "src/components/ui/Fab";
 import { useDialog } from "src/core/dialog";
-import { timeSince } from "src/utils/time";
 
 import { AddTimeSeriesPointDialog } from "../../components/AddTimeSeriesPointDialog";
-import { getAggregatedData, getTimeSeriesStats } from "./TimeSeriesPage.utils";
-
-const LABEL_COLORS: ChipProps["color"][] = ["primary", "secondary"];
-
-const getLabelColor = (index: number) =>
-  LABEL_COLORS[index % LABEL_COLORS.length];
+import { TimeSeriesChart } from "../../components/TimeSeriesChart";
+import { TimeSeriesPointList } from "../../components/TimeSeriesPointList";
+import { getTimeSeriesStats } from "../../utils/stats.helper";
 
 interface TimeSeriesPageComponentProps {
   timeSeries: TimeSeriesDetails;
@@ -47,8 +35,6 @@ export function TimeSeriesPageComponent({
   };
 
   const stats = getTimeSeriesStats(timeSeries);
-
-  const data = getAggregatedData(timeSeries);
 
   return (
     <Box>
@@ -72,15 +58,7 @@ export function TimeSeriesPageComponent({
           <Typography variant="h6">Charts</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <BarChart
-            dataset={data}
-            height={300}
-            series={timeSeries.labels.map((label) => ({
-              dataKey: label,
-              stack: "default",
-            }))}
-            xAxis={[{ dataKey: "date" }]}
-          />
+          <TimeSeriesChart timeSeries={timeSeries} />
         </AccordionDetails>
       </Accordion>
 
@@ -89,34 +67,7 @@ export function TimeSeriesPageComponent({
           <Typography variant="h6">Data</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <List>
-            {timeSeries.points.map((point) => (
-              <ListItem key={point.id}>
-                <ListItemIcon>
-                  <Avatar>{point.value}</Avatar>
-                </ListItemIcon>
-                <ListItemText
-                  primary={
-                    <Box
-                      component="span"
-                      sx={{ display: "flex", gap: 2, alignItems: "center" }}
-                    >
-                      <span>{point.description}</span>
-                      <Chip
-                        color={getLabelColor(
-                          timeSeries.labels.indexOf(point.label),
-                        )}
-                        label={point.label}
-                        size="small"
-                        variant="outlined"
-                      />
-                    </Box>
-                  }
-                  secondary={timeSince(point.createdAt)}
-                />
-              </ListItem>
-            ))}
-          </List>
+          <TimeSeriesPointList timeSeries={timeSeries} />
         </AccordionDetails>
       </Accordion>
 
