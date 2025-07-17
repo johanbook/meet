@@ -67,32 +67,6 @@ export const getTimeSeriesStats = (
   return getAggregatedValues(timeSeries);
 };
 
-interface PlotPoint {
-  id: string;
-  x: number;
-  y: number;
-}
-
-export const getChartData = (timeSeries: TimeSeriesDetails) => {
-  const data: Record<string, PlotPoint[]> = {};
-
-  for (const point of timeSeries.points) {
-    const value = {
-      id: point.id,
-      x: new Date(point.createdAt).valueOf(),
-      y: point.value,
-    };
-
-    if (point.label in data) {
-      data[point.label].push(value);
-    } else {
-      data[point.label] = [value];
-    }
-  }
-
-  return data;
-};
-
 export const getAggregatedData = (
   timeSeries: TimeSeriesDetails,
   aggregation: TimeSeriesDetailsAggregationEnum,
