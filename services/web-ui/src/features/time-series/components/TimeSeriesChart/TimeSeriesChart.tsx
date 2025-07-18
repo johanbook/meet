@@ -6,7 +6,7 @@ import { TimeSeriesDetails, TimeSeriesDetailsAggregationEnum } from "src/api";
 
 import { getAggregatedData } from "../../utils/stats.helper";
 
-const stackStrategy = {
+const SERIES_OPTIONS = {
   area: true,
   showMark: false,
 };
@@ -28,10 +28,9 @@ export function TimeSeriesChart({
       dataset={data}
       height={300}
       series={timeSeries.labels.map((label) => ({
-        ...stackStrategy,
+        ...SERIES_OPTIONS,
         dataKey: label,
         label,
-        stack: "default",
       }))}
       xAxis={[{ dataKey: "date", scaleType: "time" }]}
     />
