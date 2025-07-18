@@ -15,7 +15,7 @@ import {
 import { TimeSeriesDetails } from "src/api";
 import { timeSince } from "src/utils/time";
 
-const LABEL_COLORS: ChipProps["color"][] = ["primary", "secondary"];
+const LABEL_COLORS: ChipProps["color"][] = ["primary", "secondary", "info"];
 
 const getLabelColor = (index: number) =>
   LABEL_COLORS[index % LABEL_COLORS.length];
