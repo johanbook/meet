@@ -9,4 +9,20 @@ describe("<OrganizationAvatar />", () => {
     const label = screen.getByText("T");
     expect(label).toBeInTheDocument();
   });
+
+  it("renders image if available", () => {
+    const { container } = render(
+      <OrganizationAvatar src="https://example.com" />,
+    );
+
+    const image = container.querySelector("img");
+    expect(image).toBeInTheDocument();
+  });
+
+  it("renders svg if no image or name", () => {
+    const { container } = render(<OrganizationAvatar />);
+
+    const svg = container.querySelector("svg");
+    expect(svg).toBeInTheDocument();
+  });
 });
