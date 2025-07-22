@@ -31,8 +31,9 @@ export const getAggregationDate = (
       return { label: day, value: day };
     }
     case TimeSeriesDetailsAggregationEnum.Hourly: {
-      const hour = date.toJSON().slice(0, 13);
-      return { label: hour, value: hour };
+      const hour = dayjs(date).format("HH:00");
+      const now = dayjs().format("YYYY-MM-DD");
+      return { label: hour, value: `${now}T${hour}` };
     }
   }
 };
