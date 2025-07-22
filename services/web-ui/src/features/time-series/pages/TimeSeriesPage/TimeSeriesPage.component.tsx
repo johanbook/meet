@@ -2,20 +2,12 @@ import { ReactElement } from "react";
 import { useNavigate } from "react-router";
 
 import { AddRounded } from "@mui/icons-material";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Card,
-  CardContent,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 
 import { TimeSeriesDetails } from "src/api";
 import { timeSeriesApi } from "src/apis";
 import { Button } from "src/components/ui";
+import { CollapsibleCard } from "src/components/ui/CollapsibleCard";
 import { Fab } from "src/components/ui/Fab";
 import { useConfirmDialog, useDialog } from "src/core/dialog";
 import { useMutation } from "src/core/query";
@@ -70,9 +62,9 @@ export function TimeSeriesPageComponent({
     <Box>
       <Typography color="textSecondary">{timeSeries.description}</Typography>
 
-      <Stack direction="row" spacing={2} sx={{ mt: 2, mb: 4 }}>
+      <Stack direction="row" spacing={2} sx={{ mt: 2, mb: 2 }}>
         {stats.map(({ label, value }) => (
-          <Card key={label}>
+          <Card key={label} variant="outlined">
             <CardContent>
               <Typography gutterBottom>{label} </Typography>
               <Typography align="center" variant="h4">
@@ -83,30 +75,17 @@ export function TimeSeriesPageComponent({
         ))}
       </Stack>
 
-      <Accordion>
-        <AccordionSummary>
-          <Typography variant="h6">Charts</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
+      <Stack spacing={2}>
+        <CollapsibleCard sx={{ p: 2 }} title="Charts">
           <TimeSeriesChart timeSeries={timeSeries} />
-        </AccordionDetails>
-      </Accordion>
+        </CollapsibleCard>
 
-      <Accordion defaultExpanded>
-        <AccordionSummary>
-          <Typography variant="h6">Data</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
+        <CollapsibleCard openByDefault sx={{ p: 2 }} title="Data">
           <TimeSeriesPointList timeSeries={timeSeries} />
-        </AccordionDetails>
-      </Accordion>
+        </CollapsibleCard>
 
-      <Accordion>
-        <AccordionSummary>
-          <Typography variant="h6">Settings</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography color="textSecondary" gutterBottom>
+        <CollapsibleCard sx={{ p: 2 }} title="Settings">
+          <Typography color="textSecondary" sx={{ pb: 2 }}>
             Delete time series
           </Typography>
           <Button
@@ -117,8 +96,8 @@ export function TimeSeriesPageComponent({
           >
             Delete
           </Button>
-        </AccordionDetails>
-      </Accordion>
+        </CollapsibleCard>
+      </Stack>
 
       <Fab onClick={handleOpenForm}>
         <AddRounded />
