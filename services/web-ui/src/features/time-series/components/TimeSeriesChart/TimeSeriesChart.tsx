@@ -31,6 +31,8 @@ export function TimeSeriesChart({
       theme.palette.primary.main,
       theme.palette.secondary.main,
       theme.palette.info.main,
+      theme.palette.success.main,
+      theme.palette.warning.main,
     ];
     const index = timeSeries.labels.indexOf(label);
 
