@@ -1,7 +1,6 @@
 import dayjs from "dayjs";
-import weekOfYear from "dayjs/plugin/weekOfYear";
 
-dayjs.extend(weekOfYear);
+import { getWeek } from "src/utils/time";
 
 export function getAllDatesInCurrentMonth(): dayjs.Dayjs[] {
   const today = dayjs();
@@ -26,7 +25,7 @@ export function getDateGrid(): Record<number, dayjs.Dayjs[]> {
   const dates = getAllDatesInCurrentMonth();
 
   for (const date of dates) {
-    const weekNumber = dayjs(date).week();
+    const weekNumber = getWeek(date);
 
     if (weekNumber in grid) {
       grid[weekNumber].push(date);

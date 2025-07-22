@@ -18,7 +18,7 @@ describe("getAggregationDate", () => {
       new Date(),
       TimeSeriesDetailsAggregationEnum.Total,
     );
-    expect(result).toBe("");
+    expect(result.value).toBe("");
   });
 
   it("should return the correct date for Yearly aggregation", () => {
@@ -26,7 +26,7 @@ describe("getAggregationDate", () => {
       new Date(),
       TimeSeriesDetailsAggregationEnum.Yearly,
     );
-    expect(result).toBe("2000");
+    expect(result.value).toBe("2000");
   });
 
   it("should return the correct date for Monthly aggregation", () => {
@@ -34,7 +34,7 @@ describe("getAggregationDate", () => {
       new Date(),
       TimeSeriesDetailsAggregationEnum.Monthly,
     );
-    expect(result).toBe("2000-01");
+    expect(result.value).toBe("2000-01");
   });
 
   it("should return the correct date for Daily aggregation", () => {
@@ -42,7 +42,7 @@ describe("getAggregationDate", () => {
       new Date(),
       TimeSeriesDetailsAggregationEnum.Daily,
     );
-    expect(result).toBe("2000-01-01");
+    expect(result.value).toBe("2000-01-01");
   });
 
   it("should return the correct date for Hourly aggregation", () => {
@@ -50,6 +50,6 @@ describe("getAggregationDate", () => {
       new Date(),
       TimeSeriesDetailsAggregationEnum.Hourly,
     );
-    expect(result).toBe("2000-01-01T00");
+    expect(result.value).toBe("2000-01-01T00");
   });
 });
