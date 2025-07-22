@@ -6,7 +6,10 @@ import { LineChart } from "@mui/x-charts";
 import { TimeSeriesDetails, TimeSeriesDetailsAggregationEnum } from "src/api";
 import { Select } from "src/components/ui";
 
-import { getAggregatedData } from "../../utils/stats.helper";
+import {
+  getAggregatedData,
+  getAggregationDate,
+} from "../../utils/stats.helper";
 
 const SERIES_OPTIONS = {
   area: true,
@@ -72,7 +75,17 @@ export function TimeSeriesChart({
           dataKey: label,
           label,
         }))}
-        xAxis={[{ dataKey: "date", scaleType: "time" }]}
+        xAxis={[
+          {
+            dataKey: "date",
+            scaleType: "time",
+            valueFormatter: (value) => {
+              const date = new Date(value);
+              const { label } = getAggregationDate(date, aggregation);
+              return label;
+            },
+          },
+        ]}
       />
     </>
   );
