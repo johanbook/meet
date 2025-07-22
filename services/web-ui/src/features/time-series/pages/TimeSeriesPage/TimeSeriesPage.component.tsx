@@ -1,4 +1,5 @@
 import { ReactElement } from "react";
+import { useNavigate } from "react-router";
 
 import { AddRounded } from "@mui/icons-material";
 import {
@@ -13,8 +14,12 @@ import {
 } from "@mui/material";
 
 import { TimeSeriesDetails } from "src/api";
+import { timeSeriesApi } from "src/apis";
+import { Button } from "src/components/ui";
 import { Fab } from "src/components/ui/Fab";
-import { useDialog } from "src/core/dialog";
+import { useConfirmDialog, useDialog } from "src/core/dialog";
+import { useMutation } from "src/core/query";
+import { useSnackbar } from "src/core/snackbar";
 
 import { AddTimeSeriesPointDialog } from "../../components/AddTimeSeriesPointDialog";
 import { TimeSeriesChart } from "../../components/TimeSeriesChart";
@@ -28,11 +33,36 @@ interface TimeSeriesPageComponentProps {
 export function TimeSeriesPageComponent({
   timeSeries,
 }: TimeSeriesPageComponentProps): ReactElement {
+  const navigate = useNavigate();
+  const snackbar = useSnackbar();
   const { openDialog } = useDialog();
+  const { confirmWithDialog } = useConfirmDialog();
+  const mutation = useMutation({
+    mutationFn: () =>
+      timeSeriesApi.deleteTimeSeries({
+        deleteTimeSeriesCommand: { id: timeSeries.id },
+      }),
+  });
 
-  const handleOpenForm = () => {
+  function handleOpenForm() {
     openDialog(AddTimeSeriesPointDialog, { timeSeriesId: timeSeries.id });
-  };
+  }
+
+  function handleDelete() {
+    confirmWithDialog({
+      description: "Deleting this time series will remove it permanently.",
+      onConfirm: async (closeDialog) =>
+        await mutation.mutateAsync(undefined, {
+          onError: () => snackbar.error("Failed to delete"),
+          onSuccess: () => {
+            snackbar.success("Time series deleted");
+            navigate("/time-series");
+            closeDialog();
+          },
+        }),
+      title: "Delete time series?",
+    });
+  }
 
   const stats = getTimeSeriesStats(timeSeries);
 
@@ -68,6 +98,25 @@ export function TimeSeriesPageComponent({
         </AccordionSummary>
         <AccordionDetails>
           <TimeSeriesPointList timeSeries={timeSeries} />
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion>
+        <AccordionSummary>
+          <Typography variant="h6">Settings</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography color="textSecondary" gutterBottom>
+            Delete time series
+          </Typography>
+          <Button
+            color="error"
+            loading={mutation.isPending}
+            onClick={handleDelete}
+            variant="contained"
+          >
+            Delete
+          </Button>
         </AccordionDetails>
       </Accordion>
 
