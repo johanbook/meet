@@ -17,12 +17,13 @@ export const getAggregationDate = (
     }
     case TimeSeriesDetailsAggregationEnum.Monthly: {
       const month = date.toJSON().slice(0, 7);
-      return { label: month, value: month };
+      const x = dayjs(month).format("MMM");
+      return { label: x, value: month };
     }
     case TimeSeriesDetailsAggregationEnum.Weekly: {
       const week = getWeek(date);
       const year = date.toJSON().slice(0, 4);
-      const label = `${year} W${week}`;
+      const label = `${week}`;
       const newDate = dayjs(year).week(week);
       return { label, value: newDate.toJSON() };
     }
