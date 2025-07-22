@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "src/test";
 
-import { getDate, getDateDaysAgo, timeSince } from "./time";
+import { getDate, getDateDaysAgo, getWeek, timeSince } from "./time";
 
 beforeEach(() => {
   vi.useFakeTimers();
@@ -24,8 +24,14 @@ describe(timeSince.name, () => {
   });
 });
 
-describe(getDateDaysAgo, () => {
+describe(getDateDaysAgo.name, () => {
   it("parses correct dates", () => {
     expect(getDateDaysAgo(1).toJSON()).toBe("2000-12-30T00:00:00.000Z");
+  });
+});
+
+describe(getWeek.name, () => {
+  it("parses correct week", () => {
+    expect(getWeek("2000-01-01")).toBe(1);
   });
 });

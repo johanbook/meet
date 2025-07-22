@@ -1,7 +1,9 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import weekOfYear from "dayjs/plugin/weekOfYear";
 
 dayjs.extend(relativeTime);
+dayjs.extend(weekOfYear);
 
 export function getDate(time: string): string {
   const date = dayjs(time);
@@ -19,4 +21,8 @@ export function getDateDaysAgo(days: number): Date {
 
 export function getDateYearsAgo(years: number): Date {
   return dayjs().subtract(years, "year").toDate();
+}
+
+export function getWeek(date: string | Date | dayjs.Dayjs): number {
+  return dayjs(date).week();
 }
