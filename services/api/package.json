@@ -42,7 +42,7 @@
     "jimp": "1.6.0",
     "keyv": "5.3.3",
     "nestjs-minio-client": "2.2.0",
-    "nodemailer": "7.0.3",
+    "nodemailer": "7.0.5",
     "pg": "8.16.3",
     "pino": "9.7.0",
     "reflect-metadata": "0.2.2",
