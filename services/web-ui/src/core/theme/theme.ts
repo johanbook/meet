@@ -13,6 +13,25 @@ export function createTheme({ darkmode, theme }: CreateThemeProps) {
 
   return createMuiTheme({
     components: {
+      MuiAccordion: {
+        styleOverrides: {
+          root: {
+            "&:before": {
+              display: "none",
+            },
+          },
+          rounded: ({ theme }) => ({
+            borderRadius: theme.spacing(2),
+          }),
+        },
+      },
+      MuiCard: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            borderRadius: theme.spacing(2),
+          }),
+        },
+      },
       MuiDialog: {
         styleOverrides: {
           paper: ({ theme }) => ({

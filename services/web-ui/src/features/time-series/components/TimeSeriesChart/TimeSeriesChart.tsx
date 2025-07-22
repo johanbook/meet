@@ -65,6 +65,7 @@ export function TimeSeriesChart({
       <LineChart
         dataset={data}
         height={300}
+        margin={{ left: 0, right: 0 }}
         series={timeSeries.labels.map((label) => ({
           ...SERIES_OPTIONS,
           color: getColor(label),
