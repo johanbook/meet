@@ -4,7 +4,6 @@ import { Link as RouterLink } from "react-router";
 
 import { ErrorOutline } from "@mui/icons-material";
 import {
-  Avatar,
   ListItem,
   ListItemButton,
   ListItemIcon,
@@ -13,6 +12,7 @@ import {
 } from "@mui/material";
 
 import { profileApi } from "src/apis";
+import { ProfileAvatar } from "src/components/shared";
 import { useTranslation } from "src/core/i18n";
 import { CacheKeysConstants, useQuery } from "src/core/query";
 
@@ -45,20 +45,11 @@ const ProfileIcon = () => {
     );
   }
 
-  const src = query.data.photo?.url;
-
-  if (!src) {
-    return (
-      <Avatar sx={{ height: AVATAR_SIZE, width: AVATAR_SIZE }}>
-        {query.data.name}
-      </Avatar>
-    );
-  }
-
   return (
-    <Avatar
-      src={query.data?.photo?.url}
-      sx={{ height: AVATAR_SIZE, width: AVATAR_SIZE }}
+    <ProfileAvatar
+      name={query.data.name}
+      size={AVATAR_SIZE}
+      src={query.data.photo?.url}
     />
   );
 };
