@@ -29,7 +29,7 @@ export function OrganizationAvatar({
   if (name) {
     return (
       <Avatar sx={{ width: size, height: size }} variant="rounded">
-        {name.slice(0, 1)}
+        {name.slice(0, 1).toUpperCase()}
       </Avatar>
     );
   }
