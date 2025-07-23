@@ -1,7 +1,8 @@
-import { NotFoundException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
+
+import { EntityNotFoundError } from "src/core/error-handling";
 
 import { BlogPost } from "../../../infrastructure/entities/blog-post.entity";
 import { UpdateBlogPostCommand } from "../../contracts/commands/update-blog-post.command";
@@ -21,7 +22,7 @@ export class UpdateBlogPostHandler
     });
 
     if (!blogPost) {
-      throw new NotFoundException("Blog post not found");
+      throw new EntityNotFoundError(BlogPost);
     }
 
     blogPost.content = command.content;

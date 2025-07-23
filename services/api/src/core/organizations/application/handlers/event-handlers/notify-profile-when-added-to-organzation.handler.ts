@@ -1,8 +1,8 @@
-import { NotFoundException } from "@nestjs/common";
 import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { EntityNotFoundError } from "src/core/error-handling";
 import {
   NotificationEventEnum,
   NotificationService,
@@ -33,7 +33,7 @@ export class NotifyProfileWhenAddedToOrganizationHandler
     });
 
     if (!organization) {
-      throw new NotFoundException("Organization not found");
+      throw new EntityNotFoundError(Organization);
     }
 
     const notification: INotification = {

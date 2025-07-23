@@ -1,8 +1,8 @@
-import { NotFoundException } from "@nestjs/common";
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { EntityNotFoundError } from "src/core/error-handling";
 import { map, mapArray } from "src/core/mapper";
 import { CurrentOrganizationService } from "src/core/organizations";
 import { PhotoService } from "src/core/photos";
@@ -62,7 +62,7 @@ export class GetBlogPostHandler
     });
 
     if (!blogPost) {
-      throw new NotFoundException("Blog post not found");
+      throw new EntityNotFoundError(BlogPost);
     }
 
     return map(BlogPostDetails, {

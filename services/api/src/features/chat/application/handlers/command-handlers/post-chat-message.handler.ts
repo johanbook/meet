@@ -1,8 +1,8 @@
-import { NotFoundException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { EntityNotFoundError } from "src/core/error-handling";
 import { CurrentProfileService } from "src/core/profiles";
 
 import { ChatMessageService } from "../../../domain/services/chat-message.service";
@@ -35,7 +35,7 @@ export class PostChatMessageHandler
     });
 
     if (!chatConversation) {
-      throw new NotFoundException("Conversation not found");
+      throw new EntityNotFoundError(ChatConversation);
     }
 
     const chatMessage = new ChatMessage();

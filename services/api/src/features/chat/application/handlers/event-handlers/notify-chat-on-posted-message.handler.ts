@@ -1,8 +1,8 @@
-import { NotFoundException } from "@nestjs/common";
 import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { EntityNotFoundError } from "src/core/error-handling";
 import {
   NotificationEventEnum,
   NotificationService,
@@ -36,7 +36,7 @@ export class NotifyChatOnPostedMessageHandler
     });
 
     if (!profile) {
-      throw new NotFoundException("Profile not found");
+      throw new EntityNotFoundError(Profile);
     }
 
     const conversation = await this.chatConversations.findOne({
@@ -54,7 +54,7 @@ export class NotifyChatOnPostedMessageHandler
     });
 
     if (!conversation) {
-      throw new NotFoundException("Conversation not found");
+      throw new EntityNotFoundError(ChatConversation);
     }
 
     const receivers = conversation.members

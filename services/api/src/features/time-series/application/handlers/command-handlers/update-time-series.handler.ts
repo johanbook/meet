@@ -1,7 +1,8 @@
-import { NotFoundException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
+
+import { EntityNotFoundError } from "src/core/error-handling";
 
 import { TimeSeries } from "../../../infrastructure/entities/time-series.entity";
 import { UpdateTimeSeriesCommand } from "../../contracts/commands/update-time-series.command";
@@ -21,7 +22,7 @@ export class UpdateTimeSeriesHandler
     });
 
     if (!timeSeries) {
-      throw new NotFoundException("Time series not found");
+      throw new EntityNotFoundError(TimeSeries);
     }
 
     timeSeries.name = command.name;

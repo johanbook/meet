@@ -1,8 +1,8 @@
-import { NotFoundException } from "@nestjs/common";
 import { EventsHandler, IEventHandler } from "@nestjs/cqrs";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { EntityNotFoundError } from "src/core/error-handling";
 import {
   NotificationEventEnum,
   NotificationService,
@@ -36,7 +36,7 @@ export class NotifyOrganizationOnPostedBlogPostCommentHandler
     });
 
     if (!profile) {
-      throw new NotFoundException("Profile not found");
+      throw new EntityNotFoundError(Profile);
     }
 
     const blogPost = await this.blogPosts.findOne({
@@ -56,7 +56,7 @@ export class NotifyOrganizationOnPostedBlogPostCommentHandler
     });
 
     if (!blogPost) {
-      throw new NotFoundException("Blog post not found");
+      throw new EntityNotFoundError(BlogPost);
     }
 
     const notification: INotification = {
