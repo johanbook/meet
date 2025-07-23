@@ -35,7 +35,12 @@ export function CollapsibleCard({
 
         <IconButton>
           <KeyboardArrowDownRounded
-            sx={{ transform: open ? "rotate(180deg)" : undefined }}
+            sx={(theme) => ({
+              transform: open ? "rotate(180deg)" : "rotate(0deg)",
+              transition: theme.transitions.create("transform", {
+                duration: theme.transitions.duration.short,
+              }),
+            })}
           />
         </IconButton>
       </ButtonBase>
