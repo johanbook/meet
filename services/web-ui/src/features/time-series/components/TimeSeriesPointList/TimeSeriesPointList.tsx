@@ -40,7 +40,7 @@ export function TimeSeriesPointList({
   return (
     <List sx={{ maxHeight: "40vh", overflowY: "auto" }}>
       {timeSeries.points.map((point) => (
-        <ListItem key={point.id}>
+        <ListItem disableGutters key={point.id}>
           <ListItemIcon>
             <Avatar>{point.value}</Avatar>
           </ListItemIcon>
