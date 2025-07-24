@@ -11,6 +11,7 @@ import {
 import { LineChart } from "@mui/x-charts";
 
 import { TimeSeriesDetails, TimeSeriesDetailsAggregationEnum } from "src/api";
+import { format } from "src/utils/string";
 
 import {
   getAggregatedData,
@@ -79,7 +80,7 @@ export function TimeSeriesChart({
           {Object.entries(TimeSeriesDetailsAggregationEnum).map(
             ([name, value]) => (
               <ToggleButton key={value} size="small" value={value}>
-                {name}
+                {format(name)}
               </ToggleButton>
             ),
           )}
