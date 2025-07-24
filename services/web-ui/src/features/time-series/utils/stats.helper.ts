@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 
 import { TimeSeriesDetails, TimeSeriesDetailsAggregationEnum } from "src/api";
-import { getWeek } from "src/utils/time";
+import { getWeek, getWeekDay } from "src/utils/time";
 
 export const getAggregationDate = (
   date: Date,
@@ -22,10 +22,16 @@ export const getAggregationDate = (
     }
     case TimeSeriesDetailsAggregationEnum.Weekly: {
       const week = getWeek(date);
-      const year = date.toJSON().slice(0, 4);
-      const label = `${week}`;
-      const newDate = dayjs(year).week(week);
-      return { label, value: newDate.toJSON() };
+      const currentYear = date.toJSON().slice(0, 4);
+      const newDate = dayjs(currentYear).week(week);
+      return { label: String(week), value: newDate.toJSON() };
+    }
+    case TimeSeriesDetailsAggregationEnum.DayOfWeek: {
+      const label = getWeekDay(date);
+      const weekdayIndex = dayjs(date).day();
+      const referenceSunday = dayjs("2020-01-05");
+      const weekdayDate = referenceSunday.add(weekdayIndex, "day");
+      return { label, value: weekdayDate.toJSON() };
     }
     case TimeSeriesDetailsAggregationEnum.Daily: {
       const day = date.toJSON().slice(0, 10);
