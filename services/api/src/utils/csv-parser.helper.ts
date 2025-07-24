@@ -3,14 +3,18 @@ import { readFileSync } from "node:fs";
 
 export function parseCsv<T = unknown>(
   csvContent: string,
-  options?: CsvParserOptions,
+  options?: Omit<CsvParserOptions<T>, "columns">,
 ): T[] {
-  return parse(csvContent, { columns: true, comment: "#", ...options });
+  return parse<T>(csvContent, {
+    columns: true,
+    comment: "#",
+    ...options,
+  });
 }
 
 export function readAndParseCsv<T = unknown>(
   path: string,
-  csvParserOptions?: CsvParserOptions,
+  csvParserOptions?: CsvParserOptions<T>,
 ): T[] {
   const fileContent = readFileSync(path, { encoding: "utf8" });
   return parseCsv(fileContent, csvParserOptions);

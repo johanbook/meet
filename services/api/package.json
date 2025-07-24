@@ -38,7 +38,7 @@
     "axios": "1.11.0",
     "class-transformer": "0.5.1",
     "class-validator": "0.14.1",
-    "csv-parse": "5.6.0",
+    "csv-parse": "6.1.0",
     "jimp": "1.6.0",
     "keyv": "5.3.3",
     "lodash": "4.17.21",
