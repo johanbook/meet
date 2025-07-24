@@ -78,7 +78,7 @@ export function TimeSeriesChart({
         >
           {Object.entries(TimeSeriesDetailsAggregationEnum).map(
             ([name, value]) => (
-              <ToggleButton key={value} value={value}>
+              <ToggleButton key={value} size="small" value={value}>
                 {name}
               </ToggleButton>
             ),

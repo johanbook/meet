@@ -3,13 +3,8 @@ import { ReactElement, ReactNode } from "react";
 import { Typography } from "@mui/material";
 
 import { Nav } from "src/components/nav";
-import { DateRangePicker } from "src/components/ui";
+import { DateRange, DateRangePicker } from "src/components/ui";
 import { useTranslation } from "src/core/i18n";
-
-export interface DateRange {
-  from: Date;
-  to: Date;
-}
 
 interface OrganizationJournalPageNavProps {
   children: ReactNode;
