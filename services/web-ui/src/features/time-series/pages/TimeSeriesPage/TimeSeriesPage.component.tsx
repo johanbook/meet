@@ -2,13 +2,11 @@ import { ReactElement } from "react";
 import { useNavigate } from "react-router";
 
 import { AddRounded } from "@mui/icons-material";
-import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
+import { Box, CardContent, Stack, Typography } from "@mui/material";
 
 import { TimeSeriesDetails } from "src/api";
 import { timeSeriesApi } from "src/apis";
-import { Button } from "src/components/ui";
-import { CollapsibleCard } from "src/components/ui/CollapsibleCard";
-import { Fab } from "src/components/ui/Fab";
+import { Button, Card, CollapsibleCard, Fab } from "src/components/ui";
 import { useConfirmDialog, useDialog } from "src/core/dialog";
 import { useMutation } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
@@ -64,7 +62,7 @@ export function TimeSeriesPageComponent({
 
       <Stack direction="row" spacing={2} sx={{ mt: 2, mb: 2 }}>
         {stats.map(({ label, value }) => (
-          <Card key={label} variant="outlined">
+          <Card key={label}>
             <CardContent>
               <Typography gutterBottom>{label} </Typography>
               <Typography align="center" variant="h4">

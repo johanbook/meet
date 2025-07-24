@@ -4,9 +4,9 @@ import { Grid } from "@mui/material";
 
 import { DatePicker } from "../DatePicker";
 
-interface DateRange {
-  to: Date;
+export interface DateRange {
   from: Date;
+  to: Date;
 }
 
 interface DateRangePickerProps {
