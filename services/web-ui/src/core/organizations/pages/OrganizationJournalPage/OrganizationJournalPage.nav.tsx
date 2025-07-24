@@ -1,9 +1,9 @@
 import { ReactElement, ReactNode } from "react";
 
-import { Grid, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 import { Nav } from "src/components/nav";
-import { DatePicker } from "src/components/ui/DatePicker";
+import { DateRangePicker } from "src/components/ui";
 import { useTranslation } from "src/core/i18n";
 
 export interface DateRange {
@@ -30,25 +30,7 @@ export function OrganizationJournalPageNav({
         {t("description")}
       </Typography>
 
-      <Grid container spacing={2}>
-        <Grid size={{ xs: 6 }}>
-          <DatePicker
-            fullWidth
-            label="From"
-            onChange={(from) => onDateChange({ ...values, from })}
-            value={values.from}
-          />
-        </Grid>
-
-        <Grid size={{ xs: 6 }}>
-          <DatePicker
-            fullWidth
-            label="To"
-            onChange={(to) => onDateChange({ ...values, to })}
-            value={values.to}
-          />
-        </Grid>
-      </Grid>
+      <DateRangePicker fullWidth onChange={onDateChange} value={values} />
 
       {children}
     </Nav>
