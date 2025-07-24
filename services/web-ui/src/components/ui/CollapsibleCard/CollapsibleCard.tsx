@@ -2,6 +2,7 @@ import { ReactElement, ReactNode, useState } from "react";
 
 import { KeyboardArrowDownRounded } from "@mui/icons-material";
 import {
+  Box,
   ButtonBase,
   Collapse,
   IconButton,
@@ -28,10 +29,15 @@ export function CollapsibleCard({
 
   return (
     <Card sx={sx}>
-      <ButtonBase onClick={() => setOpen(!open)} sx={{ width: "100%" }}>
-        <Typography align="left" sx={{ flexGrow: 1 }} variant="h5">
-          {title}
-        </Typography>
+      <Box
+        onClick={() => setOpen(!open)}
+        sx={{ display: "flex", width: "100%" }}
+      >
+        <ButtonBase sx={{ flexGrow: 1 }}>
+          <Typography align="left" sx={{ width: "100%" }} variant="h5">
+            {title}
+          </Typography>
+        </ButtonBase>
 
         <IconButton>
           <KeyboardArrowDownRounded
@@ -43,7 +49,7 @@ export function CollapsibleCard({
             })}
           />
         </IconButton>
-      </ButtonBase>
+      </Box>
 
       <Collapse in={open}>{children} </Collapse>
     </Card>
