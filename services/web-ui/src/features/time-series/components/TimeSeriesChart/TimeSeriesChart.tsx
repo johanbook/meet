@@ -1,10 +1,16 @@
 import { ReactElement, useMemo, useState } from "react";
 
-import { MenuItem, alpha, useTheme } from "@mui/material";
+import {
+  Box,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+  alpha,
+  useTheme,
+} from "@mui/material";
 import { LineChart } from "@mui/x-charts";
 
 import { TimeSeriesDetails, TimeSeriesDetailsAggregationEnum } from "src/api";
-import { Select } from "src/components/ui";
 
 import {
   getAggregatedData,
@@ -50,20 +56,35 @@ export function TimeSeriesChart({
 
   return (
     <>
-      <Select
-        onChange={(value) =>
-          setAggregation(value as TimeSeriesDetailsAggregationEnum)
-        }
-        value={aggregation}
-      >
-        {Object.entries(TimeSeriesDetailsAggregationEnum).map(
-          ([name, value]) => (
-            <MenuItem key={value} value={value}>
-              {name}
-            </MenuItem>
-          ),
-        )}
-      </Select>
+      <Typography color="textSecondary" sx={{ pb: 2 }}>
+        A visualization of your time series.
+      </Typography>
+
+      <Box>
+        <Typography gutterBottom>
+          <b>Aggregation</b>
+        </Typography>
+
+        <ToggleButtonGroup
+          exclusive
+          onChange={(_, value) => {
+            // NB: `null` is passed if user is trying to deslect option
+            if (value) {
+              setAggregation(value as TimeSeriesDetailsAggregationEnum);
+            }
+          }}
+          sx={{ mb: 2 }}
+          value={aggregation}
+        >
+          {Object.entries(TimeSeriesDetailsAggregationEnum).map(
+            ([name, value]) => (
+              <ToggleButton key={value} value={value}>
+                {name}
+              </ToggleButton>
+            ),
+          )}
+        </ToggleButtonGroup>
+      </Box>
 
       <LineChart
         dataset={data}
