@@ -6,6 +6,9 @@ export default mergeConfig(
   viteConfig,
   defineConfig({
     test: {
+      env: {
+        TZ: "UTC",
+      },
       // mui-x-grid imports a CSS file which needs this
       // as it implictly turns on CSS transforms
       pool: "vmThreads",

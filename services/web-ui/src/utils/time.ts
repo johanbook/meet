@@ -1,9 +1,11 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import utc from "dayjs/plugin/utc";
 import weekOfYear from "dayjs/plugin/weekOfYear";
 import weekday from "dayjs/plugin/weekday";
 
 dayjs.extend(relativeTime);
+dayjs.extend(utc);
 dayjs.extend(weekday);
 dayjs.extend(weekOfYear);
 
@@ -31,4 +33,8 @@ export function getWeek(date: string | Date | dayjs.Dayjs): number {
 
 export function getWeekDay(date: string | Date | dayjs.Dayjs): string {
   return dayjs(date).format("dddd");
+}
+
+export function parseDateInUTC(date: string): Date {
+  return dayjs.utc(date).toDate();
 }
