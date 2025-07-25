@@ -13,10 +13,8 @@ import { LineChart } from "@mui/x-charts";
 import { TimeSeriesDetails, TimeSeriesDetailsAggregationEnum } from "src/api";
 import { format } from "src/utils/string";
 
-import {
-  getAggregatedData,
-  getAggregationDate,
-} from "../../utils/stats.helper";
+import { CHART_CONFIGS } from "../../utils/chart.config";
+import { getChartData } from "../../utils/stats.helper";
 
 const SERIES_OPTIONS = {
   area: true,
@@ -35,9 +33,11 @@ export function TimeSeriesChart({
       TimeSeriesDetailsAggregationEnum.Daily,
     );
 
+  const config = CHART_CONFIGS[aggregation];
+
   const data = useMemo(
-    () => getAggregatedData(timeSeries, aggregation),
-    [aggregation, timeSeries],
+    () => getChartData(timeSeries, config),
+    [config, timeSeries],
   );
 
   const theme = useTheme();
@@ -69,7 +69,7 @@ export function TimeSeriesChart({
         <ToggleButtonGroup
           exclusive
           onChange={(_, value) => {
-            // NB: `null` is passed if user is trying to deslect option
+            // NB: `null` is passed if user is trying to deselect option
             if (value) {
               setAggregation(value as TimeSeriesDetailsAggregationEnum);
             }
@@ -100,12 +100,8 @@ export function TimeSeriesChart({
         xAxis={[
           {
             dataKey: "date",
-            scaleType: "time",
-            valueFormatter: (value) => {
-              const date = new Date(value);
-              const { label } = getAggregationDate(date, aggregation);
-              return label;
-            },
+            scaleType: config.scaleType,
+            valueFormatter: (value: string) => config.getLabel(value),
           },
         ]}
       />

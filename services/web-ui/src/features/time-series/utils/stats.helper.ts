@@ -3,6 +3,8 @@ import dayjs from "dayjs";
 import { TimeSeriesDetails, TimeSeriesDetailsAggregationEnum } from "src/api";
 import { getWeek, getWeekDay } from "src/utils/time";
 
+import { ChartConfig } from "./chart.config";
+
 export const getAggregationDate = (
   date: Date,
   aggregation: TimeSeriesDetailsAggregationEnum,
@@ -86,28 +88,25 @@ export const getTimeSeriesStats = (
   return getAggregatedValues(timeSeries);
 };
 
-export const getAggregatedData = (
+export const getChartData = (
   timeSeries: TimeSeriesDetails,
-  aggregation: TimeSeriesDetailsAggregationEnum,
+  config: ChartConfig,
 ) => {
   const data: Record<string, Record<string, number>> = {};
 
   for (const point of timeSeries.points) {
-    const aggregatedDate = getAggregationDate(
-      new Date(point.createdAt),
-      aggregation,
-    ).value;
+    const groupKey = config.getGroupKey(new Date(point.createdAt));
 
-    if (!(aggregatedDate in data)) {
-      data[aggregatedDate] = {};
+    if (!(groupKey in data)) {
+      data[groupKey] = {};
     }
 
     const label = point.label;
 
-    if (label in data[aggregatedDate]) {
-      data[aggregatedDate][label] += point.value;
+    if (label in data[groupKey]) {
+      data[groupKey][label] += point.value;
     } else {
-      data[aggregatedDate][label] = point.value;
+      data[groupKey][label] = point.value;
     }
   }
 
@@ -115,11 +114,15 @@ export const getAggregatedData = (
     timeSeries.labels.map((label) => [label, 0]),
   );
 
-  const entries = Object.entries(data).map(([date, data]) => ({
+  const entries = Object.entries(data).map(([groupKey, data]) => ({
     ...defaultPoints,
     ...data,
-    date: new Date(date).valueOf(),
+    date: config.getValue(groupKey),
   }));
 
-  return entries.sort((a, b) => (a.date < b.date ? 1 : -1));
+  if (config.sortCompareFn) {
+    entries.sort((a, b) => config.sortCompareFn!(a.date, b.date));
+  }
+
+  return entries;
 };
