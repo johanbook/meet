@@ -5,9 +5,10 @@ import { Repository } from "typeorm";
 import { EntityNotFoundError } from "src/core/error-handling";
 import { map, mapArray } from "src/core/mapper";
 import { CurrentOrganizationService } from "src/core/organizations";
-import { TimeSeries } from "src/features/time-series/infrastructure/entities/time-series.entity";
 import { uniqify } from "src/utils/array.helper";
 
+import { TimeSeries } from "../../../infrastructure/entities/time-series.entity";
+import { TimeSeriesAggregationEnum } from "../../../time-series-aggregation.enum";
 import { TimeSeriesPointDetails } from "../../contracts/dtos/time-series-point.dto";
 import { TimeSeriesDetails } from "../../contracts/dtos/time-series.dto";
 import { GetTimeSeriesQuery } from "../../contracts/queries/get-time-series.query";
@@ -48,7 +49,7 @@ export class GetTimeSeriesHandler
     const labels = uniqify(timeSeries.points.map((point) => point.label));
 
     return map(TimeSeriesDetails, {
-      aggregation: timeSeries.aggregation,
+      aggregation: TimeSeriesAggregationEnum.Daily,
       createdAt: timeSeries.createdAt.toISOString(),
       description: timeSeries.description,
       labels,
@@ -61,6 +62,7 @@ export class GetTimeSeriesHandler
         id: point.id,
         value: point.value,
       })),
+      summary: timeSeries.summary,
     });
   }
 }

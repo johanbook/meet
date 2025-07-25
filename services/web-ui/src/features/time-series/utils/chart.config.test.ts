@@ -15,12 +15,6 @@ interface TestProps {
 const VALUE = 1_577_836_800_000;
 
 const TESTS: Record<TimeSeriesDetailsAggregationEnum, TestProps> = {
-  [TimeSeriesDetailsAggregationEnum.Total]: {
-    date: "2020-01-01T00:00:00Z",
-    key: "Total",
-    label: "Total",
-    value: "Total",
-  },
   [TimeSeriesDetailsAggregationEnum.Yearly]: {
     date: "2020-01-01T00:00:00Z",
     key: "2020",

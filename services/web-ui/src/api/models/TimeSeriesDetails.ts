@@ -69,6 +69,12 @@ export interface TimeSeriesDetails {
      * @memberof TimeSeriesDetails
      */
     points: Array<TimeSeriesPointDetails>;
+    /**
+     * 
+     * @type {string}
+     * @memberof TimeSeriesDetails
+     */
+    summary: TimeSeriesDetailsSummaryEnum;
 }
 
 
@@ -81,10 +87,23 @@ export const TimeSeriesDetailsAggregationEnum = {
     DayOfWeek: 'dayOfWeek',
     Weekly: 'weekly',
     Monthly: 'monthly',
+    Yearly: 'yearly'
+} as const;
+export type TimeSeriesDetailsAggregationEnum = typeof TimeSeriesDetailsAggregationEnum[keyof typeof TimeSeriesDetailsAggregationEnum];
+
+/**
+ * @export
+ */
+export const TimeSeriesDetailsSummaryEnum = {
+    Hourly: 'hourly',
+    Daily: 'daily',
+    DayOfWeek: 'dayOfWeek',
+    Weekly: 'weekly',
+    Monthly: 'monthly',
     Yearly: 'yearly',
     Total: 'total'
 } as const;
-export type TimeSeriesDetailsAggregationEnum = typeof TimeSeriesDetailsAggregationEnum[keyof typeof TimeSeriesDetailsAggregationEnum];
+export type TimeSeriesDetailsSummaryEnum = typeof TimeSeriesDetailsSummaryEnum[keyof typeof TimeSeriesDetailsSummaryEnum];
 
 
 /**
@@ -99,6 +118,7 @@ export function instanceOfTimeSeriesDetails(value: object): boolean {
     isInstance = isInstance && "aggregation" in value;
     isInstance = isInstance && "labels" in value;
     isInstance = isInstance && "points" in value;
+    isInstance = isInstance && "summary" in value;
 
     return isInstance;
 }
@@ -120,6 +140,7 @@ export function TimeSeriesDetailsFromJSONTyped(json: any, ignoreDiscriminator: b
         'aggregation': json['aggregation'],
         'labels': json['labels'],
         'points': ((json['points'] as Array<any>).map(TimeSeriesPointDetailsFromJSON)),
+        'summary': json['summary'],
     };
 }
 
@@ -139,6 +160,7 @@ export function TimeSeriesDetailsToJSON(value?: TimeSeriesDetails | null): any {
         'aggregation': value.aggregation,
         'labels': value.labels,
         'points': ((value.points as Array<any>).map(TimeSeriesPointDetailsToJSON)),
+        'summary': value.summary,
     };
 }
 
