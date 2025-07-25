@@ -1,48 +1,32 @@
-import dayjs from "dayjs";
-
-import { TimeSeriesDetails, TimeSeriesDetailsAggregationEnum } from "src/api";
-import { getWeek, getWeekDay } from "src/utils/time";
+import { TimeSeriesDetails, TimeSeriesDetailsSummaryEnum } from "src/api";
 
 import { ChartConfig } from "./chart.config";
 
-export const getAggregationDate = (
+export const getSummaryDate = (
   date: Date,
-  aggregation: TimeSeriesDetailsAggregationEnum,
-): { label: string; value: string } => {
-  switch (aggregation) {
-    case TimeSeriesDetailsAggregationEnum.Total: {
-      return { label: "Total", value: "" };
+  summary: TimeSeriesDetailsSummaryEnum,
+): string => {
+  switch (summary) {
+    case TimeSeriesDetailsSummaryEnum.Total: {
+      return "";
     }
-    case TimeSeriesDetailsAggregationEnum.Yearly: {
-      const year = date.toJSON().slice(0, 4);
-      return { label: year, value: year };
+    case TimeSeriesDetailsSummaryEnum.Yearly: {
+      return date.toJSON().slice(0, 4);
     }
-    case TimeSeriesDetailsAggregationEnum.Monthly: {
-      const month = date.toJSON().slice(0, 7);
-      const x = dayjs(month).format("MMM");
-      return { label: x, value: month };
+    case TimeSeriesDetailsSummaryEnum.Monthly: {
+      return date.toJSON().slice(0, 7);
     }
-    case TimeSeriesDetailsAggregationEnum.Weekly: {
-      const week = getWeek(date);
-      const currentYear = date.toJSON().slice(0, 4);
-      const newDate = dayjs(currentYear).week(week);
-      return { label: String(week), value: newDate.toJSON() };
+    case TimeSeriesDetailsSummaryEnum.Weekly: {
+      throw new Error("Not supported yet");
     }
-    case TimeSeriesDetailsAggregationEnum.DayOfWeek: {
-      const label = getWeekDay(date);
-      const weekdayIndex = dayjs(date).day();
-      const referenceSunday = dayjs("2020-01-05");
-      const weekdayDate = referenceSunday.add(weekdayIndex, "day");
-      return { label, value: weekdayDate.toJSON() };
+    case TimeSeriesDetailsSummaryEnum.DayOfWeek: {
+      throw new Error("Not supported yet");
     }
-    case TimeSeriesDetailsAggregationEnum.Daily: {
-      const day = date.toJSON().slice(0, 10);
-      return { label: day, value: day };
+    case TimeSeriesDetailsSummaryEnum.Daily: {
+      return date.toJSON().slice(0, 10);
     }
-    case TimeSeriesDetailsAggregationEnum.Hourly: {
-      const hour = dayjs(date).format("HH:00");
-      const now = dayjs().format("YYYY-MM-DD");
-      return { label: hour, value: `${now}T${hour}` };
+    case TimeSeriesDetailsSummaryEnum.Hourly: {
+      return date.toJSON().slice(0, 13);
     }
   }
 };
@@ -52,18 +36,13 @@ interface TimeSeriesStat {
   value: number;
 }
 
-const getAggregatedValues = (
-  timeSeries: TimeSeriesDetails,
-): TimeSeriesStat[] => {
+const getSummaryValues = (timeSeries: TimeSeriesDetails): TimeSeriesStat[] => {
   const labelTotal: Record<string, TimeSeriesStat> = {};
 
-  const currentMonth = getAggregationDate(
-    new Date(),
-    timeSeries.aggregation,
-  ).value;
+  const currentPeriod = getSummaryDate(new Date(), timeSeries.summary);
 
   for (const point of timeSeries.points) {
-    if (!point.createdAt.startsWith(currentMonth)) {
+    if (!point.createdAt.startsWith(currentPeriod)) {
       continue;
     }
 
@@ -85,7 +64,7 @@ const getAggregatedValues = (
 export const getTimeSeriesStats = (
   timeSeries: TimeSeriesDetails,
 ): TimeSeriesStat[] => {
-  return getAggregatedValues(timeSeries);
+  return getSummaryValues(timeSeries);
 };
 
 export const getChartData = (

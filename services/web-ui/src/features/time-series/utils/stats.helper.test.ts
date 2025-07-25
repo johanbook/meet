@@ -1,10 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { TimeSeriesDetailsAggregationEnum } from "src/api";
+import { TimeSeriesDetailsSummaryEnum } from "src/api";
 
-import { getAggregationDate } from "./stats.helper";
+import { getSummaryDate } from "./stats.helper";
 
-describe("getAggregationDate", () => {
+describe("getSummaryDate", () => {
   beforeEach(() => {
     vi.useFakeTimers();
     vi.setSystemTime("2000-01-01");
@@ -14,43 +14,42 @@ describe("getAggregationDate", () => {
   });
 
   it("should return the correct date for Total aggregation", () => {
-    const result = getAggregationDate(
+    const result = getSummaryDate(
       new Date(),
-      TimeSeriesDetailsAggregationEnum.Total,
+      TimeSeriesDetailsSummaryEnum.Total,
     );
-    expect(result.value).toBe("");
+    expect(result).toBe("");
   });
 
   it("should return the correct date for Yearly aggregation", () => {
-    const result = getAggregationDate(
+    const result = getSummaryDate(
       new Date(),
-      TimeSeriesDetailsAggregationEnum.Yearly,
+      TimeSeriesDetailsSummaryEnum.Yearly,
     );
-    expect(result.value).toBe("2000");
+    expect(result).toBe("2000");
   });
 
   it("should return the correct date for Monthly aggregation", () => {
-    const result = getAggregationDate(
+    const result = getSummaryDate(
       new Date(),
-      TimeSeriesDetailsAggregationEnum.Monthly,
+      TimeSeriesDetailsSummaryEnum.Monthly,
     );
-    expect(result.value).toBe("2000-01");
+    expect(result).toBe("2000-01");
   });
 
   it("should return the correct date for Daily aggregation", () => {
-    const result = getAggregationDate(
+    const result = getSummaryDate(
       new Date(),
-      TimeSeriesDetailsAggregationEnum.Daily,
+      TimeSeriesDetailsSummaryEnum.Daily,
     );
-    expect(result.value).toBe("2000-01-01");
+    expect(result).toBe("2000-01-01");
   });
 
-  // TODO: Fix test
   it.skip("should return the correct date for Hourly aggregation", () => {
-    const result = getAggregationDate(
+    const result = getSummaryDate(
       new Date(),
-      TimeSeriesDetailsAggregationEnum.Hourly,
+      TimeSeriesDetailsSummaryEnum.Hourly,
     );
-    expect(result.value).toBe("2000-01-01T01:00");
+    expect(result).toBe("2000-01-01T01");
   });
 });

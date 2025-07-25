@@ -15,12 +15,6 @@ export const CHART_CONFIGS: Record<
   TimeSeriesDetailsAggregationEnum,
   ChartConfig
 > = {
-  [TimeSeriesDetailsAggregationEnum.Total]: {
-    scaleType: "band",
-    getGroupKey: () => "Total",
-    getLabel: () => "Total",
-    getValue: (value) => value,
-  },
   [TimeSeriesDetailsAggregationEnum.Yearly]: {
     scaleType: "band",
     getGroupKey: (date) => date.getFullYear().toString(),
