@@ -13,7 +13,7 @@ import { Menu } from "src/components/ui/Menu";
 import { useDialog } from "src/core/dialog";
 import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
-import { CacheKeysConstants } from "src/core/query";
+import { CacheKeyEnum } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 interface BlogPostMenuProps {
@@ -42,7 +42,7 @@ export function BlogPostMenu({ id }: BlogPostMenuProps): ReactElement {
           onSuccess();
           snackbar.success(t("actions.delete.success"));
           queryClient.invalidateQueries({
-            queryKey: [CacheKeysConstants.BlogPosts],
+            queryKey: [CacheKeyEnum.BlogPosts],
           });
         },
       },

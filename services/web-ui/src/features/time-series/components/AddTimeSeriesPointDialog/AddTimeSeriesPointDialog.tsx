@@ -11,7 +11,7 @@ import { GlobalDialogProps } from "src/core/dialog";
 import { useForm, validators } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
-import { CacheKeysConstants } from "src/core/query";
+import { CacheKeyEnum } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 interface AddTimeSeriesPointDialogProps extends GlobalDialogProps {
@@ -61,7 +61,7 @@ export function AddTimeSeriesPointDialog({
       },
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: [CacheKeysConstants.TimeSeries, timeSeriesId],
+          queryKey: [CacheKeyEnum.TimeSeries, timeSeriesId],
         });
         form.reset();
         snackbar.success(t("actions.create.success"));

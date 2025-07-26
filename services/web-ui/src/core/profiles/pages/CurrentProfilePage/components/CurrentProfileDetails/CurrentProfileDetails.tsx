@@ -26,7 +26,7 @@ import { profileApi } from "src/apis";
 import { Center } from "src/components/ui/Center";
 import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
-import { CacheKeysConstants } from "src/core/query";
+import { CacheKeyEnum } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 import { CurrentProfileAvatar } from "../CurrentProfileAvatar";
@@ -99,7 +99,7 @@ export function CurrentProfileDetails({
           snackbar.success(t("update.success"));
 
           queryClient.invalidateQueries({
-            queryKey: [CacheKeysConstants.CurrentProfile],
+            queryKey: [CacheKeyEnum.CurrentProfile],
           });
         },
       },

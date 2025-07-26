@@ -1,6 +1,6 @@
 import { OrganizationMemberDetailsRoleEnum as Role } from "src/api";
 import { organizationsApi } from "src/apis";
-import { CacheKeysConstants, useQuery } from "src/core/query";
+import { CacheKeyEnum, useQuery } from "src/core/query";
 
 type UseAuthorizationResult =
   | {
@@ -24,7 +24,7 @@ type UseAuthorizationResult =
 
 export function useAuthorization(): UseAuthorizationResult {
   const { data, isLoading } = useQuery({
-    queryKey: [CacheKeysConstants.CurrentOrganization],
+    queryKey: [CacheKeyEnum.CurrentOrganization],
     queryFn: () => organizationsApi.getCurrentOrganization(),
   });
 

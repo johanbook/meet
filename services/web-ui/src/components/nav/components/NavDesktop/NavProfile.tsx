@@ -14,7 +14,7 @@ import {
 import { profileApi } from "src/apis";
 import { ProfileAvatar } from "src/components/shared";
 import { useTranslation } from "src/core/i18n";
-import { CacheKeysConstants, useQuery } from "src/core/query";
+import { CacheKeyEnum, useQuery } from "src/core/query";
 
 import { NavItem } from "../../types";
 
@@ -26,7 +26,7 @@ export interface NavProfileProps {
 
 const ProfileIcon = () => {
   const query = useQuery({
-    queryKey: [CacheKeysConstants.CurrentProfile],
+    queryKey: [CacheKeyEnum.CurrentProfile],
     queryFn: () => profileApi.getCurrentProfile(),
   });
 

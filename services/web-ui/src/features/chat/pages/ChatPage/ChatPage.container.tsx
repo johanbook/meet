@@ -8,7 +8,7 @@ import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { useTranslation } from "src/core/i18n";
 import { NotificationEventEnum } from "src/core/notifications";
 import { useHandleNotification } from "src/core/notifications";
-import { CacheKeysConstants, useQuery, useQueryClient } from "src/core/query";
+import { CacheKeyEnum, useQuery, useQueryClient } from "src/core/query";
 import { ErrorView } from "src/views/ErrorView";
 
 import { ChatPageNav } from "./ChatPage.nav";
@@ -30,7 +30,7 @@ export function ChatPageContainer(): ReactElement {
   function handleRefresh(): void {
     refetch();
     queryClient.invalidateQueries({
-      queryKey: [CacheKeysConstants.Chats],
+      queryKey: [CacheKeyEnum.Chats],
     });
   }
 

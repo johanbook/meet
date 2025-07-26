@@ -7,7 +7,7 @@ import { ResponseError } from "src/api";
 import { blogsApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { useTranslation } from "src/core/i18n";
-import { CacheKeysConstants, useQuery } from "src/core/query";
+import { CacheKeyEnum, useQuery } from "src/core/query";
 import { useMetaData } from "src/hooks/useMetaData";
 import { ErrorView } from "src/views/ErrorView";
 
@@ -22,7 +22,7 @@ export function BlogPostPageContainer(): ReactElement {
   const { id = "" } = useParams();
 
   const { error, data, isPending } = useQuery({
-    queryKey: [CacheKeysConstants.BlogPosts, id],
+    queryKey: [CacheKeyEnum.BlogPosts, id],
     queryFn: () => blogsApi.getBlogPost({ id }),
   });
 

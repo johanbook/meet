@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
 import { profileApi } from "src/apis";
-import { CacheKeysConstants, useQuery } from "src/core/query";
+import { CacheKeyEnum, useQuery } from "src/core/query";
 import { ErrorView } from "src/views/ErrorView";
 
 import { CurrentProfilePageNav } from "./CurrentProfilePage.nav";
@@ -10,7 +10,7 @@ import { CurrentProfileDetails } from "./components/CurrentProfileDetails";
 
 export function CurrentProfilePageContainer(): ReactElement {
   const { error, data, isPending } = useQuery({
-    queryKey: [CacheKeysConstants.CurrentProfile],
+    queryKey: [CacheKeyEnum.CurrentProfile],
     queryFn: () => profileApi.getCurrentProfile(),
   });
 

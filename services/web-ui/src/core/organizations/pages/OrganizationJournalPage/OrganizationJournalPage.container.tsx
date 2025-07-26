@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 
 import { journalApi } from "src/apis";
 import { ErrorMessage } from "src/components/ui/ErrorMessage";
-import { CacheKeysConstants, useQuery } from "src/core/query";
+import { CacheKeyEnum, useQuery } from "src/core/query";
 import { getDateDaysAgo } from "src/utils/time";
 
 import { OrganizationJournalPageComponent } from "./OrganizationJournalPage.component";
@@ -17,7 +17,7 @@ export function OrganizationJournalPageContainer(): ReactElement {
   });
 
   const { error, data, isPending } = useQuery({
-    queryKey: [CacheKeysConstants.Journal, dateRange],
+    queryKey: [CacheKeyEnum.Journal, dateRange],
     queryFn: () => journalApi.getCurrentOrganizationJournal(dateRange),
   });
 

@@ -7,7 +7,7 @@ import { settingsApi } from "src/apis";
 import { Switch } from "src/components/ui";
 import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
-import { CacheKeysConstants, useQuery } from "src/core/query";
+import { CacheKeyEnum, useQuery } from "src/core/query";
 import { ErrorView } from "src/views/ErrorView";
 
 import { AppearancePageNav } from "./AppearancePage.nav";
@@ -18,7 +18,7 @@ export function AppearancePageContainer(): ReactElement {
 
   const queryClient = useQueryClient();
   const { error, data, isPending } = useQuery({
-    queryKey: [CacheKeysConstants.Settings],
+    queryKey: [CacheKeyEnum.Settings],
     queryFn: () => settingsApi.getCurrentSettings(),
   });
 
@@ -55,7 +55,7 @@ export function AppearancePageContainer(): ReactElement {
     await mutation.mutateAsync(settings, {
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: [CacheKeysConstants.Settings],
+          queryKey: [CacheKeyEnum.Settings],
         });
       },
     });

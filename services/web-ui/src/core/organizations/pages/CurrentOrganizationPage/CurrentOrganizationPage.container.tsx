@@ -6,7 +6,7 @@ import { organizationsApi } from "src/apis";
 import { OrganizationAvatar } from "src/components/shared";
 import { useAuthorization } from "src/core/authorization";
 import { useTranslation } from "src/core/i18n";
-import { CacheKeysConstants, useQuery } from "src/core/query";
+import { CacheKeyEnum, useQuery } from "src/core/query";
 import { getDate } from "src/utils/time";
 import { ErrorView } from "src/views/ErrorView";
 
@@ -21,7 +21,7 @@ export function CurrentOrganizationPageContainer(): ReactElement {
 
   const authorization = useAuthorization();
   const { error, data, isPending } = useQuery({
-    queryKey: [CacheKeysConstants.CurrentOrganization],
+    queryKey: [CacheKeyEnum.CurrentOrganization],
     queryFn: () => organizationsApi.getCurrentOrganization(),
   });
 

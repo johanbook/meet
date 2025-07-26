@@ -9,7 +9,7 @@ import { GlobalDialogProps } from "src/core/dialog";
 import { useForm, validators } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
-import { CacheKeysConstants } from "src/core/query";
+import { CacheKeyEnum } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 export interface OrganizationMemberInviteDialogProps
@@ -57,7 +57,7 @@ export function OrganizationMemberInviteDialog(): ReactElement {
       onSuccess: () => {
         form.reset();
         queryClient.invalidateQueries({
-          queryKey: [CacheKeysConstants.CurrentOrganizationMembers],
+          queryKey: [CacheKeyEnum.CurrentOrganizationMembers],
         });
         snackbar.success(t("members.invite.submit.success"));
         onSuccess();

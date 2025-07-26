@@ -17,7 +17,7 @@ import { UploadIconButton } from "src/components/ui/UploadIconButton";
 import { useForm, validators } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
-import { CacheKeysConstants } from "src/core/query";
+import { CacheKeyEnum } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 interface CreateBlogPostPageComponentProps {
@@ -73,7 +73,7 @@ export function CreateBlogPostPageComponent({
       },
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: [CacheKeysConstants.BlogPosts],
+          queryKey: [CacheKeyEnum.BlogPosts],
         });
         form.reset();
 

@@ -10,11 +10,7 @@ import { Permissions, useAuthorization } from "src/core/authorization";
 import { useConfirmDialog } from "src/core/dialog";
 import { useForm } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
-import {
-  CacheKeysConstants,
-  useMutation,
-  useQueryClient,
-} from "src/core/query";
+import { CacheKeyEnum, useMutation, useQueryClient } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 interface OrganizationSettingsProps {
@@ -65,7 +61,7 @@ export function OrganizationSettings({
       onSuccess: () => {
         snackbar.success(t("settings.save.success"));
         queryClient.invalidateQueries({
-          queryKey: [CacheKeysConstants.CurrentOrganization],
+          queryKey: [CacheKeyEnum.CurrentOrganization],
         });
       },
     });
@@ -78,7 +74,7 @@ export function OrganizationSettings({
         snackbar.success(t("settings.delete.success"));
         onSuccess();
         queryClient.invalidateQueries({
-          queryKey: [CacheKeysConstants.CurrentOrganization],
+          queryKey: [CacheKeyEnum.CurrentOrganization],
         });
       },
     });

@@ -6,7 +6,7 @@ import { organizationsApi } from "src/apis";
 import { OrganizationAvatar } from "src/components/shared";
 import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
-import { CacheKeysConstants } from "src/core/query";
+import { CacheKeyEnum } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 export interface CurrentOrganizationAvatarProps {
@@ -46,7 +46,7 @@ export function CurrentOrganizationAvatar({
       onSuccess: () => {
         snackbar.success(t("actions.update-photo.success"));
         queryClient.invalidateQueries({
-          queryKey: [CacheKeysConstants.CurrentOrganization],
+          queryKey: [CacheKeyEnum.CurrentOrganization],
         });
       },
     });

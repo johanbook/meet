@@ -14,7 +14,7 @@ import { blogsApi } from "src/apis";
 import { useForm } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
-import { CacheKeysConstants } from "src/core/query";
+import { CacheKeyEnum } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 interface BlogPostCommentFormProps {
@@ -51,7 +51,7 @@ export function BlogPostCommentForm({
       },
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: [CacheKeysConstants.BlogPosts],
+          queryKey: [CacheKeyEnum.BlogPosts],
         });
         form.reset();
       },

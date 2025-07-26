@@ -15,6 +15,7 @@ export function LoadingView(): ReactElement {
       }}
     >
       <Favorite
+        aria-label="Loading"
         animate={{
           scale: [1, 1.5, 1],
         }}

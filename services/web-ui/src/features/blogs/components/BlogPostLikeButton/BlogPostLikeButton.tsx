@@ -9,11 +9,7 @@ import {
   DeleteBlogPostReactionRequest,
 } from "src/api";
 import { blogsApi } from "src/apis";
-import {
-  CacheKeysConstants,
-  useMutation,
-  useQueryClient,
-} from "src/core/query";
+import { CacheKeyEnum, useMutation, useQueryClient } from "src/core/query";
 
 interface BlogPostLikeButtonProps {
   blogPostId: string;
@@ -46,7 +42,7 @@ export function BlogPostLikeButton({
         {
           onSuccess: () => {
             queryClient.invalidateQueries({
-              queryKey: [CacheKeysConstants.BlogPosts],
+              queryKey: [CacheKeyEnum.BlogPosts],
             });
           },
         },
@@ -61,7 +57,7 @@ export function BlogPostLikeButton({
       {
         onSuccess: () => {
           queryClient.invalidateQueries({
-            queryKey: [CacheKeysConstants.BlogPosts],
+            queryKey: [CacheKeyEnum.BlogPosts],
           });
         },
       },

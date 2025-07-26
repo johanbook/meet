@@ -4,7 +4,7 @@ import { Typography } from "@mui/material";
 
 import { chatsApi } from "src/apis";
 import { useTranslation } from "src/core/i18n";
-import { CacheKeysConstants, useQuery } from "src/core/query";
+import { CacheKeyEnum, useQuery } from "src/core/query";
 import { ErrorView } from "src/views/ErrorView";
 
 import { ChatListPageComponent } from "./ChatListPage.component";
@@ -15,7 +15,7 @@ export function ChatListPageContainer(): ReactElement {
   const { t } = useTranslation("chat.list");
 
   const { error, data, isPending } = useQuery({
-    queryKey: [CacheKeysConstants.Chats],
+    queryKey: [CacheKeyEnum.Chats],
     queryFn: () => chatsApi.getConversations(),
   });
 

@@ -21,7 +21,7 @@ import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { Menu } from "src/components/ui/Menu";
 import { useTranslation } from "src/core/i18n";
 import {
-  CacheKeysConstants,
+  CacheKeyEnum,
   useMutation,
   useQuery,
   useQueryClient,
@@ -37,7 +37,7 @@ interface MenuContentProps {
 
 function MenuContent({ currentOrganizationId }: MenuContentProps) {
   const query = useQuery({
-    queryKey: [CacheKeysConstants.OrganizationList],
+    queryKey: [CacheKeyEnum.OrganizationList],
     queryFn: () => organizationsApi.getOrganizations(),
   });
 
@@ -118,7 +118,7 @@ export function CurrentOrganizationAvatar(): ReactElement {
   const [drawerIsOpen, setIsDrawerOpen] = useState(false);
 
   const query = useQuery({
-    queryKey: [CacheKeysConstants.CurrentOrganization],
+    queryKey: [CacheKeyEnum.CurrentOrganization],
     queryFn: () => organizationsApi.getCurrentOrganization(),
   });
 
