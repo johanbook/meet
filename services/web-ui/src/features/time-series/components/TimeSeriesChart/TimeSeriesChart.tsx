@@ -13,8 +13,8 @@ import { LineChart } from "@mui/x-charts";
 import { TimeSeriesDetails, TimeSeriesDetailsAggregationEnum } from "src/api";
 import { format } from "src/utils/string";
 
-import { CHART_CONFIGS } from "../../utils/chart.config";
-import { getChartData } from "../../utils/stats.helper";
+import { CHART_CONFIGS } from "./chart.config";
+import { getChartData } from "./stats.helper";
 
 const SERIES_OPTIONS = {
   area: true,

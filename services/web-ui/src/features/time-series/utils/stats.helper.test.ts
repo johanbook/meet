@@ -4,7 +4,7 @@ import { TimeSeriesDetailsSummaryEnum } from "src/api";
 
 import { getSummaryDate } from "./stats.helper";
 
-describe("getSummaryDate", () => {
+describe(getSummaryDate.name, () => {
   beforeEach(() => {
     vi.useFakeTimers();
     vi.setSystemTime("2000-01-01");
