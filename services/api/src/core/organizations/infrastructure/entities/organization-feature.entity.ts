@@ -8,7 +8,7 @@ import { Organization } from "./organization.entity";
 @Entity()
 @Unique(["organizationId", "feature"])
 export class OrganizationFeature extends BaseEntity {
-  @Column({ enum: OrganizationFeatureEnum })
+  @Column({ type: "enum", enum: OrganizationFeatureEnum })
   feature!: OrganizationFeatureEnum;
 
   @ManyToOne(() => Organization, (organization) => organization.features, {
