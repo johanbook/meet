@@ -1,7 +1,7 @@
+import dayjs from "dayjs";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { TimeSeriesDetailsAggregationEnum } from "src/api";
-import { parseDateInUTC } from "src/utils/time";
 
 import { CHART_CONFIGS } from "./chart.config";
 
@@ -46,8 +46,8 @@ const TESTS: Record<TimeSeriesDetailsAggregationEnum, TestProps> = {
     value: VALUE,
   },
   [TimeSeriesDetailsAggregationEnum.Hourly]: {
-    date: "2020-01-01T06:00:00Z",
-    key: "2000-01-01T06:00+00:00",
+    date: "2020-01-01T06:00:00",
+    key: "2000-01-01T06:00",
     label: "06:00",
     value: 946_706_400_000,
   },
@@ -67,7 +67,7 @@ describe("Time Series Chart Configs", () => {
     const config =
       CHART_CONFIGS[aggregation as TimeSeriesDetailsAggregationEnum];
 
-    const key = config.getGroupKey(parseDateInUTC(props.date));
+    const key = config.getGroupKey(dayjs(props.date).toDate());
     expect(key).toBe(props.key);
 
     const value = config.getValue(key);

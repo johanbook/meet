@@ -59,9 +59,9 @@ export const CHART_CONFIGS: Record<
   [TimeSeriesDetailsAggregationEnum.Hourly]: {
     scaleType: "time",
     // We use a fixed date here to coerce all hours into one day
-    getGroupKey: (date) => dayjs.utc(date).format("2000-01-01THH:00Z"),
-    getLabel: (key) => dayjs.utc(key).format("HH:00"),
-    getValue: (value) => new Date(value).valueOf(),
-    sortCompareFn: (a, b) => new Date(a).valueOf() - new Date(b).valueOf(),
+    getGroupKey: (date) => dayjs(date).format("2000-01-01THH:00"),
+    getLabel: (key) => dayjs(key).format("HH:00"),
+    getValue: (value) => dayjs(value).valueOf(),
+    sortCompareFn: (a, b) => dayjs(a).valueOf() - dayjs(b).valueOf(),
   },
 };
