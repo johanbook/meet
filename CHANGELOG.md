@@ -4,6 +4,51 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+## [2.8.0](https://github.com/johanbook/meet/compare/v2.7.0...v2.8.0) (2025-07-26)
+
+
+### Features
+
+* **api:** add aggregation to time series ([#1701](https://github.com/johanbook/meet/issues/1701)) ([3b88b76](https://github.com/johanbook/meet/commit/3b88b7603daa0625e89d84a56b2a472d786f1952))
+* **api:** add calendars module ([#1674](https://github.com/johanbook/meet/issues/1674)) ([928665b](https://github.com/johanbook/meet/commit/928665b83cd09ba284249e2984ca5be3e265c8fd))
+* **api:** add command to create booking ([#1681](https://github.com/johanbook/meet/issues/1681)) ([d2adbfb](https://github.com/johanbook/meet/commit/d2adbfb1e1f734e4d7d2c57db5f3697b89ec3a7e))
+* **api:** only include content in blog notifcation ([#1711](https://github.com/johanbook/meet/issues/1711)) ([7e00335](https://github.com/johanbook/meet/commit/7e0033515f2fac92edecf5a9ec07bb4b028760f9))
+* **api:** update notification copy ([#1673](https://github.com/johanbook/meet/issues/1673)) ([57d2db2](https://github.com/johanbook/meet/commit/57d2db20a0367bfd158a23a585d84bb1b7224937))
+* **web-ui:** add calendar placeholder page ([#1676](https://github.com/johanbook/meet/issues/1676)) ([b0b6fc7](https://github.com/johanbook/meet/commit/b0b6fc7a6a2bd814801424982f582c4f3ae34135))
+* **web-ui:** add current month time picker ([#1680](https://github.com/johanbook/meet/issues/1680)) ([c71220b](https://github.com/johanbook/meet/commit/c71220b69fb710706c055dea5e4925fdda0f6aaa))
+* **web-ui:** add scatter chart to time series page ([#1706](https://github.com/johanbook/meet/issues/1706)) ([ec1799e](https://github.com/johanbook/meet/commit/ec1799e7e53bbcf12ad87957daaeba348cf707cd))
+* **web-ui:** add setting to delete time series ([#1735](https://github.com/johanbook/meet/issues/1735)) ([32a7fc5](https://github.com/johanbook/meet/commit/32a7fc595133e1c1f0a355176612e0cb28f4bb6a))
+* **web-ui:** allow selecting aggregation level in time series chart ([#1736](https://github.com/johanbook/meet/issues/1736)) ([4913107](https://github.com/johanbook/meet/commit/4913107b7952d97eca6c971581badc71578b4a3d))
+* **web-ui:** always use daily aggregation for time series ([#1713](https://github.com/johanbook/meet/issues/1713)) ([5808774](https://github.com/johanbook/meet/commit/580877483c946d1137fba7dbb7c2c27fb230bfcd))
+* **web-ui:** improve calendar ui ([#1677](https://github.com/johanbook/meet/issues/1677)) ([5080054](https://github.com/johanbook/meet/commit/5080054ebdc51d587c8d89300dd1848f8672551a))
+* **web-ui:** improve colors in time series chart ([#1717](https://github.com/johanbook/meet/issues/1717)) ([caa630b](https://github.com/johanbook/meet/commit/caa630b594993b36b09b6061c39d1add0db3a339))
+* **web-ui:** improve create booking page ([#1679](https://github.com/johanbook/meet/issues/1679)) ([2c94c3d](https://github.com/johanbook/meet/commit/2c94c3d91d63de3a746612e01c22f9567536c266))
+* **web-ui:** improve loading state for time series page ([#1745](https://github.com/johanbook/meet/issues/1745)) ([54e5c8a](https://github.com/johanbook/meet/commit/54e5c8a14d301d1d1f85f5e0306e9632a4468862))
+* **web-ui:** improve style of time series chart labels ([#1744](https://github.com/johanbook/meet/issues/1744)) ([8f6a15e](https://github.com/johanbook/meet/commit/8f6a15e73be0b25f924fd11a8d2be79fdadaf5d4))
+* **web-ui:** improve time series chart margin ([#1739](https://github.com/johanbook/meet/issues/1739)) ([e3a352f](https://github.com/johanbook/meet/commit/e3a352f9b85f956ec1a3587e70fe1b7da890fc72))
+* **web-ui:** move time series chart into accordion ([#1710](https://github.com/johanbook/meet/issues/1710)) ([737be2e](https://github.com/johanbook/meet/commit/737be2e6b97c76973b71f5d73ac1ae06662713a6))
+* **web-ui:** replace Accordion with collapsible card ([#1741](https://github.com/johanbook/meet/issues/1741)) ([0df9e6f](https://github.com/johanbook/meet/commit/0df9e6fb2caa719b1f1152cc0d9f2e05b607dfbe))
+* **web-ui:** shows stats based on time series aggregation ([#1702](https://github.com/johanbook/meet/issues/1702)) ([110966f](https://github.com/johanbook/meet/commit/110966f56d1bfeab5401163e1a83306150496585))
+* **web-ui:** support aggregation per week ([#1737](https://github.com/johanbook/meet/issues/1737)) ([c72b4ab](https://github.com/johanbook/meet/commit/c72b4ab682444b9634c09706aee174a36564b73a))
+* **web-ui:** support day of week time series analysis ([#1749](https://github.com/johanbook/meet/issues/1749)) ([39ca930](https://github.com/johanbook/meet/commit/39ca930e3f0c8cfde04bd1a6cb2ff30507f019c8))
+* **web-ui:** support five different chart colors ([#1732](https://github.com/johanbook/meet/issues/1732)) ([10f98a8](https://github.com/johanbook/meet/commit/10f98a8b88d03ea903c8757f715a945bf411c81a))
+* **web-ui:** support hour analysis ([#1738](https://github.com/johanbook/meet/issues/1738)) ([3a659a3](https://github.com/johanbook/meet/commit/3a659a3343b8082cb3ef4a6a0e6cceb6af0706bd))
+* **web-ui:** use bar chart ([#1709](https://github.com/johanbook/meet/issues/1709)) ([14f2e1c](https://github.com/johanbook/meet/commit/14f2e1c2d127069a1fed769d91700502605d22c7))
+* **web-ui:** use line chart for time series ([#1715](https://github.com/johanbook/meet/issues/1715)) ([97f8c4d](https://github.com/johanbook/meet/commit/97f8c4da2309f58ce9d37f5034273bbb133c1aa9))
+
+
+### Bug Fixes
+
+* **api:** avoid using id in time series notification ([#1671](https://github.com/johanbook/meet/issues/1671)) ([65e97ce](https://github.com/johanbook/meet/commit/65e97ce1a65e887e62f4a1eaa233df1331606728))
+* **api:** trim time series point labels ([#1668](https://github.com/johanbook/meet/issues/1668)) ([76dcdae](https://github.com/johanbook/meet/commit/76dcdae6e4e1d74bfd0472f5430881e3dd9926f9))
+* **web-ui:** add missing label in time chart ([#1714](https://github.com/johanbook/meet/issues/1714)) ([fd2d988](https://github.com/johanbook/meet/commit/fd2d988005a0921e4d1ef6cc5a9e0759fd1fa7d9))
+* **web-ui:** ensure organization avatar is uppercased ([#1733](https://github.com/johanbook/meet/issues/1733)) ([c5ca9ea](https://github.com/johanbook/meet/commit/c5ca9eac899b51d23fa3826c921112b4f3e3f35f))
+* **web-ui:** ensure week starts on monday ([#1753](https://github.com/johanbook/meet/issues/1753)) ([27ebcb8](https://github.com/johanbook/meet/commit/27ebcb86129d45b5f295041f4e3af40900e96998))
+* **web-ui:** fix hour regression ([#1755](https://github.com/johanbook/meet/issues/1755)) ([66774b6](https://github.com/johanbook/meet/commit/66774b6ab5d115c3dc8ab08ca5b21e87769a1cc3))
+* **web-ui:** improve styles in time series page ([#1742](https://github.com/johanbook/meet/issues/1742)) ([c62db27](https://github.com/johanbook/meet/commit/c62db27f0962a6904f9636b51605363b4691391f))
+* **web-ui:** require blog feature to show blog nav item ([#1675](https://github.com/johanbook/meet/issues/1675)) ([4d08bb9](https://github.com/johanbook/meet/commit/4d08bb9a07a2427009295fdb7032fe16b59c9127))
+* **web-ui:** use correct labels ([#1740](https://github.com/johanbook/meet/issues/1740)) ([f8072ce](https://github.com/johanbook/meet/commit/f8072ce825dc3cadaa2c8ca5f4412bf52f0ca955))
+
 ## [2.7.0](https://github.com/johanbook/meet/compare/v2.6.0...v2.7.0) (2025-07-11)
 
 
