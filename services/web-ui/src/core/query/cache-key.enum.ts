@@ -3,7 +3,7 @@ export enum CacheKeyEnum {
   BlogPosts = "blogPosts",
   BookingList = "bookingList",
   Chats = "chats",
-  CurrentOrganization = "currentrganization",
+  CurrentOrganization = "currentOrganization",
   CurrentOrganizationMembers = "currentOrganizationMembers",
   CurrentProfile = "currentProfile",
   CurrentProfileExists = "currentProfileExists",
