@@ -8,7 +8,7 @@ import { Button } from "src/components/ui";
 import { useForm, validators } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
-import { CacheKeysConstants } from "src/core/query";
+import { CacheKeyEnum } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 interface CreateTimeSeriesPageComponentProps {
@@ -51,7 +51,7 @@ export function CreateTimeSeriesPageComponent({
       },
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: [CacheKeysConstants.TimeSeries],
+          queryKey: [CacheKeyEnum.TimeSeries],
         });
         form.reset();
 

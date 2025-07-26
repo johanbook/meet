@@ -8,7 +8,7 @@ import { organizationsApi } from "src/apis";
 import { OrganizationAvatar } from "src/components/shared";
 import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
-import { CacheKeysConstants, useQuery } from "src/core/query";
+import { CacheKeyEnum, useQuery } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 import { getDate } from "src/utils/time";
 import { ErrorView } from "src/views/ErrorView";
@@ -23,7 +23,7 @@ export function OrganizationListPageContainer(): ReactElement {
   const snackbar = useSnackbar();
 
   const { error, data, isPending } = useQuery({
-    queryKey: [CacheKeysConstants.OrganizationList],
+    queryKey: [CacheKeyEnum.OrganizationList],
     queryFn: () => organizationsApi.getOrganizations(),
   });
 

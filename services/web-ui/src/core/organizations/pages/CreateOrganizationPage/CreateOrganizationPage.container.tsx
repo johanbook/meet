@@ -9,11 +9,7 @@ import { Nav } from "src/components/nav";
 import { Button, TextField, Typography } from "src/components/ui";
 import { useForm, validators } from "src/core/forms";
 import { useTranslation } from "src/core/i18n";
-import {
-  CacheKeysConstants,
-  useMutation,
-  useQueryClient,
-} from "src/core/query";
+import { CacheKeyEnum, useMutation, useQueryClient } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 export function CreateOrganizationPageContainer(): ReactElement {
@@ -53,7 +49,7 @@ export function CreateOrganizationPageContainer(): ReactElement {
         form.reset();
         snackbar.success(t("actions.submit.success"));
         queryClient.invalidateQueries({
-          queryKey: [CacheKeysConstants.OrganizationList],
+          queryKey: [CacheKeyEnum.OrganizationList],
         });
         navigate("/group/list");
       },

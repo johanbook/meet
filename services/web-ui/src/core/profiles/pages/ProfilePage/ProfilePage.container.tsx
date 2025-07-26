@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { Typography } from "@mui/material";
 
 import { profileApi } from "src/apis";
-import { CacheKeysConstants, useQuery } from "src/core/query";
+import { CacheKeyEnum, useQuery } from "src/core/query";
 import { ErrorView } from "src/views/ErrorView";
 
 import { ProfilePageComponent } from "./ProfilePage.component";
@@ -15,7 +15,7 @@ export function ProfilePageContainer(): ReactElement {
   const { id } = useParams();
 
   const { error, data, isPending } = useQuery({
-    queryKey: [CacheKeysConstants.CurrentProfile, id],
+    queryKey: [CacheKeyEnum.CurrentProfile, id],
     queryFn: () => profileApi.getProfile({ id: Number(id) }),
   });
 

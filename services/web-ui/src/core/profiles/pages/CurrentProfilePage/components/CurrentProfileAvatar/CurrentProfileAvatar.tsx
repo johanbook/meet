@@ -5,7 +5,7 @@ import { Avatar, IconButton } from "@mui/material";
 import { profileApi } from "src/apis";
 import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
-import { CacheKeysConstants } from "src/core/query";
+import { CacheKeyEnum } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 const HEIGHT = 200;
@@ -43,7 +43,7 @@ export function CurrentProfileAvatar({
       onSuccess: () => {
         snackbar.success(t("actions.update-photo.success"));
         queryClient.invalidateQueries({
-          queryKey: [CacheKeysConstants.CurrentProfile],
+          queryKey: [CacheKeyEnum.CurrentProfile],
         });
       },
     });

@@ -1,7 +1,7 @@
 import { ReactElement, ReactNode } from "react";
 
 import { profileApi } from "src/apis";
-import { useQuery } from "src/core/query";
+import { CacheKeyEnum, useQuery } from "src/core/query";
 import { ErrorView } from "src/views/ErrorView";
 
 import { ProfileCreationPage } from "../pages/ProfileCreationPage";
@@ -16,7 +16,7 @@ export function ProfileGuardContainer({
   children,
 }: ProfileGuardContainerProps): ReactElement {
   const { error, data, isLoading, refetch } = useQuery({
-    queryKey: ["currentProfileExists"],
+    queryKey: [CacheKeyEnum.CurrentProfileExists],
     queryFn: () => profileApi.checkIfProfileExists(),
   });
 

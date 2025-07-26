@@ -5,7 +5,7 @@ import { Box, Typography } from "@mui/material";
 
 import { blogsApi } from "src/apis";
 import { InteractionObserver } from "src/core/infinite-scroll";
-import { CacheKeysConstants, useInfiniteQuery } from "src/core/query";
+import { CacheKeyEnum, useInfiniteQuery } from "src/core/query";
 import { ErrorView } from "src/views/ErrorView";
 
 import { BlogPhotoListPageComponent } from "./BlogPhotoListPage.component";
@@ -19,7 +19,7 @@ export function BlogPhotoListPageContainer(): ReactElement {
 
   const { error, data, isPending, fetchNextPage, hasNextPage } =
     useInfiniteQuery({
-      queryKey: [CacheKeysConstants.BlogPhotoList],
+      queryKey: [CacheKeyEnum.BlogPhotoList],
       queryFn: ({ pageParam = 0 }) =>
         blogsApi.getBlogPhotoList({
           skip: pageParam * ITEMS_PER_PAGE,

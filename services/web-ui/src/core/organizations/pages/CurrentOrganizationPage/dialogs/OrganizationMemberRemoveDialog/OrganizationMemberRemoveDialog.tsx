@@ -9,7 +9,7 @@ import { ConfirmationDialog } from "src/components/ui";
 import { GlobalDialogProps } from "src/core/dialog/dialog.context";
 import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
-import { CacheKeysConstants } from "src/core/query";
+import { CacheKeyEnum } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 export interface OrganizationMemberRemoveDialogProps extends GlobalDialogProps {
@@ -37,7 +37,7 @@ export function OrganizationMemberRemoveDialog({
         onSuccess: () => {
           snackbar.success(t("members.remove.success"));
           queryClient.invalidateQueries({
-            queryKey: [CacheKeysConstants.CurrentOrganizationMembers],
+            queryKey: [CacheKeyEnum.CurrentOrganizationMembers],
           });
           onSuccess();
         },

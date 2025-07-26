@@ -19,7 +19,7 @@ import { ErrorMessage } from "src/components/ui/ErrorMessage";
 import { Permissions, useAuthorization } from "src/core/authorization";
 import { useDialog } from "src/core/dialog";
 import { useTranslation } from "src/core/i18n";
-import { CacheKeysConstants, useQuery } from "src/core/query";
+import { CacheKeyEnum, useQuery } from "src/core/query";
 import { getDate } from "src/utils/time";
 
 import { OrganizationMemberInviteDialog } from "../../dialogs/OrganizationMemberInviteDialog";
@@ -31,7 +31,7 @@ export function OrganizationMembers(): ReactElement {
   const { openDialog } = useDialog();
 
   const { error, data, isPending } = useQuery({
-    queryKey: [CacheKeysConstants.CurrentOrganizationMembers],
+    queryKey: [CacheKeyEnum.CurrentOrganizationMembers],
     queryFn: () => organizationsApi.getCurrentOrganizationMembers(),
   });
 

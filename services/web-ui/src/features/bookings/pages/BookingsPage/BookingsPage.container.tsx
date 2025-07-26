@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
 import { bookingsApi } from "src/apis";
-import { CacheKeysConstants, useQuery } from "src/core/query";
+import { CacheKeyEnum, useQuery } from "src/core/query";
 import { ErrorView } from "src/views/ErrorView";
 
 import { BookingsPageComponent } from "./BookingsPage.component";
@@ -10,7 +10,7 @@ import { BookingsPageSkeleton } from "./BookingsPage.skeleton";
 
 export function BookingsPageContainer(): ReactElement {
   const { error, data, isLoading } = useQuery({
-    queryKey: [CacheKeysConstants.BookingList],
+    queryKey: [CacheKeyEnum.BookingList],
     queryFn: () => bookingsApi.getBookingList(),
   });
 

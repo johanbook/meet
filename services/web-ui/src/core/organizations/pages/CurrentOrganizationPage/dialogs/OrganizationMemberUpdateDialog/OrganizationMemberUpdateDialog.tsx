@@ -10,7 +10,7 @@ import { Role } from "src/core/authorization";
 import { GlobalDialogProps } from "src/core/dialog/dialog.context";
 import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
-import { CacheKeysConstants } from "src/core/query";
+import { CacheKeyEnum } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 export interface OrganizationMemberUpdateDialogProps extends GlobalDialogProps {
@@ -38,7 +38,7 @@ export function OrganizationMemberUpdateDialog({
         onSuccess: () => {
           snackbar.success(t("members.update.role.success"));
           queryClient.invalidateQueries({
-            queryKey: [CacheKeysConstants.CurrentOrganizationMembers],
+            queryKey: [CacheKeyEnum.CurrentOrganizationMembers],
           });
           onSuccess();
         },

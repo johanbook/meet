@@ -7,11 +7,7 @@ import { useAnimate } from "framer-motion";
 import { CreateBlogPostCommentReactionCommand } from "src/api";
 import type { DeleteBlogPostCommentReactionRequest } from "src/api/apis/BlogsApi";
 import { blogsApi } from "src/apis";
-import {
-  CacheKeysConstants,
-  useMutation,
-  useQueryClient,
-} from "src/core/query";
+import { CacheKeyEnum, useMutation, useQueryClient } from "src/core/query";
 
 interface BlogPostCommentLikeButtonProps {
   blogPostCommentId: string;
@@ -50,7 +46,7 @@ export function BlogPostCommentLikeButton({
         {
           onSuccess: () => {
             queryClient.invalidateQueries({
-              queryKey: [CacheKeysConstants.BlogPosts],
+              queryKey: [CacheKeyEnum.BlogPosts],
             });
           },
         },
@@ -65,7 +61,7 @@ export function BlogPostCommentLikeButton({
       {
         onSuccess: () => {
           queryClient.invalidateQueries({
-            queryKey: [CacheKeysConstants.BlogPosts],
+            queryKey: [CacheKeyEnum.BlogPosts],
           });
         },
       },

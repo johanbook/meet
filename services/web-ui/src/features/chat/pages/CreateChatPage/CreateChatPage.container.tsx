@@ -8,7 +8,7 @@ import { ProfileAvatar } from "src/components/shared";
 import { Button } from "src/components/ui";
 import { useTranslation } from "src/core/i18n";
 import {
-  CacheKeysConstants,
+  CacheKeyEnum,
   useMutation,
   useQuery,
   useQueryClient,
@@ -38,7 +38,7 @@ export function CreateChatPageContainer(): ReactElement {
   });
 
   const currentProfileQuery = useQuery({
-    queryKey: [CacheKeysConstants.CurrentProfile],
+    queryKey: [CacheKeyEnum.CurrentProfile],
     queryFn: () => profileApi.getCurrentProfile(),
   });
 
@@ -47,7 +47,7 @@ export function CreateChatPageContainer(): ReactElement {
   const createChatMutation = useMutation({
     onError: () => snackbar.error(t("create.error")),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [CacheKeysConstants.Chats] });
+      queryClient.invalidateQueries({ queryKey: [CacheKeyEnum.Chats] });
       snackbar.success(t("create.success"));
       navigate("/chat");
     },

@@ -4,7 +4,7 @@ import { Typography } from "@mui/material";
 
 import { timeSeriesApi } from "src/apis";
 import { useQuery } from "src/core/query";
-import { CacheKeysConstants } from "src/core/query";
+import { CacheKeyEnum } from "src/core/query";
 import { ErrorView } from "src/views/ErrorView";
 
 import { TimeSeriesListPageComponent } from "./TimeSeriesListPage.component";
@@ -13,7 +13,7 @@ import { TimeSeriesListPageSkeleton } from "./TimeSeriesListPage.skeleton";
 
 export function TimeSeriesListPageContainer(): ReactElement {
   const { error, data, isLoading } = useQuery({
-    queryKey: [CacheKeysConstants.TimeSeries],
+    queryKey: [CacheKeyEnum.TimeSeries],
     queryFn: () => timeSeriesApi.getTimeSeries(),
   });
 
