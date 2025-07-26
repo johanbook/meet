@@ -46,10 +46,10 @@ const TESTS: Record<TimeSeriesDetailsAggregationEnum, TestProps> = {
     value: VALUE,
   },
   [TimeSeriesDetailsAggregationEnum.Hourly]: {
-    date: "2020-01-01T06:00:00",
+    date: dayjs("2020-01-01T06:00:00").format(),
     key: "2000-01-01T06:00",
     label: "06:00",
-    value: 946_706_400_000,
+    value: dayjs("2000-01-01T06:00").valueOf(),
   },
 };
 
