@@ -5,6 +5,8 @@
 import "@testing-library/jest-dom";
 import { TextDecoder, TextEncoder } from "node:util";
 
+process.env.TZ = "UTC";
+
 if (!global.TextEncoder) {
   global.TextEncoder = TextEncoder;
 }
