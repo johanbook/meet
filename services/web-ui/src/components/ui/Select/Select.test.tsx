@@ -6,7 +6,13 @@ import { Select } from ".";
 
 describe("<Select />", () => {
   it("renders", () => {
-    render(<Select label="my-label" onChange={vi.fn()} value="option1" />);
+    render(
+      <Select label="my-label" onChange={vi.fn()} value="option1">
+        <MenuItem key="option1" value="option1">
+          Option 1
+        </MenuItem>
+      </Select>,
+    );
     const select = screen.getByRole("combobox", { name: "" });
     expect(select).toBeInTheDocument();
   });
