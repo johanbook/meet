@@ -45,8 +45,8 @@ export const CHART_CONFIGS: Record<
   },
   [TimeSeriesDetailsAggregationEnum.DayOfWeek]: {
     scaleType: "band",
-    getGroupKey: (date) => dayjs(date).day().toString(),
-    getLabel: (key) => getWeekDay(dayjs().day(Number.parseInt(key)).toDate()),
+    getGroupKey: (date) => dayjs(date).isoWeekday().toString(),
+    getLabel: (key) => getWeekDay(dayjs().isoWeekday(Number.parseInt(key))),
     getValue: (value) => value,
     sortCompareFn: (a, b) => Number(a) - Number(b),
   },

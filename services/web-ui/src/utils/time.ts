@@ -1,9 +1,11 @@
 import dayjs from "dayjs";
+import isoWeek from "dayjs/plugin/isoWeek";
 import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
 import weekOfYear from "dayjs/plugin/weekOfYear";
 import weekday from "dayjs/plugin/weekday";
 
+dayjs.extend(isoWeek);
 dayjs.extend(relativeTime);
 dayjs.extend(utc);
 dayjs.extend(weekday);
