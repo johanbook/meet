@@ -46,4 +46,8 @@ describe(getWeekDay.name, () => {
   it("parses correct weekday", () => {
     expect(getWeekDay("2025-07-24")).toBe("Thursday");
   });
+
+  it("parses correct weekday in short format", () => {
+    expect(getWeekDay("2025-07-24", "short")).toBe("Thu");
+  });
 });

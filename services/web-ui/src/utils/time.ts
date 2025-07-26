@@ -33,8 +33,11 @@ export function getWeek(date: string | Date | dayjs.Dayjs): number {
   return dayjs(date).week();
 }
 
-export function getWeekDay(date: string | Date | dayjs.Dayjs): string {
-  return dayjs(date).format("dddd");
+export function getWeekDay(
+  date: string | Date | dayjs.Dayjs,
+  format: "short" | "long" = "long",
+): string {
+  return dayjs(date).format(format === "long" ? "dddd" : "ddd");
 }
 
 export function parseDateInUTC(date: string): Date {
