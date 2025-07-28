@@ -45,7 +45,7 @@
     "class-transformer": "0.5.1",
     "class-validator": "0.14.2",
     "eslint": "9.29.0",
-    "eslint-config-prettier": "10.1.5",
+    "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "5.5.3",
     "eslint-plugin-sonarjs": "3.0.4",
     "eslint-plugin-unicorn": "59.0.1",
