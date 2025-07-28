@@ -2,13 +2,13 @@ import { ReactElement, ReactNode } from "react";
 
 import { ResponseError } from "src/api";
 import { profileApi } from "src/apis";
-import { useQuery } from "src/core/query";
+import { CacheKeyEnum, useQuery } from "src/core/query";
 import { ErrorView } from "src/views/ErrorView";
 
 import { AuthenticationGuardNav } from "./AuthenticationGuard.nav";
 import { AuthenticationGuardSkeleton } from "./AuthenticationGuard.skeleton";
 
-export interface AuthenticationGuardContainerProps {
+interface AuthenticationGuardContainerProps {
   children: ReactNode;
 }
 
@@ -16,8 +16,8 @@ export function AuthenticationGuardContainer({
   children,
 }: AuthenticationGuardContainerProps): ReactElement {
   const { error, isLoading } = useQuery({
-    queryKey: ["authentication"],
-    queryFn: () => profileApi.checkIfProfileExists(),
+    queryKey: [CacheKeyEnum.CurrentProfileExists],
+    queryFn: async () => profileApi.checkIfProfileExists(),
     retry: false,
   });
 
