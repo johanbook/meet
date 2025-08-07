@@ -40,7 +40,7 @@
     "class-validator": "0.14.1",
     "csv-parse": "6.1.0",
     "jimp": "1.6.0",
-    "keyv": "5.3.3",
+    "keyv": "5.5.0",
     "lodash": "4.17.21",
     "nestjs-minio-client": "2.2.0",
     "nodemailer": "7.0.5",
