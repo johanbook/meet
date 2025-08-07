@@ -36,7 +36,7 @@ const TESTS: Record<TimeSeriesDetailsAggregationEnum, TestProps> = {
   [TimeSeriesDetailsAggregationEnum.DayOfWeek]: {
     date: "2020-01-01T00:00:00Z",
     key: "3",
-    label: "Thursday",
+    label: "Thu",
     value: "3",
   },
   [TimeSeriesDetailsAggregationEnum.Daily]: {
