@@ -1,12 +1,16 @@
 import { TimeSeriesDetails } from "src/api";
+import { DateRange } from "src/components/ui";
 
 import { ChartConfig } from "./chart.config";
 
 export const getChartData = (
   timeSeries: TimeSeriesDetails,
   config: ChartConfig,
+  dateRange: DateRange,
 ) => {
   const data: Record<string, Record<string, number>> = {};
+
+  console.log({ dateRange });
 
   for (const point of timeSeries.points) {
     const groupKey = config.getGroupKey(new Date(point.createdAt));
