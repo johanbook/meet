@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+## [2.9.0](https://github.com/johanbook/meet/compare/v2.8.0...v2.9.0) (2025-08-13)
+
+
+### Features
+
+* **web-ui:** revert to old select ([#1808](https://github.com/johanbook/meet/issues/1808)) ([a1530c9](https://github.com/johanbook/meet/commit/a1530c912fff8e40ccc2b129912930febe0dfd9b))
+
+
+### Bug Fixes
+
+* **web-ui:** add styling improvements ([#1809](https://github.com/johanbook/meet/issues/1809)) ([05a7c2c](https://github.com/johanbook/meet/commit/05a7c2c803ecce8589259d8acd9fee65a5db13b5))
+* **web-ui:** show short weekday format in time series chart by default ([#1797](https://github.com/johanbook/meet/issues/1797)) ([8cf1240](https://github.com/johanbook/meet/commit/8cf124037b00721304fcf3e5cc56e0169fa966cc))
+
 ## [2.8.0](https://github.com/johanbook/meet/compare/v2.7.0...v2.8.0) (2025-07-26)
 
 
