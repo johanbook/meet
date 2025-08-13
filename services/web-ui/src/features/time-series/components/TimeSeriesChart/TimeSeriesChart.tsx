@@ -1,16 +1,10 @@
 import { ReactElement, useMemo, useState } from "react";
 
-import {
-  Box,
-  ToggleButton,
-  ToggleButtonGroup,
-  Typography,
-  alpha,
-  useTheme,
-} from "@mui/material";
+import { Box, MenuItem, Typography, alpha, useTheme } from "@mui/material";
 import { LineChart } from "@mui/x-charts";
 
 import { TimeSeriesDetails, TimeSeriesDetailsAggregationEnum } from "src/api";
+import { DateRange, DateRangePicker, Select } from "src/components/ui";
 import { format } from "src/utils/string";
 
 import { CHART_CONFIGS } from "./chart.config";
@@ -33,11 +27,16 @@ export function TimeSeriesChart({
       TimeSeriesDetailsAggregationEnum.Daily,
     );
 
+  const [dateRange, setDateRange] = useState<DateRange>({
+    from: new Date(),
+    to: new Date(),
+  });
+
   const config = CHART_CONFIGS[aggregation];
 
   const data = useMemo(
-    () => getChartData(timeSeries, config),
-    [config, timeSeries],
+    () => getChartData(timeSeries, config, dateRange),
+    [config, dateRange, timeSeries],
   );
 
   const theme = useTheme();
@@ -62,29 +61,27 @@ export function TimeSeriesChart({
       </Typography>
 
       <Box>
+        <DateRangePicker onChange={setDateRange} value={dateRange} />
+
         <Typography gutterBottom>
           <b>Aggregation</b>
         </Typography>
 
-        <ToggleButtonGroup
-          exclusive
-          onChange={(_, value) => {
-            // NB: `null` is passed if user is trying to deselect option
-            if (value) {
-              setAggregation(value as TimeSeriesDetailsAggregationEnum);
-            }
-          }}
+        <Select
+          onChange={(value) =>
+            setAggregation(value as TimeSeriesDetailsAggregationEnum)
+          }
           sx={{ mb: 2 }}
           value={aggregation}
         >
           {Object.entries(TimeSeriesDetailsAggregationEnum).map(
             ([name, value]) => (
-              <ToggleButton key={value} size="small" value={value}>
+              <MenuItem key={value} value={value}>
                 {format(name)}
-              </ToggleButton>
+              </MenuItem>
             ),
           )}
-        </ToggleButtonGroup>
+        </Select>
       </Box>
 
       <LineChart

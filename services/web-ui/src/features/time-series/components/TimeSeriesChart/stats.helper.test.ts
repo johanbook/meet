@@ -54,9 +54,12 @@ describe(getChartData.name, () => {
       },
     ];
 
+    const dateRange = { to: new Date(), from: new Date() };
+
     const data = getChartData(
       { ...TIME_SERIES, points },
       CHART_CONFIGS.dayOfWeek,
+      dateRange,
     );
 
     expect(data).toEqual([
