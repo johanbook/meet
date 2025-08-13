@@ -61,9 +61,12 @@ export function TimeSeriesChart({
       </Typography>
 
       <Box>
-        <DateRangePicker onChange={setDateRange} value={dateRange} />
-
         <Typography gutterBottom>
+          <b>Time Range</b>
+        </Typography>
+        <DateRangePicker fullWidth onChange={setDateRange} value={dateRange} />
+
+        <Typography gutterBottom sx={{ mt: 4 }}>
           <b>Aggregation</b>
         </Typography>
 
