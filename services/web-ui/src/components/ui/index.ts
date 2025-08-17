@@ -5,7 +5,7 @@ export { Card } from "./Card";
 export { CollapsibleCard } from "./CollapsibleCard";
 export { ConfirmationDialog } from "./ConfirmationDialog";
 export { DatePicker } from "./DatePicker";
-export { DateRangePicker } from "./DateRangePicker";
+export { DateRangePicker, DATE_SHORTCUTS } from "./DateRangePicker";
 export { Fab } from "./Fab";
 export { Link } from "./Link";
 export { Switch } from "./Switch";
