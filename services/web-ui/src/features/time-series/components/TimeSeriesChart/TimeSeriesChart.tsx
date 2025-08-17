@@ -4,7 +4,12 @@ import { Box, MenuItem, Typography, alpha, useTheme } from "@mui/material";
 import { LineChart } from "@mui/x-charts";
 
 import { TimeSeriesDetails, TimeSeriesDetailsAggregationEnum } from "src/api";
-import { DateRange, DateRangePicker, Select } from "src/components/ui";
+import {
+  DATE_SHORTCUTS,
+  DateRange,
+  DateRangePicker,
+  Select,
+} from "src/components/ui";
 import { format } from "src/utils/string";
 
 import { CHART_CONFIGS } from "./chart.config";
@@ -27,10 +32,9 @@ export function TimeSeriesChart({
       TimeSeriesDetailsAggregationEnum.Daily,
     );
 
-  const [dateRange, setDateRange] = useState<DateRange>({
-    from: new Date(),
-    to: new Date(),
-  });
+  const [dateRange, setDateRange] = useState<DateRange>(
+    DATE_SHORTCUTS.LastYear,
+  );
 
   const config = CHART_CONFIGS[aggregation];
 
