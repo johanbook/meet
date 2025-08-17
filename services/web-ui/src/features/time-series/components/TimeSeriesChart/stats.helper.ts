@@ -1,7 +1,15 @@
+import dayjs from "dayjs";
+
 import { TimeSeriesDetails } from "src/api";
 import { DateRange } from "src/components/ui";
 
 import { ChartConfig } from "./chart.config";
+
+const checkIfDateIsInRange = (date: string, min: Date, max: Date): boolean => {
+  const x = dayjs(date);
+
+  return !x.isBefore(min) && !x.isAfter(max);
+};
 
 export const getChartData = (
   timeSeries: TimeSeriesDetails,
@@ -10,9 +18,17 @@ export const getChartData = (
 ) => {
   const data: Record<string, Record<string, number>> = {};
 
-  console.log({ dateRange });
-
   for (const point of timeSeries.points) {
+    const isInRange = checkIfDateIsInRange(
+      point.createdAt,
+      dateRange.from,
+      dateRange.to,
+    );
+
+    if (!isInRange) {
+      continue;
+    }
+
     const groupKey = config.getGroupKey(new Date(point.createdAt));
 
     if (!(groupKey in data)) {

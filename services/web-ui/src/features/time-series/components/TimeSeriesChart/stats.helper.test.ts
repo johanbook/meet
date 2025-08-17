@@ -54,7 +54,10 @@ describe(getChartData.name, () => {
       },
     ];
 
-    const dateRange = { to: new Date(), from: new Date() };
+    const dateRange = {
+      to: new Date("2025-07-28"),
+      from: new Date("2025-07-20"),
+    };
 
     const data = getChartData(
       { ...TIME_SERIES, points },
