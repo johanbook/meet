@@ -56,7 +56,9 @@ const getSummaryValues = (timeSeries: TimeSeriesDetails): TimeSeriesStat[] => {
     }
   }
 
-  return Object.values(labelTotal);
+  return Object.values(labelTotal).sort((a, b) =>
+    a.label.localeCompare(b.label),
+  );
 };
 
 export const getTimeSeriesStats = (
