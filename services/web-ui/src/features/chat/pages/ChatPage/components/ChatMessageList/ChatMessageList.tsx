@@ -15,7 +15,7 @@ export function ChatMessageList({
 }: ChatMessageListProps): React.ReactElement {
   // The Flex layout used to keep focus at bottom of container
   // shows messages in reverse order
-  const shownMessages = [...messages].reverse();
+  const shownMessages = messages.toReversed();
 
   return (
     <List
