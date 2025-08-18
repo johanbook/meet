@@ -1,8 +1,6 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 
-/* eslint-disable unicorn/prefer-module */
-
 interface CreateEmailProps {
   content: string;
   header: string;

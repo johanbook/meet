@@ -6,8 +6,6 @@ import { SeederOptions } from "typeorm-extension";
 import { ConfigurationError } from "../error-handling";
 import { TypeOrmLogger } from "./typeorm.logger";
 
-/* eslint-disable unicorn/prefer-module */
-
 dotenv.config();
 
 const logging: DataSourceOptions["logging"] =
