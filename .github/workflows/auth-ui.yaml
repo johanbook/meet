@@ -20,7 +20,7 @@ jobs:
         working-directory: ./services/auth-ui
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install NodeJS
         uses: actions/setup-node@v4
@@ -42,7 +42,7 @@ jobs:
     needs: ["lint"]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install NodeJS
         uses: actions/setup-node@v4
@@ -73,7 +73,7 @@ jobs:
     needs: ["test"]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Login to ghcr.io
         uses: docker/login-action@v3
