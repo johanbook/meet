@@ -5,8 +5,6 @@ import { beforeEach, describe, expect, it } from "src/test";
 
 import { PhotoService } from "./photo.service";
 
-/* eslint-disable unicorn/prefer-module */
-
 describe(PhotoService.name, () => {
   let photoService: PhotoService;
 
