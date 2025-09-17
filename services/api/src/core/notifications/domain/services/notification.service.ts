@@ -84,13 +84,11 @@ export class NotificationService {
       where: { id: In(profileIds) },
     });
 
-    const webPushResult = await this.notificationWebPushGateway.sendWebPush(
-      profileIds,
-      notification,
-    );
+    await this.notificationWebPushGateway.sendWebPush(profileIds, notification);
 
     const ids = profiles
-      .filter((profile) => !webPushResult[profile.id])
+      // TODO: This was reported to not be working and hence disabling it
+      // .filter((profile) => !webPushResult[profile.id])
       .map((profile) => profile.userId);
 
     await this.notifyUsers(ids, notification);
