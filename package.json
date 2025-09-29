@@ -18,7 +18,7 @@
   "homepage": "https://github.com/johanbook/meet#readme",
   "devDependencies": {
     "@commitlint/cli": "19.8.1",
-    "@commitlint/config-conventional": "19.8.1",
+    "@commitlint/config-conventional": "20.0.0",
     "husky": "9.1.7",
     "lint-staged": "16.1.6",
     "prettier": "3.6.2"
