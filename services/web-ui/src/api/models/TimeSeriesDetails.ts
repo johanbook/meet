@@ -82,6 +82,7 @@ export interface TimeSeriesDetails {
  * @export
  */
 export const TimeSeriesDetailsAggregationEnum = {
+    HalfHourly: 'halfHourly',
     Hourly: 'hourly',
     Daily: 'daily',
     DayOfWeek: 'dayOfWeek',
