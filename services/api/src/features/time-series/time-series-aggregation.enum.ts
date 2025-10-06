@@ -1,4 +1,5 @@
 export enum TimeSeriesAggregationEnum {
+  HalfHourly = "halfHourly",
   Hourly = "hourly",
   Daily = "daily",
   DayOfWeek = "dayOfWeek",
