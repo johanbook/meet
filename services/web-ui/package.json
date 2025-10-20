@@ -79,7 +79,7 @@
     "eslint-plugin-prettier": "5.5.4",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "5.2.0",
-    "eslint-plugin-sonarjs": "3.0.4",
+    "eslint-plugin-sonarjs": "3.0.5",
     "eslint-plugin-storybook": "9.0.12",
     "eslint-plugin-unicorn": "60.0.0",
     "jest-environment-jsdom": "29.7.0",
