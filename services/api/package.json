@@ -56,7 +56,7 @@
     "web-push": "3.6.7"
   },
   "devDependencies": {
-    "@eslint/js": "9.34.0",
+    "@eslint/js": "9.38.0",
     "@nestjs/cli": "11.0.10",
     "@nestjs/schematics": "11.0.7",
     "@nestjs/testing": "11.1.6",
