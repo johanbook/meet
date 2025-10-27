@@ -48,7 +48,7 @@
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "5.5.4",
     "eslint-plugin-sonarjs": "3.0.5",
-    "eslint-plugin-unicorn": "61.0.2",
+    "eslint-plugin-unicorn": "62.0.0",
     "jest": "30.2.0",
     "pino-pretty": "13.0.0",
     "prettier": "3.6.2",
