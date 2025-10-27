@@ -52,7 +52,7 @@
     "react-swipeable-views": "0.14.0",
     "socket.io-client": "4.8.1",
     "typescript": "5.9.3",
-    "uuid": "11.1.0",
+    "uuid": "13.0.0",
     "vite": "7.1.5",
     "vite-tsconfig-paths": "5.1.4",
     "web-vitals": "4.2.4"
