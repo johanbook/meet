@@ -52,7 +52,7 @@
     "typeorm": "0.3.26",
     "typeorm-extension": "3.7.1",
     "typescript": "5.9.3",
-    "uuid": "11.1.0",
+    "uuid": "13.0.0",
     "web-push": "3.6.7"
   },
   "devDependencies": {
