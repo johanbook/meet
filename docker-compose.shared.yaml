@@ -1,6 +1,6 @@
 services:
   traefik:
-    image: "traefik:v2.10"
+    image: "traefik:v3.4.0"
     container_name: "traefik"
     command:
       - "--accesslog=true"
@@ -11,14 +11,18 @@ services:
       - "--providers.docker.exposedbydefault=false"
 
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.middlewares=correlation@docker"
+      - "--entrypoints.websecure.http.middlewares=correlation@docker"
 
-      # Adds correlation id
-      - "--tracing.jaeger.samplingparam=0"
-      - "--tracing.jaeger.tracecontextheadername=x-correlation-id"
+      # Adds correlation id middleware
+      - "--experimental.plugins.correlation.moduleName=github.com/saman-jafari/correlation-id-traefik"
+      - "--experimental.plugins.correlation.version=v0.2.0"
 
     labels:
       - "traefik.enable=true"
       - "traefik.http.middlewares.basicauth.basicauth.usersfile=/etc/traefik/usersfile"
+
+      - "traefik.http.middlewares.correlation.plugin.correlation.headerName=x-correlation-id"
 
       - "traefik.http.routers.edge-router.entrypoints=web"
       - "traefik.http.routers.edge-router.rule=Host(`traefik.console.$DOMAIN`)"

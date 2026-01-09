@@ -26,17 +26,21 @@ services:
       - "--entrypoints.webinsecure.address=:80"
       - "--entrypoints.webinsecure.http.redirections.entrypoint.to=web"
       - "--entrypoints.webinsecure.http.redirections.entrypoint.scheme=https"
+      - "--entrypoints.webinsecure.http.middlewares=correlation@docker"
       - "--entrypoints.web.address=:443"
       - "--entrypoints.web.http.tls.certresolver=letsencrypt"
+      - "--entrypoints.web.http.middlewares=correlation@docker"
+
+      # Adds correlation id middleware
+      - "--experimental.plugins.correlation.moduleName=github.com/saman-jafari/correlation-id-traefik"
+      - "--experimental.plugins.correlation.version=v0.2.0"
 
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=webinsecure"
       - "--certificatesresolvers.letsencrypt.acme.email=$EMAIL"
       - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
-
-      # Adds correlation id
-      - "--tracing.jaeger.samplingparam=0"
-      - "--tracing.jaeger.tracecontextheadername=x-correlation-id"
+    labels:
+      - "traefik.http.middlewares.correlation.plugin.correlation.headerName=x-correlation-id"
     ports:
       - "80:80"
       - "443:443"
