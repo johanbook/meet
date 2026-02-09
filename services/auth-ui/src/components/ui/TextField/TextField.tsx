@@ -5,8 +5,10 @@ import {
   TextFieldProps as MuiTextFieldProps,
 } from "@mui/material";
 
-export interface TextFieldProps
-  extends Omit<MuiTextFieldProps, "error" | "onChange" | "value"> {
+export interface TextFieldProps extends Omit<
+  MuiTextFieldProps,
+  "error" | "onChange" | "value"
+> {
   error?: string;
   maxLength?: number;
   onChange: (value: string) => void;
