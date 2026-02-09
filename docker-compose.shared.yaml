@@ -1,6 +1,6 @@
 services:
   traefik:
-    image: "traefik:v2.10"
+    image: "traefik:v2.11"
     container_name: "traefik"
     command:
       - "--accesslog=true"
@@ -117,7 +117,7 @@ services:
     restart: "unless-stopped"
 
   pgadmin:
-    image: "dpage/pgadmin4:9.10.0"
+    image: "dpage/pgadmin4:9.12.0"
     container_name: "pgadmin"
     environment:
       PGADMIN_DEFAULT_EMAIL: "$PGADMIN_EMAIL"
@@ -131,7 +131,7 @@ services:
       - ".data/pgadmin:/var/lib/pgadmin:rw"
 
   supertokens:
-    image: "registry.supertokens.io/supertokens/supertokens-postgresql:11.2.0"
+    image: "registry.supertokens.io/supertokens/supertokens-postgresql:11.3.2"
     container_name: "supertokens"
     environment:
       POSTGRESQL_CONNECTION_URI: "postgresql://$POSTGRES_USERNAME:$POSTGRES_PASSWORD@db:5432/"

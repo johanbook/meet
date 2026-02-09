@@ -1,7 +1,7 @@
 ################################
 # Build assets
 ################################
-FROM node:25.2.1-alpine AS builder
+FROM node:25.6.0-alpine AS builder
 
 ARG VITE_SENTRY_DSN
 
@@ -15,7 +15,7 @@ RUN npm run build
 ################################
 # Create server
 ################################
-FROM nginx:1.29.3
+FROM nginx:1.29.5
 
 COPY --from=builder /app/dist /etc/nginx/html/login
 COPY nginx.conf /etc/nginx/conf.d/default.conf
