@@ -6,9 +6,10 @@ import { OrganizationService } from "src/core/organizations/domain/services/orga
 import { UpdateOrganizationCommand } from "../../contracts/commands/update-organization.command";
 
 @CommandHandler(UpdateOrganizationCommand)
-export class UpdateOrganizationHandler
-  implements ICommandHandler<UpdateOrganizationCommand, void>
-{
+export class UpdateOrganizationHandler implements ICommandHandler<
+  UpdateOrganizationCommand,
+  void
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     private readonly organizationService: OrganizationService,

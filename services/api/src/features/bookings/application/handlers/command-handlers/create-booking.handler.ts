@@ -8,9 +8,10 @@ import { Booking } from "../../../infrastructure/entities/booking.entity";
 import { CreateBookingCommand } from "../../contracts/commands/create-booking.command";
 
 @CommandHandler(CreateBookingCommand)
-export class CreateBookingHandler
-  implements ICommandHandler<CreateBookingCommand, void>
-{
+export class CreateBookingHandler implements ICommandHandler<
+  CreateBookingCommand,
+  void
+> {
   constructor(
     private readonly bookingsService: BookingsService,
     private readonly currentOrganizationService: CurrentOrganizationService,

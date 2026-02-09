@@ -9,9 +9,10 @@ import { OrganizationService } from "../../../domain/services/organization.servi
 import { CreatePersonalOrganizationsIfMissingCommand } from "../../contracts/commands/create-personal-organizations-if-missing.command";
 
 @CommandHandler(CreatePersonalOrganizationsIfMissingCommand)
-export class CreatePersonalOrganizationsIfMissingHandler
-  implements ICommandHandler<CreatePersonalOrganizationsIfMissingCommand, void>
-{
+export class CreatePersonalOrganizationsIfMissingHandler implements ICommandHandler<
+  CreatePersonalOrganizationsIfMissingCommand,
+  void
+> {
   private logger = new Logger(CreatePersonalOrganizationsIfMissingCommand.name);
 
   constructor(

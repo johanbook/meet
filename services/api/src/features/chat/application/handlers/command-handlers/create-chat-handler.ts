@@ -10,9 +10,10 @@ import { ChatConversation } from "../../../infrastructure/entities/chat-conversa
 import { CreateChatCommand } from "../../contracts/commands/create-chat.command";
 
 @CommandHandler(CreateChatCommand)
-export class CreateChatHandler
-  implements ICommandHandler<CreateChatCommand, void>
-{
+export class CreateChatHandler implements ICommandHandler<
+  CreateChatCommand,
+  void
+> {
   constructor(
     private readonly chatConversationService: ChatConversationService,
     private readonly currentOrganizationSerivce: CurrentOrganizationService,

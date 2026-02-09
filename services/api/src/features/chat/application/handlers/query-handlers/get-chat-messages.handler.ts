@@ -13,9 +13,10 @@ import { ChatMessageDetails } from "../../contracts/dtos/chat-message.dto";
 import { GetChatMessagesQuery } from "../../contracts/queries/get-chat-messages.query";
 
 @QueryHandler(GetChatMessagesQuery)
-export class GetChatMessagesHandler
-  implements IQueryHandler<GetChatMessagesQuery, ChatMessageDetails[]>
-{
+export class GetChatMessagesHandler implements IQueryHandler<
+  GetChatMessagesQuery,
+  ChatMessageDetails[]
+> {
   constructor(
     @InjectRepository(ChatMessage)
     private readonly chatMessages: Repository<ChatMessage>,

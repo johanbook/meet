@@ -19,9 +19,10 @@ import { BlogPostReactionDetails } from "../../contracts/dtos/blog-post-reaction
 import { GetBlogPostListQuery } from "../../contracts/queries/get-blog-post-list.query";
 
 @QueryHandler(GetBlogPostListQuery)
-export class GetBlogPostListHandler
-  implements IQueryHandler<GetBlogPostListQuery, BlogPostDetails[]>
-{
+export class GetBlogPostListHandler implements IQueryHandler<
+  GetBlogPostListQuery,
+  BlogPostDetails[]
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     private readonly currentProfileService: CurrentProfileService,

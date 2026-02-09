@@ -10,9 +10,10 @@ import { TimeSeries } from "../../../infrastructure/entities/time-series.entity"
 import { UpdateTimeSeriesPointCommand } from "../../contracts/commands/update-time-series-point.command";
 
 @CommandHandler(UpdateTimeSeriesPointCommand)
-export class UpdateTimeSeriesPointHandler
-  implements ICommandHandler<UpdateTimeSeriesPointCommand, void>
-{
+export class UpdateTimeSeriesPointHandler implements ICommandHandler<
+  UpdateTimeSeriesPointCommand,
+  void
+> {
   constructor(
     private readonly authorizationService: AuthorizationService,
     @InjectRepository(TimeSeries)

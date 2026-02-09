@@ -14,9 +14,7 @@ import { TimeSeriesPointCreatedEvent } from "../../../domain/events/time-series-
 import { TimeSeries } from "../../../infrastructure/entities/time-series.entity";
 
 @EventsHandler(TimeSeriesPointCreatedEvent)
-export class NotifyOrganizationOnTimeSeriesPointCreatedHandler
-  implements IEventHandler<TimeSeriesPointCreatedEvent>
-{
+export class NotifyOrganizationOnTimeSeriesPointCreatedHandler implements IEventHandler<TimeSeriesPointCreatedEvent> {
   constructor(
     private readonly notificationService: NotificationService,
     @InjectRepository(Profile)

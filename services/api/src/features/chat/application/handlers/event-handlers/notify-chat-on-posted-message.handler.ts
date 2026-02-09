@@ -14,9 +14,7 @@ import { ChatMessageSentEvent } from "../../../domain/events/chat-message-sent.e
 import { ChatConversation } from "../../../infrastructure/entities/chat-conversation.entity";
 
 @EventsHandler(ChatMessageSentEvent)
-export class NotifyChatOnPostedMessageHandler
-  implements IEventHandler<ChatMessageSentEvent>
-{
+export class NotifyChatOnPostedMessageHandler implements IEventHandler<ChatMessageSentEvent> {
   constructor(
     @InjectRepository(ChatConversation)
     private readonly chatConversations: Repository<ChatConversation>,

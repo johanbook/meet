@@ -13,9 +13,7 @@ import { Profile } from "src/core/profiles";
 import { BlogPostCreatedEvent } from "../../../domain/events/blog-post-created.event";
 
 @EventsHandler(BlogPostCreatedEvent)
-export class NotifyOrganizationOnPostedBlogPostHandler
-  implements IEventHandler<BlogPostCreatedEvent>
-{
+export class NotifyOrganizationOnPostedBlogPostHandler implements IEventHandler<BlogPostCreatedEvent> {
   constructor(
     private readonly notificationService: NotificationService,
     @InjectRepository(Profile)

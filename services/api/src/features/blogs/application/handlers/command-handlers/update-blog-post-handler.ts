@@ -8,9 +8,10 @@ import { BlogPost } from "../../../infrastructure/entities/blog-post.entity";
 import { UpdateBlogPostCommand } from "../../contracts/commands/update-blog-post.command";
 
 @CommandHandler(UpdateBlogPostCommand)
-export class UpdateBlogPostHandler
-  implements ICommandHandler<UpdateBlogPostCommand, void>
-{
+export class UpdateBlogPostHandler implements ICommandHandler<
+  UpdateBlogPostCommand,
+  void
+> {
   constructor(
     @InjectRepository(BlogPost)
     private readonly blogPosts: Repository<BlogPost>,

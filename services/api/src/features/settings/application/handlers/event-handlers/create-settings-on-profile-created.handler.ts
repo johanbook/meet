@@ -6,9 +6,7 @@ import { ProfileCreatedEvent } from "src/core/profiles";
 import { CreateSettingsCommand } from "../../contracts/commands/create-settings.command";
 
 @EventsHandler(ProfileCreatedEvent)
-export class CreateSettingsOnProfileCreatedHandler
-  implements IEventHandler<ProfileCreatedEvent>
-{
+export class CreateSettingsOnProfileCreatedHandler implements IEventHandler<ProfileCreatedEvent> {
   private logger = new Logger(CreateSettingsOnProfileCreatedHandler.name);
 
   constructor(private commandBus: CommandBus) {}

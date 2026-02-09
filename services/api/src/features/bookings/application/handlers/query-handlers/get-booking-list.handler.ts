@@ -10,9 +10,10 @@ import { BookingDetails } from "../../contracts/dtos/booking.dto";
 import { GetBookingListQuery } from "../../contracts/queries/get-booking-list.query";
 
 @QueryHandler(GetBookingListQuery)
-export class GetBookingListQueryHandler
-  implements IQueryHandler<GetBookingListQuery, BookingDetails[]>
-{
+export class GetBookingListQueryHandler implements IQueryHandler<
+  GetBookingListQuery,
+  BookingDetails[]
+> {
   constructor(
     @InjectRepository(Booking)
     private readonly bookings: Repository<Booking>,

@@ -10,9 +10,10 @@ import { BlogPost } from "../../../infrastructure/entities/blog-post.entity";
 import { DeleteBlogPostCommand } from "../../contracts/commands/delete-blog-post.command";
 
 @CommandHandler(DeleteBlogPostCommand)
-export class DeleteBlogPostHandler
-  implements ICommandHandler<DeleteBlogPostCommand, void>
-{
+export class DeleteBlogPostHandler implements ICommandHandler<
+  DeleteBlogPostCommand,
+  void
+> {
   constructor(
     private readonly authorizationService: AuthorizationService,
     @InjectRepository(BlogPost)

@@ -12,9 +12,10 @@ import { NotificationDetails } from "../../contracts/dtos/notification.dto";
 import { GetNotificationListQuery } from "../../contracts/queries/get-notification-list.query";
 
 @QueryHandler(GetNotificationListQuery)
-export class GetNotificationListHandler
-  implements IQueryHandler<GetNotificationListQuery, NotificationDetails[]>
-{
+export class GetNotificationListHandler implements IQueryHandler<
+  GetNotificationListQuery,
+  NotificationDetails[]
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     private readonly currentProfileService: CurrentProfileService,

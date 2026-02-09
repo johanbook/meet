@@ -11,9 +11,10 @@ import { OrganizationService } from "../../../domain/services/organization.servi
 import { AddMemberToOrganizationCommand } from "../../contracts/commands/add-member-to-organization.command";
 
 @CommandHandler(AddMemberToOrganizationCommand)
-export class AddMemberToOrganizationHandler
-  implements ICommandHandler<AddMemberToOrganizationCommand, void>
-{
+export class AddMemberToOrganizationHandler implements ICommandHandler<
+  AddMemberToOrganizationCommand,
+  void
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     private readonly organizationService: OrganizationService,

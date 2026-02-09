@@ -14,9 +14,7 @@ import { BlogPostCommentCreatedEvent } from "../../../domain/events/blog-post-co
 import { BlogPost } from "../../../infrastructure/entities/blog-post.entity";
 
 @EventsHandler(BlogPostCommentCreatedEvent)
-export class NotifyOrganizationOnPostedBlogPostCommentHandler
-  implements IEventHandler<BlogPostCommentCreatedEvent>
-{
+export class NotifyOrganizationOnPostedBlogPostCommentHandler implements IEventHandler<BlogPostCommentCreatedEvent> {
   constructor(
     @InjectRepository(BlogPost)
     private readonly blogPosts: Repository<BlogPost>,

@@ -11,9 +11,10 @@ import { TimeSeriesListItem } from "../../contracts/dtos/time-series-list-item.d
 import { GetTimeSeriesListQuery } from "../../contracts/queries/get-time-series-list.query";
 
 @QueryHandler(GetTimeSeriesListQuery)
-export class GetTimeSeriesListHandler
-  implements IQueryHandler<GetTimeSeriesListQuery, TimeSeriesListItem[]>
-{
+export class GetTimeSeriesListHandler implements IQueryHandler<
+  GetTimeSeriesListQuery,
+  TimeSeriesListItem[]
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     @InjectRepository(TimeSeries)

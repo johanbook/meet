@@ -14,9 +14,10 @@ import { TimeSeriesDetails } from "../../contracts/dtos/time-series.dto";
 import { GetTimeSeriesQuery } from "../../contracts/queries/get-time-series.query";
 
 @QueryHandler(GetTimeSeriesQuery)
-export class GetTimeSeriesHandler
-  implements IQueryHandler<GetTimeSeriesQuery, TimeSeriesDetails>
-{
+export class GetTimeSeriesHandler implements IQueryHandler<
+  GetTimeSeriesQuery,
+  TimeSeriesDetails
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     @InjectRepository(TimeSeries)

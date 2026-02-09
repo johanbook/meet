@@ -16,9 +16,10 @@ import { Profile } from "src/core/profiles";
 import { AddMemberToOrganizationViaEmailCommand } from "../../contracts/commands/add-member-to-organization-via-email.command";
 
 @CommandHandler(AddMemberToOrganizationViaEmailCommand)
-export class AddMemberToOrganizationViaEmailHandler
-  implements ICommandHandler<AddMemberToOrganizationViaEmailCommand, void>
-{
+export class AddMemberToOrganizationViaEmailHandler implements ICommandHandler<
+  AddMemberToOrganizationViaEmailCommand,
+  void
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     private readonly organizationService: OrganizationService,

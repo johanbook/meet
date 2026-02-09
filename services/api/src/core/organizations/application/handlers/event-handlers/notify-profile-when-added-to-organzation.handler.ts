@@ -13,9 +13,7 @@ import { MemberAddedToOrganizationEvent } from "../../../domain/events/member-ad
 import { Organization } from "../../../infrastructure/entities/organization.entity";
 
 @EventsHandler(MemberAddedToOrganizationEvent)
-export class NotifyProfileWhenAddedToOrganizationHandler
-  implements IEventHandler<MemberAddedToOrganizationEvent>
-{
+export class NotifyProfileWhenAddedToOrganizationHandler implements IEventHandler<MemberAddedToOrganizationEvent> {
   constructor(
     private readonly notificationService: NotificationService,
     @InjectRepository(Organization)

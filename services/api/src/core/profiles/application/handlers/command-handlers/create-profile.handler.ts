@@ -11,9 +11,10 @@ import { Profile } from "../../../infrastructure/entities/profile.entity";
 import { CreateProfileCommand } from "../../contracts/commands/create-profile.command";
 
 @CommandHandler(CreateProfileCommand)
-export class CreateProfileHandler
-  implements ICommandHandler<CreateProfileCommand, void>
-{
+export class CreateProfileHandler implements ICommandHandler<
+  CreateProfileCommand,
+  void
+> {
   private logger = new Logger(CreateProfileHandler.name);
 
   constructor(

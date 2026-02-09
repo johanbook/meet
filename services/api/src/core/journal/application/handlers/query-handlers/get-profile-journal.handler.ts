@@ -18,9 +18,10 @@ function formatCommandName(commandName: string): string {
 }
 
 @QueryHandler(GetProfileJournalQuery)
-export class GetProfileJournalHandler
-  implements IQueryHandler<GetProfileJournalQuery, JournalDetails>
-{
+export class GetProfileJournalHandler implements IQueryHandler<
+  GetProfileJournalQuery,
+  JournalDetails
+> {
   constructor(
     private readonly currentProfileService: CurrentProfileService,
     @InjectRepository(JournalEntry)

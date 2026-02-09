@@ -7,9 +7,10 @@ import { CurrentProfileService } from "src/core/profiles";
 import { SaveNotificationSubscriptionCommand } from "../../contracts/commands/save-notification-subscription.command";
 
 @CommandHandler(SaveNotificationSubscriptionCommand)
-export class SaveNotificationSubscriptionHandler
-  implements ICommandHandler<SaveNotificationSubscriptionCommand, void>
-{
+export class SaveNotificationSubscriptionHandler implements ICommandHandler<
+  SaveNotificationSubscriptionCommand,
+  void
+> {
   constructor(
     private readonly currentProfileService: CurrentProfileService,
     private readonly notificationSubscriptionService: NotificationSubscriptionService,

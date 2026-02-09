@@ -13,9 +13,10 @@ import { ProfileDetails } from "../../contracts/dtos/profile.dto";
 import { GetCurrentProfileQuery } from "../../contracts/queries/get-current-profile.query";
 
 @QueryHandler(GetCurrentProfileQuery)
-export class GetCurrentProfileHandler
-  implements IQueryHandler<GetCurrentProfileQuery, ProfileDetails>
-{
+export class GetCurrentProfileHandler implements IQueryHandler<
+  GetCurrentProfileQuery,
+  ProfileDetails
+> {
   constructor(
     private readonly photoService: PhotoService,
     @InjectRepository(Profile)
