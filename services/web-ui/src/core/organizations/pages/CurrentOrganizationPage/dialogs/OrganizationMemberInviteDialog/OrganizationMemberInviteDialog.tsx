@@ -12,8 +12,7 @@ import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeyEnum } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
-export interface OrganizationMemberInviteDialogProps
-  extends GlobalDialogProps {}
+export interface OrganizationMemberInviteDialogProps extends GlobalDialogProps {}
 
 export function OrganizationMemberInviteDialog(): ReactElement {
   const authorization = useAuthorization();

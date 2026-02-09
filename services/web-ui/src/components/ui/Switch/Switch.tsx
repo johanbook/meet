@@ -5,8 +5,10 @@ import {
   SwitchProps as MuiSwitchProps,
 } from "@mui/material";
 
-export interface SwitchProps
-  extends Omit<MuiSwitchProps, "checked" | "onChange" | "value"> {
+export interface SwitchProps extends Omit<
+  MuiSwitchProps,
+  "checked" | "onChange" | "value"
+> {
   onChange: (value: boolean) => void;
   value: boolean;
 }
