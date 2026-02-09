@@ -15,7 +15,7 @@ RUN npm run build
 ################################
 # Create server
 ################################
-FROM nginx:1.29.4
+FROM nginx:1.29.5
 
 COPY --from=builder /app/dist /etc/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
