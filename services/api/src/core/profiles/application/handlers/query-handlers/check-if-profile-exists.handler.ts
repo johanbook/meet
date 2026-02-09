@@ -8,9 +8,10 @@ import { Profile } from "../../../infrastructure/entities/profile.entity";
 import { CheckIfProfileExistsQuery } from "../../contracts/queries/check-if-profile-exists.query";
 
 @QueryHandler(CheckIfProfileExistsQuery)
-export class CheckIfProfileExistsHandler
-  implements IQueryHandler<CheckIfProfileExistsQuery, boolean>
-{
+export class CheckIfProfileExistsHandler implements IQueryHandler<
+  CheckIfProfileExistsQuery,
+  boolean
+> {
   constructor(
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,

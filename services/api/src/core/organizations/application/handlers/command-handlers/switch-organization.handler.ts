@@ -8,9 +8,10 @@ import { CurrentProfileService } from "src/core/profiles";
 import { SwitchOrganizationCommand } from "../../contracts/commands/switch-organization.command";
 
 @CommandHandler(SwitchOrganizationCommand)
-export class SwitchOrganizationHandler
-  implements ICommandHandler<SwitchOrganizationCommand, void>
-{
+export class SwitchOrganizationHandler implements ICommandHandler<
+  SwitchOrganizationCommand,
+  void
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     private readonly currentProfileService: CurrentProfileService,

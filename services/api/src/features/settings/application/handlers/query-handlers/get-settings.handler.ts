@@ -7,9 +7,10 @@ import { SettingsDetails } from "../../contracts/dtos/settings-details.dto";
 import { GetSettingsQuery } from "../../contracts/queries/get-settings.query";
 
 @QueryHandler(GetSettingsQuery)
-export class GetSettingsHandler
-  implements IQueryHandler<GetSettingsQuery, SettingsDetails>
-{
+export class GetSettingsHandler implements IQueryHandler<
+  GetSettingsQuery,
+  SettingsDetails
+> {
   constructor(
     private readonly currentSettingsService: CurrentSettingsService,
   ) {}

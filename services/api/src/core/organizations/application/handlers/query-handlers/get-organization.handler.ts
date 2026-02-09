@@ -10,9 +10,10 @@ import { OrganizationPhotoDetails } from "../../contracts/dtos/organization-phot
 import { GetOrganizationQuery } from "../../contracts/queries/get-organization.query";
 
 @QueryHandler(GetOrganizationQuery)
-export class GetOrganizationHandler
-  implements IQueryHandler<GetOrganizationQuery, CurrentOrganizationDetails>
-{
+export class GetOrganizationHandler implements IQueryHandler<
+  GetOrganizationQuery,
+  CurrentOrganizationDetails
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     private readonly photoService: PhotoService,

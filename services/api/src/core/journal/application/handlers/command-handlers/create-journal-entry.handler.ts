@@ -12,9 +12,10 @@ import { JournalEntry } from "../../../infrastructure/entities/journal-entry.ent
 import { CreateJournalEntryCommand } from "../../contracts/commands/create-journal-entry.command";
 
 @CommandHandler(CreateJournalEntryCommand)
-export class CreateJournalEntryHandler
-  implements ICommandHandler<CreateJournalEntryCommand, void>
-{
+export class CreateJournalEntryHandler implements ICommandHandler<
+  CreateJournalEntryCommand,
+  void
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     private readonly currentProfileService: CurrentProfileService,

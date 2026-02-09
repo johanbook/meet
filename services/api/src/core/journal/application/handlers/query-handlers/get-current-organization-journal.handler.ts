@@ -18,9 +18,10 @@ function formatCommandName(commandName: string): string {
 }
 
 @QueryHandler(GetCurrentOrganizationJournalQuery)
-export class GetCurrentOrganizationJournalHandler
-  implements IQueryHandler<GetCurrentOrganizationJournalQuery, JournalDetails>
-{
+export class GetCurrentOrganizationJournalHandler implements IQueryHandler<
+  GetCurrentOrganizationJournalQuery,
+  JournalDetails
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     @InjectRepository(JournalEntry)

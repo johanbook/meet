@@ -11,9 +11,10 @@ import { ChatMessage } from "../../../infrastructure/entities/chat-message.entit
 import { PostChatMessageCommand } from "../../contracts/commands/post-chat-message.command";
 
 @CommandHandler(PostChatMessageCommand)
-export class PostChatMessageHandler
-  implements ICommandHandler<PostChatMessageCommand, void>
-{
+export class PostChatMessageHandler implements ICommandHandler<
+  PostChatMessageCommand,
+  void
+> {
   constructor(
     @InjectRepository(ChatConversation)
     private readonly chatConversations: Repository<ChatConversation>,

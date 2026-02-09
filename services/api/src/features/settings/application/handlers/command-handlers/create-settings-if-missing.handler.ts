@@ -9,9 +9,10 @@ import { Settings } from "src/features/settings/infrastructure/entities/settings
 import { CreateSettingsIfMissingCommand } from "../../contracts/commands/create-settings-if-missing.command";
 
 @CommandHandler(CreateSettingsIfMissingCommand)
-export class CreateSettingsIfMissingHandler
-  implements ICommandHandler<CreateSettingsIfMissingCommand, void>
-{
+export class CreateSettingsIfMissingHandler implements ICommandHandler<
+  CreateSettingsIfMissingCommand,
+  void
+> {
   private logger = new Logger(CreateSettingsIfMissingHandler.name);
 
   constructor(

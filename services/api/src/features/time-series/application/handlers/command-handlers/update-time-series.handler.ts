@@ -8,9 +8,10 @@ import { TimeSeries } from "../../../infrastructure/entities/time-series.entity"
 import { UpdateTimeSeriesCommand } from "../../contracts/commands/update-time-series.command";
 
 @CommandHandler(UpdateTimeSeriesCommand)
-export class UpdateTimeSeriesHandler
-  implements ICommandHandler<UpdateTimeSeriesCommand, void>
-{
+export class UpdateTimeSeriesHandler implements ICommandHandler<
+  UpdateTimeSeriesCommand,
+  void
+> {
   constructor(
     @InjectRepository(TimeSeries)
     private readonly timeSeries: Repository<TimeSeries>,

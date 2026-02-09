@@ -8,9 +8,7 @@ import { CreatePersonalOrganizationCommand } from "../../contracts/commands/crea
 import { SwitchOrganizationCommand } from "../../contracts/commands/switch-organization.command";
 
 @EventsHandler(ProfileCreatedEvent)
-export class CreateOrganizationOnProfileCreatedHandler
-  implements IEventHandler<ProfileCreatedEvent>
-{
+export class CreateOrganizationOnProfileCreatedHandler implements IEventHandler<ProfileCreatedEvent> {
   private logger = new Logger(CreateOrganizationOnProfileCreatedHandler.name);
 
   constructor(private commandBus: CommandBus) {}

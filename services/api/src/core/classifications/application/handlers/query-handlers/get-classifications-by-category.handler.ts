@@ -7,10 +7,10 @@ import { GetClassificationsByCategoryQuery } from "../../contracts/queries/get-c
 import { mapToClassificationDetails } from "../../mappers/classification.mapper";
 
 @QueryHandler(GetClassificationsByCategoryQuery)
-export class GetClassificationsByCategoryHandler
-  implements
-    IQueryHandler<GetClassificationsByCategoryQuery, ClassificationDetails[]>
-{
+export class GetClassificationsByCategoryHandler implements IQueryHandler<
+  GetClassificationsByCategoryQuery,
+  ClassificationDetails[]
+> {
   constructor(private readonly classificationService: ClassificationService) {}
 
   async execute(query: GetClassificationsByCategoryQuery) {

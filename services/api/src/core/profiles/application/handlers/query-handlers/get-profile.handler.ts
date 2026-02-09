@@ -13,9 +13,10 @@ import { ProfileDetails } from "../../contracts/dtos/profile.dto";
 import { GetProfileQuery } from "../../contracts/queries/get-profile.query";
 
 @QueryHandler(GetProfileQuery)
-export class GetProfileHandler
-  implements IQueryHandler<GetProfileQuery, ProfileDetails>
-{
+export class GetProfileHandler implements IQueryHandler<
+  GetProfileQuery,
+  ProfileDetails
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     private readonly photoService: PhotoService,

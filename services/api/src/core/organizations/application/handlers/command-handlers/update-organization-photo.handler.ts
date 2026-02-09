@@ -12,9 +12,10 @@ import { Organization } from "../../../infrastructure/entities/organization.enti
 import { UpdateOrganizationPhotoCommand } from "../../contracts/commands/update-organization-photo.command";
 
 @CommandHandler(UpdateOrganizationPhotoCommand)
-export class UpdateOrganizationPhotoHandler
-  implements ICommandHandler<UpdateOrganizationPhotoCommand, void>
-{
+export class UpdateOrganizationPhotoHandler implements ICommandHandler<
+  UpdateOrganizationPhotoCommand,
+  void
+> {
   constructor(
     private readonly activeOrganizationService: ActiveOrganizationService,
     private readonly photoService: PhotoService,

@@ -11,9 +11,10 @@ import { BlogPost } from "../../../infrastructure/entities/blog-post.entity";
 import { CreateBlogPostCommand } from "../../contracts/commands/create-blog-post.command";
 
 @CommandHandler(CreateBlogPostCommand)
-export class CreateBlogPostHandler
-  implements ICommandHandler<CreateBlogPostCommand, void>
-{
+export class CreateBlogPostHandler implements ICommandHandler<
+  CreateBlogPostCommand,
+  void
+> {
   constructor(
     private readonly blogPostService: BlogPostService,
     private readonly currentOrganizationService: CurrentOrganizationService,

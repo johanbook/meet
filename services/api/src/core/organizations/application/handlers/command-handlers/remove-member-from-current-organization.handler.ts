@@ -9,9 +9,10 @@ import { OrganizationMembership } from "../../../infrastructure/entities/organiz
 import { RemoveMemberFromCurrentOrganizationCommand } from "../../contracts/commands/remove-member-from-current-organization.command";
 
 @CommandHandler(RemoveMemberFromCurrentOrganizationCommand)
-export class RemoveMemberFromCurrentOrganizationHandler
-  implements ICommandHandler<RemoveMemberFromCurrentOrganizationCommand, void>
-{
+export class RemoveMemberFromCurrentOrganizationHandler implements ICommandHandler<
+  RemoveMemberFromCurrentOrganizationCommand,
+  void
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     @InjectRepository(OrganizationMembership)

@@ -10,9 +10,10 @@ import { TimeSeries } from "../../../infrastructure/entities/time-series.entity"
 import { DeleteTimeSeriesPointCommand } from "../../contracts/commands/delete-time-series-point.command";
 
 @CommandHandler(DeleteTimeSeriesPointCommand)
-export class DeleteTimeSeriesPointHandler
-  implements ICommandHandler<DeleteTimeSeriesPointCommand, void>
-{
+export class DeleteTimeSeriesPointHandler implements ICommandHandler<
+  DeleteTimeSeriesPointCommand,
+  void
+> {
   constructor(
     private readonly authorizationService: AuthorizationService,
     @InjectRepository(TimeSeries)

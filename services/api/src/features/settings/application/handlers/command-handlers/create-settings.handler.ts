@@ -10,9 +10,10 @@ import { Settings } from "src/features/settings/infrastructure/entities/settings
 import { CreateSettingsCommand } from "../../contracts/commands/create-settings.command";
 
 @CommandHandler(CreateSettingsCommand)
-export class CreateSettingsHandler
-  implements ICommandHandler<CreateSettingsCommand, void>
-{
+export class CreateSettingsHandler implements ICommandHandler<
+  CreateSettingsCommand,
+  void
+> {
   constructor(
     private readonly currentProfileService: CurrentProfileService,
     private readonly currentSettingsService: CurrentSettingsService,

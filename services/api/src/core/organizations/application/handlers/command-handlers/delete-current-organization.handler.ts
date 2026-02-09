@@ -8,9 +8,10 @@ import { CurrentProfileService } from "src/core/profiles";
 import { DeleteCurrentOrganizationCommand } from "../../contracts/commands/delete-current-organization.command";
 
 @CommandHandler(DeleteCurrentOrganizationCommand)
-export class DeleteCurrentOrganizationHandler
-  implements ICommandHandler<DeleteCurrentOrganizationCommand, void>
-{
+export class DeleteCurrentOrganizationHandler implements ICommandHandler<
+  DeleteCurrentOrganizationCommand,
+  void
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     private readonly currentProfileService: CurrentProfileService,

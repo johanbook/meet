@@ -12,9 +12,10 @@ import { BlogPhotoDetails } from "../../contracts/dtos/blog-photo.dto";
 import { GetBlogPhotoListQuery } from "../../contracts/queries/get-blog-photo-list.query";
 
 @QueryHandler(GetBlogPhotoListQuery)
-export class GetBlogPhotoListHandler
-  implements IQueryHandler<GetBlogPhotoListQuery, BlogPhotoDetails[]>
-{
+export class GetBlogPhotoListHandler implements IQueryHandler<
+  GetBlogPhotoListQuery,
+  BlogPhotoDetails[]
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     @InjectRepository(BlogPostPhoto)

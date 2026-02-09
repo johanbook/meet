@@ -8,9 +8,10 @@ import { TimeSeries } from "../../../infrastructure/entities/time-series.entity"
 import { CreateTimeSeriesCommand } from "../../contracts/commands/create-time-series.command";
 
 @CommandHandler(CreateTimeSeriesCommand)
-export class CreateTimeSeriesHandler
-  implements ICommandHandler<CreateTimeSeriesCommand, void>
-{
+export class CreateTimeSeriesHandler implements ICommandHandler<
+  CreateTimeSeriesCommand,
+  void
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     private readonly currentProfileService: CurrentProfileService,

@@ -11,10 +11,10 @@ import { OrganizationMemberDetails } from "../../contracts/dtos/organization-mem
 import { GetOrganizationMembersQuery } from "../../contracts/queries/get-organization-members.query";
 
 @QueryHandler(GetOrganizationMembersQuery)
-export class GetOrganizationMembersHandler
-  implements
-    IQueryHandler<GetOrganizationMembersQuery, OrganizationMemberDetails[]>
-{
+export class GetOrganizationMembersHandler implements IQueryHandler<
+  GetOrganizationMembersQuery,
+  OrganizationMemberDetails[]
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     @InjectRepository(OrganizationMembership)

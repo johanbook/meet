@@ -7,9 +7,10 @@ import { CurrentProfileService } from "src/core/profiles";
 import { CreatePersonalOrganizationCommand } from "../../contracts/commands/create-personal-organization.command";
 
 @CommandHandler(CreatePersonalOrganizationCommand)
-export class CreatePersonalOrganizationHandler
-  implements ICommandHandler<CreatePersonalOrganizationCommand, number>
-{
+export class CreatePersonalOrganizationHandler implements ICommandHandler<
+  CreatePersonalOrganizationCommand,
+  number
+> {
   constructor(
     private readonly currentProfileService: CurrentProfileService,
     private readonly organizationService: OrganizationService,

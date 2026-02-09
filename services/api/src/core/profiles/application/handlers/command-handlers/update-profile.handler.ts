@@ -10,9 +10,10 @@ import { Profile } from "../../../infrastructure/entities/profile.entity";
 import { UpdateProfileCommand } from "../../contracts/commands/update-profile.command";
 
 @CommandHandler(UpdateProfileCommand)
-export class UpdateProfileHandler
-  implements ICommandHandler<UpdateProfileCommand, void>
-{
+export class UpdateProfileHandler implements ICommandHandler<
+  UpdateProfileCommand,
+  void
+> {
   constructor(
     @InjectRepository(Profile)
     private readonly profiles: Repository<Profile>,

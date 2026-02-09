@@ -12,9 +12,10 @@ import { TimeSeries } from "../../../infrastructure/entities/time-series.entity"
 import { AddPointToTimeSeriesCommand } from "../../contracts/commands/add-point-to-time-series.command";
 
 @CommandHandler(AddPointToTimeSeriesCommand)
-export class AddPointToTimeSeriesHandler
-  implements ICommandHandler<AddPointToTimeSeriesCommand, void>
-{
+export class AddPointToTimeSeriesHandler implements ICommandHandler<
+  AddPointToTimeSeriesCommand,
+  void
+> {
   constructor(
     private readonly authorizationService: AuthorizationService,
     private readonly currentProfileService: CurrentProfileService,

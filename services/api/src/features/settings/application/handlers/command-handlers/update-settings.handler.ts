@@ -8,9 +8,10 @@ import { Settings } from "src/features/settings/infrastructure/entities/settings
 import { UpdateSettingsCommand } from "../../contracts/commands/update-settings.comamnd";
 
 @CommandHandler(UpdateSettingsCommand)
-export class UpdateSettingsHandler
-  implements ICommandHandler<UpdateSettingsCommand, void>
-{
+export class UpdateSettingsHandler implements ICommandHandler<
+  UpdateSettingsCommand,
+  void
+> {
   constructor(
     private readonly currentSettingsService: CurrentSettingsService,
     @InjectRepository(Settings)

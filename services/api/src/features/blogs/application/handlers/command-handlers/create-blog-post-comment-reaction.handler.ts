@@ -12,9 +12,10 @@ import { BlogPostComment } from "../../../infrastructure/entities/blog-post-comm
 import { CreateBlogPostCommentReactionCommand } from "../../contracts/commands/create-blog-post-comment-reaction.command";
 
 @CommandHandler(CreateBlogPostCommentReactionCommand)
-export class CreateBlogPostCommentReactionHandler
-  implements ICommandHandler<CreateBlogPostCommentReactionCommand, void>
-{
+export class CreateBlogPostCommentReactionHandler implements ICommandHandler<
+  CreateBlogPostCommentReactionCommand,
+  void
+> {
   constructor(
     @InjectRepository(BlogPostComment)
     private readonly blogPostComments: Repository<BlogPostComment>,

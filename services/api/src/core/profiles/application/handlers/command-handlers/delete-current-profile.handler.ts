@@ -5,9 +5,10 @@ import { ProfileService } from "../../../domain/services/profile.service";
 import { DeleteCurrentProfileCommand } from "../../contracts/commands/delete-current-profile.command";
 
 @CommandHandler(DeleteCurrentProfileCommand)
-export class DeleteCurrentProfileHandler
-  implements ICommandHandler<DeleteCurrentProfileHandler, void>
-{
+export class DeleteCurrentProfileHandler implements ICommandHandler<
+  DeleteCurrentProfileHandler,
+  void
+> {
   constructor(
     private readonly currentProfileService: CurrentProfileService,
     private readonly profileService: ProfileService,

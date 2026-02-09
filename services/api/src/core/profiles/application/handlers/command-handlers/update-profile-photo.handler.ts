@@ -12,9 +12,10 @@ import { Profile } from "src/core/profiles/infrastructure/entities/profile.entit
 import { UpdateProfilePhotoCommand } from "../../contracts/commands/update-profile-photo.command";
 
 @CommandHandler(UpdateProfilePhotoCommand)
-export class UpdateProfilePhotoHandler
-  implements ICommandHandler<UpdateProfilePhotoCommand, void>
-{
+export class UpdateProfilePhotoHandler implements ICommandHandler<
+  UpdateProfilePhotoCommand,
+  void
+> {
   constructor(
     private readonly photoService: PhotoService,
     @InjectRepository(Profile)

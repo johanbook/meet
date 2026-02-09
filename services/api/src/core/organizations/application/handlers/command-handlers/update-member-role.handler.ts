@@ -11,9 +11,10 @@ import { CurrentProfileService } from "src/core/profiles";
 import { UpdateMemberRoleCommand } from "../../contracts/commands/update-member-role.command";
 
 @CommandHandler(UpdateMemberRoleCommand)
-export class UpdateMemberRoleHandler
-  implements ICommandHandler<UpdateMemberRoleCommand, void>
-{
+export class UpdateMemberRoleHandler implements ICommandHandler<
+  UpdateMemberRoleCommand,
+  void
+> {
   constructor(
     private readonly currentOrganizationService: CurrentOrganizationService,
     private readonly currentProfileSerivce: CurrentProfileService,
