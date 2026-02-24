@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+## [2.9.0](https://github.com/johanbook/meet/compare/v2.8.0...v2.9.0) (2026-02-24)
+
+
+### Features
+
+* **web-ui:** implement actual date range selector in time series charts ([#1811](https://github.com/johanbook/meet/issues/1811)) ([28a49f0](https://github.com/johanbook/meet/commit/28a49f0d6bd6d7fa292efede56a9685b6cfbffb4))
+* **web-ui:** revert to old select ([#1808](https://github.com/johanbook/meet/issues/1808)) ([a1530c9](https://github.com/johanbook/meet/commit/a1530c912fff8e40ccc2b129912930febe0dfd9b))
+* **web-ui:** sort time series stats by label ([#1810](https://github.com/johanbook/meet/issues/1810)) ([0faecd7](https://github.com/johanbook/meet/commit/0faecd7759d8a96f5b89a630afb4a6fc5b8b7175))
+* **web-ui:** support time series aggregation for half hours ([#1917](https://github.com/johanbook/meet/issues/1917)) ([dd27801](https://github.com/johanbook/meet/commit/dd27801a76c67a47f112230ffd413e2155b09970))
+* **web-ui:** use past year as default when selecting time range ([#1812](https://github.com/johanbook/meet/issues/1812)) ([b2e8e34](https://github.com/johanbook/meet/commit/b2e8e341fd748756c2b61dc4ee38b778d903ddc6))
+
+
+### Bug Fixes
+
+* **api:** send email notification despite web push already being sent ([#1899](https://github.com/johanbook/meet/issues/1899)) ([3603729](https://github.com/johanbook/meet/commit/3603729335993ee27a86a2a44d64862403cea299))
+* **web-ui:** add styling improvements ([#1809](https://github.com/johanbook/meet/issues/1809)) ([05a7c2c](https://github.com/johanbook/meet/commit/05a7c2c803ecce8589259d8acd9fee65a5db13b5))
+* **web-ui:** show short weekday format in time series chart by default ([#1797](https://github.com/johanbook/meet/issues/1797)) ([8cf1240](https://github.com/johanbook/meet/commit/8cf124037b00721304fcf3e5cc56e0169fa966cc))
+
 ## [2.8.0](https://github.com/johanbook/meet/compare/v2.7.0...v2.8.0) (2025-07-26)
 
 
