@@ -64,14 +64,13 @@ export class NotificationService {
     await this.notifications.save(newNotifications);
 
     const profileIds = memberships.map((membership) => membership.profile.id);
-    const webPushResult = await this.notificationWebPushGateway.sendWebPush(
-      profileIds,
-      notification,
-    );
+    await this.notificationWebPushGateway.sendWebPush(profileIds, notification);
 
     // Get list of user ids where a web push wes not sent
+    // NB: We are temporarily disabling the filter here as some
+    // users are reporting that they don't receive email notification.
     const userIds = memberships
-      .filter((membership) => !webPushResult[membership.profileId])
+      // .filter((membership) => !webPushResult[membership.profileId])
       .map((membership) => membership.profile.userId);
 
     await this.notifyUsers(userIds, notification);
