@@ -2,8 +2,6 @@ import { ObjectLiteral, Repository } from "typeorm";
 
 import { vi } from "..";
 
-/* eslint-disable unicorn/consistent-function-scoping */
-
 class MockRepository<T extends ObjectLiteral> {
   private currentId = 1;
 
