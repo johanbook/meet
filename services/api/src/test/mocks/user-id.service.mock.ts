@@ -3,8 +3,6 @@ import { UserIdService } from "src/core/authentication";
 import { vi } from "..";
 import { DEFAULT_MOCK_USERID } from "./constants";
 
-/* eslint-disable unicorn/consistent-function-scoping */
-
 class UserIdServiceMock {
   private readonly userId: number | string = DEFAULT_MOCK_USERID;
 
