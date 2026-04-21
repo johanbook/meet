@@ -34,7 +34,7 @@ const config = new Configuration({
           return;
         }
 
-        let message = "";
+        let message;
         const contentType = response.headers.get("content-type");
 
         if (contentType?.startsWith("application/json")) {
