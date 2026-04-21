@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
-    "@fastify/http-proxy": "11.1.2",
+    "@fastify/http-proxy": "11.4.4",
     "@nestjs/cli": "11.0.16",
     "@nestjs/schematics": "11.0.7",
     "@nestjs/testing": "11.1.9",
