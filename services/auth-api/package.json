@@ -36,7 +36,7 @@
     "@fastify/http-proxy": "11.4.4",
     "@nestjs/cli": "11.0.16",
     "@nestjs/schematics": "11.0.7",
-    "@nestjs/testing": "11.1.9",
+    "@nestjs/testing": "11.1.19",
     "@trivago/prettier-plugin-sort-imports": "5.2.2",
     "@types/jest": "30.0.0",
     "@types/node": "24.0.3",
