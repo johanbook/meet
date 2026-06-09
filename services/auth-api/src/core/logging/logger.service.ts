@@ -6,8 +6,8 @@ export function getLogLevel(): string {
   return level.toLowerCase();
 }
 
-export function createPinoLoggerOptions(name: string): pino.pino.LoggerOptions {
-  let transport: pino.pino.LoggerOptions["transport"] | undefined;
+export function createPinoLoggerOptions(name: string): pino.LoggerOptions {
+  let transport: pino.LoggerOptions["transport"] | undefined;
 
   if (process.env.NODE_ENV !== "production") {
     transport = {
