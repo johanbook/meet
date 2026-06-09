@@ -9,7 +9,7 @@ export function getLogLevel(): string {
 }
 
 export function createPinoLoggerOptions(name: string) {
-  let transport: pino.pino.LoggerOptions["transport"] | undefined;
+  let transport: pino.LoggerOptions["transport"] | undefined;
 
   if (process.env.NODE_ENV !== "production") {
     transport = {
