@@ -25,7 +25,10 @@ export async function mapAndValidate<T extends object, V extends T>(
 ): Promise<T> {
   const value = map(cls, plain);
 
-  await validateOrReject(value);
+  // `value` is always a proper class instance produced by `map`, so it is never
+  // truly "unknown". Disable `forbidUnknownValues` (defaulted to `true` since
+  // class-validator 0.15) to keep validating classes that have no decorators.
+  await validateOrReject(value, { forbidUnknownValues: false });
 
   return value;
 }
