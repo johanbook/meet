@@ -48,7 +48,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "15.5.1",
-    "react-router": "7.15.0",
+    "react-router": "7.17.0",
     "react-swipeable-views": "0.14.0",
     "socket.io-client": "4.8.1",
     "typescript": "5.9.3",
@@ -86,7 +86,7 @@
     "prettier": "3.8.3",
     "storybook": "9.1.20",
     "typescript-eslint": "8.41.0",
-    "vitest": "4.1.6",
+    "vitest": "4.1.8",
     "workbox-cli": "7.4.1"
   }
 }
