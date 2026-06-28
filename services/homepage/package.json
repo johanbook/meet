@@ -26,7 +26,7 @@
     "@emotion/styled": "11.14.0",
     "@mui/icons-material": "7.0.2",
     "@mui/material": "7.0.2",
-    "@vitejs/plugin-react": "4.4.0",
+    "@vitejs/plugin-react": "6.0.3",
     "i18next": "25.0.1",
     "i18next-browser-languagedetector": "8.0.5",
     "i18next-http-backend": "3.0.5",
@@ -35,7 +35,7 @@
     "react-i18next": "15.5.1",
     "react-router": "7.17.0",
     "typescript": "5.9.3",
-    "vite": "6.4.2",
+    "vite": "8.1.0",
     "vite-tsconfig-paths": "4.3.2",
     "web-vitals": "2.1.4"
   },
@@ -53,6 +53,6 @@
     "eslint-plugin-sonarjs": "3.0.5",
     "eslint-plugin-unicorn": "64.0.0",
     "prettier": "3.8.3",
-    "typescript-eslint": "8.41.0"
+    "typescript-eslint": "8.62.0"
   }
 }
