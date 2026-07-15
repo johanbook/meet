@@ -4,7 +4,6 @@ services:
     container_name: "traefik"
     command:
       - "--accesslog=true"
-      - "--accesslog.fields.headers.names.x-correlation-id=keep"
       - "--api.insecure=true"
 
       - "--providers.docker=true"
