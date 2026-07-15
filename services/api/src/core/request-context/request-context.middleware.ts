@@ -32,7 +32,8 @@ export class RequestContextMiddleware implements NestModule {
           _: FastifyReply["raw"],
           next: () => void,
         ) => {
-          const correlationId = req.headers["x-correlation-id"];
+          // TODO: Enable correlation id in Traefik
+          const correlationId = "my-correlation-id";
           let userId: string | undefined;
 
           if (typeof correlationId != "string") {
