@@ -1,7 +1,7 @@
 ################################
 # Build assets
 ################################
-FROM node:26.3.1-alpine AS builder
+FROM node:26.5.0-alpine AS builder
 
 ARG VITE_SENTRY_DSN
 
