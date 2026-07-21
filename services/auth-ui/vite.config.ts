@@ -8,6 +8,10 @@ export default defineConfig({
     alias: {
       src: fileURLToPath(new URL("./src", import.meta.url)),
     },
+    dedupe: ["supertokens-web-js", "supertokens-auth-react"],
   },
   plugins: [react()],
+  optimizeDeps: {
+    include: ["supertokens-web-js", "supertokens-auth-react"],
+  },
 });
