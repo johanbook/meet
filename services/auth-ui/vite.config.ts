@@ -1,6 +1,6 @@
 import react from "@vitejs/plugin-react";
+import { URL, fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
-import { fileURLToPath, URL } from "node:url";
 
 export default defineConfig({
   base: "/login",
@@ -8,10 +8,6 @@ export default defineConfig({
     alias: {
       src: fileURLToPath(new URL("./src", import.meta.url)),
     },
-    dedupe: ["supertokens-web-js", "supertokens-auth-react"],
   },
   plugins: [react()],
-  optimizeDeps: {
-    include: ["supertokens-web-js", "supertokens-auth-react"],
-  },
 });
