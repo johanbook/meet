@@ -64,7 +64,7 @@ jobs:
 
   build-and-push-docker-image:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    # if: github.ref == 'refs/heads/main'
     defaults:
       run:
         working-directory: ./services/auth-ui
