@@ -5,7 +5,7 @@
     "outDir": "dist",
     "jsx": "react-jsx",
     "module": "es2022",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
