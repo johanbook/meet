@@ -10,8 +10,6 @@
 
   "login": {
     "title": "Logga in",
-    "notSignedUp": "Inte registrerad än?",
-    "signUpLink": "Registrera dig",
     "button": "Logga in",
     "forgotPassword": "Glömt lösenord?"
   },
@@ -20,15 +18,6 @@
     "generic": "Något gick fel. Försök igen.",
     "wrongCredentials": "Fel kombination av e-post och lösenord"
   },
-
-  "signup": {
-    "title": "Registrera dig",
-    "alreadyHaveAccount": "Har du redan ett konto?",
-    "logInLink": "Logga in",
-    "button": "Registrera dig",
-    "acceptPrivacy": "Genom att fortsätta godkänner du vår Integritetspolicy"
-  },
-
   "resetPassword": {
     "title": "Återställ ditt lösenord",
     "instructions": "Ange din e-postadress så skickar vi en länk för att terställa ditt lösenord.",
