@@ -2,7 +2,7 @@ FROM node:26.5.0-alpine
 
 WORKDIR /app
 COPY . .
-RUN npm ci -D --legacy-peer-deps
+RUN npm ci -D
 
 CMD ["npm", "run", "start:dev"]
 EXPOSE 80
