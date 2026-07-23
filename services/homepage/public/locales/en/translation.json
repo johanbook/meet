@@ -1,7 +1,7 @@
 {
   "landingpage": {
     "hero": {
-      "signup": "Signup",
+      "login": "Login",
       "text": "Connect with family and friends"
     }
   },

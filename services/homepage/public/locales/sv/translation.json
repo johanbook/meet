@@ -1,7 +1,7 @@
 {
   "landingpage": {
     "hero": {
-      "signup": "Skapa konto",
+      "login": "Logga in",
       "text": "Håll kontakten med nära och kära"
     }
   },

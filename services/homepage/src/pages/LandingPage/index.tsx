@@ -27,7 +27,7 @@ export function LandingPage(): React.ReactElement {
       <Center>
         <Button
           component="a"
-          href={CONFIG.URLS.SIGNUP_UP}
+          href={CONFIG.URLS.LOGIN}
           size="large"
           sx={({ palette }) => ({
             backgroundImage: `linear-gradient(to left, ${palette.primary.light}, ${palette.secondary.main})`,
@@ -35,7 +35,7 @@ export function LandingPage(): React.ReactElement {
           })}
           variant="contained"
         >
-          {t("landingpage.hero.signup")}
+          {t("landingpage.hero.login")}
         </Button>
       </Center>
 

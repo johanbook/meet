@@ -7,6 +7,6 @@ export const CONFIG = {
   },
   URLS: {
     APP: "https://app.meetly.site",
-    SIGNUP_UP: "https://app.meetly.site/login?show=signup",
+    LOGIN: "https://app.meetly.site/login",
   },
 };
