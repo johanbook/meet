@@ -1,7 +1,7 @@
 {
   "landingpage": {
     "hero": {
-      "signup": "注册",
+      "login": "登录",
       "text": "与朋友和家人保持联系"
     }
   },
