@@ -81,11 +81,6 @@ export const LogIn: FC = () => {
         <Typography align="center" gutterBottom variant="h4">
           {t("login.title")}
         </Typography>
-
-        <Typography align="center">
-          {t("login.notSignedUp")}
-          <Link to="/login/signup"> {t("login.signUpLink")} </Link>
-        </Typography>
       </Box>
 
       <TextField

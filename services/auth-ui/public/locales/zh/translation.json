@@ -9,21 +9,12 @@
   },
   "login": {
     "title": "登录",
-    "notSignedUp": "还没有账户？",
-    "signUpLink": "注册",
     "button": "登录",
     "forgotPassword": "忘记密码？"
   },
   "errors": {
     "generic": "出现错误。请重试。",
     "wrongCredentials": "邮箱和密码不匹配"
-  },
-  "signup": {
-    "title": "注册",
-    "alreadyHaveAccount": "已经有账户？",
-    "logInLink": "登录",
-    "button": "注册",
-    "acceptPrivacy": "继续即表示您同意我们的隐私政策"
   },
   "resetPassword": {
     "title": "重置密码",
