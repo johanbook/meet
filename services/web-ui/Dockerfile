@@ -8,7 +8,7 @@ ARG VITE_SENTRY_DSN
 WORKDIR /app
 
 COPY . .
-RUN npm ci -D --legacy-peer-deps
+RUN npm ci -D
 RUN npm run build
 
 
