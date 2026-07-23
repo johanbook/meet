@@ -14,7 +14,6 @@ import {
 } from "./supertokens.interface";
 
 type SigninPayload = Parameters<APIInterface["signInPOST"]>[0];
-type SignupPayload = Parameters<APIInterface["signUpPOST"]>[0];
 
 @Injectable()
 export class SupertokensService {
@@ -36,10 +35,7 @@ export class SupertokensService {
                   await this.preSigninHook(input);
                   return originalImplementation.signInPOST(input);
                 },
-                signUpPOST: async (input) => {
-                  await this.preSignupHook(input);
-                  return originalImplementation.signUpPOST(input);
-                },
+                signUpPOST: undefined,
               };
             },
           },
@@ -58,9 +54,5 @@ export class SupertokensService {
 
   private async preSigninHook(input: SigninPayload) {
     this.logger.debug({ msg: "Attempting sign in", input });
-  }
-
-  private async preSignupHook(input: SignupPayload) {
-    this.logger.debug({ msg: "Attempting sign up", input });
   }
 }
