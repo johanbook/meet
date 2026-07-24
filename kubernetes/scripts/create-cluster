@@ -1,2 +1,0 @@
-#!/bin/bash
-cat kubernetes/manifests/kind-cluster.yaml | envsubst | kind create cluster --config - --name meet

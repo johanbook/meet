@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: supertokens
-data:
-  SUPERTOKENS_PORT: "3567"
