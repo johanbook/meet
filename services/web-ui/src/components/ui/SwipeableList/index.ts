@@ -1,1 +1,0 @@
-export { SwipeableList } from "./SwipeableList";
