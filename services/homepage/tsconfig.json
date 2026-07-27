@@ -5,6 +5,7 @@
     "outDir": "dist",
     "jsx": "react-jsx",
     "module": "CommonJS",
+    "moduleResolution": "bundler",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
