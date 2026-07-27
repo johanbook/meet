@@ -25,7 +25,7 @@
     "@fastify/helmet": "13.0.2",
     "@fastify/multipart": "9.4.0",
     "@fastify/static": "9.1.1",
-    "@nestjs/common": "11.1.19",
+    "@nestjs/common": "11.1.28",
     "@nestjs/core": "11.1.19",
     "@nestjs/cqrs": "11.0.3",
     "@nestjs/platform-express": "11.1.28",
