@@ -4,7 +4,7 @@
     "esModuleInterop": true,
     "outDir": "dist",
     "jsx": "react-jsx",
-    "module": "CommonJS",
+    "module": "ES2022",
     "moduleResolution": "bundler",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
@@ -13,5 +13,4 @@
     "target": "ES2022"
   },
   "include": ["src"],
-  "exclude": ["src/api"]
 }
