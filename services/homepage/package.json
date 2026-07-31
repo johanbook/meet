@@ -53,6 +53,6 @@
     "eslint-plugin-sonarjs": "3.0.5",
     "eslint-plugin-unicorn": "64.0.0",
     "prettier": "3.9.6",
-    "typescript-eslint": "8.41.0"
+    "typescript-eslint": "8.65.0"
   }
 }
