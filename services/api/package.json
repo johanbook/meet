@@ -60,7 +60,7 @@
     "@nestjs/cli": "11.0.21",
     "@nestjs/schematics": "11.1.0",
     "@nestjs/testing": "11.1.19",
-    "@swc/core": "1.13.5",
+    "@swc/core": "1.15.47",
     "@trivago/prettier-plugin-sort-imports": "5.2.2",
     "@types/express": "5.0.3",
     "@types/lodash": "4.17.20",
