@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import {
+  useLocalSearchParams,
+  usePathname,
+  useRouter,
+} from "expo-router";
 import {
   Platform,
   ScrollView,
@@ -31,6 +35,7 @@ interface LoginFormValues {
 
 export default function LoginPage() {
   const router = useRouter();
+  const pathname = usePathname();
   const params = useLocalSearchParams<{
     redirectTarget?: string;
     verify?: string;
@@ -40,7 +45,11 @@ export default function LoginPage() {
   const queryClient = useQueryClient();
   const { height: windowHeight } = useWindowDimensions();
 
-  const redirectTarget = params.redirectTarget || "/";
+  const redirectParam = params.redirectTarget;
+  const redirectTarget =
+    typeof redirectParam === "string" && redirectParam.length > 0
+      ? redirectParam
+      : "/";
   const needsVerification = params.verify === "1";
 
   const form = useForm<LoginFormValues>(
@@ -96,7 +105,12 @@ export default function LoginPage() {
         queryKey: [CacheKeyEnum.CurrentOrganization],
       });
 
+      console.info(`[auth] signed in; navigating to "${redirectTarget}"`);
       router.replace(redirectTarget);
+
+      setTimeout(() => {
+        console.info(`[auth] pathname at sign-in: "${pathname}"`);
+      }, 1000);
     } catch (error) {
       if (error instanceof AuthError && error.status === 401) {
         setErrorMessage("Incorrect email or password");
