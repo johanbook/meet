@@ -16,8 +16,9 @@ export class AuthenticationController {
 
   /**
    * Gateway callback used by Traefik forward-auth for every /api request.
-   * The gateway forwards the original request here, so it validates both
-   * cookie sessions (PWA/browser) and access tokens (native clients).
+   * When the request carries an Authorization header (native clients), that
+   * access token is verified against the session core; otherwise the usual
+   * cookie session flow applies (PWA/browser).
    */
   @Get("/authenticate")
   async authenticate(
@@ -28,24 +29,11 @@ export class AuthenticationController {
     session: ISession,
     @Headers() headers: Record<string, string | undefined>,
   ): Promise<void> {
-    const userId =
-      session?.getUserId() ??
-      (await this.resolveBearerUserId(headers["authorization"]));
+    const authorizationValue = headers["authorization"];
 
-    this.sendAuthentication(userId, response);
-  }
-
-  /**
-   * Dedicated bearer-token endpoint for native clients: validates the access
-   * token and returns the owning user id. Called directly by the app to
-   * verify a session - not part of the gateway flow.
-   */
-  @Get("/authenticate/token")
-  async authenticateWithToken(
-    @Res({ passthrough: false }) response: FastifyReply,
-    @Headers() headers: Record<string, string | undefined>,
-  ): Promise<void> {
-    const userId = await this.resolveBearerUserId(headers["authorization"]);
+    const userId = authorizationValue
+      ? await this.resolveBearerUserId(authorizationValue)
+      : session?.getUserId();
 
     this.sendAuthentication(userId, response);
   }
