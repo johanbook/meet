@@ -1,0 +1,19 @@
+/** Best-effort formatting for text that should be displayed */
+export function format(value: string): string {
+  const trimmed = value.trim();
+
+  if (trimmed.length === 0) {
+    return trimmed;
+  }
+
+  return trimmed[0].toUpperCase() + trimmed.slice(1).toLowerCase();
+}
+
+/** Removes prefix in string if present */
+export function removePrefix(value: string, prefix: string): string {
+  if (value.startsWith(prefix)) {
+    return value.slice(prefix.length);
+  }
+
+  return value;
+}
