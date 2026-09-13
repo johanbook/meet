@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import {
   Platform,
@@ -8,13 +9,14 @@ import {
   View,
 } from "react-native";
 
+import { CacheKeyEnum } from "src/core/query";
+
 import { Button } from "src/components/ui/Button/Button";
 import { TextField } from "src/components/ui/TextField/TextField";
 import { Typography } from "src/components/ui/Typography/Typography";
 import {
   AuthError,
   hasSession,
-  isManualCookieTransport,
   resendVerificationEmail,
   signIn,
 } from "src/core/authentication";
@@ -35,6 +37,7 @@ export default function LoginPage() {
   }>();
   const snackbar = useSnackbar();
   const theme = useTheme();
+  const queryClient = useQueryClient();
   const { height: windowHeight } = useWindowDimensions();
 
   const redirectTarget = params.redirectTarget || "/";
@@ -70,14 +73,28 @@ export default function LoginPage() {
 
       // Without a captured session the next guarded request would 401 and
       // bounce straight back here; surface that instead of silently looping.
-      if (isManualCookieTransport() && !hasSession()) {
+      if (!hasSession()) {
+        console.error(
+          "Sign-in returned no access token (st-access-token header)",
+        );
         setErrorMessage(
-          "Signed in, but the session could not be stored on this " +
-            "device. Try again, or contact support with the console output.",
+          "Signed in, but no session was returned. Try again, or " +
+            "contact support with the console output.",
         );
 
         return;
       }
+
+      // The guards cached 401 errors from the unauthenticated boot probes;
+      // clear them so the guarded pages don't snapshot the stale failure and
+      // bounce straight back to /login.
+      queryClient.invalidateQueries({
+        queryKey: [CacheKeyEnum.CurrentProfileExists],
+      });
+      queryClient.invalidateQueries({ queryKey: [CacheKeyEnum.Settings] });
+      queryClient.invalidateQueries({
+        queryKey: [CacheKeyEnum.CurrentOrganization],
+      });
 
       router.replace(redirectTarget);
     } catch (error) {

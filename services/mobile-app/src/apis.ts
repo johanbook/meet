@@ -12,11 +12,8 @@ import {
   TimeSeriesApi,
 } from "src/api";
 import { config } from "src/config";
-import {
-  getCookieValue,
-  getSessionCookieHeader,
-  updateSessionFromResponseHeaders,
-} from "src/core/authentication/session";
+import { refreshSession } from "src/core/authentication/authApi";
+import { getSessionTokens, hasSession } from "src/core/authentication/session";
 import { Logger } from "src/core/logging";
 
 declare global {
@@ -27,32 +24,44 @@ declare global {
 
 const logger = new Logger("API");
 
-// Attaches the Supertokens session cookie (and anti-CSRF header) to every
-// request. The web app relies on the browser doing this implicitly for
-// same-origin requests; on mobile the session travels as an explicit header.
-const fetchApi: FetchAPI = async (url, init) => {
+// Supertokens header-mode session: the access token travels as an
+// Authorization bearer header (validated by the gateway's /authenticate),
+// with st-auth-mode marking the transfer preference for session creation.
+function withSessionHeaders(init?: RequestInit): RequestInit {
   const options = init ?? {};
   const headers = new Headers(options.headers);
 
-  // Native: replay the session cookie jar as a header. Web: the browser
-  // attaches cookies automatically for same-origin requests.
-  const cookieHeader = getSessionCookieHeader();
+  const accessToken = getSessionTokens()?.accessToken;
 
-  if (cookieHeader) {
-    headers.set("Cookie", cookieHeader);
+  if (accessToken) {
+    headers.set("Authorization", `Bearer ${accessToken}`);
+    headers.set("st-auth-mode", "header");
   }
 
-  const antiCsrfToken = getCookieValue("sAntiCsrfToken");
-  const method = (options.method || "GET").toUpperCase();
+  return { ...options, headers };
+}
 
-  if (antiCsrfToken && method !== "GET") {
-    headers.set("anti-csrf", antiCsrfToken);
+// A single token refresh attempt per 401, guarded against loops: we only
+// retry when we had a token, refreshed it, and got a new one.
+let refreshInFlight = false;
+
+const fetchApi: FetchAPI = async (url, init) => {
+  const hadToken = hasSession();
+  const response = await fetch(url, withSessionHeaders(init));
+
+  if (response.status === 401 && hadToken && !refreshInFlight) {
+    refreshInFlight = true;
+
+    try {
+      await refreshSession();
+
+      if (hasSession()) {
+        return await fetch(url, withSessionHeaders(init));
+      }
+    } finally {
+      refreshInFlight = false;
+    }
   }
-
-  const response = await fetch(url, { ...options, headers });
-
-  // The API never rotates cookies, but capture any Set-Cookie just in case.
-  updateSessionFromResponseHeaders(response.headers);
 
   return response;
 };

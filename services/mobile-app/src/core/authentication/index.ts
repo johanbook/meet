@@ -1,13 +1,14 @@
 export { AuthenticationGuard } from "./guards/AuthenticationGuard";
 export {
+  AuthError,
+  refreshSession,
+  resendVerificationEmail,
   signIn,
   signOut,
-  resendVerificationEmail,
-  AuthError,
 } from "./authApi";
 export {
   clearSession,
-  getSessionCookieHeader,
+  getSessionTokens,
   hasSession,
-  isManualCookieTransport,
+  setSessionTokens,
 } from "./session";

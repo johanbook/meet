@@ -58,20 +58,20 @@ npm run typecheck
 
 ## Authentication
 
-The backend authenticates with Supertokens session cookies verified at the
+The backend authenticates with Supertokens sessions verified at the
 Traefik gateway (`/api` requests are forwarded to `auth-api/authenticate`).
-The mobile app implements the same session flow directly:
+The app uses Supertokens **header-mode sessions**: session tokens are
+delivered as readable response headers and replayed as an authorization
+header, which works on iOS where `Set-Cookie` is invisible to JS.
 
-- `src/core/authentication/session.ts` — cookie jar, persisted to the
-  platform cache directory (`expo-file-system`). iOS never surfaces
-  `Set-Cookie` to JS, so the jar reads sessions from the `x-session-cookie`
-  response header (set by the auth-api mirroring Supertokens' Set-Cookie
-  headers) with a `set-cookie` fallback where available.
-- `src/core/authentication/authApi.ts` — Supertokens recipe calls
-  (`/auth/api/signin`, `/auth/api/signout`); the `anti-csrf` header is
-  replayed from the `sAntiCsrfToken` cookie when present.
-- `src/apis.ts` — attaches the session cookie to every API request through a
-  custom `fetchApi` on the generated client `Configuration`.
+- `src/core/authentication/session.ts` — access/refresh token store,
+  persisted to the platform cache directory (`expo-file-system`).
+- `src/core/authentication/authApi.ts` — Supertokens recipe calls with
+  `st-auth-mode: header` (`/auth/api/signin`, `/session/refresh`); the
+  recipes hand back `st-access-token`/`st-refresh-token` response headers.
+- `src/apis.ts` — attaches `Authorization: Bearer <accessToken>` (plus
+  `st-auth-mode: header`) to every request; a single 401 triggers a token
+  refresh and one retry before the request fails.
 
 Sign-in is `src/app/login.tsx` (`POST {authBase}/signin` with email/password).
 New accounts and email verification happen on the web auth UI; the app's
@@ -79,10 +79,10 @@ login screen surfaces the "verify email" state and can resend the
 verification email.
 
 On native, an empty app session skips the API probe entirely and opens the
-login screen directly (there is no browser cookie jar to probe); a stored
-session that the server rejects (401) falls back to the same login screen.
-On web the session lives in the browser and the probe is the only way to
-detect it, so the server's 401 drives the redirect instead.
+login screen directly; a stored session the server rejects (token expired
+or revoked) refreshes once and otherwise falls back to the login screen.
+On web the session lives in the browser and the probe's 401 drives the
+redirect instead.
 
 ## Architecture
 

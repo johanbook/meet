@@ -1,21 +1,15 @@
-import { Platform } from "react-native";
-
 import { storage } from "src/core/storage";
 
-const SESSION_STORAGE_KEY = "session.cookies";
+const SESSION_STORAGE_KEY = "session.tokens";
 
-/**
- * Browsers never expose Set-Cookie through fetch and attach the session
- * cookie automatically for same-origin requests. Only native runtimes need an
- * explicit cookie jar replayed as a header.
- */
-export function isManualCookieTransport(): boolean {
-  return Platform.OS !== "web";
+export interface SessionTokens {
+  accessToken: string;
+  refreshToken?: string;
 }
 
-let cookies: Record<string, string> = {};
+let tokens: SessionTokens | undefined;
 
-function loadStoredCookies(): void {
+function loadStoredTokens(): void {
   const stored = storage.getItem(SESSION_STORAGE_KEY);
 
   if (!stored) {
@@ -25,91 +19,49 @@ function loadStoredCookies(): void {
   try {
     const parsed = JSON.parse(stored) as unknown;
 
-    if (parsed && typeof parsed === "object") {
-      cookies = parsed as Record<string, string>;
+    if (
+      parsed &&
+      typeof parsed === "object" &&
+      typeof (parsed as SessionTokens).accessToken === "string"
+    ) {
+      tokens = parsed as SessionTokens;
     }
   } catch {
-    cookies = {};
+    tokens = undefined;
   }
 }
 
-function persistCookies(): void {
-  storage.setItem(SESSION_STORAGE_KEY, JSON.stringify(cookies));
-}
-
-/** Parses one or more Set-Cookie header values into a name -> raw-value map. */
-function parseSetCookieHeader(headerValue: string): Record<string, string> {
-  const parsed: Record<string, string> = {};
-
-  for (const part of headerValue.split(/,(?=\s*[A-Za-z_][\w-]*=)/)) {
-    const match = /^\s*([A-Za-z_][\w-]*)\s*=\s*([^;]*)/.exec(part);
-
-    if (match) {
-      parsed[match[1]] = match[2].trim();
-    }
+function persistTokens(): void {
+  if (tokens) {
+    storage.setItem(SESSION_STORAGE_KEY, JSON.stringify(tokens));
+  } else {
+    storage.removeItem(SESSION_STORAGE_KEY);
   }
-
-  return parsed;
 }
 
 /**
- * Replaces the session jar with the cookies set by the most recent auth
- * response. Supertokens issues replacement cookies on every auth interaction,
- * so stale values must not survive. Native only; on web the browser jar owns
- * the session.
- *
- * iOS never surfaces Set-Cookie to JS; the auth-api mirrors it in the
- * `x-session-cookie` header so native clients can read sessions there.
+ * Supertokens delivers sessions to (non-browser) clients as access/refresh
+ * tokens via response headers (st-access-token / st-refresh-token) when the
+ * request carries `st-auth-mode: header` - no cookies involved, so it works
+ * on iOS where Set-Cookie is invisible to JS. Store and replay the access
+ * token as an Authorization header; refresh with the refresh token.
  */
-export function updateSessionFromResponseHeaders(
-  headers: Headers | string | undefined,
-): void {
-  if (!isManualCookieTransport()) {
-    return;
-  }
-
-  let headerValue: string | undefined;
-
-  if (typeof headers === "string") {
-    headerValue = headers;
-  } else if (headers) {
-    headerValue =
-      headers.get("set-cookie") ?? headers.get("x-session-cookie") ?? undefined;
-  }
-
-  if (!headerValue) {
-    return;
-  }
-
-  const updated = parseSetCookieHeader(headerValue);
-
-  if (Object.keys(updated).length > 0) {
-    cookies = updated;
-    persistCookies();
-  }
+export function setSessionTokens(next: SessionTokens): void {
+  tokens = next;
+  persistTokens();
 }
 
 export function clearSession(): void {
-  cookies = {};
-  storage.removeItem(SESSION_STORAGE_KEY);
+  tokens = undefined;
+  persistTokens();
 }
 
-export function getSessionCookieHeader(): string {
-  if (!isManualCookieTransport()) {
-    return "";
-  }
-
-  const pairs = Object.entries(cookies).map(([name, value]) => `${name}=${value}`);
-
-  return pairs.join("; ");
-}
-
-export function getCookieValue(name: string): string | undefined {
-  return isManualCookieTransport() ? cookies[name] : undefined;
+export function getSessionTokens(): SessionTokens | undefined {
+  return tokens;
 }
 
 export function hasSession(): boolean {
-  return Object.keys(cookies).length > 0;
+  return tokens !== undefined && tokens.accessToken.length > 0;
 }
 
-loadStoredCookies();
+loadStoredTokens();
