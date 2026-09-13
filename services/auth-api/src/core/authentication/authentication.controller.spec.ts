@@ -1,7 +1,4 @@
-import {
-  parseBearerToken,
-  verifyAccessToken,
-} from "./authentication.controller";
+import { parseBearerToken, verifyAccessToken } from "./access-token";
 
 describe("parseBearerToken", () => {
   it("extracts a bearer token", () => {

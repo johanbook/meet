@@ -5,73 +5,20 @@ import { FastifyReply } from "fastify";
 import { Logger } from "../logging/logger.service";
 import { Session } from "../supertokens/session.decorator";
 import { ISession } from "../supertokens/session.interface";
+import { parseBearerToken, verifyAccessToken } from "./access-token";
 
 const HTTP_HEADER_USER_ID = process.env.USER_ID_HTTP_HEADER || "x-user-id";
-const SUPERTOKENS_URL = process.env.SUPERTOKENS_URL || "http://localhost";
-const VERIFY_TIMEOUT_MS = 5000;
-
-export function parseBearerToken(
-  authorizationValue?: string,
-): string | undefined {
-  if (!authorizationValue) {
-    return undefined;
-  }
-
-  const match = /^Bearer[ \t]+(\S+)$/i.exec(authorizationValue);
-
-  return match ? match[1].trim() : undefined;
-}
-
-/**
- * Verifies a Supertokens access token against the session core and returns
- * the owning user id. Native clients cannot read the cookie session (iOS
- * never surfaces Set-Cookie), so they authenticate with the access token as
- * an Authorization header instead.
- */
-export async function verifyAccessToken(
-  accessToken: string,
-): Promise<string | undefined> {
-  try {
-    const response = await fetch(`${SUPERTOKENS_URL}/recipe/session/verify`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        accessToken,
-        doAntiCsrfCheck: false,
-        enableAntiCsrf: false,
-        // Check the database so revoked sessions (e.g. after sign out)
-        // are rejected too.
-        checkDatabase: true,
-      }),
-      signal: AbortSignal.timeout(VERIFY_TIMEOUT_MS),
-    });
-
-    if (!response.ok) {
-      return undefined;
-    }
-
-    const body = (await response.json()) as {
-      session?: { userId?: string };
-      status?: string;
-    };
-
-    if (body.status === "OK" && typeof body.session?.userId === "string") {
-      return body.session.userId;
-    }
-  } catch {
-    // Core unreachable or an unexpected response - deny the request.
-  }
-
-  return undefined;
-}
 
 @Controller()
 @ApiTags("authentication")
 export class AuthenticationController {
   private logger = new Logger(AuthenticationController.name);
 
+  /**
+   * Gateway callback used by Traefik forward-auth for every /api request.
+   * The gateway forwards the original request here, so it validates both
+   * cookie sessions (PWA/browser) and access tokens (native clients).
+   */
   @Get("/authenticate")
   async authenticate(
     @Res({ passthrough: false }) response: FastifyReply,
@@ -81,18 +28,44 @@ export class AuthenticationController {
     session: ISession,
     @Headers() headers: Record<string, string | undefined>,
   ): Promise<void> {
-    let userId = session?.getUserId();
+    const userId =
+      session?.getUserId() ??
+      (await this.resolveBearerUserId(headers["authorization"]));
 
-    if (!userId) {
-      // Native clients authenticate with the access token instead of the
-      // cookie session they cannot read.
-      const accessToken = parseBearerToken(headers["authorization"]);
+    this.sendAuthentication(userId, response);
+  }
 
-      if (accessToken) {
-        userId = await verifyAccessToken(accessToken);
-      }
+  /**
+   * Dedicated bearer-token endpoint for native clients: validates the access
+   * token and returns the owning user id. Called directly by the app to
+   * verify a session - not part of the gateway flow.
+   */
+  @Get("/authenticate/token")
+  async authenticateWithToken(
+    @Res({ passthrough: false }) response: FastifyReply,
+    @Headers() headers: Record<string, string | undefined>,
+  ): Promise<void> {
+    const userId = await this.resolveBearerUserId(headers["authorization"]);
+
+    this.sendAuthentication(userId, response);
+  }
+
+  private async resolveBearerUserId(
+    authorizationValue?: string,
+  ): Promise<string | undefined> {
+    const accessToken = parseBearerToken(authorizationValue);
+
+    if (!accessToken) {
+      return undefined;
     }
 
+    return verifyAccessToken(accessToken);
+  }
+
+  private sendAuthentication(
+    userId: string | undefined,
+    response: FastifyReply,
+  ): void {
     if (!userId) {
       this.logger.trace("Denied authentication");
 
