@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Meet",
+    "slug": "mobile-app",
+    "version": "0.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "web": {
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "reactCompiler": true
+    }
+  }
+}

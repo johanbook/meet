@@ -1,0 +1,89 @@
+import dayjs from "dayjs";
+
+import { TimeSeriesDetailsAggregationEnum } from "src/api";
+import { getWeek, getWeekDay } from "src/utils/time";
+
+export interface ChartConfig {
+  scaleType: "band" | "time";
+  getGroupKey: (date: Date) => string;
+  getLabel: (groupKey: string) => string;
+  getValue: (value: string) => string | number;
+  sortCompareFn?: (a: string | number, b: string | number) => number;
+}
+
+export const CHART_CONFIGS: Record<
+  TimeSeriesDetailsAggregationEnum,
+  ChartConfig
+> = {
+  [TimeSeriesDetailsAggregationEnum.Yearly]: {
+    scaleType: "band",
+    getGroupKey: (date) => date.getFullYear().toString(),
+    getLabel: (key) => dayjs(key).format("YYYY"),
+    getValue: (value) => value,
+  },
+  [TimeSeriesDetailsAggregationEnum.Monthly]: {
+    scaleType: "time",
+    getGroupKey: (date) => dayjs(date).format("YYYY-MM"),
+    getLabel: (key) => dayjs(key).format("MMM"),
+    getValue: (value) => new Date(value as string).valueOf(),
+  },
+  [TimeSeriesDetailsAggregationEnum.Weekly]: {
+    scaleType: "time",
+    getGroupKey: (date) => {
+      const year = date.getFullYear();
+      const week = getWeek(date);
+
+      return `${year}-W${week}`;
+    },
+    getLabel: (date) => String(dayjs(date).week()),
+    getValue: (value) => {
+      const [year, week] = value.split("-W");
+      const date = dayjs.utc(year).week(Number(week));
+
+      return date.valueOf();
+    },
+  },
+  [TimeSeriesDetailsAggregationEnum.DayOfWeek]: {
+    scaleType: "band",
+    getGroupKey: (date) => dayjs(date).isoWeekday().toString(),
+    getLabel: (key) => {
+      const weekday = dayjs().isoWeekday(parseInt(key));
+
+      return getWeekDay(weekday, "short");
+    },
+    getValue: (value) => value,
+    sortCompareFn: (a, b) => Number(a) - Number(b),
+  },
+  [TimeSeriesDetailsAggregationEnum.Daily]: {
+    scaleType: "time",
+    getGroupKey: (date) => dayjs(date).format("YYYY-MM-DD"),
+    getLabel: (key) => dayjs(key).format("YYYY-MM-DD"),
+    getValue: (value) => new Date(value as string).valueOf(),
+  },
+  [TimeSeriesDetailsAggregationEnum.Hourly]: {
+    scaleType: "time",
+    // We use a fixed date here to coerce all hours into one day
+    getGroupKey: (date) => dayjs(date).format("2000-01-01THH:00"),
+    getLabel: (key) => dayjs(key).format("HH:00"),
+    getValue: (value) => dayjs(value as string).valueOf(),
+    sortCompareFn: (a, b) => dayjs(a as string).valueOf() - dayjs(b as string).valueOf(),
+  },
+  [TimeSeriesDetailsAggregationEnum.HalfHourly]: {
+    scaleType: "time",
+    // Coerce into half-hour buckets using a fixed reference date
+    getGroupKey: (date) => {
+      const d = dayjs(date);
+      const minuteBucket = d.minute() < 30 ? "00" : "30";
+
+      return d.format(`2000-01-01THH:${minuteBucket}`);
+    },
+    getLabel: (date) => {
+      const d = dayjs(date);
+      const minuteBucket = d.minute() < 30 ? 0 : 30;
+
+      return d.minute(minuteBucket).second(0).millisecond(0).format("HH:mm");
+    },
+    getValue: (value) => dayjs(value as string).valueOf(),
+    sortCompareFn: (a, b) => dayjs(a as string).valueOf() - dayjs(b as string).valueOf(),
+  },
+};
