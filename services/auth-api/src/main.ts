@@ -49,6 +49,23 @@ async function bootstrap() {
 
   app.register(plugin);
 
+  // Supertokens session cookies are invisible to JS on iOS (and to
+  // browsers), so the mobile app cannot read Set-Cookie. Echo the cookies
+  // back in a readable header so native clients can persist the session.
+  app.register(async (fastify) => {
+    fastify.addOnSendHook(async (_request, reply) => {
+      const setCookies = reply.getHeader("set-cookie");
+
+      if (!setCookies) {
+        return;
+      }
+
+      const values = Array.isArray(setCookies) ? setCookies : [setCookies];
+
+      reply.header("x-session-cookie", values.join(", "));
+    });
+  });
+
   app.useGlobalFilters(new SupertokensExceptionFilter());
   app.enableCors(CORS_OPTIONS);
 
