@@ -14,11 +14,7 @@ import {
 } from "src/components/ui";
 import { signOut } from "src/core/authentication";
 import { required, useForm } from "src/core/forms";
-import {
-  CacheKeyEnum,
-  useMutation,
-  useQueryClient,
-} from "src/core/query";
+import { CacheKeyEnum, useMutation, useQueryClient } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 import { pickImages } from "src/utils/photo";
 
@@ -98,11 +94,7 @@ export function CurrentProfileDetails({ profile }: CurrentProfileDetailsProps) {
   return (
     <>
       <View style={{ alignItems: "center", padding: 16 }}>
-        <ProfileAvatar
-          name={profile.name}
-          size={96}
-          src={profile.photo?.url}
-        />
+        <ProfileAvatar name={profile.name} size={96} src={profile.photo?.url} />
         <View style={{ height: 8 }} />
         <Typography variant="h5">{profile.name}</Typography>
         {profile.description ? (
@@ -135,7 +127,9 @@ export function CurrentProfileDetails({ profile }: CurrentProfileDetailsProps) {
         <Button
           color="primary"
           disabled={
-            !form.state.name.value || updateMutation.isPending || photoMutation.isPending
+            !form.state.name.value ||
+            updateMutation.isPending ||
+            photoMutation.isPending
           }
           onPress={handleSave}
           variant="contained"

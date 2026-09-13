@@ -6,11 +6,7 @@ import { organizationsApi } from "src/apis";
 import { Screen } from "src/components/nav/Screen";
 import { Button, TextField } from "src/components/ui";
 import { required, useForm } from "src/core/forms";
-import {
-  CacheKeyEnum,
-  useMutation,
-  useQueryClient,
-} from "src/core/query";
+import { CacheKeyEnum, useMutation, useQueryClient } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 export default function CreateGroupPage() {

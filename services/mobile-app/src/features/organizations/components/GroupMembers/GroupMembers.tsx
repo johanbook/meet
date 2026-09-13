@@ -2,13 +2,7 @@ import { View } from "react-native";
 
 import { organizationsApi } from "src/apis";
 import { ProfileAvatar } from "src/components/shared/ProfileAvatar/ProfileAvatar";
-import {
-  Chip,
-  List,
-  ListItem,
-  Skeleton,
-  Typography,
-} from "src/components/ui";
+import { Chip, List, ListItem, Skeleton, Typography } from "src/components/ui";
 import { CacheKeyEnum, useQuery } from "src/core/query";
 import { timeSince } from "src/utils";
 import { ErrorView } from "src/views/ErrorView";
@@ -58,10 +52,14 @@ export function GroupMembers() {
       <List>
         {data.map((member) => (
           <ListItem key={member.id}>
-            <View style={{ alignItems: "center", flexDirection: "row", gap: 8 }}>
+            <View
+              style={{ alignItems: "center", flexDirection: "row", gap: 8 }}
+            >
               <ProfileAvatar name={member.name} src={member.imageUrl} />
               <View style={{ flex: 1 }}>
-                <View style={{ alignItems: "center", flexDirection: "row", gap: 8 }}>
+                <View
+                  style={{ alignItems: "center", flexDirection: "row", gap: 8 }}
+                >
                   <View style={{ flex: 1 }}>
                     <Typography numberOfLines={1}>{member.name}</Typography>
                   </View>

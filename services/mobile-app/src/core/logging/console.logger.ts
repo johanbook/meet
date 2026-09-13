@@ -1,6 +1,9 @@
 import { BaseLogger, LogProps } from "./base.logger";
 
-const LEVEL_METHOD: Record<LogProps["level"], "debug" | "error" | "info" | "warn"> = {
+const LEVEL_METHOD: Record<
+  LogProps["level"],
+  "debug" | "error" | "info" | "warn"
+> = {
   debug: "debug",
   error: "error",
   fatal: "error",

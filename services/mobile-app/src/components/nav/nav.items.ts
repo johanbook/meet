@@ -9,7 +9,12 @@ export interface NavItem {
 }
 
 export const NAV_ITEMS: NavItem[] = [
-  { icon: "dashboard", label: "Moments", path: "/", feature: OrganizationFeature.Blog },
+  {
+    icon: "dashboard",
+    label: "Moments",
+    path: "/",
+    feature: OrganizationFeature.Blog,
+  },
   {
     icon: "add",
     label: "Share a moment",

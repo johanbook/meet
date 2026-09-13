@@ -59,7 +59,9 @@ export default function GroupListPage() {
         <List>
           {[0, 1, 2].map((index) => (
             <ListItem key={index}>
-              <View style={{ alignItems: "center", flexDirection: "row", gap: 8 }}>
+              <View
+                style={{ alignItems: "center", flexDirection: "row", gap: 8 }}
+              >
                 <Skeleton borderRadius={20} height={40} width={40} />
                 <Skeleton height={16} width="60%" />
               </View>
@@ -95,7 +97,9 @@ export default function GroupListPage() {
               key={organization.id}
               onPress={() => handleSwitch(organization)}
             >
-              <View style={{ alignItems: "center", flexDirection: "row", gap: 8 }}>
+              <View
+                style={{ alignItems: "center", flexDirection: "row", gap: 8 }}
+              >
                 <OrganizationAvatar
                   name={organization.name}
                   src={organization.photo?.url}

@@ -12,11 +12,7 @@ import {
 } from "src/components/ui";
 import { Permissions, useAuthorization } from "src/core/authorization";
 import { required, useForm } from "src/core/forms";
-import {
-  CacheKeyEnum,
-  useMutation,
-  useQueryClient,
-} from "src/core/query";
+import { CacheKeyEnum, useMutation, useQueryClient } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 
 interface GroupSettingsProps {

@@ -6,7 +6,13 @@ import { Pressable, ScrollView, Text, View } from "react-native";
 import { CreateBookingCommand } from "src/api";
 import { bookingsApi } from "src/apis";
 import { Screen } from "src/components/nav/Screen";
-import { Button, Select, SelectItem, TextField, Typography } from "src/components/ui";
+import {
+  Button,
+  Select,
+  SelectItem,
+  TextField,
+  Typography,
+} from "src/components/ui";
 import { required, useForm } from "src/core/forms";
 import { Validator } from "src/core/forms/types";
 import { CacheKeyEnum, useMutation, useQueryClient } from "src/core/query";
@@ -42,7 +48,9 @@ function BookingDateCell({ isSelected, onPress, value }: BookingDateCellProps) {
 
   const isDisabled = value.isBefore(dayjs(), "day");
   const backgroundColor = isDisabled
-    ? (theme.darkmode ? "#303030" : "#9e9e9e")
+    ? theme.darkmode
+      ? "#303030"
+      : "#9e9e9e"
     : isSelected
       ? theme.palette.primary
       : theme.palette.success;
@@ -64,9 +72,8 @@ function BookingDateCell({ isSelected, onPress, value }: BookingDateCellProps) {
     >
       <Text
         style={{
-          color: isDisabled || !isSelected
-            ? theme.palette.text.primary
-            : "#ffffff",
+          color:
+            isDisabled || !isSelected ? theme.palette.text.primary : "#ffffff",
           fontSize: 14,
         }}
       >
@@ -84,10 +91,15 @@ export default function CreateBookingPage() {
 
   const form = useForm<BookingFormValues>(
     { name: "", description: "" },
-    { name: required<BookingFormValues>(), description: optional<BookingFormValues>() },
+    {
+      name: required<BookingFormValues>(),
+      description: optional<BookingFormValues>(),
+    },
   );
 
-  const [selectedDate, setSelectedDate] = useState<Dayjs | undefined>(undefined);
+  const [selectedDate, setSelectedDate] = useState<Dayjs | undefined>(
+    undefined,
+  );
   const [time, setTime] = useState<string>("");
 
   const { mutate, isPending } = useMutation({
@@ -124,7 +136,12 @@ export default function CreateBookingPage() {
       .toDate();
     const endTime = dayjs(startTime).add(1, "hour").toDate();
 
-    mutate({ name: data.name, description: data.description, startTime, endTime });
+    mutate({
+      name: data.name,
+      description: data.description,
+      startTime,
+      endTime,
+    });
   }
 
   return (

@@ -29,7 +29,10 @@ interface IconProps {
   size?: number;
 }
 
-const COLOR_VALUE: Record<IconColor, (primary: string, error: string) => string> = {
+const COLOR_VALUE: Record<
+  IconColor,
+  (primary: string, error: string) => string
+> = {
   default: () => "#000000",
   error: (_, error) => error,
   primary: (primary) => primary,

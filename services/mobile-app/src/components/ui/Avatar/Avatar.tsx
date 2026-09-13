@@ -14,7 +14,10 @@ function initialsOf(name: string | undefined): string {
     return "";
   }
 
-  const parts = name.trim().split(/\s+/).filter((part) => part.length > 0);
+  const parts = name
+    .trim()
+    .split(/\s+/)
+    .filter((part) => part.length > 0);
 
   if (parts.length === 0) {
     return "";

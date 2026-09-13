@@ -61,10 +61,7 @@ export default function ChatListPage() {
       <ScrollView style={{ flex: 1 }}>
         <List>
           {data.map((conversation) => (
-            <ConversationListItem
-              key={conversation.id}
-              data={conversation}
-            />
+            <ConversationListItem key={conversation.id} data={conversation} />
           ))}
         </List>
       </ScrollView>

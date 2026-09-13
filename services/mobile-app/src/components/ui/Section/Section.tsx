@@ -12,7 +12,11 @@ interface SectionProps {
 }
 
 /** Collapsible card (charts / data / settings on the time-series page). */
-export function Section({ children, openByDefault = false, title }: SectionProps) {
+export function Section({
+  children,
+  openByDefault = false,
+  title,
+}: SectionProps) {
   const [isOpen, setIsOpen] = useState(openByDefault);
   const theme = useTheme();
 

@@ -6,6 +6,10 @@ interface OrganizationAvatarProps {
   src?: string;
 }
 
-export function OrganizationAvatar({ name, size, src }: OrganizationAvatarProps) {
+export function OrganizationAvatar({
+  name,
+  size,
+  src,
+}: OrganizationAvatarProps) {
   return <Avatar name={name} size={size} src={src} />;
 }

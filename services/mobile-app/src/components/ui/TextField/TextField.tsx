@@ -39,8 +39,9 @@ export function TextField({
 }: TextFieldProps) {
   const theme = useTheme();
   const borderColor = error ? theme.palette.error : theme.palette.divider;
-  const height =
-    multiline ? Math.max(INPUT_HEIGHT, (minRows ?? 2) * 20) : INPUT_HEIGHT;
+  const height = multiline
+    ? Math.max(INPUT_HEIGHT, (minRows ?? 2) * 20)
+    : INPUT_HEIGHT;
 
   return (
     <View style={{ width: "100%" }}>

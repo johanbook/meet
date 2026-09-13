@@ -5,11 +5,7 @@ import { Pressable, ScrollView, Text, View } from "react-native";
 
 import { blogsApi } from "src/apis";
 import { Screen } from "src/components/nav/Screen";
-import {
-  Button,
-  TextField,
-  Typography,
-} from "src/components/ui";
+import { Button, TextField, Typography } from "src/components/ui";
 import { useForm, required } from "src/core/forms";
 import { CacheKeyEnum } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
@@ -53,9 +49,7 @@ export default function CreateBlogPostPage() {
       router.replace("/");
     },
     onError: () => {
-      snackbar.error(
-        "Something went wrong when trying to share your moment",
-      );
+      snackbar.error("Something went wrong when trying to share your moment");
     },
   });
 
@@ -71,7 +65,9 @@ export default function CreateBlogPostPage() {
 
   function removePhoto(photo: PhotoFile): void {
     form.setValue({
-      photos: form.state.photos.value.filter((candidate) => candidate !== photo),
+      photos: form.state.photos.value.filter(
+        (candidate) => candidate !== photo,
+      ),
     });
   }
 
@@ -105,10 +101,7 @@ export default function CreateBlogPostPage() {
           </Typography>
           <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
             {form.state.photos.value.map((photo) => (
-              <View
-                key={photo.uri}
-                style={{ margin: 4, position: "relative" }}
-              >
+              <View key={photo.uri} style={{ margin: 4, position: "relative" }}>
                 <Image
                   accessibilityLabel="Uploaded photo preview"
                   source={{ uri: photo.uri }}
@@ -162,7 +155,9 @@ export default function CreateBlogPostPage() {
           </View>
           <Button
             color="primary"
-            disabled={mutation.isPending || form.state.content.value.length === 0}
+            disabled={
+              mutation.isPending || form.state.content.value.length === 0
+            }
             loading={mutation.isPending}
             onPress={handleSubmit}
           >

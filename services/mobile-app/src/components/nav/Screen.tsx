@@ -32,7 +32,8 @@ export function Screen({
   const router = useRouter();
   const theme = useTheme();
 
-  const left = headerLeft ??
+  const left =
+    headerLeft ??
     (navBackTo ? (
       <IconButton icon="arrowBack" onPress={() => router.replace(navBackTo)} />
     ) : (

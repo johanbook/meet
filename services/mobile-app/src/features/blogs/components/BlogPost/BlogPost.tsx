@@ -7,10 +7,7 @@ import { Role, useAuthorization } from "src/core/authorization";
 import { useTheme } from "src/core/theme";
 import { timeSince } from "src/utils";
 import { ProfileAvatar } from "src/components/shared/ProfileAvatar/ProfileAvatar";
-import {
-  BlogPostDetails,
-  BlogPostCommentDetails,
-} from "src/api";
+import { BlogPostDetails, BlogPostCommentDetails } from "src/api";
 
 import { BlogPostCommentForm } from "../BlogPostCommentForm/BlogPostCommentForm";
 import { BlogPostCommentLikeButton } from "../BlogPostCommentLikeButton/BlogPostCommentLikeButton";
@@ -37,11 +34,7 @@ function reactionCaption(reactions: { names: string[] }): string {
   return `${firstReactions.join(", ")} and ${last} like this`;
 }
 
-function CommentRow({
-  comment,
-}: {
-  comment: BlogPostCommentDetails;
-}) {
+function CommentRow({ comment }: { comment: BlogPostCommentDetails }) {
   const router = useRouter();
   const theme = useTheme();
   const caption = reactionCaption(comment.reactions);
@@ -60,7 +53,13 @@ function CommentRow({
           />
         </Pressable>
         <View style={{ flex: 1, marginLeft: 8 }}>
-          <Text style={{ color: theme.palette.text.primary, fontSize: 14, fontWeight: "600" }}>
+          <Text
+            style={{
+              color: theme.palette.text.primary,
+              fontSize: 14,
+              fontWeight: "600",
+            }}
+          >
             {comment.profile.name}
           </Text>
           <Text style={{ color: theme.palette.text.secondary, fontSize: 12 }}>
@@ -90,10 +89,7 @@ function CommentRow({
   );
 }
 
-export function BlogPost({
-  alwaysShowComments = false,
-  post,
-}: BlogPostProps) {
+export function BlogPost({ alwaysShowComments = false, post }: BlogPostProps) {
   const router = useRouter();
   const theme = useTheme();
   const authorization = useAuthorization();
@@ -103,8 +99,7 @@ export function BlogPost({
   const reactionsCaption = reactionCaption(post.reactions);
 
   const canManage =
-    post.ownedByCurrentUser ||
-    authorization.role === Role.Admin;
+    post.ownedByCurrentUser || authorization.role === Role.Admin;
 
   return (
     <View
@@ -127,7 +122,13 @@ export function BlogPost({
           />
         </Pressable>
         <View style={{ flex: 1, marginLeft: 8 }}>
-          <Text style={{ color: theme.palette.text.primary, fontSize: 15, fontWeight: "600" }}>
+          <Text
+            style={{
+              color: theme.palette.text.primary,
+              fontSize: 15,
+              fontWeight: "600",
+            }}
+          >
             {post.profile.name}
           </Text>
           <Text style={{ color: theme.palette.text.secondary, fontSize: 12 }}>
@@ -136,7 +137,13 @@ export function BlogPost({
         </View>
         {canManage ? <BlogPostMenu id={post.id} /> : null}
       </View>
-      <Text style={{ color: theme.palette.text.primary, fontSize: 16, marginTop: 8 }}>
+      <Text
+        style={{
+          color: theme.palette.text.primary,
+          fontSize: 16,
+          marginTop: 8,
+        }}
+      >
         {post.content}
       </Text>
       {post.photos.map((photo) => (
@@ -167,11 +174,14 @@ export function BlogPost({
           accessibilityLabel="comment"
           accessibilityRole="button"
           onPress={() => setShowComments(true)}
-          style={{ alignItems: "center", height: 40, justifyContent: "center", width: 40 }}
+          style={{
+            alignItems: "center",
+            height: 40,
+            justifyContent: "center",
+            width: 40,
+          }}
         >
-          <Text
-            style={{ color: theme.palette.text.primary, fontSize: 20 }}
-          >
+          <Text style={{ color: theme.palette.text.primary, fontSize: 20 }}>
             {"\u270e"}
           </Text>
         </Pressable>

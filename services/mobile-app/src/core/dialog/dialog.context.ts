@@ -23,6 +23,5 @@ export const noopGlobalDialog: IGlobalDialogContext = {
   openDialog: () => undefined,
 };
 
-export const GlobalDialogContext = createContext<IGlobalDialogContext>(
-  noopGlobalDialog,
-);
+export const GlobalDialogContext =
+  createContext<IGlobalDialogContext>(noopGlobalDialog);

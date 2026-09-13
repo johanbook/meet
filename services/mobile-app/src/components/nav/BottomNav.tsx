@@ -63,7 +63,9 @@ export function BottomNav() {
           >
             <Text
               style={{
-                color: active ? theme.palette.primary : theme.palette.text.secondary,
+                color: active
+                  ? theme.palette.primary
+                  : theme.palette.text.secondary,
                 fontSize: 20,
               }}
             >
@@ -72,7 +74,9 @@ export function BottomNav() {
             <Text
               numberOfLines={1}
               style={{
-                color: active ? theme.palette.primary : theme.palette.text.secondary,
+                color: active
+                  ? theme.palette.primary
+                  : theme.palette.text.secondary,
                 fontSize: 10,
                 marginTop: 2,
               }}

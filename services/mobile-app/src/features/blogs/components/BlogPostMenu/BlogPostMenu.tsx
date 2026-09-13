@@ -18,8 +18,7 @@ export function BlogPostMenu({ id }: BlogPostMenuProps) {
   const { confirmWithDialog } = useConfirmDialog();
 
   const deleteMutation = useMutation({
-    mutationFn: () =>
-      blogsApi.deletelogPost({ deleteBlogPostCommand: { id } }),
+    mutationFn: () => blogsApi.deletelogPost({ deleteBlogPostCommand: { id } }),
     onSuccess: () => {
       snackbar.success("The moment was successfully deleted");
       queryClient.invalidateQueries({

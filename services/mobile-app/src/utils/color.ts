@@ -1,4 +1,8 @@
-function parseColor(color: string): { red: number; green: number; blue: number } {
+function parseColor(color: string): {
+  red: number;
+  green: number;
+  blue: number;
+} {
   const trimmed = color.trim();
 
   if (trimmed.startsWith("#") && trimmed.length === 7) {

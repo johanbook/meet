@@ -16,12 +16,26 @@ export function ErrorView({
 
   return (
     <Center style={{ padding: 48 }}>
-      <Text style={{ color: theme.palette.error, fontSize: 60 }}>{"\u2665"}</Text>
-      <Text style={{ color: theme.palette.text.primary, fontSize: 24, marginTop: 16 }}>
+      <Text style={{ color: theme.palette.error, fontSize: 60 }}>
+        {"\u2665"}
+      </Text>
+      <Text
+        style={{
+          color: theme.palette.text.primary,
+          fontSize: 24,
+          marginTop: 16,
+        }}
+      >
         {message}
       </Text>
       {description ? (
-        <Text style={{ color: theme.palette.text.secondary, fontSize: 16, marginTop: 8 }}>
+        <Text
+          style={{
+            color: theme.palette.text.secondary,
+            fontSize: 16,
+            marginTop: 8,
+          }}
+        >
           {description}
         </Text>
       ) : null}

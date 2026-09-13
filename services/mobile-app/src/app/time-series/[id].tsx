@@ -16,11 +16,7 @@ import {
   useConfirmDialog,
 } from "src/components/ui";
 import { GlobalDialogProps, useDialog } from "src/core/dialog";
-import {
-  CacheKeyEnum,
-  useMutation,
-  useQuery,
-} from "src/core/query";
+import { CacheKeyEnum, useMutation, useQuery } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 import { ErrorView } from "src/views/ErrorView";
 import { AddTimeSeriesPointDialog } from "src/features/time-series/components/AddTimeSeriesPointDialog/AddTimeSeriesPointDialog";

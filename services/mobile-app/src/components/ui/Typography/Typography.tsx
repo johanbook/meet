@@ -9,7 +9,11 @@ type TypographyColor = "error" | "primary" | "textPrimary" | "textSecondary";
 
 const VARIANT_STYLE: Record<
   TypographyVariant,
-  { fontSize: number; fontWeight?: "400" | "500" | "600" | "700"; lineHeight: number }
+  {
+    fontSize: number;
+    fontWeight?: "400" | "500" | "600" | "700";
+    lineHeight: number;
+  }
 > = {
   body1: { fontSize: 16, fontWeight: "400", lineHeight: 24 },
   body2: { fontSize: 14, fontWeight: "400", lineHeight: 20 },

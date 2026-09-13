@@ -131,56 +131,60 @@ export default function ChatPage() {
               <View style={{ padding: 32 }}>
                 <Typography color="textSecondary">No messages yet</Typography>
               </View>
-            ) : messages.map((message) => {
-              const bubble = (
-                <View
-                  style={{
-                    backgroundColor: theme.palette.background.paper,
-                    borderColor: theme.palette.divider,
-                    borderRadius: 3,
-                    borderWidth: 1,
-                    maxWidth: "80%",
-                    padding: 8,
-                  }}
-                >
-                  <Text
+            ) : (
+              messages.map((message) => {
+                const bubble = (
+                  <View
                     style={{
-                      color: theme.palette.text.primary,
-                      fontSize: 16,
+                      backgroundColor: theme.palette.background.paper,
+                      borderColor: theme.palette.divider,
+                      borderRadius: 3,
+                      borderWidth: 1,
+                      maxWidth: "80%",
+                      padding: 8,
                     }}
                   >
-                    {message.message}
-                  </Text>
-                </View>
-              );
+                    <Text
+                      style={{
+                        color: theme.palette.text.primary,
+                        fontSize: 16,
+                      }}
+                    >
+                      {message.message}
+                    </Text>
+                  </View>
+                );
 
-              if (message.sentByCurrentUser) {
+                if (message.sentByCurrentUser) {
+                  return (
+                    <View
+                      key={message.id}
+                      style={{ alignItems: "flex-end", padding: 8 }}
+                    >
+                      {bubble}
+                    </View>
+                  );
+                }
+
                 return (
                   <View
                     key={message.id}
-                    style={{ alignItems: "flex-end", padding: 8 }}
+                    style={{ alignItems: "flex-start", padding: 8 }}
                   >
-                    {bubble}
+                    <View
+                      style={{ alignItems: "center", flexDirection: "row" }}
+                    >
+                      <ProfileAvatar
+                        name={message.profile.name}
+                        size={28}
+                        src={message.profile.imageUrl}
+                      />
+                      <View style={{ marginLeft: 8 }}>{bubble}</View>
+                    </View>
                   </View>
                 );
-              }
-
-              return (
-                <View
-                  key={message.id}
-                  style={{ alignItems: "flex-start", padding: 8 }}
-                >
-                  <View style={{ alignItems: "center", flexDirection: "row" }}>
-                    <ProfileAvatar
-                      name={message.profile.name}
-                      size={28}
-                      src={message.profile.imageUrl}
-                    />
-                    <View style={{ marginLeft: 8 }}>{bubble}</View>
-                  </View>
-                </View>
-              );
-            })}
+              })
+            )}
           </ScrollView>
         </View>
 

@@ -5,9 +5,9 @@ import { useSnackbar } from "src/core/snackbar";
 
 import { NotificationEventHandler } from "./notificationEvent.handler";
 
-const NotificationContext = createContext<
-  NotificationEventHandler | undefined
->(undefined);
+const NotificationContext = createContext<NotificationEventHandler | undefined>(
+  undefined,
+);
 
 interface NotificationProviderProps {
   children: ReactNode;

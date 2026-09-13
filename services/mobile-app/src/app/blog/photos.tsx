@@ -28,9 +28,8 @@ export default function BlogPhotoListPage() {
       lastPage.length >= ITEMS_PER_PAGE ? pages.length : undefined,
   });
 
-  const photos: BlogPhotoDetails[] = query.data?.pages.flatMap(
-    (page) => page,
-  ) ?? [];
+  const photos: BlogPhotoDetails[] =
+    query.data?.pages.flatMap((page) => page) ?? [];
 
   if (query.error) {
     return (

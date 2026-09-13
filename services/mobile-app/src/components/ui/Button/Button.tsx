@@ -21,7 +21,10 @@ interface ButtonProps {
   variant?: ButtonVariant;
 }
 
-const COLOR_VALUE: Record<ButtonColor, (primary: string, error: string) => string> = {
+const COLOR_VALUE: Record<
+  ButtonColor,
+  (primary: string, error: string) => string
+> = {
   default: () => "#1976d2",
   error: (_, error) => error,
   primary: (primary) => primary,
@@ -36,7 +39,10 @@ export function Button({
   variant = "contained",
 }: ButtonProps) {
   const theme = useTheme();
-  const colorValue = COLOR_VALUE[color](theme.palette.primary, theme.palette.error);
+  const colorValue = COLOR_VALUE[color](
+    theme.palette.primary,
+    theme.palette.error,
+  );
   const isDisabled = disabled || loading;
 
   const backgroundColor =

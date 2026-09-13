@@ -1,3 +1,1 @@
-export {
-  CurrentOrganizationDetailsFeaturesEnum as OrganizationFeature,
-} from "src/api";
+export { CurrentOrganizationDetailsFeaturesEnum as OrganizationFeature } from "src/api";

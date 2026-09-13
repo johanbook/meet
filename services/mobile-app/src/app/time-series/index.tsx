@@ -64,7 +64,10 @@ export default function TimeSeriesListPage() {
               key={series.id}
               onPress={() => router.replace(`/time-series/${series.id}`)}
             >
-              <ListItemText primary={series.name} secondary={series.description} />
+              <ListItemText
+                primary={series.name}
+                secondary={series.description}
+              />
             </ListItem>
           ))}
         </List>

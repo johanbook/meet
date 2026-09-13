@@ -22,8 +22,7 @@ export default function AppearancePage() {
   });
 
   const mutation = useMutation({
-    mutationFn: (body: object) =>
-      settingsApi.updateCurrentSettings({ body }),
+    mutationFn: (body: object) => settingsApi.updateCurrentSettings({ body }),
   });
 
   function handleDarkmodeChange(value: boolean): void {
@@ -62,7 +61,9 @@ export default function AppearancePage() {
   return (
     <Screen navBackTo="/profile" title="Appearance">
       <ScrollView style={{ flex: 1 }}>
-        <View style={{ alignItems: "center", flexDirection: "row", padding: 16 }}>
+        <View
+          style={{ alignItems: "center", flexDirection: "row", padding: 16 }}
+        >
           <View style={{ flex: 1 }}>
             <Typography>Dark mode</Typography>
           </View>

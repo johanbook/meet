@@ -1,10 +1,6 @@
 import { config } from "src/config";
 
-import {
-  clearSession,
-  getSessionTokens,
-  setSessionTokens,
-} from "./session";
+import { clearSession, getSessionTokens, setSessionTokens } from "./session";
 
 export class AuthError extends Error {
   constructor(
@@ -160,4 +156,3 @@ export async function resendVerificationEmail(): Promise<void> {
     false,
   );
 }
-

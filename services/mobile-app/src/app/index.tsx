@@ -22,7 +22,14 @@ function FeedSkeleton() {
         <View key={index} style={{ borderBottomWidth: 1, padding: 16 }}>
           <View style={{ alignItems: "center", flexDirection: "row" }}>
             <View style={{ borderRadius: 20, height: 40, width: 40 }} />
-            <View style={{ borderBottomWidth: 1, flex: 1, height: 16, marginLeft: 8 }} />
+            <View
+              style={{
+                borderBottomWidth: 1,
+                flex: 1,
+                height: 16,
+                marginLeft: 8,
+              }}
+            />
           </View>
           <View style={{ height: 56, marginTop: 8 }} />
         </View>
@@ -46,9 +53,8 @@ export default function BlogPostListPage() {
       lastPage.length >= ITEMS_PER_PAGE ? pages.length : undefined,
   });
 
-  const posts: BlogPostDetails[] = query.data?.pages.flatMap(
-    (page) => page,
-  ) ?? [];
+  const posts: BlogPostDetails[] =
+    query.data?.pages.flatMap((page) => page) ?? [];
 
   if (query.isLoading && posts.length === 0) {
     return (
@@ -92,10 +98,7 @@ export default function BlogPostListPage() {
         items={posts}
         onEndReached={() => query.fetchNextPage()}
         renderItem={(post, index) => (
-          <BlogPost
-            key={`${post.id}-${index}`}
-            post={post}
-          />
+          <BlogPost key={`${post.id}-${index}`} post={post} />
         )}
       />
     </Screen>

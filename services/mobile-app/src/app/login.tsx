@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import {
-  useLocalSearchParams,
-  usePathname,
-  useRouter,
-} from "expo-router";
+import { useLocalSearchParams, usePathname, useRouter } from "expo-router";
 import {
   Platform,
   ScrollView,
@@ -206,7 +202,9 @@ export default function LoginPage() {
               }}
             >
               <Typography color="textSecondary" variant="body2">
-                {"Your email address has not been verified yet. Check your inbox, or send a new verification email."}
+                {
+                  "Your email address has not been verified yet. Check your inbox, or send a new verification email."
+                }
               </Typography>
               <Button
                 disabled={isResending}

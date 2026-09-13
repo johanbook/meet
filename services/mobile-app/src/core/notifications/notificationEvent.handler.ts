@@ -108,8 +108,7 @@ export class NotificationEventHandler {
     this.handlers[type][id] = {
       execute: handler as (notification: unknown) => void,
       shouldExecute: onCondition as
-        | undefined
-        | ((notification: unknown) => boolean),
+        undefined | ((notification: unknown) => boolean),
     };
 
     return id;

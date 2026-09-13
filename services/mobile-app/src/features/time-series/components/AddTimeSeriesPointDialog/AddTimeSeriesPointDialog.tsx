@@ -4,11 +4,7 @@ import { timeSeriesApi } from "src/apis";
 import { Button, TextField, Typography } from "src/components/ui";
 import { GlobalDialogProps } from "src/core/dialog";
 import { required, useForm } from "src/core/forms";
-import {
-  CacheKeyEnum,
-  useMutation,
-  useQueryClient,
-} from "src/core/query";
+import { CacheKeyEnum, useMutation, useQueryClient } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 import { useTheme } from "src/core/theme";
 

@@ -1,3 +1,1 @@
-export {
-  CurrentOrganizationDetailsThemeEnum as ThemeEnum,
-} from "src/api";
+export { CurrentOrganizationDetailsThemeEnum as ThemeEnum } from "src/api";

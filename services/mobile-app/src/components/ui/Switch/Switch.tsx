@@ -8,7 +8,11 @@ interface SwitchProps {
   value: boolean;
 }
 
-export function Switch({ disabled = false, onValueChange, value }: SwitchProps) {
+export function Switch({
+  disabled = false,
+  onValueChange,
+  value,
+}: SwitchProps) {
   const theme = useTheme();
   const trackColor = value ? theme.palette.primary : theme.palette.divider;
   const thumbColor = value ? "#ffffff" : theme.palette.text.secondary;

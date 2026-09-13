@@ -66,7 +66,8 @@ export const CHART_CONFIGS: Record<
     getGroupKey: (date) => dayjs(date).format("2000-01-01THH:00"),
     getLabel: (key) => dayjs(key).format("HH:00"),
     getValue: (value) => dayjs(value as string).valueOf(),
-    sortCompareFn: (a, b) => dayjs(a as string).valueOf() - dayjs(b as string).valueOf(),
+    sortCompareFn: (a, b) =>
+      dayjs(a as string).valueOf() - dayjs(b as string).valueOf(),
   },
   [TimeSeriesDetailsAggregationEnum.HalfHourly]: {
     scaleType: "time",
@@ -84,6 +85,7 @@ export const CHART_CONFIGS: Record<
       return d.minute(minuteBucket).second(0).millisecond(0).format("HH:mm");
     },
     getValue: (value) => dayjs(value as string).valueOf(),
-    sortCompareFn: (a, b) => dayjs(a as string).valueOf() - dayjs(b as string).valueOf(),
+    sortCompareFn: (a, b) =>
+      dayjs(a as string).valueOf() - dayjs(b as string).valueOf(),
   },
 };

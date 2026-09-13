@@ -51,9 +51,7 @@ export function ProfileCreationPage({
       onProfileCreated();
     },
     onError: () => {
-      snackbar.error(
-        "Something went wrong when trying to create your profile",
-      );
+      snackbar.error("Something went wrong when trying to create your profile");
     },
   });
 

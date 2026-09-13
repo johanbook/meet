@@ -11,9 +11,11 @@ export interface PhotoFile {
  * FormData-compatible file descriptors (RN fetch accepts { uri, name, type }
  * parts).
  */
-export async function pickImages(options: {
-  multiple?: boolean;
-} = {}): Promise<PhotoFile[]> {
+export async function pickImages(
+  options: {
+    multiple?: boolean;
+  } = {},
+): Promise<PhotoFile[]> {
   const result = await launchImageLibraryAsync({
     allowsMultipleSelection: options.multiple ?? true,
     mediaTypes: "images",

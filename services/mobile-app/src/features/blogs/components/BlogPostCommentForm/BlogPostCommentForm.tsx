@@ -20,7 +20,10 @@ export function BlogPostCommentForm({ blogPostId }: BlogPostCommentFormProps) {
 
   const form = useForm<CreateBlogPostCommentCommand>(
     { blogPostId, content: "" },
-    { blogPostId: required<CreateBlogPostCommentCommand>(), content: required<CreateBlogPostCommentCommand>() },
+    {
+      blogPostId: required<CreateBlogPostCommentCommand>(),
+      content: required<CreateBlogPostCommentCommand>(),
+    },
   );
 
   const mutation = useMutation({
@@ -74,10 +77,9 @@ export function BlogPostCommentForm({ blogPostId }: BlogPostCommentFormProps) {
       >
         <Text
           style={{
-            color:
-              form.state.content.value
-                ? theme.palette.primary
-                : theme.palette.text.secondary,
+            color: form.state.content.value
+              ? theme.palette.primary
+              : theme.palette.text.secondary,
             fontSize: 20,
           }}
         >

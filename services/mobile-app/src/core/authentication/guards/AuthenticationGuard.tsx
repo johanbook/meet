@@ -45,9 +45,7 @@ export function AuthenticationGuard({ children }: AuthenticationGuardProps) {
     }
 
     if (noSessionOnNative) {
-      router.replace(
-        `/login?redirectTarget=${encodeURIComponent(pathname)}`,
-      );
+      router.replace(`/login?redirectTarget=${encodeURIComponent(pathname)}`);
 
       return;
     }

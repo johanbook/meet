@@ -89,7 +89,8 @@ export default function CreateChatPage() {
     }))
     .filter(
       (option) =>
-        option.id !== meId && !selected.some((picked) => picked.id === option.id),
+        option.id !== meId &&
+        !selected.some((picked) => picked.id === option.id),
     );
 
   return (
@@ -150,7 +151,11 @@ export default function CreateChatPage() {
                 paddingVertical: 8,
               })}
             >
-              <ProfileAvatar name={option.label} size={32} src={option.imageUrl} />
+              <ProfileAvatar
+                name={option.label}
+                size={32}
+                src={option.imageUrl}
+              />
               <View style={{ flex: 1, marginLeft: 8 }}>
                 <Typography variant="body2">{option.label}</Typography>
               </View>

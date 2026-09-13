@@ -54,8 +54,19 @@ export default function GroupPage() {
   return (
     <Screen title="Group">
       <ScrollView style={{ flex: 1 }}>
-        <View style={{ alignItems: "center", flexDirection: "row", gap: 12, padding: 16 }}>
-          <OrganizationAvatar name={data.name} size={86} src={data.photo?.url} />
+        <View
+          style={{
+            alignItems: "center",
+            flexDirection: "row",
+            gap: 12,
+            padding: 16,
+          }}
+        >
+          <OrganizationAvatar
+            name={data.name}
+            size={86}
+            src={data.photo?.url}
+          />
           <View style={{ flex: 1 }}>
             <Typography numberOfLines={1} variant="h5">
               {data.name}

@@ -77,10 +77,12 @@ export function TimeSeriesPointList({ timeSeries }: TimeSeriesPointListProps) {
                     {point.description}
                   </Text>
                   <Chip
-                    color={LABEL_COLORS[
-                      timeSeries.labels.indexOf(point.label) %
-                        LABEL_COLORS.length
-                    ]}
+                    color={
+                      LABEL_COLORS[
+                        timeSeries.labels.indexOf(point.label) %
+                          LABEL_COLORS.length
+                      ]
+                    }
                     label={point.label}
                   />
                 </View>

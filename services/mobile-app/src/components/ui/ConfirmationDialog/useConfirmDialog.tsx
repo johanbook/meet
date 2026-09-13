@@ -1,6 +1,9 @@
 import { useDialog } from "src/core/dialog";
 
-import { ConfirmationDialog, ConfirmationDialogProps } from "./ConfirmationDialog";
+import {
+  ConfirmationDialog,
+  ConfirmationDialogProps,
+} from "./ConfirmationDialog";
 
 type ConfirmDialogCallerProps = Omit<
   ConfirmationDialogProps,

@@ -1,3 +1,1 @@
-export {
-  NotificationWebSocketDetailsTypeEnum as NotificationEventEnum,
-} from "src/api";
+export { NotificationWebSocketDetailsTypeEnum as NotificationEventEnum } from "src/api";
