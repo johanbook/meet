@@ -8,6 +8,7 @@ import {
   useWindowDimensions,
   View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { CacheKeyEnum } from "src/core/query";
 
@@ -40,6 +41,7 @@ export default function LoginPage() {
   const theme = useTheme();
   const queryClient = useQueryClient();
   const { height: windowHeight } = useWindowDimensions();
+  const insets = useSafeAreaInsets();
 
   const redirectParam = params.redirectTarget;
   const redirectTarget =
@@ -160,7 +162,7 @@ export default function LoginPage() {
             alignItems: "center",
             flex: 1,
             justifyContent: "center",
-            minHeight: windowHeight,
+            minHeight: windowHeight - insets.top - insets.bottom,
             padding: 32,
           }}
         >
