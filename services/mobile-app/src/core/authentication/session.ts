@@ -57,6 +57,9 @@ function parseSetCookieHeader(headerValue: string): Record<string, string> {
  * response. Supertokens issues replacement cookies on every auth interaction,
  * so stale values must not survive. Native only; on web the browser jar owns
  * the session.
+ *
+ * iOS never surfaces Set-Cookie to JS; the auth-api mirrors it in the
+ * `x-session-cookie` header so native clients can read sessions there.
  */
 export function updateSessionFromResponseHeaders(
   headers: Headers | string | undefined,
@@ -70,7 +73,8 @@ export function updateSessionFromResponseHeaders(
   if (typeof headers === "string") {
     headerValue = headers;
   } else if (headers) {
-    headerValue = headers.get("set-cookie") ?? undefined;
+    headerValue =
+      headers.get("set-cookie") ?? headers.get("x-session-cookie") ?? undefined;
   }
 
   if (!headerValue) {

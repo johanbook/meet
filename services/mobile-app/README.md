@@ -63,7 +63,10 @@ Traefik gateway (`/api` requests are forwarded to `auth-api/authenticate`).
 The mobile app implements the same session flow directly:
 
 - `src/core/authentication/session.ts` — cookie jar, persisted to the
-  platform cache directory (`expo-file-system`).
+  platform cache directory (`expo-file-system`). iOS never surfaces
+  `Set-Cookie` to JS, so the jar reads sessions from the `x-session-cookie`
+  response header (set by the auth-api mirroring Supertokens' Set-Cookie
+  headers) with a `set-cookie` fallback where available.
 - `src/core/authentication/authApi.ts` — Supertokens recipe calls
   (`/auth/api/signin`, `/auth/api/signout`); the `anti-csrf` header is
   replayed from the `sAntiCsrfToken` cookie when present.

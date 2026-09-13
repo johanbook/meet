@@ -4,6 +4,8 @@ import {
   clearSession,
   getCookieValue,
   getSessionCookieHeader,
+  hasSession,
+  isManualCookieTransport,
   updateSessionFromResponseHeaders,
 } from "./session";
 
@@ -47,10 +49,7 @@ function buildHeaders(includeBody: boolean): AuthHeaders {
   return headers;
 }
 
-async function authRequest(
-  path: string,
-  init: RequestInit,
-): Promise<Response> {
+async function authRequest(path: string, init: RequestInit): Promise<Response> {
   const url = `${config.AUTH.BASE_URL}${path}`;
   const headers = buildHeaders(init.method !== "GET");
 
@@ -79,17 +78,15 @@ async function authRequest(
     if (typeof json.message === "string") {
       message = json.message;
     }
-  } catch {
+  } catch (error) {
     // Non-JSON error body - keep status text.
+    console.log("Something went wrong", { error });
   }
 
   throw new AuthError(response.status, message);
 }
 
-export async function signIn(
-  email: string,
-  password: string,
-): Promise<void> {
+export async function signIn(email: string, password: string): Promise<void> {
   await authRequest("/signin", {
     method: "POST",
     body: JSON.stringify({
@@ -99,6 +96,17 @@ export async function signIn(
       ],
     }),
   });
+
+  // The server accepted the credentials - the session must now survive in
+  // the cookie jar or every subsequent request will 401. Surface it early:
+  // this is the point where a runtime that hides Set-Cookie (e.g. an iOS
+  // fetch stack that keeps cookies internally) would leave us signed out.
+  if (isManualCookieTransport() && !hasSession()) {
+    console.warn(
+      "Sign-in succeeded but no session cookie was captured - " +
+        "the response headers did not expose Set-Cookie on this runtime.",
+    );
+  }
 }
 
 export async function signOut(): Promise<void> {

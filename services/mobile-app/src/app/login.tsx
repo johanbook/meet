@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import {
+  Platform,
   ScrollView,
   Text,
   useWindowDimensions,
@@ -10,11 +11,16 @@ import {
 import { Button } from "src/components/ui/Button/Button";
 import { TextField } from "src/components/ui/TextField/TextField";
 import { Typography } from "src/components/ui/Typography/Typography";
-import { AuthError, resendVerificationEmail, signIn } from "src/core/authentication";
+import {
+  AuthError,
+  hasSession,
+  isManualCookieTransport,
+  resendVerificationEmail,
+  signIn,
+} from "src/core/authentication";
 import { useForm, required } from "src/core/forms";
 import { useSnackbar } from "src/core/snackbar";
 import { useTheme } from "src/core/theme";
-import { config } from "src/config";
 
 interface LoginFormValues {
   email: string;
@@ -23,7 +29,10 @@ interface LoginFormValues {
 
 export default function LoginPage() {
   const router = useRouter();
-  const params = useLocalSearchParams<{ redirectTarget?: string; verify?: string }>();
+  const params = useLocalSearchParams<{
+    redirectTarget?: string;
+    verify?: string;
+  }>();
   const snackbar = useSnackbar();
   const theme = useTheme();
   const { height: windowHeight } = useWindowDimensions();
@@ -41,12 +50,15 @@ export default function LoginPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isResending, setIsResending] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(
+    undefined,
+  );
 
   async function handleSubmit(): Promise<void> {
     const { data, isValid } = form.validate();
 
     if (!isValid) {
+      console.log("Data not valid");
       return;
     }
 
@@ -55,12 +67,38 @@ export default function LoginPage() {
 
     try {
       await signIn(data.email, data.password);
+
+      // Without a captured session the next guarded request would 401 and
+      // bounce straight back here; surface that instead of silently looping.
+      if (isManualCookieTransport() && !hasSession()) {
+        setErrorMessage(
+          "Signed in, but the session could not be stored on this " +
+            "device. Try again, or contact support with the console output.",
+        );
+
+        return;
+      }
+
       router.replace(redirectTarget);
     } catch (error) {
       if (error instanceof AuthError && error.status === 401) {
         setErrorMessage("Incorrect email or password");
       } else {
-        setErrorMessage("Unable to sign in. Check the connection and try again.");
+        // Browsers report CORS rejections and connection failures both as
+        // fetch TypeErrors with no visible console output; make it visible.
+        console.error("Sign in failed", error);
+
+        if (Platform.OS === "web") {
+          setErrorMessage(
+            "Unable to sign in from the web preview - browsers block " +
+              "cross-origin API calls (CORS). Use the iOS simulator or a " +
+              "device instead.",
+          );
+        } else {
+          setErrorMessage(
+            "Unable to sign in. Check your connection and try again.",
+          );
+        }
       }
     } finally {
       setIsSubmitting(false);
@@ -86,35 +124,59 @@ export default function LoginPage() {
         contentContainerStyle={{ flexGrow: 1 }}
         style={{ flex: 1, width: "100%" }}
       >
-        {/* The minHeight keeps short forms vertically centered while longer
-            content still scrolls. */}
+        {/* flex: 1 keeps short content vertically centered while the
+            minHeight fallback guarantees centering on platforms where the
+            scroll content container does not grow. Taller content overflows
+            and scrolls. */}
         <View
           style={{
             alignItems: "center",
+            flex: 1,
             justifyContent: "center",
             minHeight: windowHeight,
             padding: 32,
           }}
         >
-          <Typography variant="h4">Meet</Typography>
+          <View
+            style={{
+              alignItems: "center",
+              borderRadius: 32,
+              height: 64,
+              justifyContent: "center",
+              marginBottom: 12,
+              width: 64,
+            }}
+          >
+            <Text
+              style={{
+                color: theme.palette.primary,
+                fontSize: 32,
+                lineHeight: 32,
+              }}
+            >
+              {"\u2665"}
+            </Text>
+          </View>
+          <Typography variant="h5">Meet</Typography>
           <Typography color="textSecondary" variant="body2">
             Sign in to continue
           </Typography>
+
           {needsVerification ? (
             <View
               style={{
                 backgroundColor: theme.palette.background.paper,
                 borderColor: theme.palette.info,
-                borderRadius: 4,
+                borderRadius: 8,
                 borderWidth: 1,
-                marginTop: 16,
+                marginTop: 20,
                 padding: 12,
+                width: "100%",
               }}
             >
-              <Text style={{ color: theme.palette.text.primary, fontSize: 14 }}>
-                Your email address has not been verified yet. Check your inbox,
-                or send a new verification email.
-              </Text>
+              <Typography color="textSecondary" variant="body2">
+                {"Your email address has not been verified yet. Check your inbox, or send a new verification email."}
+              </Typography>
               <Button
                 disabled={isResending}
                 loading={isResending}
@@ -125,39 +187,57 @@ export default function LoginPage() {
               </Button>
             </View>
           ) : null}
-          {errorMessage ? (
-            <Typography color="error" variant="body2">
-              {errorMessage}
-            </Typography>
-          ) : null}
-          <TextField
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="email-address"
-            label="Email"
-            onValueChange={(value) => form.setValue({ email: value })}
-            value={form.state.email.value}
-          />
-          <TextField
-            label="Password"
-            onValueChange={(value) => form.setValue({ password: value })}
-            secureTextEntry
-            value={form.state.password.value}
-          />
-          <Button
-            color="primary"
-            disabled={isSubmitting}
-            loading={isSubmitting}
-            onPress={() => handleSubmit()}
+
+          <View
+            style={{
+              backgroundColor: theme.palette.background.paper,
+              borderColor: theme.palette.divider,
+              borderRadius: 16,
+              borderWidth: 1,
+              elevation: 2,
+              gap: 16,
+              marginTop: 28,
+              maxWidth: 400,
+              padding: 24,
+              width: "100%",
+            }}
           >
-            Sign in
-          </Button>
-          <Typography color="textSecondary" variant="caption">
-            {"New accounts are created on the web at this domain's login page."}
-          </Typography>
-          <Typography color="textSecondary" variant="caption">
-            API: {config.API.BASE_URL}
-          </Typography>
+            {errorMessage ? (
+              <Typography color="error" variant="body2">
+                {errorMessage}
+              </Typography>
+            ) : null}
+            <TextField
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="email-address"
+              label="Email"
+              onValueChange={(value) => form.setValue({ email: value })}
+              value={form.state.email.value}
+            />
+            <TextField
+              label="Password"
+              onValueChange={(value) => form.setValue({ password: value })}
+              secureTextEntry
+              value={form.state.password.value}
+            />
+            <Button
+              color="primary"
+              disabled={isSubmitting}
+              loading={isSubmitting}
+              onPress={() => handleSubmit()}
+            >
+              Sign in
+            </Button>
+          </View>
+
+          <View style={{ marginTop: 24 }}>
+            <Typography color="textSecondary" variant="caption">
+              {
+                "New accounts are created on the web at this domain's login page."
+              }
+            </Typography>
+          </View>
         </View>
       </ScrollView>
     </View>

@@ -9,4 +9,5 @@ export {
   clearSession,
   getSessionCookieHeader,
   hasSession,
+  isManualCookieTransport,
 } from "./session";
