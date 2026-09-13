@@ -1,11 +1,10 @@
-import { Controller, Get, Headers, HttpStatus, Res } from "@nestjs/common";
+import { Controller, Get, HttpStatus, Res } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { FastifyReply } from "fastify";
 
 import { Logger } from "../logging/logger.service";
 import { Session } from "../supertokens/session.decorator";
 import { ISession } from "../supertokens/session.interface";
-import { parseBearerToken, verifyAccessToken } from "./access-token";
 
 const HTTP_HEADER_USER_ID = process.env.USER_ID_HTTP_HEADER || "x-user-id";
 
@@ -14,12 +13,6 @@ const HTTP_HEADER_USER_ID = process.env.USER_ID_HTTP_HEADER || "x-user-id";
 export class AuthenticationController {
   private logger = new Logger(AuthenticationController.name);
 
-  /**
-   * Gateway callback used by Traefik forward-auth for every /api request.
-   * When the request carries an Authorization header (native clients), that
-   * access token is verified against the session core; otherwise the usual
-   * cookie session flow applies (PWA/browser).
-   */
   @Get("/authenticate")
   async authenticate(
     @Res({ passthrough: false }) response: FastifyReply,
@@ -27,35 +20,19 @@ export class AuthenticationController {
       sessionRequired: false,
     })
     session: ISession,
-    @Headers() headers: Record<string, string | undefined>,
   ): Promise<void> {
-    const authorizationValue = headers["authorization"];
+    if (!session) {
+      this.logger.trace("Denied authentication");
 
-    const userId = authorizationValue
-      ? await this.resolveBearerUserId(authorizationValue)
-      : session?.getUserId();
+      response.status(HttpStatus.UNAUTHORIZED).send();
 
-    this.sendAuthentication(userId, response);
-  }
-
-  private async resolveBearerUserId(
-    authorizationValue?: string,
-  ): Promise<string | undefined> {
-    const accessToken = parseBearerToken(authorizationValue);
-
-    if (!accessToken) {
-      return undefined;
+      return;
     }
 
-    return verifyAccessToken(accessToken);
-  }
+    const userId = session.getUserId();
 
-  private sendAuthentication(
-    userId: string | undefined,
-    response: FastifyReply,
-  ): void {
     if (!userId) {
-      this.logger.trace("Denied authentication");
+      this.logger.error("UserID or user info missing");
 
       response.status(HttpStatus.UNAUTHORIZED).send();
 
