@@ -92,14 +92,16 @@ export default function LoginPage() {
         return;
       }
 
-      // The guards cached 401 errors from the unauthenticated boot probes;
-      // clear them so the guarded pages don't snapshot the stale failure and
-      // bounce straight back to /login.
-      queryClient.invalidateQueries({
+      // The guards cached 401 errors from the unauthenticated boot probes.
+      // Remove those entries entirely: invalidateQueries would keep serving
+      // the stale 401 while refetching, re-triggering the guards' redirect
+      // for a moment and bouncing the user straight back to /login on the
+      // first sign-in.
+      queryClient.removeQueries({
         queryKey: [CacheKeyEnum.CurrentProfileExists],
       });
-      queryClient.invalidateQueries({ queryKey: [CacheKeyEnum.Settings] });
-      queryClient.invalidateQueries({
+      queryClient.removeQueries({ queryKey: [CacheKeyEnum.Settings] });
+      queryClient.removeQueries({
         queryKey: [CacheKeyEnum.CurrentOrganization],
       });
 
