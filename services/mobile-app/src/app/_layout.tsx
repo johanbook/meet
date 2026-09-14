@@ -2,6 +2,10 @@ import { ReactNode } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Slot } from "expo-router";
 import { View } from "react-native";
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
 import { BottomNav } from "src/components/nav/BottomNav";
 import { AuthenticationGuard } from "src/core/authentication";
@@ -18,9 +22,20 @@ interface ShellProps {
 
 function Shell({ children }: ShellProps) {
   const theme = useTheme();
+  const insets = useSafeAreaInsets();
 
   return (
-    <View style={{ backgroundColor: theme.palette.background.main, flex: 1 }}>
+    // The insets keep the header and bottom navigation clear of the device
+    // status bar / notch / home indicator; the app background paints the
+    // safe zones so nothing looks truncated.
+    <View
+      style={{
+        backgroundColor: theme.palette.background.main,
+        flex: 1,
+        paddingBottom: insets.bottom,
+        paddingTop: insets.top,
+      }}
+    >
       {children}
       <BottomNav />
     </View>
@@ -29,22 +44,24 @@ function Shell({ children }: ShellProps) {
 
 export default function AppLayout() {
   return (
-    <QueryClientProvider client={QUERY_CLIENT}>
-      <ThemeProvider>
-        <SnackbarProvider>
-          <GlobalDialogProvider>
-            <AuthenticationGuard>
-              <NotificationProvider>
-                <ProfileGuard>
-                  <Shell>
-                    <Slot />
-                  </Shell>
-                </ProfileGuard>
-              </NotificationProvider>
-            </AuthenticationGuard>
-          </GlobalDialogProvider>
-        </SnackbarProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <SafeAreaProvider>
+      <QueryClientProvider client={QUERY_CLIENT}>
+        <ThemeProvider>
+          <SnackbarProvider>
+            <GlobalDialogProvider>
+              <AuthenticationGuard>
+                <NotificationProvider>
+                  <ProfileGuard>
+                    <Shell>
+                      <Slot />
+                    </Shell>
+                  </ProfileGuard>
+                </NotificationProvider>
+              </AuthenticationGuard>
+            </GlobalDialogProvider>
+          </SnackbarProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </SafeAreaProvider>
   );
 }
