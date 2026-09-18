@@ -55,8 +55,6 @@ services:
       - "traefik.http.routers.api.middlewares=auth"
       - "traefik.http.routers.api-healthcheck.rule=Host(`$DOMAIN`)&&PathPrefix(`/api/health`)"
       - "traefik.http.routers.api-healthcheck.entrypoints=web"
-
-      - "com.centurylinklabs.watchtower.enable=true"
     restart: "unless-stopped"
 
   console:
@@ -82,8 +80,6 @@ services:
       - "traefik.http.routers.auth-api.entrypoints=web"
       - "traefik.http.middlewares.auth.forwardauth.address=http://auth-api/authenticate"
       - "traefik.http.middlewares.auth.forwardauth.authResponseHeaders=x-user-id"
-
-      - "com.centurylinklabs.watchtower.enable=true"
     environment:
       API_URL: "$PROTOCOL://$DOMAIN"
       UI_URL: "$PROTOCOL://$DOMAIN"
@@ -96,8 +92,6 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.auth-ui.rule=Host(`$DOMAIN`)&&(PathPrefix(`/login`)||PathPrefix(`/logout`))"
       - "traefik.http.routers.auth-ui.entrypoints=web"
-
-      - "com.centurylinklabs.watchtower.enable=true"
     restart: "unless-stopped"
 
   db:
@@ -138,8 +132,6 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.web-ui.rule=Host(`$DOMAIN`)&&!PathPrefix(`/api`)"
       - "traefik.http.routers.web-ui.entrypoints=web"
-
-      - "com.centurylinklabs.watchtower.enable=true"
     restart: "unless-stopped"
 
   minio:
