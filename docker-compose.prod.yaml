@@ -96,18 +96,6 @@ services:
       file: "./docker-compose.shared.yaml"
       service: "supertokens"
 
-  watchtower:
-    logging: *logging
-    image: containrrr/watchtower
-    container_name: watchtower
-    command:
-      - "--label-enable"
-      - "--cleanup"
-      - "--schedule"
-      - "0 0 * * * *"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-
   web-ui:
     logging: *logging
     extends:
