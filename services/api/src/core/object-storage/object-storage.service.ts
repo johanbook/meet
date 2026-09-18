@@ -53,22 +53,15 @@ export class ObjectStorageService {
     await client.removeObject(bucketName, id);
   }
 
-  /**
-   * Deletes multiple objects. The MinIO SDK batches the list into chunks of
-   * 1000 and sends them sequentially, resolving with the per-object failures.
-   *
-   * The SDK declares a `Promise<void>` return type, but the implementation
-   * actually resolves with the array of failed deletes from each batch.
-   */
   async deleteObjects(
     bucketName: BucketName,
     ids: string[],
   ): Promise<unknown[]> {
     const client = this.minioService.client;
 
-    return (await (client.removeObjects(bucketName, ids) as unknown as Promise<
+    return await (client.removeObjects(bucketName, ids) as unknown as Promise<
       unknown[]
-    >));
+    >);
   }
 
   async put(
