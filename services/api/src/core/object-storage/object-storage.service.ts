@@ -53,15 +53,10 @@ export class ObjectStorageService {
     await client.removeObject(bucketName, id);
   }
 
-  async deleteObjects(
-    bucketName: BucketName,
-    ids: string[],
-  ): Promise<unknown[]> {
+  async deleteObjects(bucketName: BucketName, ids: string[]): Promise<void> {
     const client = this.minioService.client;
 
-    return await (client.removeObjects(bucketName, ids) as unknown as Promise<
-      unknown[]
-    >);
+    await client.removeObjects(bucketName, ids);
   }
 
   async put(

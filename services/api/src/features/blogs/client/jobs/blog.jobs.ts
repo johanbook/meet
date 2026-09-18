@@ -42,17 +42,13 @@ export class BlogJobs {
       photosToBeDeleted: orphaned.length,
     });
 
-    const failures = await this.objectStorageService.deleteObjects(
+    await this.objectStorageService.deleteObjects(
       BUCKET_NAMES.BLOG_POST_PHOTO,
       orphaned,
     );
 
-    for (const failure of failures) {
-      this.logger.error("Failed to delete orphaned photo", { failure });
-    }
-
-    this.logger.log("Cleaned up orphaned photos", {
-      deletedCount: orphaned.length - failures.length,
+    this.logger.log("Delete requests sent", {
+      requested: orphaned.length,
     });
   }
 }
