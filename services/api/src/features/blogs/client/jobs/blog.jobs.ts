@@ -19,19 +19,6 @@ export class BlogJobs {
     private readonly objectStorageService: ObjectStorageService,
   ) {}
 
-  private async deleteOrphanedPhoto(
-    id: string,
-    callback: () => void,
-  ): Promise<void> {
-    try {
-      await this.objectStorageService.delete(BUCKET_NAMES.BLOG_POST_PHOTO, id);
-
-      callback();
-    } catch (error) {
-      this.logger.error("Failed to delete orphaned photo", { id, error });
-    }
-  }
-
   @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
   async deleteOrphanedPhotos(): Promise<void> {
     this.logger.log("Starting job");
@@ -55,12 +42,13 @@ export class BlogJobs {
       photosToBeDeleted: orphaned.length,
     });
 
-    let deletedCount = 0;
-
-    await Promise.all(
-      orphaned.map((id) => this.deleteOrphanedPhoto(id, () => deletedCount++)),
+    await this.objectStorageService.deleteObjects(
+      BUCKET_NAMES.BLOG_POST_PHOTO,
+      orphaned,
     );
 
-    this.logger.log("Cleaned up orphaned photos", { deletedCount });
+    this.logger.log("Delete requests sent", {
+      requested: orphaned.length,
+    });
   }
 }
