@@ -16,6 +16,7 @@ describe(CreateBlogPostHandler.name, () => {
   let blogPostService: BlogPostService;
   let commandHandler: CreateBlogPostHandler;
   let eventBus: EventBus;
+  let photoService: any;
 
   beforeEach(() => {
     blogPosts = createMockRepository<BlogPost>();
@@ -30,7 +31,10 @@ describe(CreateBlogPostHandler.name, () => {
       fetchCurrentProfileId: vi.fn(() => "my-profile-id"),
     } as any;
 
-    const photoService = {} as any;
+    photoService = {
+      resize: vi.fn(),
+      uploadPhoto: vi.fn(),
+    } as any;
 
     blogPostService = new BlogPostService(
       blogPosts,
@@ -56,6 +60,35 @@ describe(CreateBlogPostHandler.name, () => {
         content: "my-post",
         organizationId: "my-organization-id",
         profileId: "my-profile-id",
+      });
+    });
+  });
+
+  describe("can create blog post with photos", () => {
+    it("should save photos with an order matching addition order", async () => {
+      photoService.resize.mockResolvedValue(Buffer.from("resized-photo"));
+      photoService.uploadPhoto.mockImplementation(() => ({}));
+
+      const command = map(CreateBlogPostCommand, {
+        content: "my-post",
+        photos: [
+          Buffer.from("photo-1"),
+          Buffer.from("photo-2"),
+          Buffer.from("photo-3"),
+        ],
+      });
+
+      await commandHandler.execute(command);
+
+      expect(blogPosts.save).toHaveBeenCalledWith({
+        content: "my-post",
+        organizationId: "my-organization-id",
+        profileId: "my-profile-id",
+        photos: [
+          { profileId: "my-profile-id", order: 0 },
+          { profileId: "my-profile-id", order: 1 },
+          { profileId: "my-profile-id", order: 2 },
+        ],
       });
     });
   });

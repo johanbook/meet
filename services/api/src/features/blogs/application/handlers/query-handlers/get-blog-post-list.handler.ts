@@ -101,11 +101,15 @@ export class GetBlogPostListHandler implements IQueryHandler<
       createdAt: post.createdAt.toISOString(),
       id: post.id,
       ownedByCurrentUser: post.profileId === currentProfileId,
-      photos: mapArray(BlogPostPhotoDetails, post.photos, (photo) => ({
-        description: photo.description,
-        id: photo.id,
-        url: this.photoService.getUrl(photo, "blog-post-photo"),
-      })),
+      photos: mapArray(
+        BlogPostPhotoDetails,
+        sortByField(post.photos, (photo) => photo.order),
+        (photo) => ({
+          description: photo.description,
+          id: photo.id,
+          url: this.photoService.getUrl(photo, "blog-post-photo"),
+        }),
+      ),
       profile: map(BlogPostProfileDetails, {
         id: post.profile.id,
         imageUrl:
