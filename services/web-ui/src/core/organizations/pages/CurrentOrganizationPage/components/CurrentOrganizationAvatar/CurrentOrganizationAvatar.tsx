@@ -8,6 +8,9 @@ import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeyEnum } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
+import { downscaleImage } from "src/utils/image";
+
+const MAX_PHOTO_WIDTH = 200;
 
 export interface CurrentOrganizationAvatarProps {
   name?: string;
@@ -41,7 +44,9 @@ export function CurrentOrganizationAvatar({
       return;
     }
 
-    await mutation.mutateAsync(files[0], {
+    const photo = await downscaleImage(files[0], MAX_PHOTO_WIDTH);
+
+    await mutation.mutateAsync(photo, {
       onError: () => snackbar.error(t("actions.update-photo.error")),
       onSuccess: () => {
         snackbar.success(t("actions.update-photo.success"));
