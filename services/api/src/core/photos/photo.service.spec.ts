@@ -24,7 +24,10 @@ describe(PhotoService.name, () => {
 
       const result = await photoService.resize(buffer, options);
 
-      expect(result.byteLength).toBe(30_704);
+      expect(result.byteLength).toBe(5556);
+      // JPEG SOI marker (FF D8); keeps the encoder from silently regressing
+      expect(result[0]).toBe(255);
+      expect(result[1]).toBe(216);
     });
   });
 });

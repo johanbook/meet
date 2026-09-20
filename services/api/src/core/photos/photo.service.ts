@@ -24,7 +24,9 @@ export class PhotoService {
 
     const { width, height } = options;
 
-    return jimp.resize({ w: width, h: height }).getBuffer("image/png");
+    return jimp
+      .resize({ w: width, h: height })
+      .getBuffer("image/jpeg", { quality: 85 });
   }
 
   getUrl<T extends BasePhoto>(photo: T, bucketName: BucketName): string {
