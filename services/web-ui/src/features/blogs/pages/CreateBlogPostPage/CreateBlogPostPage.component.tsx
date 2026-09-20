@@ -21,7 +21,7 @@ import { CacheKeyEnum } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
 import { downscaleImage } from "src/utils/image";
 
-const MAX_PHOTO_WIDTH = 500;
+const MAX_PHOTO_WIDTH = 800;
 
 interface CreateBlogPostPageComponentProps {
   onAfterSubmit?: () => void;
