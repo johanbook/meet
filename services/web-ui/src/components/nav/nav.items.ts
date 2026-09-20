@@ -2,7 +2,6 @@ import {
   AccountCircle,
   AddCircleOutlineRounded,
   BarChartRounded,
-  CalendarMonthRounded,
   Chat,
   HomeRounded,
 } from "@mui/icons-material";
@@ -32,13 +31,6 @@ export const desktopNav: DesktopNav = {
       name: "navigation.create-blog",
       requiredFeatures: [OrganizationFeature.Blog],
       url: "/blog/create",
-    },
-    {
-      Icon: CalendarMonthRounded,
-      checkIfActive: (path) => path.startsWith("/bookings"),
-      name: "navigation.bookings",
-      requiredFeatures: [OrganizationFeature.Bookings],
-      url: "/bookings",
     },
     {
       Icon: Chat,
@@ -88,13 +80,6 @@ export const mobileNav: MobileNav = {
       name: "navigation.create-blog",
       requiredFeatures: [OrganizationFeature.Blog],
       url: "/blog/create",
-    },
-    {
-      Icon: CalendarMonthRounded,
-      checkIfActive: (path) => path.startsWith("/bookings"),
-      name: "navigation.bookings",
-      requiredFeatures: [OrganizationFeature.Bookings],
-      url: "/bookings",
     },
     {
       Icon: Chat,

@@ -1,7 +1,6 @@
 export enum CacheKeyEnum {
   BlogPhotoList = "blogPhotoList",
   BlogPosts = "blogPosts",
-  BookingList = "bookingList",
   Chats = "chats",
   CurrentOrganization = "currentOrganization",
   CurrentOrganizationMembers = "currentOrganizationMembers",
