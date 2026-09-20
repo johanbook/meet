@@ -19,6 +19,9 @@ import { useTranslation } from "src/core/i18n";
 import { useMutation, useQueryClient } from "src/core/query";
 import { CacheKeyEnum } from "src/core/query";
 import { useSnackbar } from "src/core/snackbar";
+import { downscaleImage } from "src/utils/image";
+
+const MAX_PHOTO_WIDTH = 500;
 
 interface CreateBlogPostPageComponentProps {
   onAfterSubmit?: () => void;
@@ -54,6 +57,16 @@ export function CreateBlogPostPageComponent({
       // localStorageKey: "create-blog-post-form",
     },
   );
+
+  async function handleAddPhotos(photos: File[]): Promise<void> {
+    const resizedPhotos = await Promise.all(
+      photos.map((photo) => downscaleImage(photo, MAX_PHOTO_WIDTH)),
+    );
+
+    form.setValue({
+      photos: [...(form.state.photos.value || []), ...resizedPhotos],
+    });
+  }
 
   function handleRemovePhoto(photoToDelete: Blob): void {
     const photos = form.state.photos.value;
@@ -149,11 +162,7 @@ export function CreateBlogPostPageComponent({
           <UploadIconButton
             accept="image/*"
             multiple
-            onChange={(photos) =>
-              form.setValue({
-                photos: [...(form.state.photos.value || []), ...photos],
-              })
-            }
+            onChange={handleAddPhotos}
             sx={{
               background: "background.paper",
               border: "1px solid",
