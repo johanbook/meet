@@ -54,7 +54,7 @@ export class CreateBlogPostHandler implements ICommandHandler<
 
     for (const [index, binary] of photos.entries()) {
       const resizedPhoto = await this.photoService.resize(binary as Buffer, {
-        width: 500,
+        width: 800,
       });
 
       const blogPostPhoto = await this.photoService.uploadPhoto(
