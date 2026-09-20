@@ -53,11 +53,18 @@ async function bootstrap() {
   await app.register(fastifyMultipart, {
     attachFieldsToBody: "keyValues",
     limits: {
-      fileSize: 30 * 1000 * 1000,
-      files: 20,
+      fileSize: 2 * 1000 * 1000,
+      files: 10,
     },
+    // Reject oversized uploads with a 413 instead of buffering them into
+    // memory (the web client pre-resizes photos, so these limits are a
+    // defense for other callers)
+    throwFileSizeLimit: true,
     onFile: async (part: MultipartFile) => {
-      (part as any).value = await part.toBuffer();
+      // The plugin reads `value` when attaching the body; the installed
+      // types omit the field, so cast once at this boundary
+      const partWithValue = part as unknown as { value: Buffer };
+      partWithValue.value = await part.toBuffer();
     },
   });
 
