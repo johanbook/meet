@@ -52,7 +52,7 @@ export class CreateBlogPostHandler implements ICommandHandler<
   ): Promise<void> {
     const blogPostPhotos: BlogPostPhoto[] = [];
 
-    for (const binary of photos) {
+    for (const [index, binary] of photos.entries()) {
       const resizedPhoto = await this.photoService.resize(binary as Buffer, {
         width: 500,
       });
@@ -63,6 +63,7 @@ export class CreateBlogPostHandler implements ICommandHandler<
         resizedPhoto,
       );
       blogPostPhoto.profileId = profileId;
+      blogPostPhoto.order = index;
       blogPostPhotos.push(blogPostPhoto);
     }
 
