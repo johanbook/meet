@@ -20,6 +20,16 @@ interface TimeSeriesPageComponentProps {
   timeSeries: TimeSeriesDetails;
 }
 
+function getDeltaColor(delta: number): string {
+  if (delta > 0) {
+    return "success.main";
+  }
+  if (delta < 0) {
+    return "error.main";
+  }
+  return "textSecondary";
+}
+
 export function TimeSeriesPageComponent({
   timeSeries,
 }: TimeSeriesPageComponentProps): ReactElement {
@@ -54,23 +64,41 @@ export function TimeSeriesPageComponent({
     });
   }
 
-  const stats = getTimeSeriesStats(timeSeries);
+  const { stats, windowLabel, previousWindowLabel } =
+    getTimeSeriesStats(timeSeries);
 
   return (
     <Box>
       <Typography color="textSecondary">{timeSeries.description}</Typography>
 
       <Stack direction="row" spacing={2} sx={{ mt: 2, mb: 2 }}>
-        {stats.map(({ label, value }) => (
-          <Card key={label}>
-            <CardContent>
-              <Typography gutterBottom>{label} </Typography>
-              <Typography align="center" variant="h4">
-                {value}
-              </Typography>
-            </CardContent>
-          </Card>
-        ))}
+        {stats.map(({ label, value, previousValue }) => {
+          const delta =
+            previousValue === undefined ? undefined : value - previousValue;
+
+          return (
+            <Card key={label}>
+              <CardContent>
+                <Typography gutterBottom>
+                  {label} ({windowLabel})
+                </Typography>
+                <Typography align="center" variant="h4">
+                  {value}
+                </Typography>
+                {delta !== undefined && (
+                  <Typography
+                    align="center"
+                    color={getDeltaColor(delta)}
+                    variant="caption"
+                  >
+                    {delta >= 0 ? "+" : ""}
+                    {delta} vs {previousWindowLabel}
+                  </Typography>
+                )}
+              </CardContent>
+            </Card>
+          );
+        })}
       </Stack>
 
       <Stack spacing={2}>
