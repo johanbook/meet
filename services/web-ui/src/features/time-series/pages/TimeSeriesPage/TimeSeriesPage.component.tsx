@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 
 import { AddRounded } from "@mui/icons-material";
 import { Box, CardContent, Stack, Typography } from "@mui/material";
+import dayjs from "dayjs";
 
 import { TimeSeriesDetails } from "src/api";
 import { timeSeriesApi } from "src/apis";
@@ -14,7 +15,11 @@ import { useSnackbar } from "src/core/snackbar";
 import { AddTimeSeriesPointDialog } from "../../components/AddTimeSeriesPointDialog";
 import { TimeSeriesChart } from "../../components/TimeSeriesChart";
 import { TimeSeriesPointList } from "../../components/TimeSeriesPointList";
-import { getTimeSeriesStats } from "../../utils/stats.helper";
+import {
+  CadenceStats,
+  getCadenceStats,
+  getTimeSeriesStats,
+} from "../../utils/stats.helper";
 
 interface TimeSeriesPageComponentProps {
   timeSeries: TimeSeriesDetails;
@@ -28,6 +33,78 @@ function getDeltaColor(delta: number): string {
     return "error.main";
   }
   return "textSecondary";
+}
+
+const plural = (count: number, noun: string): string =>
+  `${count} ${noun}${count === 1 ? "" : "s"}`;
+
+const formatNextExpected = (date: Date, daysUntil: number): string => {
+  const expected = dayjs(date).format("MMM D, YYYY");
+
+  if (daysUntil > 0) {
+    return `${expected} (in ${plural(daysUntil, "day")})`;
+  }
+  if (daysUntil < 0) {
+    return `${expected} (overdue by ${plural(-daysUntil, "day")})`;
+  }
+  return `${expected} (today)`;
+};
+
+interface CadenceRowProps {
+  label: string;
+  value: string;
+}
+
+function CadenceRow({ label, value }: CadenceRowProps): ReactElement {
+  return (
+    <Stack direction="row" sx={{ justifyContent: "space-between" }}>
+      <Typography color="textSecondary">{label}</Typography>
+      <Typography>{value}</Typography>
+    </Stack>
+  );
+}
+
+function renderCadence(cadence: CadenceStats): ReactElement {
+  const { lastEventDate, daysSinceLastEvent } = cadence;
+
+  if (lastEventDate === undefined) {
+    return <Typography color="textSecondary">No points added yet</Typography>;
+  }
+
+  return (
+    <Stack spacing={1}>
+      <CadenceRow
+        label="Last event"
+        value={dayjs(lastEventDate).format("MMM D, YYYY")}
+      />
+      <CadenceRow
+        label="Days since"
+        value={plural(daysSinceLastEvent ?? 0, "day")}
+      />
+      {cadence.averageIntervalDays !== undefined && (
+        <CadenceRow
+          label="Average interval"
+          value={plural(Math.round(cadence.averageIntervalDays), "day")}
+        />
+      )}
+      {cadence.longestIntervalDays !== undefined && (
+        <CadenceRow
+          label="Range"
+          value={`${cadence.shortestIntervalDays}–${cadence.longestIntervalDays} days`}
+        />
+      )}
+      {cadence.nextExpectedDate !== undefined &&
+        cadence.daysUntilNextExpected !== undefined && (
+          <CadenceRow
+            label="Next expected"
+            value={formatNextExpected(
+              cadence.nextExpectedDate,
+              cadence.daysUntilNextExpected,
+            )}
+          />
+        )}
+    </Stack>
+  );
 }
 
 export function TimeSeriesPageComponent({
@@ -66,6 +143,7 @@ export function TimeSeriesPageComponent({
 
   const { stats, windowLabel, previousWindowLabel } =
     getTimeSeriesStats(timeSeries);
+  const cadence = getCadenceStats(timeSeries.points);
 
   return (
     <Box>
@@ -104,6 +182,10 @@ export function TimeSeriesPageComponent({
       <Stack spacing={2}>
         <CollapsibleCard sx={{ p: 2 }} title="Charts">
           <TimeSeriesChart timeSeries={timeSeries} />
+        </CollapsibleCard>
+
+        <CollapsibleCard sx={{ p: 2 }} title="Cadence">
+          {renderCadence(cadence)}
         </CollapsibleCard>
 
         <CollapsibleCard openByDefault sx={{ p: 2 }} title="Data">
