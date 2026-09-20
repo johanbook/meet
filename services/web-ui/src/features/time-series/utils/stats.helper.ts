@@ -1,4 +1,8 @@
-import { TimeSeriesDetails, TimeSeriesDetailsSummaryEnum } from "src/api";
+import {
+  TimeSeriesDetails,
+  TimeSeriesDetailsSummaryEnum,
+  TimeSeriesPointDetails,
+} from "src/api";
 
 export const getSummaryDate = (
   date: Date,
@@ -153,5 +157,112 @@ export const getTimeSeriesStats = (
     stats,
     windowLabel: WINDOW_LABELS[summary].current,
     previousWindowLabel: WINDOW_LABELS[summary].previous,
+  };
+};
+
+const DAY_IN_MS = 86_400_000;
+const MAX_CADENCE_INTERVALS = 6;
+
+/** Calendar day number (days since Unix epoch, local calendar) for an instant. */
+const getCalendarDayNumber = (date: Date): number => {
+  const startOfDay = Date.UTC(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+  );
+
+  return Math.floor(startOfDay / DAY_IN_MS);
+};
+
+export interface CadenceStats {
+  /** Date of the most recent point; undefined when there are no points. */
+  lastEventDate: Date | undefined;
+  /** Whole calendar days since the last point; undefined when there are no points. */
+  daysSinceLastEvent: number | undefined;
+  /** Mean gap in days between consecutive points; undefined with fewer than two points. */
+  averageIntervalDays: number | undefined;
+  /** Shortest sampled gap in days; undefined with fewer than two points. */
+  shortestIntervalDays: number | undefined;
+  /** Longest sampled gap in days; undefined with fewer than two points. */
+  longestIntervalDays: number | undefined;
+  /** Last point plus the average interval; undefined with fewer than two points. */
+  nextExpectedDate: Date | undefined;
+  /** Calendar days until the projected next event; negative when overdue. */
+  daysUntilNextExpected: number | undefined;
+}
+
+/**
+ * Statistics about the cadence of event points, e.g. the gap between
+ * consecutive logged events. Interval stats cover the most recent
+ * {@link MAX_CADENCE_INTERVALS} gaps.
+ */
+export const getCadenceStats = (
+  points: TimeSeriesPointDetails[],
+): CadenceStats => {
+  if (points.length === 0) {
+    return {
+      lastEventDate: undefined,
+      daysSinceLastEvent: undefined,
+      averageIntervalDays: undefined,
+      shortestIntervalDays: undefined,
+      longestIntervalDays: undefined,
+      nextExpectedDate: undefined,
+      daysUntilNextExpected: undefined,
+    };
+  }
+
+  const dates = points
+    .map((point) => new Date(point.createdAt))
+    .toSorted((a, b) => a.valueOf() - b.valueOf());
+
+  const lastEventDate = dates.at(-1)!;
+  const today = new Date();
+  const daysSinceLastEvent = Math.max(
+    0,
+    getCalendarDayNumber(today) - getCalendarDayNumber(lastEventDate),
+  );
+
+  if (dates.length < 2) {
+    return {
+      lastEventDate,
+      daysSinceLastEvent,
+      averageIntervalDays: undefined,
+      shortestIntervalDays: undefined,
+      longestIntervalDays: undefined,
+      nextExpectedDate: undefined,
+      daysUntilNextExpected: undefined,
+    };
+  }
+
+  const intervals: number[] = [];
+
+  for (let index = 1; index < dates.length; index++) {
+    intervals.push(
+      Math.max(
+        0,
+        getCalendarDayNumber(dates[index]) -
+          getCalendarDayNumber(dates[index - 1]),
+      ),
+    );
+  }
+
+  const sampledIntervals = intervals.slice(-MAX_CADENCE_INTERVALS);
+  const averageIntervalDays =
+    sampledIntervals.reduce((sum, interval) => sum + interval, 0) /
+    sampledIntervals.length;
+
+  const nextExpectedDate = new Date(
+    lastEventDate.valueOf() + averageIntervalDays * DAY_IN_MS,
+  );
+
+  return {
+    lastEventDate,
+    daysSinceLastEvent,
+    averageIntervalDays,
+    shortestIntervalDays: Math.min(...sampledIntervals),
+    longestIntervalDays: Math.max(...sampledIntervals),
+    nextExpectedDate,
+    daysUntilNextExpected:
+      getCalendarDayNumber(nextExpectedDate) - getCalendarDayNumber(today),
   };
 };

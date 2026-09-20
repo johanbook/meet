@@ -8,6 +8,7 @@ import {
 } from "src/api";
 
 import {
+  getCadenceStats,
   getPreviousSummaryDate,
   getSummaryDate,
   getTimeSeriesStats,
@@ -197,6 +198,83 @@ describe("stats.helper", () => {
       ]);
       expect(windowLabel).toBe("all time");
       expect(previousWindowLabel).toBe("");
+    });
+  });
+
+  describe(getCadenceStats.name, () => {
+    it("returns undefined stats when there are no points", () => {
+      expect(getCadenceStats([])).toEqual({
+        lastEventDate: undefined,
+        daysSinceLastEvent: undefined,
+        averageIntervalDays: undefined,
+        shortestIntervalDays: undefined,
+        longestIntervalDays: undefined,
+        nextExpectedDate: undefined,
+        daysUntilNextExpected: undefined,
+      });
+    });
+
+    it("reports the last event and days since it for a single point", () => {
+      const cadence = getCadenceStats([
+        createPoint("Cost", "1999-12-31T23:00", 1),
+      ]);
+
+      expect(cadence.lastEventDate).toEqual(new Date("1999-12-31T23:00"));
+      expect(cadence.daysSinceLastEvent).toBe(1);
+      expect(cadence.averageIntervalDays).toBeUndefined();
+      expect(cadence.nextExpectedDate).toBeUndefined();
+    });
+
+    it("computes interval stats and the next expected event", () => {
+      const cadence = getCadenceStats([
+        createPoint("Cost", "1999-12-01T08:00", 1),
+        createPoint("Cost", "1999-12-29T08:00", 1),
+      ]);
+
+      expect(cadence.averageIntervalDays).toBe(28);
+      expect(cadence.shortestIntervalDays).toBe(28);
+      expect(cadence.longestIntervalDays).toBe(28);
+      expect(cadence.nextExpectedDate).toEqual(
+        new Date(new Date("1999-12-29T08:00").valueOf() + 28 * 86_400_000),
+      );
+      expect(cadence.daysUntilNextExpected).toBe(25);
+    });
+
+    it("sorts points chronologically", () => {
+      const cadence = getCadenceStats([
+        createPoint("Cost", "1999-12-29T08:00", 1),
+        createPoint("Cost", "1999-12-01T08:00", 1),
+      ]);
+
+      expect(cadence.lastEventDate).toEqual(new Date("1999-12-29T08:00"));
+      expect(cadence.averageIntervalDays).toBe(28);
+    });
+
+    it("samples the most recent intervals", () => {
+      const cadence = getCadenceStats([
+        createPoint("Cost", "1998-01-01T00:00", 1),
+        createPoint("Cost", "2000-09-27T00:00", 1),
+        createPoint("Cost", "2000-10-07T00:00", 1),
+        createPoint("Cost", "2000-10-17T00:00", 1),
+        createPoint("Cost", "2000-10-27T00:00", 1),
+        createPoint("Cost", "2000-11-06T00:00", 1),
+        createPoint("Cost", "2000-11-16T00:00", 1),
+        createPoint("Cost", "2000-11-26T00:00", 1),
+        createPoint("Cost", "2000-12-06T00:00", 1),
+      ]);
+
+      expect(cadence.averageIntervalDays).toBe(10);
+      expect(cadence.shortestIntervalDays).toBe(10);
+      expect(cadence.longestIntervalDays).toBe(10);
+    });
+
+    it("reports an overdue next expected event", () => {
+      const cadence = getCadenceStats([
+        createPoint("Cost", "1999-01-01T00:00", 1),
+        createPoint("Cost", "1999-02-01T00:00", 1),
+      ]);
+
+      expect(cadence.daysUntilNextExpected).toBe(-303);
     });
   });
 });
