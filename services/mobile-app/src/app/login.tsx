@@ -8,6 +8,7 @@ import {
   useWindowDimensions,
   View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { CacheKeyEnum } from "src/core/query";
 
@@ -40,6 +41,7 @@ export default function LoginPage() {
   const theme = useTheme();
   const queryClient = useQueryClient();
   const { height: windowHeight } = useWindowDimensions();
+  const insets = useSafeAreaInsets();
 
   const redirectParam = params.redirectTarget;
   const redirectTarget =
@@ -90,14 +92,16 @@ export default function LoginPage() {
         return;
       }
 
-      // The guards cached 401 errors from the unauthenticated boot probes;
-      // clear them so the guarded pages don't snapshot the stale failure and
-      // bounce straight back to /login.
-      queryClient.invalidateQueries({
+      // The guards cached 401 errors from the unauthenticated boot probes.
+      // Remove those entries entirely: invalidateQueries would keep serving
+      // the stale 401 while refetching, re-triggering the guards' redirect
+      // for a moment and bouncing the user straight back to /login on the
+      // first sign-in.
+      queryClient.removeQueries({
         queryKey: [CacheKeyEnum.CurrentProfileExists],
       });
-      queryClient.invalidateQueries({ queryKey: [CacheKeyEnum.Settings] });
-      queryClient.invalidateQueries({
+      queryClient.removeQueries({ queryKey: [CacheKeyEnum.Settings] });
+      queryClient.removeQueries({
         queryKey: [CacheKeyEnum.CurrentOrganization],
       });
 
@@ -160,7 +164,7 @@ export default function LoginPage() {
             alignItems: "center",
             flex: 1,
             justifyContent: "center",
-            minHeight: windowHeight,
+            minHeight: windowHeight - insets.top - insets.bottom,
             padding: 32,
           }}
         >

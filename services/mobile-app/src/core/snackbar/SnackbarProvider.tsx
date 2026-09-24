@@ -1,5 +1,6 @@
 import { ReactNode, useRef, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Theme, useTheme } from "src/core/theme";
 
@@ -30,6 +31,7 @@ interface SnackbarProviderProps {
 
 export function SnackbarProvider({ children }: SnackbarProviderProps) {
   const theme = useTheme();
+  const insets = useSafeAreaInsets();
   const [messages, setMessages] = useState<SnackbarMessage[]>([]);
   const timers = useRef(new Map<number, ReturnType<typeof setTimeout>>());
 
@@ -69,7 +71,10 @@ export function SnackbarProvider({ children }: SnackbarProviderProps) {
           key={message.id}
           style={[
             styles.snackbar,
-            { backgroundColor: VARIANT_COLOR[message.variant](theme.palette) },
+            {
+              backgroundColor: VARIANT_COLOR[message.variant](theme.palette),
+              bottom: 96 + insets.bottom,
+            },
           ]}
         >
           <Text style={styles.text}>{message.message}</Text>
