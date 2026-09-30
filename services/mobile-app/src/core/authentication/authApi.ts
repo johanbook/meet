@@ -117,7 +117,10 @@ export async function signIn(email: string, password: string): Promise<void> {
 
 /**
  * Exchanges the refresh token for a fresh session. Called when an API
- * request is rejected with 401 because the access token expired.
+ * request is rejected with 401, or pre-emptively when the access token is
+ * about to expire. Never throws: on failure the session is cleared so the
+ * underlying 401 flows back to the guards, which take the user to login
+ * instead of leaving error screens behind.
  */
 export async function refreshSession(): Promise<void> {
   const refreshToken = getSessionTokens()?.refreshToken;
@@ -128,15 +131,22 @@ export async function refreshSession(): Promise<void> {
     return;
   }
 
-  await authRequest(
-    "/session/refresh",
-    {
-      method: "POST",
-      headers: { "st-refresh-token": refreshToken },
-      body: JSON.stringify({}),
-    },
-    true,
-  );
+  try {
+    await authRequest(
+      "/session/refresh",
+      {
+        method: "POST",
+        headers: { "st-refresh-token": refreshToken },
+        body: JSON.stringify({}),
+      },
+      true,
+    );
+  } catch (error) {
+    // Expired/revoked refresh token or unreachable core - the session is
+    // unusable either way.
+    console.warn("Token refresh failed; clearing the session", error);
+    clearSession();
+  }
 }
 
 export function signOut(): void {

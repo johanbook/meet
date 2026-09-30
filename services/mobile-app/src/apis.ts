@@ -13,7 +13,11 @@ import {
 } from "src/api";
 import { config } from "src/config";
 import { refreshSession } from "src/core/authentication/authApi";
-import { getSessionTokens, hasSession } from "src/core/authentication/session";
+import {
+  accessTokenExpiryMs,
+  getSessionTokens,
+  hasSession,
+} from "src/core/authentication/session";
 import { Logger } from "src/core/logging";
 
 declare global {
@@ -41,11 +45,44 @@ function withSessionHeaders(init?: RequestInit): RequestInit {
   return { ...options, headers };
 }
 
-// A single token refresh attempt per 401, guarded against loops: we only
-// retry when we had a token, refreshed it, and got a new one.
+// A single token refresh at a time. Never re-entrant: whether triggered
+// pre-emptively (access token about to expire) or by a 401, only one
+// refresh runs per moment and each request retries at most once.
 let refreshInFlight = false;
 
+const REFRESH_BEFORE_EXPIRY_MS = 60 * 1000;
+
+async function ensureFreshAccessToken(): Promise<void> {
+  if (refreshInFlight) {
+    return;
+  }
+
+  const accessToken = getSessionTokens()?.accessToken;
+
+  if (!accessToken) {
+    return;
+  }
+
+  const expiry = accessTokenExpiryMs(accessToken);
+
+  if (expiry === undefined || expiry - Date.now() > REFRESH_BEFORE_EXPIRY_MS) {
+    return;
+  }
+
+  refreshInFlight = true;
+
+  try {
+    await refreshSession();
+  } finally {
+    refreshInFlight = false;
+  }
+}
+
 const fetchApi: FetchAPI = async (url, init) => {
+  // Refresh before the access token expires so idle sessions don't surface
+  // 401-based error screens on the first request after a long pause.
+  await ensureFreshAccessToken();
+
   const hadToken = hasSession();
   const response = await fetch(url, withSessionHeaders(init));
 
