@@ -64,4 +64,61 @@ export function hasSession(): boolean {
   return tokens !== undefined && tokens.accessToken.length > 0;
 }
 
+const BASE64URL_ALPHABET =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+
+/** Decodes a base64url segment to a byte string (values 0-255 per char). */
+function base64UrlDecode(input: string): string {
+  let bits = 0;
+  let bitCount = 0;
+  let out = "";
+
+  for (const char of input.replace(/=+$/, "")) {
+    const value = BASE64URL_ALPHABET.indexOf(char);
+
+    if (value < 0) {
+      continue;
+    }
+
+    bits = (bits << 6) | value;
+    bitCount += 6;
+
+    if (bitCount >= 8) {
+      bitCount -= 8;
+      out += String.fromCharCode((bits >> bitCount) & 0xff);
+    }
+  }
+
+  return out;
+}
+
+/**
+ * Returns the access token's expiry as epoch millis, or undefined when it
+ * cannot be read. The token is a JWT (base64url payload with a JSON body);
+ * the claims we care about hold ASCII digits, so a byte-level scan of the
+ * decoded payload is enough - no full UTF-8 decode needed.
+ */
+export function accessTokenExpiryMs(token: string): number | undefined {
+  const parts = token.split(".");
+
+  if (parts.length !== 3) {
+    return undefined;
+  }
+
+  const payload = base64UrlDecode(parts[1]);
+
+  const expiryTime = /"expiryTime"\s*:\s*(\d+)/.exec(payload);
+  const exp = /"exp"\s*:\s*(\d+)/.exec(payload);
+
+  if (expiryTime) {
+    return Number(expiryTime[1]);
+  }
+
+  if (exp) {
+    return Number(exp[1]) * 1000;
+  }
+
+  return undefined;
+}
+
 loadStoredTokens();
