@@ -1,6 +1,6 @@
 services:
   traefik:
-    image: "traefik:v3.7.16"
+    image: "traefik:v3.7.18"
     container_name: "traefik"
     command:
       - "--accesslog=true"
